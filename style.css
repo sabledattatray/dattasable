@@ -30,7 +30,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: @;
+  background-color:#2B3022 @;
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.3s;
