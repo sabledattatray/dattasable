@@ -90,7 +90,13 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role || 'USER';
+        // Promote specific emails to ADMIN automatically
+        const adminEmails = ['admin@dattasable.com', 'sabledattatray@gmail.com'];
+        if (user.email && adminEmails.includes(user.email)) {
+          token.role = 'ADMIN';
+        } else {
+          token.role = (user as any).role || 'USER';
+        }
       }
       return token;
     },
