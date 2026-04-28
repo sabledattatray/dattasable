@@ -28,14 +28,14 @@ This platform is more than just a portfolio; it's a comprehensive **Analytics Hu
 ### 🪐 The Experience (Hero Section)
 The landing page establishes immediate authority with a high-fidelity technical visualization and a clear value proposition for data-driven enterprises.
 
-![Hero Section](https://dattasable.com/images/readme/hero_preview.png)
+![Hero Section](./public/images/readme/hero_preview.png)
 
 ### 📊 Admin Command Center
 A clean, enterprise-grade interface for managing the entire ecosystem. Designed for efficiency and high-stakes data management.
 
 | **Admin Portal (Light Mode)** | **Analytics Showcase** |
 | :--- | :--- |
-| ![Admin Login](https://dattasable.com/images/readme/admin_preview.png) | ![Dashboard Showcase](https://dattasable.com/images/readme/dashboard_preview.png) |
+| ![Admin Login](./public/images/readme/admin_preview.png) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.png) |
 
 ---
 
