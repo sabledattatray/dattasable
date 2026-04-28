@@ -38,7 +38,7 @@ body {
   color: var(--text);
   font-family: var(--font-syne);
   font-weight: 400;
-  overflow-x: hidden;
+  overflow-x: clip; /* Modern way to prevent horizontal scroll */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -148,7 +148,7 @@ body {
 
 @media (max-width: 640px) {
   .card {
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
   }
 }
 

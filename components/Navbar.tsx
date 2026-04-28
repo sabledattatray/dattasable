@@ -249,14 +249,14 @@ export default function Navbar() {
                           {hasSubmenu ? (
                             <button
                               onClick={() => setExpandedMobile(isExpanded ? null : link.label)}
-                              style={{ padding: '1rem' }}
-                              className={`w-full flex items-center justify-between text-[12px] font-bold tracking-widest uppercase transition-colors ${
+                              style={{ padding: '1.25rem 1rem' }}
+                              className={`w-full flex items-center justify-between text-[13px] font-bold tracking-widest uppercase transition-colors ${
                                 isExpanded ? 'text-[var(--accent)]' : 'text-white/70'
                               }`}
                             >
                               {link.label}
                               <ChevronDown 
-                                size={14} 
+                                size={16} 
                                 className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-[var(--accent)]' : 'opacity-30'}`} 
                               />
                             </button>
