@@ -219,7 +219,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[400px] z-[200] bg-[#050505] border-l border-white/10 md:hidden flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-[92vw] max-w-[480px] z-[200] bg-[#050505] border-l border-white/10 md:hidden flex flex-col shadow-2xl"
             >
               <div className="flex flex-col h-full overflow-y-auto">
                 {/* Drawer Header */}
