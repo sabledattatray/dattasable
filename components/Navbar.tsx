@@ -84,7 +84,7 @@ export default function Navbar() {
       <div className="w-full max-w-[1448px] px-6 lg:px-0">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1.5 group no-underline">
+          <Link href="/" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
             <LogoIcon color="#c9f31d" className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
             <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.05rem', color: '#fff', letterSpacing: '-0.01em' }}>
               Datta Sable
@@ -92,7 +92,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
             {navLinks.map((link) => (
               <div 
                 key={link.label}
@@ -191,7 +191,7 @@ export default function Navbar() {
           {/* Mobile Toggle */}
           {!mobileMenuOpen && (
             <button
-              className="md:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
+              className="xl:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
               onClick={() => setMobileMenuOpen(true)}
             >
               <Menu size={24} />
@@ -210,7 +210,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-[190] bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[190] bg-black/60 backdrop-blur-sm xl:hidden"
             />
             
             {/* Drawer */}
@@ -220,7 +220,7 @@ export default function Navbar() {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               style={{ width: '75vw' }}
-              className="fixed top-0 right-0 bottom-0 z-[200] bg-[#050505] border-l border-white/10 md:hidden flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 z-[200] bg-[#050505] border-l border-white/10 xl:hidden flex flex-col shadow-2xl"
             >
               <div className="flex flex-col h-full overflow-y-auto">
                 {/* Drawer Header */}
