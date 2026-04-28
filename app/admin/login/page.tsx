@@ -134,12 +134,47 @@ export default function AdminLogin() {
         </form>
 
         <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-          <button
-            onClick={() => router.push('/')}
-            style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}
-          >
-            Back to Website
-          </button>
+          <div style={{ position: 'relative', marginBottom: '2.5rem' }}>
+            <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '1px', background: '#e2e8f0', zIndex: 0 }} />
+            <span style={{ position: 'relative', background: '#fff', padding: '0 1rem', color: '#94a3b8', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', zIndex: 1 }}>
+              Or Continue With
+            </span>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+            {[
+              { id: 'google', icon: 'google', color: '#ea4335', bg: '#fef2f2' },
+              { id: 'github', icon: 'github', color: '#333', bg: '#f8fafc' },
+              { id: 'linkedin', icon: 'linkedin', color: '#0077b5', bg: '#f0f9ff' }
+            ].map(provider => (
+              <button
+                key={provider.id}
+                onClick={() => signIn(provider.id, { callbackUrl: '/admin' })}
+                style={{ 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.75rem',
+                  background: '#fff', border: '1px solid #e2e8f0', borderRadius: '12px', cursor: 'pointer',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = provider.color}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#e2e8f0'}
+              >
+                <img 
+                  src={`https://authjs.dev/img/providers/${provider.id}.svg`} 
+                  alt={provider.id} 
+                  style={{ width: '20px', height: '20px' }} 
+                />
+              </button>
+            ))}
+          </div>
+
+          <div style={{ marginTop: '2.5rem' }}>
+            <button
+              onClick={() => router.push('/')}
+              style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}
+            >
+              Back to Website
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>
