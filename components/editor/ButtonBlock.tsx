@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 export default function ButtonBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
-  const [label, setLabel] = useState(block.metadata?.label || 'Click Here');
-  const [url, setUrl] = useState(block.metadata?.url || '');
-  const [style, setStyle] = useState(block.metadata?.style || 'primary'); // primary, outline, subtle
+  const [label, setLabel] = useState<string>((block.metadata?.label as string) || 'Click Here');
+  const [url, setUrl] = useState<string>((block.metadata?.url as string) || '');
+  const [style, setStyle] = useState<string>((block.metadata?.style as string) || 'primary'); // primary, outline, subtle
 
   const handleUpdate = (updates: any) => {
     updateBlock(block.id, { metadata: { ...block.metadata, label, url, style, ...updates } });
