@@ -125,7 +125,7 @@ export default function HomePage() {
           {/* Layer 1: Right-Side Visual - Now visible on mobile */}
           <div className="block absolute top-1/2 right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none">
             <Image 
-              src="/hero-bg.png"
+              src="/hero-bg.webp"
               alt="Technical Data Visualization"
               width={800}
               height={600}

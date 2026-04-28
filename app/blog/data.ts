@@ -27,7 +27,7 @@ export const posts = [
     date: 'Apr 28, 2026',
     color: 'var(--accent)',
     icon: '🏗️',
-    image: '/images/blog/tech_stack_2026_hero_1777409998596.png'
+    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp'
   },
   {
     slug: 'postgres-vs-snowflake-speed',
@@ -57,7 +57,7 @@ export const posts = [
     date: 'Apr 25, 2026',
     color: 'var(--accent)',
     icon: '⚡',
-    image: '/images/blog/postgres_vs_snowflake_hero_1777410017107.png'
+    image: '/images/blog/postgres_vs_snowflake_hero_1777410017107.webp'
   },
   {
     slug: 'python-automation-pipelines',
@@ -101,7 +101,7 @@ def main_pipeline():
     date: 'Apr 22, 2026',
     color: 'var(--accent)',
     icon: '🐍',
-    image: '/images/blog/python_automation_hero_1777410033671.png'
+    image: '/images/blog/python_automation_hero_1777410033671.webp'
   },
 
   // --- DATA INSIGHTS ---
@@ -132,7 +132,7 @@ def main_pipeline():
     date: 'Apr 19, 2026',
     color: 'var(--accent2)',
     icon: '🛍️',
-    image: '/images/blog/retail_analytics_hero_1777410051638.png'
+    image: '/images/blog/retail_analytics_hero_1777410051638.webp'
   },
   {
     slug: 'financial-bi-impact',
@@ -158,7 +158,7 @@ def main_pipeline():
     date: 'Apr 16, 2026',
     color: 'var(--accent2)',
     icon: '💰',
-    image: '/images/blog/financial_bi_hero_1777410069046.png'
+    image: '/images/blog/financial_bi_hero_1777410069046.webp'
   },
   {
     slug: 'data-democratization-risk',
@@ -184,7 +184,7 @@ def main_pipeline():
     date: 'Apr 13, 2026',
     color: 'var(--accent2)',
     icon: '⚖️',
-    image: '/images/blog/data_democratization_hero_1777410089898.png'
+    image: '/images/blog/data_democratization_hero_1777410089898.webp'
   },
 
   // --- TUTORIALS ---
@@ -221,7 +221,7 @@ WHERE o.id IS NULL;</code></pre>
     date: 'Apr 10, 2026',
     color: 'var(--accent3)',
     icon: '🔍',
-    image: '/images/blog/sql_joins_hero_1777410104986.png'
+    image: '/images/blog/sql_joins_hero_1777410104986.webp'
   },
   {
     slug: 'python-selenium-bi-scraper',
@@ -263,7 +263,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Apr 7, 2026',
     color: 'var(--accent3)',
     icon: '🕷️',
-    image: '/images/blog/python_scraper_hero_1777410123458.png'
+    image: '/images/blog/python_scraper_hero_1777410123458.webp'
   },
   {
     slug: 'tableau-lods-tutorial',
@@ -291,7 +291,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Apr 4, 2026',
     color: 'var(--accent3)',
     icon: '📊',
-    image: '/images/blog/tableau_lods_hero_1777410139358.png'
+    image: '/images/blog/tableau_lods_hero_1777410139358.webp'
   },
 
   // --- AI RESEARCH ---
@@ -319,7 +319,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Apr 1, 2026',
     color: 'var(--accent)',
     icon: '🧠',
-    image: '/images/blog/generative_ai_hero_1777410154583.png'
+    image: '/images/blog/generative_ai_hero_1777410154583.webp'
   },
   {
     slug: 'natural-language-query-engines',
@@ -345,7 +345,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Mar 29, 2026',
     color: 'var(--accent)',
     icon: '💬',
-    image: '/images/blog/nlq_engines_hero_1777410174899.png'
+    image: '/images/blog/nlq_engines_hero_1777410174899.webp'
   },
   {
     slug: 'ai-governance-bi',
@@ -371,7 +371,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Mar 26, 2026',
     color: 'var(--accent)',
     icon: '🛡️',
-    image: '/images/blog/ai_governance_hero_1777410191025.png'
+    image: '/images/blog/ai_governance_hero_1777410191025.webp'
   },
 
   // --- BI BEST PRACTICES ---
@@ -408,7 +408,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Mar 23, 2026',
     color: 'var(--accent2)',
     icon: '🎨',
-    image: '/images/blog/dashboard_ux_hero_1777410208497.png'
+    image: '/images/blog/dashboard_ux_hero_1777410208497.webp'
   },
   {
     slug: 'bi-performance-tuning',
@@ -434,7 +434,7 @@ table = WebDriverWait(driver, 10).until(
     date: 'Mar 20, 2026',
     color: 'var(--accent2)',
     icon: '🚀',
-    image: '/images/blog/bi_performance_hero_1777410226286.png'
+    image: '/images/blog/bi_performance_hero_1777410226286.webp'
   },
   {
     slug: 'data-quality-frameworks',
@@ -460,6 +460,6 @@ table = WebDriverWait(driver, 10).until(
     date: 'Mar 17, 2026',
     color: 'var(--accent2)',
     icon: '💎',
-    image: '/images/blog/data_quality_hero_1777410243821.png'
+    image: '/images/blog/data_quality_hero_1777410243821.webp'
   },
 ];
