@@ -16,7 +16,7 @@ const dashboards = [
     icon: '📊',
     image: '/images/dashboards/dashboard_1.png',
     desc: 'Real-time tracking of $12M+ in annual revenue with region/product/rep drilldown and YoY trend forecasting.',
-    embed: 'https://public.tableau.com/views/SuperStoreSalesDashboard_16874839032190/Dashboard1?:embed=y&:showVizHome=no&:display_count=n&:origin=viz_share_link',
+    embed: 'https://public.tableau.com/views/SuperstoreSalesOverviewDashboard_16817475061410/ExecOverview?:embed=y&:showVizHome=no',
     tags: ['Revenue', 'KPI', 'Trend'],
     metrics: ['$12M+ tracked', '15 markets', '200+ SKUs'],
   },
