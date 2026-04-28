@@ -56,21 +56,22 @@ export default function ResumePage() {
                   Authenticate to unlock Dattatray Sable&apos;s professional credentials and portfolio artifacts.
                 </p>
 
-                {/* Login Options - High Fidelity */}
-                <div className="flex flex-col gap-3 w-full">
+                {/* Login Options - Premium Inline */}
+                <div className="grid grid-cols-3 gap-4 w-full">
                   {[
-                    { id: 'google', name: 'Continue with Google', icon: 'https://authjs.dev/img/providers/google.svg' },
-                    { id: 'github', name: 'Continue with GitHub', icon: 'https://authjs.dev/img/providers/github.svg' },
-                    { id: 'linkedin', name: 'Continue with LinkedIn', icon: 'https://authjs.dev/img/providers/linkedin.svg' }
+                    { id: 'google', name: 'Google', icon: 'https://www.vectorlogo.zone/logos/google/google-icon.svg' },
+                    { id: 'github', name: 'GitHub', icon: 'https://www.vectorlogo.zone/logos/github/github-tile.svg' },
+                    { id: 'linkedin', name: 'LinkedIn', icon: 'https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg' }
                   ].map((p) => (
                     <button 
                       key={p.id}
                       onClick={() => signIn(p.id)}
-                      className="group flex items-center w-full bg-white text-black py-4 px-6 rounded-2xl font-bold text-[13px] tracking-tight transition-all hover:bg-[#c9f31d] hover:scale-[1.02] active:scale-[0.98]"
+                      className="group flex flex-col items-center justify-center gap-3 bg-white text-black py-6 rounded-2xl transition-all hover:bg-[#c9f31d] hover:scale-[1.05] active:scale-[0.95] shadow-xl"
                     >
-                      <img src={p.icon} alt={p.id} className="w-5 h-5 mr-4" />
-                      <span className="flex-1 text-left">{p.name}</span>
-                      <ArrowRight size={16} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      <img src={p.icon} alt={p.id} className="w-8 h-8" />
+                      <span className="text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">
+                        {p.id}
+                      </span>
                     </button>
                   ))}
                 </div>
