@@ -42,7 +42,9 @@ export const metadata: Metadata = {
 
 import { Providers } from "@/components/Providers";
 import NotificationManager from "@/components/NotificationManager";
+import GoogleOneTap from "@/components/GoogleOneTap";
 import { Syne, Kanit, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
 
 const syne = Syne({
   subsets: ['latin'],
@@ -76,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <script
@@ -100,6 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
+            <GoogleOneTap />
             <NotificationManager />
           </ThemeProvider>
         </Providers>
