@@ -327,7 +327,7 @@ const dashboards = [
     tool: 'Tableau',
     color: 'var(--accent2)',
     icon: '💰',
-    image: '/images/blog/data_quality_hero_1777410243821.webp',
+    image: '/images/blog/financial_bi_hero_1777410069046.webp',
     desc: 'High-authority financial dashboard showcasing employee expense tracking and departmental budget management.',
     embed: 'https://public.tableau.com/views/EmployeeExpenseAnalysis/EmployeeExpenseAnalysis?:embed=y&:showVizHome=no',
     tags: ['Finance', 'Expense', 'Audit'],
