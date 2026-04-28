@@ -48,78 +48,76 @@ export default function NotificationManager() {
       <AnimatePresence>
         {showPrompt && (
           <motion.div
-            initial={{ opacity: 0, y: 50, x: -20 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             style={{
               position: 'fixed',
-              bottom: '2rem',
-              left: '2rem',
+              top: '1rem',
+              left: '1rem',
               zIndex: 9999,
-              width: '320px',
-              background: 'rgba(15, 15, 15, 0.85)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid var(--border)',
-              padding: '1.25rem',
+              width: '300px',
+              background: '#ffffff',
+              border: '1px solid #e5e7eb',
+              padding: '1rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              gap: '0.75rem',
+              boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+              borderRadius: '8px'
             }}
           >
-            <button 
-              onClick={() => setShowPrompt(false)}
-              style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              <X size={14} />
-            </button>
-
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
               <div style={{ 
-                background: 'var(--accent)', 
-                padding: '0.75rem', 
-                borderRadius: '0', 
+                background: '#f3f4f6', 
+                padding: '0.5rem', 
+                borderRadius: '6px',
                 display: 'flex', 
                 alignItems: 'center', 
-                justifyContent: 'center',
-                boxShadow: '0 0 20px rgba(201, 243, 29, 0.3)'
+                justifyContent: 'center'
               }}>
-                <Bell size={20} color="#000" />
+                <Bell size={18} color="#374151" />
               </div>
               <div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--text)' }}>Enable BI Insights?</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.5 }}>
-                  Get real-time updates on new dashboards, industry trends, and data engineering case studies.
+                <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#111827' }}>Enable Notifications</h4>
+                <p style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                  Get real-time updates and BI insights.
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
               <button 
                 onClick={requestPermission}
-                className="btn-primary"
-                style={{ flex: 1, fontSize: '0.8rem', padding: '0.6rem' }}
+                style={{ 
+                  flex: 1, 
+                  fontSize: '0.75rem', 
+                  padding: '0.5rem', 
+                  background: '#111827', 
+                  color: '#fff', 
+                  border: 'none', 
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontWeight: 600
+                }}
               >
-                Allow Notifications
+                Allow
               </button>
               <button 
                 onClick={() => setShowPrompt(false)}
                 style={{ 
                   flex: 1, 
-                  fontSize: '0.8rem', 
-                  padding: '0.6rem', 
-                  background: 'transparent', 
-                  border: '1px solid var(--border)', 
-                  color: 'var(--text)',
+                  fontSize: '0.75rem', 
+                  padding: '0.5rem', 
+                  background: '#f9fafb', 
+                  border: '1px solid #e5e7eb', 
+                  color: '#374151',
+                  borderRadius: '4px',
                   cursor: 'pointer'
                 }}
               >
-                Maybe Later
+                Dismiss
               </button>
-            </div>
-            
-            <div style={{ fontSize: '0.65rem', color: 'var(--muted)', textAlign: 'center', fontFamily: 'JetBrains Mono, monospace', opacity: 0.5 }}>
-              SECURE_HANDSHAKE: SSL_REQUIRED
             </div>
           </motion.div>
         )}
