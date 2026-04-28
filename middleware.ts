@@ -7,11 +7,11 @@ export function middleware(_request: NextRequest) {
   // Note: Adjust 'script-src' and 'img-src' if you use external scripts/images
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://public.tableau.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    img-src 'self' blob: data: https://*.googleusercontent.com https://public.tableau.com;
+    img-src 'self' blob: data: https://*.googleusercontent.com https://*.tableau.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-    frame-src 'self' https://public.tableau.com https://app.powerbi.com;
+    frame-src 'self' https://*.tableau.com https://*.powerbi.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
