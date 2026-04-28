@@ -7,14 +7,15 @@ export function middleware(_request: NextRequest) {
   // Note: Adjust 'script-src' and 'img-src' if you use external scripts/images
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://public.tableau.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    img-src 'self' blob: data: https://*.googleusercontent.com;
+    img-src 'self' blob: data: https://*.googleusercontent.com https://public.tableau.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    frame-src 'self' https://public.tableau.com https://app.powerbi.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'none';
+    frame-ancestors 'self';
     block-all-mixed-content;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
@@ -22,7 +23,8 @@ export function middleware(_request: NextRequest) {
   response.headers.set('Content-Security-Policy', cspHeader);
 
   // 2. X-Frame-Options (Prevents Clickjacking)
-  response.headers.set('X-Frame-Options', 'DENY');
+  // We use SAMEORIGIN instead of DENY to allow embedding within our own site's structure if needed.
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
 
   // 3. X-Content-Type-Options (Prevents MIME sniffing)
   response.headers.set('X-Content-Type-Options', 'nosniff');

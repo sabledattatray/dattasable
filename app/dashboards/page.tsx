@@ -13,6 +13,7 @@ const dashboards = [
     tool: 'Tableau',
     color: 'var(--accent)',
     icon: '📊',
+    image: '/images/dashboards/dashboard_1.png',
     desc: 'Real-time tracking of $12M+ in annual revenue with region/product/rep drilldown and YoY trend forecasting.',
     embed: 'https://public.tableau.com/views/SuperStoreSalesDashboard_16874839032190/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link',
     tags: ['Revenue', 'KPI', 'Trend'],
@@ -25,6 +26,7 @@ const dashboards = [
     tool: 'Power BI',
     color: 'var(--accent2)',
     icon: '🔗',
+    image: '/images/dashboards/dashboard_2.png',
     desc: 'End-to-end supply chain visibility — inventory, supplier SLA, logistics cost and demand forecasting.',
     embed: null,
     tags: ['Supply Chain', 'Inventory', 'Logistics'],
@@ -37,6 +39,7 @@ const dashboards = [
     tool: 'Tableau',
     color: 'var(--accent3)',
     icon: '👥',
+    image: '/images/dashboards/dashboard_3.webp',
     desc: 'Attrition prediction, headcount planning, performance distribution, and diversity metrics.',
     embed: null,
     tags: ['Attrition', 'Headcount', 'D&I'],
@@ -49,6 +52,7 @@ const dashboards = [
     tool: 'Tableau',
     color: 'var(--accent)',
     icon: '🛒',
+    image: '/images/dashboards/dashboard_4.webp',
     desc: 'Omnichannel attribution, customer lifetime value cohorts, funnel analysis, and campaign ROI tracking.',
     embed: null,
     tags: ['Attribution', 'LTV', 'Funnel'],
@@ -61,6 +65,7 @@ const dashboards = [
     tool: 'Power BI',
     color: 'var(--accent2)',
     icon: '💰',
+    image: '/images/dashboards/dashboard_5.webp',
     desc: 'Board-ready P&L, cash flow waterfall, budget variance heatmap, and departmental cost breakdown.',
     embed: null,
     tags: ['P&L', 'Cash Flow', 'Budget'],
@@ -73,6 +78,7 @@ const dashboards = [
     tool: 'Looker',
     color: 'var(--accent3)',
     icon: '📢',
+    image: '/images/dashboards/dashboard_6.webp',
     desc: 'Multi-channel campaign performance, A/B test results, audience segmentation, and real-time spend tracking.',
     embed: null,
     tags: ['Campaigns', 'A/B Testing', 'Segments'],
@@ -265,18 +271,24 @@ export default function DashboardsPage() {
                       justifyContent: 'center',
                       position: 'relative',
                       overflow: 'hidden',
-                      fontSize: '5rem',
                     }}
                   >
-                    {d.icon}
-                    {/* Simulated chart lines */}
-                    <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1rem', opacity: 0.2 }}>
-                      {[70, 50, 80, 45, 90, 60, 85].map((h, j) => (
-                        <div key={j} style={{ display: 'inline-block', width: `calc(100% / 7)`, height: `${h}%`, background: d.color, borderRadius: 0, position: 'absolute', bottom: 0, left: `calc((100% / 7) * ${j})`, opacity: 0.3 }} />
-                      ))}
-                    </div>
+                    {d.image ? (
+                      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+                        <motion.img 
+                          src={d.image} 
+                          alt={d.title}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
+                        />
+                        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, var(--bg), transparent)` }} />
+                      </div>
+                    ) : (
+                      <span style={{ fontSize: '5rem' }}>{d.icon}</span>
+                    )}
                     {/* Tool badge */}
-                    <div style={{ position: 'absolute', top: 12, right: 12, background: 'var(--bg)', border: `1px solid ${d.color}44`, padding: '0.3rem 0.75rem', fontSize: '10px', fontWeight: 700, color: d.color, textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>
+                    <div style={{ position: 'absolute', top: 12, right: 12, background: 'var(--bg)', border: `1px solid ${d.color}44`, padding: '0.3rem 0.75rem', fontSize: '10px', fontWeight: 700, color: d.color, textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace', zIndex: 2 }}>
                       {d.tool}
                     </div>
                   </div>
