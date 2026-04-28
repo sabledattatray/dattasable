@@ -11,6 +11,7 @@ import {
   Activity, Globe, Layers, Table, Code2
 } from 'lucide-react';
 import { useSession, signIn } from 'next-auth/react';
+import Crosshair from '@/components/Crosshair';
 
 /* ── data ── */
 const stats = [
@@ -104,53 +105,7 @@ export default function HomePage() {
       <Navbar />
 
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-20px',
-            left: '-20px',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10,
-            userSelect: 'none',
-          }}
-        >
-          {/* Subtle Ring */}
-          <div style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            border: '1px solid rgba(201, 243, 29, 0.4)', // Increased visibility yellow-green ring
-            borderRadius: '50%',
-          }} />
-          {/* Vertical Line */}
-          <div style={{
-            position: 'absolute',
-            width: '1px',
-            height: '24px',
-            background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)',
-          }} />
-          {/* Horizontal Line */}
-          <div style={{
-            position: 'absolute',
-            width: '24px',
-            height: '1px',
-            background: 'linear-gradient(to right, #c9f31d, #00C9F2)',
-          }} />
-          {/* Center Glow Dot */}
-          <div style={{
-            position: 'absolute',
-            width: '4px',
-            height: '4px',
-            background: '#c9f31d',
-            borderRadius: '50%',
-            boxShadow: '0 0 10px #c9f31d',
-          }} />
-        </div>
+        <Crosshair position="tl" />
 
         {/* ── COMPOSITIONAL HERO ── */}
         <section
@@ -313,7 +268,7 @@ export default function HomePage() {
             <div className="mb-12">
               <TechLabel>Active Deployments</TechLabel>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
+            <div className="grid-auto-fill-340">
               {projects.map((p, i) => (
                 <motion.div
                   key={p.title}
@@ -360,53 +315,7 @@ export default function HomePage() {
 
 
 
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-20px',
-            right: '-20px',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10,
-            userSelect: 'none',
-          }}
-        >
-          {/* Subtle Ring */}
-          <div style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            border: '1px solid rgba(201, 243, 29, 0.4)', // Increased visibility yellow-green ring
-            borderRadius: '50%',
-          }} />
-          {/* Vertical Line */}
-          <div style={{
-            position: 'absolute',
-            width: '1px',
-            height: '24px',
-            background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)',
-          }} />
-          {/* Horizontal Line */}
-          <div style={{
-            position: 'absolute',
-            width: '24px',
-            height: '1px',
-            background: 'linear-gradient(to right, #c9f31d, #00C9F2)',
-          }} />
-          {/* Center Glow Dot */}
-          <div style={{
-            position: 'absolute',
-            width: '4px',
-            height: '4px',
-            background: '#c9f31d',
-            borderRadius: '50%',
-            boxShadow: '0 0 10px #c9f31d',
-          }} />
-        </div>
+        <Crosshair position="br" />
       </div>
       <Footer />
     </div>

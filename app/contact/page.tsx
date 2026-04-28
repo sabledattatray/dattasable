@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Users, GitBranch, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import Crosshair from '@/components/Crosshair';
 import { signIn, useSession } from 'next-auth/react';
 
 export default function ContactPage() {
@@ -71,13 +72,7 @@ export default function ContactPage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="tl" />
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
         <div className="container">
@@ -101,7 +96,7 @@ export default function ContactPage() {
             </p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '3rem', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '3rem', alignItems: 'start' }}>
             {/* Left column */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
               {/* Availability */}
@@ -238,7 +233,7 @@ export default function ContactPage() {
                   {/* Honeypot - hidden */}
                   <input type="text" name="honeypot" value={form.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '1rem' }}>
                     {[
                       { name: 'name', label: 'Your Name', placeholder: 'Your Name', type: 'text' },
                       { name: 'email', label: 'Email Address', placeholder: 'you@company.com', type: 'email' },
@@ -334,13 +329,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="br" />
       </div>
       <Footer />
     </div>

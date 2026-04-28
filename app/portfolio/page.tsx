@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ExternalLink, GitBranch, X, ChevronRight } from 'lucide-react';
+import Crosshair from '@/components/Crosshair';
 
 const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
 
@@ -110,13 +111,7 @@ export default function PortfolioPage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="tl" />
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
         <div className="container">
@@ -168,7 +163,7 @@ export default function PortfolioPage() {
           {/* Grid */}
           <motion.div
             layout
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}
+            className="grid-auto-fill-340"
           >
             <AnimatePresence>
               {filtered.map((p) => (
@@ -265,7 +260,7 @@ export default function PortfolioPage() {
 
               <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.5rem' }}>{selected.desc}</p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                 {[
                   { label: '🔴 Problem', text: selected.problem },
                   { label: '✅ Solution', text: selected.solution },
@@ -304,13 +299,7 @@ export default function PortfolioPage() {
           </motion.div>
         )}
       </AnimatePresence>
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="br" />
       </div>
       <Footer />
     </div>

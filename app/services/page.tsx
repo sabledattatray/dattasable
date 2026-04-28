@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, ChevronDown, ArrowRight, Shield, Star } from 'lucide-react';
+import Crosshair from '@/components/Crosshair';
 
 const services = [
   {
@@ -68,13 +69,7 @@ export default function ServicesPage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="tl" />
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
         <div className="container">
@@ -99,7 +94,7 @@ export default function ServicesPage() {
           </motion.div>
 
           {/* Service cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '5rem' }}>
+          <div className="grid-auto-fill-300" style={{ marginBottom: '5rem' }}>
             {services.map((s, i) => (
               <motion.div
                 key={s.title}
@@ -254,13 +249,7 @@ export default function ServicesPage() {
           </motion.div>
         </div>
       </section>
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
-        </div>
+        <Crosshair position="br" />
       </div>
 
       <Footer />
