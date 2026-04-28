@@ -68,7 +68,7 @@ export default function ResumePage() {
                       onClick={() => signIn(p.id)}
                       className="group flex flex-col items-center justify-center gap-3 bg-white text-black py-6 rounded-2xl transition-all hover:bg-[#c9f31d] hover:scale-[1.05] active:scale-[0.95] shadow-xl"
                     >
-                      <img src={p.icon} alt={p.id} className="w-8 h-8" />
+                      <img src={p.icon} alt={p.id} className="w-6 h-6" />
                       <span className="text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">
                         {p.id}
                       </span>
