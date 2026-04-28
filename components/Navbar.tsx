@@ -249,7 +249,7 @@ export default function Navbar() {
                           {hasSubmenu ? (
                             <button
                               onClick={() => setExpandedMobile(isExpanded ? null : link.label)}
-                              className={`w-full flex items-center justify-between px-4 py-5 text-[13px] font-bold tracking-widest uppercase transition-colors ${
+                              className={`w-full flex items-center justify-between px-4 py-4 text-[12px] font-bold tracking-widest uppercase transition-colors ${
                                 isExpanded ? 'text-[var(--accent)]' : 'text-white/70'
                               }`}
                             >
@@ -263,7 +263,7 @@ export default function Navbar() {
                             <Link
                               href={link.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block px-4 py-5 text-[13px] font-bold tracking-widest uppercase text-white/70 hover:text-[var(--accent)] transition-colors no-underline"
+                              className="block px-4 py-4 text-[12px] font-bold tracking-widest uppercase text-white/70 hover:text-[var(--accent)] transition-colors no-underline"
                             >
                               {link.label}
                             </Link>
@@ -278,20 +278,20 @@ export default function Navbar() {
                               exit={{ height: 0, opacity: 0 }}
                               className="overflow-hidden bg-white/[0.02] border-l-2 border-[var(--accent)]/20 ml-2"
                             >
-                              <div className="p-2 flex flex-col gap-1">
+                              <div className="p-1.5 flex flex-col gap-1">
                                 {megaMenuData[link.label].items.map((sub: any) => (
                                   <Link
                                     key={sub.title}
                                     href={sub.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-4 p-4 rounded-lg hover:bg-white/5 no-underline group"
+                                    className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 no-underline group"
                                   >
-                                    <div className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">
+                                    <div className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">
                                       {sub.icon}
                                     </div>
                                     <div className="flex flex-col">
                                       <span className="text-sm font-bold text-white/90 group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                      <span className="text-[11px] text-white/40">{sub.desc}</span>
+                                      <span className="text-[10px] text-white/40">{sub.desc}</span>
                                     </div>
                                   </Link>
                                 ))}
