@@ -55,7 +55,7 @@ const dashboards = [
     icon: '🗺️',
     image: '/images/dashboards/regional_sales_performance.png',
     desc: 'Geospatial analysis of sales performance across 50 states, correlated with local economic indicators.',
-    embed: 'https://lookerstudio.google.com/embed/reporting/1mqTA-aptRwBcxpFUeZZ66CcPHhOTUVK6/page/VgD',
+    embed: 'https://lookerstudio.google.com/embed/reporting/0B_U5fByxZW9uX3ZpczltU3pYdTg/page/1M',
     isNDA: true,
     tags: ['Geo-spatial', 'Regional', 'Growth'],
     metrics: ['50 States', 'Live Updates', 'Zip-level Drill'],

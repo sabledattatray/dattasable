@@ -9,9 +9,9 @@ export function middleware(_request: NextRequest) {
     default-src 'self';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    img-src 'self' blob: data: https://*.googleusercontent.com https://*.tableau.com https://lookerstudio.google.com;
+    img-src 'self' blob: data: https://*.googleusercontent.com https://*.tableau.com https://lookerstudio.google.com https://datastudio.google.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-    frame-src 'self' https://*.tableau.com https://*.powerbi.com https://lookerstudio.google.com https://*.google.com;
+    frame-src 'self' https://*.tableau.com https://*.powerbi.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
