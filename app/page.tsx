@@ -268,11 +268,7 @@ export default function HomePage() {
             <div className="mb-12">
               <TechLabel>Active Deployments</TechLabel>
             </div>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))', 
-              gap: '2rem' 
-            }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((p, i) => (
                 <motion.div
                   key={p.title}
