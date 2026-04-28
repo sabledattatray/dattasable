@@ -26,52 +26,53 @@ export default function ResumePage() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black">
+      <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black flex flex-col">
         <Navbar />
-        <div className="container mx-auto px-6 pt-32 pb-20 flex flex-col items-center justify-center">
+        <div className="flex-1 flex items-center justify-center p-6 mt-12">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl w-full bg-[#0a0a0a] border border-white/10 p-8 md:p-12 rounded-2xl shadow-2xl relative overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="max-w-[480px] w-full bg-gradient-to-b from-[#111] to-[#050505] border border-white/5 p-8 md:p-12 rounded-[32px] shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] relative overflow-hidden"
           >
             {/* Background Glow */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#c9f31d]/10 blur-[80px]" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#c9f31d]/5 blur-[100px] rounded-full" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#00C9F2]/5 blur-[100px] rounded-full" />
             
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-[#c9f31d]/10 rounded-full flex items-center justify-center mb-6 border border-[#c9f31d]/20">
-                <Lock className="text-[#c9f31d]" size={32} />
+              <div className="w-20 h-20 bg-white/[0.03] border border-white/10 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
+                <Lock className="text-[#c9f31d]" size={36} strokeWidth={1.5} />
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Access Restricted</h1>
-              <p className="text-white/60 text-lg mb-10 max-w-md">
-                To view and download Dattatray Sable's premium resume, please authenticate using one of the secure providers below.
+              <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>Restricted Access</h1>
+              <p className="text-white/40 text-sm md:text-base mb-10 max-w-[320px] leading-relaxed">
+                Authenticate to view and download Dattatray Sable&apos;s premium BI dossier.
               </p>
 
-              <div className="grid grid-cols-1 gap-4 w-full max-w-sm">
-                <button 
-                  onClick={() => signIn('google')}
-                  className="flex items-center justify-center gap-3 bg-white text-black py-3.5 rounded-xl font-semibold hover:bg-white/90 transition-all active:scale-[0.98]"
-                >
-                  <Zap size={20} /> Continue with Google
-                </button>
-                
-                <button 
-                  onClick={() => signIn('github')}
-                  className="flex items-center justify-center gap-3 bg-[#171717] text-white py-3.5 rounded-xl font-semibold border border-white/10 hover:bg-[#222] transition-all active:scale-[0.98]"
-                >
-                  <GitBranch size={20} /> Continue with GitHub
-                </button>
-
-                <button 
-                  onClick={() => signIn('linkedin')}
-                  className="flex items-center justify-center gap-3 bg-[#0077b5] text-white py-3.5 rounded-xl font-semibold hover:bg-[#0077b5]/90 transition-all active:scale-[0.98]"
-                >
-                  <Users size={20} /> Continue with LinkedIn
-                </button>
+              <div className="flex flex-col gap-3 w-full">
+                {[
+                  { id: 'google', name: 'Google', icon: <Zap size={18} />, color: '#ea4335' },
+                  { id: 'github', name: 'GitHub', icon: <GitBranch size={18} />, color: '#fff' },
+                  { id: 'linkedin', name: 'LinkedIn', icon: <Users size={18} />, color: '#0077b5' }
+                ].map(p => (
+                  <button 
+                    key={p.id}
+                    onClick={() => signIn(p.id)}
+                    className="group relative flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 text-white/80 py-4 rounded-2xl font-bold text-sm tracking-widest uppercase transition-all hover:bg-white hover:text-black hover:border-white active:scale-[0.98]"
+                    style={{ fontFamily: 'Syne, sans-serif' }}
+                  >
+                    <img 
+                      src={`https://authjs.dev/img/providers/${p.id}.svg`} 
+                      alt={p.name} 
+                      className="w-5 h-5 group-hover:invert transition-all" 
+                    />
+                    Continue with {p.name}
+                  </button>
+                ))}
               </div>
 
-              <div className="mt-10 flex items-center gap-2 text-white/40 text-sm">
-                <ShieldCheck size={16} /> <span>Your data is never stored. Secure SSO only.</span>
+              <div className="mt-10 pt-8 border-t border-white/5 w-full flex items-center justify-center gap-3 text-white/20 text-[10px] font-bold tracking-[0.2em] uppercase">
+                <ShieldCheck size={14} className="text-[#c9f31d]/40" /> 
+                <span>Secure_SSO_Connection</span>
               </div>
             </div>
           </motion.div>
