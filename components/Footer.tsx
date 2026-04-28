@@ -80,6 +80,7 @@ export default function Footer() {
             <Link
               href="/"
               className="group"
+              aria-label="Datta Sable - Home"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',

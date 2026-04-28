@@ -267,6 +267,7 @@ export default function HomePage() {
           <div className="container">
             <div className="mb-12">
               <TechLabel>Active Deployments</TechLabel>
+              <h2 className="sr-only">Featured BI Projects</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((p, i) => (
@@ -303,7 +304,11 @@ export default function HomePage() {
                       <Target size={14} style={{ color: p.color }} />
                       <span className="mono text-[11px] font-normal" style={{ color: p.color }}>{p.impact}</span>
                     </div>
-                    <Link href="/portfolio" className="text-[var(--text)] hover:text-[var(--accent)] transition-colors">
+                    <Link 
+                      href="/portfolio" 
+                      className="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                      aria-label={`View details for ${p.title}`}
+                    >
                       <ArrowRight size={18} />
                     </Link>
                   </div>

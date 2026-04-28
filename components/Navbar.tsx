@@ -84,7 +84,7 @@ export default function Navbar() {
       <div className="w-full max-w-[1448px] px-6 lg:px-0">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
+          <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
             <LogoIcon color="#c9f31d" className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
             <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.05rem', color: '#fff', letterSpacing: '-0.01em' }}>
               Datta Sable
@@ -193,6 +193,7 @@ export default function Navbar() {
             <button
               className="xl:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
               onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open mobile menu"
             >
               <Menu size={24} />
             </button>
@@ -232,6 +233,7 @@ export default function Navbar() {
                   <button 
                     className="p-2 text-white/50 hover:text-white transition-colors" 
                     onClick={() => setMobileMenuOpen(false)}
+                    aria-label="Close mobile menu"
                   >
                     <X size={24} />
                   </button>

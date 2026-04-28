@@ -96,7 +96,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Providers>
           <ThemeProvider>
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
           </ThemeProvider>
         </Providers>
       </body>

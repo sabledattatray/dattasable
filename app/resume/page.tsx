@@ -78,6 +78,7 @@ export default function ResumePage() {
                     <button 
                       key={p.id}
                       onClick={() => signIn(p.id)}
+                      aria-label={`Sign in with ${p.name}`}
                       className="group flex items-center justify-center gap-3 bg-transparent border border-white/10 py-5 px-4 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
                     >
                       <div className="w-4 h-4 relative z-10 shrink-0">
@@ -110,6 +111,7 @@ export default function ResumePage() {
       {/* Download Button Overlay */}
       <button 
         onClick={handleDownload}
+        aria-label="Download Resume as PDF"
         className="fixed bottom-8 right-8 bg-[#2563eb] text-white px-6 py-3 rounded-full font-bold shadow-2xl hover:bg-[#1e40af] transition-all flex items-center gap-2 z-50 group print:hidden"
       >
         <Download size={20} className="group-hover:translate-y-0.5 transition-transform" /> 
@@ -119,6 +121,7 @@ export default function ResumePage() {
       {/* Close/Back Button */}
       <button 
         onClick={() => window.history.back()}
+        aria-label="Go back to previous page"
         className="fixed top-8 left-8 bg-white/80 backdrop-blur-md border border-black/10 p-3 rounded-full shadow-lg hover:bg-white transition-all z-50 print:hidden"
       >
         <ArrowRight className="rotate-180" size={20} />
