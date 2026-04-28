@@ -26,53 +26,55 @@ export default function ResumePage() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black flex flex-col">
+      <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black">
         <Navbar />
-        <div className="flex-1 flex items-center justify-center p-6 mt-12">
+        {/* Full screen centered container */}
+        <div className="fixed inset-0 flex items-center justify-center p-6 z-[60]">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="max-w-[480px] w-full bg-gradient-to-b from-[#111] to-[#050505] border border-white/5 p-8 md:p-12 rounded-[32px] shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] relative overflow-hidden"
+            className="max-w-[440px] w-full bg-[#0a0a0a] border border-white/10 p-8 md:p-10 rounded-[32px] shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] relative overflow-hidden"
           >
             {/* Background Glow */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#c9f31d]/5 blur-[100px] rounded-full" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#00C9F2]/5 blur-[100px] rounded-full" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#c9f31d]/5 blur-[80px] rounded-full" />
             
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-white/[0.03] border border-white/10 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
-                <Lock className="text-[#c9f31d]" size={36} strokeWidth={1.5} />
+              <div className="w-16 h-16 bg-white/[0.03] border border-white/10 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                <Lock className="text-[#c9f31d]" size={28} strokeWidth={1.5} />
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>Restricted Access</h1>
-              <p className="text-white/40 text-sm md:text-base mb-10 max-w-[320px] leading-relaxed">
-                Authenticate to view and download Dattatray Sable&apos;s premium BI dossier.
+              <h1 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>Access Restricted</h1>
+              <p className="text-white/40 text-[13px] mb-8 max-w-[280px] leading-relaxed">
+                Connect via secure SSO to unlock Dattatray Sable&apos;s premium resume.
               </p>
 
-              <div className="flex flex-col gap-3 w-full">
+              {/* 3 Inline Social Buttons */}
+              <div className="grid grid-cols-3 gap-3 w-full">
                 {[
-                  { id: 'google', name: 'Google', icon: <Zap size={18} />, color: '#ea4335' },
-                  { id: 'github', name: 'GitHub', icon: <GitBranch size={18} />, color: '#fff' },
-                  { id: 'linkedin', name: 'LinkedIn', icon: <Users size={18} />, color: '#0077b5' }
+                  { id: 'google', name: 'Google' },
+                  { id: 'github', name: 'GitHub' },
+                  { id: 'linkedin', name: 'LinkedIn' }
                 ].map(p => (
                   <button 
                     key={p.id}
                     onClick={() => signIn(p.id)}
-                    className="group relative flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 text-white/80 py-4 rounded-2xl font-bold text-sm tracking-widest uppercase transition-all hover:bg-white hover:text-black hover:border-white active:scale-[0.98]"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
+                    className="flex flex-col items-center justify-center gap-2 bg-white/[0.02] border border-white/10 p-4 rounded-2xl transition-all hover:bg-white hover:border-white group"
                   >
                     <img 
                       src={`https://authjs.dev/img/providers/${p.id}.svg`} 
                       alt={p.name} 
-                      className="w-5 h-5 group-hover:invert transition-all" 
+                      className="w-6 h-6 group-hover:invert transition-all" 
                     />
-                    Continue with {p.name}
+                    <span className="text-[9px] font-bold tracking-[0.1em] uppercase text-white/30 group-hover:text-black">
+                      {p.name}
+                    </span>
                   </button>
                 ))}
               </div>
 
-              <div className="mt-10 pt-8 border-t border-white/5 w-full flex items-center justify-center gap-3 text-white/20 text-[10px] font-bold tracking-[0.2em] uppercase">
-                <ShieldCheck size={14} className="text-[#c9f31d]/40" /> 
-                <span>Secure_SSO_Connection</span>
+              <div className="mt-8 flex items-center justify-center gap-2 text-white/20 text-[9px] font-bold tracking-[0.2em] uppercase">
+                <ShieldCheck size={12} className="text-[#c9f31d]/30" /> 
+                <span>Secure_Connection</span>
               </div>
             </div>
           </motion.div>
