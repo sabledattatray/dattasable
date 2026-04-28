@@ -176,7 +176,7 @@ const dashboards = [
     tool: 'Power BI',
     color: 'var(--accent2)',
     icon: '💰',
-    image: '/images/dashboards/dashboard_5.webp',
+    image: '/images/blog/advanced-excel.webp',
     desc: 'Board-ready P&L, cash flow waterfall, budget variance heatmap, and departmental cost breakdown.',
     embed: null,
     tags: ['P&L', 'Cash Flow', 'Budget'],
