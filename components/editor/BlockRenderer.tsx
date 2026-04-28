@@ -18,7 +18,8 @@ export default function BlockRenderer({ blocks }: BlockRendererProps) {
 }
 
 function BlockNode({ block }: { block: EditorBlock }) {
-  const { type, content, metadata } = block;
+  const { type, content } = block;
+  const metadata = (block.metadata || {}) as Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   // Apply contextual styling
   const customStyles: React.CSSProperties = {
