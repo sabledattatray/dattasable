@@ -37,27 +37,27 @@ export default function ResumePage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative w-full max-w-[520px] bg-[#0a0a0a] border border-white/10 rounded-[32px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
+            className="relative w-full max-w-[520px] min-h-[640px] flex flex-col bg-[#0a0a0a] border border-white/10 rounded-[32px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           >
             {/* Top Branding Bar */}
             <div className="h-1 bg-gradient-to-r from-[#c9f31d] via-[#00C9F2] to-[#c9f31d] w-full" />
             
-            <div className="p-10 md:p-14">
+            <div className="p-10 md:p-16 flex-1 flex flex-col justify-center">
               <div className="flex flex-col items-center text-center">
                 {/* Shield Icon */}
-                <div className="mb-10 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <ShieldCheck className="text-[#c9f31d]" size={44} strokeWidth={1} />
+                <div className="mb-12 p-5 rounded-2xl bg-white/[0.03] border border-white/5">
+                  <ShieldCheck className="text-[#c9f31d]" size={48} strokeWidth={1} />
                 </div>
 
-                <h1 className="text-3xl font-bold tracking-tight mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'Syne, sans-serif' }}>
                   Identity Verification
                 </h1>
-                <p className="text-white/40 text-sm leading-relaxed mb-12 max-w-[320px]">
+                <p className="text-white/40 text-sm leading-relaxed mb-16 max-w-[340px]">
                   Authenticate to unlock Dattatray Sable&apos;s professional credentials and portfolio artifacts.
                 </p>
 
                 {/* Login Options - Bulletproof Inline */}
-                <div className="grid grid-cols-3 gap-5 w-full">
+                <div className="grid grid-cols-3 gap-6 w-full mb-8">
                   {[
                     { 
                       id: 'google', 
@@ -78,7 +78,7 @@ export default function ResumePage() {
                     <button 
                       key={p.id}
                       onClick={() => signIn(p.id)}
-                      className="group flex flex-col items-center justify-center gap-4 bg-transparent border border-white/10 py-8 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
+                      className="group flex flex-col items-center justify-center gap-4 bg-transparent border border-white/10 py-10 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
                     >
                       <div className="w-5 h-5 relative z-10 pt-1">
                         {p.svg}
