@@ -268,7 +268,11 @@ export default function HomePage() {
             <div className="mb-12">
               <TechLabel>Active Deployments</TechLabel>
             </div>
-            <div className="grid-auto-fill-340">
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))', 
+              gap: '2rem' 
+            }}>
               {projects.map((p, i) => (
                 <motion.div
                   key={p.title}
