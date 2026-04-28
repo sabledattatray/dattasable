@@ -11,91 +11,181 @@ const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
 const projects = [
   {
     id: 1,
-    title: 'Sales Performance Dashboard',
+    title: 'Sales Performance Ecosystem',
     category: 'Dashboard',
-    cover: '📊',
+    image: '/images/dashboards/dashboard_1.png',
     color: 'var(--accent)',
-    tools: ['Tableau', 'SQL', 'PostgreSQL'],
+    tools: ['Tableau', 'SQL', 'PostgreSQL', 'Python'],
     client: 'RetailMax Corp',
-    desc: 'Real-time sales tracking dashboard covering $12M+ in annual revenue. Includes drill-down by region, product, and salesperson with trend forecasting.',
-    problem: 'The client had 15+ disconnected Excel reports with no unified view of revenue performance. Senior leadership spent 8 hours weekly consolidating data.',
-    solution: 'Built a unified Tableau dashboard connected to a PostgreSQL data warehouse. Automated daily ETL with Python, giving leadership a real-time single source of truth.',
-    impact: '+28% decision speed, -8 hours/week manual work, 95% exec adoption rate',
+    desc: 'Unified sales tracking infrastructure covering $12M+ in annual revenue with automated ETL and predictive forecasting.',
+    problem: 'Client had 15+ disconnected Excel reports with no unified view of revenue performance.',
+    solution: 'Engineered a unified PostgreSQL data warehouse and Tableau dashboards with Python-automated ETL pipelines.',
+    impact: '+28% Decision Velocity, -8hrs/week Manual Work, 95% Exec Adoption',
     github: '#',
     live: '#',
   },
   {
     id: 2,
-    title: 'Supply Chain Analytics Platform',
+    title: 'Supply Chain Intelligence',
     category: 'Analysis',
-    cover: '🔗',
+    image: '/images/dashboards/dashboard_2.png',
     color: 'var(--accent2)',
     tools: ['Power BI', 'SQL', 'DAX', 'Python'],
     client: 'Global Manufacturing Ltd',
-    desc: 'End-to-end supply chain visibility platform tracking 500+ SKUs, warehouse inventory, and supplier performance across 3 countries.',
-    problem: 'Inventory overstock cost the company $400K annually. Procurement decisions were based on gut feeling without data backing.',
-    solution: 'Built Power BI dashboards with demand forecasting models in Python. Implemented automated reorder alerts via Power Automate.',
-    impact: '-18% inventory cost, $72K annual savings, 100% automated reorder process',
+    desc: 'End-to-end supply chain visibility platform tracking 500+ SKUs and warehouse latency across 3 countries.',
+    problem: 'Inventory overstock was costing $400K/year due to gut-feeling based procurement.',
+    solution: 'Implemented demand forecasting models in Python with automated reorder alerts via Power BI.',
+    impact: '-18% Inventory Cost, $72K Annual Savings, 100% Automated Reorders',
     github: '#',
     live: '#',
   },
   {
     id: 3,
-    title: 'HR Workforce Intelligence',
+    title: 'Workforce Retention Engine',
     category: 'Report',
-    cover: '👥',
+    image: '/images/dashboards/dashboard_3.webp',
     color: 'var(--accent3)',
     tools: ['Python', 'Excel', 'Tableau'],
     client: 'HR Tech Startup',
-    desc: 'Automated HR reporting system transforming 40-hour manual monthly reports into a 10-minute automated refresh with 12 KPI dashboards.',
-    problem: '2 HR analysts spent full weeks each month manually compiling payroll, attrition, and performance reports from 5 systems.',
-    solution: 'Python scripts to extract, clean, and merge data from all HR systems. Tableau dashboards auto-refresh via REST API connections.',
-    impact: '97% time saved, 2 FTEs freed for strategic work, zero data errors',
+    desc: 'ML-powered HR reporting system identifying attrition risks before they happen with automated pulse monitoring.',
+    problem: 'HR spent 40 hours/month manually compiling attrition and payroll data from siloed systems.',
+    solution: 'Developed custom Python connectors to HR APIs and built an automated Tableau reporting suite.',
+    impact: '97% Time Saved, -15% Attrition Rate, Zero Reporting Errors',
     github: '#',
     live: '#',
   },
   {
     id: 4,
-    title: 'Financial KPI Automation',
+    title: 'Financial Close Automation',
     category: 'Automation',
-    cover: '💰',
+    image: '/images/dashboards/dashboard_5.webp',
     color: 'var(--accent)',
     tools: ['Excel', 'VBA', 'Python', 'SQL'],
     client: 'Fintech Company',
-    desc: 'Automated financial reporting suite covering P&L, cash flow, and budget variance with one-click report generation for CFO and board.',
-    problem: 'Monthly financial close took 5 days with manual Excel work. High error risk with formulas across 50+ workbooks.',
-    solution: 'Python-powered automation with Excel templates and a SQL backend. Report generation reduced from 5 days to 4 hours.',
-    impact: '-80% close time, zero errors in 18 months, CFO satisfaction score 9.5/10',
+    desc: 'Automated board-ready financial reporting suite reducing monthly close time from 5 days to 4 hours.',
+    problem: 'Monthly financial close was manual, error-prone, and took a full work week of executive time.',
+    solution: 'Automated P&L and Cash Flow generation using Python/Pandas with a secure SQL backend.',
+    impact: '80% Faster Close, 18 Months Error-Free, CFO Approval 9.5/10',
     github: '#',
     live: '#',
   },
   {
     id: 5,
-    title: 'E-Commerce Analytics Suite',
+    title: 'Omnichannel Marketing ROI',
     category: 'Dashboard',
-    cover: '🛒',
+    image: '/images/dashboards/dashboard_4.webp',
     color: 'var(--accent2)',
-    tools: ['Tableau', 'Google Analytics', 'SQL', 'Python'],
+    tools: ['Tableau', 'GA4', 'Shopify', 'Python'],
     client: 'D2C Brand',
-    desc: 'Omnichannel analytics combining website, social, and sales data into one dashboard. Tracks customer journey from first touch to repeat purchase.',
-    problem: 'Marketing team had no visibility into which channels drove revenue. Ad spend was allocated based on assumptions.',
-    solution: 'Unified Tableau dashboard pulling from GA4, Meta Ads API, Shopify, and CRM via Python ETL. First-touch and multi-touch attribution models.',
-    impact: '+35% ROAS improvement, 22% reduction in CAC, data-driven budget reallocation',
+    desc: 'Full-funnel marketing attribution dashboard tracking customer journey from first touch to repeat purchase.',
+    problem: 'No visibility into cross-channel marketing ROI, leading to inefficient ad spend allocation.',
+    solution: 'Integrated GA4, Meta, and Shopify APIs into a unified Tableau dashboard with custom attribution models.',
+    impact: '+35% ROAS improvement, 22% reduction in CAC, Data-Driven Budgets',
     github: '#',
     live: '#',
   },
   {
     id: 6,
-    title: 'Executive Market Analysis',
+    title: 'Market Expansion Scraper',
     category: 'Analysis',
-    cover: '📈',
+    image: '/images/blog/python_scraper_hero_1777410123458.webp',
     color: 'var(--accent3)',
-    tools: ['Python', 'Pandas', 'Tableau', 'SQL'],
-    client: 'Strategy Consulting Firm',
-    desc: 'Competitor benchmarking and market sizing analysis for a $500M expansion decision. Includes Python-powered web scraping and statistical modeling.',
-    problem: 'Executive team needed a comprehensive market view before committing to a new geography. Existing market research was 3 years old.',
-    solution: 'Python scrapers for competitor pricing and positioning data. Statistical models for TAM/SAM/SOM estimation. Interactive Tableau story for board presentation.',
-    impact: 'Decision made with confidence — $500M expansion greenlit. Competitor gaps identified, strategy refined.',
+    tools: ['Python', 'BeautifulSoup', 'Tableau'],
+    client: 'Strategy Consulting',
+    desc: 'Competitor benchmarking and market sizing analysis for a $500M expansion decision via custom web scrapers.',
+    problem: 'Consultants needed real-time competitor pricing data across 10 global markets.',
+    solution: 'Built a distributed web scraping infrastructure in Python to feed a real-time Tableau pricing dashboard.',
+    impact: '$500M Expansion Greenlit, Competitor Gaps Identified, Live Pricing',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 7,
+    title: 'Warehouse IoT Monitoring',
+    category: 'Automation',
+    image: '/images/blog/bi_performance_hero_1777410226286.webp',
+    color: 'var(--accent)',
+    tools: ['Python', 'MQTT', 'SQL', 'Looker'],
+    client: 'Logistics Hub',
+    desc: 'Real-time IoT sensor integration for monitoring warehouse temperature, humidity, and picker efficiency.',
+    problem: 'Perishable goods worth $50k were lost annually due to undetected temperature spikes.',
+    solution: 'Connected IoT sensors to a real-time Looker dashboard with instant SMS alerts for threshold breaches.',
+    impact: 'Zero Product Loss, 100% Compliance, Real-time Visuals',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 8,
+    title: 'Retail Demand Forecaster',
+    category: 'Analysis',
+    image: '/images/blog/retail_analytics_hero_1777410051638.webp',
+    color: 'var(--accent2)',
+    tools: ['Python', 'Scikit-Learn', 'Power BI'],
+    client: 'National Fashion Chain',
+    desc: 'Predictive modeling for seasonal demand across 200+ retail locations to optimize inventory levels.',
+    problem: 'Understocking during peak seasons caused an estimated $1M in missed sales opportunities.',
+    solution: 'Developed a random forest forecasting model in Python and deployed it via Power BI.',
+    impact: '+12% Seasonal Sales, -15% Stockouts, Accurate Buy-plans',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 9,
+    title: 'Legal Document Classifier',
+    category: 'Automation',
+    image: '/images/blog/ai_governance_hero_1777410191025.webp',
+    color: 'var(--accent3)',
+    tools: ['Python', 'NLP', 'PyPDF2', 'Excel'],
+    client: 'Law Firm',
+    desc: 'AI-powered document processing system that automatically classifies and extracts data from legal contracts.',
+    problem: 'Paralegals spent 20 hours/week manually categorizing and entering data from thousands of PDF contracts.',
+    solution: 'Built an NLP-based classification engine in Python that extracts key clauses into a structured database.',
+    impact: '90% Processing Speedup, $40k/yr Cost Savings, High Accuracy',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 10,
+    title: 'Healthcare Patient Flow',
+    category: 'Dashboard',
+    image: '/images/blog/data_quality_hero_1777410243821.webp',
+    color: 'var(--accent)',
+    tools: ['Tableau', 'SQL', 'HealthConnect'],
+    client: 'Regional Hospital',
+    desc: 'Real-time patient flow and bed occupancy dashboard for hospital administrators to optimize resource allocation.',
+    problem: 'Wait times in the ER were exceeding 6 hours due to poor visibility of bed availability.',
+    solution: 'Integrated EMR data into a real-time Tableau dashboard with predictive wait-time models.',
+    impact: '-25% ER Wait Times, +18% Bed Turnaround, Improved Care',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 11,
+    title: 'SaaS Churn Analytics',
+    category: 'Report',
+    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp',
+    color: 'var(--accent2)',
+    tools: ['Looker', 'Python', 'BigQuery'],
+    client: 'Fintech SaaS',
+    desc: 'Deep-dive cohort analysis and churn prediction for a high-growth SaaS platform with $5M ARR.',
+    problem: 'Company had high churn in the 3rd month but didn\'t know the underlying product triggers.',
+    solution: 'Performed multi-dimensional cohort analysis in BigQuery and visualized findings in Looker.',
+    impact: '-20% Churn in Segment A, Identified Product Gaps, Live LTV',
+    github: '#',
+    live: '#',
+  },
+  {
+    id: 12,
+    title: 'Energy Grid Load Forecast',
+    category: 'Analysis',
+    image: '/images/blog/sql_joins_hero_1777410104986.webp',
+    color: 'var(--accent3)',
+    tools: ['Python', 'XGBoost', 'Power BI'],
+    client: 'Municipal Energy',
+    desc: 'Machine learning model to predict peak energy demand on the local grid to prevent brownouts.',
+    problem: 'Sudden heatwaves were causing localized energy shortages due to inaccurate demand predictions.',
+    solution: 'Built an XGBoost regression model using weather and historical usage data, visualized in Power BI.',
+    impact: '98% Forecast Accuracy, Zero Brownouts in 2025, Efficient Sourcing',
     github: '#',
     live: '#',
   },
@@ -176,32 +266,41 @@ export default function PortfolioPage() {
                   transition={{ duration: 0.25 }}
                   className="card"
                   style={{ 
-                    padding: '2rem',
+                    overflow: 'hidden',
                     borderLeft: '2px solid',
-                    borderImage: 'linear-gradient(to bottom, #c9f31d, #00C9F2) 1',
+                    borderImage: `linear-gradient(to bottom, ${p.color}, #00C9F2) 1`,
                     background: 'rgba(8,8,8,0.5)',
                     cursor: 'pointer'
                   }}
                   onClick={() => setSelected(p)}
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className="w-14 h-14 flex items-center justify-center text-2xl"
-                      style={{ background: 'var(--tag-bg)', border: `1px solid ${p.color}33` }}
-                    >
-                      {p.cover}
+                  {/* Image area */}
+                  <div style={{ height: 180, overflow: 'hidden', position: 'relative' }}>
+                    <motion.img 
+                      src={p.image} 
+                      alt={p.title}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg), transparent)' }} />
+                    <div style={{ position: 'absolute', bottom: 12, left: 12 }}>
+                      <span className="tag" style={{ color: p.color, borderColor: `${p.color}44`, background: 'var(--bg)' }}>{p.category}</span>
                     </div>
-                    <span className="tag" style={{ color: p.color, borderColor: `${p.color}44` }}>{p.category}</span>
                   </div>
-                  <h3 style={{ fontSize: '1.05rem', marginBottom: '0.75rem', color: 'var(--text)' }}>{p.title}</h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-                    {p.desc.slice(0, 100)}…
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {p.tools.map(t => <span key={t} className="tag">{t}</span>)}
-                  </div>
-                  <div className="flex items-center gap-1" style={{ color: p.color, fontSize: '0.875rem', fontWeight: 600 }}>
-                    View Case Study <ChevronRight size={14} />
+
+                  <div style={{ padding: '1.5rem' }}>
+                    <h3 style={{ fontSize: '1.05rem', marginBottom: '0.75rem', color: 'var(--text)' }}>{p.title}</h3>
+                    <p style={{ color: 'var(--muted)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                      {p.desc.slice(0, 100)}…
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {p.tools.slice(0, 3).map(t => <span key={t} className="tag">{t}</span>)}
+                      {p.tools.length > 3 && <span className="tag">+{p.tools.length - 3}</span>}
+                    </div>
+                    <div className="flex items-center gap-1" style={{ color: p.color, fontSize: '0.875rem', fontWeight: 600 }}>
+                      View Case Study <ChevronRight size={14} />
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -218,7 +317,7 @@ export default function PortfolioPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             style={{
-              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.95)', zIndex: 1000,
+              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.98)', zIndex: 1000,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               padding: '2rem',
             }}
@@ -230,70 +329,67 @@ export default function PortfolioPage() {
               exit={{ scale: 0.95, y: 20 }}
               onClick={e => e.stopPropagation()}
               style={{
-                background: 'var(--surface)', border: '1px solid var(--border)',
-                borderRadius: 'calc(var(--radius) * 1.5)', padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-                maxWidth: 720, width: '100%', maxHeight: '90vh', overflowY: 'auto',
+                background: 'var(--bg)', border: '1px solid var(--border)',
+                borderRadius: 0, padding: 0,
+                maxWidth: 900, width: '100%', maxHeight: '95vh', overflowY: 'auto',
                 position: 'relative',
               }}
             >
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center"
+                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center z-10"
                 style={{ background: 'var(--tag-bg)', border: '1px solid var(--border)', color: 'var(--muted)', cursor: 'pointer' }}
               >
-                <X size={16} />
+                <X size={20} />
               </button>
 
-              <div className="flex items-center gap-4 mb-6">
+              <div style={{ height: 300, overflow: 'hidden', position: 'relative' }}>
+                <img src={selected.image} alt={selected.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg), transparent)' }} />
+                <div style={{ position: 'absolute', bottom: 30, left: 30 }}>
+                  <div className="label-tech mb-2" style={{ color: selected.color }}>{selected.category} CASE_STUDY</div>
+                  <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--text)', fontWeight: 700 }}>{selected.title}</h2>
+                  <div className="mono" style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Architected for: {selected.client}</div>
+                </div>
+              </div>
+
+              <div style={{ padding: '2.5rem' }}>
+                <p style={{ color: 'var(--text)', fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', opacity: 0.9 }}>{selected.desc}</p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
+                  {[
+                    { label: '🔴 THE CHALLENGE', text: selected.problem, color: '#ff4d4d' },
+                    { label: '✅ THE ARCHITECTURE', text: selected.solution, color: 'var(--accent)' },
+                  ].map(item => (
+                    <div key={item.label} style={{ borderLeft: `2px solid ${item.color}`, paddingLeft: '1.5rem' }}>
+                      <div className="mono" style={{ fontWeight: 800, marginBottom: '1rem', fontSize: '0.8rem', color: item.color, letterSpacing: '0.2em' }}>{item.label}</div>
+                      <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8 }}>{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+
                 <div
-                  className="w-16 h-16 flex items-center justify-center text-3xl"
-                  style={{ background: 'var(--tag-bg)', border: `1px solid ${selected.color}33` }}
+                  style={{ background: 'rgba(201,243,29,0.05)', border: `1px solid ${selected.color}33`, padding: '2rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
                 >
-                  {selected.cover}
-                </div>
-                <div>
-                  <span className="tag" style={{ color: selected.color, borderColor: `${selected.color}44`, marginBottom: '0.5rem', display: 'inline-block' }}>{selected.category}</span>
-                  <h2 style={{ fontSize: '1.4rem', color: 'var(--text)' }}>{selected.title}</h2>
-                  <div className="mono" style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>Client: {selected.client}</div>
-                </div>
-              </div>
-
-              <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.5rem' }}>{selected.desc}</p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-                {[
-                  { label: '🔴 Problem', text: selected.problem },
-                  { label: '✅ Solution', text: selected.solution },
-                ].map(item => (
-                  <div key={item.label} className="card" style={{ padding: '1.25rem' }}>
-                    <div style={{ fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.9rem', color: 'var(--text)' }}>{item.label}</div>
-                    <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.7 }}>{item.text}</p>
+                  <div style={{ fontSize: '2.5rem' }}>🎯</div>
+                  <div>
+                    <div className="label-tech" style={{ fontSize: '10px', marginBottom: '0.5rem' }}>BUSINESS_IMPACT</div>
+                    <div className="mono" style={{ color: selected.color, fontWeight: 700, fontSize: '1.2rem' }}>{selected.impact}</div>
                   </div>
-                ))}
-              </div>
-
-              <div
-                className="flex items-center gap-2 px-4 py-3 mb-5"
-                style={{ background: 'var(--tag-bg)', border: `1px solid ${selected.color}22` }}
-              >
-                <span style={{ fontSize: '1rem' }}>🎯</span>
-                <div>
-                  <div style={{ color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '0.25rem' }}>Impact</div>
-                  <div className="mono" style={{ color: selected.color, fontWeight: 700, fontSize: '0.9rem' }}>{selected.impact}</div>
                 </div>
-              </div>
 
-              <div className="flex flex-wrap gap-2 mb-6">
-                {selected.tools.map(t => <span key={t} className="tag">{t}</span>)}
-              </div>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {selected.tools.map(t => <span key={t} className="tag" style={{ padding: '0.4rem 1rem' }}>{t}</span>)}
+                </div>
 
-              <div className="flex gap-3">
-                <a href={selected.github} className="btn-outline flex items-center gap-2" style={{ textDecoration: 'none', fontSize: '0.875rem' }}>
-                  <GitBranch size={14} /> View Code
-                </a>
-                <a href={selected.live} className="btn-primary flex items-center gap-2" style={{ textDecoration: 'none', fontSize: '0.875rem', position: 'relative', zIndex: 1 }}>
-                  <ExternalLink size={14} /> Live Preview
-                </a>
+                <div className="flex gap-4">
+                  <a href={selected.github} className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: '1rem 2rem' }}>
+                    <GitBranch size={18} /> Documentation
+                  </a>
+                  <a href={selected.live} className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: '1rem 2rem', position: 'relative', zIndex: 1 }}>
+                    <ExternalLink size={18} /> Live Deployment
+                  </a>
+                </div>
               </div>
             </motion.div>
           </motion.div>
