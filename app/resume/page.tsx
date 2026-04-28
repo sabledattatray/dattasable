@@ -42,22 +42,22 @@ export default function ResumePage() {
             {/* Top Branding Bar */}
             <div className="h-1 bg-gradient-to-r from-[#c9f31d] via-[#00C9F2] to-[#c9f31d] w-full" />
             
-            <div className="p-10 md:p-14 md:px-20">
+            <div className="p-8 md:p-12 md:px-24 flex flex-col items-center">
               <div className="flex flex-col items-center text-center">
                 {/* Shield Icon */}
-                <div className="mb-10 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+                <div className="mb-8 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
                   <ShieldCheck className="text-[#c9f31d]" size={42} strokeWidth={1} />
                 </div>
 
                 <h1 className="text-3xl font-bold tracking-tight mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>
                   Identity Verification
                 </h1>
-                <p className="text-white/40 text-xs leading-relaxed mb-10 max-w-[320px]">
-                  Authenticate to unlock Dattatray Sable&apos;s professional credentials and portfolio artifacts.
+                <p className="text-white/40 text-[10px] leading-relaxed mb-10 max-w-[280px] uppercase tracking-widest font-bold">
+                  Secure Access Required
                 </p>
 
-                {/* Login Options - Bulletproof Inline */}
-                <div className="grid grid-cols-3 gap-4 w-full">
+                {/* Login Options - High Fidelity Spaced Inline */}
+                <div className="grid grid-cols-3 gap-6 w-full max-w-[480px]">
                   {[
                     { 
                       id: 'google', 
@@ -89,7 +89,6 @@ export default function ResumePage() {
                     </button>
                   ))}
                 </div>
-
                 <div className="mt-10 flex items-center gap-2 text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">
                   <Lock size={12} /> Encrypted Session
                 </div>
