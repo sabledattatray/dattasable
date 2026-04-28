@@ -6,12 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    env:
-      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v4
       
