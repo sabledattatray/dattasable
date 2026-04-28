@@ -83,7 +83,8 @@ const dashboards = [
     icon: '📦',
     image: '/images/blog/bi_performance_hero_1777410226286.webp',
     desc: 'Real-time monitoring of warehouse efficiency, picker performance, and order-to-shipment latency.',
-    embed: null,
+    embed: 'https://public.tableau.com/views/LogisticsPerformanceDashboard/LogisticsPerformance?:embed=y&:showVizHome=no',
+    isNDA: true,
     tags: ['Warehouse', 'Efficiency', 'Logistics'],
     metrics: ['2.4k orders/hr', '99.8% Accuracy', '-12m Latency'],
   },
@@ -124,7 +125,8 @@ const dashboards = [
     icon: '👥',
     image: '/images/dashboards/dashboard_3.webp',
     desc: 'Attrition prediction, headcount planning, performance distribution, and diversity metrics.',
-    embed: null,
+    embed: 'https://public.tableau.com/views/HRAnalyticsDashboard_16817478061410/HRDashboard?:embed=y&:showVizHome=no',
+    isNDA: true,
     tags: ['Attrition', 'Headcount', 'D&I'],
     metrics: ['2,000+ employees', '97% time saved', '12 KPIs'],
   },
@@ -163,7 +165,8 @@ const dashboards = [
     icon: '🌍',
     image: '/images/blog/data_democratization_hero_1777410089898.webp',
     desc: 'Real-time D&I reporting, ensuring compliance with global standards and tracking equity benchmarks.',
-    embed: null,
+    embed: 'https://public.tableau.com/views/DiversityInclusionDashboard/DiversityInclusion?:embed=y&:showVizHome=no',
+    isNDA: true,
     tags: ['Diversity', 'Equity', 'Inclusion'],
     metrics: ['Global Compliance', 'Live Pulse', 'Pay Equity'],
   },
@@ -232,7 +235,8 @@ const dashboards = [
     icon: '🛒',
     image: '/images/dashboards/dashboard_4.webp',
     desc: 'Omnichannel attribution, customer lifetime value cohorts, funnel analysis, and campaign ROI tracking.',
-    embed: null,
+    embed: 'https://public.tableau.com/views/EcommerceSalesDashboard_16817476061410/EcommerceOverview?:embed=y&:showVizHome=no',
+    isNDA: true,
     tags: ['Attribution', 'LTV', 'Funnel'],
     metrics: ['+35% ROAS', '-22% CAC', '4 channels'],
   },
@@ -618,6 +622,22 @@ export default function DashboardsPage() {
                   Close ✕
                 </button>
               </div>
+
+              {preview.isNDA && (
+                <div style={{ 
+                  background: 'rgba(201, 243, 29, 0.05)', 
+                  padding: '0.75rem 1.5rem', 
+                  borderBottom: '1px solid var(--border)',
+                  fontSize: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  color: 'var(--muted)'
+                }}>
+                  <div style={{ width: 8, height: 8, background: 'var(--accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--accent)' }} />
+                  <span><strong>NDA PROJECT:</strong> Showing a high-fidelity sample for demonstration. Contact for the full live demo.</span>
+                </div>
+              )}
 
               {/* Embed or placeholder */}
               <div style={{ height: 480, background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}>
