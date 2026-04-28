@@ -1,5 +1,5 @@
 import { EditorBlock, useEditorStore } from '@/store/editorStore';
-import { Table, Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function TableBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {

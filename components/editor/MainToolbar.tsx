@@ -11,6 +11,25 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
+interface ToolbarButtonProps {
+  onClick: () => void;
+  isActive?: boolean;
+  children: React.ReactNode;
+  title: string;
+  disabled?: boolean;
+}
+
+const ToolbarButton = ({ onClick, isActive = false, children, title, disabled }: ToolbarButtonProps) => (
+  <button
+    onClick={(e) => { e.preventDefault(); onClick(); }}
+    disabled={disabled}
+    className={`p-2 rounded hover:bg-slate-100 transition-colors ${isActive ? 'bg-slate-100 text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'} ${disabled ? 'opacity-30 cursor-not-allowed' : ''}`}
+    title={title}
+  >
+    {children}
+  </button>
+);
+
 export default function MainToolbar() {
   const { activeEditor } = useEditorStore();
   const [showColors, setShowColors] = useState(false);
@@ -18,51 +37,40 @@ export default function MainToolbar() {
   const editor = activeEditor;
   const colors = ['#0f172a', '#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
 
-  const ToolbarButton = ({ onClick, isActive = false, children, title }: any) => (
-    <button
-      onClick={(e) => { e.preventDefault(); onClick(); }}
-      disabled={!editor}
-      className={`p-2 rounded hover:bg-slate-100 transition-colors ${isActive ? 'bg-slate-100 text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'} ${!editor ? 'opacity-30 cursor-not-allowed' : ''}`}
-      title={title}
-    >
-      {children}
-    </button>
-  );
-
   return (
     <div className={`editor-toolbar flex flex-wrap items-center gap-1 transition-all duration-300 ${!editor ? 'grayscale' : ''}`}>
       <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton onClick={() => editor?.chain().focus().undo().run()} title="Undo">
+        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().undo().run()} title="Undo">
           <Undo size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor?.chain().focus().redo().run()} title="Redo">
+        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().redo().run()} title="Redo">
           <Redo size={16} />
         </ToolbarButton>
       </div>
 
       <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleBold().run()} 
           isActive={editor?.isActive('bold')}
           title="Bold"
         >
           <Bold size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleItalic().run()} 
           isActive={editor?.isActive('italic')}
           title="Italic"
         >
           <Italic size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleUnderline().run()} 
           isActive={editor?.isActive('underline')}
           title="Underline"
         >
           <Underline size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleStrike().run()} 
           isActive={editor?.isActive('strike')}
           title="Strikethrough"
@@ -72,21 +80,21 @@ export default function MainToolbar() {
       </div>
 
       <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} 
           isActive={editor?.isActive('heading', { level: 1 })}
           title="Heading 1"
         >
           <Heading1 size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} 
           isActive={editor?.isActive('heading', { level: 2 })}
           title="Heading 2"
         >
           <Heading2 size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} 
           isActive={editor?.isActive('heading', { level: 3 })}
           title="Heading 3"
@@ -96,21 +104,21 @@ export default function MainToolbar() {
       </div>
 
       <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().setTextAlign('left').run()} 
           isActive={editor?.isActive({ textAlign: 'left' })}
           title="Align Left"
         >
           <AlignLeft size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().setTextAlign('center').run()} 
           isActive={editor?.isActive({ textAlign: 'center' })}
           title="Align Center"
         >
           <AlignCenter size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().setTextAlign('right').run()} 
           isActive={editor?.isActive({ textAlign: 'right' })}
           title="Align Right"
@@ -120,28 +128,28 @@ export default function MainToolbar() {
       </div>
 
       <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleBulletList().run()} 
           isActive={editor?.isActive('bulletList')}
           title="Bullet List"
         >
           <List size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleOrderedList().run()} 
           isActive={editor?.isActive('orderedList')}
           title="Ordered List"
         >
           <ListOrdered size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleBlockquote().run()} 
           isActive={editor?.isActive('blockquote')}
           title="Quote"
         >
           <Quote size={16} />
         </ToolbarButton>
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => editor?.chain().focus().toggleCodeBlock().run()} 
           isActive={editor?.isActive('codeBlock')}
           title="Code Block"
@@ -151,7 +159,7 @@ export default function MainToolbar() {
       </div>
 
       <div className="flex items-center gap-1 relative">
-        <ToolbarButton onClick={() => setShowColors(!showColors)} title="Colors">
+        <ToolbarButton disabled={!editor} onClick={() => setShowColors(!showColors)} title="Colors">
           <Palette size={16} />
         </ToolbarButton>
         
@@ -184,7 +192,7 @@ export default function MainToolbar() {
           </div>
         )}
 
-        <ToolbarButton 
+        <ToolbarButton disabled={!editor} 
           onClick={() => {
             const url = window.prompt('URL', editor?.getAttributes('link').href);
             if (url && editor) editor.chain().focus().setLink({ href: url }).run();
@@ -195,7 +203,7 @@ export default function MainToolbar() {
           <LinkIcon size={16} />
         </ToolbarButton>
 
-        <ToolbarButton onClick={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()} title="Clear Formatting">
+        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()} title="Clear Formatting">
           <Eraser size={16} />
         </ToolbarButton>
       </div>

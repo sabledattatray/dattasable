@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
-  LayoutDashboard, Settings, Table, Map, 
-  Fingerprint, ClipboardList, Newspaper, UserCircle,
+  LayoutDashboard, Settings, Table, 
+  Newspaper,
   Menu, X, Bell, User
 } from "lucide-react";
 

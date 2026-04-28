@@ -7,7 +7,7 @@ export interface EditorBlock {
   id: string;
   type: BlockType;
   content: string; // HTML string from TipTap
-  metadata?: any; // For image URLs, heading levels, etc.
+  metadata?: Record<string, unknown>; // For image URLs, heading levels, etc.
 }
 
 interface EditorState {

@@ -47,7 +47,7 @@ export default function TipTapBlock({ block, isActive }: TipTapBlockProps) {
       },
       handleKeyDown: (view, event) => {
         // Handle Backspace at start of block
-        if (event.key === 'Backspace' && view.state.selection.empty && (view.state.selection as any).$cursor?.pos === 1) {
+        if (event.key === 'Backspace' && view.state.selection.empty && view.state.selection.$from.pos === 1) {
           event.preventDefault();
           removeBlock(block.id);
           return true;
