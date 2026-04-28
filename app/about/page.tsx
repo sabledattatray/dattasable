@@ -196,7 +196,7 @@ export default function AboutPage() {
                     background: i === 1 ? 'var(--surface2)' : 'transparent'
                   }}
                 >
-                  <div className="mono" style={{ fontSize: '12px', color: v.color, marginBottom: '1.5rem' }}>{v.id} //</div>
+                  <div className="mono" style={{ fontSize: '12px', color: v.color, marginBottom: '1.5rem' }}>{v.id} {'//'}</div>
                   <div style={{ color: v.color, marginBottom: '1.5rem' }}>{v.icon}</div>
                   <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', letterSpacing: '0.1em' }}>{v.title}</h3>
                   <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{v.desc}</p>
@@ -265,7 +265,7 @@ export default function AboutPage() {
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '5rem' }}>
               {/* Career Log */}
               <div>
-                <div className="label-tech mb-8">SYSTEM-LOGS // CAREER_HISTORY</div>
+                <div className="label-tech mb-8">SYSTEM-LOGS {'//'} CAREER_HISTORY</div>
                 <div style={{ position: 'relative', paddingLeft: '3rem' }}>
                   <div style={{ position: 'absolute', left: '7px', top: 0, bottom: 0, width: '1px', background: 'var(--border)' }} />
                   {timeline.map((t, i) => (
@@ -346,7 +346,7 @@ export default function AboutPage() {
                         CONTINUOUS_LEARNING: <span style={{ color: 'var(--accent)' }}>TRUE</span>
                       </div>
                       <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>
-                        SYSTEM_STATUS: EVOLVING // VERSION: 5.0.24
+                        SYSTEM_STATUS: EVOLVING {'//'} VERSION: 5.0.24
                       </div>
                     </div>
                   </div>
