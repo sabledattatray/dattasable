@@ -58,14 +58,16 @@ export default function ResumePage() {
                   <button 
                     key={p.id}
                     onClick={() => signIn(p.id)}
-                    className="flex flex-col items-center justify-center gap-3 bg-white/[0.03] border border-white/10 p-6 rounded-2xl transition-all hover:bg-white hover:border-white group h-[120px]"
+                    className="flex flex-col items-center justify-between bg-white/[0.03] border border-white/10 p-5 rounded-2xl transition-all hover:bg-white hover:border-white group h-[120px] w-full"
                   >
-                    <img 
-                      src={`https://authjs.dev/img/providers/${p.id}.svg`} 
-                      alt={p.name} 
-                      className="w-10 h-10 group-hover:invert transition-all object-contain" 
-                    />
-                    <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-white/40 group-hover:text-black">
+                    <div className="flex-1 flex items-center justify-center">
+                      <img 
+                        src={`https://authjs.dev/img/providers/${p.id}.svg`} 
+                        alt={p.name} 
+                        className="w-8 h-8 group-hover:brightness-0 transition-all" 
+                      />
+                    </div>
+                    <span className="text-[9px] font-bold tracking-[0.15em] uppercase text-white/40 group-hover:text-black mt-auto">
                       {p.name}
                     </span>
                   </button>
