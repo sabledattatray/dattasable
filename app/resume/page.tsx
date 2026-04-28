@@ -56,8 +56,8 @@ export default function ResumePage() {
                   Secure Access Required
                 </p>
 
-                {/* Login Options - High Fidelity Spaced Inline */}
-                <div className="grid grid-cols-3 gap-6 w-full max-w-[480px]">
+                {/* Login Options - High Fidelity Inline Buttons */}
+                <div className="grid grid-cols-3 gap-3 w-full max-w-[520px]">
                   {[
                     { 
                       id: 'google', 
@@ -78,12 +78,12 @@ export default function ResumePage() {
                     <button 
                       key={p.id}
                       onClick={() => signIn(p.id)}
-                      className="group flex flex-col items-center justify-center gap-3 bg-transparent border border-white/10 py-6 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
+                      className="group flex items-center justify-center gap-3 bg-transparent border border-white/10 py-5 px-4 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
                     >
-                      <div className="w-5 h-5 relative z-10 pt-1">
+                      <div className="w-4 h-4 relative z-10 shrink-0">
                         {p.svg}
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30 group-hover:text-[#c9f31d] z-10">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-white/30 group-hover:text-[#c9f31d] z-10 truncate">
                         {p.id}
                       </span>
                     </button>
