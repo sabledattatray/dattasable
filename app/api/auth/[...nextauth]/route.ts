@@ -46,28 +46,34 @@ const handler = NextAuth({
         };
       }
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
-    }),
-    LinkedInProvider({
-      clientId: process.env.LINKEDIN_ID!,
-      clientSecret: process.env.LINKEDIN_SECRET!,
-      issuer: 'https://www.linkedin.com',
-      jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-        }
-      },
-    }),
+    ...(process.env.GOOGLE_ID && process.env.GOOGLE_SECRET ? [
+      GoogleProvider({
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+      })
+    ] : []),
+    ...(process.env.GITHUB_ID && process.env.GITHUB_SECRET ? [
+      GitHubProvider({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET,
+      })
+    ] : []),
+    ...(process.env.LINKEDIN_ID && process.env.LINKEDIN_SECRET ? [
+      LinkedInProvider({
+        clientId: process.env.LINKEDIN_ID,
+        clientSecret: process.env.LINKEDIN_SECRET,
+        issuer: 'https://www.linkedin.com',
+        jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
+        profile(profile) {
+          return {
+            id: profile.sub,
+            name: profile.name,
+            email: profile.email,
+            image: profile.picture,
+          }
+        },
+      })
+    ] : []),
   ],
   session: {
     strategy: "jwt",
