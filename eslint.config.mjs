@@ -1,8 +1,8 @@
-import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
-const eslintConfig = defineConfig([
+/** @type {import('eslint').Linter.Config[]} */
+export default [
   ...nextVitals,
   ...nextTs,
   {
@@ -16,15 +16,15 @@ const eslintConfig = defineConfig([
       "react-hooks/rules-of-hooks": "error",
     }
   },
-  globalIgnores([
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-    "admin-dashboard/**",
-    "scratch/**",
-    "notus/**",
-  ]),
-]);
-
-export default eslintConfig;
+  {
+    ignores: [
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+      "admin-dashboard/**",
+      "scratch/**",
+      "notus/**",
+    ]
+  }
+];
