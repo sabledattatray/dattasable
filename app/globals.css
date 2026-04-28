@@ -404,12 +404,19 @@ h1, h2, h3, h4, h5, h6 {
 /* Grid helper */
 .grid-auto-fill-300 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
 }
 
 .grid-auto-fill-340 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .grid-auto-fill-300, .grid-auto-fill-340 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
