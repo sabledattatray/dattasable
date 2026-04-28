@@ -141,28 +141,37 @@ export default function AdminLogin() {
             </span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {[
-              { id: 'google', icon: 'google', color: '#ea4335', bg: '#fef2f2' },
-              { id: 'github', icon: 'github', color: '#333', bg: '#f8fafc' },
-              { id: 'linkedin', icon: 'linkedin', color: '#0077b5', bg: '#f0f9ff' }
+              { id: 'google', name: 'Google', color: '#ea4335', bg: '#fff' },
+              { id: 'github', name: 'GitHub', color: '#181717', bg: '#fff' },
+              { id: 'linkedin', name: 'LinkedIn', color: '#0077b5', bg: '#fff' }
             ].map(provider => (
               <button
                 key={provider.id}
                 onClick={() => signIn(provider.id, { callbackUrl: '/admin' })}
                 style={{ 
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.75rem',
-                  background: '#fff', border: '1px solid #e2e8f0', borderRadius: '12px', cursor: 'pointer',
-                  transition: 'all 0.2s'
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                  width: '100%', padding: '0.85rem',
+                  background: provider.bg, border: '1px solid #e2e8f0', borderRadius: '12px', 
+                  cursor: 'pointer', transition: 'all 0.2s',
+                  color: '#0f172a', fontSize: '0.9rem', fontWeight: 600
                 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = provider.color}
-                onMouseLeave={e => e.currentTarget.style.borderColor = '#e2e8f0'}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = '#f8fafc';
+                  e.currentTarget.style.borderColor = '#94a3b8';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = provider.bg;
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                }}
               >
                 <img 
                   src={`https://authjs.dev/img/providers/${provider.id}.svg`} 
                   alt={provider.id} 
-                  style={{ width: '20px', height: '20px' }} 
+                  style={{ width: '18px', height: '18px' }} 
                 />
+                Continue with {provider.name}
               </button>
             ))}
           </div>
