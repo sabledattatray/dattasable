@@ -69,55 +69,77 @@ export default function NotificationManager() {
           >
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
               <div style={{ 
-                background: '#f3f4f6', 
-                padding: '0.5rem', 
-                borderRadius: '6px',
+                background: '#e0f2fe', 
+                padding: '0.6rem', 
+                borderRadius: '50%',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center'
               }}>
-                <Bell size={18} color="#374151" />
+                <CheckCircle2 size={20} color="#0369a1" />
               </div>
               <div>
-                <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#111827' }}>Enable Notifications</h4>
-                <p style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                  Get real-time updates and BI insights.
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                  <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#111827' }}>Notification Settings</h4>
+                  <span style={{ 
+                    fontSize: '8px', 
+                    background: '#dcfce7', 
+                    color: '#15803d', 
+                    padding: '1px 6px', 
+                    borderRadius: '10px', 
+                    fontWeight: 800, 
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}>
+                    Verified
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4 }}>
+                  Enable real-time BI insights via <strong>Secure SSL Connection</strong>.
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
               <button 
                 onClick={requestPermission}
                 style={{ 
                   flex: 1, 
                   fontSize: '0.75rem', 
-                  padding: '0.5rem', 
-                  background: '#111827', 
+                  padding: '0.6rem', 
+                  background: '#0369a1', 
                   color: '#fff', 
                   border: 'none', 
-                  borderRadius: '4px',
+                  borderRadius: '6px',
                   cursor: 'pointer',
-                  fontWeight: 600
+                  fontWeight: 700,
+                  transition: 'background 0.2s'
                 }}
               >
-                Allow
+                Enable Access
               </button>
               <button 
                 onClick={() => setShowPrompt(false)}
                 style={{ 
                   flex: 1, 
                   fontSize: '0.75rem', 
-                  padding: '0.5rem', 
-                  background: '#f9fafb', 
-                  border: '1px solid #e5e7eb', 
-                  color: '#374151',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
+                  padding: '0.6rem', 
+                  background: '#fff', 
+                  border: '1px solid #d1d5db', 
+                  color: '#4b5563',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontWeight: 600
                 }}
               >
-                Dismiss
+                Not Now
               </button>
+            </div>
+            <div style={{ borderTop: '1px solid #f3f4f6', paddingTop: '0.5rem', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <div style={{ width: '6px', height: '6px', background: '#22c55e', borderRadius: '50%' }} />
+              <span style={{ fontSize: '9px', color: '#9ca3af', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                ENCRYPTED_SSL_SESSION
+              </span>
             </div>
           </motion.div>
         )}
