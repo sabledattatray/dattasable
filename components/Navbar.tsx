@@ -203,78 +203,94 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-4 z-[200] bg-[var(--bg)]/98 backdrop-blur-3xl md:hidden overflow-y-auto border border-white/10 rounded-2xl shadow-2xl flex flex-col"
-          >
-            <div className="px-6 py-6">
-              <div className="flex items-center justify-between mb-12">
-                <LogoIcon className="w-8 h-8" />
-                <button className="p-2 text-white hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                  <X size={32} />
-                </button>
-              </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-[190] bg-black/60 backdrop-blur-sm md:hidden"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[400px] z-[200] bg-[#050505] border-l border-white/10 md:hidden flex flex-col shadow-2xl"
+            >
+              <div className="flex flex-col h-full overflow-y-auto">
+                {/* Drawer Header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/5">
+                  <div className="flex items-center gap-2">
+                    <LogoIcon className="w-8 h-8" />
+                    <span className="font-bold text-sm tracking-tight">DATTA SABLE</span>
+                  </div>
+                  <button 
+                    className="p-2 text-white/50 hover:text-white transition-colors" 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
 
-              <nav className="flex flex-col gap-4">
-                {navLinks.map((link, i) => {
-                  const hasSubmenu = link.mega && megaMenuData[link.label];
-                  const isExpanded = expandedMobile === link.label;
+                {/* Navigation Links */}
+                <div className="flex-1 px-4 py-6 space-y-2">
+                  {navLinks.map((link, i) => {
+                    const hasSubmenu = link.mega && megaMenuData[link.label];
+                    const isExpanded = expandedMobile === link.label;
 
-                  return (
-                    <motion.div
-                      key={link.label}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className={`rounded-xl border transition-all duration-300 ${isExpanded ? 'border-[var(--accent)] bg-white/5' : 'border-white/5'}`}>
-                        <div 
-                          className="flex items-center justify-between py-10 px-6 cursor-pointer"
-                          onClick={() => {
-                            if (hasSubmenu) {
-                              setExpandedMobile(isExpanded ? null : link.label);
-                            } else {
-                              setMobileMenuOpen(false);
-                              router.push(link.href);
-                            }
-                          }}
-                        >
-                          <span className={`text-base font-bold tracking-widest uppercase transition-colors ${isExpanded ? 'text-[var(--accent)]' : 'text-white'}`}>
-                            {link.label}
-                          </span>
-                          {hasSubmenu && (
-                            <ChevronDown 
-                              size={16} 
-                              className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-[var(--accent)]' : 'opacity-40'}`} 
-                            />
+                    return (
+                      <div key={link.label} className="overflow-hidden">
+                        <div className="border-b border-white/5 last:border-0">
+                          {hasSubmenu ? (
+                            <button
+                              onClick={() => setExpandedMobile(isExpanded ? null : link.label)}
+                              className={`w-full flex items-center justify-between px-4 py-5 text-[13px] font-bold tracking-widest uppercase transition-colors ${
+                                isExpanded ? 'text-[var(--accent)]' : 'text-white/70'
+                              }`}
+                            >
+                              {link.label}
+                              <ChevronDown 
+                                size={14} 
+                                className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-[var(--accent)]' : 'opacity-30'}`} 
+                              />
+                            </button>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block px-4 py-5 text-[13px] font-bold tracking-widest uppercase text-white/70 hover:text-[var(--accent)] transition-colors no-underline"
+                            >
+                              {link.label}
+                            </Link>
                           )}
                         </div>
 
                         <AnimatePresence>
-                          {isExpanded && (
+                          {hasSubmenu && isExpanded && (
                             <motion.div
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden border-t border-white/5"
+                              className="overflow-hidden bg-white/[0.02] border-l-2 border-[var(--accent)]/20 ml-2"
                             >
-                              <div className="p-2 flex flex-col gap-2">
+                              <div className="p-2 flex flex-col gap-1">
                                 {megaMenuData[link.label].items.map((sub: any) => (
                                   <Link
                                     key={sub.title}
                                     href={sub.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 no-underline group"
+                                    className="flex items-center gap-4 p-4 rounded-lg hover:bg-white/5 no-underline group"
                                   >
-                                    <div className="w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] rounded-md">
+                                    <div className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">
                                       {sub.icon}
                                     </div>
                                     <div className="flex flex-col">
-                                      <span className="text-sm font-bold text-white group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                      <span className="text-[11px] text-[var(--muted)]">{sub.desc}</span>
+                                      <span className="text-sm font-bold text-white/90 group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
+                                      <span className="text-[11px] text-white/40">{sub.desc}</span>
                                     </div>
                                   </Link>
                                 ))}
@@ -283,29 +299,24 @@ export default function Navbar() {
                           )}
                         </AnimatePresence>
                       </div>
-                    </motion.div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="mt-8 pt-8 border-t border-white/5"
-                >
-                  <p className="mono text-[10px] text-[var(--muted)] uppercase tracking-[0.4em] mb-6">Operations // Primary</p>
+                {/* Drawer Footer */}
+                <div className="p-6 border-t border-white/5 bg-white/[0.02] space-y-4">
+                  <p className="mono text-[10px] text-white/30 uppercase tracking-[0.4em]">Establish Connection</p>
                   <Link 
                     href="/contact" 
-                    className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase" 
+                    className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase no-underline" 
                     onClick={() => setMobileMenuOpen(false)}
-                    style={{ textDecoration: 'none' }}
                   >
-                    ESTABLISH CONTACT
+                    START PROJECT
                   </Link>
-                </motion.div>
-              </nav>
-            </div>
-          </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
