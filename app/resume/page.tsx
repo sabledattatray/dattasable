@@ -28,59 +28,64 @@ export default function ResumePage() {
     return (
       <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black">
         <Navbar />
-        {/* Full screen centered container */}
-        <div className="fixed inset-0 flex items-center justify-center p-6 z-[60]">
+        
+        {/* Deep Blur Backdrop */}
+        <div className="fixed inset-0 z-[50] backdrop-blur-xl bg-black/60 transition-opacity" />
+
+        {/* Modal Container */}
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="max-w-[440px] w-full bg-[#0a0a0a] border border-white/10 p-8 md:p-10 rounded-[32px] shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] relative overflow-hidden"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="relative w-full max-w-[420px] bg-[#0a0a0a] border border-white/10 rounded-[32px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           >
-            {/* Background Glow */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#c9f31d]/5 blur-[80px] rounded-full" />
+            {/* Top Branding Bar */}
+            <div className="h-1 bg-gradient-to-r from-[#c9f31d] via-[#00C9F2] to-[#c9f31d] w-full" />
             
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white/[0.03] border border-white/10 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
-                <Lock className="text-[#c9f31d]" size={28} strokeWidth={1.5} />
-              </div>
-              
-              <h1 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>Access Restricted</h1>
-              <p className="text-white/40 text-[13px] mb-8 max-w-[280px] leading-relaxed">
-                Connect via secure SSO to unlock Dattatray Sable&apos;s premium resume.
-              </p>
+            <div className="p-8 md:p-12">
+              <div className="flex flex-col items-center text-center">
+                {/* Shield Icon */}
+                <div className="mb-8 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+                  <ShieldCheck className="text-[#c9f31d]" size={40} strokeWidth={1} />
+                </div>
 
-              {/* 3 Inline Social Buttons */}
-              <div className="grid grid-cols-3 gap-3 w-full">
-                {[
-                  { id: 'google', name: 'Google' },
-                  { id: 'github', name: 'GitHub' },
-                  { id: 'linkedin', name: 'LinkedIn' }
-                ].map(p => (
-                  <button 
-                    key={p.id}
-                    onClick={() => signIn(p.id)}
-                    className="flex flex-col items-center justify-between bg-white/[0.03] border border-white/10 p-5 rounded-2xl transition-all hover:bg-white hover:border-white group h-[120px] w-full"
-                  >
-                    <div className="flex-1 flex items-center justify-center">
-                      <img 
-                        src={`https://authjs.dev/img/providers/${p.id}.svg`} 
-                        alt={p.name} 
-                        className="w-8 h-8 group-hover:brightness-0 transition-all" 
-                      />
-                    </div>
-                    <span className="text-[9px] font-bold tracking-[0.15em] uppercase text-white/40 group-hover:text-black mt-auto">
-                      {p.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
+                <h1 className="text-3xl font-bold tracking-tight mb-3" style={{ fontFamily: 'Syne, sans-serif' }}>
+                  Identity Verification
+                </h1>
+                <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-[280px]">
+                  Authenticate to unlock Dattatray Sable&apos;s professional credentials and portfolio artifacts.
+                </p>
 
-              <div className="mt-8 flex items-center justify-center gap-2 text-white/20 text-[9px] font-bold tracking-[0.2em] uppercase">
-                <ShieldCheck size={12} className="text-[#c9f31d]/30" /> 
-                <span>Secure_Connection</span>
+                {/* Login Options - High Fidelity */}
+                <div className="flex flex-col gap-3 w-full">
+                  {[
+                    { id: 'google', name: 'Continue with Google', icon: 'https://authjs.dev/img/providers/google.svg' },
+                    { id: 'github', name: 'Continue with GitHub', icon: 'https://authjs.dev/img/providers/github.svg' },
+                    { id: 'linkedin', name: 'Continue with LinkedIn', icon: 'https://authjs.dev/img/providers/linkedin.svg' }
+                  ].map((p) => (
+                    <button 
+                      key={p.id}
+                      onClick={() => signIn(p.id)}
+                      className="group flex items-center w-full bg-white text-black py-4 px-6 rounded-2xl font-bold text-[13px] tracking-tight transition-all hover:bg-[#c9f31d] hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      <img src={p.icon} alt={p.id} className="w-5 h-5 mr-4" />
+                      <span className="flex-1 text-left">{p.name}</span>
+                      <ArrowRight size={16} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-10 flex items-center gap-2 text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">
+                  <Lock size={12} /> Encrypted Session
+                </div>
               </div>
             </div>
+
+            {/* Decorative Corner */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#c9f31d]/5 blur-[60px] rounded-full -mr-16 -mt-16" />
           </motion.div>
         </div>
+
         <Footer />
       </div>
     );
