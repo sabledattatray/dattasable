@@ -78,12 +78,12 @@ export default function ResumePage() {
                     <button 
                       key={p.id}
                       onClick={() => signIn(p.id)}
-                      className="group flex flex-col items-center justify-center gap-4 bg-white text-black py-8 rounded-[24px] transition-all hover:bg-[#c9f31d] hover:scale-[1.05] active:scale-[0.95] shadow-2xl relative overflow-hidden"
+                      className="group flex flex-col items-center justify-center gap-3 bg-transparent border border-white/10 py-6 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
                     >
-                      <div className="w-8 h-8 relative z-10">
+                      <div className="w-5 h-5 relative z-10">
                         {p.svg}
                       </div>
-                      <span className="text-[11px] font-black uppercase tracking-[0.15em] text-black/30 group-hover:text-black z-10">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30 group-hover:text-[#c9f31d] z-10">
                         {p.id}
                       </span>
                     </button>
