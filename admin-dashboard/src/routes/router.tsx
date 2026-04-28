@@ -52,6 +52,10 @@ export const routes: RouteObject[] = [
             element: <Analytics />,
           },
           {
+            path: '',
+            element: <Analytics />,
+          },
+          {
             path: paths.users,
             element: <UserList />,
           },

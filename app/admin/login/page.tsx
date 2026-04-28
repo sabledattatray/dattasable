@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, User, BarChart3, ArrowRight, AlertCircle } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 
 export default function AdminLogin() {
-  const [creds, setCreds] = useState({ username: '', password: '' });
+  const [creds, setCreds] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -15,17 +16,23 @@ export default function AdminLogin() {
     setLoading(true);
     setError('');
 
-    // Simulated login for demo purposes
-    setTimeout(() => {
-      const storedPass = localStorage.getItem('admin_password') || 'admin123';
-      if (creds.username === 'admin' && creds.password === storedPass) {
-        localStorage.setItem('admin_auth', 'true');
-        router.push('/admin');
-      } else {
-        setError('Invalid username or password');
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: creds.email,
+        password: creds.password,
+      });
+
+      if (result?.error) {
+        setError(result.error);
         setLoading(false);
+      } else {
+        router.push('/admin');
       }
-    }, 1000);
+    } catch (err) {
+      setError('An unexpected error occurred');
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,15 +73,15 @@ export default function AdminLogin() {
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div>
             <label style={{ display: 'block', color: '#64748b', fontSize: '0.75rem', marginBottom: '0.5rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Username
+              Email
             </label>
             <div style={{ position: 'relative' }}>
               <User size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
               <input
-                type="text"
-                placeholder="admin"
-                value={creds.username}
-                onChange={e => setCreds({ ...creds, username: e.target.value })}
+                type="email"
+                placeholder="admin@dattasable.com"
+                value={creds.email}
+                onChange={e => setCreds({ ...creds, email: e.target.value })}
                 required
                 style={{
                   width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem',
