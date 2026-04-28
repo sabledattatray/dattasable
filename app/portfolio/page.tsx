@@ -148,7 +148,7 @@ const projects = [
     id: 10,
     title: 'Healthcare Patient Flow',
     category: 'Dashboard',
-    image: '/images/blog/data_quality_hero_1777410243821.webp',
+    image: '/images/blog/data_democratization_hero_1777410089898.webp',
     color: 'var(--accent)',
     tools: ['Tableau', 'SQL', 'HealthConnect'],
     client: 'Regional Hospital',
