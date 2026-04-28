@@ -12,74 +12,51 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "admin@dattasable.com" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error("Missing credentials");
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
-        });
+        try {
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email }
+          });
 
-        if (!user || !user.password) {
-          throw new Error("No user found with this email");
+          if (!user || !user.password) {
+            throw new Error("Invalid login credentials");
+          }
+
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordValid) {
+            throw new Error("Invalid login credentials");
+          }
+
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error("Auth error:", error);
+          throw new Error("Authentication service temporarily unavailable");
         }
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isPasswordValid) {
-          throw new Error("Incorrect password");
-        }
-
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image: user.image,
-          role: user.role,
-        };
       }
     }),
-    ...(process.env.GOOGLE_ID && process.env.GOOGLE_SECRET ? [
-      GoogleProvider({
-        clientId: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
-      })
-    ] : []),
-    ...(process.env.GITHUB_ID && process.env.GITHUB_SECRET ? [
-      GitHubProvider({
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET,
-      })
-    ] : []),
-    ...(process.env.LINKEDIN_ID && process.env.LINKEDIN_SECRET ? [
-      LinkedInProvider({
-        clientId: process.env.LINKEDIN_ID,
-        clientSecret: process.env.LINKEDIN_SECRET,
-        issuer: 'https://www.linkedin.com',
-        jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
-        profile(profile) {
-          return {
-            id: profile.sub,
-            name: profile.name,
-            email: profile.email,
-            image: profile.picture,
-          }
-        },
-      })
-    ] : []),
   ],
   session: {
     strategy: "jwt",
   },
   pages: {
     signIn: '/admin/login',
+    error: '/admin/login', // Redirect back to login on error
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -95,15 +72,8 @@ const handler = NextAuth({
       return session;
     },
   },
-  events: {
-    async signIn({ user, account }) {
-      await logAudit({ userId: user.id, action: 'LOGIN', status: 'SUCCESS', details: `Provider: ${account?.provider}` });
-    },
-    async signOut({ token }) {
-      await logAudit({ userId: token.sub, action: 'LOGOUT', status: 'SUCCESS' });
-    }
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-dev-only-change-in-prod',
+  debug: process.env.NODE_ENV === 'development',
 });
 
 export { handler as GET, handler as POST };
