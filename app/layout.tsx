@@ -41,6 +41,7 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
+import NotificationManager from "@/components/NotificationManager";
 import { Syne, Kanit, JetBrains_Mono } from 'next/font/google';
 
 const syne = Syne({
@@ -99,6 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
+            <NotificationManager />
           </ThemeProvider>
         </Providers>
       </body>
