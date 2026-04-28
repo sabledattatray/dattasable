@@ -70,6 +70,7 @@ body {
     margin-right: 0;
     border-left: none;
     border-right: none;
+    overflow-x: hidden; /* Prevent internal absolute elements from causing scroll */
   }
 }
 
@@ -98,6 +99,12 @@ body {
   max-width: 1077.88px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
 }
 
 .container-wide {
@@ -137,6 +144,12 @@ body {
   border: 1px solid var(--border);
   position: relative;
   padding: 2rem;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1.5rem;
+  }
 }
 
 /* Typography Labels */

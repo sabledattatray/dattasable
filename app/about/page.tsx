@@ -97,7 +97,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)', borderBottom: '1px solid var(--border)' }}>
           <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '4rem', alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '2rem', alignItems: 'center' }}>
               <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
                 <div className="label-tech mb-4" style={{ letterSpacing: '0.3em' }}>CORE-MISSION</div>
                 <h1 style={{ 
@@ -217,7 +217,7 @@ export default function AboutPage() {
               </p>
 
               {/* STATS: SIDE-BY-SIDE */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '3rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
                 {/* Card 01: Infrastructure */}
                 <div style={{ background: 'var(--surface2)', padding: '2rem', border: '1px solid var(--border)', position: 'relative' }}>
                   <div className="mono" style={{ fontSize: '10px', color: 'var(--accent)', marginBottom: '1.5rem' }}>INFRASTRUCTURE_STATS:</div>
@@ -262,7 +262,7 @@ export default function AboutPage() {
         {/* Career Log & Certs */}
         <section className="section">
           <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '3rem' }}>
               {/* Career Log */}
               <div>
                 <div className="label-tech mb-8">SYSTEM-LOGS {'//'} CAREER_HISTORY</div>
