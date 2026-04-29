@@ -1,8 +1,15 @@
 import { NextResponse } from 'next/server';
-// import { prisma } from '@/lib/prisma'; // Uncomment when DB is connected
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function GET() {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     // Phase 1: Mock Data (for UI compatibility)
     const stats = [
       { id: '1', type: 'VISITORS', value: '5.9M', label: 'Total Visitors' },
@@ -10,14 +17,6 @@ export async function GET() {
       { id: '3', type: 'CONVERSION', value: '21.9%', label: 'Conversion' },
       { id: '4', type: 'REFERRALS', value: '470', label: 'Active Referrals' },
     ];
-
-    /* 
-    // Phase 2: Real Database Fetch
-    const dbStats = await prisma.analyticsStat.findMany({
-      orderBy: { date: 'desc' },
-      take: 4
-    });
-    */
 
     return NextResponse.json(stats);
   } catch (error) {

@@ -80,6 +80,23 @@ model ContactMessage {
   createdAt DateTime @default(now())
 }
 
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  category  String
+  excerpt   String   @db.Text
+  content   String   @db.Text
+  readTime  Int
+  date      String
+  color     String?
+  icon      String?
+  image     String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model AuditLog {
   id        String   @id @default(cuid())
   userId    String?

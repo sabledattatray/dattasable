@@ -89,7 +89,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account }) {
       if (user) {
-        const adminEmails = ['admin@dattasable.com', 'sabledattatray@gmail.com'];
+        const adminEmails = process.env.ADMIN_EMAILS?.split(',') || ['admin@dattasable.com', 'sabledattatray@gmail.com'];
         const role = (user.email && adminEmails.includes(user.email)) ? 'ADMIN' : ((user as any).role || 'USER');
         
         // Persist user to DB if they don't exist (important for OAuth users)
