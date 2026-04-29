@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
+        {/* <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" /> */}
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <script
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
-            <GoogleOneTap />
+            {/* <GoogleOneTap /> */}
             <NotificationManager />
           </ThemeProvider>
         </Providers>

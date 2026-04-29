@@ -6,6 +6,10 @@
 
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 400px;
+}
+
 :root {
   --bg: #000000;
   --surface: #000000;
@@ -24,6 +28,13 @@
   --grid-color: #111111;
   --radius: 0px;
   --grid-size: 100px;
+  --crosshair-offset: -20px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --crosshair-offset: -20px;
+  }
 }
 
 * {
@@ -46,8 +57,8 @@ body {
 .boxed-wrapper {
   width: 100%;
   max-width: 1077.88px;
-  margin: 130px auto 40px;
-  min-height: calc(100vh - 130px);
+  margin: 90px auto 40px;
+  min-height: calc(100vh - 90px);
   background: var(--bg);
   border: 1px solid var(--border);
   position: relative;
@@ -64,13 +75,14 @@ body {
 
 @media (max-width: 768px) {
   .boxed-wrapper {
-    margin-top: 100px;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    border-left: none;
-    border-right: none;
-    overflow-x: hidden; /* Prevent internal absolute elements from causing scroll */
+    margin-top: 80px;
+    width: calc(100% - 2rem); /* Clearer gap to see the 'box' */
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding-bottom: 2rem;
+    overflow: visible; 
   }
 }
 
@@ -378,8 +390,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 640px) {
+  /* Crosshairs enabled on mobile */
   .crosshair {
-    display: none !important;
+    transform: scale(0.7); /* Slightly smaller on mobile */
   }
 }
 
@@ -393,16 +406,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .crosshair-v {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 1px;
   height: 24px;
-  background: linear-gradient(to bottom, #c9f31d, #00C9F2);
+  background: #ffffff;
 }
 
 .crosshair-h {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 24px;
   height: 1px;
-  background: linear-gradient(to right, #c9f31d, #00C9F2);
+  background: #ffffff;
 }
 
 .crosshair-dot {

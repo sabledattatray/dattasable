@@ -23,14 +23,16 @@ export default function AuthModal() {
       {isOpen && (
         <>
           <motion.div
-            initial={{ opacity: 0, x: 20, y: -20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            exit={{ opacity: 0, x: 20, y: -20 }}
+            initial={{ opacity: 0, x: '-50%', y: -20 }}
+            animate={{ opacity: 1, x: '-50%', y: 0 }}
+            exit={{ opacity: 0, x: '-50%', y: -20 }}
             style={{
               position: 'fixed',
               top: '85px',
-              right: '24px',
-              width: '320px',
+              left: '50%',
+              x: '-50%',
+              width: 'calc(100% - 48px)',
+              maxWidth: '320px',
               background: 'rgba(10, 10, 10, 0.95)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255, 255, 255, 0.1)',

@@ -111,19 +111,19 @@ export default function HomePage() {
         <section
           className="section hero-grid"
           style={{ 
-            minHeight: '800px', 
+            minHeight: '600px', 
             height: 'auto',
             display: 'flex', 
             alignItems: 'center', 
             position: 'relative', 
             overflow: 'hidden', 
             opacity: 0.95, 
-            padding: '4rem 0' 
+            padding: '2rem 0' 
           }}
         >
 
           {/* Layer 1: Right-Side Visual - Now visible on mobile */}
-          <div className="block absolute top-1/2 right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none">
+          <div className="block absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none">
             <Image 
               src="/hero-bg.webp"
               alt="Technical Data Visualization"
@@ -159,7 +159,7 @@ export default function HomePage() {
             >
               <TechLabel>Technical Architecture</TechLabel>
               <h1 style={{ 
-                fontSize: 'clamp(2rem, 6vw, 48px)', 
+                fontSize: 'clamp(1.5rem, 8vw, 48px)', 
                 fontWeight: 600, 
                 letterSpacing: '-0.02em', 
                 lineHeight: 1.1, 
@@ -174,17 +174,17 @@ export default function HomePage() {
               <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
                 High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/portfolio" className="btn-primary" style={{ textDecoration: 'none' }}>
+              <div className="flex flex-col xs:flex-row flex-wrap gap-4">
+                <Link href="/portfolio" className="btn-primary w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
                   INITIALIZE SYSTEM
                 </Link>
-                <Link href="/contact" className="btn-outline" style={{ textDecoration: 'none' }}>
+                <Link href="/contact" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
                   ESTABLISH CONTACT
                 </Link>
               </div>
 
               {/* Spacer */}
-              <div style={{ height: '5rem' }} />
+              <div style={{ height: '2rem' }} />
 
               {/* Tool Icons - Marquee on Mobile, Static on Desktop */}
               <div className="relative w-full overflow-hidden no-scrollbar py-4">
