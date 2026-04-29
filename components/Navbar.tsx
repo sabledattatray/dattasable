@@ -10,7 +10,8 @@ import {
   BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown,
   PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings
 } from 'lucide-react';
-import LoginModal from './LoginModal';
+import dynamic from 'next/dynamic';
+const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [

@@ -41,10 +41,14 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
-import NotificationManager from "@/components/NotificationManager";
-import GoogleOneTap from "@/components/GoogleOneTap";
+import NextDynamic from 'next/dynamic';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+
+// Dynamic Imports for Performance Optimization (Phase 3)
+const NotificationManager = NextDynamic(() => import("@/components/NotificationManager"), { ssr: false });
+const GoogleOneTap = NextDynamic(() => import("@/components/GoogleOneTap"), { ssr: false });
+const CookieConsent = NextDynamic(() => import("@/components/CookieConsent"), { ssr: false });
 
 const syne = Syne({
   subsets: ['latin'],
@@ -115,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Script 
           src="https://accounts.google.com/gsi/client" 
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
@@ -126,6 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
             <GoogleOneTap />
             <NotificationManager />
+            <CookieConsent />
           </ThemeProvider>
         </Providers>
       </body>
