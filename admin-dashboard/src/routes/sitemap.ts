@@ -42,9 +42,8 @@ const sitemap: MenuItem[] = [
         name: 'Real-Time Tracking',
         path: paths.realTime,
         pathName: 'real-time',
-        icon: 'material-symbols:analytics-outline-rounded',
+        icon: 'material-symbols:data-usage',
         active: true,
-        iconSx: { color: 'inherit' },
       },
       {
         name: 'Users',
