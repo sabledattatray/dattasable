@@ -33,7 +33,11 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
         sx={{
           height: 32,
           width: 32,
-          color: '#c9f31d', // Force consistent accent color matching site
+          color: '#c9f31d',
+          transition: 'transform 0.5s ease',
+          '&:hover': {
+            transform: 'rotate(30deg)',
+          },
           ...sx,
         }}
         {...rest}
@@ -47,12 +51,12 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
         <Typography
           sx={{
             color: 'text.primary',
-            fontWeight: 800,
-            fontSize: 20,
+            fontWeight: 700,
+            fontSize: '1.2rem',
             lineHeight: 1,
             margin: 0,
-            marginLeft: 1.5,
-            letterSpacing: '-0.02em',
+            marginLeft: 0.75,
+            letterSpacing: '-0.01em',
             fontFamily: "'Syne', sans-serif",
             textTransform: 'none',
             transition: 'color .3s ease',
