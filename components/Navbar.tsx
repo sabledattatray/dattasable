@@ -78,150 +78,163 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 flex justify-center ${
-        scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-4 border-b border-[var(--border)]' : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="w-full max-w-[1448px] px-6 lg:px-0">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
-            <LogoIcon color="var(--accent)" className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
-            <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.05rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
-              Datta Sable
-            </span>
-          </Link>
+    <>
+      <header 
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 flex justify-center ${
+          scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-4 border-b border-[var(--border)]' : 'bg-transparent py-6'
+        }`}
+      >
+        <div className="w-full max-w-[1448px] px-6 lg:px-0">
+          <div className="flex items-center justify-between h-24 lg:h-20">
+            {/* Logo */}
+            <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group no-underline whitespace-nowrap flex-shrink-0">
+              <LogoIcon color="var(--accent)" className="w-9 h-9 lg:w-8 lg:h-8 group-hover:rotate-[30deg] transition-transform duration-500" />
+              <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
+                Datta Sable
+              </span>
+            </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
-            {navLinks.map((link) => (
-              <div 
-                key={link.label}
-                className="relative group"
-                onMouseEnter={() => setHovered(link.label)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <Link
-                  href={link.href}
-                  className={`px-6 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
-                    pathname === link.href || (hovered === link.label && link.mega)
-                      ? 'text-[var(--accent)]' 
-                      : 'text-[var(--text)] opacity-75 hover:opacity-100'
-                  }`}
-                  style={{ fontFamily: 'Syne, sans-serif' }}
+            {/* Desktop Nav */}
+            <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
+              {navLinks.map((link) => (
+                <div 
+                  key={link.label}
+                  className="relative group"
+                  onMouseEnter={() => setHovered(link.label)}
+                  onMouseLeave={() => setHovered(null)}
                 >
-                  {link.label}
-                  {link.mega && (
-                    <ChevronDown 
-                      size={10} 
-                      className={`transition-transform duration-300 ${hovered === link.label ? 'rotate-180' : ''}`} 
-                    />
-                  )}
-                  {(pathname === link.href) && (
-                    <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--accent)]" />
-                  )}
-                </Link>
-                
-                {/* Mega Menu Dropdown */}
-                <AnimatePresence>
-                  {hovered === link.label && megaMenuData[link.label] && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute left-1/2 -translate-x-1/2 w-max max-w-[1077.88px] bg-[var(--surface)] backdrop-blur-3xl border border-[var(--border)] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden"
-                      style={{ top: '60px' }}
-                    >
-                      <div className="grid grid-cols-3">
-                        {megaMenuData[link.label].items.map((item: any, idx: number) => (
-                          <motion.div
-                            key={item.title}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.1 + (idx * 0.05) }}
-                            className={`border-b border-[var(--border)] ${idx % 3 !== 2 ? 'border-r' : ''}`}
-                          >
-                            <Link 
-                              href={item.href} 
-                              className="group/item block no-underline p-12 hover:bg-white/[0.02] transition-colors h-full min-h-[120px] flex flex-col justify-center"
-                              onClick={() => setHovered(null)}
-                            >
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover/item:border-[var(--accent)] transition-all duration-500">
-                                  {item.icon}
-                                </div>
-                                <div className="flex-1">
-                                  <h4 className="text-sm font-bold text-[var(--text)] mb-2 flex items-center gap-2 group-hover/item:text-[var(--accent)] transition-colors">
-                                    {item.title}
-                                    <ArrowUpRight size={14} className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
-                                  </h4>
-                                  <p className="text-[13px] text-[var(--muted)] leading-relaxed font-medium group-hover/item:text-[var(--text)] opacity-70 transition-colors">
-                                    {item.desc}
-                                  </p>
-                                </div>
-                              </div>
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-            
-            <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
-              <ThemeToggle />
-              {session ? (
-                <div className="flex items-center gap-4">
-                    {(session.user as any)?.role === 'ADMIN' && (
-                      <div className="flex flex-col items-end">
-                        <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
-                        <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
-                      </div>
-                    )}
-                  <button 
-                    onClick={() => signOut()}
-                    className="w-8 h-8 flex items-center justify-center bg-[var(--surface2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
+                  <Link
+                    href={link.href}
+                    className={`px-6 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
+                      pathname === link.href || (hovered === link.label && link.mega)
+                        ? 'text-[var(--accent)]' 
+                        : 'text-[var(--text)] opacity-75 hover:opacity-100'
+                    }`}
+                    style={{ fontFamily: 'Syne, sans-serif' }}
                   >
-                    <LogOut size={14} />
-                  </button>
+                    {link.label}
+                    {link.mega && (
+                      <ChevronDown 
+                        size={10} 
+                        className={`transition-transform duration-300 ${hovered === link.label ? 'rotate-180' : ''}`} 
+                      />
+                    )}
+                    {(pathname === link.href) && (
+                      <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--accent)]" />
+                    )}
+                  </Link>
+                  
+                  {/* Mega Menu Dropdown */}
+                  <AnimatePresence>
+                    {hovered === link.label && megaMenuData[link.label] && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute left-1/2 -translate-x-1/2 w-max max-w-[1077.88px] bg-[var(--surface)] backdrop-blur-3xl border border-[var(--border)] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden"
+                        style={{ top: '60px' }}
+                      >
+                        <div className="grid grid-cols-3">
+                          {megaMenuData[link.label].items.map((item: any, idx: number) => (
+                            <motion.div
+                              key={item.title}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.1 + (idx * 0.05) }}
+                              className={`border-b border-[var(--border)] ${idx % 3 !== 2 ? 'border-r' : ''}`}
+                            >
+                              <Link 
+                                href={item.href} 
+                                className="group/item block no-underline p-12 hover:bg-white/[0.02] transition-colors h-full min-h-[120px] flex flex-col justify-center"
+                                onClick={() => setHovered(null)}
+                              >
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover/item:border-[var(--accent)] transition-all duration-500">
+                                    {item.icon}
+                                  </div>
+                                  <div className="flex-1">
+                                    <h4 className="text-sm font-bold text-[var(--text)] mb-2 flex items-center gap-2 group-hover/item:text-[var(--accent)] transition-colors">
+                                      {item.title}
+                                      <ArrowUpRight size={14} className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
+                                    </h4>
+                                    <p className="text-[13px] text-[var(--muted)] leading-relaxed font-medium group-hover/item:text-[var(--text)] opacity-70 transition-colors">
+                                      {item.desc}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              ) : (
-                <button 
-                  onClick={() => setIsLoginOpen(true)}
-                  className="btn-primary"
-                  style={{ 
-                    textDecoration: 'none', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '8px',
-                    padding: '0.5rem 1.25rem',
-                    fontSize: '10px'
-                  }}
-                >
-                  <User size={12} /> SIGN IN
-                </button>
-              )}
-            </div>
-            <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
-          </nav>
+              ))}
+              
+              <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
+                <ThemeToggle />
+                {session ? (
+                  <div className="flex items-center gap-4">
+                      {(session.user as any)?.role === 'ADMIN' && (
+                        <div className="flex flex-col items-end">
+                          <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
+                          <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
+                        </div>
+                      )}
+                    <button 
+                      onClick={() => signOut()}
+                      className="w-8 h-8 flex items-center justify-center bg-[var(--surface2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
+                    >
+                      <LogOut size={14} />
+                    </button>
+                  </div>
+                ) : (
+                  <button 
+                    onClick={() => setIsLoginOpen(true)}
+                    className="btn-primary"
+                    style={{ 
+                      textDecoration: 'none', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '8px',
+                      padding: '0.5rem 1.25rem',
+                      fontSize: '10px'
+                    }}
+                  >
+                    <User size={12} /> SIGN IN
+                  </button>
+                )}
+              </div>
+              <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+            </nav>
 
-          {/* Mobile Toggle */}
-          {!mobileMenuOpen && (
-            <button
-              className="xl:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
-              onClick={() => setMobileMenuOpen(true)}
-              aria-label="Open mobile menu"
-            >
-              <Menu size={24} />
-            </button>
-          )}
+            {/* Mobile Toggle */}
+            {!mobileMenuOpen && (
+              <button
+                className="xl:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
+                onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open mobile menu"
+              >
+                <Menu size={24} />
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -361,6 +374,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

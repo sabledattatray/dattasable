@@ -21,7 +21,7 @@
   --text: #ffffff;
   --muted: #666666;
   --tag-bg: #111111;
-  --navbar-bg: rgba(0, 0, 0, 0.8);
+  --navbar-bg: rgba(0, 0, 0, 0.98);
   --hero-overlay-start: #000000;
   --hero-overlay-mid: rgba(0, 0, 0, 0.75);
   --hero-overlay-end: rgba(0, 0, 0, 0.3);
@@ -46,7 +46,7 @@
   --text: #000000;
   --muted: #52525b;
   --tag-bg: #e5e7eb;
-  --navbar-bg: rgba(252, 252, 252, 0.9);
+  --navbar-bg: rgba(252, 252, 252, 0.98);
   --hero-overlay-start: #fcfcfc;
   --hero-overlay-mid: rgba(252, 252, 252, 0.85);
   --hero-overlay-end: rgba(252, 252, 252, 0.4);
