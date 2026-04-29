@@ -130,7 +130,7 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
             background: theme.vars.palette.background.elevation3,
           },
           ...theme.applyStyles('dark', {
-            color: theme.vars.palette.neutral.dark,
+            color: theme.vars.palette.common.white,
           }),
         };
       },
