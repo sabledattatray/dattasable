@@ -157,7 +157,11 @@ const RealTimeAnalytics = () => {
               <Typography variant="body2" color="text.secondary">No traffic data recorded yet.</Typography>
             ) : (
               data?.topPages?.map((page: any, idx: number) => (
-                <Stack key={page.url} direction="row" justifyContent="space-between" alignItems="center">
+                <Stack 
+                  key={page.url} 
+                  direction="row" 
+                  sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+                >
                   <Typography variant="body2">{idx + 1}. {page.url}</Typography>
                   <Typography variant="subtitle2" color="primary">{page._count.url} Views</Typography>
                 </Stack>
