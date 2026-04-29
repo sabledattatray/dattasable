@@ -84,7 +84,7 @@ export default function Footer() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.4rem',
                 textDecoration: 'none',
                 marginBottom: '2rem',
               }}

@@ -99,7 +99,7 @@ export default function Navbar() {
         <div className="w-full max-w-[1448px] px-6 lg:px-0">
           <div className="flex items-center justify-between h-24 lg:h-20">
             {/* Logo */}
-            <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group no-underline whitespace-nowrap flex-shrink-0">
+            <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
               <LogoIcon color="var(--accent)" className="w-9 h-9 lg:w-8 lg:h-8 group-hover:rotate-[30deg] transition-transform duration-500" />
               <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
                 Datta Sable
