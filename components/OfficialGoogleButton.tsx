@@ -33,5 +33,5 @@ export default function OfficialGoogleButton() {
     }
   }, []);
 
-  return <div ref={buttonRef} className="w-full" style={{ minHeight: '44px' }} />;
+  return <div ref={buttonRef} className="w-full" style={{ minHeight: '44px' }} aria-label="Sign in with Google" />;
 }

@@ -132,7 +132,7 @@ export default function HomePage() {
               fetchPriority="high"
               loading="eager"
               decoding="async"
-              quality={75}
+              quality={70}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto"
             />

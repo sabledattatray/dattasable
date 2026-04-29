@@ -76,6 +76,7 @@ export default function CookieConsent() {
             <button 
               onClick={() => setIsVisible(false)}
               className="text-[var(--muted)] hover:text-[var(--text)] transition-colors"
+              aria-label="Close cookie consent"
             >
               <X size={18} />
             </button>
@@ -89,14 +90,14 @@ export default function CookieConsent() {
             <button 
               onClick={handleAccept}
               className="btn-primary w-full sm:w-auto"
-              style={{ padding: '0.6rem 2rem', fontSize: '10px' }}
+              style={{ padding: '0.6rem 2rem', fontSize: '12px' }}
             >
               ACCEPT_ALL
             </button>
             <button 
               onClick={handleDecline}
               className="btn-outline w-full sm:w-auto"
-              style={{ padding: '0.6rem 2rem', fontSize: '10px', borderColor: 'var(--border)' }}
+              style={{ padding: '0.6rem 2rem', fontSize: '12px', borderColor: 'var(--border)' }}
             >
               DECLINE
             </button>

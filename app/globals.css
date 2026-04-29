@@ -51,10 +51,10 @@
   --hero-overlay-mid: rgba(252, 252, 252, 0.85);
   --hero-overlay-end: rgba(252, 252, 252, 0.4);
   --grid-color: #ececec;
-  --hero-title-bg: linear-gradient(135deg, #000000 0%, var(--accent) 45%, #00d4ff 100%);
+  --hero-title-bg: linear-gradient(135deg, #000000 0%, var(--accent) 55%, #0369a1 100%);
   --hero-title-color: transparent;
-  --btn-primary-bg: #0890EC;
-  --btn-primary-text: #fff;
+  --btn-primary-bg: var(--accent);
+  --btn-primary-text: #ffffff;
 }
 
 .light .crosshair-v,

@@ -170,7 +170,11 @@ export default function Chatbot() {
                   <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>Online · Flat UI Mode</span>
                 </div>
               </div>
-              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', display: 'flex', padding: '4px' }}>
+              <button 
+                onClick={() => setOpen(false)} 
+                aria-label="Close assistant"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', display: 'flex', padding: '4px' }}
+              >
                 <X size={18} />
               </button>
             </div>
@@ -229,7 +233,7 @@ export default function Chatbot() {
                 <button
                   key={q}
                   onClick={() => { setInput(q); }}
-                  style={{ background: 'transparent', border: '1px solid var(--border)', borderRadius: 0, padding: '0.3rem 0.75rem', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--muted)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}
+                  style={{ background: 'transparent', border: '1px solid var(--border)', borderRadius: 0, padding: '0.3rem 0.75rem', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--muted)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--text)'; (e.currentTarget as HTMLElement).style.color = 'var(--text)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; }}
                 >
