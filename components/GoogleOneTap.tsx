@@ -20,7 +20,6 @@ export default function GoogleOneTap() {
           window.google.accounts.id.initialize({
             client_id: clientId,
             callback: (response: any) => {
-              // Sign in with NextAuth using the credential from Google
               signIn('google', {
                 credential: response.credential,
                 redirect: false,
@@ -28,15 +27,19 @@ export default function GoogleOneTap() {
             },
             auto_select: false,
             cancel_on_tap_outside: false,
+            itp_support: true, // Enable ITP support for Safari
           });
 
+          // Only prompt if not already logged in
           window.google.accounts.id.prompt((notification: any) => {
             if (notification.isNotDisplayed()) {
-              console.log('One Tap not displayed:', notification.getNotDisplayedReason());
-            } else if (notification.isSkippedMoment()) {
-              console.log('One Tap skipped:', notification.getSkippedReason());
-            } else if (notification.isDismissedMoment()) {
-              console.log('One Tap dismissed:', notification.getDismissedReason());
+              const reason = notification.getNotDisplayedReason();
+              console.log('One Tap not displayed:', reason);
+              
+              // If the reason is 'suppressed_by_user' or 'opt_out_or_no_session', it's expected
+              if (reason === 'opt_out_or_no_session') {
+                console.warn('Google One Tap: No active Google session found or user opted out.');
+              }
             }
           });
         }
