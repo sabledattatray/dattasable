@@ -31,9 +31,9 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
       <SvgIcon
         viewBox="0 0 24 24"
         sx={{
-          height: 28,
-          width: 28,
-          color: 'text.primary',
+          height: 32,
+          width: 32,
+          color: '#c9f31d', // Force consistent accent color matching site
           ...sx,
         }}
         {...rest}
@@ -47,13 +47,14 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
         <Typography
           sx={{
             color: 'text.primary',
-            fontWeight: 600,
-            fontSize: 18,
+            fontWeight: 800,
+            fontSize: 20,
             lineHeight: 1,
-            margin: 1,
-            marginLeft: 0.75,
-            letterSpacing: '-0.5px',
+            margin: 0,
+            marginLeft: 1.5,
+            letterSpacing: '-0.02em',
             fontFamily: "'Syne', sans-serif",
+            textTransform: 'none',
             transition: 'color .3s ease',
           }}
         >
