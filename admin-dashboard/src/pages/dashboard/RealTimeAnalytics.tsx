@@ -104,7 +104,18 @@ const RealTimeAnalytics = () => {
             </Typography>
           </Box>
           
-          <Stack direction="row" spacing={1} alignItems="center" sx={{ bgcolor: 'rgba(255, 0, 0, 0.1)', px: 1.5, py: 0.5, borderRadius: 10, border: '1px solid rgba(255, 0, 0, 0.2)' }}>
+          <Stack 
+            direction="row" 
+            spacing={1} 
+            sx={{ 
+              alignItems: 'center',
+              bgcolor: 'rgba(255, 0, 0, 0.1)', 
+              px: 1.5, 
+              py: 0.5, 
+              borderRadius: 10, 
+              border: '1px solid rgba(255, 0, 0, 0.2)' 
+            }}
+          >
             <Box sx={{ 
               width: 8, 
               height: 8, 
