@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 export default function TableBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
-  const [rows, setRows] = useState<string[][]>(block.metadata?.rows || [
+  const metadata = block.metadata as any;
+  const [rows, setRows] = useState<string[][]>(metadata?.rows || [
     ['Header 1', 'Header 2'],
     ['Cell 1', 'Cell 2']
   ]);

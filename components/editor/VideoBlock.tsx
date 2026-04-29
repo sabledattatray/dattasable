@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 export default function VideoBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
-  const [url, setUrl] = useState(block.metadata?.url || '');
+  const metadata = block.metadata as any;
+  const [url, setUrl] = useState(metadata?.url || '');
 
   const handleSave = () => {
     // Basic YouTube conversion for demonstration
@@ -22,7 +23,7 @@ export default function VideoBlock({ block, isActive }: { block: EditorBlock; is
       {block.metadata?.url ? (
         <div className="relative group w-full aspect-video">
           <iframe 
-            src={block.metadata.url} 
+            src={metadata?.url} 
             className="w-full h-full border-none rounded-xl"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
