@@ -15,6 +15,7 @@ const paths = {
   signup: `/${rootPaths.authRoot}/sign-up`,
   notifications: `/notifications`,
   documentation: documentationPath,
+  settings: '/settings',
 
   cms: {
     posts: '/cms/posts',

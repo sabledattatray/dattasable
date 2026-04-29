@@ -81,6 +81,13 @@ const sitemap: MenuItem[] = [
         pathName: 'sign-up',
         active: true,
       },
+      {
+        name: 'Settings',
+        path: paths.settings,
+        pathName: 'settings',
+        icon: 'material-symbols:settings-outline-rounded',
+        active: true,
+      },
     ],
   },
   {
