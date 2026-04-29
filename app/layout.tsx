@@ -114,6 +114,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <Script 
+          src="https://accounts.google.com/gsi/client" 
+          strategy="beforeInteractive"
+        />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <Providers>
