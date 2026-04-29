@@ -23,7 +23,7 @@ const values = [
     title: 'DATA INTEGRITY', 
     desc: 'Uncompromising accuracy in every calculation. No "approximate" insights.',
     icon: <Shield size={24} />,
-    color: '#c9f31d'
+    color: 'var(--accent)'
   },
   { 
     id: '02', 
@@ -58,7 +58,7 @@ const timeline = [
 function SkillItem({ name, icon, pct, category }: any) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
-  const color = category === 'BI Tools' ? '#c9f31d' : category === 'Programming' ? '#00C9F2' : '#00d4ff';
+  const color = category === 'BI Tools' ? 'var(--accent)' : category === 'Programming' ? '#00C9F2' : '#00d4ff';
   
   return (
     <div ref={ref} style={{ marginBottom: '1.25rem' }}>
@@ -88,10 +88,10 @@ export default function AboutPage() {
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '80px' }}>
         {/* ── Top-left Precision Crosshair ── */}
         <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
 
         {/* Hero Section */}
@@ -108,11 +108,7 @@ export default function AboutPage() {
                   letterSpacing: '-0.04em'
                 }}>
                   Engineering <br />
-                  <span style={{ 
-                    background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                  }}>Decision Clarity.</span>
+                  <span className="hero-title">Decision</span> Clarity.
                 </h1>
                 <p style={{ color: 'var(--muted)', maxWidth: 520, lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2.5rem' }}>
                   I am Datta Sable, a Business Intelligence architect dedicated to transforming raw data noise into surgical strategic assets. My systems are built for one purpose: <span style={{ color: 'var(--text)' }}>Absolute decision confidence.</span>
@@ -126,15 +122,7 @@ export default function AboutPage() {
 
               <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ position: 'relative', padding: '10px' }}>
                 {/* Animated Background Glow */}
-                <motion.div 
-                  animate={{ opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ 
-                    position: 'absolute', inset: 0, 
-                    background: 'radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 70%)',
-                    filter: 'blur(30px)', zIndex: 0 
-                  }} 
-                />
+
 
                 <div style={{ 
                   width: '100%', 
@@ -142,7 +130,7 @@ export default function AboutPage() {
                   position: 'relative',
                   overflow: 'hidden',
                   borderRadius: '0 60px 0 60px',
-                  background: 'linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, #00C9F2, #c9f31d) border-box',
+                  background: 'var(--surface) padding-box, linear-gradient(135deg, #00C9F2, var(--accent)) border-box',
                   border: '1px solid transparent',
                   zIndex: 1
                 }}>
@@ -152,22 +140,13 @@ export default function AboutPage() {
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6))' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201, 243, 29, 0.03) 3px, transparent 4px)', pointerEvents: 'none' }} />
                   
-                  {/* Scanning Line Animation */}
-                  <motion.div 
-                    animate={{ top: ['-10%', '110%'] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                    style={{ 
-                      position: 'absolute', left: 0, right: 0, height: '2px', 
-                      background: 'linear-gradient(to right, transparent, var(--accent), transparent)',
-                      opacity: 0.5, zIndex: 2
-                    }} 
-                  />
+
                 </div>
 
                 {/* Outer tech frame */}
                 <div style={{ 
                   position: 'absolute', inset: 0, 
-                  background: 'linear-gradient(135deg, #00C9F2, #c9f31d)',
+                  background: 'linear-gradient(135deg, #00C9F2, var(--accent))',
                   opacity: 0.2, 
                   borderRadius: '0 60px 0 60px',
                   transform: 'translate(10px, 10px)',
@@ -219,7 +198,7 @@ export default function AboutPage() {
               {/* STATS: SIDE-BY-SIDE */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
                 {/* Card 01: Infrastructure */}
-                <div style={{ background: 'var(--surface2)', padding: '2rem', border: '1px solid var(--border)', position: 'relative' }}>
+                <div className="card" style={{ padding: '2rem', position: 'relative' }}>
                   <div className="mono" style={{ fontSize: '10px', color: 'var(--accent)', marginBottom: '1.5rem' }}>INFRASTRUCTURE_STATS:</div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '2rem' }}>
                     <div>
@@ -235,7 +214,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Card 02: Reliability */}
-                <div style={{ background: 'var(--surface2)', padding: '2rem', border: '1px solid var(--border)', position: 'relative' }}>
+                <div className="card" style={{ padding: '2rem', position: 'relative' }}>
                   <div className="mono" style={{ fontSize: '10px', color: 'var(--accent2)', marginBottom: '1.5rem' }}>RELIABILITY_LOGS:</div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '2rem' }}>
                     <div>
@@ -376,9 +355,9 @@ export default function AboutPage() {
         {/* ── Bottom-right Precision Crosshair ── */}
         <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
           <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
       </div>
       <Footer />

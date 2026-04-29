@@ -47,12 +47,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               transform: 'translate(-50%, -50%)',
               width: '100%',
               maxWidth: '420px',
-              background: '#0a0a0a',
+              background: 'var(--bg)',
               border: '1px solid var(--border)',
               borderRadius: '16px',
               overflow: 'hidden',
               zIndex: 1001,
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.2)',
             }}
           >
             {/* Header */}
@@ -78,7 +78,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <Lock size={24} color="var(--accent)" />
               </div>
               
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', marginBottom: '0.5rem', fontFamily: 'Syne, sans-serif' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text)', marginBottom: '0.5rem', fontFamily: 'Syne, sans-serif' }}>
                 Join the Network
               </h2>
               <p style={{ fontSize: '0.875rem', color: 'var(--muted)', lineHeight: 1.6 }}>
@@ -145,9 +145,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               </button>
 
               <div style={{ margin: '1rem 0', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+                <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
                 <span style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Or</span>
-                <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+                <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
               </div>
 
               <button 
@@ -156,8 +156,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   width: '100%',
                   padding: '1rem',
                   background: 'transparent',
-                  color: 'rgba(255,255,255,0.3)',
-                  border: '1px dashed rgba(255,255,255,0.2)',
+                  color: 'var(--muted)',
+                  border: '1px dashed var(--border)',
                   borderRadius: '12px',
                   fontWeight: 600,
                   fontSize: '0.9rem',
@@ -174,7 +174,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             </div>
 
             {/* Footer */}
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
               <p style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>
                 By continuing, you agree to our <a href="#" style={{ color: 'var(--text)', fontWeight: 600 }}>Privacy Policy</a> and <a href="#" style={{ color: 'var(--text)', fontWeight: 600 }}>Terms of Service</a>.
               </p>

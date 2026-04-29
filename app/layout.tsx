@@ -78,11 +78,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        {/* <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" /> */}
-      </head>
-      <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -98,6 +97,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })
           }}
         />
+        <script
+          id="theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+                  if (!theme && supportDarkMode) theme = 'dark';
+                  if (!theme) theme = 'light';
+                  if (theme === 'light') document.documentElement.classList.add('light');
+                  else document.documentElement.classList.remove('light');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <Providers>
           <ThemeProvider>
             <main id="main-content">

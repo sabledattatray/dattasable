@@ -38,10 +38,10 @@ export default function BlogPage() {
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
         {/* ── Top-left Precision Crosshair ── */}
         <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
@@ -55,11 +55,7 @@ export default function BlogPage() {
                 marginBottom: '1.5rem',
                 letterSpacing: '-0.02em'
               }}>
-                Insights & <span style={{ 
-                  background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}>Technical Logs</span>
+                Insights & <span className="hero-title">Technical Logs</span>
               </h1>
               <p style={{ color: 'var(--muted)', maxWidth: 560, lineHeight: 1.8, fontSize: '1.05rem' }}>
                 Documenting my journey through data architecture, BI strategy, and automated analytics. Read the latest technical insights.
@@ -97,7 +93,7 @@ export default function BlogPage() {
                       textTransform: 'uppercase',
                       letterSpacing: '0.1em',
                       background: activeCategory === cat ? 'var(--accent)' : 'var(--tag-bg)',
-                      color: activeCategory === cat ? '#000' : 'var(--muted)',
+                      color: activeCategory === cat ? 'var(--btn-primary-text)' : 'var(--muted)',
                       border: '1px solid var(--border)',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease'
@@ -125,8 +121,7 @@ export default function BlogPage() {
                     style={{ 
                       padding: '2rem',
                       borderLeft: '2px solid',
-                      borderImage: 'linear-gradient(to bottom, #c9f31d, #00C9F2) 1',
-                      background: 'rgba(8,8,8,0.5)',
+                      borderImage: 'linear-gradient(to bottom, var(--accent), #00C9F2) 1',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column'
@@ -169,10 +164,10 @@ export default function BlogPage() {
 
         {/* ── Bottom-right Precision Crosshair ── */}
         <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
       </div>
       <Footer />

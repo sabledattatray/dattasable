@@ -51,7 +51,7 @@ export default function BlogPostPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [params.slug, router]);
 
-  if (loading) return <div style={{ background: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c9f31d' }}>INITIALIZING LOG_ACCESS...</div>;
+  if (loading) return <div style={{ background: 'var(--bg)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)' }}>INITIALIZING LOG_ACCESS...</div>;
   if (!currentPost) return null;
 
   const handleShare = async (e: React.MouseEvent) => {
@@ -84,9 +84,9 @@ export default function BlogPostPage() {
         {/* ── Top-left Precision Crosshair ── */}
         <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
           <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
@@ -142,7 +142,7 @@ export default function BlogPostPage() {
                 className="ml-auto flex items-center gap-2 transition-all duration-200" 
                 style={{ 
                   background: copied ? 'var(--accent)' : 'var(--surface2)', 
-                  border: '1px solid #c9f31d', 
+                  border: '1px solid var(--accent)', 
                   borderRadius: 0, 
                   padding: '0.4rem 1.2rem', 
                   cursor: 'pointer', 

@@ -33,14 +33,14 @@ export default function AuthModal() {
               x: '-50%',
               width: 'calc(100% - 48px)',
               maxWidth: '320px',
-              background: 'rgba(10, 10, 10, 0.95)',
+              background: 'var(--surface)',
               backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid var(--border)',
               padding: '1.25rem',
               zIndex: 9999,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2), 0 0 0 1px var(--border)',
               borderRadius: '16px',
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              fontFamily: 'var(--font-syne), sans-serif',
             }}
           >
             {/* Trust Indicator */}
@@ -50,21 +50,21 @@ export default function AuthModal() {
               gap: '6px', 
               marginBottom: '1rem',
               paddingBottom: '0.75rem',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+              borderBottom: '1px solid var(--border)'
             }}>
-              <div style={{ color: '#c9f31d', display: 'flex' }}>
+              <div style={{ color: 'var(--accent)', display: 'flex' }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <span style={{ fontSize: '10px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Secure Connection
               </span>
               <button
                 onClick={() => setIsOpen(false)}
                 style={{
                   marginLeft: 'auto',
-                  color: 'rgba(255,255,255,0.3)',
+                  color: 'var(--muted)',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
@@ -76,8 +76,8 @@ export default function AuthModal() {
             </div>
 
             <div style={{ marginBottom: '1.25rem' }}>
-              <h2 style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '4px' }}>Sign in to this Trusted Portal</h2>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px', lineHeight: 1.4 }}>Select a verified provider to establish a secure connection.</p>
+              <h2 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)', marginBottom: '4px' }}>Sign in to this Trusted Portal</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '11px', lineHeight: 1.4 }}>Select a verified provider to establish a secure connection.</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -115,9 +115,9 @@ export default function AuthModal() {
                   onClick={() => signIn('linkedin')}
                   style={{
                     height: '40px',
-                    background: 'rgba(255,255,255,0.05)',
-                    color: '#fff',
-                    border: '1px solid rgba(255,255,255,0.6)',
+                    background: 'var(--surface2)',
+                    color: 'var(--text)',
+                    border: '1px solid var(--border)',
                     borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
@@ -139,9 +139,9 @@ export default function AuthModal() {
                   onClick={() => signIn('github')}
                   style={{
                     height: '40px',
-                    background: 'rgba(255,255,255,0.05)',
-                    color: '#fff',
-                    border: '1px solid rgba(255,255,255,0.6)',
+                    background: 'var(--surface2)',
+                    color: 'var(--text)',
+                    border: '1px solid var(--border)',
                     borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',

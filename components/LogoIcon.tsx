@@ -1,4 +1,4 @@
-export default function LogoIcon({ className = "w-8 h-8", color = "#c9f31d" }: { className?: string; color?: string }) {
+export default function LogoIcon({ className = "w-8 h-8", color = "var(--accent)" }: { className?: string; color?: string }) {
   return (
     <svg 
       viewBox="-2 -2 28 28" 

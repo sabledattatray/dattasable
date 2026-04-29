@@ -57,34 +57,34 @@ export default function NotificationManager() {
               left: '1.5rem',
               zIndex: 9999,
               width: '320px',
-              background: '#ffffff',
+              background: 'var(--surface)',
               padding: '1.25rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '1rem',
               boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
               borderRadius: '12px',
-              border: '1px solid #f3f4f6'
+              border: '1px solid var(--border)'
             }}
           >
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <div style={{ 
                 width: '40px',
                 height: '40px',
-                background: '#f8fafc', 
+                background: 'var(--surface2)', 
                 borderRadius: '10px',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
-                border: '1px solid #f1f5f9'
+                border: '1px solid var(--border)'
               }}>
                 <img src="/favicon.svg" alt="Site Logo" style={{ width: '24px', height: '24px' }} />
               </div>
               <div style={{ flex: 1 }}>
-                <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b', marginBottom: '0.1rem' }}>
+                <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.1rem' }}>
                   dattasable.com
                 </h4>
-                <p style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>
                   Wants to send you notifications
                 </p>
               </div>
@@ -97,14 +97,14 @@ export default function NotificationManager() {
                   fontSize: '0.8rem', 
                   padding: '0.5rem 1rem', 
                   background: 'transparent', 
-                  color: '#64748b',
+                  color: 'var(--muted)',
                   border: 'none',
                   borderRadius: '6px',
                   cursor: 'pointer',
                   fontWeight: 600,
                   transition: 'background 0.2s'
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.background = '#f1f5f9')}
+                onMouseOver={(e) => (e.currentTarget.style.background = 'var(--surface2)')}
                 onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
               >
                 Block
@@ -145,7 +145,7 @@ export default function NotificationManager() {
               left: '50%',
               transform: 'translateX(-50%)',
               zIndex: 10000,
-              background: '#c9f31d',
+              background: 'var(--accent)',
               color: '#000',
               padding: '0.75rem 1.5rem',
               display: 'flex',

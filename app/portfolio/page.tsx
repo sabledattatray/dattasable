@@ -214,11 +214,7 @@ export default function PortfolioPage() {
               marginBottom: '1.5rem',
               letterSpacing: '-0.02em'
             }}>
-              Project <span style={{ 
-                background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>Portfolio</span>
+              Project <span className="hero-title">Portfolio</span>
             </h1>
             <p style={{ color: 'var(--muted)', maxWidth: 560, lineHeight: 1.8, fontSize: '1.05rem' }}>
               High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
@@ -239,7 +235,7 @@ export default function PortfolioPage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                   background: active === cat ? 'var(--accent)' : 'var(--tag-bg)',
-                  color: active === cat ? '#000' : 'var(--muted)',
+                  color: active === cat ? 'var(--btn-primary-text)' : 'var(--muted)',
                   border: '1px solid var(--border)',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease'
@@ -269,7 +265,6 @@ export default function PortfolioPage() {
                     overflow: 'hidden',
                     borderLeft: '2px solid',
                     borderImage: `linear-gradient(to bottom, ${p.color}, #00C9F2) 1`,
-                    background: 'rgba(8,8,8,0.5)',
                     cursor: 'pointer'
                   }}
                   onClick={() => setSelected(p)}
@@ -317,7 +312,7 @@ export default function PortfolioPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             style={{
-              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.98)', zIndex: 1000,
+              position: 'fixed', inset: 0, background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)', zIndex: 1000,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               padding: '2rem',
             }}
@@ -369,7 +364,7 @@ export default function PortfolioPage() {
                 </div>
 
                 <div
-                  style={{ background: 'rgba(201,243,29,0.05)', border: `1px solid ${selected.color}33`, padding: '2rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
+                  style={{ background: 'var(--surface2)', border: `1px solid var(--border)`, padding: '2rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
                 >
                   <div style={{ fontSize: '2.5rem' }}>🎯</div>
                   <div>

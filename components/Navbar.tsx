@@ -11,6 +11,7 @@ import {
   PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings
 } from 'lucide-react';
 import LoginModal from './LoginModal';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -80,15 +81,15 @@ export default function Navbar() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 flex justify-center ${
-        scrolled ? 'bg-[#050505]/80 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-6'
+        scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-4 border-b border-[var(--border)]' : 'bg-transparent py-6'
       }`}
     >
       <div className="w-full max-w-[1448px] px-6 lg:px-0">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
-            <LogoIcon color="#c9f31d" className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
-            <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.05rem', color: '#fff', letterSpacing: '-0.01em' }}>
+            <LogoIcon color="var(--accent)" className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
+            <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.05rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
               Datta Sable
             </span>
           </Link>
@@ -131,7 +132,7 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -5 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute left-1/2 -translate-x-1/2 w-max max-w-[1077.88px] bg-gradient-to-b from-[#1a1a1a] via-[#050505] to-[#000000] backdrop-blur-3xl border border-white/5 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] rounded-xl overflow-hidden"
+                      className="absolute left-1/2 -translate-x-1/2 w-max max-w-[1077.88px] bg-[var(--surface)] backdrop-blur-3xl border border-[var(--border)] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden"
                       style={{ top: '60px' }}
                     >
                       <div className="grid grid-cols-3">
@@ -141,7 +142,7 @@ export default function Navbar() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.1 + (idx * 0.05) }}
-                            className={`border-b border-white/5 ${idx % 3 !== 2 ? 'border-r' : ''}`}
+                            className={`border-b border-[var(--border)] ${idx % 3 !== 2 ? 'border-r' : ''}`}
                           >
                             <Link 
                               href={item.href} 
@@ -153,11 +154,11 @@ export default function Navbar() {
                                   {item.icon}
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-sm font-bold text-white mb-2 flex items-center gap-2 group-hover/item:text-[var(--accent)] transition-colors">
+                                  <h4 className="text-sm font-bold text-[var(--text)] mb-2 flex items-center gap-2 group-hover/item:text-[var(--accent)] transition-colors">
                                     {item.title}
                                     <ArrowUpRight size={14} className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
                                   </h4>
-                                  <p className="text-[13px] text-white/40 leading-relaxed font-medium group-hover/item:text-white/60 transition-colors">
+                                  <p className="text-[13px] text-[var(--muted)] leading-relaxed font-medium group-hover/item:text-[var(--text)] opacity-70 transition-colors">
                                     {item.desc}
                                   </p>
                                 </div>
@@ -172,16 +173,17 @@ export default function Navbar() {
               </div>
             ))}
             
-            <div className="ml-4 pl-4 border-l border-white/10 flex items-center gap-4">
+            <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
+              <ThemeToggle />
               {session ? (
                 <div className="flex items-center gap-4">
                    <div className="flex flex-col items-end">
-                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">{session.user?.name}</span>
+                    <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
                     <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">{(session.user as any)?.role || 'User'}</span>
                   </div>
                   <button 
                     onClick={() => signOut()}
-                    className="w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
+                    className="w-8 h-8 flex items-center justify-center bg-[var(--surface2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
                   >
                     <LogOut size={14} />
                   </button>
@@ -239,17 +241,17 @@ export default function Navbar() {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               style={{ width: '75vw' }}
-              className="fixed top-0 right-0 bottom-0 z-[200] bg-[#050505] border-l border-white/10 xl:hidden flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 z-[200] bg-[var(--bg)] border-l border-[var(--border)] xl:hidden flex flex-col shadow-2xl"
             >
               <div className="flex flex-col h-full overflow-y-auto">
                 {/* Drawer Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/5">
+                <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">
                   <div className="flex items-center gap-2">
                     <LogoIcon className="w-8 h-8" />
                     <span className="font-bold text-sm tracking-tight">DATTA SABLE</span>
                   </div>
                   <button 
-                    className="p-2 text-white/50 hover:text-white transition-colors" 
+                    className="p-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors" 
                     onClick={() => setMobileMenuOpen(false)}
                     aria-label="Close mobile menu"
                   >
@@ -265,13 +267,13 @@ export default function Navbar() {
 
                     return (
                       <div key={link.label} className="overflow-hidden">
-                        <div className="border-b border-white/5 last:border-0">
+                        <div className="border-b border-[var(--border)] last:border-0">
                           {hasSubmenu ? (
                             <button
                               onClick={() => setExpandedMobile(isExpanded ? null : link.label)}
                               style={{ padding: '1.25rem 1rem' }}
                               className={`w-full flex items-center justify-between text-[13px] font-bold tracking-widest uppercase transition-colors ${
-                                isExpanded ? 'text-[var(--accent)]' : 'text-white/70'
+                                isExpanded ? 'text-[var(--accent)]' : 'text-[var(--text)]'
                               }`}
                             >
                               {link.label}
@@ -285,7 +287,7 @@ export default function Navbar() {
                               href={link.href}
                               onClick={() => setMobileMenuOpen(false)}
                               style={{ padding: '1rem', display: 'block' }}
-                              className="text-[12px] font-bold tracking-widest uppercase text-white/70 hover:text-[var(--accent)] transition-colors no-underline"
+                              className="text-[12px] font-bold tracking-widest uppercase text-[var(--text)] opacity-70 hover:text-[var(--accent)] transition-colors no-underline"
                             >
                               {link.label}
                             </Link>
@@ -298,7 +300,7 @@ export default function Navbar() {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden bg-white/[0.02] border-l-2 border-[var(--accent)]/20 ml-2"
+                              className="overflow-hidden bg-[var(--surface2)] border-l-2 border-[var(--accent)]/20 ml-2"
                             >
                               <div style={{ padding: '0.375rem' }} className="flex flex-col gap-1">
                                 {megaMenuData[link.label].items.map((sub: any) => (
@@ -313,8 +315,8 @@ export default function Navbar() {
                                       {sub.icon}
                                     </div>
                                     <div className="flex flex-col">
-                                      <span className="text-sm font-bold text-white/90 group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                      <span className="text-[10px] text-white/40">{sub.desc}</span>
+                                      <span className="text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
+                                      <span className="text-[10px] text-[var(--muted)]">{sub.desc}</span>
                                     </div>
                                   </Link>
                                 ))}
@@ -328,8 +330,8 @@ export default function Navbar() {
                 </div>
 
                 {/* Drawer Footer */}
-                <div className="p-6 border-t border-white/5 bg-white/[0.02] space-y-4">
-                  <p className="mono text-[10px] text-white/30 uppercase tracking-[0.4em]">Establish Connection</p>
+                <div className="p-6 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
+                  <p className="mono text-[10px] text-[var(--muted)] uppercase tracking-[0.4em]">Establish Connection</p>
                   {session ? (
                      <button 
                       onClick={() => signOut()}

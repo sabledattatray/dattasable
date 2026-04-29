@@ -1,13 +1,58 @@
 'use client';
-import { createContext, useContext } from 'react';
 
-const ThemeContext = createContext({ theme: 'dark', toggle: () => {} });
-export const useTheme = () => useContext(ThemeContext);
+import * as React from 'react';
+
+type Theme = 'dark' | 'light';
+
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}
+
+const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setThemeState] = React.useState<Theme>('dark');
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    // Determine initial theme
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const initialTheme = savedTheme || systemTheme;
+    
+    setThemeState(initialTheme);
+    document.documentElement.classList.toggle('light', initialTheme === 'light');
+    setMounted(true);
+  }, []);
+
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('light', newTheme === 'light');
+  };
+
+  // Provide a stable context value
+  const value = React.useMemo(() => ({
+    theme,
+    setTheme
+  }), [theme]);
+
   return (
-    <>
+    <ThemeContext.Provider value={value}>
       {children}
-    </>
+    </ThemeContext.Provider>
   );
+}
+
+export function useTheme() {
+  const context = React.useContext(ThemeContext);
+  if (context === undefined) {
+    // Provide a default that doesn't crash
+    return { 
+      theme: 'dark' as Theme, 
+      setTheme: (t: Theme) => console.warn('ThemeProvider not found') 
+    };
+  }
+  return context;
 }

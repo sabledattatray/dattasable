@@ -82,11 +82,7 @@ export default function ServicesPage() {
               marginBottom: '1.5rem',
               letterSpacing: '-0.02em'
             }}>
-              Services & <span style={{ 
-                background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>Packages</span>
+              Services & <span className="hero-title">Packages</span>
             </h1>
             <p style={{ color: 'var(--muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.8, fontSize: '1.05rem' }}>
               High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
@@ -123,7 +119,6 @@ export default function ServicesPage() {
                     padding: '2.5rem',
                     borderLeft: '2px solid',
                     borderImage: `linear-gradient(to bottom, ${s.color}, #00C9F2) 1`,
-                    background: 'rgba(8,8,8,0.5)',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -182,8 +177,8 @@ export default function ServicesPage() {
               {trustBadges.map(b => (
                 <div
                   key={b.label}
-                  className="flex items-center gap-2"
-                  style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '0', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: 'var(--muted)' }}
+                  className="card flex items-center gap-2"
+                  style={{ borderRadius: '0', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: 'var(--muted)' }}
                 >
                   <span>{b.icon}</span> {b.label}
                 </div>

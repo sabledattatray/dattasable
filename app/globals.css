@@ -15,7 +15,7 @@
   --surface: #000000;
   --surface2: #080808;
   --border: #1a1a1a;
-  --accent: #c9f31d;
+  --accent: var(--accent);
   --accent2: #b5da1a;
   --accent3: #9fb817;
   --text: #ffffff;
@@ -29,6 +29,37 @@
   --radius: 0px;
   --grid-size: 100px;
   --crosshair-offset: -20px;
+  --hero-title-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 20%, #00d4ff 40%);
+  --hero-title-color: transparent;
+  --btn-primary-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 100%);
+  --btn-primary-text: #000;
+}
+
+.light {
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface2: #f4f4f5;
+  --border: #d1d5db;
+  --accent: #170C79;
+  --accent2: #1e1194;
+  --accent3: #2a1ab5;
+  --text: #000000;
+  --muted: #52525b;
+  --tag-bg: #e5e7eb;
+  --navbar-bg: rgba(252, 252, 252, 0.9);
+  --hero-overlay-start: #fcfcfc;
+  --hero-overlay-mid: rgba(252, 252, 252, 0.85);
+  --hero-overlay-end: rgba(252, 252, 252, 0.4);
+  --grid-color: #ececec;
+  --hero-title-bg: none;
+  --hero-title-color: #000000;
+  --btn-primary-bg: #170C79;
+  --btn-primary-text: #fff;
+}
+
+.light .crosshair-v,
+.light .crosshair-h {
+  background: #18181b;
 }
 
 @media (max-width: 768px) {
@@ -158,6 +189,12 @@ body {
   padding: 2rem;
 }
 
+.light .card {
+  border-color: #170C79 !important;
+  border-image: none !important;
+  background: #ffffff !important;
+}
+
 @media (max-width: 640px) {
   .card {
     padding: 1.25rem 1rem;
@@ -193,8 +230,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, #c9f31d 0%, #fff134 100%);
-  color: #000;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 0.75rem 2rem;
   font-family: var(--font-syne);
   font-size: 11px;
@@ -227,6 +264,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-outline:hover {
   border-color: var(--text);
+}
+
+.light .btn-outline {
+  border-color: #d4d4d8;
 }
 
 /* Scrollbar */
@@ -428,9 +469,9 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #c9f31d;
+  background: var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 10px #c9f31d;
+  box-shadow: 0 0 10px var(--accent);
 }
 
 /* Grid helper */
@@ -444,6 +485,14 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+}
+
+.hero-title {
+  background: var(--hero-title-bg);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--hero-title-color);
+  color: var(--hero-title-color);
 }
 
 @media (max-width: 640px) {

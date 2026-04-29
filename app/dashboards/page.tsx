@@ -380,10 +380,10 @@ export default function DashboardsPage() {
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
         {/* ── Top-left Precision Crosshair ── */}
         <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
@@ -398,11 +398,7 @@ export default function DashboardsPage() {
               marginBottom: '1.5rem',
               letterSpacing: '-0.02em'
             }}>
-              Dashboard <span style={{ 
-                background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>Showcase</span>
+              Dashboard <span className="hero-title">Showcase</span>
             </h1>
             <p style={{ color: 'var(--muted)', maxWidth: 560, lineHeight: 1.8, marginBottom: '2.5rem', fontSize: '1.05rem' }}>
               Real-world analytics platforms engineered for high-stakes decision making. Filter by industry or stack.
@@ -426,19 +422,19 @@ export default function DashboardsPage() {
               ].map(item => (
                 <div key={item.label} style={{ background: 'var(--bg)', padding: '1.5rem', position: 'relative' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                    <span style={{ color: item.color, opacity: 0.8 }}>{item.icon}</span>
-                    <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: item.color }}>{item.count}</span>
+                    <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
+                    <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)' }}>{item.count}</span>
                   </div>
                   <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '4px' }}>{item.label}</div>
                   <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em' }}>{item.sub}</div>
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '2px', background: item.color, opacity: 0.4 }} />
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '2px', background: 'var(--accent)', opacity: 0.4 }} />
                 </div>
               ))}
             </div>
 
             {/* Filter Control Center */}
             <div style={{ 
-              background: 'rgba(8,8,8,0.3)', 
+              background: 'var(--surface2)', 
               border: '1px solid var(--border)', 
               padding: '1.5rem',
               display: 'flex',
@@ -462,7 +458,7 @@ export default function DashboardsPage() {
                         textTransform: 'uppercase',
                         letterSpacing: '0.1em',
                         background: activeCat === cat ? 'var(--accent)' : 'transparent',
-                        color: activeCat === cat ? '#000' : 'var(--muted)',
+                        color: activeCat === cat ? 'var(--btn-primary-text)' : 'var(--muted)',
                         border: '1px solid var(--border)',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
@@ -494,7 +490,7 @@ export default function DashboardsPage() {
                         textTransform: 'uppercase',
                         letterSpacing: '0.1em',
                         background: activeTool === t ? 'var(--accent2)' : 'transparent',
-                        color: activeTool === t ? '#fff' : 'var(--muted)',
+                        color: activeTool === t ? 'var(--btn-primary-text)' : 'var(--muted)',
                         border: '1px solid var(--border)',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
@@ -525,7 +521,6 @@ export default function DashboardsPage() {
                     overflow: 'hidden',
                     borderLeft: '2px solid',
                     borderImage: `linear-gradient(to bottom, ${d.color}, #00C9F2) 1`,
-                    background: 'rgba(8,8,8,0.5)'
                   }}
                 >
                   {/* Preview area */}
@@ -674,10 +669,10 @@ export default function DashboardsPage() {
 
         {/* ── Bottom-right Precision Crosshair ── */}
         <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'linear-gradient(to bottom, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'linear-gradient(to right, #c9f31d, #00C9F2)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: '#c9f31d', borderRadius: '50%', boxShadow: '0 0 10px #c9f31d' }} />
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
         </div>
       </div>
       <Footer />

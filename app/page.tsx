@@ -28,7 +28,7 @@ const projects = [
     desc: 'Real-time Tableau dashboard tracking $12M+ in revenue with drill-down KPIs and trend forecasting.',
     tools: ['Tableau', 'SQL', 'Python'],
     impact: '+28% decision speed',
-    color: '#c9f31d',
+    color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <BarChart3 size={20} />,
   },
@@ -38,7 +38,7 @@ const projects = [
     desc: 'End-to-end SQL + Power BI solution reducing inventory costs by 18% through predictive analytics.',
     tools: ['Power BI', 'SQL', 'DAX'],
     impact: '-18% inventory cost',
-    color: '#c9f31d',
+    color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Database size={20} />,
   },
@@ -48,7 +48,7 @@ const projects = [
     desc: 'Python + Excel automation that transforms 40-hour manual reporting into a 10-minute refresh.',
     tools: ['Python', 'Excel', 'Tableau'],
     impact: '97% time saved',
-    color: '#c9f31d',
+    color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Target size={20} />,
   },
@@ -58,7 +58,7 @@ const projects = [
     desc: 'Python-powered financial reporting suite that reduced monthly close cycle from 5 days to 4 hours.',
     tools: ['Python', 'SQL', 'Excel'],
     impact: '-80% close time',
-    color: '#c9f31d',
+    color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Activity size={20} />,
   },
@@ -158,17 +158,17 @@ export default function HomePage() {
               style={{ maxWidth: 640 }}
             >
               <TechLabel>Technical Architecture</TechLabel>
-              <h1 style={{ 
-                fontSize: 'clamp(1.5rem, 8vw, 48px)', 
-                fontWeight: 600, 
-                letterSpacing: '-0.02em', 
-                lineHeight: 1.1, 
-                marginBottom: '1.5rem', 
-                background: 'linear-gradient(135deg, #c9f31d 0%, #fff134 20%, #00d4ff 40%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                display: 'inline-block'
-              }}>
+              <h1 
+                className="hero-title"
+                style={{ 
+                  fontSize: 'clamp(1.5rem, 8vw, 48px)', 
+                  fontWeight: 600, 
+                  letterSpacing: '-0.02em', 
+                  lineHeight: 1.1, 
+                  marginBottom: '1.5rem', 
+                  display: 'inline-block'
+                }}
+              >
                 Engineering data into<br />strategic assets
               </h1>
               <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
@@ -244,11 +244,9 @@ export default function HomePage() {
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: i * 0.1 }}
                   viewport={{ once: true }}
+                  className="card"
                   style={{ 
-                    background: 'var(--bg)', 
                     padding: '2rem 1.5rem',
-                    border: '1px solid',
-                    borderImage: 'linear-gradient(135deg, #c9f31d, #00C9F2) 1'
                   }}
                 >
                   <div className="mono text-[10px] text-[var(--muted)] mb-4">{s.code}</div>
@@ -278,14 +276,24 @@ export default function HomePage() {
                   transition={{ delay: i * 0.1 }}
                   viewport={{ once: true }}
                   className="card"
-                  style={{ borderLeft: `2px solid`, borderImage: `linear-gradient(to bottom, ${p.color}, ${p.color2}) 1`, position: 'relative', overflow: 'hidden', opacity: 0.95 }}
+                  style={{ 
+                    position: 'relative', 
+                    overflow: 'hidden', 
+                    opacity: 0.95,
+                    borderLeftWidth: '2px',
+                    borderLeftStyle: 'solid'
+                  }}
                 >
                   {/* Top colour strip */}
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(to right, ${p.color}, ${p.color2})`, opacity: 0.5 }} />
+                  {/* Top colour strip - Hidden in light mode */}
+                  <div 
+                    className="dark:block hidden"
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(to right, ${p.color}, ${p.color2})`, opacity: 0.5 }} 
+                  />
                   <div className="flex justify-between items-start mb-8" style={{ marginTop: '0.5rem' }}>
-                    <div style={{ color: p.color }}>{p.icon}</div>
+                    <div style={{ color: 'var(--accent)' }}>{p.icon}</div>
                     <span className="mono text-[10px] py-1 px-3 border text-[var(--muted)]"
-                      style={{ borderColor: p.color2, color: p.color2, background: `${p.color2}18` }}>
+                      style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--surface2)' }}>
                       {p.category.toUpperCase()}
                     </span>
                   </div>
@@ -293,16 +301,16 @@ export default function HomePage() {
                   <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', height: '3.2rem', overflow: 'hidden' }}>{p.desc}</p>
                   <div className="flex flex-wrap gap-2 mb-8">
                     {p.tools.map(t => (
-                      <span key={t} className="mono text-[10px] py-1 px-2"
-                        style={{ color: p.color2, background: `${p.color2}15`, border: `1px solid ${p.color2}40` }}>
+                      <span key={t} className="mono text-[10px] py-1 px-2 border"
+                        style={{ color: 'var(--accent)', background: 'var(--surface2)', borderColor: 'var(--border)' }}>
                         {t}
                       </span>
                     ))}
                   </div>
                   <div className="flex items-center justify-between border-t border-[var(--border)] pt-6">
                     <div className="flex items-center gap-2">
-                      <Target size={14} style={{ color: p.color }} />
-                      <span className="mono text-[11px] font-normal" style={{ color: p.color }}>{p.impact}</span>
+                      <Target size={14} style={{ color: 'var(--accent)' }} />
+                      <span className="mono text-[11px] font-normal" style={{ color: 'var(--accent)' }}>{p.impact}</span>
                     </div>
                     <Link 
                       href="/portfolio" 

@@ -18,7 +18,7 @@ export default function ResumePage() {
         <motion.div 
           animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-12 h-12 border-2 border-[#c9f31d] rounded-full border-t-transparent"
+          className="w-12 h-12 border-2 border-[var(--accent)] rounded-full border-t-transparent"
         />
       </div>
     );
@@ -26,7 +26,7 @@ export default function ResumePage() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-[#050505] text-white selection:bg-[#c9f31d] selection:text-black">
+      <div className="min-h-screen bg-[#050505] text-white selection:bg-[var(--accent)] selection:text-black">
         <Navbar />
         
         {/* Deep Blur Backdrop */}
@@ -40,13 +40,13 @@ export default function ResumePage() {
             className="relative w-full max-w-[580px] bg-[#0a0a0a] border border-white/10 rounded-[32px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           >
             {/* Top Branding Bar */}
-            <div className="h-1 bg-gradient-to-r from-[#c9f31d] via-[#00C9F2] to-[#c9f31d] w-full" />
+            <div className="h-1 bg-gradient-to-r from-[var(--accent)] via-[#00C9F2] to-[var(--accent)] w-full" />
             
             <div className="p-8 md:p-12 md:px-24 flex flex-col items-center">
               <div className="flex flex-col items-center text-center">
                 {/* Shield Icon */}
                 <div className="mb-8 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <ShieldCheck className="text-[#c9f31d]" size={42} strokeWidth={1} />
+                  <ShieldCheck className="text-[var(--accent)]" size={42} strokeWidth={1} />
                 </div>
 
                 <h1 className="text-3xl font-bold tracking-tight mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>
@@ -79,12 +79,12 @@ export default function ResumePage() {
                       key={p.id}
                       onClick={() => signIn(p.id)}
                       aria-label={`Sign in with ${p.name}`}
-                      className="group flex items-center justify-center gap-3 bg-transparent border border-white/10 py-5 px-4 rounded-none transition-all hover:bg-white/[0.05] hover:border-[#c9f31d] active:scale-[0.98] relative overflow-hidden"
+                      className="group flex items-center justify-center gap-3 bg-transparent border border-white/10 py-5 px-4 rounded-none transition-all hover:bg-white/[0.05] hover:border-[var(--accent)] active:scale-[0.98] relative overflow-hidden"
                     >
                       <div className="w-4 h-4 relative z-10 shrink-0">
                         {p.svg}
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-white/30 group-hover:text-[#c9f31d] z-10 truncate">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-white/30 group-hover:text-[var(--accent)] z-10 truncate">
                         {p.id}
                       </span>
                     </button>
@@ -97,7 +97,7 @@ export default function ResumePage() {
             </div>
 
             {/* Decorative Corner */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#c9f31d]/5 blur-[60px] rounded-full -mr-16 -mt-16" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 blur-[60px] rounded-full -mr-16 -mt-16" />
           </motion.div>
         </div>
 
@@ -107,7 +107,7 @@ export default function ResumePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] print:bg-white selection:bg-[#c9f31d] selection:text-black">
+    <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] print:bg-white selection:bg-[var(--accent)] selection:text-black">
       {/* Download Button Overlay */}
       <button 
         onClick={handleDownload}
@@ -136,22 +136,22 @@ export default function ResumePage() {
           </div>
 
           <div className="mb-10">
-            <h3 className="text-[#c9f31d] uppercase tracking-[0.1em] text-sm font-bold border-b border-white/10 pb-2 mb-6">Contact</h3>
+            <h3 className="text-[var(--accent)] uppercase tracking-[0.1em] text-sm font-bold border-b border-white/10 pb-2 mb-6">Contact</h3>
             <div className="space-y-4 text-sm text-[#cbd5e1]">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#c9f31d]">
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[var(--accent)]">
                   <Zap size={16} />
                 </div>
                 <span>sabledattatray@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#c9f31d]">
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[var(--accent)]">
                   <Lock size={16} />
                 </div>
                 <span>+91 8010803756</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#c9f31d]">
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[var(--accent)]">
                   <ShieldCheck size={16} />
                 </div>
                 <span>Mumbai, India</span>
@@ -160,10 +160,10 @@ export default function ResumePage() {
           </div>
 
           <div className="mb-10">
-            <h3 className="text-[#c9f31d] uppercase tracking-[0.1em] text-sm font-bold border-b border-white/10 pb-2 mb-6">Expertise</h3>
+            <h3 className="text-[var(--accent)] uppercase tracking-[0.1em] text-sm font-bold border-b border-white/10 pb-2 mb-6">Expertise</h3>
             <div className="flex flex-wrap gap-2">
               {['Power BI', 'SQL Server', 'SAP MIS', 'Adv. Excel', 'Data Automation', 'Risk Analysis'].map(skill => (
-                <span key={skill} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded text-[11px] font-bold text-[#94a3b8] uppercase tracking-wider hover:border-[#c9f31d]/30 transition-colors">
+                <span key={skill} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded text-[11px] font-bold text-[#94a3b8] uppercase tracking-wider hover:border-[var(--accent)]/30 transition-colors">
                   {skill}
                 </span>
               ))}

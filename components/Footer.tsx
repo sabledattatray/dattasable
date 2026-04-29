@@ -54,8 +54,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: '#000',
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        background: 'var(--bg)',
+        borderTop: '1px solid var(--border)',
         width: '100%',
         paddingTop: '6rem',
       }}
@@ -89,13 +89,13 @@ export default function Footer() {
                 marginBottom: '2rem',
               }}
             >
-              <LogoIcon className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500" color="#c9f31d" />
+              <LogoIcon className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
               <span
                 style={{
                   fontFamily: "'Syne', sans-serif",
                   fontWeight: 700,
                   fontSize: '1.25rem',
-                  color: '#fff',
+                  color: 'var(--text)',
                   letterSpacing: '-0.02em',
                 }}
               >
@@ -105,7 +105,7 @@ export default function Footer() {
 
             <p
               style={{
-                color: 'rgba(255, 255, 255, 0.5)',
+                color: 'var(--muted)',
                 fontSize: '0.95rem',
                 lineHeight: 1.6,
                 maxWidth: '320px',
@@ -123,14 +123,14 @@ export default function Footer() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: 'var(--muted)',
                   fontSize: '0.85rem',
                   fontFamily: "'JetBrains Mono', monospace",
                   textDecoration: 'none',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c9f31d')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)')}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
               >
                 <Mail size={14} />
                 info@dattasable.com
@@ -141,14 +141,14 @@ export default function Footer() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: 'var(--muted)',
                   fontSize: '0.85rem',
                   fontFamily: "'JetBrains Mono', monospace",
                   textDecoration: 'none',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c9f31d')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)')}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
               >
                 <Clock size={14} />
                 +91 8010803756
@@ -158,7 +158,7 @@ export default function Footer() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: 'var(--muted)',
                   fontSize: '0.85rem',
                   fontFamily: "'JetBrains Mono', monospace",
                 }}
@@ -177,7 +177,7 @@ export default function Footer() {
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: '11px',
                   fontWeight: 700,
-                  color: '#fff',
+                  color: 'var(--text)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.2em',
                   marginBottom: '2rem',
@@ -196,18 +196,18 @@ export default function Footer() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        color: 'rgba(255, 255, 255, 0.4)',
+                        color: 'var(--muted)',
                         fontSize: '0.9rem',
                         fontFamily: "'Syne', sans-serif",
                         textDecoration: 'none',
                         transition: 'all 0.3s ease',
                       }}
                       onMouseEnter={e => {
-                        e.currentTarget.style.color = '#fff';
+                        e.currentTarget.style.color = 'var(--text)';
                         e.currentTarget.style.paddingLeft = '4px';
                       }}
                       onMouseLeave={e => {
-                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)';
+                        e.currentTarget.style.color = 'var(--muted)';
                         e.currentTarget.style.paddingLeft = '0';
                       }}
                     >
@@ -229,7 +229,7 @@ export default function Footer() {
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: '11px',
                 fontWeight: 700,
-                color: '#fff',
+                color: 'var(--text)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.2em',
                 marginBottom: '2rem',
@@ -250,9 +250,9 @@ export default function Footer() {
                   key={tool}
                   style={{
                     padding: '0.6rem 0.5rem',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    color: 'rgba(255, 255, 255, 0.4)',
+                    border: '1px solid var(--border)',
+                    background: 'var(--surface2)',
+                    color: 'var(--muted)',
                     fontSize: '0.7rem',
                     fontFamily: "'JetBrains Mono', monospace",
                     borderRadius: '2px',
@@ -263,12 +263,12 @@ export default function Footer() {
                     cursor: 'default',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-                    e.currentTarget.style.color = '#fff';
+                    e.currentTarget.style.borderColor = 'var(--accent)';
+                    e.currentTarget.style.color = 'var(--text)';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)';
+                    e.currentTarget.style.borderColor = 'var(--border)';
+                    e.currentTarget.style.color = 'var(--muted)';
                   }}
                 >
                   {tool}
@@ -282,7 +282,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div
         style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+          borderTop: '1px solid var(--border)',
           padding: '2.5rem 2rem',
         }}
       >
@@ -300,16 +300,16 @@ export default function Footer() {
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: '0.75rem',
-              color: 'rgba(255, 255, 255, 0.2)',
+              color: 'var(--muted)',
             }}
           >
             © {year} Datta Sable. Built for high performance.
           </p>
           <div style={{ display: 'flex', gap: '2rem' }}>
-            <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.2)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
+            <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
               PRIVACY POLICY
             </Link>
-            <Link href="/terms" style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.2)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
+            <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
               TERMS OF SERVICE
             </Link>
           </div>
