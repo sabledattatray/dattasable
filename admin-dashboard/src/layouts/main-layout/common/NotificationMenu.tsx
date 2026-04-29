@@ -61,7 +61,7 @@ const NotificationMenu = () => {
         >
           <IconifyIcon
             icon="material-symbols-light:notifications-outline-rounded"
-            sx={{ fontSize: 22 }}
+            sx={{ fontSize: 22, color: 'inherit' }}
           />
         </OutlinedBadge>
       </Button>

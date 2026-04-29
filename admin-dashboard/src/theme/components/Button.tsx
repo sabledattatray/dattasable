@@ -129,9 +129,9 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
           '&:hover': {
             background: theme.vars.palette.background.elevation3,
           },
-          ...theme.applyStyles('dark', {
+          '[data-dattasable-color-scheme="dark"] &': {
             color: theme.vars.palette.common.white,
-          }),
+          },
         };
       },
     },
@@ -144,9 +144,9 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
           '&:hover': {
             background: theme.vars.palette.background.elevation2,
           },
-          ...theme.applyStyles('dark', {
+          '[data-dattasable-color-scheme="dark"] &': {
             color: theme.vars.palette.common.white,
-          }),
+          },
         };
       },
     },

@@ -44,7 +44,7 @@ const ThemeToggler = () => {
       <Button color="neutral" variant="soft" shape="circle" onClick={handleOpen}>
         <IconifyIcon 
           icon={mode === 'dark' ? 'material-symbols:dark-mode-outline' : 'material-symbols:light-mode-outline'} 
-          sx={{ fontSize: 22 }} 
+          sx={{ fontSize: 22, color: 'inherit' }} 
         />
       </Button>
 
