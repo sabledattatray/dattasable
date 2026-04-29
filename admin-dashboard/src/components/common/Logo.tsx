@@ -31,8 +31,8 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
       <SvgIcon
         viewBox="0 0 24 24"
         sx={{
-          height: 32,
-          width: 32,
+          height: 28,
+          width: 28,
           color: 'text.primary',
           ...sx,
         }}

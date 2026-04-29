@@ -100,7 +100,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-24 lg:h-20">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
-              <LogoIcon color="var(--accent)" className="w-9 h-9 lg:w-8 lg:h-8 group-hover:rotate-[30deg] transition-transform duration-500" />
+              <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
               <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
                 Datta Sable
               </span>

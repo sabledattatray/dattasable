@@ -89,7 +89,7 @@ export default function Footer() {
                 marginBottom: '2rem',
               }}
             >
-              <LogoIcon className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
+              <LogoIcon className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
               <span
                 style={{
                   fontFamily: "'Syne', sans-serif",
