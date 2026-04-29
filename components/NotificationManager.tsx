@@ -53,93 +53,81 @@ export default function NotificationManager() {
             exit={{ opacity: 0, y: -20 }}
             style={{
               position: 'fixed',
-              top: '1rem',
-              left: '1rem',
+              top: '1.5rem',
+              left: '1.5rem',
               zIndex: 9999,
-              width: '300px',
+              width: '320px',
               background: '#ffffff',
-              border: '1px solid #e5e7eb',
-              padding: '1rem',
+              padding: '1.25rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.75rem',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-              borderRadius: '8px'
+              gap: '1rem',
+              boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
+              borderRadius: '12px',
+              border: '1px solid #f3f4f6'
             }}
           >
-            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <div style={{ 
-                background: '#e0f2fe', 
-                padding: '0.6rem', 
-                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                background: '#f8fafc', 
+                borderRadius: '10px',
                 display: 'flex', 
                 alignItems: 'center', 
-                justifyContent: 'center'
+                justifyContent: 'center',
+                border: '1px solid #f1f5f9'
               }}>
-                <CheckCircle2 size={20} color="#0369a1" />
+                <img src="/favicon.svg" alt="Site Logo" style={{ width: '24px', height: '24px' }} />
               </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-                  <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#111827' }}>Notification Settings</h4>
-                  <span style={{ 
-                    fontSize: '8px', 
-                    background: '#dcfce7', 
-                    color: '#15803d', 
-                    padding: '1px 6px', 
-                    borderRadius: '10px', 
-                    fontWeight: 800, 
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Verified
-                  </span>
-                </div>
-                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4 }}>
-                  Enable real-time BI insights via <strong>Secure SSL Connection</strong>.
+              <div style={{ flex: 1 }}>
+                <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b', marginBottom: '0.1rem' }}>
+                  dattasable.com
+                </h4>
+                <p style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                  Wants to send you notifications
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '0.5rem' }}>
+              <button 
+                onClick={() => setShowPrompt(false)}
+                style={{ 
+                  fontSize: '0.8rem', 
+                  padding: '0.5rem 1rem', 
+                  background: 'transparent', 
+                  color: '#64748b',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                  transition: 'background 0.2s'
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = '#f1f5f9')}
+                onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
+              >
+                Block
+              </button>
               <button 
                 onClick={requestPermission}
                 style={{ 
-                  flex: 1, 
-                  fontSize: '0.75rem', 
-                  padding: '0.6rem', 
-                  background: '#0369a1', 
+                  fontSize: '0.8rem', 
+                  padding: '0.5rem 1.25rem', 
+                  background: '#2563eb', 
                   color: '#fff', 
                   border: 'none', 
                   borderRadius: '6px',
                   cursor: 'pointer',
-                  fontWeight: 700,
-                  transition: 'background 0.2s'
+                  fontWeight: 600,
+                  boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)',
+                  transition: 'all 0.2s'
                 }}
+                onMouseOver={(e) => (e.currentTarget.style.background = '#1d4ed8')}
+                onMouseOut={(e) => (e.currentTarget.style.background = '#2563eb')}
               >
-                Enable Access
+                Allow
               </button>
-              <button 
-                onClick={() => setShowPrompt(false)}
-                style={{ 
-                  flex: 1, 
-                  fontSize: '0.75rem', 
-                  padding: '0.6rem', 
-                  background: '#fff', 
-                  border: '1px solid #d1d5db', 
-                  color: '#4b5563',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontWeight: 600
-                }}
-              >
-                Not Now
-              </button>
-            </div>
-            <div style={{ borderTop: '1px solid #f3f4f6', paddingTop: '0.5rem', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <div style={{ width: '6px', height: '6px', background: '#22c55e', borderRadius: '50%' }} />
-              <span style={{ fontSize: '9px', color: '#9ca3af', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
-                ENCRYPTED_SSL_SESSION
-              </span>
             </div>
           </motion.div>
         )}
