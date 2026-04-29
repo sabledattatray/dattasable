@@ -119,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Google AdSense Global Script */}
         <script 
           async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_CLIENT_ID" 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250" 
           crossOrigin="anonymous"
         />
       </head>

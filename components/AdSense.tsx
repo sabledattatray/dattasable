@@ -39,7 +39,7 @@ export default function AdSense({ slot, format = 'auto', responsive = 'true', st
       <ins
         className="adsbygoogle"
         style={{ display: 'block', minWidth: '250px' }}
-        data-ad-client="ca-pub-YOUR_CLIENT_ID" // Replace with real ID
+        data-ad-client="ca-pub-4242010382827250"
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive}
