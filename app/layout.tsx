@@ -132,9 +132,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
+            <GoogleAnalytics id="G-Q4GEY4N9WN" />
             <Suspense fallback={null}>
               <AnalyticsTracker />
-              <GoogleAnalytics id="G-Q4GEY4N9WN" />
             </Suspense>
             <ClientOnlyWrapper />
           </ThemeProvider>
