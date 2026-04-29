@@ -107,3 +107,13 @@ model AuditLog {
   userAgent String?
   createdAt DateTime @default(now())
 }
+model PageView {
+  id        String   @id @default(cuid())
+  url       String
+  referrer  String?
+  userAgent String?
+  ipHash    String?
+  city      String?
+  country   String?
+  createdAt DateTime @default(now())
+}

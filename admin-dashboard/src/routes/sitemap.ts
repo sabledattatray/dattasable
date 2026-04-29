@@ -39,6 +39,13 @@ const sitemap: MenuItem[] = [
         active: true,
       },
       {
+        name: 'Real-Time Tracking',
+        path: paths.realTime,
+        pathName: 'real-time',
+        icon: 'material-symbols:radar-rounded',
+        active: true,
+      },
+      {
         name: 'Users',
         path: paths.users,
         pathName: 'users',

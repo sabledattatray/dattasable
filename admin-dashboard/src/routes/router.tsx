@@ -9,6 +9,7 @@ import PageLoader from 'components/loading/PageLoader';
 import paths, { rootPaths } from './paths';
 
 const Analytics = lazy(() => import('pages/dashboard/Analytics'));
+const RealTimeAnalytics = lazy(() => import('pages/dashboard/RealTimeAnalytics'));
 const UserList = lazy(() => import('pages/users/UserList'));
 const Starter = lazy(() => import('pages/others/Starter'));
 const Account = lazy(() => import('pages/others/Account'));
@@ -55,6 +56,10 @@ export const routes: RouteObject[] = [
           {
             path: '',
             element: <Analytics />,
+          },
+          {
+            path: paths.realTime,
+            element: <RealTimeAnalytics />,
           },
           {
             path: paths.users,

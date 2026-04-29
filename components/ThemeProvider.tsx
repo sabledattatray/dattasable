@@ -16,8 +16,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    // Determine initial theme
-    const savedTheme = localStorage.getItem('theme') as Theme;
+    // Determine initial theme safely
+    let savedTheme: Theme | null = null;
+    try {
+      savedTheme = localStorage.getItem('theme') as Theme;
+    } catch (e) {
+      console.warn('LocalStorage access denied:', e);
+    }
+
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     const initialTheme = savedTheme || systemTheme;
     
@@ -28,7 +34,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('theme', newTheme);
+    try {
+      localStorage.setItem('theme', newTheme);
+    } catch (e) {
+      console.warn('LocalStorage setItem failed:', e);
+    }
     document.documentElement.classList.toggle('light', newTheme === 'light');
   };
 

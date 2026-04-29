@@ -16,6 +16,7 @@ const paths = {
   notifications: `/notifications`,
   documentation: documentationPath,
   settings: '/settings',
+  realTime: '/real-time',
 
   cms: {
     posts: '/cms/posts',

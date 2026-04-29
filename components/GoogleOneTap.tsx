@@ -21,6 +21,7 @@ export default function GoogleOneTap() {
             window.google.accounts.id.initialize({
               client_id: clientId,
               callback: (response: any) => {
+                console.log('✅ Google One Tap Response Received');
                 signIn('google', {
                   credential: response.credential,
                   redirect: false,
@@ -29,8 +30,8 @@ export default function GoogleOneTap() {
               auto_select: true,
               cancel_on_tap_outside: true,
               itp_support: true,
-              // Enabling FedCM for production compatibility
-              use_fedcm_for_prompt: true, 
+              // Switching FedCM to false temporarily to resolve MS Edge origin issues
+              use_fedcm_for_prompt: false, 
             });
 
             window.google.accounts.id.prompt((notification: any) => {

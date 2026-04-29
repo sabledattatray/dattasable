@@ -41,9 +41,11 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
-import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
+import { Suspense } from 'react';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 
 const syne = Syne({
   subsets: ['latin'],
@@ -129,6 +131,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
+            <Suspense fallback={null}>
+              <AnalyticsTracker />
+            </Suspense>
             <ClientOnlyWrapper />
           </ThemeProvider>
         </Providers>
