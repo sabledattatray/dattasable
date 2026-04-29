@@ -177,10 +177,12 @@ export default function Navbar() {
               <ThemeToggle />
               {session ? (
                 <div className="flex items-center gap-4">
-                   <div className="flex flex-col items-end">
-                    <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
-                    <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">{(session.user as any)?.role || 'User'}</span>
-                  </div>
+                    {(session.user as any)?.role === 'ADMIN' && (
+                      <div className="flex flex-col items-end">
+                        <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
+                        <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
+                      </div>
+                    )}
                   <button 
                     onClick={() => signOut()}
                     className="w-8 h-8 flex items-center justify-center bg-[var(--surface2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
