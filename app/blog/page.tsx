@@ -6,10 +6,20 @@ import BlogList from '@/components/BlogList';
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function BlogPage() {
-  const posts = await prisma.post.findMany({
+  const dbPosts = await prisma.post.findMany({
     where: { published: true },
     orderBy: { createdAt: 'desc' }
   });
+
+  const { posts: staticPosts } = await import('./data');
+  
+  // Merge posts, using slug as unique key (DB takes priority)
+  const allPostsMap = new Map();
+  staticPosts.forEach(p => allPostsMap.set(p.slug, p));
+  dbPosts.forEach(p => allPostsMap.set(p.slug, p));
+  
+  const posts = Array.from(allPostsMap.values())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
