@@ -33,7 +33,7 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
         sx={{
           height: 32,
           width: 32,
-          color: '#c9f31d',
+          color: 'primary.main',
           transition: 'transform 0.5s ease',
           '&:hover': {
             transform: 'rotate(30deg)',
