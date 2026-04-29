@@ -8,8 +8,9 @@ import { useSession, signOut } from 'next-auth/react';
 import {
   Menu, X, ArrowUpRight,
   BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown,
-  PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles
+  PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings
 } from 'lucide-react';
+import LoginModal from './LoginModal';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -64,6 +65,7 @@ export default function Navbar() {
   const { data: session } = useSession();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const pathname = usePathname();
@@ -171,21 +173,37 @@ export default function Navbar() {
             ))}
             
             <div className="ml-4 pl-4 border-l border-white/10 flex items-center gap-4">
-              <Link 
-                href="/contact"
-                className="btn-primary"
-                style={{ 
-                  textDecoration: 'none', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '8px',
-                  padding: '0.5rem 1.25rem',
-                  fontSize: '10px'
-                }}
-              >
-                <Send size={12} /> RECRUIT
-              </Link>
+              {session ? (
+                <div className="flex items-center gap-4">
+                   <div className="flex flex-col items-end">
+                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">{session.user?.name}</span>
+                    <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">{(session.user as any)?.role || 'User'}</span>
+                  </div>
+                  <button 
+                    onClick={() => signOut()}
+                    className="w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
+                  >
+                    <LogOut size={14} />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={() => setIsLoginOpen(true)}
+                  className="btn-primary"
+                  style={{ 
+                    textDecoration: 'none', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px',
+                    padding: '0.5rem 1.25rem',
+                    fontSize: '10px'
+                  }}
+                >
+                  <User size={12} /> SIGN IN
+                </button>
+              )}
             </div>
+            <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
           </nav>
 
           {/* Mobile Toggle */}
@@ -312,13 +330,24 @@ export default function Navbar() {
                 {/* Drawer Footer */}
                 <div className="p-6 border-t border-white/5 bg-white/[0.02] space-y-4">
                   <p className="mono text-[10px] text-white/30 uppercase tracking-[0.4em]">Establish Connection</p>
-                  <Link 
-                    href="/contact" 
-                    className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase no-underline" 
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    START PROJECT
-                  </Link>
+                  {session ? (
+                     <button 
+                      onClick={() => signOut()}
+                      className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase" 
+                    >
+                      SIGN OUT
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setIsLoginOpen(true);
+                      }}
+                      className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase" 
+                    >
+                      SIGN IN
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>
