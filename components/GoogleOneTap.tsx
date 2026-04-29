@@ -27,7 +27,8 @@ export default function GoogleOneTap() {
             },
             auto_select: false,
             cancel_on_tap_outside: false,
-            itp_support: true, // Enable ITP support for Safari
+            itp_support: true,
+            use_fedcm_for_prompt: true, // Enable the new FedCM API support
           });
 
           // Only prompt if not already logged in
