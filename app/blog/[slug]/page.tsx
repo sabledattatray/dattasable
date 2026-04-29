@@ -19,13 +19,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
+  const ogImage = `/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`;
+
   return {
     title: `${post.title} | Datta Sable Blog`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: post.image ? [post.image] : [],
+      images: [ogImage],
       type: 'article',
       publishedTime: post.createdAt.toISOString(),
       authors: ['Datta Sable'],
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: post.image ? [post.image] : [],
+      images: [ogImage],
     }
   };
 }

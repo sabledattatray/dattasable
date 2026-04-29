@@ -121,6 +121,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://accounts.google.com/gsi/client" 
           strategy="lazyOnload"
         />
+        {/* Google AdSense Global Script */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_CLIENT_ID" 
+          crossOrigin="anonymous"
+        />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <Providers>
