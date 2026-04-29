@@ -10,16 +10,25 @@ const RealTimeAnalytics = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/admin/analytics')
-      .then(res => res.json())
-      .then(json => {
-        setData(json);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to fetch analytics:', err);
-        setLoading(false);
-      });
+    const fetchData = () => {
+      fetch('/api/admin/analytics')
+        .then(res => res.json())
+        .then(json => {
+          setData(json);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error('Failed to fetch analytics:', err);
+          setLoading(false);
+        });
+    };
+
+    fetchData(); // Initial fetch
+    
+    // Auto-refresh every 10 seconds for real-time feel
+    const interval = setInterval(fetchData, 10000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -85,13 +94,33 @@ const RealTimeAnalytics = () => {
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
       <Grid size={{ xs: 12 }}>
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="h5" sx={{ fontWeight: 700, color: 'text.primary' }}>
-            Real-Time Platform Intelligence
-          </Typography>
-          <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 1 }}>
-            LIVE VISITOR TRAJECTORY MONITORING
-          </Typography>
+        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 700, color: 'text.primary' }}>
+              Real-Time Platform Intelligence
+            </Typography>
+            <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 1 }}>
+              LIVE VISITOR TRAJECTORY MONITORING
+            </Typography>
+          </Box>
+          
+          <Stack direction="row" spacing={1} alignItems="center" sx={{ bgcolor: 'rgba(255, 0, 0, 0.1)', px: 1.5, py: 0.5, borderRadius: 10, border: '1px solid rgba(255, 0, 0, 0.2)' }}>
+            <Box sx={{ 
+              width: 8, 
+              height: 8, 
+              bgcolor: '#ff4d4d', 
+              borderRadius: '50%',
+              animation: 'pulse 1.5s infinite ease-in-out',
+              '@keyframes pulse': {
+                '0%': { transform: 'scale(0.8)', opacity: 0.5, boxShadow: '0 0 0 0 rgba(255, 77, 77, 0.7)' },
+                '70%': { transform: 'scale(1.1)', opacity: 1, boxShadow: '0 0 0 6px rgba(255, 77, 77, 0)' },
+                '100%': { transform: 'scale(0.8)', opacity: 0.5, boxShadow: '0 0 0 0 rgba(255, 77, 77, 0)' }
+              }
+            }} />
+            <Typography variant="caption" sx={{ color: '#ff4d4d', fontWeight: 700, fontSize: '0.65rem', letterSpacing: 1 }}>
+              LIVE
+            </Typography>
+          </Stack>
         </Box>
       </Grid>
 
