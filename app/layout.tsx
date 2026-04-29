@@ -67,9 +67,16 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
+import { Plus_Jakarta_Sans, Roboto, Inter, Poppins } from 'next/font/google';
+
+const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plus-jakarta' });
+const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-roboto' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins' });
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${syne.variable} ${kanit.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${syne.variable} ${kanit.variable} ${jetbrains.variable} ${plusJakartaSans.variable} ${roboto.variable} ${inter.variable} ${poppins.variable}`}>
       <head>
         {/* FontAwesome is still needed for some icons, but we should consider replacing it with SVG icons later */}
         <link
