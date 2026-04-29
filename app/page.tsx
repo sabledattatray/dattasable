@@ -130,10 +130,9 @@ export default function HomePage() {
               height={600}
               priority
               fetchPriority="high"
-              quality={75}
+              quality={80}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
-              className="w-full h-auto opacity-95"
-              style={{ filter: 'contrast(1.1) brightness(1.05)' }}
+              className="w-full h-auto"
             />
             {/* Dark gradient overlay */}
             <div style={{
