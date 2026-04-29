@@ -101,7 +101,6 @@ export default function HomePage() {
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <AuthModal />
       <Navbar />
 
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
