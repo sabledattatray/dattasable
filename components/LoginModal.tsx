@@ -59,6 +59,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <div style={{ padding: '2rem', textAlign: 'center', position: 'relative' }}>
               <button 
                 onClick={onClose}
+                aria-label="Close login modal"
                 style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer' }}
               >
                 <X size={20} />

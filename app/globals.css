@@ -40,7 +40,7 @@
   --surface: #ffffff;
   --surface2: #f4f4f5;
   --border: #d1d5db;
-  --accent: #0890EC;
+  --accent: #0070c1;
   --accent2: #0674c2;
   --accent3: #045794;
   --text: #000000;
@@ -204,7 +204,7 @@ body {
 /* Typography Labels */
 .label-tech {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--accent);
   text-transform: uppercase;

@@ -192,7 +192,7 @@ export default function Navbar() {
                   <div className="flex items-center gap-4">
                       {(session.user as any)?.role === 'ADMIN' && (
                         <div className="flex flex-col items-end">
-                          <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
+                          <span className="text-[12px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
                           <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
                         </div>
                       )}
@@ -214,7 +214,7 @@ export default function Navbar() {
                       alignItems: 'center', 
                       gap: '8px',
                       padding: '0.5rem 1.25rem',
-                      fontSize: '10px'
+                      fontSize: '12px'
                     }}
                   >
                     <User size={12} /> SIGN IN
@@ -336,7 +336,7 @@ export default function Navbar() {
                                     </div>
                                     <div className="flex flex-col">
                                       <span className="text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                      <span className="text-[10px] text-[var(--muted)]">{sub.desc}</span>
+                                      <span className="text-[12px] text-[var(--muted)]">{sub.desc}</span>
                                     </div>
                                   </Link>
                                 ))}
@@ -351,7 +351,7 @@ export default function Navbar() {
 
                 {/* Drawer Footer */}
                 <div className="p-6 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
-                  <p className="mono text-[10px] text-[var(--muted)] uppercase tracking-[0.4em]">Establish Connection</p>
+                  <p className="mono text-[12px] text-[var(--muted)] uppercase tracking-[0.4em]">Establish Connection</p>
                   {session ? (
                      <button 
                       onClick={() => signOut()}

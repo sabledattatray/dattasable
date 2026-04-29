@@ -90,7 +90,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 function TechLabel({ children, index }: { children: React.ReactNode; index?: string }) {
   return (
     <div className="flex items-center gap-4 mb-6">
-      {index && <span className="mono text-[10px] text-[var(--muted)]">{index}</span>}
+      {index && <span className="mono text-[12px] text-[var(--muted)]">{index}</span>}
       <p className="label-tech">{children}</p>
     </div>
   );
@@ -129,8 +129,9 @@ export default function HomePage() {
               width={800}
               height={600}
               priority
-              quality={85}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              fetchPriority="high"
+              quality={75}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto opacity-95"
               style={{ filter: 'contrast(1.1) brightness(1.05)' }}
             />
@@ -223,7 +224,7 @@ export default function HomePage() {
                     ].map((tool, idx) => (
                       <div key={`${tool.label}-${idx}`} className="flex items-center gap-2 flex-shrink-0">
                         <div style={{ color: 'var(--accent)' }}>{tool.icon}</div>
-                        <span className="mono text-[10px] text-[var(--text)] uppercase tracking-[0.2em] whitespace-nowrap">{tool.label}</span>
+                        <span className="mono text-[12px] text-[var(--text)] uppercase tracking-[0.2em] whitespace-nowrap">{tool.label}</span>
                       </div>
                     ))}
                   </div>
@@ -250,7 +251,7 @@ export default function HomePage() {
                     padding: '2rem 1.5rem',
                   }}
                 >
-                  <div className="mono text-[10px] text-[var(--muted)] mb-4">{s.code}</div>
+                  <div className="mono text-[12px] text-[var(--muted)] mb-4">{s.code}</div>
                   <div style={{ fontSize: '2.5rem', fontWeight: 600, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.02em' }}>
                     <Counter value={s.value} suffix={s.suffix} />
                   </div>
@@ -293,7 +294,7 @@ export default function HomePage() {
                   />
                   <div className="flex justify-between items-start mb-8" style={{ marginTop: '0.5rem' }}>
                     <div style={{ color: 'var(--accent)' }}>{p.icon}</div>
-                    <span className="mono text-[10px] py-1 px-3 border text-[var(--muted)]"
+                    <span className="mono text-[12px] py-1 px-3 border text-[var(--muted)]"
                       style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--surface2)' }}>
                       {p.category.toUpperCase()}
                     </span>
@@ -302,7 +303,7 @@ export default function HomePage() {
                   <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', height: '3.2rem', overflow: 'hidden' }}>{p.desc}</p>
                   <div className="flex flex-wrap gap-2 mb-8">
                     {p.tools.map(t => (
-                      <span key={t} className="mono text-[10px] py-1 px-2 border"
+                      <span key={t} className="mono text-[12px] py-1 px-2 border"
                         style={{ color: 'var(--accent)', background: 'var(--surface2)', borderColor: 'var(--border)' }}>
                         {t}
                       </span>
