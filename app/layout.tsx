@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 
 import { Providers } from "@/components/Providers";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from 'react';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
@@ -133,6 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
             <Suspense fallback={null}>
               <AnalyticsTracker />
+              <GoogleAnalytics id="487040514" />
             </Suspense>
             <ClientOnlyWrapper />
           </ThemeProvider>
