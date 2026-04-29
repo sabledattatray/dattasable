@@ -1,6 +1,6 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Github, Linkedin, Lock, Chrome } from 'lucide-react';
+import { X, Mail, Github, Linkedin, Lock, Globe } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -108,7 +108,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   opacity: isLoading === 'google' ? 0.7 : 1
                 }}
               >
-                <Chrome size={20} />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9105 17.5856 17.1582 16.3231 17.9718V20.9545H20.1903C22.4605 18.8818 23.766 15.8545 23.766 12.2764Z" fill="#4285F4"/>
+                  <path d="M12.24 24C15.522 24 18.2815 22.9255 20.1945 21.0914L16.3273 18.1086C15.2495 18.8455 13.8641 19.2932 12.2442 19.2932C9.07985 19.2932 6.40432 17.2064 5.44118 14.3918H1.4574V17.4514C3.51655 21.5045 7.63227 24 12.24 24Z" fill="#34A853"/>
+                  <path d="M5.44118 14.3918C5.19191 13.6636 5.05432 12.8836 5.05432 12.0818C5.05432 11.28 5.19191 10.5 5.44118 9.77182V6.71227H1.4574C0.613636 8.38909 0.12 10.2327 0.12 12.1636C0.12 14.0945 0.613636 15.9382 1.4574 17.615L5.44118 14.3918Z" fill="#FBBC05"/>
+                  <path d="M12.24 4.82727C14.0247 4.82727 15.6262 5.42455 16.8862 6.61909L20.2727 3.23273C18.273 1.43727 15.5135 0.218182 12.24 0.218182C7.63227 0.218182 3.51655 2.71364 1.4574 6.76682L5.44118 9.82636C6.40432 7.01182 9.07985 4.82727 12.24 4.82727Z" fill="#EA4335"/>
+                </svg>
                 {isLoading === 'google' ? 'Connecting...' : 'Continue with Google'}
               </button>
 
