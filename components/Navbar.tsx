@@ -250,13 +250,16 @@ export default function Navbar() {
                     <LogoIcon className="w-8 h-8" />
                     <span className="font-bold text-sm tracking-tight">DATTA SABLE</span>
                   </div>
-                  <button 
-                    className="p-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors" 
-                    onClick={() => setMobileMenuOpen(false)}
-                    aria-label="Close mobile menu"
-                  >
-                    <X size={24} />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <ThemeToggle />
+                    <button 
+                      className="p-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      aria-label="Close mobile menu"
+                    >
+                      <X size={24} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Navigation Links */}
