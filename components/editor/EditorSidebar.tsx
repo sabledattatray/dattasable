@@ -167,53 +167,60 @@ export default function EditorSidebar() {
               </div>
             ) : (
               <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center gap-3">
-                  <div className="w-8 h-8 rounded bg-slate-900 text-white flex items-center justify-center font-bold uppercase text-xs">
-                    {activeBlock.type.substring(0, 2)}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-slate-900 capitalize">{activeBlock.type} Block</div>
-                    <div className="text-xs text-slate-500">ID: {activeBlock.id.split('-')[1]}</div>
-                  </div>
-                </div>
+                {(() => {
+                  const metadata = activeBlock.metadata as any;
+                  return (
+                    <>
+                      <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center gap-3">
+                        <div className="w-8 h-8 rounded bg-slate-900 text-white flex items-center justify-center font-bold uppercase text-xs">
+                          {activeBlock.type.substring(0, 2)}
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-slate-900 capitalize">{activeBlock.type} Block</div>
+                          <div className="text-xs text-slate-500">ID: {activeBlock.id.split('-')[1]}</div>
+                        </div>
+                      </div>
 
-                {/* Padding */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Padding (rem)</label>
-                  <input 
-                    type="number" 
-                    step="0.5"
-                    value={activeBlock.metadata?.padding || 0}
-                    onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...activeBlock.metadata, padding: e.target.value } })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 outline-none focus:border-slate-400 transition-colors"
-                  />
-                </div>
+                      {/* Padding */}
+                      <div className="flex flex-col gap-2">
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Padding (rem)</label>
+                        <input 
+                          type="number" 
+                          step="0.5"
+                          value={metadata?.padding || 0}
+                          onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...metadata, padding: e.target.value } })}
+                          className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 outline-none focus:border-slate-400 transition-colors"
+                        />
+                      </div>
 
-                {/* Width */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Width</label>
-                  <select 
-                    value={activeBlock.metadata?.width || 'contained'}
-                    onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...activeBlock.metadata, width: e.target.value } })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 outline-none focus:border-slate-400 transition-colors"
-                  >
-                    <option value="contained">Contained</option>
-                    <option value="full">Full Width</option>
-                    <option value="wide">Wide</option>
-                  </select>
-                </div>
+                      {/* Width */}
+                      <div className="flex flex-col gap-2">
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Width</label>
+                        <select 
+                          value={metadata?.width || 'contained'}
+                          onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...metadata, width: e.target.value } })}
+                          className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 outline-none focus:border-slate-400 transition-colors"
+                        >
+                          <option value="contained">Contained</option>
+                          <option value="full">Full Width</option>
+                          <option value="wide">Wide</option>
+                        </select>
+                      </div>
 
-                {/* Custom CSS Class */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Custom CSS Class</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. shadow-lg rounded-xl"
-                    value={activeBlock.metadata?.cssClass || ''}
-                    onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...activeBlock.metadata, cssClass: e.target.value } })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 outline-none focus:border-slate-400 transition-colors font-mono"
-                  />
-                </div>
+                      {/* Custom CSS Class */}
+                      <div className="flex flex-col gap-2">
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Custom CSS Class</label>
+                        <input 
+                          type="text" 
+                          placeholder="e.g. shadow-lg rounded-xl"
+                          value={metadata?.cssClass || ''}
+                          onChange={(e) => updateBlock(activeBlock.id, { metadata: { ...metadata, cssClass: e.target.value } })}
+                          className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 outline-none focus:border-slate-400 transition-colors font-mono"
+                        />
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             )}
           </>
