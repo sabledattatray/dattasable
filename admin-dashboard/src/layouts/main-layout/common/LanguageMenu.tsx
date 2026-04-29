@@ -69,7 +69,7 @@ const LanguageMenu = () => {
               variant="subtitle2"
               sx={{
                 color: 'text.secondary',
-                fontWeight: 'normal',
+                fontWeight: 400,
               }}
             >
               {language.currencySymbol}

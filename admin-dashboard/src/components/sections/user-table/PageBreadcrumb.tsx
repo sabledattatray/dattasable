@@ -25,7 +25,7 @@ const PageBreadcrumb = ({ items, sx }: PageBreadcrumbProps) => {
           href={!active ? url : undefined}
           sx={{
             color: active ? 'text.primary' : 'primary.main',
-            fontWeight: 'medium',
+            fontWeight: 500,
           }}
         >
           {label}

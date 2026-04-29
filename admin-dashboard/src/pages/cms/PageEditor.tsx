@@ -41,7 +41,7 @@ const PageEditor = () => {
       />
       <Paper sx={{ p: { xs: 3, md: 5 }, mt: 3, flex: 1 }}>
         <Stack spacing={4} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <Typography variant="h5" sx={{ fontWeight: 700 }}>Page Configuration</Typography>
+          <Typography variant="h5" sx={{ fontWeight: 600 }}>Page Configuration</Typography>
           
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, md: 6 }}>
@@ -101,7 +101,7 @@ const PageEditor = () => {
                 sx={{ 
                   '& .MuiInputBase-root': {
                     fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: '0.9rem'
+                    fontSize: '14px'
                   }
                 }}
               />

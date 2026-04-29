@@ -30,7 +30,7 @@ const LegendButton = ({ active, onClick, icon, label }: LegendButtonProps) => (
     onClick={onClick}
   >
     {icon}
-    <Typography variant="subtitle2" sx={{ fontWeight: 700 }} color="text.secondary">
+    <Typography variant="subtitle2" sx={{ fontWeight: 600 }} color="text.secondary">
       {label}
     </Typography>
   </ButtonBase>
@@ -70,7 +70,7 @@ const UserEngagement = ({ data }: UserEngagementProps) => {
               }}
               label={
                 <>
-                  <Typography variant="caption" sx={{ fontWeight: 700, mb: 0.25 }}>
+                  <Typography variant="caption" sx={{ fontWeight: 600, mb: 0.25 }}>
                     {title}
                   </Typography>
                   <Typography

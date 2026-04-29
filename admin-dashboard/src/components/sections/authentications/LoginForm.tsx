@@ -139,7 +139,7 @@ const LoginForm = ({ defaultCredential }: LoginFormProps) => {
                     }
                   />
 
-                  <Link href="#!" variant="subtitle2">
+                  <Link href={paths.settings} variant="subtitle2">
                     Forgot Password?
                   </Link>
                 </Stack>
@@ -153,7 +153,7 @@ const LoginForm = ({ defaultCredential }: LoginFormProps) => {
           </Box>
         </Grid>
       </Grid>
-      <Link href="#!" variant="subtitle2">
+      <Link href={paths.settings} variant="subtitle2">
         Trouble signing in?
       </Link>
     </Stack>

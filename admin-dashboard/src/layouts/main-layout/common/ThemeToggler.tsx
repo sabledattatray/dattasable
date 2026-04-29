@@ -43,7 +43,13 @@ const ThemeToggler = () => {
     <>
       <Button color="neutral" variant="soft" shape="circle" onClick={handleOpen}>
         <IconifyIcon 
-          icon={mode === 'dark' ? 'material-symbols:dark-mode-outline' : 'material-symbols:light-mode-outline'} 
+          icon={
+            mode === 'dark'
+              ? 'material-symbols:dark-mode-outline-rounded'
+              : mode === 'system'
+                ? 'material-symbols:monitor-outline-rounded'
+                : 'material-symbols:light-mode-outline-rounded'
+          }
           sx={{ fontSize: 22, color: 'inherit' }} 
         />
       </Button>
@@ -62,19 +68,19 @@ const ThemeToggler = () => {
       >
         <MenuItem onClick={() => handleModeChange('light')} selected={mode === 'light'}>
           <ListItemIcon>
-            <IconifyIcon icon="material-symbols:light-mode-outline" />
+            <IconifyIcon icon="material-symbols:light-mode-outline-rounded" />
           </ListItemIcon>
           <ListItemText>Light</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => handleModeChange('dark')} selected={mode === 'dark'}>
           <ListItemIcon>
-            <IconifyIcon icon="material-symbols:dark-mode-outline" />
+            <IconifyIcon icon="material-symbols:dark-mode-outline-rounded" />
           </ListItemIcon>
           <ListItemText>Dark</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => handleModeChange('system')} selected={mode === 'system'}>
           <ListItemIcon>
-            <IconifyIcon icon="material-symbols:settings-brightness-outline" />
+            <IconifyIcon icon="material-symbols:monitor-outline-rounded" />
           </ListItemIcon>
           <ListItemText>System</ListItemText>
         </MenuItem>

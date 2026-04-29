@@ -194,7 +194,7 @@ const NavItem = ({ item, level }: NavItemProps) => {
                 {
                   [`& .${listItemTextClasses.primary}`]: {
                     typography: 'caption',
-                    fontWeight: 'medium',
+                    fontWeight: 500,
                     whiteSpace: 'nowrap',
                     lineHeight: 1.3,
                     color: level === 0 ? 'text.primary' : 'text.secondary',

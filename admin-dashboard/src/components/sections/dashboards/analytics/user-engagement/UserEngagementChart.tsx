@@ -81,7 +81,7 @@ const UserEngagementChart = ({ sx, data, activeTab, ref }: UserEngagementChartPr
           fontFamily: typography.fontFamily,
           fontSize: typography.caption.fontSize,
           color: getThemeColor(vars.palette.text.disabled),
-          fontWeight: 700,
+          fontWeight: 600,
         },
         splitLine: {
           show: true,

@@ -13,10 +13,10 @@ export default function AdminServices() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: 800, fontFamily: 'Syne, sans-serif' }}>Service Catalog</h2>
-          <p style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '4px' }}>Manage your professional offerings and pricing</p>
+          <h2 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: 600 }}>Service Catalog</h2>
+          <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>Manage your professional offerings and pricing</p>
         </div>
-        <button style={{ background: '#000', color: '#fff', fontWeight: 700, fontSize: '0.85rem', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <button style={{ background: '#000', color: '#fff', fontWeight: 600, fontSize: '14px', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
           <Plus size={18} /> Add Service
         </button>
       </div>
@@ -40,17 +40,17 @@ export default function AdminServices() {
                 <button style={{ background: '#fef2f2', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '8px', borderRadius: '8px' }}><Trash2 size={16} /></button>
               </div>
             </div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px', fontFamily: 'Syne, sans-serif' }}>{s.title}</h3>
-            <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000', marginBottom: '1.75rem' }}>{s.price}</div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a', marginBottom: '8px' }}>{s.title}</h3>
+            <div style={{ fontSize: '1.5rem', fontWeight: 600, color: '#000', marginBottom: '1.75rem' }}>{s.price}</div>
             
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
-                <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 700 }}>{s.status}</span>
+                <span style={{ fontSize: '14px', color: '#16a34a', fontWeight: 600 }}>{s.status}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8' }}>
                 <Clock size={14} />
-                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{s.orders} deployments</span>
+                <span style={{ fontSize: '14px', fontWeight: 600 }}>{s.orders} deployments</span>
               </div>
             </div>
           </div>

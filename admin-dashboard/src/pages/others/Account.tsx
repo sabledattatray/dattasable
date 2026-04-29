@@ -1,9 +1,8 @@
 'use client';
 import { SyntheticEvent, useState } from 'react';
 import { TabContext } from '@mui/lab';
-import { Container, Drawer, Paper, SnackbarCloseReason, Stack } from '@mui/material';
+import { Container, Drawer, Paper, Stack } from '@mui/material';
 import { accountTabs } from 'data/account/account-tabs';
-import ProSnackbar from 'layouts/main-layout/common/ProSnackbar';
 import AccountsProvider from 'providers/AccountsProvider';
 import { useBreakpoints } from 'providers/BreakpointsProvider';
 import SimpleBar from 'components/base/SimpleBar';
@@ -11,23 +10,14 @@ import SideTabList from 'components/sections/account/SideTabList';
 import AccountTabPanel from 'components/sections/account/common/AccountTabPanel';
 
 const Account = () => {
-  const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(accountTabs[0].value);
   const { down } = useBreakpoints();
   const [showTabList, setShowTabList] = useState(true);
 
   const downMd = down('md');
-  const handleChange = (_event: SyntheticEvent, newValue: string): void => {
-    if (newValue !== 'personal_information') {
-      setOpen(true);
-      return;
-    }
-    setActiveTab(newValue);
-  };
 
-  const handleClose = (_event: SyntheticEvent, reason?: SnackbarCloseReason) => {
-    if (reason === 'clickaway') return;
-    setOpen(false);
+  const handleChange = (_event: SyntheticEvent, newValue: string): void => {
+    setActiveTab(newValue);
   };
 
   return (
@@ -39,10 +29,7 @@ const Account = () => {
               hideBackdrop
               open={showTabList}
               onClose={() => setShowTabList(false)}
-              ModalProps={{
-                keepMounted: true,
-                disablePortal: true,
-              }}
+              ModalProps={{ keepMounted: true, disablePortal: true }}
               slotProps={{
                 paper: {
                   sx: {
@@ -55,9 +42,7 @@ const Account = () => {
                   },
                 },
               }}
-              sx={{
-                pointerEvents: 'none',
-              }}
+              sx={{ pointerEvents: 'none' }}
             >
               <SimpleBar>
                 <SideTabList setShowTabList={setShowTabList} handleChange={handleChange} />
@@ -104,7 +89,6 @@ const Account = () => {
               ))}
             </Container>
           </Paper>
-          <ProSnackbar open={open} onClose={handleClose} />
         </Stack>
       </TabContext>
     </AccountsProvider>

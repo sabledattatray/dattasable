@@ -40,9 +40,9 @@
   --surface: #ffffff;
   --surface2: #f4f4f5;
   --border: #d1d5db;
-  --accent: #170C79;
-  --accent2: #1e1194;
-  --accent3: #2a1ab5;
+  --accent: #0890EC;
+  --accent2: #0674c2;
+  --accent3: #045794;
   --text: #000000;
   --muted: #52525b;
   --tag-bg: #e5e7eb;
@@ -51,9 +51,9 @@
   --hero-overlay-mid: rgba(252, 252, 252, 0.85);
   --hero-overlay-end: rgba(252, 252, 252, 0.4);
   --grid-color: #ececec;
-  --hero-title-bg: none;
-  --hero-title-color: #000000;
-  --btn-primary-bg: #170C79;
+  --hero-title-bg: linear-gradient(135deg, #000000 0%, var(--accent) 45%, #00d4ff 100%);
+  --hero-title-color: transparent;
+  --btn-primary-bg: #0890EC;
   --btn-primary-text: #fff;
 }
 
@@ -190,7 +190,7 @@ body {
 }
 
 .light .card {
-  border-color: #170C79 !important;
+  border-color: var(--border) !important;
   border-image: none !important;
   background: #ffffff !important;
 }

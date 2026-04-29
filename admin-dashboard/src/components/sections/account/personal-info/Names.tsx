@@ -8,14 +8,25 @@ import InfoCard from '../common/InfoCard';
 import InfoCardAttribute from '../common/InfoCardAttribute';
 
 const Names = () => {
-  const { personalInfo } = useAccounts();
+  const { personalInfo, updatePersonalInfo } = useAccounts();
   const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState({ firstName: '', lastName: '' });
 
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setDraft({ firstName: personalInfo.firstName, lastName: personalInfo.lastName });
+    setOpen(true);
+  };
+
+  const handleDiscard = () => setOpen(false);
+
+  const handleConfirm = () => {
+    updatePersonalInfo({ firstName: draft.firstName.trim(), lastName: draft.lastName.trim() });
+    setOpen(false);
+  };
 
   return (
     <>
-      <InfoCard setOpen={setOpen}>
+      <InfoCard setOpen={handleOpen}>
         <Stack direction="column" spacing={{ xs: 2, sm: 1 }}>
           <InfoCardAttribute label="First Name" value={personalInfo.firstName} />
           <InfoCardAttribute label="Last Name" value={personalInfo.lastName} />
@@ -25,26 +36,29 @@ const Names = () => {
           sx={{ fontSize: 20, color: 'neutral.dark', visibility: 'hidden' }}
         />
       </InfoCard>
+
       <AccountDialog
         title="Name"
         subtitle="Enter your updated first and last name below. Your name will be reflected across all your account settings."
         open={open}
-        handleConfirm={handleClose}
-        handleDialogClose={handleClose}
-        handleDiscard={handleClose}
+        handleConfirm={handleConfirm}
+        handleDialogClose={handleDiscard}
+        handleDiscard={handleDiscard}
         sx={{ maxWidth: 463 }}
       >
         <Stack direction="column" spacing={1} sx={{ p: 0.125 }}>
           <TextField
-            placeholder="First Name"
             label="First Name"
-            defaultValue={personalInfo.firstName}
+            placeholder="First Name"
+            value={draft.firstName}
+            onChange={(e) => setDraft((d) => ({ ...d, firstName: e.target.value }))}
             fullWidth
           />
           <TextField
-            placeholder="Last Name"
             label="Last Name"
-            defaultValue={personalInfo.lastName}
+            placeholder="Last Name"
+            value={draft.lastName}
+            onChange={(e) => setDraft((d) => ({ ...d, lastName: e.target.value }))}
             fullWidth
           />
         </Stack>

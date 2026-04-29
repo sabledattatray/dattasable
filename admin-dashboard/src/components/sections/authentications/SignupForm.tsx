@@ -126,7 +126,7 @@ const SignupForm = () => {
           </Box>
         </Grid>
       </Grid>
-      <Link href="#!" variant="subtitle2" sx={{ flex: 1 }}>
+      <Link href={paths.settings} variant="subtitle2" sx={{ flex: 1 }}>
         Trouble signing in?
       </Link>
     </Stack>

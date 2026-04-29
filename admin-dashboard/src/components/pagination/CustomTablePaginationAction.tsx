@@ -50,7 +50,7 @@ const CustomTablePaginationAction = ({
         variant="caption"
         href={showAllHref}
         onClick={onShowAllClick}
-        sx={{ fontWeight: 700, flexShrink: 0, mt: { sm: 0.5 } }}
+        sx={{ fontWeight: 600, flexShrink: 0, mt: { sm: 0.5 } }}
       >
         {isShowingAll ? 'View less' : 'Show all'}
       </Link>

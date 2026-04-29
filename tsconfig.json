@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -19,22 +23,54 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "App": ["./admin-dashboard/src/App.tsx"],
-      "config": ["./admin-dashboard/src/config.ts"],
-      "components/*": ["./admin-dashboard/src/components/*"],
-      "config/*": ["./admin-dashboard/src/config/*"],
-      "data/*": ["./admin-dashboard/src/data/*"],
-      "helpers/*": ["./admin-dashboard/src/helpers/*"],
-      "hooks/*": ["./admin-dashboard/src/hooks/*"],
-      "layouts/*": ["./admin-dashboard/src/layouts/*"],
-      "lib/*": ["./admin-dashboard/src/lib/*"],
-      "pages/*": ["./admin-dashboard/src/pages/*"],
-      "providers/*": ["./admin-dashboard/src/providers/*"],
-      "reducers/*": ["./admin-dashboard/src/reducers/*"],
-      "routes/*": ["./admin-dashboard/src/routes/*"],
-      "theme/*": ["./admin-dashboard/src/theme/*"],
-      "types/*": ["./admin-dashboard/src/types/*"]
+      "@/*": [
+        "./*"
+      ],
+      "App": [
+        "./admin-dashboard/src/App.tsx"
+      ],
+      "config": [
+        "./admin-dashboard/src/config.ts"
+      ],
+      "components/*": [
+        "./admin-dashboard/src/components/*"
+      ],
+      "config/*": [
+        "./admin-dashboard/src/config/*"
+      ],
+      "data/*": [
+        "./admin-dashboard/src/data/*"
+      ],
+      "helpers/*": [
+        "./admin-dashboard/src/helpers/*"
+      ],
+      "hooks/*": [
+        "./admin-dashboard/src/hooks/*"
+      ],
+      "layouts/*": [
+        "./admin-dashboard/src/layouts/*"
+      ],
+      "lib/*": [
+        "./admin-dashboard/src/lib/*"
+      ],
+      "pages/*": [
+        "./admin-dashboard/src/pages/*"
+      ],
+      "providers/*": [
+        "./admin-dashboard/src/providers/*"
+      ],
+      "reducers/*": [
+        "./admin-dashboard/src/reducers/*"
+      ],
+      "routes/*": [
+        "./admin-dashboard/src/routes/*"
+      ],
+      "theme/*": [
+        "./admin-dashboard/src/theme/*"
+      ],
+      "types/*": [
+        "./admin-dashboard/src/types/*"
+      ]
     }
   },
   "include": [
@@ -45,5 +81,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

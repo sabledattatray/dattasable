@@ -41,7 +41,7 @@ const NotificationList = ({
             component={Typography}
             variant="body2"
             sx={{
-              fontWeight: 'bold',
+              fontWeight: 600,
               color: 'text.primary',
               lineHeight: 1.45,
               mb: 0.5,
@@ -67,7 +67,7 @@ const NotificationList = ({
             }}
           >
             <ListItemButton
-              href="#!"
+              component="div"
               disableRipple
               onClick={onItemClick}
               sx={[

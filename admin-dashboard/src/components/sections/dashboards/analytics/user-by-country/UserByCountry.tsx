@@ -30,7 +30,7 @@ const UserByCountry = ({ data }: { data: UserByCountryData[] }) => {
                 color: 'neutral.dark',
                 borderRadius: 2,
                 padding: '6px 12px',
-                fontSize: '0.75rem'
+                fontSize: '13px'
               },
             }}
           >

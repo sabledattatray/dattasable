@@ -17,6 +17,7 @@ import { GridApiCommunity } from '@mui/x-data-grid/internals';
 import dayjs from 'dayjs';
 import { User } from 'types/users';
 import DashboardMenu from 'components/common/DashboardMenu';
+import ConfirmDialog from 'components/common/ConfirmDialog';
 import DataGridPagination from 'components/pagination/DataGridPagination';
 
 interface UsersTableProps {
@@ -53,6 +54,26 @@ const getProviderIcon = (provider?: string) => {
 const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
   const [rows, setRows] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteConfirm = async () => {
+    if (!userToDelete) return;
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/users?id=${userToDelete.id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setRows((prev) => prev.filter((u) => u.id !== userToDelete.id));
+      } else {
+        console.error('Failed to delete user');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    } finally {
+      setIsDeleting(false);
+      setUserToDelete(null);
+    }
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -125,7 +146,7 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
             label={params.row.provider?.toUpperCase() || 'N/A'} 
             size="small" 
             variant="outlined"
-            sx={{ fontSize: '10px', fontWeight: 600 }}
+            sx={{ fontSize: '13px', fontWeight: 600 }}
           />
         ),
       },
@@ -166,9 +187,7 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
                 label: 'Delete',
                 sx: { color: 'error.main' },
                 onClick: () => {
-                  if (window.confirm(`Are you sure you want to delete ${params.row.name}?`)) {
-                    console.log('Delete user:', params.row.id);
-                  }
+                  setUserToDelete(params.row);
                 },
               },
             ]}
@@ -212,6 +231,16 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
           },
         }}
       />
+      {userToDelete && (
+        <ConfirmDialog
+          open={!!userToDelete}
+          title="Delete User"
+          message={`Are you sure you want to delete ${userToDelete.name}? This action cannot be undone.`}
+          confirmLabel={isDeleting ? 'Deleting...' : 'Delete'}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => !isDeleting && setUserToDelete(null)}
+        />
+      )}
     </Box>
   );
 };

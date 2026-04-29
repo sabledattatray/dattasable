@@ -16,7 +16,7 @@ const AccountTab = (props: AccountTabProps) => {
         justifyContent: 'flex-start',
         gap: 2,
         borderRadius: 2,
-        fontWeight: 700,
+        fontWeight: 600,
         color: 'text.primary',
         bgcolor: 'background.elevation2',
         [`&.${tabClasses.selected}`]: {

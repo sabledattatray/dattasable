@@ -116,11 +116,11 @@ const common = generatePaletteChannel({ white: basic.white, black: basic.black }
 const grey = generatePaletteChannel(colorGrey);
 
 const primary = generatePaletteChannel({
-  lighter: cssVarRgba(generatePaletteChannel({ main: brand.secondary }).mainChannel, 0.1),
-  light: brand.secondary,
-  main: brand.secondary, // Purple as primary in light mode for a different look
-  dark: brand.secondary,
-  darker: brand.secondary,
+  lighter: cssVarRgba(generatePaletteChannel({ main: '#0890EC' }).mainChannel, 0.1),
+  light: '#3db0ff',
+  main: '#0890EC',
+  dark: '#0674c2',
+  darker: '#045794',
   contrastText: basic.white,
 });
 const secondary = generatePaletteChannel({

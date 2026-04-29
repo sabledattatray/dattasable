@@ -12,12 +12,12 @@ export default function AdminTestimonials() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: 800, fontFamily: 'Syne, sans-serif' }}>Client Testimonials</h2>
-          <p style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '4px' }}>Review and approve client feedback for your portfolio</p>
+          <h2 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: 600 }}>Client Testimonials</h2>
+          <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>Review and approve client feedback for your portfolio</p>
         </div>
         <div style={{ position: 'relative', width: '320px' }}>
           <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-          <input type="text" placeholder="Search feedback..." style={{ width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', color: '#0f172a', fontSize: '0.9rem', fontWeight: 500 }} />
+          <input type="text" placeholder="Search feedback..." style={{ width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', color: '#0f172a', fontSize: '14px', fontWeight: 500 }} />
         </div>
       </div>
 
@@ -34,7 +34,7 @@ export default function AdminTestimonials() {
               <div style={{ display: 'flex', gap: '4px' }}>
                 {[...Array(t.rating)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}
               </div>
-              <div style={{ fontSize: '10px', background: t.status === 'Approved' ? '#f0fdf4' : '#f5f3ff', color: t.status === 'Approved' ? '#16a34a' : '#00C9F2', padding: '5px 12px', borderRadius: '8px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div style={{ fontSize: '13px', background: t.status === 'Approved' ? '#f0fdf4' : '#f5f3ff', color: t.status === 'Approved' ? '#16a34a' : '#00C9F2', padding: '5px 12px', borderRadius: '8px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {t.status}
               </div>
             </div>
@@ -43,12 +43,12 @@ export default function AdminTestimonials() {
             </p>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 800, fontSize: '0.9rem' }}>
+                <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 600, fontSize: '14px' }}>
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <div style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a' }}>{t.name}</div>
-                  <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>{t.role} @ {t.company}</div>
+                  <div style={{ fontSize: '1rem', fontWeight: 600, color: '#0f172a' }}>{t.name}</div>
+                  <div style={{ fontSize: '14px', color: '#64748b', fontWeight: 500 }}>{t.role} @ {t.company}</div>
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>

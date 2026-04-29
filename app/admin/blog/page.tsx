@@ -171,8 +171,8 @@ export default function AdminBlog() {
                 <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fef2f2', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                   <Trash2 size={30} />
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>Delete Story?</h3>
-                <p style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem' }}>This action is permanent and cannot be undone. The story will be removed from your public blog.</p>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.75rem' }}>Delete Story?</h3>
+                <p style={{ color: '#64748b', fontSize: '14px', lineHeight: 1.6, marginBottom: '2rem' }}>This action is permanent and cannot be undone. The story will be removed from your public blog.</p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button onClick={() => setShowDeleteModal(false)} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
                   <button onClick={confirmDelete} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: '#ef4444', border: 'none', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
@@ -193,11 +193,11 @@ export default function AdminBlog() {
               style={{ 
                 width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', 
                 background: '#ffffff', border: '1px solid #e2e8f0', 
-                borderRadius: '12px', color: '#0f172a', fontSize: '0.85rem', outline: 'none'
+                borderRadius: '12px', color: '#0f172a', fontSize: '14px', outline: 'none'
               }} 
             />
           </div>
-          <Link href="/admin/editor" style={{ background: '#000', color: '#fff', fontWeight: 700, padding: '0.75rem 1.5rem', borderRadius: '12px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link href="/admin/editor" style={{ background: '#000', color: '#fff', fontWeight: 600, padding: '0.75rem 1.5rem', borderRadius: '12px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Plus size={18} /> Write New Story
           </Link>
         </div>
@@ -206,30 +206,30 @@ export default function AdminBlog() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Story</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Category</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Visibility</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Reach</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Actions</th>
+                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Story</th>
+                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Category</th>
+                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Visibility</th>
+                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Reach</th>
+                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((post) => (
                 <tr key={post.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = '#fcfdfe'} onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                   <td style={{ padding: '1.5rem' }}>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>{post.title}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px' }}>{post.date} &bull; /blog/{post.slug}</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>{post.title}</div>
+                    <div style={{ fontSize: '13px', color: '#64748b', marginTop: '4px' }}>{post.date} &bull; /blog/{post.slug}</div>
                   </td>
                   <td style={{ padding: '1.5rem' }}>
-                    <span style={{ fontSize: '10px', fontWeight: 800, background: '#f0fdf4', padding: '4px 12px', borderRadius: '6px', color: '#16a34a', textTransform: 'uppercase' }}>{post.category}</span>
+                    <span style={{ fontSize: '13px', fontWeight: 600, background: '#f0fdf4', padding: '4px 12px', borderRadius: '6px', color: '#16a34a', textTransform: 'uppercase' }}>{post.category}</span>
                   </td>
                   <td style={{ padding: '1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <div style={{ width: 8, height: 8, borderRadius: '50%', background: post.status === 'Published' ? '#22c55e' : '#00C9F2' }} />
-                      <span style={{ fontSize: '0.8rem', color: post.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 700 }}>{post.status}</span>
+                      <span style={{ fontSize: '14px', color: post.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 600 }}>{post.status}</span>
                     </div>
                   </td>
-                  <td style={{ padding: '1.5rem', color: '#0f172a', fontWeight: 800 }}>{post.views}</td>
+                  <td style={{ padding: '1.5rem', color: '#0f172a', fontWeight: 600 }}>{post.views}</td>
                   <td style={{ padding: '1.5rem' }}>
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <Link 
@@ -286,11 +286,11 @@ export default function AdminBlog() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Draft Saved</span>
-          <button style={{ background: 'none', border: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>Preview</button>
+          <span style={{ fontSize: '14px', color: '#94a3b8' }}>Draft Saved</span>
+          <button style={{ background: 'none', border: 'none', color: '#0f172a', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>Preview</button>
           <button 
             onClick={handleSave}
-            style={{ background: '#000', border: 'none', color: '#fff', padding: '6px 16px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
+            style={{ background: '#000', border: 'none', color: '#fff', padding: '6px 16px', borderRadius: '6px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
           >
             Publish
           </button>
@@ -311,8 +311,8 @@ export default function AdminBlog() {
               value={formData.title}
               onChange={e => setFormData({ ...formData, title: e.target.value })}
               style={{ 
-                width: '100%', fontSize: '3.8rem', fontWeight: 800, background: 'none', border: 'none', 
-                color: '#0f172a', outline: 'none', fontFamily: 'Syne, sans-serif', resize: 'none',
+                width: '100%', fontSize: '3.8rem', fontWeight: 600, background: 'none', border: 'none', 
+                color: '#0f172a', outline: 'none', resize: 'none',
                 height: 'auto', padding: '0', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: '2rem'
               }}
             />
@@ -324,9 +324,9 @@ export default function AdminBlog() {
             }}>
               {/* Typography */}
               <div style={{ display: 'flex', gap: '4px', borderRight: '1px solid #e2e8f0', paddingRight: '0.75rem' }}>
-                <button onClick={() => execCommand('formatBlock', '<h1>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '11px', fontWeight: 800, borderRadius: '4px' }}>H1</button>
-                <button onClick={() => execCommand('formatBlock', '<h2>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '11px', fontWeight: 800, borderRadius: '4px' }}>H2</button>
-                <button onClick={() => execCommand('formatBlock', '<h3>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '11px', fontWeight: 800, borderRadius: '4px' }}>H3</button>
+                <button onClick={() => execCommand('formatBlock', '<h1>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H1</button>
+                <button onClick={() => execCommand('formatBlock', '<h2>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H2</button>
+                <button onClick={() => execCommand('formatBlock', '<h3>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H3</button>
               </div>
 
               {/* Formatting */}
@@ -380,12 +380,12 @@ export default function AdminBlog() {
         {/* SUPERIOR SIDEBAR */}
         <aside style={{ width: '340px', background: '#f8fafc', borderLeft: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column' }}>
           <div style={{ padding: '1.5rem', borderBottom: '1px solid #e2e8f0' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Post Settings</h3>
+            <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Post Settings</h3>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {/* Category Dropdown */}
               <div>
-                <label style={{ display: 'block', fontSize: '10px', color: '#64748b', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>Category</label>
+                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Category</label>
                 <select 
                   value={formData.category}
                   onChange={e => setFormData({ ...formData, category: e.target.value })}
@@ -399,15 +399,15 @@ export default function AdminBlog() {
                   <input 
                     type="text" value={newCat} onChange={e => setNewCat(e.target.value)}
                     placeholder="New cat..."
-                    style={{ flex: 1, background: 'none', border: 'none', borderBottom: '1px solid #cbd5e1', color: '#0f172a', fontSize: '11px', outline: 'none' }}
+                    style={{ flex: 1, background: 'none', border: 'none', borderBottom: '1px solid #cbd5e1', color: '#0f172a', fontSize: '14px', outline: 'none' }}
                   />
-                  <button onClick={handleAddCategory} style={{ background: '#0f172a', border: 'none', borderRadius: '6px', padding: '4px 12px', fontSize: '10px', fontWeight: 700, cursor: 'pointer', color: '#fff' }}>ADD</button>
+                  <button onClick={handleAddCategory} style={{ background: '#0f172a', border: 'none', borderRadius: '6px', padding: '4px 12px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', color: '#fff' }}>ADD</button>
                 </div>
               </div>
 
               {/* URL Slug */}
               <div>
-                <label style={{ display: 'block', fontSize: '10px', color: '#64748b', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>URL Slug</label>
+                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>URL Slug</label>
                 <input 
                   type="text" value={formData.slug}
                   onChange={e => setFormData({ ...formData, slug: e.target.value })}
@@ -417,7 +417,7 @@ export default function AdminBlog() {
 
               {/* Featured Image */}
               <div>
-                <label style={{ display: 'block', fontSize: '10px', color: '#64748b', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>Featured Image</label>
+                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Featured Image</label>
                 <div 
                   onClick={triggerUpload}
                   style={{ width: '100%', height: '140px', background: '#ffffff', border: '1px dashed #cbd5e1', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', overflow: 'hidden' }}
@@ -427,17 +427,17 @@ export default function AdminBlog() {
                   ) : (
                     <div style={{ textAlign: 'center' }}>
                       <ImageIcon size={24} style={{ color: '#cbd5e1', marginBottom: '8px' }} />
-                      <div style={{ fontSize: '10px', color: '#94a3b8' }}>Set featured image</div>
+                      <div style={{ fontSize: '13px', color: '#94a3b8' }}>Set featured image</div>
                     </div>
                   )}
                 </div>
                 <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
-                {formData.image && <button onClick={() => setFormData({...formData, image: ''})} style={{ marginTop: '8px', background: 'none', border: 'none', color: '#ef4444', fontSize: '10px', fontWeight: 700, cursor: 'pointer' }}>Remove image</button>}
+                {formData.image && <button onClick={() => setFormData({...formData, image: ''})} style={{ marginTop: '8px', background: 'none', border: 'none', color: '#ef4444', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Remove image</button>}
               </div>
 
               {/* Excerpt */}
               <div>
-                <label style={{ display: 'block', fontSize: '10px', color: '#64748b', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>Excerpt</label>
+                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Excerpt</label>
                 <textarea 
                   value={formData.excerpt}
                   onChange={e => setFormData({ ...formData, excerpt: e.target.value })}

@@ -9,7 +9,7 @@ interface InfoCardAttributeProps {
 const InfoCardAttribute = ({ label, value }: InfoCardAttributeProps) => {
   return (
     <Stack spacing={1} direction={{ xs: 'column', sm: 'row' }}>
-      <Typography variant="subtitle2" sx={{ minWidth: 120, fontWeight: 700 }}>
+      <Typography variant="subtitle2" sx={{ minWidth: 120, fontWeight: 600 }}>
         {label}
       </Typography>
       <Typography variant="subtitle2" sx={{ fontWeight: 400, overflowWrap: 'anywhere' }}>

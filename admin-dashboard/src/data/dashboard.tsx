@@ -22,7 +22,7 @@ export const analyticKPIs: AnalyticKPIData[] = [
     link: {
       prefix: 'See in-depth',
       text: 'Traffic sources',
-      url: '#!',
+      url: '/users',
     },
   },
   {
@@ -35,7 +35,7 @@ export const analyticKPIs: AnalyticKPIData[] = [
     link: {
       prefix: 'See page-wise',
       text: 'Performance',
-      url: '#!',
+      url: '/account',
     },
   },
   {
@@ -48,7 +48,7 @@ export const analyticKPIs: AnalyticKPIData[] = [
     link: {
       prefix: "See last week's",
       text: 'Top Products',
-      url: '#!',
+      url: '/interactions/messages',
     },
   },
   {
@@ -61,7 +61,7 @@ export const analyticKPIs: AnalyticKPIData[] = [
     link: {
       prefix: 'See all inbound',
       text: 'Referral links',
-      url: '#!',
+      url: '/interactions/subscribers',
     },
   },
 ];

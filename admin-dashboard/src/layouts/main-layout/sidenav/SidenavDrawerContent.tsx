@@ -101,7 +101,7 @@ const SidenavDrawerContent = ({ variant = 'permanent' }: SidenavDrawerContentPro
                         mb: 1,
                         display: 'block',
                         color: 'text.secondary',
-                        fontWeight: 700,
+                        fontWeight: 600,
                         textTransform: 'uppercase',
                         letterSpacing: '0.1em',
                         fontSize: '0.65rem'

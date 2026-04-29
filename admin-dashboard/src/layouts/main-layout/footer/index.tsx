@@ -28,7 +28,7 @@ const Footer = () => {
           component="p"
           sx={{
             lineHeight: 1.6,
-            fontWeight: 'light',
+            fontWeight: 400,
             color: 'text.secondary',
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
@@ -47,7 +47,7 @@ const Footer = () => {
             </Box>{' '}
             {dayjs().year()} ©
             <Link
-              href="#!"
+              href="https://dattasable.com"
               target="_blank"
               sx={{ textDecoration: 'none', mx: 0.5 }}
             >
@@ -60,7 +60,7 @@ const Footer = () => {
           variant="caption"
           component="p"
           sx={{
-            fontWeight: 'light',
+            fontWeight: 400,
             color: 'text.secondary',
           }}
         >

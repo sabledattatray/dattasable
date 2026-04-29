@@ -95,13 +95,13 @@ const Starter = () => {
               position: 'relative',
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 'light', color: 'primary.main' }}>
+            <Typography variant="h3" sx={{ fontWeight: 400, color: 'primary.main' }}>
               Create
             </Typography>
-            <Typography variant="h3" sx={{ fontWeight: 'light', color: 'text.secondary' }}>
+            <Typography variant="h3" sx={{ fontWeight: 400, color: 'text.secondary' }}>
               Something
             </Typography>
-            <Typography variant="h3" sx={{ fontWeight: 'light', color: 'text.secondary' }}>
+            <Typography variant="h3" sx={{ fontWeight: 400, color: 'text.secondary' }}>
               Beautiful
             </Typography>
           </Stack>

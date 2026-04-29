@@ -101,7 +101,7 @@ const PromoCard = ({
       >
         <Stack direction="column" spacing={2} sx={{ alignItems: "center", position: "relative", zIndex: 10 }}>
           <Stack direction="column" sx={{ alignItems: "center" }} spacing={0.5}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
               {title}
             </Typography>
             <Stack spacing={1} sx={{ alignItems: "center" }}>

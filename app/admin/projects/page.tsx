@@ -76,7 +76,7 @@ export default function ProjectsManager() {
             }}
           />
         </div>
-        <button onClick={handleOpenAdd} style={{ background: '#000', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '10px', fontWeight: 700, fontSize: '0.875rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button onClick={handleOpenAdd} style={{ background: '#000', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '10px', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Plus size={18} /> Add New Project
         </button>
       </div>
@@ -86,32 +86,32 @@ export default function ProjectsManager() {
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>Project</th>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>Client</th>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>Stack</th>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>Status</th>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>Views</th>
-              <th style={{ padding: '1.25rem', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Project</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Client</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Stack</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Status</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Views</th>
+              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((p) => (
               <tr key={p.id} style={{ borderBottom: '1px solid #f1f5f9' }} className="hover:bg-slate-50 transition-colors">
                 <td style={{ padding: '1.25rem' }}>
-                  <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{p.title}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{p.category}</div>
+                  <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '14px' }}>{p.title}</div>
+                  <div style={{ fontSize: '13px', color: '#64748b' }}>{p.category}</div>
                 </td>
                 <td style={{ padding: '1.25rem', fontSize: '0.875rem', color: '#0f172a', fontWeight: 500 }}>{p.client}</td>
                 <td style={{ padding: '1.25rem' }}>
-                  <span style={{ fontSize: '10px', background: '#f1f5f9', padding: '4px 10px', borderRadius: '6px', color: '#64748b', fontWeight: 700 }}>{p.tool}</span>
+                  <span style={{ fontSize: '13px', background: '#f1f5f9', padding: '4px 10px', borderRadius: '6px', color: '#64748b', fontWeight: 600 }}>{p.tool}</span>
                 </td>
                 <td style={{ padding: '1.25rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: p.status === 'Published' ? '#22c55e' : '#00C9F2' }} />
-                    <span style={{ fontSize: '0.85rem', color: p.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 700 }}>{p.status}</span>
+                    <span style={{ fontSize: '14px', color: p.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 600 }}>{p.status}</span>
                   </div>
                 </td>
-                <td style={{ padding: '1.25rem', fontSize: '0.875rem', color: '#94a3b8', fontWeight: 700 }}>{p.views}</td>
+                <td style={{ padding: '1.25rem', fontSize: '0.875rem', color: '#94a3b8', fontWeight: 600 }}>{p.views}</td>
                 <td style={{ padding: '1.25rem', textAlign: 'right' }}>
                   <div className="flex gap-2 justify-end">
                     <button 
@@ -163,7 +163,7 @@ export default function ProjectsManager() {
               style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 32, width: '100%', maxWidth: 700, padding: '3rem', boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', fontFamily: 'Syne, sans-serif' }}>
+                <h2 style={{ fontSize: '1.75rem', fontWeight: 600, color: '#0f172a' }}>
                   {editing ? 'Edit Project' : 'Create Project'}
                 </h2>
                 <button onClick={() => { setEditing(null); setIsAddModalOpen(false); }} style={{ background: '#f1f5f9', border: 'none', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b' }}>
@@ -174,11 +174,11 @@ export default function ProjectsManager() {
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Project Title</label>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Project Title</label>
                     <input type="text" required value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 500 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Category</label>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Category</label>
                     <select value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 600 }}>
                       <option>Dashboard</option>
                       <option>Analysis</option>
@@ -190,11 +190,11 @@ export default function ProjectsManager() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Client Name</label>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Client Name</label>
                     <input type="text" required value={formData.client} onChange={e => setFormData({ ...formData, client: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 500 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Primary Tool</label>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Primary Tool</label>
                     <select value={formData.tool} onChange={e => setFormData({ ...formData, tool: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 600 }}>
                       <option>Tableau</option>
                       <option>Power BI</option>
@@ -206,8 +206,8 @@ export default function ProjectsManager() {
                 </div>
 
                 <div className="flex gap-4 justify-end pt-6" style={{ borderTop: '1px solid #f1f5f9' }}>
-                  <button type="button" onClick={() => { setEditing(null); setIsAddModalOpen(false); }} style={{ flex: 1, padding: '0.85rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', color: '#0f172a', fontWeight: 700, cursor: 'pointer' }}>Discard</button>
-                  <button type="submit" style={{ flex: 1, padding: '0.85rem', background: '#000', color: '#fff', fontWeight: 800, border: 'none', borderRadius: '12px', cursor: 'pointer' }}>
+                  <button type="button" onClick={() => { setEditing(null); setIsAddModalOpen(false); }} style={{ flex: 1, padding: '0.85rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', color: '#0f172a', fontWeight: 600, cursor: 'pointer' }}>Discard</button>
+                  <button type="submit" style={{ flex: 1, padding: '0.85rem', background: '#000', color: '#fff', fontWeight: 600, border: 'none', borderRadius: '12px', cursor: 'pointer' }}>
                     {editing ? 'Update Project' : 'Publish Project'}
                   </button>
                 </div>

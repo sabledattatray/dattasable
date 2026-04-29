@@ -108,7 +108,7 @@ export default function Navbar() {
                   className={`px-6 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
                     pathname === link.href || (hovered === link.label && link.mega)
                       ? 'text-[var(--accent)]' 
-                      : 'text-[var(--text)] opacity-50 hover:opacity-100'
+                      : 'text-[var(--text)] opacity-75 hover:opacity-100'
                   }`}
                   style={{ fontFamily: 'Syne, sans-serif' }}
                 >

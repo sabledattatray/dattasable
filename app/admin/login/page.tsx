@@ -54,8 +54,8 @@ export default function AdminLogin() {
           >
             <BarChart3 size={24} color="#fff" />
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', fontFamily: 'Syne, sans-serif' }}>Admin Portal</h1>
-          <p style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 500 }}>Enter your credentials to manage DattaSable</p>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.5rem' }}>Admin Portal</h1>
+          <p style={{ color: '#64748b', fontSize: '14px', fontWeight: 500 }}>Enter your credentials to manage DattaSable</p>
         </div>
 
         {error && (
@@ -66,13 +66,13 @@ export default function AdminLogin() {
             style={{ background: '#fef2f2', border: '1px solid #fee2e2', color: '#ef4444' }}
           >
             <AlertCircle size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{error}</span>
+            <span style={{ fontSize: '14px', fontWeight: 600 }}>{error}</span>
           </motion.div>
         )}
 
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div>
-            <label style={{ display: 'block', color: '#64748b', fontSize: '0.75rem', marginBottom: '0.5rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <label style={{ display: 'block', color: '#64748b', fontSize: '13px', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Email
             </label>
             <div style={{ position: 'relative' }}>
@@ -86,7 +86,7 @@ export default function AdminLogin() {
                 style={{
                   width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem',
                   background: '#f8fafc', border: '1px solid #e2e8f0',
-                  borderRadius: '12px', color: '#0f172a', fontSize: '0.9rem',
+                  borderRadius: '12px', color: '#0f172a', fontSize: '14px',
                   outline: 'none', fontWeight: 500
                 }}
               />
@@ -94,7 +94,7 @@ export default function AdminLogin() {
           </div>
 
           <div>
-            <label style={{ display: 'block', color: '#64748b', fontSize: '0.75rem', marginBottom: '0.5rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <label style={{ display: 'block', color: '#64748b', fontSize: '13px', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Password
             </label>
             <div style={{ position: 'relative' }}>
@@ -108,7 +108,7 @@ export default function AdminLogin() {
                 style={{
                   width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem',
                   background: '#f8fafc', border: '1px solid #e2e8f0',
-                  borderRadius: '12px', color: '#0f172a', fontSize: '0.9rem',
+                  borderRadius: '12px', color: '#0f172a', fontSize: '14px',
                   outline: 'none', fontWeight: 500
                 }}
               />
@@ -121,7 +121,7 @@ export default function AdminLogin() {
             style={{ 
               width: '100%', marginTop: '1rem', padding: '1rem',
               background: '#000', color: '#fff', border: 'none',
-              borderRadius: '12px', fontSize: '0.95rem', fontWeight: 800,
+              borderRadius: '12px', fontSize: '0.95rem', fontWeight: 600,
               cursor: 'pointer', display: 'flex', alignItems: 'center',
               justifyContent: 'center', gap: '8px', opacity: loading ? 0.7 : 1,
               transition: 'transform 0.2s'
@@ -136,7 +136,7 @@ export default function AdminLogin() {
         <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
           <div style={{ position: 'relative', marginBottom: '2.5rem' }}>
             <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '1px', background: '#e2e8f0', zIndex: 0 }} />
-            <span style={{ position: 'relative', background: '#fff', padding: '0 1rem', color: '#94a3b8', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', zIndex: 1 }}>
+            <span style={{ position: 'relative', background: '#fff', padding: '0 1rem', color: '#94a3b8', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', zIndex: 1 }}>
               Or Continue With
             </span>
           </div>
@@ -155,7 +155,7 @@ export default function AdminLogin() {
                   width: '100%', padding: '0.85rem',
                   background: provider.bg, border: '1px solid #e2e8f0', borderRadius: '12px', 
                   cursor: 'pointer', transition: 'all 0.2s',
-                  color: '#0f172a', fontSize: '0.9rem', fontWeight: 600
+                  color: '#0f172a', fontSize: '14px', fontWeight: 600
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.background = '#f8fafc';
@@ -179,7 +179,7 @@ export default function AdminLogin() {
           <div style={{ marginTop: '2.5rem' }}>
             <button
               onClick={() => router.push('/')}
-              style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}
+              style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '14px', cursor: 'pointer', fontWeight: 600 }}
             >
               Back to Website
             </button>

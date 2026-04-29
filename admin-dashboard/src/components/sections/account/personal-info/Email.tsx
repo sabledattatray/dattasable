@@ -9,13 +9,30 @@ import InfoCardAttribute from '../common/InfoCardAttribute';
 
 const Email = () => {
   const [open, setOpen] = useState(false);
-  const { personalInfo } = useAccounts();
+  const { personalInfo, updatePersonalInfo } = useAccounts();
+  const [draft, setDraft] = useState({ primaryEmail: '', secondaryEmail: '' });
 
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setDraft({
+      primaryEmail: personalInfo.primaryEmail,
+      secondaryEmail: personalInfo.secondaryEmail,
+    });
+    setOpen(true);
+  };
+
+  const handleDiscard = () => setOpen(false);
+
+  const handleConfirm = () => {
+    updatePersonalInfo({
+      primaryEmail: draft.primaryEmail.trim(),
+      secondaryEmail: draft.secondaryEmail.trim(),
+    });
+    setOpen(false);
+  };
 
   return (
     <>
-      <InfoCard setOpen={setOpen} sx={{ mb: 2 }}>
+      <InfoCard setOpen={handleOpen} sx={{ mb: 2 }}>
         <Stack direction="column" spacing={{ xs: 2, sm: 1 }}>
           <InfoCardAttribute label="Primary Email" value={personalInfo.primaryEmail} />
           <InfoCardAttribute label="Secondary Email" value={personalInfo.secondaryEmail} />
@@ -25,32 +42,36 @@ const Email = () => {
           sx={{ fontSize: 20, color: 'neutral.dark', visibility: 'hidden' }}
         />
       </InfoCard>
+
       <AccountDialog
         title="Email Address"
         subtitle="Update your primary email address. You can also set an alternate email address for extra security and backup."
         open={open}
-        handleConfirm={handleClose}
-        handleDialogClose={handleClose}
-        handleDiscard={handleClose}
-        sx={{
-          maxWidth: 463,
-        }}
+        handleConfirm={handleConfirm}
+        handleDialogClose={handleDiscard}
+        handleDiscard={handleDiscard}
+        sx={{ maxWidth: 463 }}
       >
         <Stack direction="column" spacing={1} sx={{ p: 0.125 }}>
           <TextField
-            placeholder="Primary Email"
             label="Primary Email"
-            defaultValue={personalInfo.primaryEmail}
+            placeholder="Primary Email"
+            type="email"
+            value={draft.primaryEmail}
+            onChange={(e) => setDraft((d) => ({ ...d, primaryEmail: e.target.value }))}
             fullWidth
           />
           <TextField
-            placeholder="Secondary Email"
             label="Secondary Email"
-            defaultValue={personalInfo.secondaryEmail}
+            placeholder="Secondary Email"
+            type="email"
+            value={draft.secondaryEmail}
+            onChange={(e) => setDraft((d) => ({ ...d, secondaryEmail: e.target.value }))}
             fullWidth
           />
         </Stack>
       </AccountDialog>
+
       <Stack spacing={1} sx={{ color: 'info.main' }}>
         <IconifyIcon icon="material-symbols:info" sx={{ fontSize: 24 }} />
         <Typography variant="body2">

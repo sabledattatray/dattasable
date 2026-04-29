@@ -54,7 +54,7 @@ const SettingsPanel = () => {
           <Typography
             variant="subtitle1"
             sx={{
-              fontWeight: 700,
+              fontWeight: 600,
               flex: 1,
             }}
           >
@@ -148,7 +148,7 @@ const Section = ({
         variant="subtitle1"
         sx={[
           {
-            fontWeight: 700,
+            fontWeight: 600,
             mb: 2,
           },
           !!disable && { mb: 1, color: 'text.disabled' },

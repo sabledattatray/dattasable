@@ -95,7 +95,7 @@ const SideTabList = ({ setShowTabList, handleChange, sx }: SideTabListProps) => 
                 <Typography
                   noWrap
                   sx={{
-                    fontWeight: 700,
+                    fontWeight: 600,
                     textOverflow: 'ellipsis',
                     overflow: 'hidden',
                     whiteSpace: 'nowrap',

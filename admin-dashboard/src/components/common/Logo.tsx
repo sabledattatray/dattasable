@@ -47,7 +47,7 @@ const Logo = ({ sx, viewBox = '0 0 26 40', showName = true, ...rest }: LogoProps
         <Typography
           sx={{
             color: 'text.primary',
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: 18,
             lineHeight: 1,
             margin: 1,

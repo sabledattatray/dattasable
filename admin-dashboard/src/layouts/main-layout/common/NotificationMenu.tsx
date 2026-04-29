@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Box, Button, Link, Popover, Stack, badgeClasses, paperClasses } from '@mui/material';
+import { NavLink } from 'react-router';
+import { Box, Button, Popover, Stack, badgeClasses, paperClasses } from '@mui/material';
 import { notifications as notificationsData } from 'data/notifications';
 import dayjs from 'dayjs';
 import { DatewiseNotification } from 'types/notification';
@@ -110,7 +111,7 @@ const NotificationMenu = () => {
             py: 1,
           }}
         >
-          <Button component={Link} underline="none" href="#!" variant="text" color="primary">
+          <Button component={NavLink} to="/notifications" variant="text" color="primary">
             Load more notifications
           </Button>
         </Stack>

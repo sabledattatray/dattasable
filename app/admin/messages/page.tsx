@@ -35,7 +35,7 @@ export default function MessagesInbox() {
               style={{
                 width: '100%', padding: '0.6rem 0.75rem 0.6rem 2.25rem',
                 background: '#f8fafc', border: '1px solid #e2e8f0',
-                borderRadius: '10px', color: '#0f172a', fontSize: '0.85rem',
+                borderRadius: '10px', color: '#0f172a', fontSize: '14px',
                 outline: 'none',
               }}
             />
@@ -63,8 +63,8 @@ export default function MessagesInbox() {
                 <span style={{ fontWeight: msg.read ? 600 : 800, fontSize: '0.875rem', color: '#0f172a' }}>{msg.name}</span>
                 <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{msg.date}</span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: msg.read ? '#64748b' : '#0f172a', fontWeight: msg.read ? 500 : 700, marginBottom: '0.25rem' }}>{msg.subject}</div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{msg.message}</div>
+              <div style={{ fontSize: '14px', color: msg.read ? '#64748b' : '#0f172a', fontWeight: msg.read ? 500 : 700, marginBottom: '0.25rem' }}>{msg.subject}</div>
+              <div style={{ fontSize: '13px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{msg.message}</div>
             </div>
           ))}
         </div>
@@ -83,32 +83,32 @@ export default function MessagesInbox() {
             >
               <div style={{ padding: '1.5rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className="flex gap-3 items-center">
-                  <div style={{ width: 42, height: 42, borderRadius: '12px', background: 'linear-gradient(135deg, #f1f5f9, #e2e8f0)', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 800, fontSize: '0.9rem' }}>
+                  <div style={{ width: 42, height: 42, borderRadius: '12px', background: 'linear-gradient(135deg, #f1f5f9, #e2e8f0)', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 600, fontSize: '14px' }}>
                     {selected.name.charAt(0)}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem' }}>{selected.name}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{selected.email}</div>
+                    <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.95rem' }}>{selected.name}</div>
+                    <div style={{ fontSize: '13px', color: '#64748b' }}>{selected.email}</div>
                   </div>
                 </div>
                 <div className="flex gap-2">
                   <button style={{ background: '#fef2f2', border: '1px solid #fee2e2', color: '#ef4444', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
-                  <button style={{ background: '#0f172a', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>Reply Message</button>
+                  <button style={{ background: '#0f172a', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>Reply Message</button>
                 </div>
               </div>
 
               <div style={{ flex: 1, padding: '2.5rem', overflowY: 'auto' }}>
-                <div className="flex items-center gap-2 mb-6" style={{ color: '#94a3b8', fontSize: '0.8rem', fontWeight: 600 }}>
+                <div className="flex items-center gap-2 mb-6" style={{ color: '#94a3b8', fontSize: '14px', fontWeight: 600 }}>
                   <Clock size={14} /> Received on {selected.date}
                 </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f172a', letterSpacing: '-0.01em' }}>{selected.subject}</h3>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1.5rem', color: '#0f172a', letterSpacing: '-0.01em' }}>{selected.subject}</h3>
                 <div style={{ lineHeight: 1.8, color: '#334155', background: '#f8fafc', padding: '2rem', borderRadius: '16px', border: '1px solid #f1f5f9', fontSize: '1rem' }}>
                   {selected.message}
                 </div>
               </div>
 
               <div style={{ padding: '1.25rem 2.5rem', borderTop: '1px solid #f1f5f9', background: '#f8fafc' }}>
-                <div style={{ color: '#64748b', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
+                <div style={{ color: '#64748b', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
                   <CheckCircle size={14} style={{ color: '#22c55e' }} /> This inquiry is tracked in your CRM
                 </div>
               </div>

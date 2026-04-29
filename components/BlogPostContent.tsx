@@ -116,7 +116,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
               borderRadius: 0, 
               padding: '0.4rem 1.2rem', 
               cursor: 'pointer', 
-              color: copied ? '#000' : '#fff', 
+              color: copied ? '#000' : 'var(--text)', 
               fontSize: '10px',
               fontWeight: 700,
               textTransform: 'uppercase',

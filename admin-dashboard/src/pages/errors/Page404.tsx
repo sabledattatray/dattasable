@@ -52,7 +52,7 @@ const Page404 = () => {
             variant="h2"
             sx={{
               color: 'text.disabled',
-              fontWeight: 'medium',
+              fontWeight: 500,
               mb: 2,
               fontSize: { xs: 'h4.fontSize', sm: 'h2.fontSize' },
             }}
@@ -63,7 +63,7 @@ const Page404 = () => {
             variant="h5"
             sx={{
               color: 'text.secondary',
-              fontWeight: 'normal',
+              fontWeight: 400,
               mb: 5,
               fontSize: { xs: 'subtitle1.fontSize', sm: 'h5.fontSize' },
             }}

@@ -17,7 +17,7 @@ const AnalyticKPI = ({ kpi }: { kpi: AnalyticKPIData }) => {
       <Typography
         variant="caption"
         sx={{
-          fontWeight: 700,
+          fontWeight: 600,
           mb: 1,
           color: 'text.secondary',
           whiteSpace: 'nowrap',
@@ -48,7 +48,7 @@ const AnalyticKPI = ({ kpi }: { kpi: AnalyticKPIData }) => {
           />
         </Avatar>
 
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {typeof value === 'number' ? formatNumber(value) : value}
         </Typography>
       </Stack>

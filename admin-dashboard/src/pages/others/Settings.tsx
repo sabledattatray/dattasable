@@ -62,8 +62,8 @@ const Settings = () => {
 
   const labelStyle = {
     display: 'block',
-    fontSize: '11px',
-    fontWeight: 800,
+    fontSize: '14px',
+    fontWeight: 600,
     color: 'text.secondary',
     textTransform: 'uppercase',
     mb: 1,
@@ -77,7 +77,7 @@ const Settings = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, height: '100%' }}>
             {/* General Settings */}
             <Paper sx={cardStyle} elevation={0}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5, fontFamily: 'Syne, sans-serif' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Globe size={20} style={{ color: theme.palette.primary.main }} /> Portal Configuration
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -107,7 +107,7 @@ const Settings = () => {
                     mt: 2, 
                     borderRadius: '12px', 
                     py: 1.5, 
-                    fontWeight: 800,
+                    fontWeight: 600,
                     bgcolor: 'text.primary',
                     color: 'background.paper',
                     '&:hover': {
@@ -122,7 +122,7 @@ const Settings = () => {
 
             {/* Security / Password Change */}
             <Paper sx={cardStyle} elevation={0}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5, fontFamily: 'Syne, sans-serif' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Shield size={20} style={{ color: '#00C9F2' }} /> Security Protocol
               </Typography>
               
@@ -132,7 +132,7 @@ const Settings = () => {
                     <Box sx={{ 
                       p: 2, 
                       borderRadius: '12px', 
-                      fontSize: '0.85rem', 
+                      fontSize: '14px', 
                       fontWeight: 600, 
                       bgcolor: msg.type === 'success' ? alpha(theme.palette.success.main, 0.1) : alpha(theme.palette.error.main, 0.1),
                       color: msg.type === 'success' ? 'success.main' : 'error.main',
@@ -184,7 +184,7 @@ const Settings = () => {
                       mt: 1,
                       py: 1.5,
                       borderRadius: '12px',
-                      fontWeight: 800,
+                      fontWeight: 600,
                       borderColor: 'divider',
                       color: '#00C9F2',
                       background: alpha('#00C9F2', 0.05),
@@ -207,14 +207,14 @@ const Settings = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, height: '100%' }}>
             {/* System Health */}
             <Paper sx={cardStyle} elevation={0}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5, fontFamily: 'Syne, sans-serif' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Database size={20} style={{ color: theme.palette.success.main }} /> Database Integrity
               </Typography>
               <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Box sx={{ mb: 4 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
                     <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>Storage Allocation</Typography>
-                    <Typography variant="body2" sx={{ color: 'text.primary', fontWeight: 800 }}>24.2 / 50 GB</Typography>
+                    <Typography variant="body2" sx={{ color: 'text.primary', fontWeight: 600 }}>24.2 / 50 GB</Typography>
                   </Box>
                   <LinearProgress 
                     variant="determinate" 
@@ -233,14 +233,14 @@ const Settings = () => {
                 <Grid container spacing={3}>
                   <Grid size={6}>
                     <Box sx={{ p: 2.5, bgcolor: 'background.elevation2', borderRadius: '16px', textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
-                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 900, color: 'text.primary', fontFamily: 'Syne, sans-serif' }}>99.9%</Typography>
-                      <Typography sx={{ fontSize: '10px', color: 'text.secondary', textTransform: 'uppercase', fontWeight: 800, mt: 0.5, letterSpacing: '0.05em' }}>System Uptime</Typography>
+                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 600, color: 'text.primary' }}>99.9%</Typography>
+                      <Typography sx={{ fontSize: '13px', color: 'text.secondary', textTransform: 'uppercase', fontWeight: 600, mt: 0.5, letterSpacing: '0.05em' }}>System Uptime</Typography>
                     </Box>
                   </Grid>
                   <Grid size={6}>
                     <Box sx={{ p: 2.5, bgcolor: 'background.elevation2', borderRadius: '16px', textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
-                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 900, color: 'text.primary', fontFamily: 'Syne, sans-serif' }}>12ms</Typography>
-                      <Typography sx={{ fontSize: '10px', color: 'text.secondary', textTransform: 'uppercase', fontWeight: 800, mt: 0.5, letterSpacing: '0.05em' }}>Sync Latency</Typography>
+                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 600, color: 'text.primary' }}>12ms</Typography>
+                      <Typography sx={{ fontSize: '13px', color: 'text.secondary', textTransform: 'uppercase', fontWeight: 600, mt: 0.5, letterSpacing: '0.05em' }}>Sync Latency</Typography>
                     </Box>
                   </Grid>
                 </Grid>
@@ -249,7 +249,7 @@ const Settings = () => {
 
             {/* API Credentials */}
             <Paper sx={cardStyle} elevation={0}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5, fontFamily: 'Syne, sans-serif' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 4, display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Key size={20} style={{ color: theme.palette.info.main }} /> API Intelligence
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>

@@ -99,14 +99,14 @@ const sitemap: MenuItem[] = [
         name: 'Blog Posts',
         path: paths.cms.posts,
         pathName: 'blog-posts',
-        icon: 'material-symbols:list-alt-outline-rounded',
+        icon: 'material-symbols:article-outline-rounded',
         active: true,
       },
       {
         name: 'Categories',
         path: paths.cms.categories,
         pathName: 'categories',
-        icon: 'material-symbols:category-outline-rounded',
+        icon: 'material-symbols:folder-outline',
         active: true,
       },
       {
