@@ -41,14 +41,9 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
-import NextDynamic from 'next/dynamic';
+import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
-
-// Dynamic Imports for Performance Optimization (Phase 3)
-const NotificationManager = NextDynamic(() => import("@/components/NotificationManager"), { ssr: false });
-const GoogleOneTap = NextDynamic(() => import("@/components/GoogleOneTap"), { ssr: false });
-const CookieConsent = NextDynamic(() => import("@/components/CookieConsent"), { ssr: false });
 
 const syne = Syne({
   subsets: ['latin'],
@@ -134,9 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
-            <GoogleOneTap />
-            <NotificationManager />
-            <CookieConsent />
+            <ClientOnlyWrapper />
           </ThemeProvider>
         </Providers>
       </body>
