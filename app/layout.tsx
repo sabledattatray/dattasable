@@ -41,7 +41,6 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
-import NotificationManager from "@/components/NotificationManager";
 import GoogleOneTap from "@/components/GoogleOneTap";
 import { Syne, Kanit, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
@@ -104,7 +103,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <GoogleOneTap />
-            <NotificationManager />
           </ThemeProvider>
         </Providers>
       </body>
