@@ -13,9 +13,9 @@ export async function POST(req: NextRequest) {
     // Hash IP for privacy compliance (GDPR)
     const ipHash = crypto.createHash('sha256').update(ip).digest('hex').substring(0, 16);
 
-    // Save to database with defensive check for model existence
-    if (prisma.pageView) {
-      await prisma.pageView.create({
+    // Try to save to database using model or raw SQL fallback
+    if ((prisma as any).pageView) {
+      await (prisma as any).pageView.create({
         data: {
           url,
           referrer,
@@ -24,11 +24,16 @@ export async function POST(req: NextRequest) {
         }
       });
     } else {
-      console.warn('⚠️ Analytics Tracker: PageView model not yet available. Please restart server.');
+      // Fallback: Use raw SQL because the Prisma client is out of sync with the schema
+      const id = 'pv_' + Math.random().toString(36).substring(2, 15);
+      await prisma.$executeRawUnsafe(
+        'INSERT INTO "PageView" (id, url, referrer, "userAgent", "ipHash", "createdAt") VALUES ($1, $2, $3, $4, $5, NOW())',
+        id, url, referrer || null, userAgent, ipHash
+      );
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Tracking error:', error);
     return NextResponse.json({ success: false }, { status: 500 });
   }
