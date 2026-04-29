@@ -119,6 +119,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <a
                 href="mailto:info@dattasable.com"
+                aria-label="Email Datta Sable"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -137,6 +138,7 @@ export default function Footer() {
               </a>
               <a
                 href="tel:+918010803756"
+                aria-label="Call Datta Sable"
                 style={{
                   display: 'flex',
                   alignItems: 'center',

@@ -130,7 +130,9 @@ export default function HomePage() {
               height={600}
               priority
               fetchPriority="high"
-              quality={80}
+              loading="eager"
+              decoding="async"
+              quality={75}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto"
             />
