@@ -17,36 +17,62 @@ export default function PrivacyPage() {
           <div className="card" style={{ padding: '3rem', lineHeight: '1.8' }}>
             <section style={{ marginBottom: '2.5rem' }}>
               <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>1. Introduction</h2>
-              <p>Welcome to Datta Sable's portfolio and BI platform. We respect your privacy and are committed to protecting your personal data. This privacy policy informs you how we look after your personal data when you visit our website and tells you about your privacy rights.</p>
+              <p>Welcome to Datta Sable&apos;s Portfolio (dattasable.com). We respect your privacy and are committed to protecting your personal data. This privacy policy informs you how we look after your personal data when you visit our website (regardless of where you visit it from) and tells you about your privacy rights and how the law protects you.</p>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
               <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>2. Data We Collect</h2>
-              <p>When you use our "One-Tap Connect" or contact form, we may collect:</p>
+              <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
               <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem' }}>
-                <li>Identity Data (Name, Profile Picture)</li>
-                <li>Contact Data (Email address)</li>
-                <li>Technical Data (IP address, browser type, and usage data)</li>
+                <li><strong>Identity Data</strong>: Includes first name, last name, or similar identifier (collected via Google One-Tap).</li>
+                <li><strong>Contact Data</strong>: Includes email address and telephone numbers.</li>
+                <li><strong>Technical Data</strong>: Includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform.</li>
+                <li><strong>Usage Data</strong>: Includes information about how you use our website and services.</li>
               </ul>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>3. How We Use Your Data</h2>
-              <p>We use your data strictly for:</p>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>3. How We Use Your Personal Data</h2>
+              <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
               <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem' }}>
-                <li>Authenticating your session for dashboard access</li>
-                <li>Responding to your inquiries via the contact form</li>
-                <li>Improving our BI analytics features and user experience</li>
+                <li>To provide access to specialized BI dashboards and analytics content.</li>
+                <li>To respond to your inquiries via our contact form.</li>
+                <li>To optimize website performance and user experience through analytics.</li>
+                <li>Where we need to comply with a legal or regulatory obligation.</li>
               </ul>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>4. Third-Party Services</h2>
-              <p>We use Google Identity Services for authentication. Your data is handled according to Google's privacy standards. We do not sell or share your data with other third parties.</p>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>4. GDPR Rights (EU Users)</h2>
+              <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:</p>
+              <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem' }}>
+                <li>Request access to your personal data.</li>
+                <li>Request correction of your personal data.</li>
+                <li>Request erasure of your personal data.</li>
+                <li>Object to processing of your personal data.</li>
+                <li>Request restriction of processing your personal data.</li>
+                <li>Request transfer of your personal data.</li>
+                <li>Right to withdraw consent.</li>
+              </ul>
+            </section>
+
+            <section style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>5. CCPA Compliance (California Users)</h2>
+              <p>The California Consumer Privacy Act (CCPA) provides California residents with specific rights regarding their personal information. You have the right to request that we disclose certain information to you about our collection and use of your personal information over the past 12 months. We do not sell your personal data to third parties.</p>
+            </section>
+
+            <section style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>6. Cookies Policy</h2>
+              <p>We use cookies and similar tracking technologies to track the activity on our Service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.</p>
+            </section>
+
+            <section style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>7. Data Retention</h2>
+              <p>We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
             </section>
 
             <section>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>5. Contact Us</h2>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>8. Contact Us</h2>
               <p>If you have any questions about this privacy policy or our data practices, please contact us at: <a href="mailto:info@dattasable.com" style={{ color: 'var(--accent)', textDecoration: 'none' }}>info@dattasable.com</a></p>
             </section>
           </div>

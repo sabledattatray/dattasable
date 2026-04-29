@@ -141,6 +141,65 @@ export default function BlogPostContent({ post }: { post: Post }) {
             }}
           />
         )}
+
+        {/* ── Author Box (E-E-A-T) ── */}
+        <div style={{ 
+          marginTop: '5rem', 
+          padding: '3rem', 
+          background: 'var(--surface2)', 
+          border: '1px solid var(--border)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--accent)' }} />
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), var(--accent2))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', flexShrink: 0 }}>
+              👨‍💻
+            </div>
+            <div>
+              <div className="label-tech mb-2">VERIFIED-AUTHOR</div>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Datta Sable</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/about" className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] hover:underline">View Portfolio</Link>
+                <Link href="/contact" className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] hover:underline">Get in Touch</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Breadcrumb Schema (SEO) ── */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://dattasable.com"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog",
+                  "item": "https://dattasable.com/blog"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": post.title,
+                  "item": `https://dattasable.com/blog/${post.slug}`
+                }
+              ]
+            })
+          }}
+        />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 :root {
   --font-syne: 'Syne', sans-serif;
-  --font-kanit: 'Kanit', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -19,7 +19,7 @@
   --accent2: #b5da1a;
   --accent3: #9fb817;
   --text: #ffffff;
-  --muted: #666666;
+  --muted: #a1a1aa;
   --tag-bg: #111111;
   --navbar-bg: rgba(0, 0, 0, 0.98);
   --hero-overlay-start: #000000;
@@ -44,7 +44,7 @@
   --accent2: #0674c2;
   --accent3: #045794;
   --text: #000000;
-  --muted: #52525b;
+  --muted: #71717a;
   --tag-bg: #e5e7eb;
   --navbar-bg: rgba(252, 252, 252, 0.98);
   --hero-overlay-start: #fcfcfc;

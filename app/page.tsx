@@ -125,10 +125,12 @@ export default function HomePage() {
           <div className="block absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none">
             <Image 
               src="/hero-bg.webp"
-              alt="Technical Data Visualization"
+              alt="Advanced Technical Data Visualization and BI Architecture Mockup"
               width={800}
               height={600}
               priority
+              quality={85}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-auto opacity-95"
               style={{ filter: 'contrast(1.1) brightness(1.05)' }}
             />
