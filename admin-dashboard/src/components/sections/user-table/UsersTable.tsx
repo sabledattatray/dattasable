@@ -1,11 +1,12 @@
 'use client';
-import { RefObject, useMemo } from 'react';
+import { RefObject, useMemo, useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Chip, { ChipOwnProps } from '@mui/material/Chip';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   DataGrid,
   GRID_CHECKBOX_SELECTION_COL_DEF,
@@ -13,7 +14,6 @@ import {
   GridRenderCellParams,
 } from '@mui/x-data-grid';
 import { GridApiCommunity } from '@mui/x-data-grid/internals';
-import { users } from 'data/users';
 import dayjs from 'dayjs';
 import { User } from 'types/users';
 import DashboardMenu from 'components/common/DashboardMenu';
@@ -37,7 +37,41 @@ const getStatusChipColor = (value: User['status']): ChipOwnProps['color'] => {
   }
 };
 
+const getProviderIcon = (provider?: string) => {
+  switch (provider) {
+    case 'google':
+      return 'logo-google';
+    case 'github':
+      return 'logo-github';
+    case 'linkedin':
+      return 'logo-linkedin';
+    default:
+      return 'key-outline';
+  }
+};
+
 const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
+  const [rows, setRows] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('/api/admin/users');
+        if (response.ok) {
+          const data = await response.json();
+          setRows(data);
+        }
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   const columns: GridColDef<User>[] = useMemo(
     () => [
       {
@@ -76,7 +110,6 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
         headerName: 'Email',
         minWidth: 230,
         flex: 1,
-        valueGetter: ({ email }) => email,
         renderCell: (params: GridRenderCellParams<User>) => (
           <Link href={`mailto:${params.row.email}`} variant="body2">
             {params.row.email}
@@ -84,51 +117,38 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
         ),
       },
       {
-        field: 'status',
-        headerName: 'Status',
-        width: 100,
-        align: 'center',
-        headerAlign: 'center',
+        field: 'provider',
+        headerName: 'Auth Method',
+        width: 130,
         renderCell: (params: GridRenderCellParams<User>) => (
-          <Chip
-            label={params.row.status}
-            color={getStatusChipColor(params.row.status)}
-            sx={{
-              textTransform: 'capitalize',
-            }}
+          <Chip 
+            label={params.row.provider?.toUpperCase() || 'N/A'} 
+            size="small" 
+            variant="outlined"
+            sx={{ fontSize: '10px', fontWeight: 600 }}
           />
         ),
       },
       {
         field: 'role',
         headerName: 'Role',
-        width: 130,
-        renderCell: (params: GridRenderCellParams<User>) => <Chip label={params.row.role} />,
-      },
-      {
-        field: 'department',
-        headerName: 'Department',
-        width: 150,
-      },
-      {
-        field: 'phone',
-        headerName: 'Phone',
-        width: 160,
-        sortable: false,
-        filterable: false,
-      },
-      {
-        field: 'location',
-        headerName: 'Location',
-        width: 160,
-        sortable: false,
+        width: 100,
+        renderCell: (params: GridRenderCellParams<User>) => (
+          <Chip 
+            label={params.row.role} 
+            color={params.row.role === 'ADMIN' ? 'primary' : 'default'}
+            size="small"
+          />
+        ),
       },
       {
         field: 'createdAt',
-        headerName: 'Created At',
-        width: 200,
+        headerName: 'Joined',
+        width: 180,
         renderCell: (params: GridRenderCellParams<User>) => (
-          <Typography>{dayjs(params.row.createdAt).format('DD MMMM, YYYY')}</Typography>
+          <Typography variant="caption">
+            {dayjs(params.row.createdAt).format('MMM DD, YYYY')}
+          </Typography>
         ),
       },
       {
@@ -142,10 +162,6 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
         renderCell: (params: GridRenderCellParams<User>) => (
           <DashboardMenu
             menuItems={[
-              {
-                label: 'Edit',
-                onClick: () => console.log('Edit user:', params.row.id),
-              },
               {
                 label: 'Delete',
                 sx: { color: 'error.main' },
@@ -163,14 +179,22 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
     [],
   );
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 5 }}>
+        <CircularProgress size={24} />
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ width: 1 }}>
       <DataGrid
         rowHeight={64}
-        rows={users}
+        rows={rows}
         apiRef={apiRef}
         columns={columns}
-        pageSizeOptions={[8]}
+        pageSizeOptions={[8, 20, 50]}
         initialState={{
           pagination: {
             paginationModel: {
