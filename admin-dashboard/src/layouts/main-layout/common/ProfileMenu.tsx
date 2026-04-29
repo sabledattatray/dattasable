@@ -63,8 +63,8 @@ const ProfileMenu = () => {
         sx={{
           width: 40,
           height: 40,
-          border: 2,
-          borderColor: 'background.paper',
+          border: 1,
+          borderColor: 'divider',
         }}
       />
     </Button>

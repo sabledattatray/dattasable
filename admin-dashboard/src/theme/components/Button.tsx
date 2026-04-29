@@ -135,6 +135,21 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
         };
       },
     },
+    {
+      props: { variant: 'text', color: 'neutral' },
+      style: (style) => {
+        const theme = style.theme as Theme;
+        return {
+          color: theme.vars.palette.neutral.main,
+          '&:hover': {
+            background: theme.vars.palette.background.elevation2,
+          },
+          ...theme.applyStyles('dark', {
+            color: theme.vars.palette.common.white,
+          }),
+        };
+      },
+    },
   ],
   defaultProps: {
     disableElevation: true,
