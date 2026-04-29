@@ -48,62 +48,47 @@ export default function CookieConsent() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          style={{
-            position: 'fixed',
-            bottom: '24px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'calc(100% - 48px)',
-            maxWidth: '600px',
-            background: 'var(--surface2)',
-            border: '1px solid var(--border)',
-            padding: '24px',
-            zIndex: 9999,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-          }}
+          className="fixed bottom-0 sm:bottom-6 left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[calc(100%-48px)] sm:max-w-[600px] bg-[var(--surface2)] border-t sm:border border-[var(--border)] p-5 sm:p-6 z-[9999] flex flex-col gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] sm:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
           {/* Decorative Corner */}
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--accent)' }} />
+          <div className="absolute top-0 left-0 w-1 sm:w-1.5 h-full bg-[var(--accent)]" />
           
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
               <ShieldCheck className="text-[var(--accent)]" size={20} />
-              <span className="mono text-[10px] tracking-[0.2em] font-bold text-[var(--text)]">PRIVACY_PROTOCOL</span>
+              <span className="mono text-[11px] sm:text-[12px] tracking-[0.2em] font-bold text-[var(--text)] uppercase">PRIVACY_PROTOCOL</span>
             </div>
             <button 
               onClick={() => setIsVisible(false)}
-              className="text-[var(--muted)] hover:text-[var(--text)] transition-colors"
+              className="text-[var(--muted)] hover:text-[var(--text)] transition-colors p-1"
               aria-label="Close cookie consent"
             >
               <X size={18} />
             </button>
           </div>
 
-          <div style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: '1.6' }}>
+          <div className="text-[13px] sm:text-[14px] text-[var(--muted)] leading-relaxed">
             We use cookies to enhance your technical experience, analyze traffic, and ensure absolute decision clarity across our BI dashboards. By clicking &ldquo;Accept&rdquo;, you consent to our use of cookies in accordance with our <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>.
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
+          <div className="flex flex-col xs:flex-row items-center gap-3 sm:gap-4 mt-2">
             <button 
               onClick={handleAccept}
-              className="btn-primary w-full sm:w-auto"
-              style={{ padding: '0.6rem 2rem', fontSize: '12px' }}
+              className="btn-primary w-full xs:w-auto text-[11px] sm:text-[12px]"
+              style={{ padding: '0.6rem 2rem' }}
             >
               ACCEPT_ALL
             </button>
             <button 
               onClick={handleDecline}
-              className="btn-outline w-full sm:w-auto"
-              style={{ padding: '0.6rem 2rem', fontSize: '12px', borderColor: 'var(--border)' }}
+              className="btn-outline w-full xs:w-auto text-[11px] sm:text-[12px]"
+              style={{ padding: '0.6rem 2rem', borderColor: 'var(--border)' }}
             >
               DECLINE
             </button>
             <Link 
               href="/privacy" 
-              className="mono text-[9px] text-[var(--muted)] hover:text-[var(--accent)] transition-colors uppercase tracking-widest ml-auto"
+              className="mono text-[10px] text-[var(--muted)] hover:text-[var(--accent)] transition-colors uppercase tracking-widest xs:ml-auto text-center w-full xs:w-auto mt-2 xs:mt-0"
               style={{ textDecoration: 'none' }}
             >
               Manage Preferences
