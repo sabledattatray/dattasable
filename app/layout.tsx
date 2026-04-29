@@ -134,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
             <Suspense fallback={null}>
               <AnalyticsTracker />
-              <GoogleAnalytics id="487040514" />
+              <GoogleAnalytics id="G-Q4GEY4N9WN" />
             </Suspense>
             <ClientOnlyWrapper />
           </ThemeProvider>
