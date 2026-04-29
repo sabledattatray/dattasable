@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 interface CardStatsProps {
   statSubtitle: string;
@@ -47,15 +47,9 @@ export default function CardStats({
               </div>
             </div>
           </div>
-          <p className="text-sm text-slate-400 mt-4">
-            <span className={statPercentColor + " mr-2"}>
-              <i
-                className={
-                  statArrow === "up"
-                    ? "fas fa-arrow-up"
-                    : "fas fa-arrow-down"
-                }
-              ></i>{" "}
+          <p className="text-sm text-slate-400 mt-4 flex items-center">
+            <span className={statPercentColor + " mr-2 flex items-center gap-1"}>
+              {statArrow === "up" ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
               {statPercent}%
             </span>
             <span className="whitespace-nowrap">{statDescripiron}</span>

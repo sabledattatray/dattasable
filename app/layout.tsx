@@ -72,13 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={`${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
-        {/* FontAwesome is still needed for some icons, but we should consider replacing it with SVG icons later */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
+        {/* Font icons are now handled by Lucide-React SVG icons for better performance */}
         <Script
           id="json-ld"
           type="application/ld+json"
@@ -119,10 +113,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://accounts.google.com/gsi/client" 
           strategy="lazyOnload"
         />
-        {/* Google AdSense Global Script */}
-        <script 
+        {/* Google AdSense Global Script - Loaded with lazyOnload for performance */}
+        <Script 
           async 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250" 
+          strategy="lazyOnload"
           crossOrigin="anonymous"
         />
       </head>
