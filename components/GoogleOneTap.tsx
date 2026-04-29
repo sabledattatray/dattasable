@@ -26,8 +26,8 @@ export default function GoogleOneTap() {
                   redirect: false,
                 });
               },
-              auto_select: false,
-              cancel_on_tap_outside: false,
+              auto_select: true,
+              cancel_on_tap_outside: true,
               itp_support: true,
               // Enabling FedCM for production compatibility
               use_fedcm_for_prompt: true, 
