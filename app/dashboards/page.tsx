@@ -544,6 +544,7 @@ export default function DashboardsPage() {
                           whileHover={{ scale: 1.1 }}
                           transition={{ duration: 0.6 }}
                           style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
+                          loading="lazy"
                         />
                         <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, var(--bg), transparent)` }} />
                       </div>
