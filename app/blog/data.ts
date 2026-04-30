@@ -99,14 +99,6 @@ export const posts = [
         ></iframe>
       </div>
 
-      <h3>Critical Shortcut Clusters:</h3>
-      <ul>
-        <li><strong>Editing Cluster:</strong> CTRL+C (Copy), CTRL+V (Paste), CTRL+X (Cut), CTRL+Z (Undo).</li>
-        <li><strong>Navigation Cluster:</strong> CTRL+F (Find), CTRL+H (Replace), CTRL+G (Go to).</li>
-        <li><strong>Selection Cluster:</strong> CTRL+A (Select All), CTRL+Shift+Arrows (Block Selection).</li>
-      </ul>
-      <p>For more productivity tips, check our <a href="/blog/modern-bi-stack-2026">2026 Technical Stack Guide</a>.</p>
-    `,
     readTime: 10,
     date: 'Jan 13, 2023',
     color: '#34d399',
@@ -396,7 +388,7 @@ export const posts = [
     date: 'Apr 22, 2026',
     color: '#3b82f6',
     icon: '🐍',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2340&auto=format&fit=crop',
     tags: ['Python', 'Prefect', 'DataOps']
   },
   {
@@ -412,7 +404,7 @@ export const posts = [
     date: 'Apr 16, 2026',
     color: '#10b981',
     icon: '💸',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2340&auto=format&fit=crop',
     tags: ['SaaS', 'Finance', 'ROI']
   },
   {
@@ -460,7 +452,7 @@ export const posts = [
     date: 'Mar 17, 2026',
     color: '#f59e0b',
     icon: '🛡️',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1454165833767-124971bb0f71?q=80&w=2340&auto=format&fit=crop',
     tags: ['Data Quality', 'Testing', 'BI']
   },
   {
@@ -492,7 +484,7 @@ export const posts = [
     date: 'Mar 29, 2026',
     color: '#8b5cf6',
     icon: '💬',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=80&w=2340&auto=format&fit=crop',
     tags: ['AI', 'NLQ', 'LLM']
   },
   {
@@ -508,7 +500,7 @@ export const posts = [
     date: 'Apr 01, 2026',
     color: '#E97627',
     icon: '📊',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=2340&auto=format&fit=crop',
     tags: ['Tableau', 'AI', 'Pulse']
   },
   {
@@ -524,7 +516,7 @@ export const posts = [
     date: 'Apr 19, 2026',
     color: '#F9D100',
     icon: '🛒',
-    image: 'https://images.unsplash.com/photo-1526367790999-0150786486a9?q=80&w=2342&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2342&auto=format&fit=crop',
     tags: ['Retail', 'Predictive', 'Inventory']
   },
   {
@@ -540,7 +532,7 @@ export const posts = [
     date: 'Apr 25, 2026',
     color: '#3b82f6',
     icon: '❄️',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2340&auto=format&fit=crop',
     tags: ['SQL', 'Snowflake', 'Scaling']
   },
   {
@@ -556,7 +548,7 @@ export const posts = [
     date: 'Apr 10, 2026',
     color: '#3178c6',
     icon: '🔗',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=2340&auto=format&fit=crop',
     tags: ['SQL', 'Programming', 'Joins']
   },
   {
@@ -572,7 +564,7 @@ export const posts = [
     date: 'Jun 23, 2025',
     color: '#f43f5e',
     icon: '🚀',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2340&auto=format&fit=crop',
     tags: ['SEO', 'Marketing', 'Tools']
   },
   {
@@ -604,7 +596,7 @@ export const posts = [
     date: 'Apr 17, 2026',
     color: '#3b82f6',
     icon: '🤖',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2340&auto=format&fit=crop',
     tags: ['Python', 'Automation', 'Finance']
   },
   {
@@ -620,7 +612,7 @@ export const posts = [
     date: 'Apr 17, 2026',
     color: '#f43f5e',
     icon: '📊',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1454165833767-124971bb0f71?q=80&w=2340&auto=format&fit=crop',
     tags: ['MIS', 'Reporting', 'Strategy']
   },
   {
@@ -636,7 +628,7 @@ export const posts = [
     date: 'May 16, 2025',
     color: '#f43f5e',
     icon: '🎬',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=2340&auto=format&fit=crop',
     tags: ['Content', 'Marketing', 'Tools']
   },
   {
@@ -652,7 +644,7 @@ export const posts = [
     date: 'Apr 28, 2026',
     color: '#a4373a',
     icon: '🔑',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1484417856242-4665006e75d7?q=80&w=2340&auto=format&fit=crop',
     tags: ['Database', 'MS Access', 'MIS']
   },
   {
@@ -668,7 +660,7 @@ export const posts = [
     date: 'May 10, 2026',
     color: '#f43f5e',
     icon: '🔍',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8f2c1d9?q=80&w=2340&auto=format&fit=crop',
     tags: ['SEO', 'Digital Marketing', 'Guide']
   },
   // --- TECH STACK ---
