@@ -33,6 +33,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Handle Login page separately
   if (pathname === '/admin/login') return <>{children}</>;
 
+  // Prevent flicker: Do not render admin wrapper if not an admin
+  const isAdmin = status === 'authenticated' && (session?.user as any)?.role === 'ADMIN';
+  
+  if (!isAdmin) {
+    // We return null here because the useEffect will handle the redirect
+    return null;
+  }
+
   return (
     <AdminDashboardWrapper>
       {children}
