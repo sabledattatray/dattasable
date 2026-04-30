@@ -98,7 +98,7 @@ export default function Navbar() {
           scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-4 border-b border-[var(--border)]' : 'bg-transparent py-6'
         }`}
       >
-        <div className="w-full max-w-[1448px] px-6 lg:px-0">
+        <div className="w-full max-w-[1448px] px-12 lg:px-0">
           <div className="flex items-center justify-between h-24 lg:h-20">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">

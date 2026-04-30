@@ -313,8 +313,9 @@ export default function PortfolioPage() {
             exit={{ opacity: 0 }}
             style={{
               position: 'fixed', inset: 0, background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)', zIndex: 1000,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              padding: '2rem',
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+              padding: 'clamp(0.5rem, 3vw, 2rem)',
+              overflowY: 'auto',
             }}
             onClick={() => setSelected(null)}
           >
@@ -326,30 +327,32 @@ export default function PortfolioPage() {
               style={{
                 background: 'var(--bg)', border: '1px solid var(--border)',
                 borderRadius: 0, padding: 0,
-                maxWidth: 900, width: '100%', maxHeight: '95vh', overflowY: 'auto',
+                maxWidth: 900, width: '100%',
                 position: 'relative',
+                marginTop: 'auto',
+                marginBottom: 'auto',
               }}
             >
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center z-10"
-                style={{ background: 'var(--tag-bg)', border: '1px solid var(--border)', color: 'var(--muted)', cursor: 'pointer' }}
+                className="absolute w-10 h-10 flex items-center justify-center z-10"
+                style={{ top: 'clamp(0.75rem, 3vw, 1.5rem)', right: 'clamp(0.75rem, 3vw, 1.5rem)', background: 'var(--tag-bg)', border: '1px solid var(--border)', color: 'var(--muted)', cursor: 'pointer' }}
               >
                 <X size={20} />
               </button>
 
-              <div style={{ height: 300, overflow: 'hidden', position: 'relative' }}>
+              <div style={{ height: 'clamp(180px, 35vw, 300px)', overflow: 'hidden', position: 'relative' }}>
                 <img src={selected.image} alt={selected.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg), transparent)' }} />
-                <div style={{ position: 'absolute', bottom: 30, left: 30 }}>
+                <div style={{ position: 'absolute', bottom: 'clamp(12px, 3vw, 30px)', left: 'clamp(12px, 4vw, 30px)', right: '3.5rem' }}>
                   <div className="label-tech mb-2" style={{ color: selected.color }}>{selected.category} CASE_STUDY</div>
-                  <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--text)', fontWeight: 700 }}>{selected.title}</h2>
-                  <div className="mono" style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Architected for: {selected.client}</div>
+                  <h2 style={{ fontSize: 'clamp(1.2rem, 4vw, 2.5rem)', color: 'var(--text)', fontWeight: 700 }}>{selected.title}</h2>
+                  <div className="mono" style={{ color: 'var(--muted)', fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)' }}>Architected for: {selected.client}</div>
                 </div>
               </div>
 
-              <div style={{ padding: '2.5rem' }}>
-                <p style={{ color: 'var(--text)', fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', opacity: 0.9 }}>{selected.desc}</p>
+              <div style={{ padding: 'clamp(1rem, 5vw, 2.5rem)' }}>
+                <p style={{ color: 'var(--text)', fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', lineHeight: 1.8, marginBottom: '2.5rem', opacity: 0.9 }}>{selected.desc}</p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
                   {[
@@ -364,12 +367,12 @@ export default function PortfolioPage() {
                 </div>
 
                 <div
-                  style={{ background: 'var(--surface2)', border: `1px solid var(--border)`, padding: '2rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
+                  style={{ background: 'var(--surface2)', border: `1px solid var(--border)`, padding: 'clamp(1rem, 4vw, 2rem)', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}
                 >
-                  <div style={{ fontSize: '2.5rem' }}>🎯</div>
-                  <div>
+                  <div style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)' }}>🎯</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div className="label-tech" style={{ fontSize: '10px', marginBottom: '0.5rem' }}>BUSINESS_IMPACT</div>
-                    <div className="mono" style={{ color: selected.color, fontWeight: 700, fontSize: '1.2rem' }}>{selected.impact}</div>
+                    <div className="mono" style={{ color: selected.color, fontWeight: 700, fontSize: 'clamp(0.9rem, 3vw, 1.2rem)', wordBreak: 'break-word' }}>{selected.impact}</div>
                   </div>
                 </div>
 
@@ -377,11 +380,11 @@ export default function PortfolioPage() {
                   {selected.tools.map(t => <span key={t} className="tag" style={{ padding: '0.4rem 1rem' }}>{t}</span>)}
                 </div>
 
-                <div className="flex gap-4">
-                  <a href={selected.github} className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: '1rem 2rem' }}>
+                <div className="flex flex-wrap gap-3">
+                  <a href={selected.github} className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', flex: '1 1 auto', justifyContent: 'center' }}>
                     <GitBranch size={18} /> Documentation
                   </a>
-                  <a href={selected.live} className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: '1rem 2rem', position: 'relative', zIndex: 1 }}>
+                  <a href={selected.live} className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', position: 'relative', zIndex: 1, flex: '1 1 auto', justifyContent: 'center' }}>
                     <ExternalLink size={18} /> Live Deployment
                   </a>
                 </div>
