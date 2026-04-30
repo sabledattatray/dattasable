@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="lg:col-span-4 xl:col-span-2">
             <Link
               href="/"
-              className="group"
+              className="group no-underline"
               aria-label="Datta Sable - Home"
               style={{
                 display: 'inline-flex',
