@@ -41,12 +41,12 @@ export default function Hero() {
         style={{ 
           aspectRatio: '800/600', 
           backgroundColor: 'var(--surface2)',
-          // Web: Subtle | App: Vibrant
+          // Web: No gradient (clean) | App: Stronger vibrant gradient
           backgroundImage: isApp 
             ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
-            : 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)',
+            : 'none',
           backgroundSize: '100% 100%',
-          opacity: isApp ? 0.8 : undefined
+          opacity: isApp ? 0.8 : 0.5
         }}
       >
         <div className="hidden lg:block w-full h-full">
