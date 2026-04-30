@@ -47,7 +47,7 @@ export default function Hero() {
             ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
             : 'none',
           backgroundSize: '100% 100%',
-          opacity: isApp ? 0.8 : 0.5
+          opacity: isApp ? 0.8 : 1.0
         }}
       >
         <div className="hidden lg:block w-full h-full">
