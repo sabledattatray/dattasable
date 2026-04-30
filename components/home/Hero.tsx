@@ -75,6 +75,8 @@ export default function Hero() {
           background: 'linear-gradient(to bottom, transparent 50%, var(--bg) 100%)',
           zIndex: 2,
         }} />
+        {/* Global Dark Tint */}
+        <div className="absolute inset-0 bg-black/40 z-[3] pointer-events-none" />
       </div>
 
       {/* Layer 2: Content Foreground */}
