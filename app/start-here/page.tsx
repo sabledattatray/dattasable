@@ -56,7 +56,44 @@ export default function StartHerePage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+          {/* Featured Legacy Workshop */}
+          <div className="card" style={{ marginTop: '5rem', padding: '3rem', borderLeft: '4px solid #FF0000', background: 'rgba(255,0,0,0.02)' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="label-tech mb-4" style={{ color: '#FF0000' }}>LEGACY-WORKSHOP // 2021</div>
+                <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Full-Stack Web Orchestration Masterclass</h2>
+                <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+                  A comprehensive, 35-minute workshop demonstrating the engineering fundamentals of scalable digital infrastructure. This legacy session has helped over 9,000+ engineers establish their first web-based data environments.
+                </p>
+                <div className="flex items-center gap-6">
+                  <div>
+                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>9K+</div>
+                    <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>VIEWS_LOGGED</div>
+                  </div>
+                  <div style={{ width: '1px', height: '30px', background: 'var(--border)' }} />
+                  <div>
+                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>35m</div>
+                    <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>SESSION_DURATION</div>
+                  </div>
+                </div>
+              </div>
+              <div style={{ position: 'relative', aspectRatio: '16/9', background: 'var(--bg)', border: '1px solid var(--border)', overflow: 'hidden' }}>
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/5sXT6HuV61w" 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0 }}
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '5rem' }}>
             {paths.map((path, idx) => (
               <div key={path.title} className="card h-full" style={{ padding: '2.5rem', borderTop: `4px solid ${path.color}` }}>
                 <div style={{ color: path.color, marginBottom: '1.5rem' }}>{path.icon}</div>

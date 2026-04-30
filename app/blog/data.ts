@@ -1,4 +1,41 @@
 export const posts = [
+  {
+    slug: 'building-enterprise-web-architectures',
+    title: 'Masterclass: Building Scalable Web Infrastructures from Scratch',
+    category: 'Architecture',
+    excerpt: 'A deep-dive workshop on establishing robust, cost-effective digital environments for data-driven applications.',
+    content: `
+      <p>Building a digital presence that scales is not just about writing code; it's about architecting an infrastructure that can handle growth while remaining manageable. In this comprehensive legacy workshop, we explore the core principles of web orchestration.</p>
+      
+      <h3>The Fundamentals of Web Deployment</h3>
+      <p>Modern web environments require a delicate balance of speed, security, and accessibility. Whether you are building a BI dashboard or a customer-facing portal, the underlying server architecture must be optimized for sub-second delivery. In this session, we break down the process into three actionable pillars:</p>
+      <ul>
+        <li><strong>Environment Configuration:</strong> Setting up the foundational servers and DNS records.</li>
+        <li><strong>Data Integration:</strong> Ensuring your frontend has a clear, secure path to your backend assets.</li>
+        <li><strong>Optimization:</strong> Minimizing latencies and maximizing uptime.</li>
+      </ul>
+
+      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+        <iframe 
+          src="https://www.youtube.com/embed/5sXT6HuV61w" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        ></iframe>
+      </div>
+
+      <h3>Why Infrastructure Matters for BI</h3>
+      <p>For data engineers and analytics professionals, the website is often the "last mile" of the delivery pipeline. If the website is slow or poorly configured, the high-fidelity insights generated in your SQL or Python pipelines will never reach the executive team efficiently. Understanding the "Web" part of Web-Analytics is a critical skill for the modern BI architect.</p>
+      <p>For more on modern stacks, check our <a href="/blog/modern-bi-stack-2026">2026 BI Stack Guide</a>.</p>
+    `,
+    readTime: 35,
+    date: 'Jan 15, 2021',
+    color: '#FF0000',
+    icon: '🎬',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2426&auto=format&fit=crop',
+    tags: ['Architecture', 'Web', 'Infrastructure']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
