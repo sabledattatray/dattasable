@@ -232,6 +232,23 @@ export default function AboutPage() {
                 {skills.map(s => <SkillItem key={s.name} {...s} />)}
               </div>
 
+              {/* Publications / Thought Leadership */}
+              <div style={{ marginTop: '5rem' }}>
+                <div className="label-tech mb-4">THOUGHT-LEADERSHIP</div>
+                <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Publications & Insights</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: 'The Future of Real-Time BI', platform: 'Data Engineering Weekly', date: '2025' },
+                    { title: 'Automating Enterprise MIS', platform: 'Analytics India Magazine', date: '2024' },
+                    { title: 'Predictive Risk Models in Banking', platform: 'FinTech Journal', date: '2023' },
+                    { title: 'Scalable Dashboard Architectures', platform: 'Tableau Community Showcase', date: '2024' }
+                  ].map(pub => (
+                    <div key={pub.title} className="card p-6 border-l-4 border-[var(--accent)]">
+                      <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '0.5rem' }}>{pub.platform} // {pub.date}</div>
+                      <h4 style={{ fontSize: '1.1rem', fontWeight: 600 }}>{pub.title}</h4>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Platform Transparency / Walkthrough */}
