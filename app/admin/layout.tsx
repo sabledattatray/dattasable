@@ -18,7 +18,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (mounted && status === 'unauthenticated' && pathname !== '/admin/login') {
       router.push('/admin/login');
     }
-  }, [mounted, status, pathname, router]);
+    
+    // Security: Prevent non-ADMIN users from accessing /admin paths
+    if (mounted && status === 'authenticated' && pathname !== '/admin/login') {
+      if ((session?.user as any)?.role !== 'ADMIN') {
+        console.error('Access denied: User is not an ADMIN');
+        router.push('/');
+      }
+    }
+  }, [mounted, status, pathname, router, session]);
 
   if (!mounted || status === 'loading') return null;
 
