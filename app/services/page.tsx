@@ -77,7 +77,19 @@ const services = [
     color: 'var(--accent3)',
     popular: false,
   },
+  {
+    icon: '🔗',
+    title: 'n8n Workflow Automation',
+    id: 'n8n-automation',
+    desc: 'Self-hosted and scalable workflow automation using n8n to connect your entire toolstack and eliminate manual data silos.',
+    features: ['Custom n8n nodes & triggers', 'Multi-app workflow design', 'Self-hosted setup & security', 'Error handling & retry logic', 'API & Webhook integration', 'Data synchronization & cleanup'],
+    price: 'Starting at ₹15,000',
+    cta: 'Connect My Stack',
+    color: 'var(--accent)',
+    popular: false,
+  },
 ];
+
 
 
 
