@@ -31,7 +31,8 @@ export default function Hero() {
         alignItems: 'center', 
         position: 'relative', 
         overflow: 'hidden', 
-        padding: '2rem 0',
+        paddingTop: '2rem',
+        paddingBottom: '5rem',
         backgroundColor: 'var(--bg)',
         border: 'none'
       }}
@@ -69,6 +70,7 @@ export default function Hero() {
           inset: 0,
           background: 'linear-gradient(to right, var(--hero-overlay-start) 0%, var(--hero-overlay-mid) 30%, var(--hero-overlay-end) 65%, transparent 100%)',
           zIndex: 1,
+          display: isApp ? 'block' : 'none'
         }} />
         <div className="block lg:hidden" style={{
           position: 'absolute',
