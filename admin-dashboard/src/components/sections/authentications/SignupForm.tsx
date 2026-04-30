@@ -20,114 +20,138 @@ const SignupForm = () => {
       sx={{
         height: 1,
         alignItems: 'center',
-        justifyContent: 'space-between',
-        pt: { md: 10 },
-        pb: 10,
+        justifyContent: 'center',
+        p: { xs: 2, sm: 4 },
+        background: (theme) => 
+          theme.palette.mode === 'dark' 
+            ? 'radial-gradient(circle at 50% 50%, rgba(13, 110, 253, 0.05) 0%, transparent 50%)'
+            : 'radial-gradient(circle at 50% 50%, rgba(13, 110, 253, 0.02) 0%, transparent 50%)',
       }}
     >
-      <div />
-
-      <Grid
-        container
+      <Box
         sx={{
-          height: 1,
-          maxWidth: '35rem',
-          rowGap: 4,
-          alignContent: { md: 'center' },
+          width: 1,
+          maxWidth: 450,
           p: { xs: 3, sm: 5 },
-          mb: 5,
+          borderRadius: 4,
+          bgcolor: 'background.paper',
+          border: '1px solid',
+          borderColor: (theme) => 
+            theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)',
+          boxShadow: (theme) => 
+            theme.palette.mode === 'dark' 
+              ? '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.05)'
+              : '0 20px 40px rgba(0,0,0,0.05)',
+          backdropFilter: 'blur(10px)',
         }}
       >
-        <Grid size={12}>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={1}
-            sx={{
-              justifyContent: 'space-between',
-              alignItems: { xs: 'flex-start', sm: 'flex-end' },
-            }}
-          >
-            <Typography variant="h4">Sign up</Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                color: 'text.secondary',
+        <Stack spacing={4}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h3" sx={{ fontWeight: 800, mb: 1, letterSpacing: '-0.02em' }}>
+              Create Account
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Join the Datta Sable ecosystem today
+            </Typography>
+          </Box>
+
+          <SocialAuth />
+
+          <Divider sx={{ 
+            '&::before, &::after': { borderColor: 'divider' },
+            color: 'text.secondary',
+            fontSize: '0.75rem',
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            letterSpacing: '0.1em'
+          }}>
+            or use email
+          </Divider>
+
+          <Box component="form" noValidate onSubmit={handleSubmit}>
+            <Stack spacing={2.5}>
+              <TextField
+                fullWidth
+                id="name"
+                label="Full Name"
+                variant="outlined"
+                placeholder="John Doe"
+                InputProps={{
+                  sx: { borderRadius: 2 }
+                }}
+              />
+              <TextField
+                fullWidth
+                id="email"
+                type="email"
+                label="Email Address"
+                variant="outlined"
+                placeholder="name@example.com"
+                InputProps={{
+                  sx: { borderRadius: 2 }
+                }}
+              />
+              <PasswordTextField
+                fullWidth
+                id="password"
+                label="Password"
+                variant="outlined"
+                placeholder="••••••••"
+                InputProps={{
+                  sx: { borderRadius: 2 }
+                }}
+              />
+
+              <Button 
+                fullWidth 
+                type="submit" 
+                size="large" 
+                variant="contained"
+                sx={{ 
+                  py: 1.5, 
+                  borderRadius: 2, 
+                  fontWeight: 700,
+                  fontSize: '1rem',
+                  textTransform: 'none',
+                  boxShadow: (theme) => `0 8px 16px ${theme.palette.primary.main}40`,
+                  '&:hover': {
+                    boxShadow: (theme) => `0 12px 20px ${theme.palette.primary.main}60`,
+                  }
+                }}
+              >
+                Sign Up
+              </Button>
+            </Stack>
+          </Box>
+
+          <Typography variant="body2" align="center" color="text.secondary">
+            Already have an account?{' '}
+            <Link 
+              href={paths.login} 
+              sx={{ 
+                fontWeight: 700, 
+                color: 'primary.main', 
+                textDecoration: 'none',
+                '&:hover': { textDecoration: 'underline' }
               }}
             >
-              Already have an account?
-              <Link href={paths.login} sx={{ ml: 1 }}>
-                Log in
-              </Link>
-            </Typography>
-          </Stack>
-        </Grid>
+              Log in
+            </Link>
+          </Typography>
+        </Stack>
+      </Box>
 
-        <Grid size={12}>
-          <SocialAuth />
-        </Grid>
-        <Grid size={12}>
-          <Divider sx={{ color: 'text.secondary' }}>or use email</Divider>
-        </Grid>
-
-        <Grid size={12}>
-          <Box component="form" noValidate onSubmit={handleSubmit}>
-            <Grid container>
-              <Grid
-                sx={{
-                  mb: 3,
-                }}
-                size={12}
-              >
-                <TextField
-                  fullWidth
-                  size="large"
-                  id="name"
-                  type="text"
-                  label="Name"
-                  variant="filled"
-                />
-              </Grid>
-              <Grid
-                sx={{
-                  mb: 3,
-                }}
-                size={12}
-              >
-                <TextField
-                  fullWidth
-                  size="large"
-                  id="email"
-                  type="email"
-                  label="Email"
-                  variant="filled"
-                />
-              </Grid>
-              <Grid
-                sx={{
-                  mb: 4,
-                }}
-                size={12}
-              >
-                <PasswordTextField
-                  fullWidth
-                  size="large"
-                  id="password"
-                  label="Password"
-                  variant="filled"
-                />
-              </Grid>
-
-              <Grid size={12}>
-                <Button fullWidth type="submit" size="large" variant="contained">
-                  Create Account
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
-      </Grid>
-      <Link href={paths.settings} variant="subtitle2" sx={{ flex: 1 }}>
-        Trouble signing in?
+      <Link 
+        href={paths.settings} 
+        variant="caption" 
+        sx={{ 
+          mt: 4, 
+          color: 'text.disabled',
+          textDecoration: 'none',
+          '&:hover': { color: 'text.secondary' }
+        }}
+      >
+        Trouble signing in? Contact support
       </Link>
     </Stack>
   );
