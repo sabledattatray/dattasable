@@ -354,10 +354,6 @@ export default function PortfolioPage({ searchParams }: { searchParams: any }) {
                       style={{ objectFit: 'cover' }}
                       className="transition-transform duration-500 group-hover:scale-110"
                     />
-
-                      transition={{ duration: 0.6 }}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }}
-                    />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg), transparent)' }} />
                     <div style={{ position: 'absolute', bottom: 12, left: 12 }}>
                       <span className="tag" style={{ color: p.color, borderColor: `${p.color}44`, background: 'var(--bg)' }}>{p.category}</span>
