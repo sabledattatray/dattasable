@@ -636,7 +636,7 @@ export default function DashboardsPage() {
                   color: 'var(--muted)'
                 }}>
                   <div style={{ width: 8, height: 8, background: 'var(--accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--accent)' }} />
-                  <span><strong>NDA PROJECT:</strong> Showing a high-fidelity sample for demonstration. Contact for the full live demo.</span>
+                  <span><strong>REDACTED CASE STUDY:</strong> This visualization uses anonymized data to demonstrate advanced technical orchestration. Detailed architectural breakdowns are available for peer review.</span>
                 </div>
               )}
 

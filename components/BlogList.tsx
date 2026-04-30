@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Search, Clock, ArrowRight } from 'lucide-react';
+import Newsletter from './Newsletter';
 
 interface Post {
   id: string;
@@ -48,6 +49,44 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
           Documenting my journey through data architecture, BI strategy, and automated analytics. Read the latest technical insights.
         </p>
       </motion.div>
+
+      {/* Featured Log Highlight */}
+      {initialPosts.length > 0 && activeCategory === 'All' && !search && (
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          style={{ marginBottom: '4rem' }}
+        >
+          <Link href={`/blog/${initialPosts[0].slug}`} style={{ textDecoration: 'none' }}>
+            <div className="card group" style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 0,
+              padding: 0,
+              overflow: 'hidden',
+              borderLeft: '4px solid var(--accent)'
+            }}>
+              <div style={{ height: '350px', position: 'relative' }}>
+                <img 
+                  src={initialPosts[0].image || ''} 
+                  alt={initialPosts[0].title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg) 0%, transparent 100%)', display: 'none' }} className="lg:block" />
+              </div>
+              <div style={{ padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div className="label-tech mb-4">FEATURED-ANALYSIS</div>
+                <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>{initialPosts[0].title}</h2>
+                <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2rem' }}>{initialPosts[0].excerpt}</p>
+                <div className="flex items-center gap-4">
+                  <div className="tag">{initialPosts[0].category}</div>
+                  <div className="mono text-[11px] font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">READ FULL LOG →</div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </motion.div>
+      )}
 
       {/* Search and Filter */}
       <div style={{ marginBottom: '3rem' }}>
@@ -148,6 +187,8 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
           </Link>
         ))}
       </div>
+
+      <Newsletter />
     </div>
   );
 }
