@@ -46,13 +46,11 @@ export const metadata: Metadata = {
 };
 
 import { Providers } from "@/components/Providers";
-import AnalyticsTracker from "@/components/AnalyticsTracker";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from 'react';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
-import SmartAdSense from "@/components/SmartAdSense";
+import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 const syne = Syne({
   subsets: ['latin'],
@@ -79,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         
         <Script
           id="json-ld"
@@ -136,18 +135,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
-            <Suspense fallback={null}>
-              <AnalyticsTracker />
-            </Suspense>
             <ClientOnlyWrapper />
             
-            {/* Third-party scripts moved here for better LCP performance */}
-            <GoogleAnalytics id="G-Q4GEY4N9WN" />
-            <Script 
-              src="https://accounts.google.com/gsi/client" 
-              strategy="lazyOnload"
+            {/* High-Performance Third-Party Script Optimization */}
+            <PerformanceOptimizer 
+              googleAnalyticsId="G-Q4GEY4N9WN"
+              googleSignInClientId=""
+              adSenseClientId="ca-pub-4242010382827250"
             />
-            <SmartAdSense client="ca-pub-4242010382827250" />
           </ThemeProvider>
         </Providers>
       </body>
