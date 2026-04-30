@@ -44,6 +44,15 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Twitter / X', href: 'https://x.com/sabledattatray',    icon: MessageSquare,  external: true },
     ],
   },
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Blog',       href: '/blog',       icon: BookOpen },
+      { label: 'Dashboards', href: '/dashboards', icon: LayoutDashboard },
+      { label: 'Resume',     href: '/resume',     icon: User },
+      { label: 'Hire Me',    href: '/contact',    icon: Send },
+    ],
+  },
 ];
 
 export default function Footer() {
@@ -67,7 +76,7 @@ export default function Footer() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-16">
           {/* Brand Section */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 xl:col-span-2">
             <Link
               href="/"
               className="group"
@@ -99,7 +108,7 @@ export default function Footer() {
                 color: 'var(--muted)',
                 fontSize: '0.95rem',
                 lineHeight: 1.6,
-                maxWidth: '320px',
+                maxWidth: '100%',
                 marginBottom: '2.5rem',
                 fontFamily: "'Syne', sans-serif",
               }}
@@ -154,53 +163,54 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          {NAV_LINKS.map((col) => (
-            <div key={col.heading} className="lg:col-span-2">
-              <h3
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  color: 'var(--text)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.2em',
-                  marginBottom: '2rem',
-                }}
-              >
-                {col.heading}
-              </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {col.links.map((lnk) => (
-                      <li key={lnk.label}>
-                    <Link
-                      href={lnk.href}
-                      target={lnk.external ? '_blank' : undefined}
-                      rel={lnk.external ? 'noopener noreferrer' : undefined}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        color: 'var(--muted)',
-                        fontSize: '0.9rem',
-                        fontFamily: "'Syne', sans-serif",
-                        textDecoration: 'none',
-                        transition: 'all 0.3s ease',
-                      }}
-                    >
-                      {lnk.label}
-                      {lnk.external && (
-                        <ArrowUpRight size={12} style={{ opacity: 0.5 }} />
-                      )}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-10 md:contents lg:contents">
+            {NAV_LINKS.map((col) => (
+              <div key={col.heading} className="lg:col-span-2 xl:col-span-2">
+                <h3
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    color: 'var(--text)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.2em',
+                    marginBottom: '2rem',
+                  }}
+                >
+                  {col.heading}
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {col.links.map((lnk) => (
+                        <li key={lnk.label}>
+                      <Link
+                        href={lnk.href}
+                        target={lnk.external ? '_blank' : undefined}
+                        rel={lnk.external ? 'noopener noreferrer' : undefined}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          color: 'var(--muted)',
+                          fontSize: '0.9rem',
+                          fontFamily: "'Syne', sans-serif",
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        {lnk.label}
+                        {lnk.external && (
+                          <ArrowUpRight size={12} style={{ opacity: 0.5 }} />
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
           {/* Tools Section */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-2">
             <h3
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
@@ -249,23 +259,19 @@ export default function Footer() {
       <div
         style={{
           borderTop: '1px solid var(--border)',
-          padding: '2.5rem 2rem',
+          padding: '1.25rem 2rem',
         }}
       >
         <div 
+          className="flex flex-col items-center justify-center text-center gap-4 md:flex-row md:justify-between md:text-left"
           style={{ 
             maxWidth: '1448px', 
             margin: '0 auto', 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1.5rem'
           }}
         >
           <p
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Syne', sans-serif",
               fontSize: '0.75rem',
               color: 'var(--muted)',
             }}
@@ -273,10 +279,10 @@ export default function Footer() {
             © {year} Datta Sable. Built for high performance.
           </p>
           <div style={{ display: 'flex', gap: '2rem' }}>
-            <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
+            <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
               PRIVACY POLICY
             </Link>
-            <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none' }}>
+            <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
               TERMS OF SERVICE
             </Link>
           </div>
