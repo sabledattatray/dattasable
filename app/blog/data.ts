@@ -38,7 +38,7 @@ export const posts = [
     date: 'Jan 15, 2021',
     color: 'var(--accent)',
     icon: '🎬',
-    image: '/images/blog/full_page_post_add_1777383311699.webp',
+    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp',
     tags: ['Architecture', 'Web', 'Infrastructure']
   },
   {
@@ -76,7 +76,7 @@ export const posts = [
     date: 'Jun 10, 2024',
     color: '#21759b',
     icon: '⚙️',
-    image: '/images/blog/publish_settings_card_close_up_1777383362173.webp',
+    image: '/images/blog/dashboard_ux_hero_1777410208497.webp',
     tags: ['WordPress', 'Web Dev', 'Architecture']
   },
 
@@ -117,7 +117,7 @@ export const posts = [
     date: 'Sep 15, 2025',
     color: '#f2c811',
     icon: '📊',
-    image: '/images/blog/add_post_page_bottom_1777383043565.webp',
+    image: '/images/blog/tableau-vs-powerbi.webp',
     tags: ['Power BI', 'Production', 'DAX']
   },
   {
@@ -195,7 +195,7 @@ export const posts = [
     date: 'Mar 05, 2026',
     color: 'var(--accent)',
     icon: '📱',
-    image: '/images/blog/media__1777399742723.webp',
+    image: '/images/blog/retail_analytics_hero_1777410051638.webp',
     tags: ['Telecom', 'Analytics', 'Collections']
   },
   {
@@ -234,7 +234,7 @@ export const posts = [
     date: 'Apr 20, 2026',
     color: '#F9D100',
     icon: '⚡',
-    image: '/images/blog/add_post_page_check_1777383232831.webp',
+    image: '/images/blog/data_quality_hero_1777410243821.webp',
     tags: ['Q-Commerce', 'Retail', 'WIP']
   },
   {
@@ -715,7 +715,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Apr 07, 2026',
     color: '#3b82f6',
     icon: '🕸️',
-    image: '/images/blog/media__1777400868908.webp',
+    image: '/images/blog/python_scraper_hero_1777410123458.webp',
     tags: ['Python', 'Scraping', 'Market Research', 'Engineering', '2026']
   },
   {
@@ -814,7 +814,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'May 10, 2026',
     color: 'var(--accent)',
     icon: '🚀',
-    image: '/images/blog/retail_analytics_hero_1777410051638.webp',
+    image: '/images/blog/ai_governance_hero_1777410191025.webp',
     tags: ['SEO', 'Digital Marketing', 'Growth Engineering', '2026']
   },
   {
@@ -849,7 +849,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Jun 23, 2025',
     color: '#f43f5e',
     icon: '🚀',
-    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp',
+    image: '/images/blog/generative_ai_hero_1777410154583.webp',
     tags: ['SEO', 'Marketing', 'Tools', 'Digital Strategy', '2025']
   },
   {
@@ -886,7 +886,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Apr 17, 2026',
     color: '#f43f5e',
     icon: '📊',
-    image: '/images/blog/dashboard_ux_hero_1777410208497.webp',
+    image: '/images/blog/bi_performance_hero_1777410226286.webp',
     tags: ['MIS', 'Management', 'Strategy', 'Decision Support', '2026']
   },
 
@@ -969,7 +969,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'May 16, 2025',
     color: '#00d4ff',
     icon: '🌐',
-    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp',
+    image: '/images/blog/dashboard_ux_hero_1777410208497.webp',
     tags: ['Web Dev', 'Beginners', 'Next.js', 'AI Coding', '2025 Guide']
   },
   {
@@ -996,7 +996,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Apr 25, 2026',
     color: '#A4373A',
     icon: '💾',
-    image: '/images/blog/sql-window.webp',
+    image: '/images/blog/postgres_vs_snowflake_hero_1777410017107.webp',
     tags: ['MS Access', 'Databases', 'Prototyping', 'Engineering']
   },
   {
