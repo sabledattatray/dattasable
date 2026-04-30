@@ -19,7 +19,7 @@ const projects = [
     client: 'High-Fidelity Enterprise Showcase',
     desc: 'The technical magnum opus: A 3-page executive engine featuring complex time-intelligence DAX (MTD, LMTD) and seamless cross-page navigation.',
     problem: 'Executives needed multi-period comparisons (Month-over-Month) with sub-second recalculation across millions of regional records.',
-    solution: 'Engineered a 7-day high-intensity sprint resulting in a 3-tier intelligence layer (Overall, MTD, LMTD) with optimized DAX for executive-grade smoothing.',
+    solution: 'This dashboard helps businesses track performance trends in real-time by comparing current sales (MTD) with last month\'s performance (LMTD) at the same point in time. It provides 10-second clarity for executive decision-making.',
     impact: '7-Day Technical Sprint, Complex DAX Orchestration, Flagship Status',
     github: 'https://github.com/sabledattatray/dattasable',
     live: 'https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true',

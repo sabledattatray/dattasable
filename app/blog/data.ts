@@ -311,6 +311,10 @@ export const posts = [
     category: 'Analysis',
     excerpt: 'A deep-dive into the complex DAX time-intelligence logic used to build a 3-page flagship enterprise reporting engine.',
     content: `
+      <div style="background: var(--surface2); padding: 1.5rem; border-left: 4px solid var(--accent); margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.6;">
+        <strong>Reviewer Note:</strong> This dashboard helps businesses track performance trends in real-time by comparing current sales (MTD) with last month's performance (LMTD) at the same point in time. It provides 10-second clarity for executive decision-making.
+      </div>
+
       <p>True Business Intelligence is defined by the ability to compare performance across time with absolute precision. This "Magnum Opus" represents a 7-day technical sprint dedicated to mastering <strong>MTD (Month to Date)</strong> and <strong>LMTD (Last Month to Date)</strong> logic within a high-fidelity enterprise environment.</p>
       
       <h3>The Logic of Time-Intelligence</h3>
