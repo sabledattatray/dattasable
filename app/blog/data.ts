@@ -623,6 +623,54 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
     tags: ['MIS', 'Reporting', 'Strategy']
   },
+  {
+    id: 'content-tools-2025',
+    slug: 'top-5-free-content-creator-tools-2025',
+    title: 'Top 5 Free Tools Every Content Creator Should Be Using in 2025',
+    category: 'Marketing',
+    excerpt: 'From Canva to Google Trends, these are the essential free tools for content creators in 2025.',
+    content: `
+      <p>Content creation doesn't require a massive budget. We look at the top 5 free tools—Canva, CapCut, Google Trends, Grammarly, and Notion—that allow you to build a professional brand from scratch.</p>
+    `,
+    readTime: 7,
+    date: 'May 16, 2025',
+    color: '#f43f5e',
+    icon: '🎬',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Content', 'Marketing', 'Tools']
+  },
+  {
+    id: 'ms-access-2026',
+    slug: 'importance-of-ms-access-2026',
+    title: 'The Importance of MS Access in 2026: Still Relevant, Still Powerful',
+    category: 'Engineering',
+    excerpt: 'One of the biggest strengths of MS Access is its simplicity and power for rapid database development.',
+    content: `
+      <p>In a world of cloud databases, MS Access remains a powerful tool for local database development and rapid prototyping. We explore its continued relevance in 2026 for MIS and small-scale business automation.</p>
+    `,
+    readTime: 10,
+    date: 'Apr 28, 2026',
+    color: '#a4373a',
+    icon: '🔑',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Database', 'MS Access', 'MIS']
+  },
+  {
+    id: 'seo-marketing-2026',
+    slug: 'what-is-seo-digital-marketing-guide',
+    title: 'What is SEO in Digital Marketing & How Does It Work?',
+    category: 'Marketing',
+    excerpt: 'A beginner-friendly guide to understanding the mechanics of SEO and how it drives sustainable growth.',
+    content: `
+      <p>SEO is the art and science of making your content discoverable. We look at the core pillars of SEO—Technical, On-Page, and Off-Page—to understand how search engines rank content in 2026.</p>
+    `,
+    readTime: 12,
+    date: 'May 10, 2026',
+    color: '#f43f5e',
+    icon: '🔍',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    tags: ['SEO', 'Digital Marketing', 'Guide']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
