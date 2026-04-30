@@ -55,7 +55,9 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
   const [rows, setRows] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [userToEdit, setUserToEdit] = useState<User | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const handleDeleteConfirm = async () => {
     if (!userToDelete) return;
@@ -72,6 +74,31 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
     } finally {
       setIsDeleting(false);
       setUserToDelete(null);
+    }
+  };
+
+  const handleEditConfirm = async () => {
+    if (!userToEdit) return;
+    setIsUpdating(true);
+    const newRole = userToEdit.role === 'ADMIN' ? 'USER' : 'ADMIN';
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: userToEdit.id, role: newRole }),
+      });
+      
+      if (res.ok) {
+        setRows((prev) => prev.map(u => u.id === userToEdit.id ? { ...u, role: newRole } : u));
+      } else {
+        alert('Failed to update user role');
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+      alert('Error updating user role');
+    } finally {
+      setIsUpdating(false);
+      setUserToEdit(null);
     }
   };
 
@@ -186,34 +213,8 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
               {
                 label: 'Edit',
                 icon: 'material-symbols:edit-outline-rounded',
-                onClick: async () => {
-                  console.log('Edit clicked for user:', params.row.name);
-                  const currentRole = params.row.role;
-                  const newRole = currentRole === 'ADMIN' ? 'USER' : 'ADMIN';
-                  
-                  if (window.confirm(`Change ${params.row.name}'s role from ${currentRole} to ${newRole}?`)) {
-                    try {
-                      console.log('Sending PATCH request to update role...');
-                      const res = await fetch('/api/admin/users', {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ id: params.row.id, role: newRole }),
-                      });
-                      
-                      if (res.ok) {
-                        console.log('Role updated successfully on server');
-                        setRows((prev) => prev.map(u => u.id === params.row.id ? { ...u, role: newRole } : u));
-                        alert(`Successfully changed ${params.row.name} to ${newRole}`);
-                      } else {
-                        const errorData = await res.json();
-                        console.error('Failed to update role:', errorData);
-                        alert(`Failed to update: ${errorData.error || 'Unknown error'}`);
-                      }
-                    } catch (error) {
-                      console.error('Network error during role update:', error);
-                      alert('Network error: Could not reach the server');
-                    }
-                  }
+                onClick: () => {
+                  setUserToEdit(params.row);
                 },
               },
               {
@@ -280,6 +281,16 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
           confirmLabel={isDeleting ? 'Deleting...' : 'Delete'}
           onConfirm={handleDeleteConfirm}
           onCancel={() => !isDeleting && setUserToDelete(null)}
+        />
+      )}
+      {userToEdit && (
+        <ConfirmDialog
+          open={!!userToEdit}
+          title="Change User Role"
+          message={`Are you sure you want to change ${userToEdit.name}'s role to ${userToEdit.role === 'ADMIN' ? 'USER' : 'ADMIN'}?`}
+          confirmLabel={isUpdating ? 'Updating...' : 'Update'}
+          onConfirm={handleEditConfirm}
+          onCancel={() => !isUpdating && setUserToEdit(null)}
         />
       )}
     </Box>
