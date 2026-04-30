@@ -224,6 +224,46 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
     tags: ['Sales', 'BI', 'Authorship']
   },
+  {
+    id: 'telecom-collection-analytics-2026',
+    slug: 'telecom-collection-optimization-strategies',
+    title: 'Telecom Analytics: Optimizing Postpaid Collection Workflows',
+    category: 'Analysis',
+    excerpt: 'A technical exploration into the aging logic and recovery metrics used in high-volume telecom postpaid portfolios.',
+    content: `
+      <p>The telecom sector operates on high volumes and narrow margins, making <strong>Collection Efficiency</strong> a mission-critical metric. This technical showcase explores the <strong>Vodafone Collection Summary Engine</strong>, a production-grade asset designed to manage thousands of postpaid accounts.</p>
+      
+      <h3>Engineering Regional Recovery Logic</h3>
+      <p>Managing postpaid collections requires a nuanced understanding of "Aging Buckets" (0-30, 31-60, 61-90+ days). In this project, we implemented automated DAX logic to categorize accounts in real-time, allowing recovery agents to prioritize high-value/low-risk segments. This significantly reduces "Slippage"—where accounts move into unrecoverable aging buckets.</p>
+      
+      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
+        <h4 style="margin-bottom: 1.5rem;">Live Telecom Collection Dashboard</h4>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+          <iframe 
+            src="https://app.powerbi.com/view?r=eyJrIjoiN2IyNDg5MzEtNmUyYS00MjZlLWFkYmEtYjM4ZjA5ZjVjZDcxIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+            frameborder="0" 
+            allowFullScreen="true"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          ></iframe>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Vertical: Telecom // Client Focus: Vodafone Postpaid</p>
+      </div>
+
+      <h3>Architectural Breakdown:</h3>
+      <ul>
+        <li><strong>Aging Engine:</strong> Dynamic grouping based on billing cycles and payment latencies.</li>
+        <li><strong>CRM Integration:</strong> Mapping dashboard outputs to field-agent recovery workflows.</li>
+        <li><strong>Data Integrity:</strong> Ensuring absolute accuracy across millions of regional postpaid transactions.</li>
+      </ul>
+      <p>For more on enterprise sales strategy, explore our <a href="/blog/sales-performance-ecosystem-2026">Feb-2026 Sales Deep-Dive</a>.</p>
+    `,
+    readTime: 8,
+    date: 'Mar 05, 2026',
+    color: '#E60000',
+    icon: '📱',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Telecom', 'Analytics', 'Collections']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
