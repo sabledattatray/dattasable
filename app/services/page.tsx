@@ -89,7 +89,19 @@ const services = [
     color: 'var(--accent)',
     popular: false,
   },
+  {
+    icon: '✒️',
+    title: 'Professional Graphic Design',
+    id: 'graphic-design',
+    desc: 'Expert vector design and branding solutions powered by CorelDRAW, delivering high-impact visual communication for print and digital media.',
+    features: ['Vector logo design', 'Brand identity development', 'Print-ready marketing assets', 'Custom typography & layouts', 'Icon set creation', 'File conversion & vectorization'],
+    price: 'Starting at ₹5,000',
+    cta: 'Get a Quote',
+    color: 'var(--accent2)',
+    popular: false,
+  },
 ];
+
 
 
 

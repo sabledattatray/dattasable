@@ -8,7 +8,8 @@ import { useSession, signOut } from 'next-auth/react';
 import {
   Menu, X, ArrowUpRight,
   BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown,
-  PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings
+  PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings,
+  PenTool
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
@@ -34,7 +35,9 @@ const megaMenuData: Record<string, any> = {
       { title: 'Technical SEO', desc: 'On-page & technical ranking.', icon: <Sparkles size={20} />, href: '/services#seo-optimization' },
       { title: 'Premium Web Design', desc: 'Bespoke UI/UX experiences.', icon: <Layers size={20} />, href: '/services#web-design' },
       { title: 'n8n Workflows', desc: 'Self-hosted app connectivity.', icon: <Zap size={20} />, href: '/services#n8n-automation' },
+      { title: 'Graphic Design', desc: 'CorelDRAW vector solutions.', icon: <PenTool size={20} />, href: '/services#graphic-design' },
       { title: 'Predictive Modeling', desc: 'Statistical forecasting & AI.', icon: <Activity size={20} />, href: '/services#consulting' },
+
 
 
 
