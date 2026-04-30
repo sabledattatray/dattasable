@@ -10,14 +10,16 @@ declare global {
 
 export default function GoogleOneTap() {
   const { status } = useSession();
+  const initialized = useRef(false);
   const clientId = "707439992057-j87plivvk29u7nq35l1j7sqdraoqhv5u.apps.googleusercontent.com";
 
   useEffect(() => {
-    // Only run if user is not authenticated
-    if (status === 'unauthenticated') {
+    // Only run if user is not authenticated and not already initialized
+    if (status === 'unauthenticated' && !initialized.current) {
       const initializeOneTap = () => {
-        if (window.google?.accounts?.id) {
+        if (window.google?.accounts?.id && !initialized.current) {
           try {
+            initialized.current = true;
             window.google.accounts.id.initialize({
               client_id: clientId,
               callback: (response: any) => {
@@ -27,22 +29,24 @@ export default function GoogleOneTap() {
                   redirect: false,
                 });
               },
-              auto_select: true,
+              auto_select: false, // Changed to false to prevent conflicting auto-requests
               cancel_on_tap_outside: true,
               itp_support: true,
-              // Switching FedCM to false temporarily to resolve MS Edge origin issues
-              use_fedcm_for_prompt: false, 
+              use_fedcm_for_prompt: true, 
             });
 
             window.google.accounts.id.prompt((notification: any) => {
               if (notification.isNotDisplayed()) {
                 console.log('One Tap not displayed:', notification.getNotDisplayedReason());
-              } else if (notification.isSkippedMoment()) {
-                console.log('One Tap skipped:', notification.getSkippedReason());
+                // If not displayed, we might want to allow re-init later if state changes
+                if (notification.getNotDisplayedReason() === 'suppressed_by_user') {
+                  // Keep as initialized to respect user choice
+                }
               }
             });
           } catch (error) {
             console.error('Error initializing Google One Tap:', error);
+            initialized.current = false;
           }
         }
       };
@@ -51,14 +55,9 @@ export default function GoogleOneTap() {
       if (window.google?.accounts?.id) {
         initializeOneTap();
       } else {
-        // Retry logic for script loading
-        let attempts = 0;
         const interval = setInterval(() => {
-          attempts++;
           if (window.google?.accounts?.id) {
             initializeOneTap();
-            clearInterval(interval);
-          } else if (attempts > 10) {
             clearInterval(interval);
           }
         }, 1000);

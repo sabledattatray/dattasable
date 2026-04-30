@@ -7,7 +7,21 @@ export default function OfficialGoogleButton() {
 
   useEffect(() => {
     const initializeButton = () => {
-      if (window.google && buttonRef.current) {
+      if (window.google?.accounts?.id && buttonRef.current) {
+        // Ensure initialization happens at least once
+        // GSI SDK doesn't have an 'isInitialized' check, but we can safely call it 
+        // if we are sure it won't trigger a prompt here.
+        window.google.accounts.id.initialize({
+          client_id: "707439992057-j87plivvk29u7nq35l1j7sqdraoqhv5u.apps.googleusercontent.com",
+          callback: (response: any) => {
+            signIn('google', {
+              credential: response.credential,
+              callbackUrl: window.location.origin,
+            });
+          },
+          use_fedcm_for_prompt: true,
+        });
+
         window.google.accounts.id.renderButton(buttonRef.current, {
           theme: 'outline',
           size: 'large',
@@ -20,11 +34,11 @@ export default function OfficialGoogleButton() {
     };
 
     // Initialize if SDK is ready, otherwise wait
-    if (window.google) {
+    if (window.google?.accounts?.id) {
       initializeButton();
     } else {
       const interval = setInterval(() => {
-        if (window.google) {
+        if (window.google?.accounts?.id) {
           initializeButton();
           clearInterval(interval);
         }
