@@ -349,6 +349,152 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
     tags: ['Masterclass', 'DAX', 'Time-Intelligence']
   },
+  {
+    id: 'web-dev-2025',
+    slug: 'building-your-first-website-2025',
+    title: 'The Ultimate Beginner\'s Guide to Building Your First Website in 2025',
+    category: 'Web Dev',
+    excerpt: 'A comprehensive roadmap for beginners starting their web development journey in the age of AI and automated deployments.',
+    content: `
+      <p>Building a website in 2025 is fundamentally different than it was a decade ago. Today, the focus has shifted from low-level syntax to high-level architecture and AI-assisted coding.</p>
+      <h3>The 2025 Tech Stack</h3>
+      <p>For beginners, I recommend starting with the Next.js ecosystem. It provides the perfect balance of performance (Server Components) and ease of use (Vercel deployments). When combined with AI tools, you can move from a mockup to a live URL in minutes.</p>
+    `,
+    readTime: 10,
+    date: 'May 16, 2025',
+    color: '#00d4ff',
+    icon: '🌐',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2344&auto=format&fit=crop',
+    tags: ['Web Dev', 'Beginners', 'Next.js']
+  },
+  {
+    id: 'ux-principles-2026',
+    slug: 'ui-ux-principles-executive-dashboards',
+    title: '7 UI/UX Principles for High-Stakes Executive Dashboards',
+    category: 'Design',
+    excerpt: 'Learn the design principles that ensure your reports are intuitive, actionable, and visually balanced for the boardroom.',
+    content: `
+      <p>A dashboard is more than a collection of charts; it is a user interface for data. For executives, every pixel must earn its place. We explore principles like Progressive Disclosure and the 5-Second Rule for data comprehension.</p>
+    `,
+    readTime: 8,
+    date: 'Mar 23, 2026',
+    color: '#c9f31d',
+    icon: '🎨',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['UX', 'Design', 'Dashboards']
+  },
+  {
+    id: 'python-prefect-2026',
+    slug: 'data-pipelines-python-prefect',
+    title: 'Building Robust Data Pipelines with Python and Prefect',
+    category: 'Automation',
+    excerpt: 'Exploring "Negative Engineering" and how to wrap your Python code in a layer of observability and resilience.',
+    content: `
+      <p>Data pipelines fail. It’s not a matter of "if," but "when." Prefect allows us to manage these failures gracefully, providing a modern framework for orchestration and monitoring.</p>
+    `,
+    readTime: 12,
+    date: 'Apr 22, 2026',
+    color: '#3b82f6',
+    icon: '🐍',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Python', 'Prefect', 'DataOps']
+  },
+  {
+    id: 'finance-saas-2026',
+    slug: 'roi-financial-visibility-saas',
+    title: 'The ROI of Real-Time Financial Visibility in SaaS',
+    category: 'Finance',
+    excerpt: 'How advanced financial dashboards track CAC vs. LTV in real-time to drive sustainable growth in the SaaS sector.',
+    content: `
+      <p>In the SaaS world, real-time visibility into unit economics is the difference between scaling and burning out. We look at how to architect dashboards that track churn and growth simultaneously.</p>
+    `,
+    readTime: 9,
+    date: 'Apr 16, 2026',
+    color: '#10b981',
+    icon: '💸',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['SaaS', 'Finance', 'ROI']
+  },
+  {
+    id: 'ethical-ai-2026',
+    slug: 'ethical-ai-governance-llm',
+    title: 'Ethical AI: Implementing Governance for LLM-Driven Insights',
+    category: 'AI',
+    excerpt: 'As AI takes over analytical workloads, governance becomes a matter of ethics and transparency.',
+    content: `
+      <p>The output of an LLM is only as good as the guardrails around it. We explore how to implement bias-detection and transparency layers in AI-driven analytical systems.</p>
+    `,
+    readTime: 11,
+    date: 'Mar 26, 2026',
+    color: '#8b5cf6',
+    icon: '⚖️',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2340&auto=format&fit=crop',
+    tags: ['AI', 'Ethics', 'Governance']
+  },
+  {
+    id: 'data-democratization-2026',
+    slug: 'data-democratization-access-security',
+    title: 'Data Democratization: Balancing Access with Security',
+    category: 'Strategy',
+    excerpt: 'Giving everyone access to data is the goal—but security is the prerequisite for a data-driven culture.',
+    content: `
+      <p>Data democratization fails when it leads to security leaks. We explore the "Zero-Trust" approach to data access in modern enterprise environments.</p>
+    `,
+    readTime: 7,
+    date: 'Apr 13, 2026',
+    color: '#f43f5e',
+    icon: '🔓',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Data Strategy', 'Security', 'Governance']
+  },
+  {
+    id: 'zero-trust-quality-2026',
+    slug: 'zero-trust-data-quality-framework',
+    title: 'Building a "Zero-Trust" Data Quality Framework for BI',
+    category: 'Engineering',
+    excerpt: 'Data quality is the foundation of trust. Learn how to implement automated testing and observability for 100% reliability.',
+    content: `
+      <p>If the data is wrong, the decision is wrong. We look at implementing Great Expectations and automated profiling to ensure data integrity at every step.</p>
+    `,
+    readTime: 14,
+    date: 'Mar 17, 2026',
+    color: '#f59e0b',
+    icon: '🛡️',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Data Quality', 'Testing', 'BI']
+  },
+  {
+    id: 'bi-scraper-2026',
+    slug: 'bi-scraper-python-playwright',
+    title: 'Building a Business Intelligence Scraper with Python and Playwright',
+    category: 'Engineering',
+    excerpt: 'Automate market research and competitor tracking by building a robust web scraper for dynamic, JS-heavy websites.',
+    content: `
+      <p>Modern web scraping requires more than just requests; it requires browser automation. We use Playwright to navigate dynamic dashboards and extract competitive intelligence.</p>
+    `,
+    readTime: 13,
+    date: 'Apr 07, 2026',
+    color: '#3b82f6',
+    icon: '🕸️',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Python', 'Scraping', 'Market Research']
+  },
+  {
+    id: 'nlq-llm-2026',
+    slug: 'natural-language-query-llm-real-world',
+    title: 'Natural Language Query: Is "Chat with your Data" Finally Real?',
+    category: 'AI',
+    excerpt: 'Testing leading NLQ engines against real-world enterprise datasets to see if LLMs have finally solved "Chat with your Data."',
+    content: `
+      <p>Natural Language Query has been a promise for a decade. With the advent of LLMs, the "Talk to your data" interface is finally becoming a production reality.</p>
+    `,
+    readTime: 10,
+    date: 'Mar 29, 2026',
+    color: '#8b5cf6',
+    icon: '💬',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2340&auto=format&fit=crop',
+    tags: ['AI', 'NLQ', 'LLM']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
