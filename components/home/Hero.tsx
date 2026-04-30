@@ -24,32 +24,32 @@ export default function Hero() {
   return (
     <section
       className="section hero-grid"
-      style={{ 
-        minHeight: '600px', 
+      style={{
+        minHeight: '600px',
         height: 'auto',
-        display: 'flex', 
-        alignItems: 'center', 
-        position: 'relative', 
-        overflow: 'hidden', 
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
         padding: '2rem 0',
         backgroundColor: 'var(--bg)',
         border: 'none'
       }}
     >
       {/* Layer 1: Right-Side Visual - Optimized with Mobile-First Strategy */}
-      <div 
+      <div
         id="hero-visual-container"
         className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 lg:opacity-100 pointer-events-none overflow-hidden"
-        style={{ 
+        style={{
           opacity: isApp ? 0.8 : 'var(--hero-mobile-opacity)',
-          backgroundImage: isApp 
+          backgroundImage: isApp
             ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
             : 'none',
           backgroundSize: '100% 100%'
         }}
       >
         <div className="w-full h-full">
-          <Image 
+          <Image
             src="/hero-bg.webp"
             alt="Advanced Technical Data Visualization"
             width={800}
@@ -57,16 +57,16 @@ export default function Hero() {
             priority
             fetchPriority="high"
             decoding="sync"
-            quality={25}
-            sizes="55vw"
+            quality={65}
+            sizes="(max-width: 1024px) 100vw, 55vw"
             className="w-full h-auto"
           />
         </div>
         {/* Targeted Dark/Light Overlay: Bottom-Left to Middle-Left */}
-        <div 
+        <div
           className="absolute inset-0 z-10 pointer-events-none"
-          style={{ 
-            background: 'linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end))' 
+          style={{
+            background: 'linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end))'
           }}
         />
         <div style={{
