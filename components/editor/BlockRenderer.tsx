@@ -1,5 +1,7 @@
 import { EditorBlock } from '@/store/editorStore';
 import { MessageCircle, Globe, Link } from 'lucide-react';
+import Image from 'next/image';
+
 
 interface BlockRendererProps {
   blocks: EditorBlock[];
@@ -36,9 +38,16 @@ function BlockNode({ block }: { block: EditorBlock }) {
     case 'image':
       if (!metadata?.url) return null;
       return (
-        <div className={wrapperClass} style={customStyles}>
-          <img src={metadata.url} alt="Post image" className="w-full h-auto rounded-2xl shadow-lg" />
+        <div className={wrapperClass} style={{ ...customStyles, position: 'relative', height: '400px' }}>
+          <Image 
+            src={metadata.url} 
+            alt="Post image" 
+            fill
+            style={{ objectFit: 'cover' }}
+            className="rounded-2xl shadow-lg" 
+          />
         </div>
+
       );
 
     case 'video':
@@ -145,10 +154,16 @@ function BlockNode({ block }: { block: EditorBlock }) {
         <div className={`${wrapperClass} grid grid-cols-2 md:grid-cols-3 gap-4`} style={customStyles}>
           {images.map((img: string, idx: number) => (
             <div key={idx} className="relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+              <Image 
+                src={img} 
+                alt={`Gallery ${idx + 1}`} 
+                fill
+                style={{ objectFit: 'cover' }} 
+              />
             </div>
           ))}
         </div>
+
       );
 
     case 'paragraph':

@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Clock, ArrowRight } from 'lucide-react';
+
 import Newsletter from './Newsletter';
 
 interface Post {
@@ -159,13 +161,16 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                 style={{ borderBottom: `1px solid ${p.color}33` }}
               >
                 {p.image && (
-                  <img 
+                  <Image 
                     src={p.image} 
                     alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
                     className="group-hover:scale-110"
                   />
                 )}
+
                 <div 
                   style={{ position: 'absolute', top: 12, left: 12, background: `linear-gradient(135deg, ${p.color || 'var(--accent)'}, #00C9F2)`, color: '#000', fontSize: '1.5rem', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >

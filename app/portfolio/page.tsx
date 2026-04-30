@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 import { ExternalLink, GitBranch, X, ChevronRight } from 'lucide-react';
+
 import Crosshair from '@/components/Crosshair';
 
 const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
@@ -333,7 +335,7 @@ export default function PortfolioPage({ searchParams }: { searchParams: any }) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.25 }}
-                  className="card"
+                  className="card group"
                   style={{ 
                     overflow: 'hidden',
                     borderLeft: '2px solid',
@@ -344,10 +346,15 @@ export default function PortfolioPage({ searchParams }: { searchParams: any }) {
                 >
                   {/* Image area */}
                   <div style={{ height: 180, overflow: 'hidden', position: 'relative' }}>
-                    <motion.img 
+                    <Image 
                       src={p.image} 
                       alt={p.title}
-                      whileHover={{ scale: 1.1 }}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 group-hover:scale-110"
+                    />
+
                       transition={{ duration: 0.6 }}
                       style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }}
                     />
@@ -447,7 +454,12 @@ export default function PortfolioPage({ searchParams }: { searchParams: any }) {
               </button>
 
               <div style={{ height: 'clamp(180px, 35vw, 300px)', overflow: 'hidden', position: 'relative' }}>
-                <img src={selected.image} alt={selected.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
+                <Image 
+                  src={selected.image} 
+                  alt={selected.title} 
+                  fill
+                  style={{ objectFit: 'cover', opacity: 0.4 }} 
+                />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg), transparent)' }} />
                 <div style={{ position: 'absolute', bottom: 'clamp(12px, 3vw, 30px)', left: 'clamp(12px, 4vw, 30px)', right: '3.5rem' }}>
                   <div className="label-tech mb-2" style={{ color: selected.color }}>{selected.category} CASE_STUDY</div>

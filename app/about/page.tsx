@@ -2,8 +2,10 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
 import { Download, Award, Briefcase, GraduationCap, ArrowRight, Shield, Zap, Target, Cpu, Database, BarChart, Code } from 'lucide-react';
 
 const skills = [
@@ -132,7 +134,15 @@ export default function AboutPage() {
                   border: '1px solid transparent',
                   zIndex: 1
                 }}>
-                  <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image 
+                    src="/images/datta.png" 
+                    alt="Datta Sable" 
+                    fill
+                    style={{ objectFit: 'cover' }} 
+                  />
+                </div>
+
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6))' }} />
                 </div>
                 
