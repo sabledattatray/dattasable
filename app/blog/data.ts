@@ -104,7 +104,7 @@ export const posts = [
     color: '#34d399',
     icon: '⌨️',
     image: 'https://images.unsplash.com/photo-1587829741301-dc798b83dadc?q=80&w=2400&auto=format&fit=crop',
-    tags: ['Productivity', 'Windows', 'Marathi']
+    tags: ['Productivity', 'Windows', 'Marathi'],
   },
   {
     id: 'marathi-typing-2022',
@@ -140,7 +140,7 @@ export const posts = [
     color: '#eab308',
     icon: '🇮🇳',
     image: 'https://images.unsplash.com/photo-1595231776515-99b1746daee1?q=80&w=2340&auto=format&fit=crop',
-    tags: ['Marathi', 'Windows', 'Localization']
+    tags: ['Marathi', 'Windows', 'Localization'],
   },
   {
     id: 'live-production-benchmark-2025',
