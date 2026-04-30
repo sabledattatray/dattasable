@@ -10,11 +10,13 @@ import {
   listClasses,
   menuClasses,
 } from '@mui/material';
+import IconifyIcon from 'components/base/IconifyIcon';
 import EllipsisHorizontalIcon from 'components/icons/EllipsisHorizontalIcon';
 
 interface DashboardMenuProps {
   menuItems?: ({
     label: string;
+    icon?: string;
   } & MenuItemProps)[];
   icon?: JSX.Element;
   size?: ButtonOwnProps['size'];
@@ -101,7 +103,7 @@ const DashboardMenu = ({
           },
         }}
       >
-        {menuItems.map(({ label, onClick, ...rest }) => (
+        {menuItems.map(({ label, icon, onClick, ...rest }) => (
           <MenuItem
             key={label}
             onClick={(e) => {
@@ -111,7 +113,9 @@ const DashboardMenu = ({
               handleClose(e);
             }}
             {...rest}
+            sx={{ gap: 1, ...rest.sx }}
           >
+            {icon && <IconifyIcon icon={icon} sx={{ fontSize: 18 }} />}
             {label}
           </MenuItem>
         ))}
