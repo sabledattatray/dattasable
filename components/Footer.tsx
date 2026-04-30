@@ -285,6 +285,9 @@ export default function Footer() {
             <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
               TERMS OF SERVICE
             </Link>
+            <Link href="/disclaimer" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
+              DISCLAIMER
+            </Link>
           </div>
         </div>
       </div>
