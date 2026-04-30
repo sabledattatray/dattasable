@@ -36,7 +36,12 @@ export const metadata: Metadata = {
     images: ["/images/datta.png"],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 };
 
