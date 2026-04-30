@@ -40,7 +40,7 @@ export default function Hero() {
         className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none"
         style={{ 
           aspectRatio: '800/600', 
-          backgroundColor: 'var(--surface2)',
+          // Removed background color for a cleaner, seamless look
           // Web: No gradient (clean) | App: Stronger vibrant gradient
           backgroundImage: isApp 
             ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
