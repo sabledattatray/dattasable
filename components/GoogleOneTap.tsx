@@ -29,19 +29,17 @@ export default function GoogleOneTap() {
                   redirect: false,
                 });
               },
-              auto_select: false, // Changed to false to prevent conflicting auto-requests
+              auto_select: true,
               cancel_on_tap_outside: true,
               itp_support: true,
-              use_fedcm_for_prompt: true, 
+              use_fedcm_for_prompt: false, 
             });
 
             window.google.accounts.id.prompt((notification: any) => {
               if (notification.isNotDisplayed()) {
                 console.log('One Tap not displayed:', notification.getNotDisplayedReason());
-                // If not displayed, we might want to allow re-init later if state changes
-                if (notification.getNotDisplayedReason() === 'suppressed_by_user') {
-                  // Keep as initialized to respect user choice
-                }
+              } else if (notification.isSkippedMoment()) {
+                console.log('One Tap skipped:', notification.getSkippedReason());
               }
             });
           } catch (error) {

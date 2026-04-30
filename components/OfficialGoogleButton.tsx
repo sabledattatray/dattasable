@@ -19,7 +19,7 @@ export default function OfficialGoogleButton() {
               callbackUrl: window.location.origin,
             });
           },
-          use_fedcm_for_prompt: true,
+          use_fedcm_for_prompt: false,
         });
 
         window.google.accounts.id.renderButton(buttonRef.current, {
