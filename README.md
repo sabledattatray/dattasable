@@ -6,20 +6,21 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.0-38B2AC.svg?logo=tailwind-css)
 ![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?logo=vercel)
 
-> **Engineering Data into Strategic Assets.** A high-performance, full-stack Business Intelligence portfolio and admin ecosystem designed for the 2026 data landscape.
+> **Engineering Data and Digital Infrastructure into Strategic Assets.** A high-performance, full-stack Business Intelligence, Automation, and Web Solutions portfolio designed for the 2026 digital landscape.
 
 ---
 
 ## 💎 Project Overview
 
-This platform is more than just a portfolio; it's a comprehensive **Analytics Hub**. It bridges the gap between complex data engineering and executive-level storytelling. Built with a "Modern Data Stack" philosophy, it features a blazingly fast Next.js frontend, a secure restricted-access portal, and a custom-built Admin Dashboard for managing large-scale content and project lifecycle.
+This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap between complex data engineering, seamless automation, and executive-level digital storytelling. Built with a "Modern Tech Stack" philosophy, it features a blazingly fast Next.js frontend, a robust service portfolio, and a custom-built Admin Dashboard for managing large-scale content and project lifecycles.
 
 ### 🚀 Key Features
-- **Elite Performance**: Sub-second load times with WebP optimization and edge-caching.
-- **Dynamic Content Engine**: A high-authority blog with 15+ technical articles across 5 categories.
-- **Restricted Access Portal**: Secure, OAuth-driven gateway for proprietary professional assets.
-- **Admin Command Center**: A professional-grade dashboard for real-time CMS and analytics management.
-- **Premium Aesthetics**: A futuristic "Cyber-Tech" design system with glassmorphism and micro-animations.
+- **Elite Performance**: Sub-second load times with native `next/image` WebP optimization and edge-caching.
+- **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, n8n Automation, and CorelDRAW Graphic Design.
+- **Dynamic Knowledge Engine**: A high-authority blog featuring 33+ technical case studies and articles across specialized categories.
+- **Restricted Access Portal**: Secure, OAuth-driven gateway for proprietary professional assets and VIP dashboards.
+- **Admin Command Center**: A professional-grade dashboard for real-time CMS, portfolio, and analytics management.
+- **Premium Aesthetics**: A futuristic, highly responsive design system with glassmorphism, dynamic grids, and micro-animations.
 
 ---
 
@@ -53,9 +54,11 @@ A clean, enterprise-grade interface for managing the entire ecosystem. Designed 
 - **Hosting**: Vercel (Edge Functions & Optimized Caching)
 - **Image Processing**: Sharp (WebP Optimization)
 
-### **Analytics & Tools**
+### **Analytics, Automation & Design**
 - **BI Visualization**: Tableau, Power BI, ECharts
 - **Data Engineering**: Python (Prefect), SQL (PostgreSQL)
+- **Workflow Automation**: n8n
+- **Design & Assets**: CorelDRAW, Figma
 
 ---
 
