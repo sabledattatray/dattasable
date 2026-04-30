@@ -72,8 +72,8 @@ export default function StartHerePage() {
                   </div>
                   <div style={{ width: '1px', height: '30px', background: 'var(--border)' }} />
                   <div>
-                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>35m</div>
-                    <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>SESSION_DURATION</div>
+                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>319</div>
+                    <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>SUBSCRIBERS</div>
                   </div>
                 </div>
               </div>
@@ -90,6 +90,22 @@ export default function StartHerePage() {
                   style={{ position: 'absolute', top: 0, left: 0 }}
                 ></iframe>
               </div>
+            </div>
+            
+            {/* Community Pulse - Social Proof */}
+            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border)', display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ width: 40, height: 40, background: '#FF0000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                  <Zap size={20} />
+                </div>
+                <div>
+                  <div className="mono" style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text)' }}>COMMUNITY_ENGAGEMENT: <span style={{ color: 'var(--accent)' }}>ACTIVE</span></div>
+                  <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)' }}>WEEKLY_POLLS // STUDENT_INTERACTION</div>
+                </div>
+              </div>
+              <p style={{ fontSize: '0.85rem', color: 'var(--muted)', flex: 1, minWidth: '300px' }}>
+                Beyond the videos, our YouTube community actively participates in architectural polls and technical discussions, ensuring the curriculum remains responsive to real-world engineering challenges.
+              </p>
             </div>
           </div>
 
