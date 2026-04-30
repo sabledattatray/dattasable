@@ -31,7 +31,12 @@ export default function AnalyticsTracker() {
       }
     };
 
-    trackView();
+    // Use requestIdleCallback to ensure tracking doesn't block critical rendering
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => trackView());
+    } else {
+      setTimeout(trackView, 1000);
+    }
   }, [pathname, searchParams]);
 
   return null;

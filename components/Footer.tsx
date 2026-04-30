@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
 import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon } from 'lucide-react';
@@ -67,16 +65,9 @@ export default function Footer() {
           padding: '0 2rem 6rem' 
         }}
       >
-        <div 
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(12, 1fr)', 
-            gap: '4rem' 
-          }}
-          className="footer-grid-main"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-16">
           {/* Brand Section */}
-          <div style={{ gridColumn: 'span 4' }} className="footer-brand-section">
+          <div className="lg:col-span-4">
             <Link
               href="/"
               className="group"
@@ -119,7 +110,6 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <a
                 href="mailto:info@dattasable.com"
-                aria-label="Email Datta Sable"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -128,17 +118,13 @@ export default function Footer() {
                   fontSize: '0.85rem',
                   fontFamily: "'JetBrains Mono', monospace",
                   textDecoration: 'none',
-                  transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
               >
                 <Mail size={14} />
                 info@dattasable.com
               </a>
               <a
                 href="tel:+918010803756"
-                aria-label="Call Datta Sable"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -147,10 +133,7 @@ export default function Footer() {
                   fontSize: '0.85rem',
                   fontFamily: "'JetBrains Mono', monospace",
                   textDecoration: 'none',
-                  transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
               >
                 <Clock size={14} />
                 +91 8010803756
@@ -173,7 +156,7 @@ export default function Footer() {
 
           {/* Navigation Links */}
           {NAV_LINKS.map((col) => (
-            <div key={col.heading} style={{ gridColumn: 'span 2' }}>
+            <div key={col.heading} className="lg:col-span-2">
               <h3
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
@@ -204,14 +187,6 @@ export default function Footer() {
                         textDecoration: 'none',
                         transition: 'all 0.3s ease',
                       }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.color = 'var(--text)';
-                        e.currentTarget.style.paddingLeft = '4px';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.color = 'var(--muted)';
-                        e.currentTarget.style.paddingLeft = '0';
-                      }}
                     >
                       {lnk.label}
                       {lnk.external && (
@@ -225,7 +200,7 @@ export default function Footer() {
           ))}
 
           {/* Tools Section */}
-          <div style={{ gridColumn: 'span 2' }}>
+          <div className="lg:col-span-2">
             <h3
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
@@ -240,7 +215,6 @@ export default function Footer() {
               Expertise
             </h3>
             <div 
-              className="footer-expertise-grid"
               style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(2, 1fr)', 
@@ -261,16 +235,6 @@ export default function Footer() {
                     textAlign: 'center',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em',
-                    transition: 'all 0.3s ease',
-                    cursor: 'default',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'var(--accent)';
-                    e.currentTarget.style.color = 'var(--text)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'var(--border)';
-                    e.currentTarget.style.color = 'var(--muted)';
                   }}
                 >
                   {tool}
@@ -289,13 +253,14 @@ export default function Footer() {
         }}
       >
         <div 
-          className="footer-bottom-container"
           style={{ 
             maxWidth: '1448px', 
             margin: '0 auto', 
             display: 'flex', 
             justifyContent: 'space-between', 
-            alignItems: 'center' 
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1.5rem'
           }}
         >
           <p
@@ -317,24 +282,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 1024px) {
-          .footer-grid-main {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 4rem !important;
-          }
-          .footer-brand-section {
-            grid-column: span 12 !important;
-          }
-          .footer-bottom-container {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 1.5rem !important;
-          }
-        }
-      `}</style>
     </footer>
   );
 }

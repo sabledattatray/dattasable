@@ -47,6 +47,7 @@ import { Suspense } from 'react';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
+import SmartAdSense from "@/components/SmartAdSense";
 
 const syne = Syne({
   subsets: ['latin'],
@@ -71,8 +72,11 @@ const jetbrains = JetBrains_Mono({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
-      <head>
-        {/* Font icons are now handled by Lucide-React SVG icons for better performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        
         <Script
           id="json-ld"
           type="application/ld+json"
@@ -109,17 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <Script 
-          src="https://accounts.google.com/gsi/client" 
-          strategy="lazyOnload"
-        />
-        {/* Google AdSense Global Script - Loaded with lazyOnload for performance */}
-        <Script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250" 
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <Providers>
@@ -127,11 +120,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main-content">
               {children}
             </main>
-            <GoogleAnalytics id="G-Q4GEY4N9WN" />
             <Suspense fallback={null}>
               <AnalyticsTracker />
             </Suspense>
             <ClientOnlyWrapper />
+            
+            {/* Third-party scripts moved here for better LCP performance */}
+            <GoogleAnalytics id="G-Q4GEY4N9WN" />
+            <Script 
+              src="https://accounts.google.com/gsi/client" 
+              strategy="lazyOnload"
+            />
+            <SmartAdSense client="ca-pub-4242010382827250" />
           </ThemeProvider>
         </Providers>
       </body>
