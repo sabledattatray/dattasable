@@ -22,10 +22,9 @@ export default function SmartAdSense({ client }: { client: string }) {
   if (!shouldLoad) return null;
 
   return (
-    <Script
-      id="adsense-init"
+    <script
+      async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`}
-      strategy="lazyOnload"
       crossOrigin="anonymous"
     />
   );

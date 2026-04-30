@@ -7,12 +7,12 @@ export function middleware(_request: NextRequest) {
   // Note: Adjust 'script-src' and 'img-src' if you use external scripts/images
   const cspHeader = `
     default-src 'self';
-    connect-src 'self' https://*.google.com https://accounts.google.com https://*.tableau.com https://*.google-analytics.com https://*.adtrafficquality.google https://*.doubleclick.net;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://*.doubleclick.net;
+    connect-src 'self' https://*.google.com https://accounts.google.com https://*.tableau.com https://*.google-analytics.com https://*.adtrafficquality.google https://*.doubleclick.net https://*.google;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     img-src 'self' blob: data: https://*.googleusercontent.com https://*.tableau.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com https://*.google-analytics.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://*.doubleclick.net;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-    frame-src 'self' https://*.tableau.com https://*.powerbi.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com https://*.doubleclick.net https://*.google.ad;
+    frame-src 'self' https://*.tableau.com https://*.powerbi.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com https://*.doubleclick.net https://*.google.ad https://*.google;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
