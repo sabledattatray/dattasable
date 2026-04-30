@@ -232,22 +232,35 @@ export default function AboutPage() {
                 {skills.map(s => <SkillItem key={s.name} {...s} />)}
               </div>
 
-              {/* Publications / Thought Leadership */}
+              </div>
+
+              {/* Platform Transparency / Walkthrough */}
               <div style={{ marginTop: '5rem' }}>
-                <div className="label-tech mb-4">THOUGHT-LEADERSHIP</div>
-                <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Publications & Insights</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    { title: 'The Future of Real-Time BI', platform: 'Data Engineering Weekly', date: '2025' },
-                    { title: 'Automating Enterprise MIS', platform: 'Analytics India Magazine', date: '2024' },
-                    { title: 'Predictive Risk Models in Banking', platform: 'FinTech Journal', date: '2023' },
-                    { title: 'Scalable Dashboard Architectures', platform: 'Tableau Community Showcase', date: '2024' }
-                  ].map(pub => (
-                    <div key={pub.title} className="card p-6 border-l-4 border-[var(--accent)]">
-                      <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '0.5rem' }}>{pub.platform} // {pub.date}</div>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 600 }}>{pub.title}</h4>
+                <div className="card" style={{ padding: '3rem', background: 'var(--surface2)', border: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div style={{ position: 'relative', aspectRatio: '16/9', background: 'var(--bg)', border: '1px solid var(--border)', overflow: 'hidden' }}>
+                      <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/5sXT6HuV61w" 
+                        title="Portfolio Walkthrough" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen
+                        style={{ position: 'absolute', top: 0, left: 0 }}
+                      ></iframe>
                     </div>
-                  ))}
+                    <div>
+                      <div className="label-tech mb-4" style={{ color: 'var(--accent)' }}>PLATFORM-TRANSPARENCY // 2025</div>
+                      <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>The Architecture Behind This Platform</h2>
+                      <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+                        A definitive technical walkthrough showcasing the design logic, responsive orchestration, and engineering principles used to build this very ecosystem. This transparency ensures my clients and peers understand the high-fidelity standards applied to every deployment.
+                      </p>
+                      <div className="mono" style={{ fontSize: '10px', color: 'var(--accent)', letterSpacing: '0.1em' }}>
+                        STATUS: VERIFIED_AUTHORSHIP // ORIGIN: DATTA_SABLE_STUDIO
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
