@@ -78,6 +78,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Manual Preload for LCP Hero Image */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/_next/image?url=%2Fhero-bg.webp&w=640&q=15" 
+          media="(max-width: 640px)"
+        />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/_next/image?url=%2Fhero-bg.webp&w=1200&q=15" 
+          media="(min-width: 641px)"
+        />
         
         <Script
           id="json-ld"

@@ -29,7 +29,10 @@ export default function Hero() {
       }}
     >
       {/* Layer 1: Right-Side Visual */}
-      <div className="block absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none">
+      <div 
+        className="block absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none"
+        style={{ aspectRatio: '800/600', backgroundColor: 'var(--surface2)' }}
+      >
         <Image 
           src="/hero-bg.webp"
           alt="Advanced Technical Data Visualization"
@@ -37,9 +40,9 @@ export default function Hero() {
           height={600}
           priority
           fetchPriority="high"
-          decoding="async"
-          quality={30}
-          sizes="(max-width: 640px) 384px, (max-width: 1024px) 512px, 800px"
+          decoding="sync"
+          quality={15}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
           className="w-full h-auto"
         />
         <div style={{
