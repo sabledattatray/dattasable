@@ -115,27 +115,33 @@ const SignupForm = () => {
                   fullWidth
                   label="Full Name"
                   placeholder="Enter your name"
-                  InputProps={{
-                    startAdornment: <User size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                    sx: { borderRadius: 3, height: 56 }
+                  slotProps={{
+                    input: {
+                      startAdornment: <User size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
+                      sx: { borderRadius: 3, height: 56 }
+                    }
                   }}
                 />
                 <TextField
                   fullWidth
                   label="Email Address"
                   placeholder="name@email.com"
-                  InputProps={{
-                    startAdornment: <Mail size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                    sx: { borderRadius: 3, height: 56 }
+                  slotProps={{
+                    input: {
+                      startAdornment: <Mail size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
+                      sx: { borderRadius: 3, height: 56 }
+                    }
                   }}
                 />
                 <PasswordTextField
                   fullWidth
                   label="Password"
                   placeholder="Create a password"
-                  InputProps={{
-                    startAdornment: <Lock size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                    sx: { borderRadius: 3, height: 56 }
+                  slotProps={{
+                    input: {
+                      startAdornment: <Lock size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
+                      sx: { borderRadius: 3, height: 56 }
+                    }
                   }}
                 />
 
