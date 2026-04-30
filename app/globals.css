@@ -492,8 +492,75 @@ h1, h2, h3, h4, h5, h6 {
   width: 4px;
   height: 4px;
   background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent);
+}
+
+/* ── DASHBOARD OPTIMIZATION ── */
+.dashboard-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+
+.dashboard-container::before {
+  content: "INITIALIZING_ENGINE...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  opacity: 0.5;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.dashboard-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: transparent;
+}
+
+.dashboard-fallback {
+  margin-top: 1rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.dashboard-fallback a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.dashboard-fallback a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    aspect-ratio: 1/1.2; /* Better for mobile viewing */
+    margin: 1.5rem 0;
+  }
 }
 
 /* Grid helper */

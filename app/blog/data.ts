@@ -15,14 +15,17 @@ export const posts = [
         <li><strong>Optimization:</strong> Minimizing latencies and maximizing uptime.</li>
       </ul>
 
-      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+      <div class="dashboard-container">
         <iframe 
           src="https://www.youtube.com/embed/5sXT6HuV61w" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          loading="lazy"
         ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://youtu.be/5sXT6HuV61w" target="_blank">VIEW_MASTERCLASS_DIRECT // SECURE_EXTERNAL_LINK</a>
       </div>
 
       <h3>Why Infrastructure Matters for BI</h3>
@@ -123,14 +126,17 @@ export const posts = [
       <h3>Technical Setup for Regional Input</h3>
       <p>Modern Windows environments (10/11) have robust support for Indic languages, but the configuration requires specific steps to ensure compatibility across professional software like Excel, Power BI, and SQL Management Studio.</p>
       
-      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+      <div class="dashboard-container">
         <iframe 
           src="https://www.youtube.com/embed/2Vv1CzLDIIk" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          loading="lazy"
         ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://youtu.be/2Vv1CzLDIIk" target="_blank">VIEW_LOCALIZATION_WORKSHOP_DIRECT // SECURE_EXTERNAL_LINK</a>
       </div>
 
       <h3>Why Localization Matters for BI</h3>
@@ -156,17 +162,16 @@ export const posts = [
       <h3>Engineering the Live Dashboard</h3>
       <p>Traditional reporting often suffers from data lag. For this project, we implemented a Direct-Query hybrid architecture that ensures the metrics seen by executives are reflected within seconds of the source transaction. This level of fidelity is achieved through highly optimized DAX measures and a clean Star-Schema data model.</p>
       
-      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
-        <h4 style="margin-bottom: 1.5rem;">Live Production Prototype</h4>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
-          <iframe 
-            src="https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
-            frameborder="0" 
-            allowFullScreen="true"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          ></iframe>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Note: This is a live architectural showcase using real production-tier data orchestration.</p>
+      <div class="dashboard-container">
+        <iframe 
+          src="https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" target="_blank">VIEW_FULL_DASHBOARD_DIRECT // SECURE_PROD_LINK</a>
       </div>
 
       <h3>Key Technical Achievements:</h3>
@@ -196,17 +201,16 @@ export const posts = [
       <h3>Verified Authorship in BI</h3>
       <p>In a world of templated dashboards, having a verified signature within the production environment is the ultimate proof of expertise. This Feb-2026 deployment features deep integration of multi-source data points, unified under a consistent UI/UX framework that prioritizes "Actionable Delta" (the difference between actuals and targets).</p>
       
-      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
-        <h4 style="margin-bottom: 1.5rem;">Live Sales Dashboard (Feb 2026)</h4>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
-          <iframe 
-            src="https://app.powerbi.com/view?r=eyJrIjoiYzcyYzJkNWUtM2ZjNS00OWIxLWE5OWUtOWM2MmJlMTAyMjQwIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
-            frameborder="0" 
-            allowFullScreen="true"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          ></iframe>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Architect: Datta Sable // Deployment: Feb 2026</p>
+      <div class="dashboard-container">
+        <iframe 
+          src="https://app.powerbi.com/view?r=eyJrIjoiYzcyYzJkNWUtM2ZjNS00OWIxLWE5OWUtOWM2MmJlMTAyMjQwIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiYzcyYzJkNWUtM2ZjNS00OWIxLWE5OWUtOWM2MmJlMTAyMjQwIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" target="_blank">VIEW_VERIFIED_SALES_SYSTEM // SECURE_PROD_LINK</a>
       </div>
 
       <h3>Strategic Impact Analysis:</h3>
@@ -236,17 +240,16 @@ export const posts = [
       <h3>Engineering Regional Recovery Logic</h3>
       <p>Managing postpaid collections requires a nuanced understanding of "Aging Buckets" (0-30, 31-60, 61-90+ days). In this project, we implemented automated DAX logic to categorize accounts in real-time, allowing recovery agents to prioritize high-value/low-risk segments. This significantly reduces "Slippage"—where accounts move into unrecoverable aging buckets.</p>
       
-      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
-        <h4 style="margin-bottom: 1.5rem;">Live Telecom Collection Dashboard</h4>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
-          <iframe 
-            src="https://app.powerbi.com/view?r=eyJrIjoiN2IyNDg5MzEtNmUyYS00MjZlLWFkYmEtYjM4ZjA5ZjVjZDcxIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
-            frameborder="0" 
-            allowFullScreen="true"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          ></iframe>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Vertical: Telecom // Client Focus: Vodafone Postpaid</p>
+      <div class="dashboard-container">
+        <iframe 
+          src="https://app.powerbi.com/view?r=eyJrIjoiN2IyNDg5MzEtNmUyYS00MjZlLWFkYmEtYjM4ZjA5ZjVjZDcxIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiN2IyNDg5MzEtNmUyYS00MjZlLWFkYmEtYjM4ZjA5ZjVjZDcxIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" target="_blank">VIEW_TELECOM_COLLECTIONS // SECURE_PROD_LINK</a>
       </div>
 
       <h3>Architectural Breakdown:</h3>
@@ -276,17 +279,16 @@ export const posts = [
       <h3>The Challenge of Sales Velocity</h3>
       <p>Unlike traditional retail, Q-Commerce operates in minutes. Tracking <strong>Average Sales per Minute</strong> and <strong>Revenue per Delivery Window</strong> requires a data model that can handle rapid refreshes without compromising on analytical depth. In the current beta, we have successfully mapped the core revenue generation streams and established the category-level performance metrics.</p>
       
-      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
-        <h4 style="margin-bottom: 1.5rem;">Beta Showcase: Q-Commerce Engine</h4>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
-          <iframe 
-            src="https://app.powerbi.com/view?r=eyJrIjoiMTQxZTc5NzctMjBiZi00OTJjLThmMDYtMjRmMWE2OTAyMWU1IiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
-            frameborder="0" 
-            allowFullScreen="true"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          ></iframe>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Current Status: Beta // Focus: Revenue & Sales Velocity</p>
+      <div class="dashboard-container">
+        <iframe 
+          src="https://app.powerbi.com/view?r=eyJrIjoiMTQxZTc5NzctMjBiZi00OTJjLThmMDYtMjRmMWE2OTAyMWU1IiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiMTQxZTc5NzctMjBiZi00OTJjLThmMDYtMjRmMWE2OTAyMWU1IiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" target="_blank">VIEW_QCOMMERCE_BETA // SECURE_DEV_LINK</a>
       </div>
 
       <h3>Technical Roadmap (Next Phase):</h3>
@@ -320,17 +322,16 @@ export const posts = [
       <h3>The Logic of Time-Intelligence</h3>
       <p>Calculating MTD and LMTD is not just about simple filters. In this flagship project, we engineered custom DAX measures that handle fiscal calendar shifts and partial-month comparisons, ensuring that executives are always comparing "apples to apples." The 3-page architecture (Overall, MTD, LMTD) provides a layered narrative from high-level summaries to granular period-over-period deltas.</p>
       
-      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
-        <h4 style="margin-bottom: 1.5rem;">Flagship Prototype: MY_DASH (MTD/LMTD)</h4>
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
-          <iframe 
-            src="https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true" 
-            frameborder="0" 
-            allowFullScreen="true"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          ></iframe>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Engineering Sprint: 7 Days // Logic: Advanced Time-Intelligence DAX</p>
+      <div class="dashboard-container">
+        <iframe 
+          src="https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="dashboard-fallback">
+        <a href="https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true" target="_blank">VIEW_FLAGSHIP_MTD_LMTD_SYSTEM // SECURE_PROD_LINK</a>
       </div>
 
       <h3>Architectural Highlights:</h3>

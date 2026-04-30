@@ -77,7 +77,7 @@ export default function StartHerePage() {
                   </div>
                 </div>
               </div>
-              <div style={{ position: 'relative', aspectRatio: '16/9', background: 'var(--bg)', border: '1px solid var(--border)', overflow: 'hidden' }}>
+              <div className="dashboard-container">
                 <iframe 
                   width="100%" 
                   height="100%" 
@@ -86,8 +86,11 @@ export default function StartHerePage() {
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0 }}
+                  loading="lazy"
                 ></iframe>
+              </div>
+              <div className="dashboard-fallback">
+                <a href="https://youtu.be/5sXT6HuV61w" target="_blank">WATCH_MASTERCLASS_DIRECT // SECURE_EXTERNAL_LINK</a>
               </div>
             </div>
             
