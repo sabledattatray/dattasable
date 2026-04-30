@@ -187,11 +187,13 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
                 label: 'Edit',
                 icon: 'material-symbols:edit-outline-rounded',
                 onClick: async () => {
+                  console.log('Edit clicked for user:', params.row.name);
                   const currentRole = params.row.role;
                   const newRole = currentRole === 'ADMIN' ? 'USER' : 'ADMIN';
                   
                   if (window.confirm(`Change ${params.row.name}'s role from ${currentRole} to ${newRole}?`)) {
                     try {
+                      console.log('Sending PATCH request to update role...');
                       const res = await fetch('/api/admin/users', {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
@@ -199,13 +201,17 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
                       });
                       
                       if (res.ok) {
+                        console.log('Role updated successfully on server');
                         setRows((prev) => prev.map(u => u.id === params.row.id ? { ...u, role: newRole } : u));
+                        alert(`Successfully changed ${params.row.name} to ${newRole}`);
                       } else {
-                        alert('Failed to update user role');
+                        const errorData = await res.json();
+                        console.error('Failed to update role:', errorData);
+                        alert(`Failed to update: ${errorData.error || 'Unknown error'}`);
                       }
                     } catch (error) {
-                      console.error('Error updating user:', error);
-                      alert('Error updating user role');
+                      console.error('Network error during role update:', error);
+                      alert('Network error: Could not reach the server');
                     }
                   }
                 },
@@ -230,7 +236,7 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
         ),
       },
     ],
-    [],
+    [rows],
   );
 
   if (loading) {
