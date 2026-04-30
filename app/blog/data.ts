@@ -74,6 +74,43 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=2400&auto=format&fit=crop',
     tags: ['WordPress', 'Web Dev', 'Architecture']
   },
+  {
+    id: 'kb-shortcuts-2023',
+    slug: 'keyboard-mastery-ctrl-shortcuts',
+    title: 'Keyboard Mastery: Every CTRL A-Z Shortcut Explained (Marathi)',
+    category: 'Productivity',
+    excerpt: 'A definitive guide to accelerating your workflow using essential keyboard function logic and system shortcuts.',
+    content: `
+      <p>Efficiency in the modern technical workspace is often measured by how little you rely on the mouse. Mastering keyboard shortcuts is the first step toward becoming a high-performance engineer. In this session, we break down the entire CTRL A-Z spectrum.</p>
+      
+      <h3>Why Shortcuts Matter for Data Professionals</h3>
+      <p>When you are cleaning thousands of rows of data in Excel or writing complex SQL queries, every second saved on navigation adds up. By internalizing these shortcuts, you transition from "operating a computer" to "orchestrating a system."</p>
+      
+      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+        <iframe 
+          src="https://www.youtube.com/embed/FuM016Ze4K0" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        ></iframe>
+      </div>
+
+      <h3>Critical Shortcut Clusters:</h3>
+      <ul>
+        <li><strong>Editing Cluster:</strong> CTRL+C (Copy), CTRL+V (Paste), CTRL+X (Cut), CTRL+Z (Undo).</li>
+        <li><strong>Navigation Cluster:</strong> CTRL+F (Find), CTRL+H (Replace), CTRL+G (Go to).</li>
+        <li><strong>Selection Cluster:</strong> CTRL+A (Select All), CTRL+Shift+Arrows (Block Selection).</li>
+      </ul>
+      <p>For more productivity tips, check our <a href="/blog/modern-bi-stack-2026">2026 Technical Stack Guide</a>.</p>
+    `,
+    readTime: 10,
+    date: 'Jan 13, 2023',
+    color: '#34d399',
+    icon: '⌨️',
+    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83dadc?q=80&w=2400&auto=format&fit=crop',
+    tags: ['Productivity', 'Windows', 'Marathi']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
