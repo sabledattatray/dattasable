@@ -5,6 +5,8 @@
 ![Prisma](https://img.shields.io/badge/Prisma-5.0-blue.svg?logo=prisma)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.0-38B2AC.svg?logo=tailwind-css)
 ![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?logo=vercel)
+[![Mobile App](https://img.shields.io/badge/📱_Native_Android_App-ds--droid-3DDC84.svg)](https://github.com/sabledattatray/ds-droid)
+
 
 > **Engineering Data and Digital Infrastructure into Strategic Assets.** A high-performance, full-stack Business Intelligence, Automation, and Web Solutions portfolio designed for the 2026 digital landscape.
 
@@ -15,6 +17,7 @@
 This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap between complex data engineering, seamless automation, and executive-level digital storytelling. Built with a "Modern Tech Stack" philosophy, it features a blazingly fast Next.js frontend, a robust service portfolio, and a custom-built Admin Dashboard for managing large-scale content and project lifecycles.
 
 ### 🚀 Key Features
+- **Native Mobile Client**: Accompanied by a dedicated [Android Mobile App (ds-droid)](https://github.com/sabledattatray/ds-droid) for seamless cross-platform delivery.
 - **Elite Performance**: Sub-second load times with native `next/image` WebP optimization and edge-caching.
 - **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, n8n Automation, and CorelDRAW Graphic Design.
 - **Dynamic Knowledge Engine**: A high-authority blog featuring 33+ technical case studies and articles across specialized categories.
