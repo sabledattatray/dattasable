@@ -109,6 +109,27 @@ export default function StartHerePage() {
             </div>
           </div>
 
+          {/* 2025 Technical Series */}
+          <div style={{ marginTop: '5rem' }}>
+            <div className="label-tech mb-8">CURRENT-SERIES // 2025_DEPLOYMENTS</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="card p-8 border-l-4 border-[var(--accent)]">
+                <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Modern Web Orchestration (2025)</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                  A step-by-step 2025 series on establishing professional domains, WordPress environments, and custom theme engineering for high-performance deployments.
+                </p>
+                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[var(--accent)] tracking-widest hover:underline uppercase">Watch Full Series //</Link>
+              </div>
+              <div className="card p-8 border-l-4 border-[#00C9F2]">
+                <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Portfolio Architecture Walkthrough</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                  A detailed design showcase and technical walkthrough of the very platform you are currently browsing. Engineering clarity in action.
+                </p>
+                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">View Design Logic //</Link>
+              </div>
+            </div>
+          </div>
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '5rem' }}>
             {paths.map((path, idx) => (
               <div key={path.title} className="card h-full" style={{ padding: '2.5rem', borderTop: `4px solid ${path.color}` }}>
