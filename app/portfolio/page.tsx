@@ -10,6 +10,21 @@ const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
 
 const projects = [
   {
+    id: 9,
+    title: 'Flagship Enterprise BI Engine (MTD/LMTD)',
+    category: 'Analysis',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    color: 'var(--accent)',
+    tools: ['Power BI', 'Advanced DAX', 'MTD/LMTD Logic', 'Executive Suite'],
+    client: 'High-Fidelity Enterprise Showcase',
+    desc: 'The technical magnum opus: A 3-page executive engine featuring complex time-intelligence DAX (MTD, LMTD) and seamless cross-page navigation.',
+    problem: 'Executives needed multi-period comparisons (Month-over-Month) with sub-second recalculation across millions of regional records.',
+    solution: 'Engineered a 7-day high-intensity sprint resulting in a 3-tier intelligence layer (Overall, MTD, LMTD) with optimized DAX for executive-grade smoothing.',
+    impact: '7-Day Technical Sprint, Complex DAX Orchestration, Flagship Status',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: 'https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true',
+  },
+  {
     id: 0,
     title: 'Production Performance Engine (Sept 2025)',
     category: 'Dashboard',

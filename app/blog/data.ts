@@ -304,6 +304,46 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1526367790999-0150786486a9?q=80&w=2342&auto=format&fit=crop',
     tags: ['Q-Commerce', 'Retail', 'WIP']
   },
+  {
+    id: 'magnum-opus-mtd-lmtd-2026',
+    slug: 'architecting-mtd-lmtd-time-intelligence',
+    title: 'Architecting the Magnum Opus: A 7-Day Sprint into MTD/LMTD Intelligence',
+    category: 'Analysis',
+    excerpt: 'A deep-dive into the complex DAX time-intelligence logic used to build a 3-page flagship enterprise reporting engine.',
+    content: `
+      <p>True Business Intelligence is defined by the ability to compare performance across time with absolute precision. This "Magnum Opus" represents a 7-day technical sprint dedicated to mastering <strong>MTD (Month to Date)</strong> and <strong>LMTD (Last Month to Date)</strong> logic within a high-fidelity enterprise environment.</p>
+      
+      <h3>The Logic of Time-Intelligence</h3>
+      <p>Calculating MTD and LMTD is not just about simple filters. In this flagship project, we engineered custom DAX measures that handle fiscal calendar shifts and partial-month comparisons, ensuring that executives are always comparing "apples to apples." The 3-page architecture (Overall, MTD, LMTD) provides a layered narrative from high-level summaries to granular period-over-period deltas.</p>
+      
+      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
+        <h4 style="margin-bottom: 1.5rem;">Flagship Prototype: MY_DASH (MTD/LMTD)</h4>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+          <iframe 
+            src="https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true" 
+            frameborder="0" 
+            allowFullScreen="true"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          ></iframe>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Engineering Sprint: 7 Days // Logic: Advanced Time-Intelligence DAX</p>
+      </div>
+
+      <h3>Architectural Highlights:</h3>
+      <ul>
+        <li><strong>Cross-Page Synchronization:</strong> Maintaining filter context (Slicers) across the Overall, MTD, and LMTD views for a seamless UX.</li>
+        <li><strong>Smoothing Logic:</strong> Advanced DAX to "smooth" insights, eliminating noise and highlighting actionable performance trends.</li>
+        <li><strong>3-Tier Intelligence:</strong> A structured data story that scales from the Boardroom (Overall) to the Operations Floor (MTD/LMTD).</li>
+      </ul>
+      <p>For more on rapid retail analytics, see our <a href="/blog/architecting-q-commerce-dashboards">Q-Commerce Dev Log</a>.</p>
+    `,
+    readTime: 15,
+    date: 'May 01, 2026',
+    color: 'var(--accent)',
+    icon: '🏆',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Masterclass', 'DAX', 'Time-Intelligence']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
