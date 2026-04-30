@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -27,11 +27,14 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Services',
     links: [
-      { label: 'BI Consulting',      href: '/services', icon: BrainCircuit },
-      { label: 'Dashboard Design',   href: '/services', icon: PieChart },
-      { label: 'Data Modeling',      href: '/services', icon: Database },
-      { label: 'Python Automation',  href: '/services', icon: Code2 },
+      { label: 'BI Consulting',      href: '/services#consulting', icon: BrainCircuit },
+      { label: 'Dashboard Design',   href: '/services#dashboards', icon: PieChart },
+      { label: 'Web Solutions',      href: '/services#web-solutions', icon: Globe },
+      { label: 'Graphic Design',     href: '/services#graphic-design', icon: PenTool },
+      { label: 'SEO Optimization',   href: '/services#seo-optimization', icon: Sparkles },
+      { label: 'n8n Automation',     href: '/services#n8n-automation', icon: Zap },
     ],
+
   },
   {
     heading: 'Connect',
