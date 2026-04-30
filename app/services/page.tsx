@@ -55,7 +55,19 @@ const services = [
     color: 'var(--accent)',
     popular: false,
   },
+  {
+    icon: '🚀',
+    title: 'On-Page SEO Optimization',
+    id: 'seo-optimization',
+    desc: 'Technical SEO audits and on-page optimization strategies that align your content with search engine algorithms for maximum visibility.',
+    features: ['Keyword research & mapping', 'Meta tags & header optimization', 'Content gap analysis', 'Internal linking strategy', 'Image alt-text & compression', 'Core Web Vitals tuning'],
+    price: 'Starting at ₹10,000',
+    cta: 'Boost My Ranking',
+    color: 'var(--accent2)',
+    popular: false,
+  },
 ];
+
 
 
 const faqs = [
