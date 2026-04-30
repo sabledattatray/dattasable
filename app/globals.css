@@ -130,6 +130,13 @@ body {
 }
 
 
+.hero-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
 /* Section styling */
 .section {
   padding: clamp(4rem, 12vw, 8rem) 0;

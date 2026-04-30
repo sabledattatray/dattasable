@@ -23,7 +23,7 @@ export default function Hero() {
 
   return (
     <section
-      className="section"
+      className="section hero-grid"
       style={{ 
         minHeight: '600px', 
         height: 'auto',
