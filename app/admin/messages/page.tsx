@@ -92,7 +92,7 @@ export default function MessagesInbox() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button style={{ background: '#fef2f2', border: '1px solid #fee2e2', color: '#ef4444', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                  <button style={{ background: 'rgba(201, 243, 29, 0.05)', border: '1px solid rgba(201, 243, 29, 0.2)', color: 'var(--accent)', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
                   <button style={{ background: '#0f172a', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>Reply Message</button>
                 </div>
               </div>

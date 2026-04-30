@@ -11,6 +11,8 @@ const services = [
   {
     icon: '📊',
     title: 'Dashboard Development',
+    id: 'dashboards',
+
     desc: 'Custom, interactive dashboards in Tableau and Power BI that give your team real-time visibility into what matters most.',
     features: ['KPI tracking & monitoring', 'Drill-down & filter capabilities', 'Cross-platform compatibility', 'Automated data refresh', 'Executive-ready design', 'Mobile responsive'],
     price: 'Starting at ₹15,000',
@@ -21,6 +23,8 @@ const services = [
   {
     icon: '🔬',
     title: 'Data Analytics Consulting',
+    id: 'consulting',
+
     desc: 'End-to-end analytics strategy — from data audit to insight delivery. I help you understand your data and act on it.',
     features: ['Data audit & gap analysis', 'KPI framework design', 'SQL query optimization', 'Predictive modeling basics', 'Insight reporting', 'Team upskilling sessions'],
     price: 'Starting at ₹25,000',
@@ -31,6 +35,8 @@ const services = [
   {
     icon: '⚙️',
     title: 'Automation Solutions',
+    id: 'automation',
+
     desc: 'Eliminate manual reporting forever. Python & Excel VBA automation that runs your reports on autopilot.',
     features: ['Python ETL pipelines', 'Excel macro automation', 'Email report scheduling', 'API data integration', 'Error monitoring & alerts', 'Documentation & handover'],
     price: 'Starting at ₹20,000',
@@ -113,9 +119,11 @@ export default function ServicesPage() {
                     SYSTEM FAVORITE
                   </div>
                 )}
-                <div
-                  className="card"
-                  style={{
+                  <div
+                    className="card"
+                    id={s.id}
+                    style={{
+
                     padding: '2.5rem',
                     borderLeft: '2px solid',
                     borderImage: `linear-gradient(to bottom, ${s.color}, #00C9F2) 1`,

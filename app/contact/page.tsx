@@ -195,7 +195,7 @@ export default function ContactPage() {
                   )}
 
                   {status === 'error' && (
-                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444' }}>
+                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(201, 243, 29, 0.05)', border: '1px solid rgba(201, 243, 29, 0.2)', color: 'var(--accent)' }}>
                       <AlertCircle size={18} />
                       <span style={{ fontSize: '0.9rem' }}>{errorMessage || "Failed to send message. Please try again."}</span>
                     </motion.div>

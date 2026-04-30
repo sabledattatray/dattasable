@@ -76,13 +76,13 @@ function EditorContent() {
 
   const [previewMode, setPreviewMode] = useState(false);
 
-  // Basic auto-save simulation
   useEffect(() => {
     const timer = setInterval(() => {
-      console.log('Auto-saving draft...');
+      // Auto-save logic could go here
     }, 30000);
     return () => clearInterval(timer);
   }, []);
+
 
   return (
     <div className={`flex flex-col h-screen ${previewMode ? 'bg-white' : 'bg-[#f8fafc]'} text-slate-900 transition-colors`}>

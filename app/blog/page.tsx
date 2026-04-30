@@ -5,7 +5,10 @@ import BlogList from '@/components/BlogList';
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function BlogPage() {
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const resolvedParams = await searchParams;
+  const category = resolvedParams.category || 'All';
+
   const dbPosts = await prisma.post.findMany({
     where: { published: true },
     orderBy: { createdAt: 'desc' }
@@ -34,7 +37,7 @@ export default async function BlogPage() {
         </div>
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-          <BlogList initialPosts={posts as any} />
+          <BlogList initialPosts={posts as any} initialCategory={category} />
         </section>
 
         {/* ── Bottom-right Precision Crosshair ── */}

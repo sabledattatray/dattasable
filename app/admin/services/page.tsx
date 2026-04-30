@@ -37,7 +37,7 @@ export default function AdminServices() {
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button style={{ background: '#f1f5f9', border: 'none', color: '#64748b', cursor: 'pointer', padding: '8px', borderRadius: '8px' }}><Edit2 size={16} /></button>
-                <button style={{ background: '#fef2f2', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '8px', borderRadius: '8px' }}><Trash2 size={16} /></button>
+                <button style={{ background: 'rgba(201, 243, 29, 0.05)', border: 'none', color: 'var(--accent)', cursor: 'pointer', padding: '8px', borderRadius: '8px' }}><Trash2 size={16} /></button>
               </div>
             </div>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a', marginBottom: '8px' }}>{s.title}</h3>

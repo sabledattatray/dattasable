@@ -57,10 +57,10 @@ export default function StartHerePage() {
           </div>
 
           {/* Featured Legacy Workshop */}
-          <div className="card" style={{ marginTop: '5rem', padding: '3rem', borderLeft: '4px solid #FF0000', background: 'rgba(255,0,0,0.02)' }}>
+          <div className="card" style={{ marginTop: '5rem', padding: '3rem', borderLeft: '4px solid #c9f31d', background: 'rgba(201, 243, 29, 0.05)' }}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="label-tech mb-4" style={{ color: '#FF0000' }}>LEGACY-WORKSHOP // 2021</div>
+                <div className="label-tech mb-4" style={{ color: '#c9f31d' }}>LEGACY-WORKSHOP // 2021</div>
                 <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Full-Stack Web Orchestration Masterclass</h2>
                 <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '2rem' }}>
                   A comprehensive, 35-minute workshop demonstrating the engineering fundamentals of scalable digital infrastructure. This legacy session has helped over 9,000+ engineers establish their first web-based data environments.
@@ -97,7 +97,7 @@ export default function StartHerePage() {
             {/* Community Pulse - Social Proof */}
             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border)', display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: 40, height: 40, background: '#FF0000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                <div style={{ width: 40, height: 40, background: '#c9f31d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                   <Zap size={20} />
                 </div>
                 <div>
@@ -127,7 +127,7 @@ export default function StartHerePage() {
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   A detailed design showcase and technical walkthrough of the very platform you are currently browsing. Engineering clarity in action.
                 </p>
-                <Link href="https://youtu.be/n2Y6XvF1_eM" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">View Design Logic //</Link>
+                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">Watch Walkthrough //</Link>
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ const projects = [
     id: 9,
     title: 'Flagship Enterprise BI Engine (MTD/LMTD)',
     category: 'Analysis',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: '/images/dashboards/financial_pnl.png',
     color: 'var(--accent)',
     tools: ['Power BI', 'Advanced DAX', 'MTD/LMTD Logic', 'Executive Suite'],
     client: 'High-Fidelity Enterprise Showcase',
@@ -28,7 +28,7 @@ const projects = [
     id: 0,
     title: 'Production Performance Engine (Sept 2025)',
     category: 'Dashboard',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    image: '/images/dashboards/dashboard_1.png',
     color: 'var(--accent)',
     tools: ['Power BI', 'SQL', 'DAX', 'Real-Time Analytics'],
     client: 'Live Production Deployment',
@@ -58,8 +58,8 @@ const projects = [
     id: 7,
     title: 'Telecom Collection Intelligence (Vodafone)',
     category: 'Analysis',
-    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2340&auto=format&fit=crop',
-    color: '#E60000',
+    image: '/images/dashboards/fleet_logistics.png',
+    color: 'var(--accent)',
     tools: ['Power BI', 'Telecom CRM', 'SQL', 'Predictive Analysis'],
     client: 'Telecom Sector (Postpaid)',
     desc: 'Real-time collection summary engine for postpaid telecom customer portfolios, optimizing recovery rates and identifying high-risk segments.',
@@ -73,7 +73,7 @@ const projects = [
     id: 8,
     title: 'Q-Commerce Performance Engine (Beta)',
     category: 'Dashboard',
-    image: 'https://images.unsplash.com/photo-1526367790999-0150786486a9?q=80&w=2342&auto=format&fit=crop',
+    image: '/images/dashboards/ecommerce_journey.png',
     color: '#F9D100',
     tools: ['Power BI', 'ETL', 'Retail Analytics', 'WIP'],
     client: 'Blinkit Strategy Study',
@@ -251,9 +251,21 @@ const projects = [
   },
 ];
 
-export default function PortfolioPage() {
+export default function PortfolioPage({ searchParams }: { searchParams: any }) {
+  // Use a hack for client components to get search params if needed, or just use useSearchParams
   const [active, setActive] = useState('All');
   const [selected, setSelected] = useState<typeof projects[0] | null>(null);
+
+  // We'll use useEffect to handle the search params since this is a client component
+  useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('category');
+      if (cat && categories.includes(cat)) {
+        setActive(cat);
+      }
+    }
+  });
 
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
 
@@ -449,7 +461,7 @@ export default function PortfolioPage() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
                   {[
-                    { label: '🔴 THE CHALLENGE', text: selected.problem, color: '#ff4d4d' },
+                    { label: '🔴 THE CHALLENGE', text: selected.problem, color: 'var(--accent)' },
                     { label: '✅ THE ARCHITECTURE', text: selected.solution, color: 'var(--accent)' },
                   ].map(item => (
                     <div key={item.label} style={{ borderLeft: `2px solid ${item.color}`, paddingLeft: '1.5rem' }}>

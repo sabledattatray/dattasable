@@ -132,7 +132,7 @@ export default function ProjectsManager() {
                     <button 
                       onClick={() => handleDelete(p.id)} 
                       style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                      onMouseEnter={e => (e.currentTarget.style.background = '#fef2f2', e.currentTarget.style.color = '#ef4444')}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(201, 243, 29, 0.05)', e.currentTarget.style.color = 'var(--accent)')}
                       onMouseLeave={e => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
                     >
                       <Trash2 size={16} />

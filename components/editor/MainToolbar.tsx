@@ -35,7 +35,7 @@ export default function MainToolbar() {
   const [showColors, setShowColors] = useState(false);
 
   const editor = activeEditor;
-  const colors = ['#0f172a', '#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
+  const colors = ['#0f172a', '#c9f31d', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
 
   return (
     <div className={`editor-toolbar flex flex-wrap items-center gap-1 transition-all duration-300 ${!editor ? 'grayscale' : ''}`}>

@@ -20,9 +20,10 @@ interface Post {
   image: string | null;
 }
 
-export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
+export default function BlogList({ initialPosts, initialCategory = 'All' }: { initialPosts: Post[], initialCategory?: string }) {
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
+
 
   const categories = ['All', ...Array.from(new Set(initialPosts.map(p => p.category)))];
   const filtered = initialPosts.filter(p => {

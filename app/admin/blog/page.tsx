@@ -168,14 +168,14 @@ export default function AdminBlog() {
                 initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
                 style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2.5rem', maxWidth: '400px', textAlign: 'center', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}
               >
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fef2f2', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(201, 243, 29, 0.05)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                   <Trash2 size={30} />
                 </div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.75rem' }}>Delete Story?</h3>
                 <p style={{ color: '#64748b', fontSize: '14px', lineHeight: 1.6, marginBottom: '2rem' }}>This action is permanent and cannot be undone. The story will be removed from your public blog.</p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button onClick={() => setShowDeleteModal(false)} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                  <button onClick={confirmDelete} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: '#ef4444', border: 'none', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
+                  <button onClick={confirmDelete} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: 'var(--accent)', border: 'none', color: '#000', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
                 </div>
               </motion.div>
             </motion.div>
@@ -243,7 +243,7 @@ export default function AdminBlog() {
                       <button 
                         onClick={() => handleDeleteClick(post.id)} 
                         style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = '#fef2f2', e.currentTarget.style.color = '#ef4444')}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(201, 243, 29, 0.05)', e.currentTarget.style.color = 'var(--accent)')}
                         onMouseLeave={(e) => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
                       >
                         <Trash2 size={18} />
@@ -348,7 +348,7 @@ export default function AdminBlog() {
                 <button onClick={() => setShowTextColorPicker(!showTextColorPicker)} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Type size={18} /></button>
                 {showTextColorPicker && (
                   <div style={{ position: 'absolute', top: '100%', left: 0, background: '#ffffff', border: '1px solid #e2e8f0', padding: '8px', borderRadius: '12px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                    {['#000000', '#22c55e', '#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#00C9F2', '#ec4899'].map(c => (
+                    {['#000000', '#22c55e', '#c9f31d', '#3b82f6', '#10b981', '#f59e0b', '#00C9F2', '#ec4899'].map(c => (
                       <div key={c} onClick={() => { execCommand('foreColor', c); setShowTextColorPicker(false); }} style={{ width: '20px', height: '20px', background: c, borderRadius: '6px', cursor: 'pointer', border: '1px solid #f1f5f9' }} />
                     ))}
                   </div>
@@ -432,7 +432,7 @@ export default function AdminBlog() {
                   )}
                 </div>
                 <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
-                {formData.image && <button onClick={() => setFormData({...formData, image: ''})} style={{ marginTop: '8px', background: 'none', border: 'none', color: '#ef4444', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Remove image</button>}
+                {formData.image && <button onClick={() => setFormData({...formData, image: ''})} style={{ marginTop: '8px', background: 'none', border: 'none', color: 'var(--accent)', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Remove image</button>}
               </div>
 
               {/* Excerpt */}

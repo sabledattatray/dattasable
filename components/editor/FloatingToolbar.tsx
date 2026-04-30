@@ -14,7 +14,7 @@ export default function FloatingToolbar({ editor }: FloatingToolbarProps) {
     return null;
   }
 
-  const colors = ['#0f172a', '#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
+  const colors = ['#0f172a', '#c9f31d', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
 
   const Menu = BubbleMenu as any;
 
@@ -111,7 +111,7 @@ export default function FloatingToolbar({ editor }: FloatingToolbarProps) {
         >
           <LinkIcon size={15} />
         </button>
-        <button onClick={(e) => { e.preventDefault(); editor.chain().focus().unsetAllMarks().clearNodes().run() }} className="p-2 hover:bg-slate-100 transition-colors text-slate-500 hover:text-red-500">
+        <button onClick={(e) => { e.preventDefault(); editor.chain().focus().unsetAllMarks().clearNodes().run() }} className="p-2 hover:bg-slate-100 transition-colors text-slate-500 hover:text-[var(--accent)]">
           <Eraser size={15} />
         </button>
       </div>

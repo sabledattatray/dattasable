@@ -27,29 +27,29 @@ const navLinks = [
 const megaMenuData: Record<string, any> = {
   Services: {
     items: [
-      { title: 'BI Strategy', desc: 'Enterprise data roadmap planning.', icon: <Layers size={20} />, href: '/services#strategy' },
+      { title: 'BI Strategy', desc: 'Enterprise data roadmap planning.', icon: <Layers size={20} />, href: '/services#consulting' },
       { title: 'Dashboard Design', desc: 'Tableau & Power BI expert builds.', icon: <BarChart3 size={20} />, href: '/services#dashboards' },
       { title: 'Data Automation', desc: 'Python & SQL based pipelines.', icon: <Zap size={20} />, href: '/services#automation' },
-      { title: 'Predictive Modeling', desc: 'Statistical forecasting & AI.', icon: <Activity size={20} />, href: '/services#predictive' },
-      { title: 'Data Governance', desc: 'Security, compliance & quality.', icon: <Shield size={20} />, href: '/services#governance' },
+      { title: 'Predictive Modeling', desc: 'Statistical forecasting & AI.', icon: <Activity size={20} />, href: '/services#consulting' },
+      { title: 'Data Governance', desc: 'Security, compliance & quality.', icon: <Shield size={20} />, href: '/services#consulting' },
     ]
   },
   Portfolio: {
     items: [
-      { title: 'Case Studies', desc: 'Detailed project breakdowns.', icon: <Briefcase size={20} />, href: '/portfolio#cases' },
-      { title: 'Live Dashboards', desc: 'Interactive visual experiences.', icon: <Box size={20} />, href: '/portfolio#live' },
-      { title: 'Success Metrics', desc: 'Impact analysis & ROI data.', icon: <TrendingUp size={20} />, href: '/portfolio#metrics' },
-      { title: 'Client Portals', desc: 'Secure data sharing hubs.', icon: <Shield size={20} />, href: '/portfolio#portals' },
-      { title: 'UI/UX Design', desc: 'Figma-to-Dashboard excellence.', icon: <Box size={20} />, href: '/portfolio#uiux' },
+      { title: 'Interactive Dashboards', desc: 'Live visual experiences.', icon: <Box size={20} />, href: '/portfolio?category=Dashboard' },
+      { title: 'Technical Analysis', desc: 'Detailed project breakdowns.', icon: <Briefcase size={20} />, href: '/portfolio?category=Analysis' },
+      { title: 'Report Engineering', desc: 'High-fidelity data storytelling.', icon: <FileText size={20} />, href: '/portfolio?category=Report' },
+      { title: 'Automation Assets', desc: 'Scalable backend data logic.', icon: <Zap size={20} />, href: '/portfolio?category=Automation' },
+      { title: 'Success Metrics', desc: 'Impact analysis & ROI data.', icon: <TrendingUp size={20} />, href: '/portfolio' },
     ]
   },
   Blog: {
     items: [
-      { title: 'Tech Stack', desc: 'Latest tools & methodologies.', icon: <Code2 size={20} />, href: '/blog#tech' },
-      { title: 'Data Insights', desc: 'Market trends & analysis.', icon: <Sparkles size={20} />, href: '/blog#insights' },
-      { title: 'Tutorials', desc: 'Step-by-step technical guides.', icon: <FileText size={20} />, href: '/blog#tutorials' },
-      { title: 'AI Research', desc: 'Exploring LLMs and GPT.', icon: <Activity size={20} />, href: '/blog#ai' },
-      { title: 'BI Best Practices', desc: 'Efficiency & performance.', icon: <TrendingUp size={20} />, href: '/blog#best-practices' },
+      { title: 'Engineering', desc: 'Core tech stack & methodologies.', icon: <Code2 size={20} />, href: '/blog?category=Engineering' },
+      { title: 'Data Analysis', desc: 'Market trends & production insights.', icon: <Sparkles size={20} />, href: '/blog?category=Analysis' },
+      { title: 'Tutorials', desc: 'Step-by-step technical guides.', icon: <FileText size={20} />, href: '/blog?category=Tutorials' },
+      { title: 'AI Research', desc: 'Exploring LLMs and GPT in BI.', icon: <Activity size={20} />, href: '/blog?category=AI' },
+      { title: 'Architecture', desc: 'Enterprise design & standards.', icon: <TrendingUp size={20} />, href: '/blog?category=Architecture' },
     ]
   },
   Dashboards: {
