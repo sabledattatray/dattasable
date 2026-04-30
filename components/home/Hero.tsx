@@ -64,9 +64,9 @@ export default function Hero() {
             sizes="55vw"
             className="w-full h-auto"
           />
-          {/* Precise Dark Overlay for the Image Only */}
-          <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
         </div>
+        {/* Dark Overlay - Strictly for the Image Section */}
+        <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
         <div style={{
           position: 'absolute',
           inset: 0,
