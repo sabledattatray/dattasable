@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 
 declare global {
