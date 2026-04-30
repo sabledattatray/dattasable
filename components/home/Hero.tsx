@@ -92,7 +92,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           style={{ maxWidth: 640 }}
         >
-          <TechLabel>Technical Architecture</TechLabel>
+          <TechLabel>BI Engineer & Data Strategist</TechLabel>
           <h1
             className="hero-title"
             style={{
@@ -104,10 +104,10 @@ export default function Hero() {
               display: 'inline-block'
             }}
           >
-            Engineering data into<br />strategic assets
+            Engineering data into<br />strategic roadmaps
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
+            I simplify complex data ecosystems into actionable executive insights. From high-performance automation to intuitive dashboard architectures, I build systems that drive enterprise growth.
           </p>
           <div className="flex flex-col xs:flex-row flex-wrap gap-4">
             <Link href="/start-here" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>

@@ -107,11 +107,11 @@ export default function AboutPage() {
                   marginBottom: '2rem',
                   letterSpacing: '-0.04em'
                 }}>
-                  Engineering <br />
+                  Designing <br />
                   <span className="hero-title">Decision</span> Clarity.
                 </h1>
                 <p style={{ color: 'var(--muted)', maxWidth: 520, lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-                  I am Datta Sable, a Business Intelligence architect dedicated to transforming raw data noise into surgical strategic assets. My systems are built for one purpose: <span style={{ color: 'var(--text)' }}>Absolute decision confidence.</span>
+                  I am Datta Sable, a Business Intelligence specialist who bridges the gap between complex data and strategic action. I build automated systems that turn raw information into clear, confident decisions for stakeholders and organizations.
                 </p>
                 <div className="flex gap-4">
                   <Link href="/resume" className="btn-primary flex items-center gap-2" style={{ textDecoration: 'none', borderRadius: 0, padding: '1rem 2rem' }}>
