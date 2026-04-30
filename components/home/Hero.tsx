@@ -16,7 +16,7 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 
 export default function Hero() {
   const [isApp, setIsApp] = useState(false);
-  
+
   useEffect(() => {
     if ((window as any).Capacitor?.isNative) setIsApp(true);
   }, []);
@@ -31,27 +31,24 @@ export default function Hero() {
         alignItems: 'center', 
         position: 'relative', 
         overflow: 'hidden', 
-        paddingTop: '2rem',
-        paddingBottom: '5rem',
+        padding: '2rem 0',
         backgroundColor: 'var(--bg)',
         border: 'none'
       }}
     >
       {/* Layer 1: Right-Side Visual - Optimized with Mobile-First Strategy */}
       <div 
-        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none"
+        id="hero-visual-container"
+        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 lg:opacity-100 pointer-events-none overflow-hidden"
         style={{ 
-          aspectRatio: '800/600', 
-          // Removed background color for a cleaner, seamless look
-          // Web: No gradient (clean) | App: Stronger vibrant gradient
+          opacity: isApp ? 0.8 : 'var(--hero-mobile-opacity)',
           backgroundImage: isApp 
             ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
             : 'none',
-          backgroundSize: '100% 100%',
-          opacity: isApp ? 0.8 : 1.0
+          backgroundSize: '100% 100%'
         }}
       >
-        <div className="hidden lg:block w-full h-full">
+        <div className="w-full h-full">
           <Image 
             src="/hero-bg.webp"
             alt="Advanced Technical Data Visualization"
@@ -65,8 +62,13 @@ export default function Hero() {
             className="w-full h-auto"
           />
         </div>
-        {/* Dark Overlay - Strictly for the Image Section */}
-        <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
+        {/* Targeted Dark/Light Overlay: Bottom-Left to Middle-Left */}
+        <div 
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{ 
+            background: 'linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end))' 
+          }}
+        />
         <div style={{
           position: 'absolute',
           inset: 0,
@@ -91,14 +93,14 @@ export default function Hero() {
           style={{ maxWidth: 640 }}
         >
           <TechLabel>Technical Architecture</TechLabel>
-          <h1 
+          <h1
             className="hero-title"
-            style={{ 
-              fontSize: 'clamp(1.5rem, 8vw, 48px)', 
-              fontWeight: 600, 
-              letterSpacing: '-0.02em', 
-              lineHeight: 1.1, 
-              marginBottom: '1.5rem', 
+            style={{
+              fontSize: 'clamp(1.5rem, 8vw, 48px)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
+              marginBottom: '1.5rem',
               display: 'inline-block'
             }}
           >
