@@ -71,6 +71,7 @@ export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -190,14 +191,59 @@ export default function Navbar() {
               <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
                 <ThemeToggle />
                 {session ? (
-                  <div className="flex items-center gap-4">
-                      {(session.user as any)?.role === 'ADMIN' && (
-                        <div className="flex flex-col items-end">
-                          <span className="text-[12px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
-                          <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
-                        </div>
-                      )}
+                  <div className="relative">
+                    <button 
+                      onClick={() => setUserMenuOpen(!userMenuOpen)}
+                      className="flex items-center gap-3 px-3 py-1.5 hover:bg-white/5 rounded-lg transition-all border border-transparent hover:border-[var(--border)]"
+                    >
+                      <div className="flex flex-col items-end hidden sm:flex">
+                        <span className="text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
+                        <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">
+                          {(session.user as any)?.role || 'USER'}
+                        </span>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)]">
+                        <User size={16} />
+                      </div>
+                    </button>
 
+                    <AnimatePresence>
+                      {userMenuOpen && (
+                        <>
+                          <div 
+                            className="fixed inset-0 z-10" 
+                            onClick={() => setUserMenuOpen(false)}
+                          />
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute right-0 mt-2 w-48 bg-[var(--surface)] border border-[var(--border)] rounded-xl shadow-2xl z-20 overflow-hidden"
+                          >
+                            <div className="p-2 space-y-1">
+                              {(session.user as any)?.role === 'ADMIN' && (
+                                <Link 
+                                  href="/admin" 
+                                  onClick={() => setUserMenuOpen(false)}
+                                  className="flex items-center gap-3 px-3 py-2 text-[12px] font-bold text-[var(--text)] hover:bg-[var(--accent)] hover:text-black rounded-lg transition-all no-underline"
+                                >
+                                  <Settings size={14} /> DASHBOARD
+                                </Link>
+                              )}
+                              <button 
+                                onClick={() => {
+                                  setUserMenuOpen(false);
+                                  signOut();
+                                }}
+                                className="w-full flex items-center gap-3 px-3 py-2 text-[12px] font-bold text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                              >
+                                <LogOut size={14} /> SIGN OUT
+                              </button>
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
                   </div>
                 ) : (
                   <button 
