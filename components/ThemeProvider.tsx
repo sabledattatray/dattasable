@@ -24,8 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       console.warn('LocalStorage access denied:', e);
     }
 
-    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    const initialTheme = savedTheme || systemTheme;
+    const initialTheme = savedTheme || 'dark';
     
     setThemeState(initialTheme);
     document.documentElement.classList.toggle('light', initialTheme === 'light');
