@@ -100,8 +100,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
         </div>
 
         <div className="flex items-center gap-3 mb-8 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), var(--accent2))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}>
-            👨‍💻
+          <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0 }}>
+            <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 5%' }} />
           </div>
           <div>
             <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text)' }}>Datta Sable</div>
@@ -153,8 +153,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
         }}>
           <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--accent)' }} />
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), var(--accent2))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', flexShrink: 0 }}>
-              👨‍💻
+            <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--accent)', flexShrink: 0 }}>
+              <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 5%' }} />
             </div>
             <div>
               <div className="label-tech mb-2">VERIFIED-AUTHOR</div>

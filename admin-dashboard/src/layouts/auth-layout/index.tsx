@@ -1,86 +1,57 @@
 'use client';
+
 import { PropsWithChildren } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Image from 'components/base/Image';
 import Logo from 'components/common/Logo';
-const image = "/assets/images/illustrations/3.webp";
 
 const AuthLayout = ({ children }: PropsWithChildren) => {
   return (
-    <Grid
-      container
+    <Box
       sx={{
-        height: { md: '100vh' },
         minHeight: '100vh',
-        flexDirection: {
-          xs: 'column',
-          md: 'row',
-        },
+        width: '100%',
+        bgcolor: '#F9FAFB', // Reference gray background
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        py: 12,
+        px: 4
       }}
     >
-      <Grid
+      {/* Subtle Grain Overlay for Premium Look */}
+      <Box
         sx={{
-          borderRight: { md: 1 },
-          borderColor: { md: 'divider' },
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          opacity: 0.03,
+          zIndex: 50,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
         }}
-        size={{
-          xs: 12,
-          md: 6,
+      />
+
+      <Stack 
+        spacing={4} 
+        sx={{ 
+          width: '100%', 
+          maxWidth: '448px', // max-w-md
+          alignItems: 'center',
+          position: 'relative',
+          zIndex: 10
         }}
       >
-        <Stack
-          direction="column"
-          sx={{
-            justifyContent: 'space-between',
-            height: 1,
-            p: { xs: 3, sm: 5 },
-          }}
-        >
-          <Stack
-            sx={{
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mb: { xs: 5, md: 0 },
-            }}
-          >
-            <Logo />
-          </Stack>
-
-          <Stack
-            sx={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              display: { xs: 'none', md: 'flex', flexDirection: 'row-reverse' },
-            }}
-          >
-            <Box
-              sx={{
-                maxWidth: 600,
-                maxHeight: 390,
-              }}
-            >
-              <Image src={image} width="100%" height="100%" alt="auth" />
-            </Box>
-          </Stack>
-
-          <div />
-        </Stack>
-      </Grid>
-      <Grid
-        size={{
-          md: 6,
-          xs: 12,
-        }}
-        sx={{
-          display: { xs: 'flex', md: 'block' },
-          flexDirection: 'column',
-          flex: 1,
-        }}
-      >
-        {children}
-      </Grid>
-    </Grid>
+        <Box sx={{ mb: 2 }}>
+          <Logo />
+        </Box>
+        
+        <Box sx={{ width: '100%' }}>
+          {children}
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

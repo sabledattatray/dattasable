@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap');
 :root {
   --font-syne: 'Syne', sans-serif;
   --font-inter: 'Inter', sans-serif;
@@ -8,6 +9,8 @@
 
 @theme {
   --breakpoint-xs: 400px;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
 }
 
 :root {

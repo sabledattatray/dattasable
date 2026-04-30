@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShieldCheck, X } from 'lucide-react';
 
 export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith('/admin');
 
   useEffect(() => {
     let consent: string | null = null;
@@ -40,6 +43,8 @@ export default function CookieConsent() {
     setIsVisible(false);
   };
 
+  if (isAdmin) return null;
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -48,11 +53,9 @@ export default function CookieConsent() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-0 sm:bottom-6 left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[calc(100%-48px)] sm:max-w-[600px] bg-[var(--surface2)] border-t sm:border border-[var(--border)] p-5 sm:p-6 z-[9999] flex flex-col gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] sm:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          className="fixed bottom-0 sm:bottom-8 left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[calc(100%-48px)] sm:max-w-[640px] bg-[var(--surface2)] border-t sm:border border-[var(--border)] border-l-[4px] sm:border-l-[6px] border-l-[var(--accent)] sm:rounded-2xl z-[9999] flex flex-col gap-6 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] sm:shadow-[0_30px_70px_rgba(0,0,0,0.5)]"
+          style={{ padding: '24px 32px' }}
         >
-          {/* Decorative Corner */}
-          <div className="absolute top-0 left-0 w-1 sm:w-1.5 h-full bg-[var(--accent)]" />
-          
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
               <ShieldCheck className="text-[var(--accent)]" size={20} />

@@ -1,20 +1,53 @@
 'use client';
+
+const getSafeStorage = () => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return window.localStorage;
+    }
+  } catch (e) {
+    // Storage is blocked or unavailable
+  }
+  return null;
+};
+
 export const getItemFromStore = (
   key: string,
   defaultValue?: string | boolean,
-  store = localStorage,
+  store = getSafeStorage(),
 ) => {
+  if (!store) return defaultValue;
   try {
-    return store.getItem(key) === null ? defaultValue : JSON.parse(store.getItem(key) as string);
+    const item = store.getItem(key);
+    return item === null ? defaultValue : JSON.parse(item);
   } catch {
-    return store.getItem(key) || defaultValue;
+    try {
+      return store.getItem(key) || defaultValue;
+    } catch {
+      return defaultValue;
+    }
   }
 };
 
-export const setItemToStore = (key: string, payload: string, store = localStorage) =>
-  store.setItem(key, payload);
+export const setItemToStore = (key: string, payload: string, store = getSafeStorage()) => {
+  if (store) {
+    try {
+      store.setItem(key, payload);
+    } catch (e) {
+      // Storage might be full or blocked
+    }
+  }
+};
 
-export const removeItemFromStore = (key: string, store = localStorage) => store.removeItem(key);
+export const removeItemFromStore = (key: string, store = getSafeStorage()) => {
+  if (store) {
+    try {
+      store.removeItem(key);
+    } catch (e) {
+      // Storage blocked
+    }
+  }
+};
 
 export const getDates = (
   startDate: Date,
