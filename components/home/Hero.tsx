@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +15,12 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function Hero() {
+  const [isApp, setIsApp] = useState(false);
+  
+  useEffect(() => {
+    if ((window as any).Capacitor?.isNative) setIsApp(true);
+  }, []);
+
   return (
     <section
       className="section hero-grid"
@@ -34,9 +41,12 @@ export default function Hero() {
         style={{ 
           aspectRatio: '800/600', 
           backgroundColor: 'var(--surface2)',
-          // Simple CSS background for mobile to improve LCP immediately
-          backgroundImage: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)',
+          // Web: Subtle | App: Vibrant
+          backgroundImage: isApp 
+            ? 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)'
+            : 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)',
           backgroundSize: '100% 100%',
+          opacity: isApp ? 0.8 : undefined
         }}
       >
         <div className="hidden lg:block w-full h-full">
