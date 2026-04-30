@@ -95,11 +95,11 @@ export default function Navbar() {
     <>
       <header 
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 flex justify-center ${
-          scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-4 border-b border-[var(--border)]' : 'bg-transparent py-6'
+          scrolled ? 'bg-[var(--navbar-bg)] backdrop-blur-md py-2 border-b border-[var(--border)]' : 'bg-transparent py-3'
         }`}
       >
         <div className="w-full max-w-[1448px] lg:px-0" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-          <div className="flex items-center justify-between h-24 lg:h-20">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-1.5 group no-underline whitespace-nowrap flex-shrink-0">
               <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
