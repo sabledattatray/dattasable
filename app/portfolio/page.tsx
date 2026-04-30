@@ -160,7 +160,7 @@ const projects = [
     live: 'https://dattasable.com/blog',
   },
   {
-    id: 7,
+    id: 13,
     title: 'Warehouse IoT Monitoring',
     category: 'Automation',
     image: '/images/portfolio/iot.jpg',
@@ -175,7 +175,7 @@ const projects = [
     live: 'https://dattasable.com/dashboards',
   },
   {
-    id: 8,
+    id: 14,
     title: 'Retail Demand Forecaster',
     category: 'Analysis',
     image: '/images/portfolio/retail.jpg',
@@ -190,7 +190,7 @@ const projects = [
     live: 'https://dattasable.com/dashboards',
   },
   {
-    id: 9,
+    id: 15,
     title: 'Legal Document Classifier',
     category: 'Automation',
     image: '/images/portfolio/legal.jpg',
@@ -205,7 +205,7 @@ const projects = [
     live: 'https://dattasable.com/blog',
   },
   {
-    id: 10,
+    id: 16,
     title: 'Healthcare Patient Flow',
     category: 'Dashboard',
     image: '/images/portfolio/healthcare.jpg',
@@ -220,7 +220,7 @@ const projects = [
     live: 'https://dattasable.com/dashboards',
   },
   {
-    id: 11,
+    id: 17,
     title: 'SaaS Churn Analytics',
     category: 'Report',
     image: '/images/portfolio/saas.jpg',
@@ -235,7 +235,7 @@ const projects = [
     live: 'https://dattasable.com/blog',
   },
   {
-    id: 12,
+    id: 18,
     title: 'Energy Grid Load Forecast',
     category: 'Analysis',
     image: '/images/portfolio/energy.jpg',
