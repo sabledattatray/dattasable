@@ -1,4 +1,5 @@
-'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useBreakpoints } from 'providers/BreakpointsProvider';
 import Image from 'components/base/Image';
@@ -7,6 +8,15 @@ const image = "/assets/images/illustrations/1.webp";
 const Page404 = () => {
   const { up } = useBreakpoints();
   const upSm = up('sm');
+  const router = useRouter();
+
+  useEffect(() => {
+    // Automatically redirect to home after a short delay
+    const timer = setTimeout(() => {
+      window.location.href = '/';
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <Stack
       sx={{

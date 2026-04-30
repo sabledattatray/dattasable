@@ -91,6 +91,21 @@ export const authOptions: NextAuthOptions = {
     error: '/admin/login',
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // Allow OAuth without extra check since we auto-verify them on creation
+      // But for credentials, we must ensure they are verified in the DB
+      if (account?.provider === "credentials") {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email as string }
+        });
+
+        if (!dbUser?.emailVerified) {
+          throw new Error("EMAIL_NOT_VERIFIED");
+        }
+      }
+
+      return true;
+    },
     async jwt({ token, user, account }) {
       if (user) {
         const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim()) || [];

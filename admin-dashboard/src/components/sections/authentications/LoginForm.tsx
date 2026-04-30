@@ -7,9 +7,13 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router";
 import { signIn } from 'next-auth/react';
 
+import { useSearchParams } from 'next/navigation';
 import Logo from "components/common/Logo";
 
 export default function LoginForm() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,22 +22,23 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const errorMessage = error === 'CredentialsSignin' 
+    ? 'Invalid email or password' 
+    : error === 'EMAIL_NOT_VERIFIED'
+    ? 'Please verify your email address before logging in. Check your inbox for the link.'
+    : error ? 'An error occurred during sign in' : null;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login submitted:", formData);
     setIsSubmitted(true);
-    // Trigger actual sign in
     signIn('credentials', { 
       email: formData.email, 
       password: formData.password,
       callbackUrl: '/admin'
     });
-    // After 3 seconds, reset the submission state
-    setTimeout(() => setIsSubmitted(false), 3000);
   };
 
   const handleSocialLogin = (provider: string) => {
-    console.log(`Social login with ${provider} initiated`);
     signIn(provider.toLowerCase(), { callbackUrl: '/admin' });
   };
 
@@ -66,7 +71,23 @@ export default function LoginForm() {
           </CardHeader>
           
           <CardContent style={{ padding: '32px', paddingTop: '20px' }}>
-            {isSubmitted && (
+            {errorMessage && (
+              <div style={{ 
+                marginBottom: '20px', 
+                padding: '12px', 
+                backgroundColor: error === 'EMAIL_NOT_VERIFIED' ? '#fff7ed' : '#fef2f2', 
+                border: `1px solid ${error === 'EMAIL_NOT_VERIFIED' ? '#fb923c' : '#ef4444'}`, 
+                borderRadius: '6px', 
+                color: error === 'EMAIL_NOT_VERIFIED' ? '#9a3412' : '#991b1b', 
+                fontSize: '13px', 
+                textAlign: 'center', 
+                fontWeight: '500',
+                lineHeight: '1.4'
+              }}>
+                {errorMessage}
+              </div>
+            )}
+            {isSubmitted && !errorMessage && (
               <div style={{ marginBottom: '20px', padding: '12px', backgroundColor: '#ecfdf5', border: '1px solid #10b981', borderRadius: '6px', color: '#065f46', fontSize: '14px', textAlign: 'center', fontWeight: '600' }}>
                 Authenticating...
               </div>
