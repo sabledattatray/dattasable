@@ -42,6 +42,7 @@ const values = [
 ];
 
 const certifications = [
+  { name: 'Excel Data Analysis Masterclass', issuer: 'Coursera (Verified)', year: '2025' },
   { name: 'Tableau Desktop Specialist', issuer: 'Tableau / Salesforce', year: '2023' },
   { name: 'Google Data Analytics Pro', issuer: 'Google / Coursera', year: '2022' },
   { name: 'Microsoft Power BI Data Analyst', issuer: 'Microsoft', year: '2023' },
