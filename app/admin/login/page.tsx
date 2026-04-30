@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
         className="w-full max-w-[440px] z-10"
       >
         {/* Logo Section */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -91,8 +91,8 @@ export default function AdminLoginPage() {
           {/* Subtle line glow */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="mb-8 overflow-hidden">
-            <h1 className="font-display text-2xl font-bold mb-2 tracking-tight">Admin Login</h1>
+          <div className="mb-10 overflow-hidden">
+            <h1 className="font-display text-3xl font-bold mb-3 tracking-[-0.03em] text-white">Admin Login</h1>
             <p className="text-zinc-400 text-sm">Access your dashboard securely</p>
           </div>
 
@@ -171,7 +171,8 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="w-full h-12 bg-[#09090B] border border-zinc-800 rounded-xl pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
+                  className="w-full h-12 !bg-[#09090B] border border-zinc-800 rounded-xl pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
+                  style={{ colorScheme: 'dark' }}
                 />
               </div>
             </div>
@@ -189,7 +190,8 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full h-12 bg-[#09090B] border border-zinc-800 rounded-xl pl-10 pr-12 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
+                  className="w-full h-12 !bg-[#09090B] border border-zinc-800 rounded-xl pl-10 pr-12 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
+                  style={{ colorScheme: 'dark' }}
                 />
                 <button
                   type="button"
