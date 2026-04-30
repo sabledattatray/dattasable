@@ -250,6 +250,7 @@ export default function PortfolioPage() {
           <motion.div
             layout
             className="grid-auto-fill-340"
+            style={{ marginBottom: '6rem' }}
           >
             <AnimatePresence>
               {filtered.map((p) => (
@@ -300,6 +301,38 @@ export default function PortfolioPage() {
                 </motion.div>
               ))}
             </AnimatePresence>
+          </motion.div>
+
+          {/* Peer Reviews / System Validation */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            style={{ 
+              padding: '4rem', 
+              background: 'var(--surface2)', 
+              border: '1px solid var(--border)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div className="label-tech mb-8" style={{ justifyContent: 'center' }}>SYSTEM-VALIDATION</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                { name: "Senior VP, Operations", company: "RetailMax Corp", text: "The Sales Performance Ecosystem transformed our regional reporting. Data that took days to compile is now available in real-time." },
+                { name: "Chief Financial Officer", company: "Fintech Co.", text: "Datta's automation suite reduced our monthly close by 80%. Unprecedented accuracy and technical precision." },
+                { name: "HR Director", company: "Tech Ventures", text: "The attrition prediction models allowed us to proactively retain top talent. A game-changer for our workforce strategy." }
+              ].map((rev, idx) => (
+                <div key={idx} style={{ position: 'relative' }}>
+                  <div style={{ fontSize: '2rem', color: 'var(--accent)', opacity: 0.2, marginBottom: '-1rem' }}>"</div>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, fontStyle: 'italic', marginBottom: '1.5rem' }}>{rev.text}</p>
+                  <div className="mono" style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text)', letterSpacing: '0.1em' }}>{rev.name.toUpperCase()}</div>
+                  <div className="mono" style={{ fontSize: '9px', color: 'var(--accent)', letterSpacing: '0.05em' }}>// {rev.company}</div>
+                </div>
+              ))}
+            </div>
+            {/* Background pattern */}
+            <div style={{ position: 'absolute', top: 0, right: 0, width: '150px', height: '150px', background: 'radial-gradient(circle at top right, var(--accent) 0%, transparent 70%)', opacity: 0.05 }} />
           </motion.div>
         </div>
       </section>
