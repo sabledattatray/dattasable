@@ -144,12 +144,10 @@ export default function MobileMenu({
               {/* Drawer Footer */}
               <div className="p-6 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
                 {session ? (
-                   <button 
-                    onClick={signOut}
-                    className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase" 
-                  >
-                    SIGN OUT
-                  </button>
+                  <div className="py-4 text-center">
+                    <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
+                    <p className="text-sm font-bold text-[var(--text)]">{session.user?.name}</p>
+                  </div>
                 ) : (
                   <button 
                     onClick={() => {

@@ -197,13 +197,7 @@ export default function Navbar() {
                           <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">ADMIN</span>
                         </div>
                       )}
-                    <button 
-                      onClick={() => signOut()}
-                      className="w-8 h-8 flex items-center justify-center bg-[var(--surface2)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
-                      aria-label="Sign out"
-                    >
-                      <LogOut size={14} />
-                    </button>
+
                   </div>
                 ) : (
                   <button 
