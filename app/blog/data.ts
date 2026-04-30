@@ -156,7 +156,7 @@ export const posts = [
     date: 'Feb 12, 2026',
     color: '#3b82f6',
     icon: '📈',
-    image: '/images/blog/media__1777401497113.webp',
+    image: '/images/blog/bi_performance_hero_1777410226286.webp',
     tags: ['Sales', 'BI', 'Authorship']
   },
   {
