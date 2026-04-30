@@ -197,9 +197,6 @@ export default function Navbar() {
                         {(session.user as any)?.role || 'USER'}
                       </span>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)]">
-                      <User size={16} />
-                    </div>
                   </div>
                 ) : (
                   <button 
