@@ -24,74 +24,47 @@ const SignupForm = () => {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        overflow: 'hidden',
-        p: 2,
+        p: 3,
         background: (theme) => 
-          theme.palette.mode === 'dark' 
-            ? '#050505' 
-            : '#f8fafc',
+          theme.palette.mode === 'dark' ? '#050505' : '#f0f2f5',
       }}
     >
-      {/* Dynamic Background Accents */}
+      {/* Background Accents */}
       <Box sx={{ 
-        position: 'absolute', top: '-10%', left: '-5%', width: '40%', height: '40%', 
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)', 
-        filter: 'blur(80px)', zIndex: 0 
-      }} />
-      <Box sx={{ 
-        position: 'absolute', bottom: '-10%', right: '-5%', width: '40%', height: '40%', 
-        background: 'radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%)', 
-        filter: 'blur(80px)', zIndex: 0 
+        position: 'absolute', top: '20%', left: '10%', width: '30%', height: '30%', 
+        background: 'rgba(59, 130, 246, 0.1)', filter: 'blur(100px)', zIndex: 0 
       }} />
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        style={{ width: '100%', maxWidth: '480px', zIndex: 1 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        style={{ width: '100%', maxWidth: '420px', zIndex: 1 }}
       >
         <Box
           sx={{
-            p: { xs: 3, sm: 6 },
-            borderRadius: 6,
-            position: 'relative',
-            background: (theme) => 
-              theme.palette.mode === 'dark' 
-                ? 'rgba(255, 255, 255, 0.02)' 
-                : 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(20px)',
+            p: { xs: 3, sm: 5 },
+            borderRadius: 5,
+            bgcolor: 'background.paper',
             border: '1px solid',
-            borderColor: (theme) => 
-              theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
+            borderColor: 'divider',
             boxShadow: (theme) => 
               theme.palette.mode === 'dark' 
-                ? '0 30px 60px -12px rgba(0,0,0,0.8)' 
-                : '0 30px 60px -12px rgba(0,0,0,0.1)',
+                ? '0 25px 50px -12px rgba(0,0,0,0.7)' 
+                : '0 20px 40px -12px rgba(0,0,0,0.1)',
           }}
         >
-          {/* Top Gradient Line */}
-          <Box sx={{ 
-            position: 'absolute', top: 0, left: '10%', right: '10%', height: '2px',
-            background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)',
-            opacity: 0.5
-          }} />
-
-          <Stack spacing={4}>
+          <Stack spacing={3.5}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h3" sx={{ 
+              <Typography variant="h4" sx={{ 
                 fontFamily: 'Syne, sans-serif', 
                 fontWeight: 800, 
-                letterSpacing: '-0.04em',
-                mb: 1,
-                background: (theme) => theme.palette.mode === 'dark' 
-                  ? 'linear-gradient(135deg, #fff 0%, #a1a1aa 100%)'
-                  : 'linear-gradient(135deg, #000 0%, #4b5563 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                letterSpacing: '-0.02em',
+                mb: 0.5
               }}>
                 Get Started<span style={{ color: '#3b82f6' }}>.</span>
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+              <Typography variant="body2" color="text.secondary">
                 Join the exclusive Datta Sable network
               </Typography>
             </Box>
@@ -99,26 +72,26 @@ const SignupForm = () => {
             <SocialAuth />
 
             <Divider sx={{ 
-              '&::before, &::after': { borderColor: 'divider', borderTopStyle: 'dashed' },
               color: 'text.disabled',
-              fontSize: '0.65rem',
+              fontSize: '0.7rem',
+              fontWeight: 700,
               textTransform: 'uppercase',
-              fontWeight: 800,
-              letterSpacing: '0.2em'
+              letterSpacing: '0.1em'
             }}>
               Direct Access
             </Divider>
 
             <Box component="form" noValidate onSubmit={handleSubmit}>
-              <Stack spacing={2.5}>
+              <Stack spacing={2}>
                 <TextField
                   fullWidth
                   label="Full Name"
-                  placeholder="Enter your name"
+                  placeholder="Your Name"
+                  variant="outlined"
                   slotProps={{
                     input: {
-                      startAdornment: <User size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                      sx: { borderRadius: 3, height: 56 }
+                      startAdornment: <User size={18} style={{ marginRight: 12, opacity: 0.5 }} />,
+                      sx: { borderRadius: 2.5, bgcolor: 'action.hover' }
                     }
                   }}
                 />
@@ -126,21 +99,23 @@ const SignupForm = () => {
                   fullWidth
                   label="Email Address"
                   placeholder="name@email.com"
+                  variant="outlined"
                   slotProps={{
                     input: {
-                      startAdornment: <Mail size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                      sx: { borderRadius: 3, height: 56 }
+                      startAdornment: <Mail size={18} style={{ marginRight: 12, opacity: 0.5 }} />,
+                      sx: { borderRadius: 2.5, bgcolor: 'action.hover' }
                     }
                   }}
                 />
                 <PasswordTextField
                   fullWidth
                   label="Password"
-                  placeholder="Create a password"
+                  placeholder="••••••••"
+                  variant="outlined"
                   slotProps={{
                     input: {
-                      startAdornment: <Lock size={18} style={{ marginRight: 12, opacity: 0.4 }} />,
-                      sx: { borderRadius: 3, height: 56 }
+                      startAdornment: <Lock size={18} style={{ marginRight: 12, opacity: 0.5 }} />,
+                      sx: { borderRadius: 2.5, bgcolor: 'action.hover' }
                     }
                   }}
                 />
@@ -150,23 +125,16 @@ const SignupForm = () => {
                   type="submit" 
                   variant="contained"
                   sx={{ 
-                    height: 56,
-                    borderRadius: 3, 
+                    py: 1.5,
+                    borderRadius: 2.5, 
                     fontWeight: 800,
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     textTransform: 'none',
                     fontFamily: 'Syne, sans-serif',
-                    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                    boxShadow: '0 10px 20px -5px rgba(37, 99, 235, 0.4)',
-                    '&:hover': {
-                      background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-                      transform: 'translateY(-1px)',
-                      boxShadow: '0 15px 25px -5px rgba(37, 99, 235, 0.5)',
-                    },
-                    transition: 'all 0.2s ease-in-out'
+                    boxShadow: '0 8px 16px rgba(37, 99, 235, 0.2)',
                   }}
                 >
-                  Create My Account <ArrowRight size={18} style={{ marginLeft: 8 }} />
+                  Create Account <ArrowRight size={18} style={{ marginLeft: 8 }} />
                 </Button>
               </Stack>
             </Box>
@@ -179,7 +147,7 @@ const SignupForm = () => {
                   fontWeight: 700, 
                   color: 'primary.main', 
                   textDecoration: 'none',
-                  '&:hover': { color: '#3b82f6', textDecoration: 'underline' }
+                  '&:hover': { textDecoration: 'underline' }
                 }}
               >
                 Sign In
@@ -188,10 +156,10 @@ const SignupForm = () => {
           </Stack>
         </Box>
 
-        <Stack direction="row" spacing={1} sx={{ mt: 4, justifyContent: 'center', alignItems: 'center', opacity: 0.5 }}>
+        <Stack direction="row" spacing={1} sx={{ mt: 3, justifyContent: 'center', alignItems: 'center', opacity: 0.4 }}>
           <ShieldCheck size={14} />
-          <Typography variant="caption" sx={{ fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-            Enterprise Grade Security
+          <Typography variant="caption" sx={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            Secure Authentication
           </Typography>
         </Stack>
       </motion.div>
