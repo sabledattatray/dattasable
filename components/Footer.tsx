@@ -231,7 +231,7 @@ export default function Footer() {
                 gap: '0.65rem' 
               }}
             >
-              {['Tableau', 'Power BI', 'SQL', 'Python', 'ETL', 'DAX'].map((tool) => (
+              {['Tableau', 'Power BI', 'SQL', 'Python', 'CorelDRAW', 'ETL'].map((tool) => (
                 <span
                   key={tool}
                   style={{
@@ -250,6 +250,7 @@ export default function Footer() {
                   {tool}
                 </span>
               ))}
+
             </div>
           </div>
         </div>

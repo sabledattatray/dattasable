@@ -71,8 +71,9 @@ const services = [
     title: 'Custom Web Design',
     id: 'web-design',
     desc: 'Bespoke, high-fidelity UI/UX designs that balance aesthetic excellence with functional performance for a premium digital presence.',
-    features: ['High-fidelity UI/UX design', 'Responsive & adaptive layouts', 'Custom iconography & assets', 'Interactive prototypes', 'Brand identity integration', 'Performance-first architecture'],
+    features: ['High-fidelity UI/UX design', 'CorelDRAW Asset Creation', 'Responsive & adaptive layouts', 'Custom iconography', 'Brand identity integration', 'Performance-first architecture'],
     price: 'Starting at ₹25,000',
+
     cta: 'Start Designing',
     color: 'var(--accent3)',
     popular: false,
