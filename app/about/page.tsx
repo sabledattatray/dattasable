@@ -134,6 +134,8 @@ export default function AboutPage() {
                 }}>
                   <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6))' }} />
+                </div>
+                
                 {/* Outer tech frame */}
                 <div style={{ 
                   position: 'absolute', inset: 0, 
