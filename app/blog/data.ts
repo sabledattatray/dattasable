@@ -111,6 +111,39 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1587829741301-dc798b83dadc?q=80&w=2400&auto=format&fit=crop',
     tags: ['Productivity', 'Windows', 'Marathi']
   },
+  {
+    id: 'marathi-typing-2022',
+    slug: 'mastering-marathi-typing-windows',
+    title: 'Digital Localization: Mastering Marathi Input on Windows 10/11',
+    category: 'Productivity',
+    excerpt: 'A technical guide to enabling and optimizing regional language input for professional data environments.',
+    content: `
+      <p>In a globalized data economy, the ability to operate in regional languages is a significant competitive advantage. For professionals in Maharashtra, localizing your technical environment ensures better communication with stakeholders and more accurate regional reporting. In this guide, we master Marathi input orchestration.</p>
+      
+      <h3>Technical Setup for Regional Input</h3>
+      <p>Modern Windows environments (10/11) have robust support for Indic languages, but the configuration requires specific steps to ensure compatibility across professional software like Excel, Power BI, and SQL Management Studio.</p>
+      
+      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+        <iframe 
+          src="https://www.youtube.com/embed/2Vv1CzLDIIk" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        ></iframe>
+      </div>
+
+      <h3>Why Localization Matters for BI</h3>
+      <p>Analytics is about storytelling. When your audience is regional, your dashboards should speak their language. Proper font rendering and input methods ensure that your Marathi-language reports are not just accurate, but visually professional and authoritative.</p>
+      <p>For more productivity workshops, explore our <a href="/blog/keyboard-mastery-ctrl-shortcuts">Keyboard Mastery Guide</a>.</p>
+    `,
+    readTime: 5,
+    date: 'Jan 31, 2022',
+    color: '#eab308',
+    icon: '🇮🇳',
+    image: 'https://images.unsplash.com/photo-1595231776515-99b1746daee1?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Marathi', 'Windows', 'Localization']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
