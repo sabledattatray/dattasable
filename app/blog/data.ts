@@ -264,6 +264,46 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2340&auto=format&fit=crop',
     tags: ['Telecom', 'Analytics', 'Collections']
   },
+  {
+    id: 'q-commerce-dev-log-2026',
+    slug: 'architecting-q-commerce-dashboards',
+    title: 'Development Log: Architecting a Q-Commerce Dashboard (Blinkit Dataset)',
+    category: 'Analysis',
+    excerpt: 'A Work-in-Progress (WIP) look at the architectural challenges of real-time sales velocity tracking in the quick-commerce sector.',
+    content: `
+      <p>The rise of Q-Commerce (Quick Commerce) has redefined the technical requirements for retail dashboards. In this <strong>Development Log</strong>, we explore the beta stage of our <strong>Blinkit Analysis Engine</strong>, currently at 40% architectural completion.</p>
+      
+      <h3>The Challenge of Sales Velocity</h3>
+      <p>Unlike traditional retail, Q-Commerce operates in minutes. Tracking <strong>Average Sales per Minute</strong> and <strong>Revenue per Delivery Window</strong> requires a data model that can handle rapid refreshes without compromising on analytical depth. In the current beta, we have successfully mapped the core revenue generation streams and established the category-level performance metrics.</p>
+      
+      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
+        <h4 style="margin-bottom: 1.5rem;">Beta Showcase: Q-Commerce Engine</h4>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+          <iframe 
+            src="https://app.powerbi.com/view?r=eyJrIjoiMTQxZTc5NzctMjBiZi00OTJjLThmMDYtMjRmMWE2OTAyMWU1IiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+            frameborder="0" 
+            allowFullScreen="true"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          ></iframe>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Current Status: Beta // Focus: Revenue & Sales Velocity</p>
+      </div>
+
+      <h3>Technical Roadmap (Next Phase):</h3>
+      <ul>
+        <li><strong>Delivery Latency Mapping:</strong> Integrating geospatial data to analyze "Last Mile" performance.</li>
+        <li><strong>Inventory Predictive Alerts:</strong> Developing DAX logic to flag stock-outs before they occur.</li>
+        <li><strong>Advanced Basket Analysis:</strong> Identifying cross-sell opportunities in sub-10 minute delivery contexts.</li>
+      </ul>
+      <p>For more on multi-sector analytics, see our <a href="/blog/telecom-collection-optimization-strategies">Telecom Recovery Guide</a>.</p>
+    `,
+    readTime: 6,
+    date: 'Apr 20, 2026',
+    color: '#F9D100',
+    icon: '⚡',
+    image: 'https://images.unsplash.com/photo-1526367790999-0150786486a9?q=80&w=2342&auto=format&fit=crop',
+    tags: ['Q-Commerce', 'Retail', 'WIP']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
