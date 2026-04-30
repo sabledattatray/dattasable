@@ -21,7 +21,7 @@ export default function StartHerePage() {
       title: "Advanced BI & Visualization",
       desc: "Master the art of high-stakes executive reporting using industry-leading tools.",
       icon: <BarChart3 size={24} />,
-      color: "#00C9F2",
+      color: "var(--accent)",
       links: [
         { name: "Mastering Tableau LOD Expressions", href: "/blog/tableau-lods-tutorial" },
         { name: "7 UX Principles for Dashboards", href: "/blog/dashboard-ux-principles" },
@@ -32,13 +32,14 @@ export default function StartHerePage() {
       title: "Automation & Intelligence",
       desc: "Leverage Python and AI to automate the mundane and focus on strategic insights.",
       icon: <BrainCircuit size={24} />,
-      color: "#00d4ff",
+      color: "var(--accent)",
       links: [
         { name: "Building Pipelines with Python & Prefect", href: "/blog/python-automation-pipelines" },
         { name: "Integrating GenAI into Tableau", href: "/blog/generative-ai-bi-dashboards" },
         { name: "Building a BI Scraper with Selenium", href: "/blog/python-selenium-bi-scraper" },
       ]
     }
+
   ];
 
   return (
@@ -122,12 +123,12 @@ export default function StartHerePage() {
                 </p>
                 <Link href="https://youtu.be/PtrHTCjT-6I" target="_blank" className="mono text-[10px] text-[var(--accent)] tracking-widest hover:underline uppercase">Watch Full Series //</Link>
               </div>
-              <div className="card p-8 border-l-4 border-[#00C9F2]">
+              <div className="card p-8 border-l-4 border-[var(--accent)]">
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Portfolio Architecture Walkthrough</h3>
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   A detailed design showcase and technical walkthrough of the very platform you are currently browsing. Engineering clarity in action.
                 </p>
-                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">Watch Walkthrough //</Link>
+                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[var(--accent)] tracking-widest hover:underline uppercase">Watch Walkthrough //</Link>
               </div>
             </div>
           </div>
