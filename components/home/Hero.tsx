@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
+import { Table, Database, BarChart3, Layers, Code2, BookOpen } from 'lucide-react';
 
 function TechLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -110,8 +110,11 @@ export default function Hero() {
             High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
           </p>
           <div className="flex flex-col xs:flex-row flex-wrap gap-4">
-            <Link href="/portfolio" className="btn-primary w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-              INITIALIZE SYSTEM
+            <Link href="/start-here" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
+              <BookOpen size={16} /> START HERE
+            </Link>
+            <Link href="/portfolio" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+              VIEW PROJECTS
             </Link>
             <Link href="/contact" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
               ESTABLISH CONTACT

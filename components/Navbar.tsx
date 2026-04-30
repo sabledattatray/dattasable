@@ -16,11 +16,10 @@ const MobileMenu = dynamic(() => import('./MobileMenu'), { ssr: false });
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
-  { label: 'Home', href: '/' },
+  { label: 'Start Here', href: '/start-here' },
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
-  { label: 'Dashboards', href: '/dashboards', mega: true },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

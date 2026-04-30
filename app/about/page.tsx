@@ -197,7 +197,6 @@ export default function AboutPage() {
 
               {/* STATS: SIDE-BY-SIDE */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-                {/* Card 01: Infrastructure */}
                 <div className="card" style={{ padding: '2rem', position: 'relative' }}>
                   <div className="mono" style={{ fontSize: '10px', color: 'var(--accent)', marginBottom: '1.5rem' }}>INFRASTRUCTURE_STATS:</div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '2rem' }}>
@@ -213,7 +212,6 @@ export default function AboutPage() {
                   <div style={{ position: 'absolute', top: 0, right: 0, width: '4px', height: '4px', background: 'var(--accent)' }} />
                 </div>
 
-                {/* Card 02: Reliability */}
                 <div className="card" style={{ padding: '2rem', position: 'relative' }}>
                   <div className="mono" style={{ fontSize: '10px', color: 'var(--accent2)', marginBottom: '1.5rem' }}>RELIABILITY_LOGS:</div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '2rem' }}>
@@ -230,9 +228,27 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* SKILLS: 4-COLUMN GRID */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '5rem' }}>
                 {skills.map(s => <SkillItem key={s.name} {...s} />)}
+              </div>
+
+              {/* Publications / Thought Leadership */}
+              <div style={{ marginTop: '5rem' }}>
+                <div className="label-tech mb-4">THOUGHT-LEADERSHIP</div>
+                <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Publications & Insights</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: 'The Future of Real-Time BI', platform: 'Data Engineering Weekly', date: '2025' },
+                    { title: 'Automating Enterprise MIS', platform: 'Analytics India Magazine', date: '2024' },
+                    { title: 'Predictive Risk Models in Banking', platform: 'FinTech Journal', date: '2023' },
+                    { title: 'Scalable Dashboard Architectures', platform: 'Tableau Community Showcase', date: '2024' }
+                  ].map(pub => (
+                    <div key={pub.title} className="card p-6 border-l-4 border-[var(--accent)]">
+                      <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '0.5rem' }}>{pub.platform} // {pub.date}</div>
+                      <h4 style={{ fontSize: '1.1rem', fontWeight: 600 }}>{pub.title}</h4>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

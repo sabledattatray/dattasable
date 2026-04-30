@@ -62,13 +62,23 @@ export default function BlogPostContent({ post }: { post: Post }) {
       <div id="reading-progress" className="reading-progress" style={{ width: '0%', height: '3px', position: 'fixed', top: 0, left: 0, background: 'var(--accent)', zIndex: 101, transition: 'width 0.1s ease' }} />
       
       <div className="container" style={{ maxWidth: 760 }}>
-        <Link
-          href="/blog"
-          className="flex items-center gap-2 mb-8"
-          style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}
-        >
-          <ChevronLeft size={16} /> BACK TO LOGS
-        </Link>
+        <div className="flex flex-col gap-6 mb-8">
+          <Link
+            href="/blog"
+            className="flex items-center gap-2"
+            style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}
+          >
+            <ChevronLeft size={16} /> BACK TO LOGS
+          </Link>
+          
+          <nav className="flex items-center gap-2 mono text-[10px] text-[var(--muted)] opacity-60 uppercase tracking-widest">
+            <Link href="/" className="hover:text-[var(--accent)]">HOME</Link>
+            <span>/</span>
+            <Link href="/blog" className="hover:text-[var(--accent)]">BLOG</Link>
+            <span>/</span>
+            <span className="text-[var(--accent)] truncate max-w-[200px]">{post.category}</span>
+          </nav>
+        </div>
 
         <div className="flex items-center gap-3 mb-4">
           <span className="tag" style={{ color: post.color || '#c9f31d', borderColor: `${post.color || '#c9f31d'}44` }}>{post.category}</span>
