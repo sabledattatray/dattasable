@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 
@@ -88,10 +89,13 @@ export default function BlogPostContent({ post }: { post: Post }) {
           overflow: 'hidden',
           border: '1px solid var(--border)'
         }}>
-          <img 
+          <Image 
             src={post.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'} 
             alt={post.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            fill
+            priority
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 760px"
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.4))' }} />
           <div className="mono" style={{ position: 'absolute', bottom: '15px', right: '15px', fontSize: '10px', color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)', padding: '4px 10px', letterSpacing: '0.2em' }}>
@@ -100,8 +104,14 @@ export default function BlogPostContent({ post }: { post: Post }) {
         </div>
 
         <div className="flex items-center gap-3 mb-8 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0 }}>
-            <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 5%' }} />
+          <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0, position: 'relative' }}>
+            <Image 
+              src="/images/datta.png" 
+              alt="Datta Sable" 
+              width={40}
+              height={40}
+              style={{ objectFit: 'cover', objectPosition: 'center 5%' }} 
+            />
           </div>
           <div>
             <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text)' }}>Datta Sable</div>
@@ -153,8 +163,14 @@ export default function BlogPostContent({ post }: { post: Post }) {
         }}>
           <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--accent)' }} />
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--accent)', flexShrink: 0 }}>
-              <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 5%' }} />
+            <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--accent)', flexShrink: 0, position: 'relative' }}>
+              <Image 
+                src="/images/datta.png" 
+                alt="Datta Sable" 
+                width={80}
+                height={80}
+                style={{ objectFit: 'cover', objectPosition: 'center 5%' }} 
+              />
             </div>
             <div>
               <div className="label-tech mb-2">VERIFIED-AUTHOR</div>

@@ -9,15 +9,23 @@ const AuthLayout = ({ children }: PropsWithChildren) => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        height: '100vh',
         width: '100%',
-        bgcolor: '#F9FAFB', // Reference gray background
+        background: `
+          radial-gradient(at 0% 0%, hsla(253,16%,12%,1) 0, transparent 40%), 
+          radial-gradient(at 50% 0%, hsla(225,39%,10%,1) 0, transparent 40%), 
+          radial-gradient(at 100% 0%, hsla(339,49%,10%,1) 0, transparent 40%), 
+          radial-gradient(at 50% 100%, hsla(208,100%,5%,1) 0, transparent 40%), 
+          radial-gradient(at 0% 100%, hsla(242,100%,10%,1) 0, transparent 40%), 
+          radial-gradient(at 100% 100%, hsla(339,49%,10%,1) 0, transparent 40%)
+        `,
+        backgroundColor: '#000000',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        py: 12,
+        overflow: 'hidden',
         px: 4
       }}
     >
@@ -43,10 +51,6 @@ const AuthLayout = ({ children }: PropsWithChildren) => {
           zIndex: 10
         }}
       >
-        <Box sx={{ mb: 2 }}>
-          <Logo />
-        </Box>
-        
         <Box sx={{ width: '100%' }}>
           {children}
         </Box>

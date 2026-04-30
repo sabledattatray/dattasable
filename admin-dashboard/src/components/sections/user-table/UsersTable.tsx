@@ -192,10 +192,22 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
       {
         field: 'createdAt',
         headerName: 'Joined',
-        width: 180,
+        width: 150,
         renderCell: (params: GridRenderCellParams<User>) => (
           <Typography variant="caption">
             {dayjs(params.row.createdAt).format('MMM DD, YYYY')}
+          </Typography>
+        ),
+      },
+      {
+        field: 'lastLoginAt',
+        headerName: 'Last Login',
+        width: 180,
+        renderCell: (params: GridRenderCellParams<User>) => (
+          <Typography variant="caption" sx={{ color: params.row.lastLoginAt ? 'text.primary' : 'text.disabled' }}>
+            {params.row.lastLoginAt 
+              ? dayjs(params.row.lastLoginAt).format('MMM DD, hh:mm A') 
+              : 'Never'}
           </Typography>
         ),
       },

@@ -17,6 +17,7 @@ const paths = {
   documentation: documentationPath,
   settings: '/settings',
   realTime: '/real-time',
+  auditLogs: '/audit-logs',
 
   cms: {
     posts: '/cms/posts',

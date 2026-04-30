@@ -10,5 +10,6 @@ export interface User {
   phone: string;
   location: string;
   createdAt: string;
+  lastLoginAt?: string;
   provider?: string;
 }

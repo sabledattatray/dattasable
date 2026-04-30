@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostContent from '@/components/BlogPostContent';
 
-export const revalidate = 0;
+export const revalidate = 3600; // Revalidate every 1 hour
 
 interface Props {
   params: Promise<{ slug: string }>;

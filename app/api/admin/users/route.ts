@@ -39,7 +39,8 @@ export async function GET() {
       department: 'N/A',
       phone: 'N/A',
       location: 'N/A',
-      createdAt: user.id.includes('cuid') ? new Date().toISOString() : new Date().toISOString(), // Fallback
+      createdAt: user.createdAt,
+      lastLoginAt: user.lastLoginAt,
     }));
 
     return NextResponse.json(formattedUsers);

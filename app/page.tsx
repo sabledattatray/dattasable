@@ -1,9 +1,17 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
+import dynamic from 'next/dynamic';
 import Hero from '@/components/home/Hero';
-import StatsGrid from '@/components/home/StatsGrid';
-import ProjectsGrid from '@/components/home/ProjectsGrid';
+
+// Dynamic imports for below-the-fold components (Speed Optimization)
+const StatsGrid = dynamic(() => import('@/components/home/StatsGrid'), { 
+  loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
+});
+
+const ProjectsGrid = dynamic(() => import('@/components/home/ProjectsGrid'), { 
+  loading: () => <div className="h-[600px] bg-[var(--surface2)] animate-pulse" />
+});
 
 export default function HomePage() {
   return (

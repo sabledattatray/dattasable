@@ -6,6 +6,7 @@ import BreakpointsProvider from 'providers/BreakpointsProvider';
 import SettingsPanelProvider from 'providers/SettingsPanelProvider';
 import SettingsProvider from 'providers/SettingsProvider';
 import ThemeProvider from 'providers/ThemeProvider';
+import { SessionProvider } from 'next-auth/react';
 import router from 'routes/router';
 
 createRoot(document.getElementById('root')!).render(
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <BreakpointsProvider>
           <SettingsPanelProvider>
-            <RouterProvider router={router} />
+            <SessionProvider>
+              <RouterProvider router={router} />
+            </SessionProvider>
           </SettingsPanelProvider>
         </BreakpointsProvider>
       </ThemeProvider>

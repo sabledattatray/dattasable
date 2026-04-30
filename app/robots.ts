@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/dashboard/'], // Protect private routes
+      disallow: ['/api/', '/dashboard/', '/admin/'], // Protect private routes
     },
     sitemap: 'https://dattasable.com/sitemap.xml',
   };

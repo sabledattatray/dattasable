@@ -85,18 +85,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Datta Sable",
-              "url": "https://dattasable.com",
-              "jobTitle": "Business Intelligence Expert",
-              "description": "Expert in Tableau, Power BI, SQL, Python & Advanced Excel.",
-              "sameAs": [
-                "https://linkedin.com/in/dattasable",
-                "https://github.com/dattasable"
-              ]
-            })
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Datta Sable",
+                "url": "https://dattasable.com",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://dattasable.com/blog?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Datta Sable",
+                "url": "https://dattasable.com",
+                "jobTitle": "Business Intelligence Expert",
+                "description": "Expert in Tableau, Power BI, SQL, Python & Advanced Excel.",
+                "sameAs": [
+                  "https://linkedin.com/in/dattasable",
+                  "https://github.com/dattasable"
+                ]
+              }
+            ])
           }}
         />
         <script

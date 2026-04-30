@@ -12,13 +12,13 @@
   --font-display: "Syne", sans-serif;
 }
 
-/* Global Autofill Reset */
+/* Global Autofill Reset - Theme Aware */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #09090B inset !important;
-  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 

@@ -28,6 +28,10 @@ export const authOptions: NextAuthOptions = {
             throw new Error("Invalid login credentials");
           }
 
+          if (!user.emailVerified) {
+            throw new Error("Please verify your email before logging in.");
+          }
+
           const isPasswordValid = await bcrypt.compare(
             credentials.password,
             user.password
@@ -96,18 +100,35 @@ export const authOptions: NextAuthOptions = {
         try {
           const dbUser = await prisma.user.upsert({
             where: { email: user.email as string },
-            update: { name: user.name, image: (user as any).image },
+            update: { 
+              name: user.name, 
+              image: (user as any).image,
+              lastLoginAt: new Date()
+            },
             create: {
               email: user.email as string,
               name: user.name,
               role: role,
               image: (user as any).image,
+              lastLoginAt: new Date(),
+              emailVerified: account ? new Date() : null, // Auto-verify OAuth users
             }
           });
+
+          // Log the login action
+          await prisma.auditLog.create({
+            data: {
+              userId: dbUser.id,
+              action: "LOGIN",
+              status: "SUCCESS",
+              details: `User logged in via ${account?.provider || 'credentials'}`,
+            }
+          });
+
           token.id = dbUser.id;
           token.role = dbUser.role;
         } catch (error) {
-          console.error("Error upserting user:", error);
+          console.error("Error updating user activity:", error);
           token.id = user.id;
           token.role = role;
         }

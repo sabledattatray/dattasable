@@ -53,6 +53,13 @@ const sitemap: MenuItem[] = [
         active: true,
       },
       {
+        name: 'Audit Logs',
+        path: paths.auditLogs,
+        pathName: 'audit-logs',
+        icon: 'material-symbols:history-rounded',
+        active: true,
+      },
+      {
         name: 'Account',
         key: 'account',
         path: paths.account,

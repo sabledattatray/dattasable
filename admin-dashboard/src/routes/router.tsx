@@ -17,12 +17,14 @@ const Settings = lazy(() => import('pages/others/Settings'));
 
 const Login = lazy(() => import('pages/authentication/Login'));
 const Signup = lazy(() => import('pages/authentication/Signup'));
+const Verify = lazy(() => import('pages/authentication/Verify'));
 
 const BlogPosts = lazy(() => import('pages/cms/BlogPosts'));
 const Categories = lazy(() => import('pages/cms/Categories'));
 const PostEditor = lazy(() => import('pages/cms/PostEditor'));
 const Pages = lazy(() => import('pages/cms/Pages'));
 const PageEditor = lazy(() => import('pages/cms/PageEditor'));
+const AuditLogs = lazy(() => import('pages/audit-logs'));
 
 const Messages = lazy(() => import('pages/interactions/Messages'));
 const Subscribers = lazy(() => import('pages/interactions/Subscribers'));
@@ -113,6 +115,10 @@ export const routes: RouteObject[] = [
             path: '/cms/pages/edit/:id',
             element: <PageEditor />,
           },
+          {
+            path: paths.auditLogs,
+            element: <AuditLogs />,
+          },
         ],
       },
       {
@@ -131,9 +137,21 @@ export const routes: RouteObject[] = [
             path: paths.signup,
             element: <Signup />,
           },
+          {
+            path: 'verify',
+            element: <Verify />,
+          },
         ],
       },
 
+      {
+        path: 'login',
+        element: (
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
+        ),
+      },
       {
         path: paths['404'],
         element: <Page404 />,
@@ -147,7 +165,7 @@ export const routes: RouteObject[] = [
 ];
 
 const router = createBrowserRouter(routes, {
-  basename: ({ MODE: process.env.NODE_ENV, VITE_BASENAME: "/admin", VITE_APP_VERSION: "1.0.0", VITE_ASSET_BASE_URL: "" } as any).MODE === 'production' ? ({ MODE: process.env.NODE_ENV, VITE_BASENAME: "/admin", VITE_APP_VERSION: "1.0.0", VITE_ASSET_BASE_URL: "" } as any).VITE_BASENAME : '/',
+  basename: '/admin',
 });
 
 export default router;
