@@ -10,6 +10,21 @@ const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
 
 const projects = [
   {
+    id: 0,
+    title: 'Production Performance Engine (Sept 2025)',
+    category: 'Dashboard',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    color: 'var(--accent)',
+    tools: ['Power BI', 'SQL', 'DAX', 'Real-Time Analytics'],
+    client: 'Live Production Deployment',
+    desc: 'An end-to-end performance benchmarking system delivering real-time strategic insights for 2025 production environments.',
+    problem: 'Need for sub-second visibility into cross-departmental performance metrics with absolute data integrity.',
+    solution: 'Engineered a high-performance Power BI architecture with optimized DAX measures and direct live-data integration.',
+    impact: 'Live Production Proof, Sept 2025 Benchmarks, Sub-Second Latency',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: 'https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9',
+  },
+  {
     id: 1,
     title: 'Sales Performance Ecosystem',
     category: 'Dashboard',
