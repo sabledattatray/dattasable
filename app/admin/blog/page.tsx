@@ -10,6 +10,8 @@ import {
 
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 const initialPosts = mainPosts.map((p, idx) => ({
   id: idx + 1,
@@ -423,7 +425,8 @@ export default function AdminBlog() {
                   style={{ width: '100%', height: '140px', background: '#ffffff', border: '1px dashed #cbd5e1', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', overflow: 'hidden' }}
                 >
                   {formData.image ? (
-                    <img src={formData.image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Featured" />
+                    <Image src={formData.image} fill style={{ objectFit: 'cover' }} alt="Featured" />
+
                   ) : (
                     <div style={{ textAlign: 'center' }}>
                       <ImageIcon size={24} style={{ color: '#cbd5e1', marginBottom: '8px' }} />

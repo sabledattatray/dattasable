@@ -1,6 +1,8 @@
 import { EditorBlock, useEditorStore } from '@/store/editorStore';
 import { Image as ImageIcon, Trash2, UploadCloud } from 'lucide-react';
 import { useState, useRef } from 'react';
+import Image from 'next/image';
+
 
 export default function ImageBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
@@ -35,8 +37,15 @@ export default function ImageBlock({ block, isActive }: { block: EditorBlock; is
     <div className={`w-full rounded-xl overflow-hidden transition-all ${isActive ? 'ring-2 ring-slate-900 shadow-md' : 'border border-transparent'}`}>
       {block.metadata?.url ? (
         <div className="relative group flex flex-col gap-2">
-          <div className="relative w-full rounded-xl overflow-hidden">
-            <img src={block.metadata.url} alt={block.metadata.alt || 'Block image'} className="w-full h-auto object-cover" />
+          <div className="relative w-full rounded-xl overflow-hidden" style={{ minHeight: '300px' }}>
+
+            <Image 
+              src={block.metadata.url} 
+              alt={block.metadata.alt || 'Block image'} 
+              fill
+              style={{ objectFit: 'cover' }} 
+            />
+
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
               <button 
                 onClick={() => updateBlock(block.id, { metadata: { ...block.metadata, url: '' } })}

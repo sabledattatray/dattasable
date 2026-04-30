@@ -1,6 +1,8 @@
 import { EditorBlock, useEditorStore } from '@/store/editorStore';
 import { LayoutGrid, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
+
 
 export default function GalleryBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
@@ -27,7 +29,13 @@ export default function GalleryBlock({ block, isActive }: { block: EditorBlock; 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
           {images.map((img, idx) => (
             <div key={idx} className="relative group aspect-square rounded-lg overflow-hidden border border-slate-200">
-              <img src={img} alt={`Gallery image ${idx + 1}`} className="w-full h-full object-cover" />
+              <Image 
+                src={img} 
+                alt={`Gallery image ${idx + 1}`} 
+                fill
+                style={{ objectFit: 'cover' }} 
+              />
+
               {isActive && (
                 <button 
                   onClick={() => handleRemove(idx)}

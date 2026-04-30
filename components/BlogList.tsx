@@ -70,11 +70,13 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
               borderLeft: '4px solid var(--accent)'
             }}>
               <div style={{ height: '350px', position: 'relative' }}>
-                <img 
+                <Image 
                   src={initialPosts[0].image || ''} 
                   alt={initialPosts[0].title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
+
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg) 0%, transparent 100%)', display: 'none' }} className="lg:block" />
               </div>
               <div style={{ padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
