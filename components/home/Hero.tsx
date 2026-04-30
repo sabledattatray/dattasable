@@ -28,23 +28,31 @@ export default function Hero() {
         padding: '2rem 0' 
       }}
     >
-      {/* Layer 1: Right-Side Visual */}
+      {/* Layer 1: Right-Side Visual - Optimized with Mobile-First Strategy */}
       <div 
-        className="block absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none"
-        style={{ aspectRatio: '800/600', backgroundColor: 'var(--surface2)' }}
+        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 opacity-30 lg:opacity-100 pointer-events-none"
+        style={{ 
+          aspectRatio: '800/600', 
+          backgroundColor: 'var(--surface2)',
+          // Simple CSS background for mobile to improve LCP immediately
+          backgroundImage: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)',
+          backgroundSize: '100% 100%',
+        }}
       >
-        <Image 
-          src="/hero-bg.webp"
-          alt="Advanced Technical Data Visualization"
-          width={800}
-          height={600}
-          priority
-          fetchPriority="high"
-          decoding="sync"
-          quality={15}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
-          className="w-full h-auto"
-        />
+        <div className="hidden lg:block w-full h-full">
+          <Image 
+            src="/hero-bg.webp"
+            alt="Advanced Technical Data Visualization"
+            width={800}
+            height={600}
+            priority
+            fetchPriority="high"
+            decoding="sync"
+            quality={25}
+            sizes="55vw"
+            className="w-full h-auto"
+          />
+        </div>
         <div style={{
           position: 'absolute',
           inset: 0,
