@@ -184,6 +184,46 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
     tags: ['Power BI', 'Production', 'DAX']
   },
+  {
+    id: 'sales-ecosystem-feb-2026',
+    slug: 'sales-performance-ecosystem-2026',
+    title: 'Enterprise Sales Orchestration: A Feb-2026 High-Fidelity Case Study',
+    category: 'Analysis',
+    excerpt: 'Examining the technical signature and DAX architecture of a multi-regional sales dashboard deployed in early 2026.',
+    content: `
+      <p>The successful deployment of the <strong>Sales Performance Ecosystem (Feb 2026)</strong> marks a significant advancement in our regional data strategy. This dashboard doesn't just show numbers; it validates the architectural identity of the engineer behind it.</p>
+      
+      <h3>Verified Authorship in BI</h3>
+      <p>In a world of templated dashboards, having a verified signature within the production environment is the ultimate proof of expertise. This Feb-2026 deployment features deep integration of multi-source data points, unified under a consistent UI/UX framework that prioritizes "Actionable Delta" (the difference between actuals and targets).</p>
+      
+      <div style="margin: 2rem 0; background: var(--surface2); padding: 2rem; border: 1px solid var(--border); text-align: center;">
+        <h4 style="margin-bottom: 1.5rem;">Live Sales Dashboard (Feb 2026)</h4>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+          <iframe 
+            src="https://app.powerbi.com/view?r=eyJrIjoiYzcyYzJkNWUtM2ZjNS00OWIxLWE5OWUtOWM2MmJlMTAyMjQwIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9" 
+            frameborder="0" 
+            allowFullScreen="true"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+          ></iframe>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">Architect: Datta Sable // Deployment: Feb 2026</p>
+      </div>
+
+      <h3>Strategic Impact Analysis:</h3>
+      <ul>
+        <li><strong>Growth Pattern Identification:</strong> Automated heatmaps revealing emerging regional market opportunities.</li>
+        <li><strong>Leakage Detection:</strong> Identifying drop-offs in the sales funnel with 98% accuracy.</li>
+        <li><strong>Identity Trust:</strong> Explicit authorship signals within the dashboard to establish professional accountability.</li>
+      </ul>
+      <p>For more on live performance metrics, check our <a href="/blog/live-performance-benchmarking-2025">Sept-2025 Production Deep-Dive</a>.</p>
+    `,
+    readTime: 10,
+    date: 'Feb 12, 2026',
+    color: '#3b82f6',
+    icon: '📈',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
+    tags: ['Sales', 'BI', 'Authorship']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
