@@ -41,6 +41,7 @@ export async function GET() {
       location: 'N/A',
       createdAt: user.createdAt,
       lastLoginAt: user.lastLoginAt,
+      emailVerified: user.emailVerified,
     }));
 
     return NextResponse.json(formattedUsers);
@@ -84,15 +85,21 @@ export async function PATCH(request: Request) {
   }
 
   try {
-    const { id, role } = await request.json();
+    const { id, role, emailVerified } = await request.json();
 
-    if (!id || !role) {
-      return NextResponse.json({ error: 'ID and Role are required' }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
+    const updateData: any = {};
+    if (role) updateData.role = role;
+    if (emailVerified !== undefined) {
+      updateData.emailVerified = emailVerified ? new Date() : null;
     }
 
     const updatedUser = await prisma.user.update({
       where: { id },
-      data: { role },
+      data: updateData,
     });
 
     return NextResponse.json(updatedUser);

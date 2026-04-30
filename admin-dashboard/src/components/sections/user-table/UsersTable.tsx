@@ -165,6 +165,32 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
         ),
       },
       {
+        field: 'emailVerified',
+        headerName: 'Verified',
+        width: 100,
+        align: 'center',
+        headerAlign: 'center',
+        renderCell: (params: GridRenderCellParams<User>) => (
+          params.row.emailVerified ? (
+            <Chip 
+              icon={<span className="iconify" data-icon="material-symbols:check-circle-outline-rounded" />}
+              label="YES" 
+              size="small" 
+              color="success" 
+              variant="outlined"
+            />
+          ) : (
+            <Chip 
+              icon={<span className="iconify" data-icon="material-symbols:cancel-outline-rounded" />}
+              label="NO" 
+              size="small" 
+              color="error" 
+              variant="outlined"
+            />
+          )
+        ),
+      },
+      {
         field: 'provider',
         headerName: 'Auth Method',
         width: 130,
@@ -230,6 +256,11 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
                 },
               },
               {
+                label: params.row.emailVerified ? 'Unverify Email' : 'Verify Email',
+                icon: params.row.emailVerified ? 'material-symbols:cancel-outline-rounded' : 'material-symbols:check-circle-outline-rounded',
+                onClick: () => handleToggleVerification(params.row),
+              },
+              {
                 label: 'Sign Out',
                 icon: 'material-symbols:logout-rounded',
                 onClick: () => {
@@ -251,6 +282,29 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
     ],
     [rows],
   );
+
+  const handleToggleVerification = async (user: User) => {
+    setIsUpdating(true);
+    const newStatus = !user.emailVerified;
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: user.id, emailVerified: newStatus }),
+      });
+      
+      if (res.ok) {
+        setRows((prev) => prev.map(u => u.id === user.id ? { ...u, emailVerified: newStatus ? new Date().toISOString() : null } : u));
+      } else {
+        alert('Failed to update verification status');
+      }
+    } catch (error) {
+      console.error('Error updating verification:', error);
+      alert('Error updating verification');
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   if (loading) {
     return (

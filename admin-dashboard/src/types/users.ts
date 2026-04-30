@@ -4,9 +4,10 @@ export interface User {
   name: string;
   avatar: string;
   email: string;
+  emailVerified: string | Date | null;
   status: string;
-  role: 'ADMIN' | 'USER' | 'Admin' | 'User';
-  department: 'Engineering' | 'Design' | 'Marketing' | 'Human Resources' | 'Finance' | 'Support';
+  role: 'ADMIN' | 'USER';
+  department: string;
   phone: string;
   location: string;
   createdAt: string;
