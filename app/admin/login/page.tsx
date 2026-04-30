@@ -51,8 +51,8 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen w-full bg-[#0A0A0A] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans text-white">
       {/* Subtle Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
@@ -65,12 +65,13 @@ export default function AdminLoginPage() {
         className="w-full max-w-[440px] z-10"
       >
         {/* Logo Section */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="font-display font-extrabold text-2xl tracking-tighter text-white"
+            className="font-extrabold text-3xl tracking-tighter text-white"
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             dattasable<span className="text-blue-500">.</span>
           </motion.h2>
@@ -81,8 +82,8 @@ export default function AdminLoginPage() {
           {/* Subtle line glow */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="mb-8 overflow-hidden">
-            <h1 className="font-display text-2xl font-bold mb-2 tracking-tight text-white">Admin Login</h1>
+          <div className="mb-10 overflow-hidden">
+            <h1 className="text-3xl font-bold mb-3 tracking-tight text-white" style={{ fontFamily: 'var(--font-display)' }}>Admin Login</h1>
             <p className="text-zinc-400 text-sm">Access your dashboard securely</p>
           </div>
 
