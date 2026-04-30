@@ -122,9 +122,6 @@ export default function AboutPage() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ position: 'relative', padding: '10px' }}>
-                {/* Animated Background Glow */}
-
-
                 <div style={{ 
                   width: '100%', 
                   aspectRatio: '0.85', 
@@ -136,14 +133,7 @@ export default function AboutPage() {
                   zIndex: 1
                 }}>
                   <img src="/images/datta.png" alt="Datta Sable" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  
-                  {/* Premium Overlays */}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6))' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201, 243, 29, 0.03) 3px, transparent 4px)', pointerEvents: 'none' }} />
-                  
-
-                </div>
-
                 {/* Outer tech frame */}
                 <div style={{ 
                   position: 'absolute', inset: 0, 
@@ -154,6 +144,65 @@ export default function AboutPage() {
                   zIndex: -1
                 }} />
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Credential Vault: Professional Certifications ── */}
+        <section className="section" style={{ borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
+            <div className="flex items-center gap-3 mb-8">
+              <Award size={20} style={{ color: 'var(--accent)' }} />
+              <span className="label-tech">CREDENTIAL_VAULT</span>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: 'Generative AI for Marketers', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_Generative AI for Digital Marketers.pdf' },
+                { title: 'AI & The Public Sector', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_AI and the Future of the Public Sector.pdf' },
+                { title: 'Google Analytics Specialist', issuer: 'Google Analytics', file: 'Google Analytics Certifiacte.pdf' },
+                { title: 'Content Strategy Expert', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_Content Strategy for Marketers.pdf' },
+                { title: 'Digital Marketing Mastery', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_Digital Marketing Tools Create a Marketing Campaign from Start to Finish.pdf' },
+                { title: 'LinkedIn Marketing Pro', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_Marketing on LinkedIn.pdf' },
+              ].map((cert, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="card-precision"
+                  style={{ 
+                    padding: '1.5rem', 
+                    background: 'var(--surface)', 
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: '180px'
+                  }}
+                >
+                  <div>
+                    <span className="mono" style={{ fontSize: '10px', color: 'var(--accent)', display: 'block', marginBottom: '0.5rem' }}>// {cert.issuer.toUpperCase()}</span>
+                    <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', lineHeight: 1.3 }}>{cert.title}</h3>
+                  </div>
+                  <a 
+                    href={`/certs/${cert.file}`} 
+                    target="_blank" 
+                    className="btn-outline" 
+                    style={{ 
+                      fontSize: '11px', 
+                      padding: '0.6rem 1.2rem', 
+                      textDecoration: 'none', 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '8px',
+                      width: 'fit-content'
+                    }}
+                  >
+                    <Download size={14} /> VIEW_VERIFICATION
+                  </a>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
