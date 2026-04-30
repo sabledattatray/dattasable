@@ -44,7 +44,19 @@ const services = [
     color: 'var(--accent3)',
     popular: false,
   },
+  {
+    icon: '🌐',
+    title: 'Enterprise Web Solutions',
+    id: 'web-solutions',
+    desc: 'High-performance WordPress and Next.js development tailored for data-heavy organizations and professional portfolios.',
+    features: ['Custom WordPress Themes', 'Next.js Performance tuning', 'SEO architecture setup', 'Security & Speed optimization', 'Content management training', 'API & Database integration'],
+    price: 'Starting at ₹30,000',
+    cta: 'Build My Platform',
+    color: 'var(--accent)',
+    popular: false,
+  },
 ];
+
 
 const faqs = [
   { q: 'What tools do you use for dashboards?', a: 'I primarily use Tableau and Power BI, connecting to SQL, Excel, and APIs. Tool choice depends on your existing tech stack.' },
