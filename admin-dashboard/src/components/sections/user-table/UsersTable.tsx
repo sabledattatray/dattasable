@@ -184,7 +184,22 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
           <DashboardMenu
             menuItems={[
               {
+                label: 'Edit',
+                icon: 'material-symbols:edit-outline-rounded',
+                onClick: () => {
+                  alert(`Edit functionality for ${params.row.name} coming soon!`);
+                },
+              },
+              {
+                label: 'Sign Out',
+                icon: 'material-symbols:logout-rounded',
+                onClick: () => {
+                  import('next-auth/react').then(({ signOut }) => signOut({ callbackUrl: '/' }));
+                },
+              },
+              {
                 label: 'Delete',
+                icon: 'material-symbols:delete-outline-rounded',
                 sx: { color: 'error.main' },
                 onClick: () => {
                   setUserToDelete(params.row);
