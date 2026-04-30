@@ -495,6 +495,134 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2340&auto=format&fit=crop',
     tags: ['AI', 'NLQ', 'LLM']
   },
+  {
+    id: 'tableau-ai-2026',
+    slug: 'integrating-generative-ai-tableau',
+    title: 'Integrating Generative AI into Tableau: The Next Frontier',
+    category: 'BI Tools',
+    excerpt: 'Generative AI is transforming static displays into interactive consultants. Explore the state of Tableau Pulse.',
+    content: `
+      <p>Tableau Pulse represents a shift from "Pull" to "Push" analytics. With generative AI, dashboards are becoming proactive consultants that notify you of significant deltas before you even ask.</p>
+    `,
+    readTime: 9,
+    date: 'Apr 01, 2026',
+    color: '#E97627',
+    icon: '📊',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Tableau', 'AI', 'Pulse']
+  },
+  {
+    id: 'predictive-retail-2026',
+    slug: 'predictive-retail-inventory-analytics',
+    title: 'Predictive Retail: How Analytics is Reshaping Inventory Management',
+    category: 'Retail',
+    excerpt: 'Retail is no longer about responding to demand—it is about anticipating it with high-fidelity predictive models.',
+    content: `
+      <p>Predictive analytics in retail allows organizations to optimize stock levels and reduce waste. We explore the demand forecasting strategies driving the leaders of 2026.</p>
+    `,
+    readTime: 10,
+    date: 'Apr 19, 2026',
+    color: '#F9D100',
+    icon: '🛒',
+    image: 'https://images.unsplash.com/photo-1526367790999-0150786486a9?q=80&w=2342&auto=format&fit=crop',
+    tags: ['Retail', 'Predictive', 'Inventory']
+  },
+  {
+    id: 'postgres-snowflake-2026',
+    slug: 'postgresql-vs-snowflake-bi-scaling',
+    title: 'PostgreSQL vs Snowflake: When to Scale Your BI Database',
+    category: 'Engineering',
+    excerpt: 'A technical deep-dive into the performance benchmarks of PostgreSQL and Snowflake for high-volume BI workloads.',
+    content: `
+      <p>PostgreSQL is excellent for transactional loads, but at what point do you need the elastic scale of Snowflake? We analyze the tipping point for enterprise data warehouses.</p>
+    `,
+    readTime: 12,
+    date: 'Apr 25, 2026',
+    color: '#3b82f6',
+    icon: '❄️',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['SQL', 'Snowflake', 'Scaling']
+  },
+  {
+    id: 'sql-joins-2026',
+    slug: 'visual-guide-sql-joins',
+    title: 'The Ultimate Visual Guide to SQL Joins: Mastering Data Relationships',
+    category: 'Programming',
+    excerpt: 'Forget Venn diagrams. This guide uses real-world data scenarios to master Inner, Left, Right, and Full Joins.',
+    content: `
+      <p>SQL Joins are the foundation of data relationships. In this guide, we move beyond theory and look at how to join millions of records without sacrificing performance.</p>
+    `,
+    readTime: 15,
+    date: 'Apr 10, 2026',
+    color: '#3178c6',
+    icon: '🔗',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    tags: ['SQL', 'Programming', 'Joins']
+  },
+  {
+    id: 'seo-tools-2025',
+    slug: '7-best-seo-tools-2025',
+    title: '7 Best SEO Tools in 2025 Every Digital Marketer Must Use',
+    category: 'Marketing',
+    excerpt: 'A curated list of the top SEO tools driving organic growth in 2025, from Semrush to Ahrefs.',
+    content: `
+      <p>SEO is a data game. We review the 7 tools that every digital marketer needs to dominate search results in 2025.</p>
+    `,
+    readTime: 11,
+    date: 'Jun 23, 2025',
+    color: '#f43f5e',
+    icon: '🚀',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop',
+    tags: ['SEO', 'Marketing', 'Tools']
+  },
+  {
+    id: 'hr-workforce-2026',
+    slug: 'hr-analytics-workforce-intelligence',
+    title: 'HR Analytics & Workforce Intelligence',
+    category: 'HR',
+    excerpt: 'A comprehensive discovery dashboard for monitoring employee attrition, performance trends, and demographics.',
+    content: `
+      <p>HR analytics allows organizations to move from reactive to proactive retention strategies. We explore the metrics that define a high-performing workforce.</p>
+    `,
+    readTime: 9,
+    date: 'Apr 22, 2026',
+    color: '#8b5cf6',
+    icon: '👥',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['HR', 'Analytics', 'Workforce']
+  },
+  {
+    id: 'python-reconciliation-2026',
+    slug: 'python-automation-data-reconciliation',
+    title: 'Python Automation for Data Reconciliation',
+    category: 'Automation',
+    excerpt: 'Automate tedious reconciliation tasks using pandas, SQLAlchemy, and scheduled scripts.',
+    content: `
+      <p>Data reconciliation is a major bottleneck in finance. We look at how to automate these checks using Python to ensure 100% data accuracy.</p>
+    `,
+    readTime: 13,
+    date: 'Apr 17, 2026',
+    color: '#3b82f6',
+    icon: '🤖',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2340&auto=format&fit=crop',
+    tags: ['Python', 'Automation', 'Finance']
+  },
+  {
+    id: 'mis-decisions-2026',
+    slug: 'how-mis-reports-drive-business-decisions',
+    title: 'How MIS Reports Drive Better Business Decisions',
+    category: 'Strategy',
+    excerpt: 'Every effective MIS report must answer three questions: What happened? Why? and What next?',
+    content: `
+      <p>MIS reports are the steering wheel of a business. We look at how to structure reports to drive actionable outcomes across all departments.</p>
+    `,
+    readTime: 8,
+    date: 'Apr 17, 2026',
+    color: '#f43f5e',
+    icon: '📊',
+    image: 'https://images.unsplash.com/photo-1551288049-bbda3065484a?q=80&w=2340&auto=format&fit=crop',
+    tags: ['MIS', 'Reporting', 'Strategy']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
