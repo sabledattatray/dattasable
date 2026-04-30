@@ -31,7 +31,6 @@ export default function Hero() {
         alignItems: 'center', 
         position: 'relative', 
         overflow: 'hidden', 
-        opacity: 0.95, 
         padding: '2rem 0' 
       }}
     >
