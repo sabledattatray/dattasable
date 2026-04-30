@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-[440px] z-10"
+        className="w-full max-w-[480px] z-10"
       >
         {/* Logo Section */}
         <div className="text-center mb-16">
