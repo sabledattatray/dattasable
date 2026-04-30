@@ -186,8 +186,28 @@ const UsersTable = ({ apiRef, filterButtonEl }: UsersTableProps) => {
               {
                 label: 'Edit',
                 icon: 'material-symbols:edit-outline-rounded',
-                onClick: () => {
-                  alert(`Edit functionality for ${params.row.name} coming soon!`);
+                onClick: async () => {
+                  const currentRole = params.row.role;
+                  const newRole = currentRole === 'ADMIN' ? 'USER' : 'ADMIN';
+                  
+                  if (window.confirm(`Change ${params.row.name}'s role from ${currentRole} to ${newRole}?`)) {
+                    try {
+                      const res = await fetch('/api/admin/users', {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: params.row.id, role: newRole }),
+                      });
+                      
+                      if (res.ok) {
+                        setRows((prev) => prev.map(u => u.id === params.row.id ? { ...u, role: newRole } : u));
+                      } else {
+                        alert('Failed to update user role');
+                      }
+                    } catch (error) {
+                      console.error('Error updating user:', error);
+                      alert('Error updating user role');
+                    }
+                  }
                 },
               },
               {
