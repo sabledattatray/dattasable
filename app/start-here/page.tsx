@@ -85,7 +85,6 @@ export default function StartHerePage() {
                   title="YouTube video player" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerPolicy="strict-origin-when-cross-origin" 
                   allowFullScreen
                   style={{ position: 'absolute', top: 0, left: 0 }}
                 ></iframe>
@@ -118,14 +117,14 @@ export default function StartHerePage() {
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   A step-by-step 2025 series on establishing professional domains, WordPress environments, and custom theme engineering for high-performance deployments.
                 </p>
-                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[var(--accent)] tracking-widest hover:underline uppercase">Watch Full Series //</Link>
+                <Link href="https://youtu.be/PtrHTCjT-6I" target="_blank" className="mono text-[10px] text-[var(--accent)] tracking-widest hover:underline uppercase">Watch Full Series //</Link>
               </div>
               <div className="card p-8 border-l-4 border-[#00C9F2]">
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Portfolio Architecture Walkthrough</h3>
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   A detailed design showcase and technical walkthrough of the very platform you are currently browsing. Engineering clarity in action.
                 </p>
-                <Link href="https://youtu.be/5sXT6HuV61w" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">View Design Logic //</Link>
+                <Link href="https://youtu.be/n2Y6XvF1_eM" target="_blank" className="mono text-[10px] text-[#00C9F2] tracking-widest hover:underline uppercase">View Design Logic //</Link>
               </div>
             </div>
           </div>
