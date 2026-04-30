@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { X, ChevronDown, User, LogOut } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LogoIcon from './LogoIcon';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -52,17 +53,20 @@ export default function MobileMenu({
           >
             <div className="flex flex-col h-full overflow-y-auto">
               {/* Drawer Header */}
-              <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-sm tracking-tight">DATTA SABLE</span>
-                </div>
+              <div className="flex items-center justify-between min-h-[100px] px-8 border-b border-[var(--border)] bg-[var(--surface)]">
+                <Link href="/" onClick={onClose} className="flex items-center gap-2 group no-underline">
+                  <LogoIcon color="var(--accent)" className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500" />
+                  <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
+                    Datta Sable
+                  </span>
+                </Link>
                 <div className="flex items-center gap-2">
                   <ThemeToggle />
                   <button 
                     className="p-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors" 
                     onClick={onClose}
                   >
-                    <X size={24} />
+                    <X size={28} />
                   </button>
                 </div>
               </div>
