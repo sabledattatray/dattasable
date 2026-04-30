@@ -31,7 +31,9 @@ export default function Hero() {
         alignItems: 'center', 
         position: 'relative', 
         overflow: 'hidden', 
-        padding: '2rem 0' 
+        padding: '2rem 0',
+        backgroundColor: 'var(--bg)',
+        border: 'none'
       }}
     >
       {/* Layer 1: Right-Side Visual - Optimized with Mobile-First Strategy */}
