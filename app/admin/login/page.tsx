@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { signIn } from 'next-auth/react';
 import { 
   Mail, 
@@ -21,13 +21,9 @@ export default function AdminLoginPage() {
 
   // Isolation: Force a clean state for the login page
   useEffect(() => {
-    // Remove any light mode classes from root that might be inherited from main project
     document.documentElement.classList.remove('light');
     document.body.style.background = '#0A0A0A';
-    
-    return () => {
-      document.body.style.background = '';
-    };
+    return () => { document.body.style.background = ''; };
   }, []);
 
   const handleSocialLogin = async (provider: string) => {
@@ -59,7 +55,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-[#0A0A0A] flex flex-col items-center justify-center p-4 overflow-hidden font-sans text-white z-[9999]">
+    <div className="fixed inset-0 w-full h-full bg-[#0A0A0A] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans text-white z-[9999]">
       {/* Subtle Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -81,18 +77,22 @@ export default function AdminLoginPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="font-display font-extrabold text-2xl tracking-tighter text-white"
+            id="logo"
           >
             dattasable<span className="text-blue-500">.</span>
           </motion.h2>
         </div>
 
         {/* glass Card */}
-        <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-[24px] p-8 shadow-2xl overflow-hidden relative group">
+        <div 
+          className="bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-[24px] p-8 shadow-2xl overflow-hidden relative group"
+          id="login-card"
+        >
           {/* Subtle line glow */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="mb-8 overflow-hidden text-center">
-            <h1 className="font-display text-3xl font-bold mb-3 tracking-tight text-white">Admin Login</h1>
+          <div className="mb-8 overflow-hidden">
+            <h1 className="font-display text-2xl font-bold mb-2 tracking-tight">Admin Login</h1>
             <p className="text-zinc-400 text-sm">Access your dashboard securely</p>
           </div>
 
@@ -101,7 +101,7 @@ export default function AdminLoginPage() {
             <button
               onClick={() => handleSocialLogin('google')}
               disabled={!!isLoading}
-              className="w-full h-12 bg-white hover:bg-zinc-100 text-black font-semibold rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed group shadow-sm"
+              className="w-full h-12 bg-white hover:bg-zinc-100 text-black font-medium rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed group shadow-sm"
             >
               {isLoading === 'google' ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -118,41 +118,39 @@ export default function AdminLoginPage() {
               )}
             </button>
 
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => handleSocialLogin('github')}
-                disabled={!!isLoading}
-                className="h-12 bg-[#18181B] hover:bg-[#27272A] border border-zinc-800 text-white font-medium rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading === 'github' ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.102.79 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    <span>GitHub</span>
-                  </>
-                )}
-              </button>
+            <button
+              onClick={() => handleSocialLogin('github')}
+              disabled={!!isLoading}
+              className="w-full h-12 bg-[#18181B] hover:bg-[#27272A] border border-zinc-800 text-white font-medium rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading === 'github' ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.102.79 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span>Continue with GitHub</span>
+                </>
+              )}
+            </button>
 
-              <button
-                onClick={() => handleSocialLogin('linkedin')}
-                disabled={!!isLoading}
-                className="h-12 bg-[#0A66C2] hover:bg-[#0077B5] text-white font-medium rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading === 'linkedin' ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                    <span>LinkedIn</span>
-                  </>
-                )}
-              </button>
-            </div>
+            <button
+              onClick={() => handleSocialLogin('linkedin')}
+              disabled={!!isLoading}
+              className="w-full h-12 bg-[#0A66C2] hover:bg-[#0077B5] text-white font-medium rounded-xl flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+            >
+              {isLoading === 'linkedin' ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                  <span>Continue with LinkedIn</span>
+                </>
+              )}
+            </button>
           </div>
 
           <div className="flex items-center gap-4 my-8">
@@ -162,9 +160,9 @@ export default function AdminLoginPage() {
           </div>
 
           {/* Email Form */}
-          <form onSubmit={handleEmailLogin} className="space-y-5">
+          <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider ml-1">Email Address</label>
+              <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider ml-1">Email Address</label>
               <div className="relative group/input">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within/input:text-blue-500 transition-colors" />
                 <input
@@ -180,7 +178,7 @@ export default function AdminLoginPage() {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between ml-1">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Password</label>
+                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Password</label>
                 <button type="button" className="text-[11px] font-medium text-blue-500 hover:text-blue-400 transition-colors">Forgot password?</button>
               </div>
               <div className="relative group/input">
@@ -206,13 +204,13 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={!!isLoading}
-              className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] shadow-lg shadow-blue-600/20 disabled:opacity-50 mt-4"
+              className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] shadow-lg shadow-blue-600/20 disabled:opacity-50 mt-2"
             >
               {isLoading === 'email' ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <>
-                  <span>Sign In to Dashboard</span>
+                  <span>Sign In</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -220,7 +218,7 @@ export default function AdminLoginPage() {
           </form>
 
           {/* Footer */}
-          <div className="mt-10 flex items-center justify-center gap-2 text-zinc-500">
+          <div className="mt-8 flex items-center justify-center gap-2 text-zinc-500">
             <ShieldCheck className="w-3.5 h-3.5 text-zinc-600" />
             <span className="text-[11px] font-medium tracking-wide uppercase">Protected by secure authentication</span>
           </div>
