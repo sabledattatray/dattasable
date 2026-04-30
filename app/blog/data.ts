@@ -36,6 +36,44 @@ export const posts = [
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2426&auto=format&fit=crop',
     tags: ['Architecture', 'Web', 'Infrastructure']
   },
+  {
+    id: 'wp-masterclass-2024',
+    slug: 'wordpress-installation-masterclass',
+    title: 'From Zero to Live: The Definitive WordPress Installation Guide',
+    category: 'Architecture',
+    excerpt: 'A comprehensive 36-minute walkthrough on domain procurement, WordPress deployment, and brand identity setup.',
+    content: `
+      <p>Establishing a professional web presence requires more than just choosing a platform; it requires a systematic approach to infrastructure, security, and brand alignment. In this detailed masterclass, we cover the end-to-end process of deploying a production-ready WordPress environment.</p>
+      
+      <h3>Key Technical Milestones Covered:</h3>
+      <ul>
+        <li><strong>Domain Orchestration:</strong> How to buy and map a custom domain to your hosting environment.</li>
+        <li><strong>WordPress Deployment:</strong> Scripted installation and database configuration.</li>
+        <li><strong>Brand Identity:</strong> Creating logos and favicons (site icons) for technical consistency.</li>
+        <li><strong>Theme Engineering:</strong> Basic customization to ensure mobile responsiveness and speed.</li>
+      </ul>
+
+      <div style="margin: 2rem 0; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border: 1px solid var(--border);">
+        <iframe 
+          src="https://www.youtube.com/embed/PtrHTCjT-6I" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        ></iframe>
+      </div>
+
+      <h3>Why This Matters for Analytics</h3>
+      <p>As a BI professional, understanding the "Frontend" of your data delivery system is vital. Most enterprise dashboards are embedded within WordPress or React environments. Knowing how to tune these environments for performance directly impacts how your stakeholders perceive your data insights.</p>
+      <p>For more on infrastructure, see our <a href="/blog/building-enterprise-web-architectures">Infrastructure Masterclass</a>.</p>
+    `,
+    readTime: 36,
+    date: 'Jun 10, 2024',
+    color: '#21759b',
+    icon: '⚙️',
+    image: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=2400&auto=format&fit=crop',
+    tags: ['WordPress', 'Web Dev', 'Architecture']
+  },
   // --- TECH STACK ---
   {
     slug: 'modern-bi-stack-2026',
