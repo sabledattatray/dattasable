@@ -51,6 +51,7 @@ const NAV_LINKS: NavSection[] = [
     heading: 'Explore',
     links: [
       { label: 'Blog',       href: '/blog',       icon: BookOpen },
+      { label: 'Live Analytics', href: '/analytics-live', icon: Activity },
       { label: 'Dashboards', href: '/dashboards', icon: LayoutDashboard },
       { label: 'Resume',     href: '/resume',     icon: User },
       { label: 'Hire Me',    href: '/contact',    icon: Send },
