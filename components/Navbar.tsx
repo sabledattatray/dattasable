@@ -18,6 +18,7 @@ import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'Start Here', href: '/start-here' },
+  { label: 'Live Feed', href: '/analytics-live' },
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
@@ -34,6 +35,7 @@ const megaMenuData: Record<string, any> = {
       { title: 'Enterprise Web Dev', desc: 'WordPress & Next.js solutions.', icon: <Globe size={20} />, href: '/services#web-solutions' },
       { title: 'Technical SEO', desc: 'On-page & technical ranking.', icon: <Sparkles size={20} />, href: '/services#seo-optimization' },
       { title: 'Premium Web Design', desc: 'Bespoke UI/UX experiences.', icon: <Layers size={20} />, href: '/services#web-design' },
+      { title: 'Live Analytics Feed', desc: 'Real-time platform monitoring.', icon: <Activity size={20} className="text-[var(--accent)]" />, href: '/analytics-live' },
       { title: 'n8n Workflows', desc: 'Self-hosted app connectivity.', icon: <Zap size={20} />, href: '/services#n8n-automation' },
       { title: 'Graphic Design', desc: 'CorelDRAW vector solutions.', icon: <PenTool size={20} />, href: '/services#graphic-design' },
       { title: 'Predictive Modeling', desc: 'Statistical forecasting & AI.', icon: <Activity size={20} />, href: '/services#consulting' },
