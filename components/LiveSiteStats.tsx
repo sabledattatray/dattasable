@@ -60,7 +60,7 @@ export default function LiveSiteStats() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="group relative p-8 bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-500 shadow-xl"
+            className="group relative p-10 lg:p-12 bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-500 shadow-xl"
           >
             {/* Number Index */}
             <div className="absolute top-4 right-6 mono text-[10px] font-bold opacity-20 text-[var(--accent)] group-hover:opacity-100 transition-opacity">
