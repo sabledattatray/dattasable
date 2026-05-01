@@ -407,34 +407,6 @@ export default function DashboardsPage() {
 
             <LiveSiteStats />
 
-            {/* Tool stats grid */}
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-              gap: '1px', 
-              background: 'var(--border)', 
-              border: '1px solid var(--border)',
-              marginBottom: '3.5rem',
-              overflow: 'hidden'
-            }}>
-              {[
-                { icon: <BarChart3 size={18} />, label: 'Tableau Deployment', count: '30+', color: '#c9f31d', sub: 'Enterprise Visuals' },
-                { icon: <Activity size={18} />, label: 'Power BI Ecosystem', count: '15+', color: '#00C9F2', sub: 'M365 Integrated' },
-                { icon: <PieChart size={18} />, label: 'Looker Analytics', count: '5+', color: '#00d4ff', sub: 'BigQuery Ready' },
-                { icon: <TrendingUp size={18} />, label: 'Aggregate Logic', count: '50+', color: '#fff', sub: 'Verified Logs' },
-              ].map(item => (
-                <div key={item.label} style={{ background: 'var(--bg)', padding: '1.5rem', position: 'relative' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                    <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
-                    <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)' }}>{item.count}</span>
-                  </div>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '4px' }}>{item.label}</div>
-                  <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em' }}>{item.sub}</div>
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '2px', background: 'var(--accent)', opacity: 0.4 }} />
-                </div>
-              ))}
-            </div>
-
             {/* Filter Control Center */}
             <div style={{ 
               background: 'var(--surface2)', 
