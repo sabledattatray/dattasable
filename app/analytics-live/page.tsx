@@ -86,15 +86,19 @@ export default function AnalyticsLivePage() {
       <main className="p-6 max-w-[1400px] mx-auto">
         {/* Market Style Ticker Row */}
         <div className="mb-10 overflow-hidden whitespace-nowrap bg-[var(--surface)] border-y border-[var(--border)] py-2 -mx-6 px-6">
-          <div className="animate-marquee flex gap-12">
-            {[...Array(10)].map((_, i) => (
+          <motion.div 
+            animate={{ x: [0, -1000] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex gap-12"
+          >
+            {[...Array(20)].map((_, i) => (
               <div key={i} className="flex items-center gap-2 text-[10px] mono font-bold text-[var(--muted)] uppercase">
                 <span className="text-[var(--accent)]">●</span> 
                 {metrics[i % metrics.length].label}: {metrics[i % metrics.length].value} 
                 <span className="text-green-500 font-black">{metrics[i % metrics.length].trend}</span>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Professional Metrics Grid */}
@@ -183,16 +187,6 @@ export default function AnalyticsLivePage() {
           © 2026 Datta Sable Platform Intelligence • All Rights Reserved
         </p>
       </footer>
-
-      <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }
