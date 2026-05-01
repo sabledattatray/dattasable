@@ -139,7 +139,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* High-Performance Third-Party Script Optimization */}
             <PerformanceOptimizer 
               googleAnalyticsId="G-Q4GEY4N9WN"
-              googleSignInClientId=""
+              googleSignInClientId={process.env.GOOGLE_ID || ""}
               adSenseClientId="ca-pub-4242010382827250"
             />
           </ThemeProvider>

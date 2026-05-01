@@ -1,4 +1,69 @@
 export const posts = [
+  {
+    id: 'analytics-war-room-2026',
+    slug: 'building-analytics-war-room',
+    title: 'Building the Surgical War Room: Engineering a High-Fidelity Live Analytics Dashboard',
+    category: 'Engineering',
+    excerpt: 'A technical breakdown of the Noxfolio Live Intelligence Dashboard, focusing on real-time telemetry, obsidian aesthetics, and extreme performance optimization.',
+    content: `
+      <p>In the world of high-stakes Business Intelligence and Software Engineering, static data is yesterday’s news. To truly understand the pulse of a production environment, you need more than just charts—you need a <strong>Surgical War Room</strong>.</p>
+      
+      <p>The <strong>Live Intelligence Dashboard</strong> is the latest core node of the Noxfolio SaaS platform. This isn't just an analytics page; it’s a high-performance telemetry engine designed to provide real-time visibility into system health, neural indexing, and global execution logs.</p>
+
+      <h2>The Vision: Beyond Static Dashboards</h2>
+      <p>Most portfolio dashboards are "fakes"—static images or mockups that don't actually move. For Noxfolio V2.0, the goal was to build an <strong>Engineering Flight Simulator</strong>. We wanted an interface that felt alive, reactive, and authoritative.</p>
+      
+      <p>The "Surgical" aesthetic is inspired by high-end aerospace interfaces: dark, high-contrast, and focused on "at-a-glance" diagnostic clarity. Using an <strong>Obsidian Dark Theme (#060606)</strong> with a high-visibility <strong>Neon Accent (#c9f31d)</strong>, we created a UI that commands attention while remaining professional.</p>
+
+      <h2>The Technical Architecture: Powering the Heartbeat</h2>
+      <p>Building a real-time dashboard in Next.js 15 requires a delicate balance between UI responsiveness and data throughput. Here’s how we engineered the Noxfolio "Heartbeat":</p>
+
+      <h3>1. The Real-Time Simulation Engine</h3>
+      <p>The dashboard utilizes a sophisticated <code>useEffect</code> lifecycle that manages a synchronized 5-second refresh cycle. This coordinates live SVG sparklines, neural execution logs, and metric delta tracking using <code>AnimatePresence</code> for smooth transitions.</p>
+
+      <h3>2. Performance First Strategy</h3>
+      <p>To maintain an <strong>Elite-Tier PageSpeed score (90+)</strong>, we implemented a custom <code>PerformanceOptimizer</code> component. This engine delays non-critical third-party scripts until after the initial interaction, ensuring the "Surgical" UI is interactive in under 500ms.</p>
+
+      <h2>Design Highlights: A Masterclass in Visual Hierarchy</h2>
+      <p>The dashboard is structured using a <strong>Boxed-Wrapper System</strong> with technical corner decorators. This creates a focused environment that separates production telemetry from standard site navigation.</p>
+
+      <div class="dashboard-container">
+        <video 
+          src="/Live_Analytic_Report.mp4" 
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          style="width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);"
+        ></video>
+      </div>
+
+      <div class="dashboard-container" style="margin-top: 2rem;">
+        <iframe 
+          src="/analytics-live" 
+          frameborder="0" 
+          allowFullScreen="true"
+          loading="lazy"
+          style="border: 1px solid var(--border); border-radius: 8px; height: 600px;"
+        ></iframe>
+      </div>
+
+      <h3>Key Functional Nodes:</h3>
+      <ul>
+        <li><strong>Neural Index Grid:</strong> 8 high-fidelity cards tracking global system status.</li>
+        <li><strong>The Command Terminal:</strong> A mono-spaced execution log providing deep-dive transparency.</li>
+        <li><strong>System Integrity Report:</strong> High-impact diagnostic readout for instant validation.</li>
+      </ul>
+
+      <p>This dashboard is a statement on what modern production monitoring should look like. For more on our architectural standards, explore our <a href="/blog/modern-bi-stack-2026">2026 BI Stack Guide</a>.</p>
+    `,
+    readTime: 12,
+    date: 'May 02, 2026',
+    color: 'var(--accent)',
+    icon: '🚀',
+    image: '/images/blog/analytics_war_room_hero.png',
+    tags: ['Next.js', 'Framer Motion', 'Analytics', 'UX Design', 'Performance']
+  },
   // --- MASTERCLASSES ---
   {
     id: 'enterprise-web-2021',
