@@ -1,41 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
-import { BookOpen, Database, Smartphone, Globe, Cpu, Activity } from 'lucide-react';
+import { BookOpen, Database, Smartphone, Globe, Cpu, Activity, Zap, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-const stats = [
-  {
-    label: 'Knowledge Assets',
-    value: '33+',
-    icon: BookOpen,
-    description: 'Technical Case Studies',
-  },
-  {
-    label: 'Data Integrations',
-    value: '12',
-    icon: Database,
-    description: 'SQL / SAP / API / Flat',
-  },
-  {
-    label: 'Ecosystem Sync',
-    value: 'Dual',
-    icon: Smartphone,
-    description: 'Web & Native Android',
-  },
-  {
-    label: 'Edge Runtime',
-    value: '99.9%',
-    icon: Globe,
-    description: 'Global Availability',
-  },
-];
-
-const skills = [
-  { name: 'SQL & DATA ENGINEERING', level: 95 },
-  { name: 'POWER BI & TABLEAU', level: 98 },
-  { name: 'ADVANCED EXCEL (POWER QUERY)', level: 100 },
-  { name: 'NEXT.JS & FULL-STACK', level: 85 },
-];
 
 export default function LiveSiteStats() {
   const [mounted, setMounted] = useState(false);
@@ -47,99 +13,163 @@ export default function LiveSiteStats() {
   if (!mounted) return null;
 
   return (
-    <div className="space-y-12 py-12">
-      {/* Live Status Header */}
-      <div className="flex items-center gap-3 px-4 py-1.5 bg-[rgba(201,243,29,0.05)] border border-[rgba(201,243,29,0.2)] rounded-none w-fit mx-auto lg:mx-0 mb-8">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
-        </span>
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)] mono">
-          LIVE_PLATFORM_ANALYTICS_FEED
-        </span>
-      </div>
+    <div className="w-full py-16 px-4 lg:px-0">
+      {/* ── Technical Background Elements ── */}
+      <div className="relative w-full max-w-7xl mx-auto">
+        <div className="absolute -top-24 -left-12 w-64 h-64 bg-[var(--accent)] opacity-[0.03] blur-[100px] rounded-full" />
+        <div className="absolute -bottom-24 -right-12 w-64 h-64 bg-blue-500 opacity-[0.02] blur-[100px] rounded-full" />
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-[var(--border)] bg-[var(--border)] overflow-hidden">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
-            className="p-8 bg-[var(--bg)] hover:bg-[var(--surface)] transition-colors duration-300 relative group"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <stat.icon size={20} className="text-[var(--accent)] opacity-70 group-hover:opacity-100 transition-opacity" />
-              <div className="text-[10px] mono text-[var(--accent)] opacity-30">0{index + 1}</div>
+        {/* ── Header System ── */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 border-b border-[var(--border)] pb-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <div className="h-[1px] w-12 bg-[var(--accent)] opacity-50" />
+              <span className="mono text-[10px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">
+                SYSTEM_METRICS_V1.0
+              </span>
             </div>
-            <div className="text-4xl font-bold text-[var(--text)] mb-1 tracking-tighter mono">
-              {stat.value}
-            </div>
-            <div className="text-[10px] font-bold text-[var(--text)] mb-2 uppercase tracking-[0.2em] mono">
-              {stat.label}
-            </div>
-            <p className="text-[10px] text-[var(--muted)] uppercase tracking-wider mono opacity-60">
-              {stat.description}
-            </p>
-            <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--accent)] group-hover:w-full transition-all duration-500" />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Skill Matrix Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12">
-        <div className="lg:col-span-7 p-10 bg-[var(--surface)] border border-[var(--border)] relative overflow-hidden">
-          <div className="absolute top-[-20%] right-[-10%] opacity-[0.03] rotate-12">
-            <Cpu size={300} />
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase italic">
+              Platform <span className="text-[var(--accent)]">Intelligence</span>
+            </h2>
           </div>
-          <h3 className="text-xl font-bold mb-10 flex items-center gap-4 mono tracking-tight">
-            <span className="w-10 h-[1px] bg-[var(--accent)]"></span>
-            SKILL_DISTRIBUTION_MATRIX
-          </h3>
-          <div className="space-y-8">
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between text-[10px] mb-3 font-bold mono tracking-widest uppercase">
-                  <span className="text-[var(--text)]">{skill.name}</span>
-                  <span className="text-[var(--accent)]">{skill.level}%</span>
-                </div>
-                <div className="h-[2px] w-full bg-[rgba(255,255,255,0.05)] overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 2, ease: "circOut" }}
-                    className="h-full bg-[var(--accent)]"
-                  />
-                </div>
-              </div>
-            ))}
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col items-end">
+              <span className="mono text-[10px] text-[var(--muted)] uppercase tracking-widest">Global Status</span>
+              <span className="mono text-sm font-bold text-[var(--accent)]">ENCRYPTED_&_ACTIVE</span>
+            </div>
+            <div className="h-12 w-[1px] bg-[var(--border)]" />
+            <div className="p-3 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
+              <Activity className="text-[var(--accent)] animate-pulse" size={20} />
+            </div>
           </div>
         </div>
 
-        <div className="lg:col-span-5 p-10 bg-[var(--bg)] border border-[var(--border)] flex flex-col justify-between items-start text-left relative group">
-          <div className="absolute top-0 right-0 p-6 opacity-10">
-            <Activity className="text-[var(--accent)]" size={40} />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-6 italic tracking-tight">ECOSYSTEM_READINESS</h3>
-            <p className="text-xs text-[var(--muted)] mb-8 max-w-sm leading-relaxed uppercase tracking-wide mono">
-              Platform synchronized across Web (Next.js) & Android (Capacitor) hardware layers.
-            </p>
-          </div>
-          <div className="w-full space-y-4">
-            <div className="flex items-center justify-between p-4 bg-[var(--surface)] border border-[var(--border)]">
-              <span className="text-[10px] font-bold mono tracking-widest text-[var(--muted)]">WEB_LAYER</span>
-              <span className="text-[10px] font-bold mono text-[var(--accent)]">ACTIVE_SYNC</span>
+        {/* ── Main Data Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Left: Hero KPI Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="lg:col-span-4 p-8 bg-[var(--surface)] border border-[var(--border)] relative group overflow-hidden flex flex-col justify-between min-h-[400px] shadow-2xl"
+          >
+            <div className="absolute top-0 right-0 p-4 mono text-[60px] font-black opacity-[0.03] select-none italic">
+              33+
             </div>
-            <div className="flex items-center justify-between p-4 bg-[var(--surface)] border border-[var(--border)]">
-              <span className="text-[10px] font-bold mono tracking-widest text-[var(--muted)]">ANDROID_NATIVE</span>
-              <span className="text-[10px] font-bold mono text-[var(--accent)]">ACTIVE_SYNC</span>
+            <div className="relative z-10">
+              <Zap className="text-[var(--accent)] mb-6" size={32} />
+              <h3 className="text-xs mono font-bold uppercase tracking-[0.3em] text-[var(--accent)] mb-2">Primary Asset Cluster</h3>
+              <div className="text-6xl font-black italic tracking-tighter mb-4 mono">
+                33<span className="text-[var(--accent)]">+</span>
+              </div>
+              <p className="text-sm text-[var(--muted)] leading-relaxed uppercase mono opacity-70">
+                Validated technical frameworks and enterprise case studies integrated into the core ecosystem.
+              </p>
             </div>
+            <div className="pt-8 border-t border-[var(--border)] flex items-center justify-between">
+              <div className="flex -space-x-2">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[var(--bg)] bg-[var(--surface2)] flex items-center justify-center text-[10px] mono">
+                    {i}
+                  </div>
+                ))}
+              </div>
+              <span className="text-[10px] mono font-bold text-[var(--accent)]">NODE_READY</span>
+            </div>
+          </motion.div>
+
+          {/* Right: Technical Matrix */}
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Skill Matrix */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="p-8 bg-[var(--bg)] border border-[var(--border)] relative group"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <Cpu size={18} className="text-[var(--accent)]" />
+                <span className="text-xs font-bold uppercase tracking-widest mono">Skill Optimization</span>
+              </div>
+              <div className="space-y-6">
+                {[
+                  { name: 'SQL Architecture', val: 95 },
+                  { name: 'BI Visualization', val: 98 },
+                  { name: 'Data Engineering', val: 92 }
+                ].map(s => (
+                  <div key={s.name} className="space-y-2">
+                    <div className="flex justify-between text-[10px] mono font-bold opacity-60 uppercase">
+                      <span>{s.name}</span>
+                      <span>{s.val}%</span>
+                    </div>
+                    <div className="h-[3px] w-full bg-[var(--border)] overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${s.val}%` }}
+                        transition={{ duration: 1.5 }}
+                        className="h-full bg-[var(--accent)]"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Ecosystem Status */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="p-8 bg-[var(--bg)] border border-[var(--border)] flex flex-col justify-between"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Globe size={18} className="text-blue-400" />
+                <span className="text-xs font-bold uppercase tracking-widest mono">Environment Sync</span>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-[var(--surface)] border border-[var(--border)] group-hover:border-[var(--accent)] transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                    <span className="text-[10px] mono font-bold">NEXT_JS_PRODUCTION</span>
+                  </div>
+                  <span className="text-[10px] mono opacity-40">STABLE</span>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-[var(--surface)] border border-[var(--border)]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                    <span className="text-[10px] mono font-bold">ANDROID_NATIVE_SYNC</span>
+                  </div>
+                  <span className="text-[10px] mono opacity-40">ACTIVE</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Bottom Row Feature Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="md:col-span-2 p-8 bg-[var(--surface)] border border-[var(--border)] relative overflow-hidden flex items-center gap-8"
+            >
+              <div className="p-4 bg-[var(--bg)] border border-[var(--border)] rounded-full">
+                <ShieldCheck size={32} className="text-[var(--accent)]" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-xs mono font-black uppercase tracking-[0.2em] mb-1">Architecture integrity</h4>
+                <p className="text-[10px] text-[var(--muted)] mono uppercase tracking-wider leading-relaxed">
+                  99.9% availability powered by global edge-runtime and cryptographically signed mobile delivery.
+                </p>
+              </div>
+              <div className="hidden md:block h-12 w-[1px] bg-[var(--border)] mx-4" />
+              <div className="hidden md:block">
+                <span className="text-[10px] mono text-[var(--muted)] block mb-1 uppercase">Latency</span>
+                <span className="text-xl font-bold mono tracking-tighter">&lt;350ms</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
