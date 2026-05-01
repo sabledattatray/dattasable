@@ -1,144 +1,149 @@
 'use client';
-import { motion } from 'framer-motion';
-import { Database, Smartphone, Globe, BookOpen } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Database, Smartphone, Globe, BookOpen, Activity, RefreshCw } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-const stats = [
-  {
-    label: 'Knowledge Assets',
-    count: '33+',
-    icon: <BookOpen size={18} />,
-    sub: 'Technical Case Studies',
-  },
-  {
-    label: 'Data Integrations',
-    count: '12',
-    icon: <Database size={18} />,
-    sub: 'SQL / SAP / API / Flat',
-  },
-  {
-    label: 'Ecosystem Sync',
-    count: 'Dual',
-    icon: <Smartphone size={18} />,
-    sub: 'Web & Native Android',
-  },
-  {
-    label: 'Edge Runtime',
-    count: '99.9%',
-    icon: <Globe size={18} />,
-    sub: 'Global Availability',
-  },
-];
 
 export default function LiveSiteStats() {
   const [mounted, setMounted] = useState(false);
-  const [liveStats, setLiveStats] = useState(stats);
-  const [lastRefresh, setLastRefresh] = useState(new Date());
+  const [tick, setTick] = useState(0);
+  const [syncTime, setSyncTime] = useState(new Date().toLocaleTimeString());
 
   useEffect(() => {
     setMounted(true);
     
-    // Auto-refresh logic (every 3 seconds for high activity)
+    // Core Ticker: Updates every 2 seconds to force absolute dynamism
     const interval = setInterval(() => {
-      setLiveStats(current => current.map(s => {
-        if (s.label === 'Edge Runtime') {
-          return { ...s, count: (99.9 + (Math.random() * 0.08)).toFixed(3) + '%' };
-        }
-        if (s.label === 'Data Integrations') {
-          return { ...s, count: (11 + Math.floor(Math.random() * 3)).toString() };
-        }
-        if (s.label === 'Knowledge Assets') {
-          return { ...s, count: '33.' + Math.floor(Math.random() * 9) + '+' };
-        }
-        return s;
-      }));
-      setLastRefresh(new Date());
-    }, 3000);
+      setTick(prev => prev + 1);
+      setSyncTime(new Date().toLocaleTimeString());
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
 
   if (!mounted) return null;
 
+  // Derive dynamic stats directly from the tick state to guarantee updates
+  const dynamicStats = [
+    {
+      label: 'Knowledge Assets',
+      count: `33.${(tick % 9)}+`,
+      icon: <BookOpen size={18} />,
+      sub: 'Technical Case Studies',
+      val: 90 + (tick % 10)
+    },
+    {
+      label: 'Data Integrations',
+      count: (11 + (tick % 3)).toString(),
+      icon: <Database size={18} />,
+      sub: 'SQL / SAP / API / Flat',
+      val: 85 + (tick % 15)
+    },
+    {
+      label: 'Ecosystem Sync',
+      count: tick % 2 === 0 ? 'Dual' : 'Active',
+      icon: <Smartphone size={18} />,
+      sub: 'Web & Native Android',
+      val: 98
+    },
+    {
+      label: 'Edge Runtime',
+      count: (99.9 + (tick % 100) * 0.001).toFixed(3) + '%',
+      icon: <Globe size={18} />,
+      sub: 'Global Availability',
+      val: 99
+    },
+  ];
+
   return (
     <div className="w-full py-16">
       {/* Label Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 px-6">
         <div className="flex items-center gap-3">
-          <span className="relative flex h-2 w-2">
+          <div className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
-          </span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--accent)]"></span>
+          </div>
           <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mono">
             LIVE_PLATFORM_ANALYTICS_FEED
           </span>
         </div>
-        <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest bg-[var(--surface)] border border-[var(--border)] px-3 py-1">
-          <span className="w-1 h-1 bg-[var(--accent)] rounded-full animate-pulse shadow-[0_0_5px_var(--accent)]" />
-          SYSTEM_SYNC_ACTIVE: {lastRefresh.toLocaleTimeString()}
+        
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest bg-[var(--surface)] border border-[var(--border)] px-4 py-2">
+            <Activity size={10} className="text-[var(--accent)] animate-pulse" />
+            <span className="text-[var(--accent)] font-bold">LIVE_SYNC:</span> {syncTime}
+          </div>
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="text-[var(--accent)] opacity-50"
+          >
+            <RefreshCw size={14} />
+          </motion.div>
         </div>
       </div>
 
       {/* Identical Grid Styling */}
       <div className="mx-6" style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
         gap: '1px', 
         background: 'var(--border)', 
         border: '1px solid var(--border)',
         marginBottom: '2rem',
         overflow: 'hidden'
       }}>
-        {liveStats.map((item, index) => (
-          <motion.div 
+        {dynamicStats.map((item, index) => (
+          <div 
             key={item.label} 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
-            style={{ background: 'var(--bg)', padding: '1.5rem', position: 'relative' }}
+            style={{ background: 'var(--bg)', padding: '2rem', position: 'relative', overflow: 'hidden' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
               <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
-              <motion.span 
-                key={item.count}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mono" 
-                style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}
-              >
-                {item.count}
-              </motion.span>
+              <AnimatePresence mode="wait">
+                <motion.span 
+                  key={item.count}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mono" 
+                  style={{ fontSize: '1.75rem', fontStyle: 'italic', fontWeight: 900, color: 'var(--accent)', marginLeft: 'auto' }}
+                >
+                  {item.count}
+                </motion.span>
+              </AnimatePresence>
             </div>
-            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '4px' }}>{item.label}</div>
-            <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>{item.sub}</div>
             
-            {/* High-Visibility Running Bars */}
-            <div className="space-y-3">
-              {[
-                { n: 'SQL Architecture', v: (90 + Math.random() * 10).toFixed(0) + '%' },
-                { n: 'Data Engineering', v: (85 + Math.random() * 15).toFixed(0) + '%' }
-              ].map(bar => (
-                <div key={bar.n} className="space-y-1">
-                  <div className="flex justify-between text-[8px] mono font-bold opacity-60 uppercase">
-                    <span>{bar.n}</span>
-                    <span>{bar.v}</span>
-                  </div>
-                  <div className="h-[2px] w-full bg-[var(--border)] overflow-hidden">
-                    <motion.div 
-                      key={lastRefresh.getTime() + bar.n} // Force animation reset on every 3s sync
-                      initial={{ width: 0 }}
-                      animate={{ width: bar.v }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                      className="h-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]"
-                    />
-                  </div>
+            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '6px' }}>{item.label}</div>
+            <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '2rem', opacity: 0.6 }}>{item.sub}</div>
+            
+            {/* Real-time Processing Bars */}
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <div className="flex justify-between text-[9px] mono font-black opacity-40 uppercase tracking-tighter">
+                  <span>Packet Analysis</span>
+                  <span>{item.val}%</span>
                 </div>
-              ))}
+                <div className="h-[2px] w-full bg-[var(--border)] overflow-hidden">
+                  <motion.div 
+                    key={tick}
+                    initial={{ width: "20%" }}
+                    animate={{ width: `${item.val}%` }}
+                    transition={{ duration: 0.8, ease: "circOut" }}
+                    className="h-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]"
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* The signature bottom-left accent bar */}
-            <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '2px', background: 'var(--accent)', opacity: 0.4 }} />
-          </motion.div>
+            {/* Signature Accent Decoration */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, width: '60px', height: '3px', background: 'var(--accent)', opacity: 0.6 }} />
+            
+            {/* Background Data Stream (Subtle) */}
+            <div className="absolute top-0 right-0 p-2 mono text-[40px] font-black opacity-[0.02] italic pointer-events-none">
+              {tick}
+            </div>
+          </div>
         ))}
       </div>
     </div>
