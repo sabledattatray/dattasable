@@ -45,7 +45,7 @@ const Sparkline = ({ color, tick }: { color: string, tick: number }) => {
   );
 };
 
-export default function AnalyticsLivePage() {
+export default function LiveDashboardPage() {
   const [mounted, setMounted] = useState(false);
   const [tick, setTick] = useState(0);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL);
