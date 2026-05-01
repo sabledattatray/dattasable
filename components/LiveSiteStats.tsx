@@ -42,7 +42,7 @@ export default function LiveSiteStats() {
   return (
     <div className="w-full py-16">
       {/* Label Header */}
-      <div className="flex items-center gap-3 mb-8 px-1">
+      <div className="flex items-center gap-3 mb-12 px-1">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
