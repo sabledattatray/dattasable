@@ -70,7 +70,7 @@ export default function LiveSiteStats() {
             transition={{ delay: index * 0.1 }}
             style={{ background: 'var(--bg)', padding: '1.5rem', position: 'relative' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyBetween: 'space-between', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
               <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
               <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}>{item.count}</span>
             </div>
