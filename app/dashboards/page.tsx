@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity } from 'lucide-react';
+import LiveSiteStats from '@/components/LiveSiteStats';
 
 const dashboards = [
   // --- SALES (4) ---
@@ -403,6 +404,8 @@ export default function DashboardsPage() {
             <p style={{ color: 'var(--muted)', maxWidth: 560, lineHeight: 1.8, marginBottom: '2.5rem', fontSize: '1.05rem' }}>
               Real-world analytics platforms engineered for high-stakes decision making. Filter by industry or stack.
             </p>
+
+            <LiveSiteStats />
 
             {/* Tool stats grid */}
             <div style={{ 
