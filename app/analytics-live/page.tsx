@@ -164,17 +164,17 @@ export default function AnalyticsLivePage() {
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 h-[280px] overflow-hidden relative">
               <div className="mono text-[11px] leading-relaxed space-y-3">
                 <div className="flex gap-4">
-                  <span className="text-[var(--muted)]">[{new Date().toLocaleTimeString()}]</span>
+                  <span className="text-[var(--muted)]">[{syncTime}]</span>
                   <span className="text-blue-400 font-bold">SYSLOG:</span>
                   <span>Cluster initialization sequence complete. Nodes: 128/128</span>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-[var(--muted)]">[{new Date().toLocaleTimeString()}]</span>
+                  <span className="text-[var(--muted)]">[{syncTime}]</span>
                   <span className="text-green-400 font-bold">READY:</span>
                   <span>Postgres pool connection pool warmed and active (4ms)</span>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-[var(--muted)]">[{new Date().toLocaleTimeString()}]</span>
+                  <span className="text-[var(--muted)]">[{syncTime}]</span>
                   <span className="text-purple-400 font-bold">AUTH:</span>
                   <span>JWT rotation verified for global edge sessions</span>
                 </div>
@@ -184,13 +184,13 @@ export default function AnalyticsLivePage() {
                     animate={{ opacity: 1, x: 0 }}
                     className="flex gap-4"
                   >
-                    <span className="text-[var(--muted)]">[{new Date().toLocaleTimeString()}]</span>
+                    <span className="text-[var(--muted)]">[{syncTime}]</span>
                     <span className="text-[var(--accent)] font-bold">SYNC:</span>
                     <span className="animate-pulse">Broadcasting Refresh Cycle #{tick} to all endpoints...</span>
                   </motion.div>
                 )}
                 <div className="flex gap-4 opacity-40">
-                  <span className="text-[var(--muted)]">[{new Date().toLocaleTimeString()}]</span>
+                  <span className="text-[var(--muted)]">[{syncTime}]</span>
                   <span className="text-[var(--muted)] font-bold">IDLE:</span>
                   <span>Waiting for next scheduled telemetry heartbeat...</span>
                 </div>
