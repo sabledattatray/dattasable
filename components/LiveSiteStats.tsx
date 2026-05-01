@@ -38,16 +38,22 @@ export default function LiveSiteStats() {
   useEffect(() => {
     setMounted(true);
     
-    // Auto-refresh logic (every 8 seconds)
+    // Auto-refresh logic (every 3 seconds for high activity)
     const interval = setInterval(() => {
       setLiveStats(current => current.map(s => {
         if (s.label === 'Edge Runtime') {
-          return { ...s, count: (99.9 + (Math.random() * 0.05)).toFixed(2) + '%' };
+          return { ...s, count: (99.9 + (Math.random() * 0.08)).toFixed(3) + '%' };
+        }
+        if (s.label === 'Data Integrations') {
+          return { ...s, count: (11 + Math.floor(Math.random() * 3)).toString() };
+        }
+        if (s.label === 'Knowledge Assets') {
+          return { ...s, count: '33.' + Math.floor(Math.random() * 9) + '+' };
         }
         return s;
       }));
       setLastRefresh(new Date());
-    }, 8000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -67,9 +73,9 @@ export default function LiveSiteStats() {
             LIVE_PLATFORM_ANALYTICS_FEED
           </span>
         </div>
-        <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest">
-          <span className="w-1 h-1 bg-[var(--accent)] rounded-full animate-pulse" />
-          Last Sync: {lastRefresh.toLocaleTimeString()}
+        <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest bg-[var(--surface)] border border-[var(--border)] px-3 py-1">
+          <span className="w-1 h-1 bg-[var(--accent)] rounded-full animate-pulse shadow-[0_0_5px_var(--accent)]" />
+          SYSTEM_SYNC_ACTIVE: {lastRefresh.toLocaleTimeString()}
         </div>
       </div>
 
@@ -95,7 +101,7 @@ export default function LiveSiteStats() {
               <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
               <motion.span 
                 key={item.count}
-                initial={{ opacity: 0.5, y: -5 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mono" 
                 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}
@@ -109,8 +115,8 @@ export default function LiveSiteStats() {
             {/* High-Visibility Running Bars */}
             <div className="space-y-3">
               {[
-                { n: 'SQL Architecture', v: '95%' },
-                { n: 'Data Engineering', v: '92%' }
+                { n: 'SQL Architecture', v: (90 + Math.random() * 10).toFixed(0) + '%' },
+                { n: 'Data Engineering', v: (85 + Math.random() * 15).toFixed(0) + '%' }
               ].map(bar => (
                 <div key={bar.n} className="space-y-1">
                   <div className="flex justify-between text-[8px] mono font-bold opacity-60 uppercase">
@@ -119,10 +125,10 @@ export default function LiveSiteStats() {
                   </div>
                   <div className="h-[2px] w-full bg-[var(--border)] overflow-hidden">
                     <motion.div 
-                      key={lastRefresh.getTime()} // Force animation reset on refresh
+                      key={lastRefresh.getTime() + bar.n} // Force animation reset on every 3s sync
                       initial={{ width: 0 }}
-                      whileInView={{ width: bar.v }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
+                      animate={{ width: bar.v }}
+                      transition={{ duration: 1, ease: "easeOut" }}
                       className="h-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]"
                     />
                   </div>
