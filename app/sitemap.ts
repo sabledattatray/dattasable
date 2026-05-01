@@ -1,23 +1,32 @@
 import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
+import { posts as staticBlogPosts } from '@/app/blog/data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
 
-  // Fetch all blog posts for dynamic routes
-  const posts = await prisma.post.findMany({
+  // 1. Fetch DB blog posts (if any)
+  const dbPosts = await prisma.post.findMany({
     where: { published: true },
     select: { slug: true, updatedAt: true }
-  });
+  }).catch(() => []);
 
-  const blogUrls = posts.map((post) => ({
+  const dbBlogUrls = dbPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.updatedAt,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
 
-  // Static pages
+  // 2. Fetch Static blog posts from data.ts
+  const staticBlogUrls = staticBlogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // 3. Static main pages
   const staticUrls = [
     '',
     '/services',
@@ -30,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/terms',
     '/disclaimer',
     '/resume',
+    '/start-here',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -37,5 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1.0 : 0.7,
   }));
 
-  return [...staticUrls, ...blogUrls];
+  return [...staticUrls, ...dbBlogUrls, ...staticBlogUrls];
 }
+
