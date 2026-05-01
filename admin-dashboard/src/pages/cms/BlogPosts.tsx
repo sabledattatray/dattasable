@@ -23,6 +23,8 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import PageHeader from 'components/sections/user-table/PageHeader';
 import ConfirmDialog from 'components/common/ConfirmDialog';
 import { posts as staticPosts } from '../../../../app/blog/data';
+import WpBlogPosts from './WpBlogPosts';
+import { useSettingsContext } from 'providers/SettingsProvider';
 
 const STORAGE_KEY = 'admin_posts';
 
@@ -73,6 +75,12 @@ const BlogPosts = () => {
   };
 
   const handleEdit = (id: string) => navigate(`/cms/posts/edit/${id}`);
+
+  const { config } = useSettingsContext();
+
+  if (config.layout === 'classic-wp') {
+    return <WpBlogPosts />;
+  }
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (

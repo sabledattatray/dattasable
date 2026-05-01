@@ -11,6 +11,7 @@ export interface Config {
   openNavbarDrawer: boolean;
   drawerWidth: number;
   fontFamily: FontFamily;
+  layout: 'default' | 'classic-wp';
 }
 
 export const initialConfig: Config = {
@@ -19,6 +20,7 @@ export const initialConfig: Config = {
   openNavbarDrawer: false,
   drawerWidth: mainDrawerWidth.full,
   fontFamily: fontFamilies[0],
+  layout: 'default',
 };
 
 // Remove hardcoded credentials for production security

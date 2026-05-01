@@ -117,6 +117,7 @@ export const authOptions: NextAuthOptions = {
             where: { email: user.email as string },
             update: { 
               name: user.name, 
+              role: role,
               image: (user as any).image,
               lastLoginAt: new Date()
             },

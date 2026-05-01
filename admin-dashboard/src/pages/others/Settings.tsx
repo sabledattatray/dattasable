@@ -13,8 +13,15 @@ import {
   alpha
 } from '@mui/material';
 import { updateAdminPassword } from '@/app/admin/settings/actions';
+import WpSettings from './WpSettings';
+import { useSettingsContext } from 'providers/SettingsProvider';
 
 const Settings = () => {
+  const { config } = useSettingsContext();
+
+  if (config.layout === 'classic-wp') {
+    return <WpSettings />;
+  }
   const theme = useTheme();
   const [passwords, setPasswords] = useState({ current: '', next: '', confirm: '' });
   const [msg, setMsg] = useState({ text: '', type: '' });

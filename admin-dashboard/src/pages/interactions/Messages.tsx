@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import paths from 'routes/paths';
 import PageHeader from 'components/sections/user-table/PageHeader';
+import WpMessages from './WpMessages';
+import { useSettingsContext } from 'providers/SettingsProvider';
 
 interface Message {
   id: string;
@@ -17,6 +19,12 @@ interface Message {
 }
 
 const Messages = () => {
+  const { config } = useSettingsContext();
+
+  if (config.layout === 'classic-wp') {
+    return <WpMessages />;
+  }
+
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {

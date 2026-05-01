@@ -10,18 +10,21 @@ import { useSettingsContext } from 'providers/SettingsProvider';
 import NavProvider from './NavProvider';
 import Footer from './footer';
 import SidenavDrawerContent from './sidenav/SidenavDrawerContent';
+import ClassicWpLayout from '../ClassicWpLayout';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
-  const {
-    config: { drawerWidth, sidenavCollapsed, openNavbarDrawer },
-    setConfig,
-  } = useSettingsContext();
+  const { config, setConfig } = useSettingsContext();
+  const { drawerWidth, openNavbarDrawer } = config;
 
   const toggleNavbarDrawer = () => {
     setConfig({
       openNavbarDrawer: !openNavbarDrawer,
     });
   };
+
+  if (config.layout === 'classic-wp') {
+    return <ClassicWpLayout>{children}</ClassicWpLayout>;
+  }
 
   return (
     <Box>

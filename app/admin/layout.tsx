@@ -17,14 +17,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const isAuthPath = pathname?.startsWith('/admin/auth') || pathname === '/admin/login';
 
   useEffect(() => {
-    if (mounted && status === 'unauthenticated' && pathname !== '/admin/login' && !isAuthPath) {
+    if (!mounted || status === 'loading') return;
+
+    const isAdmin = status === 'authenticated' && (session?.user as any)?.role === 'ADMIN';
+
+    // If unauthenticated and not on login page, redirect to login
+    if (status === 'unauthenticated' && !isAuthPath && pathname !== '/admin/login') {
+      console.log('User unauthenticated, redirecting to login');
       router.push('/admin/login');
+      return;
     }
     
-    // Security: Prevent non-ADMIN users from accessing /admin paths
-    if (mounted && status === 'authenticated' && pathname !== '/admin/login' && !isAuthPath) {
+    // If authenticated but not an admin, redirect to home page
+    // Note: We check if status is specifically 'authenticated' to avoid race conditions
+    if (status === 'authenticated' && !isAuthPath && pathname !== '/admin/login') {
       if ((session?.user as any)?.role !== 'ADMIN') {
-        console.error('Access denied: User is not an ADMIN');
+        console.warn('Access denied: User role is not ADMIN. Redirecting to home.');
         router.push('/');
       }
     }

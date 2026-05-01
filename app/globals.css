@@ -78,6 +78,25 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.35;    /* Stronger visibility for light mode */
 }
 
+/* WordPress Admin Framework Design Tokens */
+.wp-admin {
+  --wp-bg: #f0f0f1;
+  --wp-surface: #ffffff;
+  --wp-surface-dim: #dadadb;
+  --wp-border: #d9d9d9;
+  --wp-admin-bar-bg: #1e1e1e;
+  --wp-sidebar-bg: #23282d;
+  --wp-sidebar-active-bg: #1e1e1e;
+  --wp-sidebar-hover-bg: #2c3338;
+  --wp-primary: #2271b1;
+  --wp-primary-hover: #135e96;
+  --wp-text: #3c434a;
+  --wp-text-inverted: #f0f0f1;
+  --wp-admin-bar-height: 32px;
+  --wp-sidebar-width: 160px;
+  --wp-sidebar-collapsed: 36px;
+}
+
 .light .crosshair-v,
 .light .crosshair-h {
   background: #18181b;

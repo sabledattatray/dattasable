@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { Stack, CircularProgress, Typography, Box, Paper } from '@mui/material';
 import AnalyticKPI from 'components/sections/dashboards/analytics/kpi/AnalyticKPI';
 import UserEngagement from 'components/sections/dashboards/analytics/user-engagement/UserEngagement';
+import IconifyIcon from 'components/base/IconifyIcon';
 
 const RealTimeAnalytics = () => {
   const [data, setData] = useState<any>(null);
@@ -94,42 +95,57 @@ const RealTimeAnalytics = () => {
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
       <Grid size={{ xs: 12 }}>
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <Box>
-            <Typography variant="h5" sx={{ fontWeight: 700, color: 'text.primary' }}>
-              Real-Time Platform Intelligence
-            </Typography>
-            <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 1 }}>
-              LIVE VISITOR TRAJECTORY MONITORING
-            </Typography>
+        <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' }, gap: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ 
+              width: 48, 
+              height: 48, 
+              borderRadius: 1, 
+              bgcolor: 'primary.main', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              boxShadow: (theme) => `0 0 20px ${theme.palette.primary.main}33`
+            }}>
+              <IconifyIcon icon="material-symbols:analytics-rounded" sx={{ color: 'black', fontSize: 28 }} />
+            </Box>
+            <Box>
+              <Typography variant="h5" sx={{ fontWeight: 500, textTransform: 'uppercase', letterSpacing: '-0.02em', color: 'text.primary', lineHeight: 1 }}>
+                Real-Time Platform Intelligence
+              </Typography>
+              <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 2, fontWeight: 500, fontSize: '0.65rem' }}>
+                LIVE VISITOR TRAJECTORY MONITORING // NODE_ALPHA_01
+              </Typography>
+            </Box>
           </Box>
           
           <Stack 
             direction="row" 
-            spacing={1} 
+            spacing={1.5} 
             sx={{ 
               alignItems: 'center',
-              bgcolor: 'rgba(255, 0, 0, 0.1)', 
-              px: 1.5, 
-              py: 0.5, 
-              borderRadius: 10, 
-              border: '1px solid rgba(255, 0, 0, 0.2)' 
+              bgcolor: 'rgba(255, 77, 77, 0.05)', 
+              px: 2, 
+              py: 1, 
+              borderRadius: 1, 
+              border: '1px solid rgba(255, 77, 77, 0.15)' 
             }}
           >
             <Box sx={{ 
-              width: 8, 
-              height: 8, 
+              width: 10, 
+              height: 10, 
               bgcolor: '#ff4d4d', 
               borderRadius: '50%',
-              animation: 'pulse 1.5s infinite ease-in-out',
+              boxShadow: '0 0 10px #ff4d4d',
+              animation: 'pulse 2s infinite ease-in-out',
               '@keyframes pulse': {
-                '0%': { transform: 'scale(0.8)', opacity: 0.5, boxShadow: '0 0 0 0 rgba(255, 77, 77, 0.7)' },
-                '70%': { transform: 'scale(1.1)', opacity: 1, boxShadow: '0 0 0 6px rgba(255, 77, 77, 0)' },
-                '100%': { transform: 'scale(0.8)', opacity: 0.5, boxShadow: '0 0 0 0 rgba(255, 77, 77, 0)' }
+                '0%': { transform: 'scale(0.95)', opacity: 0.8 },
+                '50%': { transform: 'scale(1.1)', opacity: 1, boxShadow: '0 0 15px #ff4d4d' },
+                '100%': { transform: 'scale(0.95)', opacity: 0.8 }
               }
             }} />
-            <Typography variant="caption" sx={{ color: '#ff4d4d', fontWeight: 700, fontSize: '0.65rem', letterSpacing: 1 }}>
-              LIVE
+            <Typography variant="caption" sx={{ color: '#ff4d4d', fontWeight: 800, fontSize: '0.7rem', letterSpacing: 2 }}>
+              SYSTEM_LIVE
             </Typography>
           </Stack>
         </Box>
@@ -148,11 +164,17 @@ const RealTimeAnalytics = () => {
       </Grid>
 
       <Grid size={{ xs: 12 }}>
-        <Paper sx={{ p: 3, borderRadius: 3 }}>
-          <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2 }}>
-            TOP PERFORMING CONTENT (LIVE)
+        <Paper sx={{ 
+          p: 3, 
+          borderRadius: 1, 
+          background: 'rgba(255, 255, 255, 0.02)',
+          border: '1px solid rgba(255, 255, 255, 0.05)',
+          position: 'relative'
+        }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 500, mb: 3, letterSpacing: 1, textTransform: 'uppercase', fontSize: '0.75rem', color: 'text.secondary' }}>
+            TOP PERFORMING CONTENT (LIVE) // TRAFFIC_SYNC_NODE
           </Typography>
-          <Stack spacing={2}>
+          <Stack spacing={1}>
             {data?.topPages?.length === 0 ? (
               <Typography variant="body2" color="text.secondary">No traffic data recorded yet.</Typography>
             ) : (
@@ -160,10 +182,26 @@ const RealTimeAnalytics = () => {
                 <Stack 
                   key={page.url} 
                   direction="row" 
-                  sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+                  sx={{ 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    p: 1.5,
+                    bgcolor: 'rgba(255, 255, 255, 0.02)',
+                    borderLeft: '2px solid',
+                    borderColor: 'primary.main',
+                    transition: 'all 0.2s',
+                    '&:hover': {
+                      bgcolor: 'rgba(255, 255, 255, 0.05)',
+                      transform: 'translateX(4px)'
+                    }
+                  }}
                 >
-                  <Typography variant="body2">{idx + 1}. {page.url}</Typography>
-                  <Typography variant="subtitle2" color="primary">{page._count.url} Views</Typography>
+                  <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'text.primary', fontWeight: 400 }}>
+                    {idx + 1}. {page.url}
+                  </Typography>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 500, color: 'primary.main', fontFamily: 'monospace' }}>
+                    {page._count.url} VIEWS
+                  </Typography>
                 </Stack>
               ))
             )}

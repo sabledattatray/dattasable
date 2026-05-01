@@ -10,8 +10,15 @@ import AnalyticKPI from 'components/sections/dashboards/analytics/kpi/AnalyticKP
 import TopCampaigns from 'components/sections/dashboards/analytics/top-campaigns/TopCampaigns';
 import UserByCountry from 'components/sections/dashboards/analytics/user-by-country/UserByCountry';
 import UserEngagement from 'components/sections/dashboards/analytics/user-engagement/UserEngagement';
+import WpAnalytics from './WpAnalytics';
+import { useSettingsContext } from 'providers/SettingsProvider';
 
 const Analytics = () => {
+  const { config } = useSettingsContext();
+
+  if (config.layout === 'classic-wp') {
+    return <WpAnalytics />;
+  }
   return (
     <Grid container spacing={1} sx={{ p: 1 }}>
       <Grid size={{ xs: 12, xl: 5 }} container spacing={1}>
