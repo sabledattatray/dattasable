@@ -75,8 +75,22 @@ export default function LiveSiteStats() {
               <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}>{item.count}</span>
             </div>
             <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '4px' }}>{item.label}</div>
-            <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em' }}>{item.sub}</div>
+            <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '1rem' }}>{item.sub}</div>
             
+            {/* Animated Running Bar */}
+            <div className="w-full h-[1px] bg-[var(--border)] overflow-hidden relative">
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: '100%' }}
+                transition={{ duration: 2, ease: "easeInOut" }}
+                className="h-full bg-[var(--accent)] opacity-50"
+              />
+            </div>
+            <div className="flex justify-between mt-1 opacity-40">
+              <span className="text-[8px] mono uppercase">Optimization</span>
+              <span className="text-[8px] mono uppercase">95%</span>
+            </div>
+
             {/* The signature bottom-left accent bar */}
             <div style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '2px', background: 'var(--accent)', opacity: 0.4 }} />
           </motion.div>
