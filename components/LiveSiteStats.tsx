@@ -32,9 +32,24 @@ const stats = [
 
 export default function LiveSiteStats() {
   const [mounted, setMounted] = useState(false);
+  const [liveStats, setLiveStats] = useState(stats);
+  const [lastRefresh, setLastRefresh] = useState(new Date());
 
   useEffect(() => {
     setMounted(true);
+    
+    // Auto-refresh logic (every 8 seconds)
+    const interval = setInterval(() => {
+      setLiveStats(current => current.map(s => {
+        if (s.label === 'Edge Runtime') {
+          return { ...s, count: (99.9 + (Math.random() * 0.05)).toFixed(2) + '%' };
+        }
+        return s;
+      }));
+      setLastRefresh(new Date());
+    }, 8000);
+
+    return () => clearInterval(interval);
   }, []);
 
   if (!mounted) return null;
@@ -42,14 +57,20 @@ export default function LiveSiteStats() {
   return (
     <div className="w-full py-16">
       {/* Label Header */}
-      <div className="flex items-center gap-3 mb-10 px-6">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
-        </span>
-        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mono">
-          LIVE_PLATFORM_ANALYTICS_FEED
-        </span>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 px-6">
+        <div className="flex items-center gap-3">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
+          </span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mono">
+            LIVE_PLATFORM_ANALYTICS_FEED
+          </span>
+        </div>
+        <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest">
+          <span className="w-1 h-1 bg-[var(--accent)] rounded-full animate-pulse" />
+          Last Sync: {lastRefresh.toLocaleTimeString()}
+        </div>
       </div>
 
       {/* Identical Grid Styling */}
@@ -62,7 +83,7 @@ export default function LiveSiteStats() {
         marginBottom: '2rem',
         overflow: 'hidden'
       }}>
-        {stats.map((item, index) => (
+        {liveStats.map((item, index) => (
           <motion.div 
             key={item.label} 
             initial={{ opacity: 0 }}
@@ -72,7 +93,15 @@ export default function LiveSiteStats() {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
               <span style={{ color: 'var(--accent)', opacity: 0.8 }}>{item.icon}</span>
-              <span className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}>{item.count}</span>
+              <motion.span 
+                key={item.count}
+                initial={{ opacity: 0.5, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mono" 
+                style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginLeft: 'auto' }}
+              >
+                {item.count}
+              </motion.span>
             </div>
             <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '4px' }}>{item.label}</div>
             <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>{item.sub}</div>
@@ -90,6 +119,7 @@ export default function LiveSiteStats() {
                   </div>
                   <div className="h-[2px] w-full bg-[var(--border)] overflow-hidden">
                     <motion.div 
+                      key={lastRefresh.getTime()} // Force animation reset on refresh
                       initial={{ width: 0 }}
                       whileInView={{ width: bar.v }}
                       transition={{ duration: 1.5, ease: "easeOut" }}
