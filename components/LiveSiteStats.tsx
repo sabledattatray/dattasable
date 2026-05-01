@@ -6,10 +6,11 @@ import { useState, useEffect } from 'react';
 export default function LiveSiteStats() {
   const [mounted, setMounted] = useState(false);
   const [tick, setTick] = useState(0);
-  const [syncTime, setSyncTime] = useState(new Date().toLocaleTimeString());
+  const [syncTime, setSyncTime] = useState('--:--:--');
 
   useEffect(() => {
     setMounted(true);
+    setSyncTime(new Date().toLocaleTimeString());
     
     // Core Ticker: Updates every 2 seconds to force absolute dynamism
     const interval = setInterval(() => {
