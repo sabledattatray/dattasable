@@ -93,7 +93,7 @@ const jetbrains = JetBrains_Mono({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         {/* Preconnects removed to optimize initial render. Third-party scripts are lazy-loaded by PerformanceOptimizer. */}
         
@@ -139,8 +139,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
                   if (!theme && supportDarkMode) theme = 'light';
                   if (!theme) theme = 'light';
-                  if (theme === 'light') document.documentElement.classList.add('light');
-                  else document.documentElement.classList.remove('light');
+                  if (theme === 'dark') document.documentElement.classList.remove('light');
+                  else document.documentElement.classList.add('light');
                 } catch (e) {}
               })();
             `,
