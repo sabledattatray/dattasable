@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Establish Connection | Datta Sable",
     description: "Connect for elite BI consulting and data architecture.",
-    images: ["/images/datta.png"],
+    images: ["/images/datta.webp"],
   }
 };
 

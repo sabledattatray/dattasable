@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BI Solutions & Technical Consulting",
     description: "High-fidelity analytics, technical automation, and scalable dashboard structures.",
-    images: ["/images/datta.png"],
+    images: ["/images/datta.webp"],
   }
 };
 

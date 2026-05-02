@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Datta Sable | BI Project Showcase",
     description: "Detailed case studies and interactive visual experiences in Data Engineering and Analytics.",
-    images: ["/images/datta.png"],
+    images: ["/images/datta.webp"],
   }
 };
 

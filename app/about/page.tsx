@@ -136,7 +136,7 @@ export default function AboutPage() {
                 }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image 
-                    src="/images/datta.png" 
+                    src="/images/datta.webp" 
                     alt="Datta Sable" 
                     fill
                     style={{ objectFit: 'cover' }} 

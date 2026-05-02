@@ -91,7 +91,7 @@ export const posts = [
     date: 'May 02, 2026',
     color: 'var(--accent)',
     icon: '🚀',
-    image: '/images/blog/analytics_war_room_hero.png',
+    image: '/images/blog/analytics_war_room_hero.webp',
     tags: ['Next.js', 'Framer Motion', 'Analytics', 'UX Design', 'Performance']
   },
   // --- MASTERCLASSES ---
@@ -584,7 +584,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Mar 17, 2026',
     color: 'var(--accent)',
     icon: '🛡️',
-    image: '/images/blog/data_quality_realistic_hero.png',
+    image: '/images/blog/data_quality_realistic_hero.webp',
     tags: ['Data Quality', 'Testing', 'BI', 'Governance', '2026']
   },
 

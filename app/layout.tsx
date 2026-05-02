@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     url: "https://dattasable.com",
     images: [
       {
-        url: "/images/datta.png",
+        url: "/images/datta.webp",
         width: 1200,
         height: 630,
         alt: "Datta Sable | BI & Analytics Expert",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Datta Sable | BI & Analytics Expert",
     description: "Transforming raw data into strategic insights.",
-    images: ["/images/datta.png"],
+    images: ["/images/datta.webp"],
   },
   icons: {
     icon: [

@@ -8,7 +8,7 @@ export const users: User[] = [
   {
     id: 0,
     name: 'dattasable',
-    avatar: '/images/datta.png', // Using the real image since avatar(0) is missing
+    avatar: '/images/datta.webp', // Using the real image since avatar(0) is missing
     email: 'info@dattasable.com',
     status: 'online',
     role: 'Admin',
