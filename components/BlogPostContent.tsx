@@ -81,7 +81,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
         </div>
 
         <div className="flex items-center gap-3 mb-4">
-          <span className="tag" style={{ color: post.color || '#c9f31d', borderColor: `${post.color || '#c9f31d'}44` }}>{post.category}</span>
+          <span className="tag" style={{ color: post.color || 'var(--accent)', borderColor: `${post.color || 'var(--accent)'}44` }}>{post.category}</span>
           <span className="flex items-center gap-1" style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>
             <Clock size={12} /> {post.readTime || '5'} min read
           </span>

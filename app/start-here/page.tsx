@@ -58,10 +58,10 @@ export default function StartHerePage() {
           </div>
 
           {/* Featured Legacy Workshop */}
-          <div className="card" style={{ marginTop: '5rem', padding: '3rem', borderLeft: '4px solid #c9f31d', background: 'rgba(201, 243, 29, 0.05)' }}>
+          <div className="card" style={{ marginTop: '5rem', padding: '3rem', borderLeft: '4px solid var(--accent)', background: 'var(--surface2)' }}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="label-tech mb-4" style={{ color: '#c9f31d' }}>LEGACY-WORKSHOP // 2021</div>
+                <div className="label-tech mb-4" style={{ color: 'var(--accent)' }}>LEGACY-WORKSHOP // 2021</div>
                 <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Full-Stack Web Orchestration Masterclass</h2>
                 <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '2rem' }}>
                   A comprehensive, 35-minute workshop demonstrating the engineering fundamentals of scalable digital infrastructure. This legacy session has helped over 9,000+ engineers establish their first web-based data environments.
@@ -98,7 +98,7 @@ export default function StartHerePage() {
             {/* Community Pulse - Social Proof */}
             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border)', display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: 40, height: 40, background: '#c9f31d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                <div style={{ width: 40, height: 40, background: 'var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000' }}>
                   <Zap size={20} />
                 </div>
                 <div>
@@ -153,7 +153,7 @@ export default function StartHerePage() {
             ))}
           </div>
 
-          <div className="card" style={{ marginTop: '4rem', padding: '3rem', textAlign: 'center', background: 'linear-gradient(135deg, rgba(201,243,29,0.03) 0%, transparent 100%)' }}>
+          <div className="card" style={{ marginTop: '4rem', padding: '3rem', textAlign: 'center', background: 'linear-gradient(135deg, var(--surface2) 0%, transparent 100%)' }}>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Need a Custom BI Roadmap?</h3>
             <p style={{ color: 'var(--muted)', maxWidth: 500, margin: '0 auto 2rem' }}>
               I help organizations architect high-performance data systems and automated analytics workflows.

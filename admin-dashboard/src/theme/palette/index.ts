@@ -124,8 +124,8 @@ const primary = generatePaletteChannel({
   contrastText: basic.white,
 });
 const secondary = generatePaletteChannel({
-  lighter: cssVarRgba(generatePaletteChannel({ main: brand.primary }).mainChannel, 0.1),
-  light: brand.primary,
+  lighter: cssVarRgba(generatePaletteChannel({ main: '#a7cc14' }).mainChannel, 0.1),
+  light: '#a7cc14',
   main: '#a7cc14', // Green as secondary in light mode
   dark: '#8eb00d',
   darker: '#759409',

@@ -6,7 +6,7 @@ import { Box, Typography, Stack, Avatar, Button, IconButton, Tooltip } from '@mu
 import IconifyIcon from 'components/base/IconifyIcon';
 import { useSettingsContext } from 'providers/SettingsProvider';
 import sitemap from 'routes/sitemap';
-import { rootPaths } from 'routes/paths';
+import paths, { rootPaths } from 'routes/paths';
 
 const ClassicWpLayout = ({ children }: { children: React.ReactNode }) => {
   const { setConfig } = useSettingsContext();
@@ -178,7 +178,7 @@ const ClassicWpLayout = ({ children }: { children: React.ReactNode }) => {
                         }
                       }}
                     >
-                      <IconifyIcon icon={item.icon} fontSize={20} sx={{ mr: collapsed ? 0 : 1.5 }} />
+                      <IconifyIcon icon={item.icon || ''} fontSize={20} sx={{ mr: collapsed ? 0 : 1.5 }} />
                       {!collapsed && (
                         <Typography sx={{ fontSize: '14px', fontWeight: isActive ? 600 : 400 }}>
                           {item.name}
