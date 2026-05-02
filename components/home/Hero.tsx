@@ -47,7 +47,7 @@ export default function Hero() {
         <div className="relative w-full h-full">
           <Image
             src="/hero-bg.webp"
-            alt="Business Intelligence and Data Strategy visualization"
+            alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
             fill
             priority
             fetchPriority="high"
@@ -85,12 +85,7 @@ export default function Hero() {
 
       {/* Layer 2: Content Foreground */}
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          style={{ maxWidth: 640 }}
-        >
+        <div style={{ maxWidth: 640 }}>
           <TechLabel>Business Intelligence Expert & Data Strategy Consultant</TechLabel>
           <h1
             className="hero-title"
@@ -161,7 +156,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
