@@ -117,7 +117,7 @@ export default function Footer() {
                 fontFamily: "'Syne', sans-serif",
               }}
             >
-              Transforming raw data into strategic assets through advanced Business Intelligence and Automation.
+              Premier <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> in India. Specializing in high-fidelity <strong>Automated Reporting Solutions</strong> and <strong>Data Engineering</strong>.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -235,7 +235,7 @@ export default function Footer() {
                 gap: '0.65rem' 
               }}
             >
-              {['Tableau', 'Power BI', 'SQL', 'Python', 'CorelDRAW', 'ETL'].map((tool) => (
+              {['Tableau', 'Power BI', 'SQL', 'Python', 'ETL', 'Automation'].map((tool) => (
                 <span
                   key={tool}
                   style={{

@@ -51,7 +51,7 @@ export default function Hero() {
         <div className="w-full h-full">
           <Image
             src="/hero-bg.webp"
-            alt="Advanced Technical Data Visualization"
+            alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
             width={800}
             height={600}
             priority
@@ -92,7 +92,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           style={{ maxWidth: 640 }}
         >
-          <TechLabel>BI Engineer & Data Strategist</TechLabel>
+          <TechLabel>Business Intelligence Expert & Data Strategy Consultant</TechLabel>
           <h1
             className="hero-title"
             style={{
@@ -107,7 +107,7 @@ export default function Hero() {
             Engineering data into<br />strategic roadmaps
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            I simplify complex data ecosystems into actionable executive insights. From high-performance automation to intuitive dashboard architectures, I build systems that drive enterprise growth.
+            Premier <strong>BI Developer in India</strong>. I simplify complex data ecosystems into actionable executive insights through <strong>SQL Automation</strong>, <strong>Python Data Engineering</strong>, and high-fidelity <strong>Automated Reporting Solutions</strong>.
           </p>
           <div className="flex flex-col xs:flex-row flex-wrap gap-4">
             <Link href="/start-here" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>

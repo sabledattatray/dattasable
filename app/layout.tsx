@@ -13,7 +13,20 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
   title: "Datta Sable | BI & Analytics Expert",
   description: "Datta Sable — Business Intelligence Expert specializing in Tableau, Power BI, SQL, Python & Advanced Excel. Building data-driven insights that empower decisions.",
-  keywords: ["Business Intelligence", "Tableau", "Power BI", "SQL", "Python", "Data Analytics", "Dashboard Development"],
+  keywords: [
+    "Datta Sable", 
+    "Datta Sable Portfolio",
+    "Business Intelligence Expert", 
+    "BI Developer India",
+    "Tableau Expert", 
+    "Power BI Consultant", 
+    "SQL Automation", 
+    "Python Data Engineering", 
+    "Data Analytics Dashboard", 
+    "Dashboard Development",
+    "Automated Reporting Solutions",
+    "Data Strategy Consultant"
+  ],
   authors: [{ name: "Datta Sable" }],
   openGraph: {
     title: "Datta Sable | BI & Analytics Expert",
@@ -42,6 +55,9 @@ export const metadata: Metadata = {
     ],
     shortcut: '/favicon.svg',
     apple: '/favicon.svg',
+  },
+  verification: {
+    google: "XV8qSN_qy63Tsmx3naTd1yXZr5CbLhaT22Xsmhf5cAw",
   },
 };
 
@@ -118,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 try {
                   var theme = localStorage.getItem('theme');
                   var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                  if (!theme && supportDarkMode) theme = 'dark';
+                  if (!theme && supportDarkMode) theme = 'light';
                   if (!theme) theme = 'light';
                   if (theme === 'light') document.documentElement.classList.add('light');
                   else document.documentElement.classList.remove('light');

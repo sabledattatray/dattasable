@@ -114,7 +114,7 @@ export default function AboutPage() {
                   <span className="hero-title">Decision</span> Clarity.
                 </h1>
                 <p style={{ color: 'var(--muted)', maxWidth: 520, lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-                  I am Datta Sable, a Business Intelligence specialist who bridges the gap between complex data and strategic action. I build automated systems that turn raw information into clear, confident decisions for stakeholders and organizations.
+                  I am Datta Sable, a <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> based in India. I bridge the gap between complex data ecosystems and strategic action, building high-fidelity <strong>Automated Reporting Solutions</strong> that empower stakeholders with absolute decision clarity.
                 </p>
                 <div className="flex gap-4">
                   <Link href="/resume" className="btn-primary flex items-center gap-2" style={{ textDecoration: 'none', borderRadius: 0, padding: '1rem 2rem' }}>
@@ -254,7 +254,7 @@ export default function AboutPage() {
               <div className="label-tech mb-4">SYSTEM-RESOURCES</div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Technical Arsenal</h2>
               <p style={{ color: 'var(--muted)', lineHeight: 1.8, maxWidth: '750px', marginBottom: '3rem' }}>
-                A specialized tech stack engineered for speed, scalability, and pixel-perfect accuracy. Each tool is a pillar in the analytics architecture.
+                A specialized tech stack engineered for speed, scalability, and pixel-perfect accuracy. As a <strong>Tableau Expert</strong> and <strong>Power BI Consultant</strong>, I focus on <strong>SQL Automation</strong> and <strong>Python Data Engineering</strong> to build the foundations for your next <strong>Data Analytics Dashboard</strong>.
               </p>
 
               {/* STATS: SIDE-BY-SIDE */}

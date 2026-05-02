@@ -12,7 +12,7 @@ interface ThemeContextType {
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = React.useState<Theme>('dark');
+  const [theme, setThemeState] = React.useState<Theme>('light');
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       console.warn('LocalStorage access denied:', e);
     }
 
-    const initialTheme = savedTheme || 'dark';
+    const initialTheme = savedTheme || 'light';
     
     setThemeState(initialTheme);
     document.documentElement.classList.toggle('light', initialTheme === 'light');
@@ -59,7 +59,7 @@ export function useTheme() {
   if (context === undefined) {
     // Provide a default that doesn't crash
     return { 
-      theme: 'dark' as Theme, 
+      theme: 'light' as Theme, 
       setTheme: (t: Theme) => console.warn('ThemeProvider not found') 
     };
   }
