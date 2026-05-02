@@ -1,10 +1,6 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
-import { Table, Database, BarChart3, Layers, Code2, BookOpen } from 'lucide-react';
+import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
+import HeroInteraction from './HeroInteraction';
 
 function TechLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -15,12 +11,6 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function Hero() {
-  const [isApp, setIsApp] = useState(false);
-
-  useEffect(() => {
-    if ((window as any).Capacitor?.isNative) setIsApp(true);
-  }, []);
-
   return (
     <section
       className="section hero-grid"
@@ -36,12 +26,12 @@ export default function Hero() {
         border: 'none'
       }}
     >
-      {/* Layer 1: Right-Side Visual - Static Opacity for LCP Optimization */}
+      {/* Layer 1: Right-Side Visual - Optimized for Server Rendering */}
       <div
         id="hero-visual-container"
         className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh]"
         style={{
-          opacity: 0.35, /* Fixed opacity for immediate rendering */
+          opacity: 0.35,
         }}
       >
         <div className="relative w-full h-full">
@@ -58,23 +48,13 @@ export default function Hero() {
             style={{ objectPosition: 'center right' }}
           />
         </div>
-        {/* Targeted Dark/Light Overlay: Bottom-Left to Middle-Left */}
         <div
           className="absolute inset-0 z-10 pointer-events-none"
           style={{
             background: 'linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end))'
           }}
         />
-        {/* App-specific overlay (client-side only) */}
-        {isApp && (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(circle at center, var(--accent) 0%, var(--accent) 50%, transparent 85%)',
-            zIndex: 1,
-            opacity: 0.5
-          }} />
-        )}
+        
         <div className="block lg:hidden" style={{
           position: 'absolute',
           inset: 0,
@@ -83,7 +63,6 @@ export default function Hero() {
         }} />
       </div>
 
-      {/* Layer 2: Content Foreground */}
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
           <TechLabel>Business Intelligence Expert & Data Strategy Consultant</TechLabel>
@@ -103,17 +82,8 @@ export default function Hero() {
           <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
             Premier <strong>BI Developer in India</strong>. I simplify complex data ecosystems into actionable executive insights through <strong>SQL Automation</strong>, <strong>Python Data Engineering</strong>, and high-fidelity <strong>Automated Reporting Solutions</strong>.
           </p>
-          <div className="flex flex-col xs:flex-row flex-wrap gap-4">
-            <Link href="/start-here" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
-              <BookOpen size={16} /> EXPLORE SERVICES
-            </Link>
-            <Link href="/portfolio" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-              PORTFOLIO PROJECTS
-            </Link>
-            <Link href="/contact" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-              HIRE BI EXPERT
-            </Link>
-          </div>
+          
+          <HeroInteraction />
 
           <div style={{ height: '2rem' }} />
 
