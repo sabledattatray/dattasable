@@ -57,8 +57,8 @@ export default function Hero() {
             priority
             fetchPriority="high"
             decoding="sync"
-            quality={50}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+            quality={40}
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1200px) 50vw, 700px"
             className="w-full h-auto"
           />
         </div>
