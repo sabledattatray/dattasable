@@ -146,6 +146,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/hero-bg.webp" 
+          fetchPriority="high"
+        />
       </head>
       <body style={{ background: 'var(--bg)' }} suppressHydrationWarning>
         <Providers>

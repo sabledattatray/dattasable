@@ -39,7 +39,7 @@ export default function Hero() {
       {/* Layer 1: Right-Side Visual - Optimized with Mobile-First Strategy */}
       <div
         id="hero-visual-container"
-        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 lg:opacity-100 pointer-events-none overflow-hidden"
+        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 lg:opacity-100 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh]"
         style={{
           opacity: isApp ? 0.8 : 'var(--hero-mobile-opacity)',
           backgroundImage: isApp
@@ -48,18 +48,18 @@ export default function Hero() {
           backgroundSize: '100% 100%'
         }}
       >
-        <div className="w-full h-full">
+        <div className="relative w-full h-full">
           <Image
             src="/hero-bg.webp"
             alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
-            width={800}
-            height={600}
+            fill
             priority
             fetchPriority="high"
             decoding="sync"
-            quality={40}
-            sizes="(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1200px) 50vw, 700px"
-            className="w-full h-auto"
+            quality={30}
+            sizes="(max-width: 768px) 100vw, 55vw"
+            className="object-cover"
+            style={{ objectPosition: 'center right' }}
           />
         </div>
         {/* Targeted Dark/Light Overlay: Bottom-Left to Middle-Left */}
