@@ -1,27 +1,33 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { useSession } from 'next-auth/react';
 import { 
-  Database, 
   Download, 
   Settings, 
   Plus, 
   X, 
   ChevronDown,
-  Terminal,
   Cpu,
-  Sparkles,
   Lock,
   Crown,
-  UserCheck,
-  Zap,
   Shield
 } from 'lucide-react';
+
+// Optimized heavy component loading
+const PreviewTerminal = dynamic(() => import('@/components/data-forge/PreviewTerminal'), {
+  loading: () => <div className="h-[600px] bg-[#0a0a0a] rounded-[2rem] animate-pulse flex items-center justify-center">
+    <div className="flex flex-col items-center gap-4">
+      <Cpu className="w-8 h-8 text-red-500/20 animate-spin" />
+      <span className="text-[10px] font-black text-white/10 uppercase tracking-[0.3em]">Initializing Core...</span>
+    </div>
+  </div>,
+  ssr: false // Client-side only for data generation previews
+});
 
 // --- CONFIGURATION OPTIONS ---
 const INDUSTRIES = [
@@ -388,81 +394,16 @@ export default function DataForgePage() {
                 </div>
               </div>
 
-              {/* Preview & Terminal Panel */}
+              {/* Preview & Terminal Panel (Dynamic) */}
               <div className="lg:col-span-7 h-full sticky top-32">
-                <div className="border border-[var(--border)] bg-[#0a0a0a] rounded-[2rem] overflow-hidden flex flex-col shadow-3xl min-h-[600px]">
-                  <div className="flex items-center justify-between px-8 py-5 border-b border-white/5 bg-white/[0.02]">
-                    <div className="flex items-center gap-3">
-                      <Terminal className="w-4 h-4 text-red-500" />
-                      <span className="text-[10px] font-black text-gray-500 tracking-[0.2em] uppercase font-mono">Intelligence Stream</span>
-                    </div>
-                    <div className="flex items-center gap-4 text-[10px] font-mono text-gray-600">
-                      <span className="text-red-500/50 uppercase tracking-widest">{selectedIndustry.id} ACTIVE</span>
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-red-500/20" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-500/20" />
-                        <div className="w-2 h-2 rounded-full bg-green-500/20" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex-1 p-8 font-mono text-[11px] overflow-x-auto no-scrollbar">
-                    <table className="w-full text-left">
-                      <thead className="text-gray-600 border-b border-white/5">
-                        <tr>
-                          {selectedFields.map(f => (
-                            <th key={f.label} className="pb-4 px-4 uppercase tracking-tighter font-bold whitespace-nowrap">{f.label}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-white/[0.03]">
-                        <AnimatePresence mode="wait">
-                          {previewData.map((row, idx) => (
-                            <motion.tr 
-                              key={`${selectedIndustry.id}-${idx}`}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.05 }}
-                              className="group hover:bg-white/[0.02] transition-colors"
-                            >
-                              {selectedFields.map(f => (
-                                <td key={f.label} className="py-4 px-4 whitespace-nowrap text-gray-300 tabular-nums">
-                                  {f.id === 'amount' ? `$${row[f.label]}` : row[f.label]}
-                                </td>
-                              ))}
-                            </motion.tr>
-                          ))}
-                        </AnimatePresence>
-                      </tbody>
-                    </table>
-                    
-                    {isGenerating && (
-                      <div className="py-8 space-y-4">
-                        {[1, 2, 3].map(i => (
-                          <div key={i} className="h-4 bg-white/5 rounded-lg animate-pulse w-full" />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Summary Bar */}
-                  <div className="px-8 py-5 bg-black/40 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-gray-600 uppercase">
-                    <div className="flex gap-10">
-                      <div className="space-y-1">
-                        <span className="text-[9px] opacity-50 block tracking-widest">Tier</span>
-                        <span className={session ? 'text-red-500 font-bold' : 'text-gray-400 font-bold'}>{session ? 'PRO' : 'OPEN'}</span>
-                      </div>
-                      <div className="space-y-1">
-                        <span className="text-[9px] opacity-50 block tracking-widest">Estimated Size</span>
-                        <span className="text-red-500 font-bold tabular-nums">~{(dataCount * selectedFields.length * 0.015).toFixed(1)} KB</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_15px_#22c55e]" />
-                      <span className="tracking-widest">Ready to Forge</span>
-                    </div>
-                  </div>
-                </div>
+                <PreviewTerminal 
+                  selectedIndustry={selectedIndustry}
+                  selectedFields={selectedFields}
+                  previewData={previewData}
+                  isGenerating={isGenerating}
+                  dataCount={dataCount}
+                  session={session}
+                />
               </div>
             </div>
           </div>
