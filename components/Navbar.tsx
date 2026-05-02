@@ -32,6 +32,7 @@ const megaMenuData: Record<string, any> = {
       { title: 'BI Strategy', desc: 'Enterprise data roadmap planning.', icon: <Layers size={20} />, href: '/services#consulting' },
       { title: 'Dashboard Design', desc: 'Tableau & Power BI expert builds.', icon: <BarChart3 size={20} />, href: '/services#dashboards' },
       { title: 'Data Automation', desc: 'Python & SQL based pipelines.', icon: <Zap size={20} />, href: '/services#automation' },
+      { title: 'Synthetic Data Forge', desc: 'High-fidelity dataset generation.', icon: <Database size={20} style={{ color: '#c9f31d' }} />, href: '/data-forge' },
       { title: 'Enterprise Web Dev', desc: 'WordPress & Next.js solutions.', icon: <Globe size={20} />, href: '/services#web-solutions' },
       { title: 'Technical SEO', desc: 'On-page & technical ranking.', icon: <Sparkles size={20} />, href: '/services#seo-optimization' },
       { title: 'Premium Web Design', desc: 'Bespoke UI/UX experiences.', icon: <Layers size={20} />, href: '/services#web-design' },
