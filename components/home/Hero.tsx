@@ -31,19 +31,18 @@ export default function Hero() {
         id="hero-visual-container"
         className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh]"
         style={{
-          opacity: 0.45,
-          background: 'radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.05) 0%, transparent 70%)', // Obsidian Mesh Gradient
+          opacity: 0.35,
         }}
       >
         <div className="relative w-full h-full">
           <Image
-            src="/images/blog/analytics_war_room_hero.webp"
+            src="/hero-bg.webp"
             alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
             fill
             priority
             fetchPriority="high"
-            loading="eager"
-            quality={60}
+            decoding="sync"
+            quality={30}
             sizes="(max-width: 768px) 100vw, 55vw"
             className="object-cover"
             style={{ objectPosition: 'center right' }}
