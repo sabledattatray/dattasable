@@ -65,7 +65,10 @@ export default function Hero() {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
-          <TechLabel>Business Intelligence Expert & Data Strategy Consultant</TechLabel>
+          <TechLabel>
+            <span className="hidden sm:inline">Business Intelligence Expert & Data Strategy Consultant</span>
+            <span className="inline sm:hidden">BI Expert & Data Strategist</span>
+          </TechLabel>
           <h1
             className="hero-title"
             style={{
