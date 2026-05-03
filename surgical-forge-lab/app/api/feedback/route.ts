@@ -7,7 +7,13 @@ export async function POST(req: NextRequest) {
     const { chartId, liked, metric } = await req.json();
     const prefPath = 'D:\\Datta Sable\\Git_Package\\preferences.json';
 
-    let prefs = { likes: [], dislikes: [] };
+    interface FeedbackEntry {
+      chartId: any;
+      metric: any;
+      timestamp: string;
+    }
+    
+    let prefs: { likes: FeedbackEntry[]; dislikes: FeedbackEntry[] } = { likes: [], dislikes: [] };
     try {
       const data = await readFile(prefPath, 'utf-8');
       prefs = JSON.parse(data);
