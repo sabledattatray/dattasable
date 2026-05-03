@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     type: 'profile',
     images: [
       {
-        url: "/images/datta.webp",
+        url: "/images/og-main.png",
         width: 1200,
         height: 630,
-        alt: "Datta Sable Profile",
+        alt: "Datta Sable | BI & Data Strategy Expert",
       },
     ],
   },
