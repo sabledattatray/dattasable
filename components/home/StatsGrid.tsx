@@ -13,7 +13,7 @@ interface Stat {
 const stats: Stat[] = [
   { value: 50, suffix: '+', label: 'Projects Delivered', code: 'PRJ-OK' },
   { value: 30, suffix: '+', label: 'Happy Clients', code: 'CLI-SAT' },
-  { value: 5, suffix: '+', label: 'Years Experience', code: 'EXP-YR' },
+  { value: 10, suffix: '+', label: 'Years Experience', code: 'EXP-YR' },
   { value: 100, suffix: 'K+', label: 'Rows Analyzed', code: 'DAT-ROW' },
 ];
 

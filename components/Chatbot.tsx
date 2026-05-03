@@ -39,7 +39,7 @@ const KB: Array<{ patterns: string[]; response: string }> = [
   {
     patterns: ['experience', 'year', 'background', 'bio', 'about'],
     response:
-      "Datta has 5+ years of BI experience:\n\n• Senior BI Analyst at DataDriven Corp (2024–now)\n• BI Developer at Analytics Studio (2022–24)\n• Data Analyst at Tech Startup (2020–22)\n• Business Analyst at MNC Consulting (2018–20)\n\nM.Sc. Data Science, University of Mumbai. Full bio at /about",
+      "Datta has 10+ years of BI experience:\n\n• Senior BI Analyst at DataDriven Corp (2024–now)\n• BI Developer at Analytics Studio (2022–24)\n• Data Analyst at Tech Startup (2020–22)\n• Business Analyst at MNC Consulting (2018–20)\n• Deputy Manager at HDFC Bank (2015–20)\n\nM.Sc. Data Science, University of Mumbai. Full bio at /about",
   },
   {
     patterns: ['certification', 'certified', 'credential', 'course'],

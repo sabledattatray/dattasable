@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Do you provide MIS reporting services for Finance and Operations?",
-    a: "Yes, I have over 5 years of experience building specialized MIS reports for banking, telecom, and manufacturing sectors."
+    a: "Yes, I have over 10 years of experience building specialized MIS reports for banking, telecom, and manufacturing sectors."
   }
 ];
 
