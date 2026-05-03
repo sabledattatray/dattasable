@@ -12,6 +12,21 @@ const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
 
 const projects = [
   {
+    id: 10,
+    title: 'Surgical Analytics Forge (SDR-9 Engine)',
+    category: 'Analysis',
+    image: '/images/portfolio/surgical_forge.png',
+    color: '#FF3B30',
+    tools: ['Python', 'DuckDB', 'Next.js', 'Heuristic Logic'],
+    client: 'Industrial Big Data Audit',
+    desc: 'An autonomous, high-performance BI engine capable of auditing 10M+ records in sub-60 seconds using in-memory OLAP (DuckDB).',
+    problem: 'Traditional BI tools struggle with massive datasets (500MB+), leading to laggy dashboards and high memory usage.',
+    solution: 'Engineered a surgical Python bridge with DuckDB integration, capable of generating high-fidelity HTML dashboards and neural summaries autonomously.',
+    impact: '10M Records Processed, Sub-60s Latency, 212k records/sec Speed',
+    github: 'https://github.com/sabledattatray/forge-bi-engine',
+    live: 'https://github.com/sabledattatray/forge-bi-engine',
+  },
+  {
     id: 9,
     title: 'Flagship Enterprise BI Engine (MTD/LMTD)',
     category: 'Analysis',

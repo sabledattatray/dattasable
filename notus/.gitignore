@@ -1,0 +1,12 @@
+# Notus Ignore Manifest
+
+# Node
+node_modules/
+dist/
+.next/
+*.local
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

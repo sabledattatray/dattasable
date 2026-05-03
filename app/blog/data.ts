@@ -1,5 +1,123 @@
 export const posts = [
   {
+    id: 'fraud-detection-sentinel-2026',
+    slug: 'architecting-10m-record-fraud-sentinel',
+    title: 'Engineering the Sentinel: Architecting a 10M-Record Fraud Detection System',
+    category: 'Engineering',
+    excerpt: 'Examining the technical requirements of high-volume BFSI fraud detection, focusing on risk-scoring algorithms and data integrity at scale.',
+    content: `
+      <p>In the financial services sector (BFSI), fraud detection isn't just a feature—it’s the primary line of defense. When dealing with <strong>10,000,000+ transactions</strong>, a system must be more than fast; it must be surgically precise.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "Fraud detection is a race against latency. Every millisecond of delay is a window of opportunity for an anomaly to slip through." — Datta Sable
+      </blockquote>
+
+      <h2>The Challenge: Identifying Needles in a 10M-Record Haystack</h2>
+      <p>Traditional threshold-based systems often fail at scale because they generate too many "False Positives." For the <strong>BFSI Sentinel</strong> project, I focused on building a multi-dimensional risk-scoring engine that evaluates transactions across several vectors simultaneously.</p>
+
+      <h2>The Sentinel Core: Technical Milestones</h2>
+      <h3>1. Advanced Risk Scoring (ARS)</h3>
+      <p>Instead of simple "If-Then" logic, the Sentinel evaluates transactions using a weighted Risk Score. By correlating <strong>Transaction Amount</strong>, <strong>Temporal Velocity</strong>, and <strong>Regional Risk Deltas</strong>, the system assigns a high-fidelity score that allows investigators to prioritize the most suspicious activities instantly.</p>
+
+      <h3>2. Performance Benchmarking with DuckDB</h3>
+      <p>To ensure sub-second response times on 10M rows, the Sentinel utilizes a <strong>Columnar Storage Engine</strong>. This allows the system to scan millions of "Risk_Score" values without loading the entire dataset into memory, maintaining a lightning-fast UI even during heavy auditing cycles.</p>
+
+      <h2>Visualization as a Diagnostic Tool</h2>
+      <p>In fraud investigation, clarity is king. I engineered a high-contrast <strong>Investigation Deck</strong> that uses color-mapping to highlight anomalies. High-risk transactions are instantly "Red-Flagged," allowing analysts to drill down into the raw data in milliseconds.</p>
+
+      <p>The BFSI Sentinel is a testament to what is possible when data engineering meets professional rigor. Explore the full architecture on my <a href="https://github.com/sabledattatray/fraud-analytics-dashboard" style="color: var(--accent); text-decoration: underline;">GitHub Sentinel Repo</a>.</p>
+    `,
+    readTime: 12,
+    date: 'May 03, 2026',
+    color: 'var(--accent)',
+    icon: '🛡️',
+    image: '/images/blog/fraud_sentinel_hero.webp',
+    tags: ['Fraud Detection', 'BFSI', 'Data Engineering', 'Risk Scoring', 'FinTech']
+  },
+  {
+    id: 'surgical-cockpit-ui-ux-2026',
+    slug: 'the-surgical-cockpit-bi-ux-design',
+    title: 'The Surgical Cockpit: Why I Built a Standalone BI Lab in Next.js',
+    category: 'Design',
+    excerpt: 'Exploring the UI/UX philosophy behind the Surgical Forge Lab, where obsidian aesthetics meet high-pressure analytical telemetry.',
+    content: `
+      <p>A dashboard is a user interface for data. But a <strong>Surgical Cockpit</strong> is a user interface for decision-making. When I built the <strong>SDR-9 Analytical Lab</strong>, I wanted to move away from the "Generic Chart" era and towards a "Professional Telemetry" experience.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "Information density shouldn't lead to cognitive load. The goal of a cockpit is to provide absolute clarity in a high-pressure environment." — Datta Sable
+      </blockquote>
+
+      <h2>The Design Philosophy: Obsidian & Neon</h2>
+      <p>The visual identity of the Surgical Forge is inspired by aerospace and high-end engineering interfaces. Using an <strong>Obsidian Base (#060606)</strong> reduces visual fatigue, while <strong>Neon Cyan Accents</strong> draw the eye to critical data deltas and "Neural Notifications."</p>
+
+      <h2>Key Functional Nodes</h2>
+      <h3>1. The Neural Intelligence Feed</h3>
+      <p>Unlike a static progress bar, the SDR-9 Lab features a <strong>Real-Time Execution Terminal</strong>. This provides the user with a "Look under the hood" of the AI Agent, showing every SQL generation and data audit as it happens. This builds <strong>Data Trust</strong> by making the "Black Box" of AI transparent.</p>
+
+      <h3>2. The Live-Preview Deck</h3>
+      <p>In traditional BI, you "Request" a dashboard. In the Surgical Forge, you "Forged" it. The UI uses an adaptive iframe architecture that refreshes the instant the Agent finishes its query. This creates a tight feedback loop that keeps the user engaged with the discovery process.</p>
+
+      <h2>The Outcome: High-Fidelity Data Discovery</h2>
+      <p>By treating the BI dashboard as a professional "Cockpit," we have created a tool that feels authoritative. It doesn't just show data; it empowers the user to perform "Surgical Strikes" on their 10M-row datasets with total confidence.</p>
+
+      <p>For more on my UI/UX standards, check out my <a href="/blog/dashboard-ux-principles" style="color: var(--accent); text-decoration: underline;">7 Principles of Executive Design</a>.</p>
+    `,
+    readTime: 10,
+    date: 'May 03, 2026',
+    color: 'var(--accent)',
+    icon: '🎨',
+    image: '/images/blog/surgical_cockpit_hero.webp',
+    tags: ['UX Design', 'Next.js', 'BI Dashboards', 'SaaS Design', 'Telemetry']
+  },
+  {
+    id: 'ai-bi-agent-duckdb-2026',
+    slug: 'engineering-10m-row-ai-bi-agent',
+    title: 'How I Engineered a 10M-Row Autonomous AI-BI Agent Using DuckDB',
+    category: 'Engineering',
+    excerpt: 'A technical deep-dive into the Surgical Forge SDR-9 engine, featuring in-process OLAP, conversational SQL generation, and sub-second persistence.',
+    content: `
+      <p>In the modern data landscape, the gap between "Data Collection" and "Decision Making" is often a chasm filled with latency. Traditional BI dashboards, while visually appealing, frequently buckle under the weight of massive datasets, leading to the dreaded "loading spinner" that kills executive momentum.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "Speed is not just a metric; it is a prerequisite for intelligence. In BI, if the data isn't instant, it isn't actionable." — Datta Sable
+      </blockquote>
+
+      <h2>The Problem: The Latency Wall</h2>
+      <p>Most BI tools rely on a client-server architecture where the browser requests data, the server queries a remote database, and the results are piped back. When dealing with 10M+ rows, this round-trip creates significant friction. For the <strong>Surgical Forge</strong> project, my goal was to move the "Analytical Brain" closer to the data.</p>
+
+      <h2>The Solution: Why DuckDB?</h2>
+      <p>The heart of this engine is <strong>DuckDB</strong>, an in-process analytical database. Unlike traditional row-based databases (like PostgreSQL), DuckDB uses a <strong>Columnar Vectorized Execution Engine</strong>. This is the secret sauce for BI:</p>
+      <ul>
+        <li><strong>Columnar Storage:</strong> Only reads the data necessary for the query.</li>
+        <li><strong>In-Process:</strong> Zero network overhead; the database lives inside the application memory.</li>
+        <li><strong>OLAP Optimized:</strong> Engineered specifically for aggregations (SUM, AVG, GROUP BY) across millions of rows.</li>
+      </ul>
+
+      <h2>Engineering the AI-BI Agent</h2>
+      <p>The Surgical Forge isn't just a database; it’s an <strong>Autonomous Agent</strong>. Here is how I structured the "Nerve Center":</p>
+
+      <h3>1. The SDR-9 Core (Python & DuckDB)</h3>
+      <p>I built the core engine in Python, leveraging DuckDB’s ability to "Auto-Audit" data. The engine performs a heuristic scan upon data injection, identifying data types and potential analytical targets without manual configuration.</p>
+
+      <h3>2. Conversational SQL Generation</h3>
+      <p>The most innovative feature is the <strong>Conversational Bridge</strong>. I engineered an NLP layer that translates natural language inquiries into precision SQL. This allows users to ask "Show me total amount" and receive a sub-second response without writing a single line of code.</p>
+
+      <h3>3. Persistent Session Architecture</h3>
+      <p>To handle 10M rows efficiently, you cannot re-upload the data for every question. I implemented a <strong>Persistent Session Layer</strong>. The first time a file is injected, it is converted into a high-performance <code>.db</code> file, making subsequent inquiries virtually instantaneous.</p>
+
+      <h2>Benchmarking Success</h2>
+      <p>During testing on a 10,000,000 record dataset, the results were definitive: Initial audits completed in sub-30 seconds, and follow-up conversational queries performed in <strong>under 2 seconds</strong>.</p>
+
+      <p>This is the future of Business Intelligence: Autonomous, Conversational, and Surgical. Explore the code for this project on my <a href="https://github.com/sabledattatray/forge-bi-engine" style="color: var(--accent); text-decoration: underline;">GitHub</a>.</p>
+    `,
+    readTime: 15,
+    date: 'May 03, 2026',
+    color: 'var(--accent)',
+    icon: '🤖',
+    image: '/images/blog/ai_bi_agent_hero.webp',
+    tags: ['AI-BI', 'DuckDB', 'Data Engineering', 'Next.js', 'SQL']
+  },
+  {
     id: 'bi-strategy-guide-2026',
     slug: 'strategic-bi-guide-india-2026',
     title: 'The 2026 Strategic BI Guide: Scaling Automated Reporting Solutions',
@@ -26,7 +144,7 @@ export const posts = [
     date: 'May 02, 2026',
     color: 'var(--accent)',
     icon: '💡',
-    image: '/images/blog/bi_performance_hero_1777410226286.webp',
+    image: '/images/blog/bi_strategy_unique.webp',
     tags: ['Strategy', 'Automation', 'BI India', 'Data Engineering']
   },
   {
@@ -133,7 +251,7 @@ export const posts = [
     date: 'Jan 15, 2021',
     color: 'var(--accent)',
     icon: '🎬',
-    image: '/images/blog/tech_stack_2026_hero_1777409998596.webp',
+    image: '/images/blog/enterprise_web_unique.webp',
     tags: ['Architecture', 'Web', 'Infrastructure']
   },
   {
@@ -171,7 +289,7 @@ export const posts = [
     date: 'Jun 10, 2024',
     color: '#21759b',
     icon: '⚙️',
-    image: '/images/blog/dashboard_ux_hero_1777410208497.webp',
+    image: '/images/blog/wordpress_unique.webp',
     tags: ['WordPress', 'Web Dev', 'Architecture']
   },
 
@@ -251,7 +369,7 @@ export const posts = [
     date: 'Feb 12, 2026',
     color: '#3b82f6',
     icon: '📈',
-    image: '/images/blog/bi_performance_hero_1777410226286.webp',
+    image: '/images/blog/sales_ecosystem_unique.webp',
     tags: ['Sales', 'BI', 'Authorship']
   },
   {
@@ -290,7 +408,7 @@ export const posts = [
     date: 'Mar 05, 2026',
     color: 'var(--accent)',
     icon: '📱',
-    image: '/images/blog/retail_analytics_hero_1777410051638.webp',
+    image: '/images/blog/telecom_analytics_unique.webp',
     tags: ['Telecom', 'Analytics', 'Collections']
   },
   {
@@ -329,7 +447,7 @@ export const posts = [
     date: 'Apr 20, 2026',
     color: '#F9D100',
     icon: '⚡',
-    image: '/images/blog/data_quality_hero_1777410243821.webp',
+    image: '/images/blog/q_commerce_unique.webp',
     tags: ['Q-Commerce', 'Retail', 'WIP']
   },
   {
@@ -434,7 +552,7 @@ export const posts = [
     date: 'Apr 25, 2026',
     color: 'var(--accent)',
     icon: '⚡',
-    image: '/images/blog/postgres_vs_snowflake_hero_1777410017107.webp',
+    image: '/images/blog/postgres_snowflake_unique.webp',
     tags: ['PostgreSQL', 'Snowflake', 'Cloud Data Warehouse', 'BI Performance', 'Scalability']
   },
   {
@@ -560,7 +678,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Mar 20, 2026',
     color: 'var(--accent2)',
     icon: '🚀',
-    image: '/images/blog/bi_performance_hero_1777410226286.webp',
+    image: '/images/blog/bi_performance_unique.webp',
     tags: ['Power BI', 'DAX', 'Performance Tuning', 'Data Modeling', 'Optimization']
   },
   {
@@ -909,7 +1027,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'May 10, 2026',
     color: 'var(--accent)',
     icon: '🚀',
-    image: '/images/blog/ai_governance_hero_1777410191025.webp',
+    image: '/images/blog/seo_masterclass_unique.webp',
     tags: ['SEO', 'Digital Marketing', 'Growth Engineering', '2026']
   },
   {
@@ -944,7 +1062,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Jun 23, 2025',
     color: '#f43f5e',
     icon: '🚀',
-    image: '/images/blog/generative_ai_hero_1777410154583.webp',
+    image: '/images/blog/seo_tools_unique.webp',
     tags: ['SEO', 'Marketing', 'Tools', 'Digital Strategy', '2025']
   },
   {
@@ -981,7 +1099,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Apr 17, 2026',
     color: '#f43f5e',
     icon: '📊',
-    image: '/images/blog/bi_performance_hero_1777410226286.webp',
+    image: '/images/blog/mis_reports_unique.webp',
     tags: ['MIS', 'Management', 'Strategy', 'Decision Support', '2026']
   },
 
@@ -1064,7 +1182,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'May 16, 2025',
     color: '#00d4ff',
     icon: '🌐',
-    image: '/images/blog/dashboard_ux_hero_1777410208497.webp',
+    image: '/images/blog/first_website_unique.webp',
     tags: ['Web Dev', 'Beginners', 'Next.js', 'AI Coding', '2025 Guide']
   },
   {
@@ -1091,7 +1209,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'Apr 25, 2026',
     color: '#A4373A',
     icon: '💾',
-    image: '/images/blog/postgres_vs_snowflake_hero_1777410017107.webp',
+    image: '/images/blog/ms_access_unique.webp',
     tags: ['MS Access', 'Databases', 'Prototyping', 'Engineering']
   },
   {
@@ -1118,7 +1236,7 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     date: 'May 16, 2025',
     color: '#f43f5e',
     icon: '🎬',
-    image: '/images/blog/data-storytelling.webp',
+    image: '/images/blog/creative_tools_unique.webp',
     tags: ['Content Creation', 'Marketing', 'Tools', 'Free Resources', '2025']
   }
 ];

@@ -6,6 +6,16 @@ import { BarChart3, Database, Target, Activity, ArrowRight } from 'lucide-react'
 
 const projects = [
   {
+    title: 'Surgical Analytics Forge',
+    category: 'Big Data Engine',
+    desc: 'Autonomous BI infrastructure capable of auditing 10M+ records in 47 seconds with zero-latency heuristics.',
+    tools: ['Python', 'DuckDB', 'Next.js'],
+    impact: '212,000 rec/sec speed',
+    color: '#FF3B30',
+    color2: '#FF3B30',
+    icon: <Activity size={20} />,
+  },
+  {
     title: 'Sales Performance Dashboard',
     category: 'Dashboard',
     desc: 'Real-time Tableau dashboard tracking $12M+ in revenue with drill-down KPIs and trend forecasting.',

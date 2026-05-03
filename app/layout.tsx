@@ -93,7 +93,7 @@ const jetbrains = JetBrains_Mono({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="dark light" />
         {/* Preconnects removed to optimize initial render. Third-party scripts are lazy-loaded by PerformanceOptimizer. */}
@@ -148,7 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body style={{ background: 'var(--bg)' }}>
+      <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>
           <ThemeProvider>
             <main id="main-content">
