@@ -55,6 +55,16 @@ const projects = [
     color2: '#00C9F2',
     icon: <Activity size={20} />,
   },
+  {
+    title: 'BFSI Fraud Sentinel',
+    category: 'Security BI',
+    desc: 'Advanced fraud detection suite for 10M+ transaction records using Python heuristics and Power BI visual alerting.',
+    tools: ['Python', 'SQL', 'Power BI'],
+    impact: '99.9% detection rate',
+    color: '#FF3B30',
+    color2: '#FF3B30',
+    icon: <Target size={20} />,
+  },
 ];
 
 function TechLabel({ children }: { children: React.ReactNode }) {
