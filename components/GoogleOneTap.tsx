@@ -14,8 +14,10 @@ export default function GoogleOneTap() {
   const clientId = "707439992057-j87plivvk29u7nq35l1j7sqdraoqhv5u.apps.googleusercontent.com";
 
   useEffect(() => {
-    // Only run if user is not authenticated and not already initialized
-    if (status === 'unauthenticated' && !initialized.current) {
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    // Only run if user is not authenticated, not already initialized, and NOT on localhost
+    if (status === 'unauthenticated' && !initialized.current && !isLocalhost) {
       const initializeOneTap = () => {
         if (window.google?.accounts?.id && !initialized.current) {
           try {
