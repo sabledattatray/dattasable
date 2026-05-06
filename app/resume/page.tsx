@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Printer, Mail, Phone, MapPin, ExternalLink, ArrowLeft, Download } from 'lucide-react';
+import { Printer, Mail, Phone, MapPin, Globe, ArrowLeft } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -10,18 +10,12 @@ export default function ResumePage() {
   };
 
   return (
-    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: 'white' }}>
+    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: 'white', fontFamily: '"Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
       <Navbar />
       
-      {/* 
-          A4 Paper Styled Resume:
-          - Centered "Sheet" on a dark background.
-          - High-fidelity typography and layout.
-          - Print-optimized to remove dark background.
-      */}
       <main style={{ 
-        paddingTop: '200px', 
-        paddingBottom: '150px', 
+        paddingTop: '160px', 
+        paddingBottom: '100px', 
         paddingLeft: '20px', 
         paddingRight: '20px',
         display: 'flex',
@@ -29,212 +23,252 @@ export default function ResumePage() {
         alignItems: 'center'
       }}>
         
-        {/* Top Control Bar */}
+        {/* Print Button */}
         <div className="no-print" style={{ 
           width: '100%', 
-          maxWidth: '850px', 
+          maxWidth: '1000px', 
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center', 
-          marginBottom: '40px' 
+          marginBottom: '30px' 
         }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.9rem' }}>
             <ArrowLeft size={16} /> Back to Portfolio
           </a>
-          
           <button 
             onClick={handlePrint}
             style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
-              gap: '10px', 
-              backgroundColor: '#a4c9ff', 
-              color: '#00315d', 
-              padding: '14px 28px', 
-              borderRadius: '8px', 
+              backgroundColor: '#fff', 
+              color: '#000', 
+              padding: '12px 24px', 
+              borderRadius: '6px', 
               fontWeight: 'bold', 
               cursor: 'pointer',
               border: 'none',
-              fontSize: '0.95rem',
-              boxShadow: '0 10px 30px rgba(164,201,255,0.2)'
+              fontSize: '0.9rem'
             }}
           >
-            <Printer size={20} />
-            PRINT AS PDF
+            <Printer size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            PRINT RESUME
           </button>
         </div>
 
-        {/* ── THE RESUME "SHEET" ── */}
-        <div 
-          id="resume-document"
-          style={{ 
-            backgroundColor: 'white', 
-            color: 'black', 
-            width: '100%', 
-            maxWidth: '850px', 
-            minHeight: '1100px', 
-            padding: '60px 80px', 
-            boxShadow: '0 50px 100px rgba(0,0,0,0.5)',
-            borderRadius: '2px',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          {/* Header */}
-          <header style={{ borderBottom: '2px solid #000', paddingBottom: '30px', marginBottom: '40px' }}>
-            <h1 style={{ fontSize: '42px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.02em', color: '#000' }}>
-              Dattatray Sable
-            </h1>
-            <p style={{ fontSize: '20px', color: '#0060ac', fontWeight: '700', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              MIS & Business Intelligence Lead
+        {/* ── RESUME CONTAINER ── */}
+        <div id="resume-document" style={{ 
+          backgroundColor: '#e6dfd9', /* The outer background color seen in image */
+          width: '100%', 
+          maxWidth: '900px', 
+          minHeight: '1200px', 
+          display: 'grid',
+          gridTemplateColumns: '350px 1fr',
+          color: '#000',
+          position: 'relative',
+          boxShadow: '0 30px 60px rgba(0,0,0,0.5)',
+          overflow: 'hidden'
+        }}>
+          
+          {/* ── LEFT SIDEBAR ── */}
+          <div style={{ 
+            backgroundColor: '#6b5d56', 
+            color: '#fff', 
+            padding: '60px 40px',
+            borderTopRightRadius: '200px',
+            borderBottomRightRadius: '200px',
+            marginTop: '20px',
+            marginBottom: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}>
+            {/* Profile Image */}
+            <div style={{ 
+              width: '180px', 
+              height: '180px', 
+              borderRadius: '50%', 
+              border: '10px solid #fff', 
+              overflow: 'hidden',
+              marginBottom: '40px',
+              backgroundColor: '#ddd'
+            }}>
+              <img 
+                src="https://lh3.googleusercontent.com/aida/ADBb0uipmhqazs7Cusgp-TalImOR4OGCg8S78FhzZSy034bTHLRYE7RB-XOHHG50veZOoJLrc6DkVtGrvsiqRSSWViXehktHdSARABi4ssVDCJzpJwpQnlNHmzFIUfYYCxBf1YUJn9GdSzSvRzsdyphDcXb43rqcqGkrh6RyZk7sLLk_y6R4JhF0cdjbeOYDnRtmLL47Rg32Uo9hAEIOXdVawXJrqlnmDf9VFiF4fUhGgkxL-txR1VZZX6fVd5y08b68R9pBUwtegYlI1g" 
+                alt="Datta Sable" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+
+            <h2 style={{ fontSize: '18px', fontWeight: 'bold', letterSpacing: '0.1em', marginBottom: '20px', textTransform: 'uppercase' }}>
+              PROFESSIONAL SUMMARY
+            </h2>
+            <p style={{ fontSize: '12px', lineHeight: '1.6', marginBottom: '40px', textAlign: 'center', opacity: 0.9 }}>
+              Results-driven MIS & Business Intelligence professional with 10+ years of experience in BFSI, collections analytics, and risk portfolio management. Highly skilled in Advanced Excel, SQL Server, Power BI, SAP MIS reporting, and data automation. Proven ability to convert large datasets into actionable dashboards and management insights, improve resolution efficiency, and support strategic decision-making with a strong understanding of business operations.
             </p>
-            
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', color: '#444', fontSize: '13px', fontWeight: '500' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Mail size={12} color="#0060ac" /> sabledattatray@gmail.com
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Phone size={12} color="#0060ac" /> +91 8010803756
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <MapPin size={12} color="#0060ac" /> Mumbai, India
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <ExternalLink size={12} color="#0060ac" /> dattasable.com
-              </span>
-            </div>
-          </header>
 
-          {/* Section: Executive Summary */}
-          <section style={{ marginBottom: '40px' }}>
-            <h2 style={{ fontSize: '14px', fontWeight: '900', color: '#000', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              Executive Summary <div style={{ height: '1px', flex: 1, backgroundColor: '#eee' }}></div>
-            </h2>
-            <p style={{ fontSize: '15px', lineHeight: '1.6', color: '#333' }}>
-              Dynamic and results-oriented professional with over <b>10 years of strategic experience</b> in BFSI, collections analytics, and risk portfolio management. Proven track record in orchestrating complex data ecosystems to drive operational efficiency and high-stakes decision-making. Specialist in transforming raw data into surgical insights through <b>Power BI, SQL Server, and Data Automation</b>.
-            </p>
-          </section>
-
-          {/* Section: Professional Experience */}
-          <section style={{ marginBottom: '40px' }}>
-            <h2 style={{ fontSize: '14px', fontWeight: '900', color: '#000', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              Professional Experience <div style={{ height: '1px', flex: 1, backgroundColor: '#eee' }}></div>
-            </h2>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-              {/* Job 1 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '5px' }}>
-                  <h3 style={{ fontSize: '18px', fontWeight: '800' }}>MIS Manager</h3>
-                  <span style={{ fontSize: '12px', color: '#0060ac', fontWeight: '700' }}>JUNE 2025 – PRESENT</span>
-                </div>
-                <p style={{ color: '#666', fontWeight: '700', fontSize: '13px', marginBottom: '12px' }}>DBS MINTEK PVT. LTD.</p>
-                <ul style={{ paddingLeft: '18px', margin: 0, color: '#444', fontSize: '14px', lineHeight: '1.5' }}>
-                  <li style={{ marginBottom: '6px' }}>Orchestrating migration of legacy reporting systems to automated architectures.</li>
-                  <li style={{ marginBottom: '6px' }}>Developed end-to-end automation workflows reducing manual effort by 40%.</li>
-                  <li style={{ marginBottom: '6px' }}>Implementing real-time data monitoring suites for executive-level performance tracking.</li>
-                </ul>
+            {/* Contact Info */}
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '50px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <div style={{ backgroundColor: '#fff', borderRadius: '50%', padding: '8px', color: '#6b5d56' }}><Phone size={16} /></div>
+                <span style={{ fontSize: '13px', fontWeight: 'bold' }}>+91 8010803756</span>
               </div>
-
-              {/* Job 2 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '5px' }}>
-                  <h3 style={{ fontSize: '18px', fontWeight: '800' }}>Information System Analyst</h3>
-                  <span style={{ fontSize: '12px', color: '#666', fontWeight: '700' }}>OCT 2023 – MAY 2025</span>
-                </div>
-                <p style={{ color: '#666', fontWeight: '700', fontSize: '13px', marginBottom: '12px' }}>CASCO</p>
-                <ul style={{ paddingLeft: '18px', margin: 0, color: '#444', fontSize: '14px', lineHeight: '1.5' }}>
-                  <li style={{ marginBottom: '6px' }}>Designed and maintained high-fidelity analytical reports for cross-functional stakeholders.</li>
-                  <li style={{ marginBottom: '6px' }}>Served as primary technical bridge between raw data lakes and business unit intelligence.</li>
-                </ul>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <div style={{ backgroundColor: '#fff', borderRadius: '50%', padding: '8px', color: '#6b5d56' }}><Mail size={16} /></div>
+                <span style={{ fontSize: '13px', fontWeight: 'bold' }}>sabledattatray@gmail.com</span>
+                <span style={{ fontSize: '11px' }}>Date Of Birth - 05-Nov-1981</span>
               </div>
-
-              {/* Job 3 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '5px' }}>
-                  <h3 style={{ fontSize: '18px', fontWeight: '800' }}>Assistant Manager</h3>
-                  <span style={{ fontSize: '12px', color: '#666', fontWeight: '700' }}>JAN 2020 – SEP 2023</span>
-                </div>
-                <p style={{ color: '#666', fontWeight: '700', fontSize: '13px', marginBottom: '12px' }}>KISSHT FINANCE LTD.</p>
-                <ul style={{ paddingLeft: '18px', margin: 0, color: '#444', fontSize: '14px', lineHeight: '1.5' }}>
-                  <li style={{ marginBottom: '6px' }}>Managed PAN-India credit portfolio analytics with focus on collections performance.</li>
-                  <li style={{ marginBottom: '6px' }}>Led specialized data teams to deliver real-time operational metrics for senior leadership.</li>
-                </ul>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <div style={{ backgroundColor: '#fff', borderRadius: '50%', padding: '8px', color: '#6b5d56' }}><MapPin size={16} /></div>
+                <p style={{ fontSize: '11px', margin: 0, lineHeight: '1.4', padding: '0 20px' }}>
+                  Badlapur, Maharashtra, India
+                </p>
               </div>
             </div>
-          </section>
 
-          {/* Section: Technical Proficiencies */}
-          <section style={{ marginBottom: '40px' }}>
-            <h2 style={{ fontSize: '14px', fontWeight: '900', color: '#000', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              Technical Arsenal <div style={{ height: '1px', flex: 1, backgroundColor: '#eee' }}></div>
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
-              <div style={{ fontSize: '14px', color: '#444' }}>• Power BI Dashboarding</div>
-              <div style={{ fontSize: '14px', color: '#444' }}>• SQL Server (SSMS)</div>
-              <div style={{ fontSize: '14px', color: '#444' }}>• SAP MIS Reporting</div>
-              <div style={{ fontSize: '14px', color: '#444' }}>• Advanced Excel / VBA</div>
-              <div style={{ fontSize: '14px', color: '#444' }}>• Data Automation (ETL)</div>
-              <div style={{ fontSize: '14px', color: '#444' }}>• Portfolio Risk Analysis</div>
+            {/* Expertise */}
+            <div style={{ width: '100%', textAlign: 'left', paddingLeft: '20px' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 'bold', letterSpacing: '0.1em', marginBottom: '20px', textTransform: 'uppercase', textAlign: 'center' }}>
+                EXPERTISE
+              </h2>
+              <ul style={{ fontSize: '12px', listStyle: 'disc', paddingLeft: '20px', lineHeight: '1.8' }}>
+                <li>Advanced Excel</li>
+                <li>Data Analyzing</li>
+                <li>MS-OFFICE</li>
+                <li>Email Management</li>
+                <li>SQL Server Management Studio</li>
+                <li>Big Data Operations</li>
+                <li>MS Power BI</li>
+                <li>MS ACCESS</li>
+                <li>Analytical Thinking</li>
+                <li>Client Communication</li>
+              </ul>
             </div>
-          </section>
+          </div>
 
-          {/* Section: Education */}
-          <section style={{ marginBottom: '40px' }}>
-            <h2 style={{ fontSize: '14px', fontWeight: '900', color: '#000', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              Education <div style={{ height: '1px', flex: 1, backgroundColor: '#eee' }}></div>
-            </h2>
-            <div>
-              <h3 style={{ fontSize: '17px', fontWeight: '800', marginBottom: '5px' }}>BSC (Bachelor of Science)</h3>
-              <p style={{ color: '#0060ac', fontWeight: '700', fontSize: '13px' }}>Class of 2005 • Dr. BAMU Aurangabad University</p>
-            </div>
-          </section>
+          {/* ── MAIN CONTENT ── */}
+          <div style={{ backgroundColor: '#fff', padding: '60px 40px' }}>
+            <header style={{ marginBottom: '40px' }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '700', margin: 0, color: '#333' }}>Dattatray Sable</h1>
+              <div style={{ display: 'flex', gap: '15px', fontSize: '14px', marginTop: '10px' }}>
+                <span style={{ color: '#555' }}>sabledattatray@gmail.com</span>
+                <span style={{ color: '#555', textDecoration: 'underline' }}>www.dattasable.com</span>
+              </div>
+              <div style={{ height: '2px', background: '#ccc', marginTop: '15px', width: '100%' }}></div>
+            </header>
 
-          {/* Footer of the page */}
-          <footer style={{ marginTop: 'auto', paddingTop: '40px', borderTop: '1px solid #eee', textAlign: 'center', color: '#999', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-            Digitally Verified Portfolio • Datta Sable • 2025
-          </footer>
+            {/* Core Competencies */}
+            <section style={{ marginBottom: '35px' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', textTransform: 'uppercase' }}>
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#000' }}></span>
+                CORE COMPETENCIES
+              </h2>
+              <p style={{ fontSize: '12px', lineHeight: '1.6', fontWeight: 'bold', color: '#333' }}>
+                Power BI (Dashboards & KPIs) | SQL Server (SSMS) | Advanced Excel (Power Query, Pivot Tables) | SAP MIS Reporting | MS Access | Data Cleansing & Automation | Portfolio & Risk Analysis | MIS & Management Reporting
+              </p>
+            </section>
+
+            {/* Professional Experience */}
+            <section style={{ marginBottom: '35px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '20px', textTransform: 'uppercase' }}>
+                PROFESSIONAL EXPERIENCE
+              </h2>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                {/* DBS Mintek */}
+                <div>
+                  <h3 style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '10px' }}>
+                    MIS Manager – DBS Mintek Pvt. Ltd. (June 2025 – Present)
+                  </h3>
+                  <ul style={{ fontSize: '12px', paddingLeft: '20px', listStyle: 'disc', color: '#444', lineHeight: '1.6' }}>
+                    <li>Developed daily, weekly, and monthly MIS dashboards using Power BI, SQL Server, Excel, and SAP.</li>
+                    <li>Automated MIS processes using Power Query, reducing manual effort by approximately 40%.</li>
+                    <li>Analyzed large-volume data using SSMS 2021 to identify trends and high-risk accounts.</li>
+                    <li>Designed bucket-wise resolution and aging dashboards to improve management visibility.</li>
+                    <li>Performed data cleansing, consolidation, and analytics modeling for targeted strategies.</li>
+                  </ul>
+                </div>
+
+                {/* CASCO */}
+                <div>
+                  <h3 style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '10px' }}>
+                    Information System Analyst – CASCO (Oct 2023 – May 2025)
+                  </h3>
+                  <ul style={{ fontSize: '12px', paddingLeft: '20px', listStyle: 'disc', color: '#444', lineHeight: '1.6' }}>
+                    <li>Analyzed business and operational data to support system-level reporting and decision-making.</li>
+                    <li>Developed MIS and analytical reports using SQL, Excel, and BI tools.</li>
+                    <li>Worked with cross-functional teams to improve data accuracy, reporting efficiency, and system processes.</li>
+                    <li>Supported management with ad-hoc analysis, dashboards, and performance insights.</li>
+                  </ul>
+                </div>
+
+                {/* Kissht Finance */}
+                <div>
+                  <h3 style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '10px' }}>
+                    Assistant Manager – MIS & Analytics – Kissht Finance Ltd. (Jan 2020 – Sep 2023)
+                  </h3>
+                  <ul style={{ fontSize: '12px', paddingLeft: '20px', listStyle: 'disc', color: '#444', lineHeight: '1.6' }}>
+                    <li>Managed PAN-India portfolios (Risk-30 ± Write-off/NPA) with structured MIS oversight.</li>
+                    <li>Supervised 60-70 tele-callers and 3-4 Team Leaders with performance analytics.</li>
+                    <li>Designed Excel dashboards using Pivot Tables, Power Query, and advanced formulas.</li>
+                    <li>Maintained customer and payment data using MS Access for fast retrieval and reporting.</li>
+                    <li>Improved resolution rates and reduced roll-forward cases through continuous analysis.</li>
+                  </ul>
+                </div>
+
+                {/* HDFC Bank */}
+                <div>
+                  <h3 style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '10px' }}>
+                    Deputy Manager – HDFC Bank Ltd. (Aug 2015 – Jan 2020)
+                  </h3>
+                  <ul style={{ fontSize: '12px', paddingLeft: '20px', listStyle: 'disc', color: '#444', lineHeight: '1.6' }}>
+                    <li>Managed Credit Card Write-off & NPA portfolios (Risk-120) for Mumbai region.</li>
+                    <li>Handled 6 external agencies and supervised in-house calling teams.</li>
+                    <li>Ensured audit compliance, daily tracking, and controlled portfolio slippage.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* Education */}
+            <section>
+              <h2 style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', textTransform: 'uppercase' }}>
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#000' }}></span>
+                Education
+              </h2>
+              <div style={{ marginLeft: '20px' }}>
+                <h3 style={{ fontSize: '14px', fontWeight: 'bold', margin: 0 }}>Dr. BAMU Aurangbad Unervisity</h3>
+                <ul style={{ fontSize: '12px', listStyle: 'disc', paddingLeft: '20px', marginTop: '5px' }}>
+                  <li>BSC- 2005</li>
+                </ul>
+              </div>
+            </section>
+          </div>
         </div>
-
-        {/* Print Instruction */}
-        <p className="no-print" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', marginTop: '40px' }}>
-          * For best results, use "Save as PDF" in the print settings.
-        </p>
       </main>
 
       <Footer />
 
       <style jsx global>{`
         @media print {
-          /* Force white background and black text */
           body, html {
             background-color: white !important;
             margin: 0 !important;
             padding: 0 !important;
           }
-          
           .no-print, nav, footer {
             display: none !important;
           }
-          
           main {
             padding: 0 !important;
             margin: 0 !important;
           }
-
           #resume-document {
             box-shadow: none !important;
-            border: none !important;
             margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
             max-width: 100% !important;
+            width: 100% !important;
           }
-          
-          /* Sharpen text for print */
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
+          header, nav, footer, .no-print {
+            display: none !important;
           }
         }
       `}</style>
