@@ -231,16 +231,19 @@ export default function Navbar() {
               <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
             </nav>
 
-            {/* Mobile Toggle */}
-            {!mobileMenuOpen && (
-              <button
-                className="xl:hidden text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
-                onClick={() => setMobileMenuOpen(true)}
-                aria-label="Open mobile menu"
-              >
-                <Menu size={24} />
-              </button>
-            )}
+            {/* Mobile Actions */}
+            <div className="xl:hidden flex items-center gap-1">
+              <ThemeToggle />
+              {!mobileMenuOpen && (
+                <button
+                  className="text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
+                  onClick={() => setMobileMenuOpen(true)}
+                  aria-label="Open mobile menu"
+                >
+                  <Menu size={24} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </header>

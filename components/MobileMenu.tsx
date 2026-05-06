@@ -61,7 +61,7 @@ export default function MobileMenu({
                   </span>
                 </Link>
                 <div className="flex items-center gap-2">
-                  <ThemeToggle />
+
                   <button 
                     className="p-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors" 
                     onClick={onClose}
