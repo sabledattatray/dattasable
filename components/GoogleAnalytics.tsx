@@ -3,6 +3,11 @@
 import Script from 'next/script';
 
 export default function GoogleAnalytics({ id }: { id: string }) {
+  // Only load analytics in production to avoid tracking developer visits
+  if (process.env.NODE_ENV === 'development') {
+    return null;
+  }
+
   return (
     <>
       <Script
