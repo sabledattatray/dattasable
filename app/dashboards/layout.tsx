@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     title: "Interactive BI Dashboard Showcase",
     description: "Expertly crafted analytics platforms for enterprise decision-making.",
     images: ["/images/dashboards/global_sales_kpi.png"],
+  },
+  alternates: {
+    canonical: '/dashboards',
   }
 };
 

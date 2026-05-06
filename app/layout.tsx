@@ -13,9 +13,6 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
   title: "Datta Sable | BI & Analytics Expert",
   description: "Datta Sable — Business Intelligence Expert specializing in Tableau, Power BI, SQL, Python & Advanced Excel. Building data-driven insights that empower decisions.",
-  alternates: {
-    canonical: 'https://dattasable.com',
-  },
   keywords: [
     "Datta Sable", 
     "Datta Sable Portfolio",

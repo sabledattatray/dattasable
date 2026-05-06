@@ -70,7 +70,7 @@ export default function Hero() {
             <span className="inline sm:hidden">BI Expert & Data Strategist</span>
           </TechLabel>
           <h1
-            className="hero-title"
+            className="hero-title lg:mt-12"
             style={{
               fontSize: 'clamp(1.5rem, 8vw, 48px)',
               fontWeight: 600,

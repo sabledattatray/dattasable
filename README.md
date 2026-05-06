@@ -1,14 +1,27 @@
 # 🌗 Datta Sable | BI & Analytics Platform
 
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Next.js](https://img.shields.io/badge/Next.js-15.0-black.svg?logo=next.js)
-![Prisma](https://img.shields.io/badge/Prisma-5.0-blue.svg?logo=prisma)
-![Tailwind](https://img.shields.io/badge/Tailwind-4.0-38B2AC.svg?logo=tailwind-css)
-![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?logo=vercel)
-[![Mobile App](https://img.shields.io/badge/📱_Native_Android_App-ds--droid-3DDC84.svg)](https://github.com/sabledattatray/ds-droid)
+![Stars](https://img.shields.io/github/stars/sabledattatray/dattasable?style=for-the-badge&logo=github&color=gold)
+![Forks](https://img.shields.io/github/forks/sabledattatray/dattasable?style=for-the-badge&logo=github&color=blue)
+![Build Status](https://img.shields.io/github/actions/workflow/status/sabledattatray/dattasable/ci.yml?branch=main&style=for-the-badge)
+![License](https://img.shields.io/github/license/sabledattatray/dattasable?style=for-the-badge&color=green)
+![Next.js](https://img.shields.io/badge/Next.js-15.0-black.svg?style=for-the-badge&logo=next.js)
+![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?style=for-the-badge&logo=vercel)
 
 
 > **Engineering Data and Digital Infrastructure into Strategic Assets.** A high-performance, full-stack Business Intelligence, Automation, and Web Solutions portfolio designed for the 2026 digital landscape.
+
+---
+
+## 📊 Professional Insights
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=sabledattatray&show_icons=true&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Datta's GitHub Stats" height="180px" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sabledattatray&layout=compact&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Top Languages" height="180px" />
+</p>
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=sabledattatray&theme=vision-friendly-dark&hide_border=true&background=0D1117&stroke=58A6FF&ring=58A6FF&fire=58A6FF&currStreakNum=C9D1D9&sideNums=C9D1D9&sideLabels=C9D1D9&dates=C9D1D9" alt="GitHub Streak" height="180px" />
+</p>
+
 
 ---
 
@@ -46,22 +59,23 @@ A clean, enterprise-grade interface for managing the entire ecosystem. Designed 
 ## 🛠️ The Tech Stack
 
 ### **Frontend & UX**
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS 4.0 + Framer Motion (Animations)
-- **Icons**: Lucide React + Iconify
-- **State Management**: Zustand (Lightweight & Reactive)
+- ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+- ![Framer](https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
 ### **Backend & Infrastructure**
-- **Database**: PostgreSQL (Prisma ORM)
-- **Authentication**: NextAuth.js (Google, GitHub, LinkedIn)
-- **Hosting**: Vercel (Edge Functions & Optimized Caching)
-- **Image Processing**: Sharp (WebP Optimization)
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+- ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
-### **Analytics, Automation & Design**
-- **BI Visualization**: Tableau, Power BI, ECharts
-- **Data Engineering**: Python (Prefect), SQL (PostgreSQL)
-- **Workflow Automation**: n8n
-- **Design & Assets**: CorelDRAW, Figma
+### **Data Engineering & BI**
+- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+- ![Power Bi](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+- ![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=Tableau&logoColor=white)
+- ![SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=sqlite&logoColor=white)
+
 
 ---
 
