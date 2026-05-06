@@ -144,9 +144,17 @@ export default function MobileMenu({
               {/* Drawer Footer */}
               <div className="p-12 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
                 {session ? (
-                  <div className="py-4 text-center">
-                    <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
-                    <p className="text-sm font-bold text-[var(--text)]">{session.user?.name}</p>
+                  <div className="py-4 text-center space-y-6">
+                    <div>
+                      <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
+                      <p className="text-sm font-bold text-[var(--text)]">{session.user?.name}</p>
+                    </div>
+                    <button 
+                      onClick={() => signOut()}
+                      className="w-full flex items-center justify-center gap-2 py-4 text-[11px] font-bold tracking-[0.2em] uppercase border border-[var(--accent)]/30 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-black transition-all"
+                    >
+                      <LogOut size={14} /> SIGN OUT
+                    </button>
                   </div>
                 ) : (
                   <button 

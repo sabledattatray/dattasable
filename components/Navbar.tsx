@@ -210,6 +210,13 @@ export default function Navbar() {
                         {(session.user as any)?.role || 'USER'}
                       </span>
                     </div>
+                    <button 
+                      onClick={() => signOut()}
+                      className="p-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-[var(--border)] ml-2 pl-4"
+                      title="Sign Out"
+                    >
+                      <LogOut size={18} />
+                    </button>
                   </div>
                 ) : (
                   <button 
