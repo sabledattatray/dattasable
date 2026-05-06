@@ -27,7 +27,12 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
 
-  const categories = ['All', ...Array.from(new Set(initialPosts.map(p => p.category)))];
+  const categoryCounts = initialPosts.reduce((acc, p) => {
+    acc[p.category] = (acc[p.category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const categories = ['All', ...Object.keys(categoryCounts)];
   const filtered = initialPosts.filter(p => {
     const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || 
                          p.excerpt?.toLowerCase().includes(search.toLowerCase());
@@ -131,6 +136,16 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
               }}
             >
               {cat}
+              <span style={{ 
+                opacity: 0.6, 
+                marginLeft: '6px', 
+                fontSize: '9px',
+                padding: '1px 5px',
+                background: activeCategory === cat ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.05)',
+                borderRadius: '10px'
+              }}>
+                {cat === 'All' ? initialPosts.length : categoryCounts[cat]}
+              </span>
             </button>
           ))}
         </div>
