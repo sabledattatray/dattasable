@@ -1,9 +1,18 @@
-import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { Metadata } from 'next';
 import { BookOpen, Target, Zap, BarChart3, Database, BrainCircuit, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "Start Your Data Journey | BI & Analytics Knowledge Hub",
+  description: "A structured learning pathway from data fundamentals to advanced enterprise orchestration. Explore modern BI stacks, automation pipelines, and executive dashboards.",
+  openGraph: {
+    title: "Start Your Data Journey | Datta Sable Hub",
+    description: "Your roadmap to mastering Business Intelligence, Automation, and Data Architecture.",
+    images: ["/images/blog/bi_performance_hero_1777410226286.webp"],
+  },
+  alternates: {
+    canonical: '/start-here',
+  }
+};
 
 export default function StartHerePage() {
   const paths = [
