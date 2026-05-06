@@ -67,9 +67,7 @@ import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
-import dynamic from 'next/dynamic';
 
-const WhatsAppButton = dynamic(() => import('@/components/WhatsAppButton'), { ssr: false });
 
 const syne = Syne({
   subsets: ['latin'],
@@ -167,7 +165,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               googleSignInClientId={process.env.GOOGLE_ID || ""}
               adSenseClientId="ca-pub-4242010382827250"
             />
-            <WhatsAppButton />
           </ThemeProvider>
         </Providers>
       </body>
