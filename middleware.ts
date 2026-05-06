@@ -11,6 +11,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
+  // 0.1 Block Suspicious Bots and Scanners
+  const userAgent = request.headers.get('user-agent') || '';
+  const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix/i;
+  
+  if (suspiciousBots.test(userAgent) && !userAgent.includes('Googlebot') && !userAgent.includes('bingbot')) {
+    return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
+  }
+
   const response = NextResponse.next();
 
   // 1. Content Security Policy (CSP)
@@ -47,6 +55,9 @@ export function middleware(request: NextRequest) {
   if (process.env.NODE_ENV === 'production') {
     response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   }
+
+  // 6. Permissions-Policy (Hardware Security)
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
 
   return response;
 }
