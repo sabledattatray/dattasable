@@ -118,7 +118,7 @@ npm run dev
 
 I am currently open to high-impact BI consulting and Data Engineering roles.
 
-- **Website**: [dattasable.com](https://dattasable.com)
+- **Live Website**: [dattasable.com](https://dattasable.com)
 - **LinkedIn**: [Datta Sable](https://linkedin.com/in/dattasable)
 - **Email**: [contact@dattasable.com](mailto:contact@dattasable.com)
 
