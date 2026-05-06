@@ -1238,5 +1238,128 @@ LEFT JOIN Employees m ON e.manager_id = m.employee_id;</code></pre>
     icon: '🎬',
     image: '/images/blog/creative_tools_unique.webp',
     tags: ['Content Creation', 'Marketing', 'Tools', 'Free Resources', '2025']
+  },
+  {
+    id: 'advanced-sql-bi-2026',
+    slug: 'beyond-the-select-advanced-sql-for-bi',
+    title: 'Beyond the SELECT: Mastering Advanced SQL for Surgical Business Intelligence',
+    category: 'Engineering',
+    excerpt: 'Deep-diving into CTEs, Window Functions, and Recursive queries to build the high-performance engines behind enterprise dashboards.',
+    content: `
+      <p>In the hierarchy of a <strong>Business Intelligence Expert</strong>, SQL is not just a tool—it is the foundational language of truth. While many can write a basic <code>SELECT</code> statement, the difference between a "Report Builder" and a "Data Architect" lies in the ability to orchestrate complex data transformations at the source.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "A dashboard is only as fast as the query that feeds it. Precision in SQL is the prerequisite for speed in BI." — Datta Sable
+      </blockquote>
+
+      <h2>The Power of Common Table Expressions (CTEs)</h2>
+      <p>Readable code is maintainable code. In <strong>Surgical BI</strong>, we use CTEs (<code>WITH</code> clauses) to break down monolithic 500-line queries into logical, modular blocks. This not only improves debugging speed but also allows the SQL optimizer to better understand the execution plan. For enterprise-grade <a href="/blog/strategic-bi-guide-india-2026" style="color: var(--accent); text-decoration: underline;">Automated Reporting Solutions</a>, modular SQL is mandatory.</p>
+
+      <h2>Window Functions: The Secret to Comparative Analytics</h2>
+      <p>If you want to track <strong>Running Totals</strong>, <strong>Moving Averages</strong>, or <strong>Year-over-Year Growth</strong> without complex self-joins, Window Functions are your surgical tool. Functions like <code>PARTITION BY</code> and <code>OVER</code> allow us to perform calculations across a set of rows while still returning individual record details—a critical requirement for <a href="/blog/architecting-mtd-lmtd-time-intelligence" style="color: var(--accent); text-decoration: underline;">MTD/LMTD Time Intelligence</a>.</p>
+
+      <h3>Example: The Rolling 7-Day Average</h3>
+      <pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;overflow-x:auto;margin:2rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:var(--accent);">SELECT 
+  date, 
+  sales,
+  AVG(sales) OVER (
+    ORDER BY date 
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+  ) as rolling_avg
+FROM production_sales;</code></pre>
+
+      <h2>Recursive Queries: Navigating Hierarchical Data</h2>
+      <p>In sectors like Telecom or Finance, data often lives in hierarchies (e.g., Parent-Child account relationships). <strong>Recursive CTEs</strong> allow a <a href="/blog/telecom-collection-optimization-strategies" style="color: var(--accent); text-decoration: underline;">Telecom Analytics Expert</a> to traverse these levels in a single pass, flattening complex trees into simple, queryable datasets for Power BI injection.</p>
+
+      <h2>Optimization: The Indexing Strategy</h2>
+      <p>Writing the query is only half the battle. As a <strong>Data Strategy Consultant</strong>, I emphasize the importance of Indexing and Query Folding. By ensuring that your SQL filters (<code>WHERE</code> clauses) leverage indexed columns, you reduce the load on the <a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: underline;">Warehouse Engine</a> and deliver sub-second responses to the end-user.</p>
+
+      <p>The journey from a basic analyst to a SQL master is a marathon, not a sprint. Focus on the 'Why' behind the data, and the 'How' will follow. Explore more about my engineering standards on my <a href="https://github.com/sabledattatray" style="color: var(--accent); text-decoration: underline;">GitHub</a>.</p>
+    `,
+    readTime: 18,
+    date: 'May 06, 2026',
+    color: 'var(--accent)',
+    icon: '💾',
+    image: '/images/blog/sql_mastery_hero.png',
+    tags: ['SQL', 'Advanced Analytics', 'Query Optimization', 'Data Architecture']
+  },
+  {
+    id: 'dashboard-psychology-2026',
+    slug: 'psychology-of-high-fidelity-dashboard-design',
+    title: 'The Cognitive Engine: Exploring the Psychology of High-Fidelity Dashboard Design',
+    category: 'Design',
+    excerpt: 'How to use color theory, Gestalt principles, and information hierarchy to design dashboards that executives actually use.',
+    content: `
+      <p>A dashboard is a bridge between a massive data lake and a human decision. But most bridges are built poorly. In the world of <strong>High-Fidelity BI</strong>, we don't just "Visualise Data"—we design <strong>Cognitive Interfaces</strong> that align with how the human brain processes information.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "Good design is invisible. It allows the data to speak directly to the decision-maker without the noise of a complex UI." — Datta Sable
+      </blockquote>
+
+      <h2>1. The Gestalt Principles in Data Visualization</h2>
+      <p>The brain naturally groups similar items together. By using <strong>Proximity</strong> and <strong>Similarity</strong>, a <a href="/blog/the-surgical-cockpit-bi-ux-design" style="color: var(--accent); text-decoration: underline;">Surgical Dashboard Designer</a> can create a sense of relationship between metrics without using borders or lines. This reduces visual "clutter" and allows the user to identify trends 40% faster.</p>
+
+      <h2>2. Color Theory: Meaning Over Aesthetics</h2>
+      <p>In professional reporting, color is a diagnostic tool, not a decorative one. We use high-contrast <strong>Neon Accents</strong> for anomalies and muted <strong>Obsidian Tones</strong> for background context. This creates a "Visual Alarm" system where the user's eye is naturally drawn to what needs attention—a technique I use extensively in my <a href="/blog/building-analytics-war-room" style="color: var(--accent); text-decoration: underline;">Live Intelligence Dashboards</a>.</p>
+
+      <h2>3. The "Z-Pattern" of Executive Scanning</h2>
+      <p>Most executives scan a dashboard in a 'Z' shape: Top-Left to Top-Right, then diagonal to Bottom-Left. By placing the most critical KPIs in the "Primary Optical Area" (Top-Left), we ensure that the most important information is consumed first. This is a core tenet of <a href="/blog/surgical-cockpit-ui-ux-2026" style="color: var(--accent); text-decoration: underline;">Surgical Cockpit Design</a>.</p>
+
+      <h3>Key UI/UX Milestones:</h3>
+      <ul>
+        <li><strong>Micro-Interactions:</strong> Subtle hover effects that reveal underlying data without a full page reload.</li>
+        <li><strong>Adaptive Layouts:</strong> Ensuring the "Surgical" experience translates from a 40-inch boardroom monitor to a mobile device.</li>
+        <li><strong>Typography Hierarchy:</strong> Using varied weights (900 for headlines, 400 for support) to guide the reader's journey.</li>
+      </ul>
+
+      <h2>The Outcome: Decision Confidence</h2>
+      <p>When a dashboard follows psychological principles, it builds <strong>User Trust</strong>. The user feels in control, not overwhelmed. It transforms a "Report" into a "Consultant." For more on my design philosophy, explore the <a href="/portfolio" style="color: var(--accent); text-decoration: underline;">SDR-9 Forge Portfolio</a>.</p>
+    `,
+    readTime: 12,
+    date: 'May 06, 2026',
+    color: '#00C9F2',
+    icon: '🧠',
+    image: '/images/blog/dashboard_psychology_hero.png',
+    tags: ['UI/UX', 'Dashboard Design', 'Psychology', 'Data Viz']
+  },
+  {
+    id: 'python-engineering-2026',
+    slug: 'scaling-the-forge-python-data-engineering',
+    title: 'Scaling the Forge: Why Python is the Backbone of Modern Data Engineering',
+    category: 'Engineering',
+    excerpt: 'Analyzing the shift from manual ETL to automated Python-based data pipelines for 10M+ record datasets.',
+    content: `
+      <p>As we scale into the era of Big Data, the traditional "Copy-Paste" method of data management is dead. To build truly <a href="/blog/modern-bi-stack-2026" style="color: var(--accent); text-decoration: underline;">Scalable Data Ecosystems</a>, a <strong>Business Intelligence Expert</strong> must transition into a <strong>Data Engineer</strong>, and Python is the weapon of choice.</p>
+
+      <blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 2rem 0; font-style: italic; color: var(--muted); font-size: 1.1rem;">
+        "Python is the glue that connects raw data sources to high-fidelity analytical insights. It turns manual labor into automated intelligence." — Datta Sable
+      </blockquote>
+
+      <h2>The Rise of High-Performance Libraries: Polars vs. Pandas</h2>
+      <p>For years, Pandas was the gold standard. But as datasets hit the 10M+ row mark, we are pivoting towards <strong>Polars</strong>—a lightning-fast, multi-threaded DataFrame library written in Rust but available in Python. By leveraging lazy evaluation and vectorized execution, we can perform complex ETL in seconds that previously took minutes. This is a core engine in our <a href="/blog/engineering-10m-row-ai-bi-agent" style="color: var(--accent); text-decoration: underline;">AI-BI Forge Agent</a>.</p>
+
+      <h2>Automated ETL: From Scripts to Orchestrations</h2>
+      <p>A script that runs on your laptop is not a pipeline. Modern engineering requires <strong>Orchestration</strong>. By using frameworks like <a href="/blog/python-automation-pipelines" style="color: var(--accent); text-decoration: underline;">Prefect or Dagster</a>, we build self-healing pipelines that manage retries, logging, and data validation automatically. This ensures that the <a href="/blog/strategic-bi-guide-india-2026" style="color: var(--accent); text-decoration: underline;">Decision Clarity</a> delivered to the board is always based on fresh, audited data.</p>
+
+      <h3>Python Snippet: Automated Data Audit</h3>
+      <pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;overflow-x:auto;margin:2rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:var(--accent);">import polars as pl
+
+def audit_dataset(file_path):
+    df = pl.read_csv(file_path)
+    null_report = df.null_count()
+    return null_report.to_dict()</code></pre>
+
+      <h2>API Integration: The Last Mile of Data Fetching</h2>
+      <p>Data no longer lives only in local databases. It lives in the cloud. Python’s <code>requests</code> and <code>asyncio</code> libraries allow us to fetch data from thousands of API endpoints concurrently, merging disparate sources into a single <a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: underline;">Cloud Data Warehouse</a> for unified reporting.</p>
+
+      <h2>Future-Proofing Your Career</h2>
+      <p>In 2026, the most successful BI professionals are those who can code. By mastering Python, you move beyond "Reporting" and into "Product Engineering." You don't just show data; you build the systems that generate it. Explore the full source code for my Python-driven dashboards on <a href="https://github.com/sabledattatray" style="color: var(--accent); text-decoration: underline;">GitHub</a>.</p>
+    `,
+    readTime: 16,
+    date: 'May 06, 2026',
+    color: '#00d4ff',
+    icon: '🐍',
+    image: '/images/blog/python_engineering_hero.png',
+    tags: ['Python', 'Data Engineering', 'ETL', 'Automation', 'Big Data']
   }
 ];
