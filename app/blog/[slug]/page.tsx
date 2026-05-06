@@ -26,8 +26,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
-  const ogImage = `/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
-  const publishDate = post.createdAt ? post.createdAt.toISOString() : new Date(post.date || Date.now()).toISOString();
+  const ogImage = (post as any).image 
+    ? `${baseUrl}${(post as any).image}`
+    : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
+    
+  const publishDate = post.createdAt ? post.createdAt.toISOString() : new Date((post as any).date || Date.now()).toISOString();
 
   return {
     title: `${post.title} | Datta Sable Blog`,
