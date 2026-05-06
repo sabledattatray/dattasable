@@ -108,8 +108,8 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user, account }) {
       if (user) {
-        const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim()) || [];
-        const role = (user.email && adminEmails.includes(user.email)) ? 'ADMIN' : 'USER';
+        const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim().toLowerCase()) || [];
+        const role = (user.email && adminEmails.includes(user.email.toLowerCase())) ? 'ADMIN' : 'USER';
         
         // Persist user to DB if they don't exist (important for OAuth users)
         try {
