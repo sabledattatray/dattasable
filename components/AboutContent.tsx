@@ -117,7 +117,7 @@ export default function AboutContent() {
                 </p>
                 <div className="flex gap-4">
                   <Link href="/resume" className="btn-primary flex items-center gap-2" style={{ textDecoration: 'none', borderRadius: 0, padding: '1rem 2rem' }}>
-                    <Download size={18} /> VIEW_RESUME_AND_DOWNLOAD
+                    <Download size={18} /> VIEW AND DOWNLOAD RESUME
                   </Link>
                 </div>
               </motion.div>
