@@ -11,8 +11,8 @@ const projects = [
     desc: 'Autonomous BI infrastructure capable of auditing 10M+ records in 47 seconds with zero-latency heuristics.',
     tools: ['Python', 'DuckDB', 'Next.js'],
     impact: '212,000 rec/sec speed',
-    color: '#FF3B30',
-    color2: '#FF3B30',
+    color: 'var(--accent)',
+    color2: '#00C9F2',
     icon: <Activity size={20} />,
   },
   {
@@ -61,8 +61,8 @@ const projects = [
     desc: 'Advanced fraud detection suite for 10M+ transaction records using Python heuristics and Power BI visual alerting.',
     tools: ['Python', 'SQL', 'Power BI'],
     impact: '99.9% detection rate',
-    color: '#FF3B30',
-    color2: '#FF3B30',
+    color: 'var(--accent)',
+    color2: '#00C9F2',
     icon: <Target size={20} />,
   },
 ];
