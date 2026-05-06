@@ -116,9 +116,6 @@ export default function AboutContent() {
                   I am Datta Sable, a <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> based in India. I bridge the gap between complex data ecosystems and strategic action, building high-fidelity <strong>Automated Reporting Solutions</strong> that empower stakeholders with absolute decision clarity.
                 </p>
                 <div className="flex gap-4">
-                  <Link href="/resume" className="btn-primary flex items-center gap-2" style={{ textDecoration: 'none', borderRadius: 0, padding: '1rem 2rem' }}>
-                    <Download size={18} /> VIEW AND DOWNLOAD RESUME
-                  </Link>
                 </div>
               </motion.div>
 
