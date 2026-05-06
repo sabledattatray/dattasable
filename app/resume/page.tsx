@@ -108,8 +108,8 @@ export default function ResumePage() {
                 backgroundColor: 'rgba(255,255,255,0.05)'
               }}>
                 <img 
-                  src="https://lh3.googleusercontent.com/aida/ADBb0uipmhqazs7Cusgp-TalImOR4OGCg8S78FhzZSy034bTHLRYE7RB-XOHHG50veZOoJLrc6DkVtGrvsiqRSSWViXehktHdSARABi4ssVDCJzpJwpQnlNHmzFIUfYYCxBf1YUJn9GdSzSvRzsdyphDcXb43rqcqGkrh6RyZk7sLLk_y6R4JhF0cdjbeOYDnRtmLL47Rg32Uo9hAEIOXdVawXJrqlnmDf9VFiF4fUhGgkxL-txR1VZZX6fVd5y08b68R9pBUwtegYlI1g" 
-                  alt="Datta Sable" 
+                  src="/images/datta.webp" 
+                  alt="" 
                   style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
                 />
               </div>
