@@ -142,7 +142,7 @@ export default function MobileMenu({
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-6 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
+              <div className="p-12 border-t border-[var(--border)] bg-[var(--surface2)] space-y-4">
                 {session ? (
                   <div className="py-4 text-center">
                     <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
