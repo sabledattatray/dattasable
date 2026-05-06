@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import { 
   Mail, MapPin, Phone, Briefcase, Database, School, Send, Printer, ShieldCheck,
-  Activity, BarChart3, Bolt
+  Activity, BarChart3, Bolt, Download
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
