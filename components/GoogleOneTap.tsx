@@ -32,7 +32,7 @@ export default function GoogleOneTap() {
               auto_select: true,
               cancel_on_tap_outside: true,
               itp_support: true,
-              use_fedcm_for_prompt: true, 
+              use_fedcm_for_prompt: false, 
             });
 
             window.google.accounts.id.prompt((notification: any) => {
