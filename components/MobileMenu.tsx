@@ -54,8 +54,8 @@ export default function MobileMenu({
             <div className="flex flex-col h-full overflow-y-auto">
               {/* Drawer Header */}
               <div className="flex items-center justify-between min-h-[100px] px-8 border-b border-[var(--border)] bg-[var(--surface)]">
-                <Link href="/" onClick={onClose} className="flex items-center gap-2 group" style={{ textDecoration: 'none' }}>
-                  <LogoIcon color="var(--accent)" className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500" />
+                <Link href="/" onClick={onClose} className="flex items-baseline gap-2 group" style={{ textDecoration: 'none' }}>
+                  <LogoIcon color="var(--accent)" className="w-8 h-8 group-hover:rotate-[30deg] transition-transform duration-500 relative top-[2px]" />
                   <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
                     Datta Sable
                   </span>
