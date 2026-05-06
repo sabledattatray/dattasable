@@ -203,20 +203,25 @@ export default function Navbar() {
               <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
                 <ThemeToggle />
                 {session ? (
-                  <div className="flex items-center gap-4">
-                    <div className="flex flex-col items-end">
-                      <span className="text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">{session.user?.name}</span>
-                      <span className="text-[8px] text-[var(--accent)] font-mono uppercase opacity-70">
-                        {(session.user as any)?.role || 'USER'}
-                      </span>
+                  <div className="flex items-center">
+                    <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 group hover:border-[var(--accent)]/20 transition-all">
+                      <div className="flex flex-col items-end">
+                        <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider leading-none mb-1">{session.user?.name}</span>
+                        <span className="text-[7px] text-[var(--accent)] font-mono uppercase opacity-60">
+                          {(session.user as any)?.role || 'USER'}
+                        </span>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--accent)] font-bold text-[10px]">
+                        {session.user?.name?.charAt(0).toUpperCase()}
+                      </div>
+                      <button 
+                        onClick={() => signOut()}
+                        className="ml-2 p-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-white/10 pl-3"
+                        title="Sign Out"
+                      >
+                        <LogOut size={14} />
+                      </button>
                     </div>
-                    <button 
-                      onClick={() => signOut()}
-                      className="p-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-[var(--border)] ml-2 pl-4"
-                      title="Sign Out"
-                    >
-                      <LogOut size={18} />
-                    </button>
                   </div>
                 ) : (
                   <button 
