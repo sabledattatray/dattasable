@@ -57,10 +57,10 @@ export default function PerformanceOptimizer({
         <AnalyticsTracker />
       </Suspense>
 
-      {/* 2. Google Sign In - afterInteractive because PerformanceOptimizer already delayed it */}
+      {/* 2. Google Sign In - lazyOnload to minimize TBT */}
       <Script 
         src="https://accounts.google.com/gsi/client" 
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* 3. Google AdSense (Lazy) */}
