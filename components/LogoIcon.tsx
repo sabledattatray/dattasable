@@ -10,7 +10,7 @@ export default function LogoIcon({ className = "w-6 h-6", color = "var(--accent)
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <path d="m3 8l4-4l4 4M7 4v16m4-8h10m-10 4h7m-7 4h4" />
+      <path d="M2 18a2 2 0 0 0 1.7 3h9.7l-2.7-4.5h-2L12 11l6 10h2.3a2 2 0 0 0 1.7-3L13.8 4a2 2 0 0 0-3.6 0Z" />
     </svg>
   );
 }
