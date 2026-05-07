@@ -3,7 +3,7 @@ export const posts = [
     id: 'future-web-dev-2026',
     slug: 'future-of-web-development-2026',
     title: 'The Future of Web Development in 2026: Beyond the Hype of AI and Edge Computing',
-    category: 'Engineering',
+    category: 'Web Dev',
     excerpt: 'Master the shift toward hybrid edge-first architectures. Learn how Next.js 15, React 19 Server Components, and Autonomous AI Agents are redefining performance and SEO in 2026.',
     content: `
       <p>As we navigate through 2026, the web development landscape has moved far beyond the "React vs. Vue" debates of the early 2020s. We are witnessing a fundamental re-architecture of the digital experience. The pendulum, which once swung heavily toward client-side execution (the Single Page Application era), has now stabilized into a hybrid, edge-first model.</p>
@@ -44,7 +44,7 @@ export const posts = [
     id: 'mastering-surgical-ui-2026',
     slug: 'mastering-surgical-ui-dashboard-engineering',
     title: 'Mastering the \'Surgical\' UI: Principles of Professional Dashboard Engineering',
-    category: 'Design',
+    category: 'Web Dev',
     excerpt: 'Move beyond cluttered dashboards. Explore the principles of the Surgical UI—using Obsidian aesthetics, high-contrast telemetry, and Framer Motion to build executive-grade data cockpits.',
     content: `
       <p>In the world of Business Intelligence (BI) and high-stakes data engineering, the term "dashboard" has become diluted. Most dashboards today are cluttered, slow, and fail to provide the immediate clarity required for executive decision-making. To solve this, we must move toward the concept of the <strong>Surgical UI</strong>—a precision-engineered "Cockpit" for the modern data explorer.</p>
