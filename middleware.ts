@@ -13,9 +13,18 @@ export function middleware(request: NextRequest) {
 
   // 0.1 Block Suspicious Bots and Scanners
   const userAgent = request.headers.get('user-agent') || '';
+  const path = request.nextUrl.pathname;
+  
+  // Allow common crawlers and exempt critical public files
+  const isExemptPath = path === '/ads.txt' || path === '/robots.txt' || path === '/sitemap.xml';
+  const isGoogleCrawler = userAgent.includes('Googlebot') || 
+                         userAgent.includes('Mediapartners-Google') || 
+                         userAgent.includes('AdsBot-Google');
+  const isBingCrawler = userAgent.includes('bingbot');
+
   const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix/i;
   
-  if (suspiciousBots.test(userAgent) && !userAgent.includes('Googlebot') && !userAgent.includes('bingbot')) {
+  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isExemptPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   }
 
@@ -72,6 +81,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|ads.txt|robots.txt|sitemap.xml).*)',
   ],
 };

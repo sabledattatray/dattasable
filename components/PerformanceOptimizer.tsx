@@ -34,8 +34,8 @@ export default function PerformanceOptimizer({
       window.addEventListener(event, loadScripts, { once: true, passive: true });
     });
 
-    // 2. Fallback timer (15 seconds) to ensure they load eventually
-    const timer = setTimeout(loadScripts, 15000);
+    // 2. Fallback timer (20 seconds) to ensure they load eventually
+    const timer = setTimeout(loadScripts, 20000);
 
     return () => {
       interactionEvents.forEach(event => {

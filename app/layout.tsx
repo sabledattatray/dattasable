@@ -94,7 +94,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
-        {/* Preconnects removed to optimize initial render. Third-party scripts are lazy-loaded by PerformanceOptimizer. */}
+        
+        {/* Elite Performance: Preconnect to Font & Image CDNs */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* LCP Optimization: Preload Hero Image with High Priority */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/hero-bg.webp" 
+          fetchPriority="high" 
+        />
         
         <Script
           id="json-ld"
