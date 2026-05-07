@@ -57,9 +57,9 @@ input:-webkit-autofill:active {
   --surface: #ffffff;
   --surface2: #f4f4f5;
   --border: #d1d5db;
-  --accent: #0077CC;
-  --accent2: #0088EE;
-  --accent3: #0066AA;
+  --accent: #0059B3;
+  --accent2: #006BD6;
+  --accent3: #00478F;
   --text: #000000;
   --muted: #3f3f46;
   --tag-bg: #e5e7eb;
@@ -245,7 +245,7 @@ body {
 /* Typography Labels */
 .label-tech {
   font-family: var(--font-syne);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;

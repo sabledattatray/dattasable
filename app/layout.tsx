@@ -95,18 +95,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="color-scheme" content="light dark" />
         
-        {/* Elite Performance: Preconnect to Font & Image CDNs */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* LCP Optimization: Preload Hero Image with High Priority */}
-        <link 
-          rel="preload" 
-          as="image" 
-          href="/hero-bg.webp" 
-          fetchPriority="high" 
-        />
-        
         <Script
           id="json-ld"
           type="application/ld+json"
