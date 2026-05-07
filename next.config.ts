@@ -6,8 +6,11 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Ensuring the build doesn't stop for non-critical type warnings
     ignoreBuildErrors: true,
+  },
+  reactStrictMode: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
   images: {
     formats: ['image/avif', 'image/webp'],
