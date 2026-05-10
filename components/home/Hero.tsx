@@ -80,7 +80,7 @@ export default function Hero() {
               display: 'inline-block'
             }}
           >
-            Engineering data into<br />strategic roadmaps
+            Surgical BI Engineering<br />& Data Strategy
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
             Premier <strong>BI Developer in India</strong>. I simplify complex data ecosystems into actionable executive insights through <strong>SQL Automation</strong>, <strong>Python Data Engineering</strong>, and high-fidelity <strong>Automated Reporting Solutions</strong>.

@@ -11,8 +11,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "Datta Sable | BI & Analytics Expert",
-  description: "Datta Sable — Business Intelligence Expert specializing in Tableau, Power BI, SQL, Python & Advanced Excel. Building data-driven insights that empower decisions.",
+  title: "Professional BI Developer & Data Strategy Consultant | Datta Sable",
+  description: "Datta Sable — Premier BI Developer in India specializing in Tableau, Power BI, SQL, and Python. Delivering strategic data insights and automated reporting solutions.",
   keywords: [
     "Datta Sable", 
     "Datta Sable Portfolio",
