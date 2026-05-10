@@ -13,6 +13,10 @@ const ProjectsGrid = dynamic(() => import('@/components/home/ProjectsGrid'), {
   loading: () => <div className="h-[600px] bg-[var(--surface2)] animate-pulse" />
 });
 
+const FAQ = dynamic(() => import('@/components/home/FAQ'), {
+  loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
+});
+
 export default function HomePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -29,6 +33,9 @@ export default function HomePage() {
 
         {/* ── PROJECTS (Client Island) ── */}
         <ProjectsGrid />
+
+        {/* ── FAQ & SEO (Client Island) ── */}
+        <FAQ />
 
         <Crosshair position="br" />
       </div>
