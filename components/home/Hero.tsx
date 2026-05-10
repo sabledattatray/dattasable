@@ -42,7 +42,7 @@ export default function Hero() {
             priority
             fetchPriority="high"
             decoding="sync"
-            quality={30}
+            quality={75}
             sizes="(max-width: 768px) 100vw, 55vw"
             className="object-cover"
             style={{ objectPosition: 'center right' }}
@@ -72,7 +72,7 @@ export default function Hero() {
           <h1
             className="hero-title lg:mt-12"
             style={{
-              fontSize: 'clamp(1.5rem, 8vw, 48px)',
+              fontSize: 'clamp(2rem, 7vw, 48px)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
               lineHeight: 1.1,
