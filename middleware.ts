@@ -16,7 +16,12 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   
   // Allow common crawlers and exempt critical public files
-  const isExemptPath = path === '/ads.txt' || path === '/robots.txt' || path === '/sitemap.xml';
+  const lowerPath = path.toLowerCase();
+  const isCrawlPath = lowerPath === '/ads.txt' || 
+                     lowerPath === '/robots.txt' || 
+                     lowerPath === '/sitemap.xml' ||
+                     !!lowerPath.match(/\.(png|jpg|jpeg|webp|gif|svg|ico)$/i);
+  
   const isGoogleCrawler = userAgent.includes('Googlebot') || 
                          userAgent.includes('Mediapartners-Google') || 
                          userAgent.includes('AdsBot-Google');
