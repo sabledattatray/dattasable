@@ -1752,7 +1752,7 @@ def audit_dataset(file_path):
     date: 'May 12, 2026',
     color: 'var(--accent)',
     icon: '🤖',
-    image: '/images/blog/professional-ai-agent-architecture-2026.png',
+    image: '/images/blog/professional-ai-agent-architecture-2026.webp',
     tags: ['AI Agents', 'Prompt Engineering', 'Workflows', 'LLM', 'AI Strategy']
   },
   {
@@ -1798,7 +1798,7 @@ def audit_dataset(file_path):
     date: 'May 12, 2026',
     color: 'var(--accent)',
     icon: '🌐',
-    image: '/images/blog/nextjs-15-react-19-enterprise-architecture.png',
+    image: '/images/blog/nextjs-15-react-19-enterprise-architecture.webp',
     tags: ['Next.js 15', 'React 19', 'Server Components', 'Enterprise', 'Performance']
   },
   {
@@ -1842,7 +1842,7 @@ def audit_dataset(file_path):
     date: 'May 12, 2026',
     color: '#06b6d4',
     icon: '🎯',
-    image: '/images/blog/first-party-data-marketing-strategy.png',
+    image: '/images/blog/first-party-data-marketing-strategy.webp',
     tags: ['Marketing', 'First-Party Data', 'Privacy', 'CDP', 'Strategy']
   },
   {
@@ -1886,7 +1886,7 @@ def audit_dataset(file_path):
     date: 'May 12, 2026',
     color: 'var(--accent)',
     icon: '🧠',
-    image: '/images/blog/deep-work-productivity-setup.png',
+    image: '/images/blog/deep-work-productivity-setup.webp',
     tags: ['Productivity', 'Deep Work', 'Focus', 'Engineering', 'Workflow']
   },
   {
@@ -1930,7 +1930,7 @@ def audit_dataset(file_path):
     date: 'May 12, 2026',
     color: 'var(--accent)',
     icon: '📈',
-    image: '/images/blog/data-driven-finance-python-portfolio.png',
+    image: '/images/blog/data-driven-finance-python-portfolio.webp',
     tags: ['Finance', 'Data-Driven', 'Python', 'Investing', 'Alpha']
   }
 ];
