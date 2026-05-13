@@ -41,11 +41,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/start-here',
     '/analytics-live',
     '/data-forge',
+    '/tools',
+    '/tools/linkedin-formatter',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0 : 0.7,
+    priority: route === '' ? 1.0 : route === '/tools' ? 0.9 : 0.7,
   }));
 
   return [...staticUrls, ...dbBlogUrls, ...staticBlogUrls];
