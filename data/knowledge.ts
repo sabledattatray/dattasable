@@ -15,14 +15,14 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
   {
     id: 'ai-context-opt-guide',
     slug: 'optimizing-ai-context-windows',
-    title: 'How to Optimize AI Context Windows for Complex Reasoning',
+    title: 'Surgical Prompt Architecture™: Optimizing Context Windows',
     description: 'Learn the technical art of semantic compression and token density to fit massive logic into narrow LLM windows.',
     category: 'AI Workflow',
     content: `
       ### The Context Window Bottleneck
       Every Large Language Model (LLM) like GPT-4, Claude 3, or Gemini has a finite "context window." When you exceed this window, the model loses its "memory" of the early part of the conversation, leading to hallucinations or logic failure.
 
-      ### Semantic Compression Techniques
+      ### Context Compression Framework™
       To fit more into less, you must master semantic compression:
       1. **Abbreviation mapping**: Replace long terms (implementation -> impl)
       2. **Structural collapse**: Remove boilerplate headers
@@ -39,14 +39,14 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
   {
     id: 'li-authority-storytelling',
     slug: 'technical-storytelling-for-founders',
-    title: 'Technical Storytelling: The Founder Authority Framework',
+    title: 'Operator Intent Mapping™: Technical Storytelling for Founders',
     description: 'A surgical breakdown of how to turn messy technical wins into viral LinkedIn authority assets.',
     category: 'LinkedIn Authority',
     content: `
       ### Why Technical Posts Fail
       Most technical founders post updates that are too dry or too vague. To build authority, you must bridge the gap between "Architecture" and "Business Impact."
 
-      ### The "Surgical Hook" Method
+      ### The Authority Distribution Matrix™
       Start with the failure, not the win. 
       *Bad Hook*: "We just finished our new database migration."
       *Surgical Hook*: "Most people think database migrations are about speed. They're wrong. They're about infrastructure survival."
@@ -57,6 +57,6 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     associatedBlueprint: 'founder-authority-system',
     associatedTool: '/tools/linkedin-formatter',
     readingTime: '4 min',
-    operatorNote: "Authenticity is the only thing AI can't fake. Use my spacing method to let your personality breathe between the lines of code. It feels more human because it follows natural speech patterns."
+    operatorNote: "Authenticity is the only thing AI can't fake. Use my spacing method to let your personality breathe between the lines of code. It follows natural speech patterns."
   }
 ];

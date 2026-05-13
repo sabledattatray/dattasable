@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
+import NewsletterCapture from '@/components/home/NewsletterCapture';
 import { 
   BookOpen, 
   ChevronRight, 
@@ -38,7 +39,7 @@ export default function KnowledgeHub() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
               {KNOWLEDGE_ARTICLES.map((article) => (
                 <Link key={article.id} href={`/knowledge/${article.slug}`} className="no-underline group">
                   <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
@@ -69,6 +70,9 @@ export default function KnowledgeHub() {
                 </Link>
               ))}
             </div>
+
+            {/* Newsletter Integration */}
+            <NewsletterCapture />
 
             {/* Glossary Entry Point */}
             <div className="mt-20 p-12 card border-dashed text-center" style={{ background: 'var(--bg)' }}>
