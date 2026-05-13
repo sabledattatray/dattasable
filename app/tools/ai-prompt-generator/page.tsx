@@ -39,7 +39,9 @@ import { TEMPLATES } from '@/data/templates';
 import { useOperatorProfile } from '@/lib/hooks/useOperatorProfile';
 import OperatorPanel from '@/components/tools/OperatorPanel';
 
-export default function AIPromptGenerator() {
+import { Suspense } from 'react';
+
+function PromptGeneratorContent() {
   const searchParams = useSearchParams();
   const { profile } = useOperatorProfile();
   const [topic, setTopic] = useSurgicalPersistence('prompt-topic', '');
@@ -123,181 +125,187 @@ export default function AIPromptGenerator() {
   };
 
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <Navbar />
-      
-      <main className="boxed-wrapper" style={{ marginBottom: '80px' }}>
-        <section className="section" style={{ paddingTop: 'clamp(6rem, 10vw, 8rem)' }}>
-          <div className="container">
-            <Link 
-              href="/tools" 
-              className="flex items-center gap-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-12 mono text-xs no-underline"
-            >
-              <ArrowLeft size={14} /> BACK_TO_HUB
-            </Link>
+    <main className="boxed-wrapper" style={{ marginBottom: '80px' }}>
+      <section className="section" style={{ paddingTop: 'clamp(6rem, 10vw, 8rem)' }}>
+        <div className="container">
+          <Link 
+            href="/tools" 
+            className="flex items-center gap-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-12 mono text-xs no-underline"
+          >
+            <ArrowLeft size={14} /> BACK_TO_HUB
+          </Link>
 
-            <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                  <Wand2 size={20} />
-                </div>
-                <div className="label-tech">NEURAL-ORCHESTRATION</div>
+          <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
+            <div className="flex items-center gap-3 mb-4">
+              <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
+                <Wand2 size={20} />
               </div>
-              <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-                Surgical Prompt <span className="hero-title">Engineer</span>
-              </h1>
-              <p style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.6 }}>
-                Transform simple ideas into high-fidelity "Mega-Prompts" that extract elite-tier performance from AI models like Gemini, Claude, and GPT-4.
-              </p>
+              <div className="label-tech">NEURAL-ORCHESTRATION</div>
+            </div>
+            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+              Surgical Prompt <span className="hero-title">Engineer</span>
+            </h1>
+            <p style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.6 }}>
+              Transform simple ideas into high-fidelity "Mega-Prompts" that extract elite-tier performance from AI models like Gemini, Claude, and GPT-4.
+            </p>
+          </div>
+
+          <OperatorPanel />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Configuration */}
+            <div className="flex flex-col gap-6">
+              <div className="card p-8" style={{ background: 'var(--surface2)' }}>
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-2">
+                    <Cpu size={16} className="text-[var(--accent)]" />
+                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Model_Architecture</h4>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3 mb-8">
+                  {PLATFORMS.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setPlatform(p.id)}
+                      className={`p-3 text-[10px] mono border transition-all ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <Target size={16} className="text-[var(--accent)]" />
+                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
+                </div>
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  {PERSONAS.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setPersona(p.id)}
+                      className={`flex items-center gap-3 p-4 border transition-all text-left ${persona === p.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)]'}`}
+                    >
+                      <span className="text-xl">{p.icon}</span>
+                      <span className={`text-xs font-bold ${persona === p.id ? 'text-[var(--accent)]' : 'text-[var(--text)]'}`}>{p.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <ShieldCheck size={16} className="text-[var(--accent)]" />
+                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Constraints</h4>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
+                    <span className="text-xs">Surgical Precision (No Fluff)</span>
+                    <input type="checkbox" checked={noFluff} onChange={(e) => setNoFluff(e.target.checked)} className="accent-[var(--accent)]" />
+                  </label>
+                  <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
+                    <span className="text-xs">Actionable Steps</span>
+                    <input type="checkbox" checked={includeSteps} onChange={(e) => setIncludeSteps(e.target.checked)} className="accent-[var(--accent)]" />
+                  </label>
+                </div>
+
+                <Link 
+                  href="/templates" 
+                  className="mt-8 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                >
+                  <div>
+                    <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                    <p className="text-[9px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
+                  </div>
+                  <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
+                </Link>
+              </div>
             </div>
 
-            <OperatorPanel />
+            {/* Input/Output */}
+            <div className="flex flex-col gap-6">
+              <div className="card p-0 overflow-hidden" style={{ background: 'var(--surface2)' }}>
+                <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
+                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Core_Concept</h4>
+                  <button onClick={() => setTopic('')} className="text-[var(--muted)] hover:text-red-500"><RotateCcw size={14} /></button>
+                </div>
+                <textarea
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                  placeholder="Enter your idea or task here (e.g. Write a script for a data dashboard)..."
+                  className="w-full h-40 p-6 bg-transparent border-none outline-none text-theme resize-none text-sm"
+                  style={{ lineHeight: 1.6 }}
+                />
+              </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Configuration */}
-              <div className="flex flex-col gap-6">
-                <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-2">
-                      <Cpu size={16} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Model_Architecture</h4>
-                    </div>
+              <div className="card p-0 overflow-hidden" style={{ background: 'var(--bg)', border: '1px solid var(--accent)' }}>
+                <div className="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--surface)]">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={14} className="text-[var(--accent)]" />
+                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Surgical_Prompt_Output</h4>
                   </div>
-
-                  <div className="grid grid-cols-3 gap-3 mb-8">
-                    {PLATFORMS.map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => setPlatform(p.id)}
-                        className={`p-3 text-[10px] mono border transition-all ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <Target size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 mb-8">
-                    {PERSONAS.map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => setPersona(p.id)}
-                        className={`flex items-center gap-3 p-4 border transition-all text-left ${persona === p.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)]'}`}
-                      >
-                        <span className="text-xl">{p.icon}</span>
-                        <span className={`text-xs font-bold ${persona === p.id ? 'text-[var(--accent)]' : 'text-[var(--text)]'}`}>{p.label}</span>
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <ShieldCheck size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Constraints</h4>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
-                      <span className="text-xs">Surgical Precision (No Fluff)</span>
-                      <input type="checkbox" checked={noFluff} onChange={(e) => setNoFluff(e.target.checked)} className="accent-[var(--accent)]" />
-                    </label>
-                    <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
-                      <span className="text-xs">Actionable Steps</span>
-                      <input type="checkbox" checked={includeSteps} onChange={(e) => setIncludeSteps(e.target.checked)} className="accent-[var(--accent)]" />
-                    </label>
-                  </div>
-
-                  <Link 
-                    href="/templates" 
-                    className="mt-8 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                  <button 
+                    onClick={handleCopy}
+                    className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[10px]"
                   >
-                    <div>
-                      <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                      <p className="text-[9px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
-                    </div>
-                    <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
-                  </Link>
+                    {copied ? <Check size={14} /> : <Copy size={14} />} COPY_PROMPT
+                  </button>
+                </div>
+                <div 
+                  className="p-6 h-[250px] overflow-y-auto mono text-xs leading-relaxed text-[var(--muted)]"
+                  style={{ whiteSpace: 'pre-wrap' }}
+                >
+                  {generatedPrompt || 'Your surgical prompt will appear here once you enter a concept...'}
                 </div>
               </div>
 
-              {/* Input/Output */}
-              <div className="flex flex-col gap-6">
-                <div className="card p-0 overflow-hidden" style={{ background: 'var(--surface2)' }}>
-                  <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Core_Concept</h4>
-                    <button onClick={() => setTopic('')} className="text-[var(--muted)] hover:text-red-500"><RotateCcw size={14} /></button>
-                  </div>
-                  <textarea
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    placeholder="Enter your idea or task here (e.g. Write a script for a data dashboard)..."
-                    className="w-full h-40 p-6 bg-transparent border-none outline-none text-theme resize-none text-sm"
-                    style={{ lineHeight: 1.6 }}
-                  />
-                </div>
-
-                <div className="card p-0 overflow-hidden" style={{ background: 'var(--bg)', border: '1px solid var(--accent)' }}>
-                  <div className="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--surface)]">
-                    <div className="flex items-center gap-2">
-                      <Sparkles size={14} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Surgical_Prompt_Output</h4>
-                    </div>
-                    <button 
-                      onClick={handleCopy}
-                      className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[10px]"
-                    >
-                      {copied ? <Check size={14} /> : <Copy size={14} />} COPY_PROMPT
-                    </button>
-                  </div>
-                  <div 
-                    className="p-6 h-[250px] overflow-y-auto mono text-xs leading-relaxed text-[var(--muted)]"
-                    style={{ whiteSpace: 'pre-wrap' }}
+              {/* Export Node */}
+              <div className="card p-6" style={{ background: 'var(--surface2)' }}>
+                <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Export_Node</h4>
+                <div className="flex gap-4">
+                  <button 
+                    onClick={() => {
+                      const blob = new Blob([generatedPrompt], { type: 'text/markdown' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = 'surgical_prompt.md';
+                      a.click();
+                    }}
+                    className="btn-outline flex-1 py-2 text-[10px] mono"
+                    disabled={!generatedPrompt}
                   >
-                    {generatedPrompt || 'Your surgical prompt will appear here once you enter a concept...'}
-                  </div>
-                </div>
-
-                {/* Export Node */}
-                <div className="card p-6" style={{ background: 'var(--surface2)' }}>
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Export_Node</h4>
-                  <div className="flex gap-4">
-                    <button 
-                      onClick={() => {
-                        const blob = new Blob([generatedPrompt], { type: 'text/markdown' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'surgical_prompt.md';
-                        a.click();
-                      }}
-                      className="btn-outline flex-1 py-2 text-[10px] mono"
-                      disabled={!generatedPrompt}
-                    >
-                      EXPORT_MD
-                    </button>
-                    <button 
-                      onClick={() => {
-                        const blob = new Blob([JSON.stringify({ prompt: generatedPrompt, platform, persona }, null, 2)], { type: 'application/json' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'surgical_prompt.json';
-                        a.click();
-                      }}
-                      className="btn-outline flex-1 py-2 text-[10px] mono"
-                      disabled={!generatedPrompt}
-                    >
-                      EXPORT_JSON
-                    </button>
-                  </div>
+                    EXPORT_MD
+                  </button>
+                  <button 
+                    onClick={() => {
+                      const blob = new Blob([JSON.stringify({ prompt: generatedPrompt, platform, persona }, null, 2)], { type: 'application/json' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = 'surgical_prompt.json';
+                      a.click();
+                    }}
+                    className="btn-outline flex-1 py-2 text-[10px] mono"
+                    disabled={!generatedPrompt}
+                  >
+                    EXPORT_JSON
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+    </main>
+  );
+}
 
+export default function AIPromptGenerator() {
+  return (
+    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      <Navbar />
+      <Suspense fallback={<div className="container py-20 mono text-xs animate-pulse">INITIATING_NEURAL_ENGINE...</div>}>
+        <PromptGeneratorContent />
+      </Suspense>
       <Footer />
     </div>
   );
