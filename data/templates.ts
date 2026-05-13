@@ -74,29 +74,7 @@ export const TEMPLATES: Template[] = [
     }
   },
 
-  // LINKEDIN PACKS
-  {
-    id: 'li-viral-hook-1',
-    slug: 'viral-linkedin-hooks-pack',
-    title: 'The Viral Hook Pack',
-    description: '10+ High-conversion hooks for technical founders and data specialists.',
-    category: 'LinkedIn',
-    targetModule: '/tools/linkedin-formatter',
-    content: {
-      text: "🚀 [Insert Big Achievement]\n\nMost people think [Common Myth] is the key to success.\n\nThey're wrong.\n\nHere is the surgical breakdown of how I [Result] in [Timeframe]:\n\n1. [Step 1]\n2. [Step 2]\n3. [Step 3]\n\nComplexity is the enemy of execution. Keep it precise."
-    }
-  },
-  {
-    id: 'li-founder-auth',
-    slug: 'founder-authority-system',
-    title: 'Founder Authority System',
-    description: 'Position yourself as a technical expert with this structural blueprint.',
-    category: 'LinkedIn',
-    targetModule: '/tools/linkedin-formatter',
-    content: {
-      text: "Building in public isn't about sharing wins.\n\nIt's about sharing the architecture of your failures.\n\nToday I'm breaking down the [System Name] we built at [Company].\n\nThe Problem:\n- [Pain Point 1]\n- [Pain Point 2]\n\nThe Solution:\n- [Tech Choice 1]\n- [Tech Choice 2]\n\nOutcome: [Metric Improvement]%\n\nIf you're building in the [Niche] space, stop optimizing for vanity and start optimizing for infrastructure."
-    }
-  },
+  // LINKEDIN PACKS (ADVANCED)
   {
     id: 'li-b2b-retention',
     slug: 'b2b-retention-post-blueprint',
