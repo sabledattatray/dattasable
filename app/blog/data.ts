@@ -14,8 +14,8 @@ export const posts = [
       <h2>The Surgical Intervention</h2>
       <p>We replaced their "Instructional" prompts with a <strong>Strict Structural Schema</strong>. By using a "Validation Node" approach, we forced the model to audit its own logic before finalizing the output string. </p>
 
-      <div style="background: var(--surface2); padding: 2rem; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0;">
-        <pre class="mermaid" style="background: transparent; border: none; padding: 0;">
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
           graph TD
             A[Input Data] --> B[Surgical Schema Layer]
             B --> C{Validation Node}
