@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import ToolCard from '@/components/tools/ToolCard';
 import { 
   Wand2, 
-  Linkedin, 
+  Share2, 
   Search, 
   Image as ImageIcon, 
   Type, 
@@ -23,7 +23,7 @@ const TOOLS = [
     id: 'linkedin-formatter',
     title: 'LinkedIn Authority Formatter',
     description: 'Transform messy thoughts into viral LinkedIn hooks with professional spacing and surgical precision.',
-    icon: <Linkedin size={24} />,
+    icon: <Share2 size={24} />,
     category: 'Social',
     href: '/tools/linkedin-formatter',
     status: 'Ready'

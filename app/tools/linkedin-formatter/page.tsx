@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { 
   Copy, 
   Check, 
-  Linkedin, 
+  Share2, 
   Trash2, 
   Sparkles, 
   ArrowLeft 
@@ -59,7 +59,7 @@ export default function LinkedInFormatter() {
             <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
               <div className="flex items-center gap-3 mb-4">
                 <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                  <Linkedin size={20} />
+                  <Share2 size={20} />
                 </div>
                 <div className="label-tech">SOCIAL-ENGINEERING</div>
               </div>
