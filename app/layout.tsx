@@ -147,36 +147,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <link rel="preload" as="image" href="/hero-bg.webp" fetchPriority="high" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://ep1.adtrafficquality.google" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
-        {/* ── CRITICAL CSS INLINING ── */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          :root {
-            --bg: #ffffff;
-            --text: #060606;
-            --accent: #c9f31d;
-            --border: rgba(0,0,0,0.1);
-            --surface2: #f8f8f8;
-            --muted: #666666;
-          }
-          .dark {
-            --bg: #060606;
-            --text: #ffffff;
-            --accent: #c9f31d;
-            --border: rgba(255,255,255,0.1);
-            --surface2: #111111;
-            --muted: #888888;
-          }
-          body { background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-          .boxed-wrapper { max-width: 1440px; margin: 0 auto; position: relative; }
-          .hero-title { font-family: var(--font-syne), sans-serif; }
-        `}} />
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>
