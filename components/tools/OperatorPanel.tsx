@@ -1,0 +1,100 @@
+'use client';
+
+import { useOperatorProfile, OperatorPersona, OperatorIntent, OperatorStyle } from '@/lib/hooks/useOperatorProfile';
+import { Settings, User, Target, Zap, ChevronDown, Check } from 'lucide-react';
+import { useState } from 'react';
+
+export default function OperatorPanel() {
+  const { profile, updateProfile } = useOperatorProfile();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const PERSONAS: OperatorPersona[] = ['Founder', 'Technical Expert', 'Data Strategist', 'Creator', 'Educator'];
+  const INTENTS: OperatorIntent[] = ['Authority', 'Engagement', 'Lead Generation', 'SEO', 'Distribution'];
+  const STYLES: OperatorStyle[] = ['Surgical', 'Executive', 'Analytical', 'Narrative', 'Minimalist'];
+
+  return (
+    <div className="card mb-8 overflow-hidden" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderOpacity: 0.2 }}>
+      <div 
+        className="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="flex items-center gap-3">
+          <div style={{ color: 'var(--accent)' }}>
+            <Settings size={18} className={isOpen ? 'rotate-90 transition-all' : 'transition-all'} />
+          </div>
+          <div>
+            <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Operator_Mode_Active</h4>
+            <p className="text-[9px] mono text-[var(--muted)]">
+              {profile.persona} / {profile.intent} / {profile.style}
+            </p>
+          </div>
+        </div>
+        <ChevronDown size={14} className={`text-[var(--muted)] transition-all ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
+
+      {isOpen && (
+        <div className="p-6 border-t border-[var(--border)] grid grid-cols-1 md:grid-cols-3 gap-8 bg-[var(--bg)]">
+          {/* Persona Selection */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <User size={14} className="text-[var(--accent)]" />
+              <h5 className="mono text-[9px] uppercase tracking-widest">Persona</h5>
+            </div>
+            <div className="flex flex-col gap-2">
+              {PERSONAS.map(p => (
+                <button 
+                  key={p}
+                  onClick={() => updateProfile({ persona: p })}
+                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.persona === p ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                >
+                  {p.toUpperCase()}
+                  {profile.persona === p && <Check size={10} />}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Intent Selection */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Target size={14} className="text-[var(--accent)]" />
+              <h5 className="mono text-[9px] uppercase tracking-widest">Intent</h5>
+            </div>
+            <div className="flex flex-col gap-2">
+              {INTENTS.map(i => (
+                <button 
+                  key={i}
+                  onClick={() => updateProfile({ intent: i })}
+                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.intent === i ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                >
+                  {i.toUpperCase()}
+                  {profile.intent === i && <Check size={10} />}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Style Selection */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Zap size={14} className="text-[var(--accent)]" />
+              <h5 className="mono text-[9px] uppercase tracking-widest">Style</h5>
+            </div>
+            <div className="flex flex-col gap-2">
+              {STYLES.map(s => (
+                <button 
+                  key={s}
+                  onClick={() => updateProfile({ style: s })}
+                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.style === s ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                >
+                  {s.toUpperCase()}
+                  {profile.style === s && <Check size={10} />}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

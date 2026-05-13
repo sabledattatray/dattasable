@@ -20,8 +20,12 @@ import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
 import { useSearchParams } from 'next/navigation';
 import { TEMPLATES } from '@/data/templates';
 
+import { useOperatorProfile } from '@/lib/hooks/useOperatorProfile';
+import OperatorPanel from '@/components/tools/OperatorPanel';
+
 export default function LinkedInAuthorityFormatter() {
   const searchParams = useSearchParams();
+  const { profile } = useOperatorProfile();
   const [text, setText] = useSurgicalPersistence('linkedin-draft-text', '');
   const [copied, setCopied] = useState(false);
   
@@ -47,15 +51,22 @@ export default function LinkedInAuthorityFormatter() {
     let formatted = text;
     
     if (type === 'spacing') {
-      // Add double spacing between paragraphs
       formatted = text.split('\n').filter(p => p.trim()).join('\n\n');
     } else if (type === 'bullets') {
-      // Convert lines to bullet points
-      formatted = text.split('\n').map(line => line.trim() ? `• ${line.trim()}` : '').join('\n');
+      const bullet = profile.persona === 'Technical Expert' ? '▹' : '•';
+      formatted = text.split('\n').map(line => line.trim() ? `${bullet} ${line.trim()}` : '').join('\n');
     } else if (type === 'hooks') {
-      // Add a hook-style prefix if not present
-      if (!text.startsWith('🚀')) {
-        formatted = `🚀 ${text}`;
+      // ADAPTIVE HOOKS based on Persona
+      const prefixes: Record<string, string> = {
+        'Founder': '🏢 ',
+        'Technical Expert': '⚙️ ',
+        'Data Strategist': '📊 ',
+        'Creator': '🚀 ',
+        'Educator': '💡 '
+      };
+      const prefix = prefixes[profile.persona] || '🚀 ';
+      if (!text.startsWith(prefix)) {
+        formatted = `${prefix}${text}`;
       }
     }
     
@@ -96,6 +107,8 @@ export default function LinkedInAuthorityFormatter() {
                 Transform messy technical notes into high-authority LinkedIn posts. Optimized for the "Surgical Spacing" technique that maximizes mobile readability.
               </p>
             </div>
+            
+            <OperatorPanel />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Editor Area */}

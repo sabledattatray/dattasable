@@ -36,13 +36,31 @@ const PLATFORMS = [
 import { useSearchParams } from 'next/navigation';
 import { TEMPLATES } from '@/data/templates';
 
+import { useOperatorProfile } from '@/lib/hooks/useOperatorProfile';
+import OperatorPanel from '@/components/tools/OperatorPanel';
+
 export default function AIPromptGenerator() {
   const searchParams = useSearchParams();
+  const { profile } = useOperatorProfile();
   const [topic, setTopic] = useSurgicalPersistence('prompt-topic', '');
-  const [persona, setPersona] = useSurgicalPersistence('prompt-persona', 'engineer');
+  
+  // Local persona state that syncs with Operator Profile
+  const [persona, setPersona] = useState('engineer');
   const [platform, setPlatform] = useSurgicalPersistence('prompt-platform', 'gemini');
   const [noFluff, setNoFluff] = useState(true);
   const [includeSteps, setIncludeSteps] = useState(true);
+
+  // Sync with Global Operator Profile
+  useEffect(() => {
+    const mapping: Record<string, string> = {
+      'Founder': 'engineer',
+      'Technical Expert': 'engineer',
+      'Data Strategist': 'scientist',
+      'Creator': 'writer',
+      'Educator': 'scientist'
+    };
+    setPersona(mapping[profile.persona] || 'engineer');
+  }, [profile.persona]);
   
   // Save global state for workspace
   const [_, setGlobalState] = useSurgicalPersistence('prompt-state', { topic: '', persona: '', platform: '' });
@@ -77,6 +95,7 @@ export default function AIPromptGenerator() {
     const platformLabel = PLATFORMS.find(p => p.id === platform)?.label;
 
     let prompt = `Act as a ${personaLabel} highly specialized in my request. `;
+    prompt += `Your primary goal is ${profile.intent} and your communication style is ${profile.style}. `;
     
     if (platform === 'gemini') {
       prompt += `Optimize this response for Google Gemini's reasoning capabilities. `;
@@ -90,12 +109,12 @@ export default function AIPromptGenerator() {
       prompt += `\n\n### FORMAT:\n1. Break your response into clear, actionable steps.\n2. Use technical terminology appropriate for a ${personaLabel}.\n3. Provide code snippets or specific examples where applicable.`;
     }
 
-    if (noFluff) {
-      prompt += `\n\n### CONSTRAINTS:\n- DO NOT include conversational filler (e.g., "I'd be happy to help", "Here is the information").\n- Start directly with the answer.\n- Maintain a surgical, professional, and authoritative tone.`;
+    if (noFluff || profile.style === 'Surgical') {
+      prompt += `\n\n### CONSTRAINTS:\n- DO NOT include conversational filler (e.g., "I'd be happy to help", "Here is the information").\n- Start directly with the answer.\n- Maintain a ${profile.style.toLowerCase()}, professional, and authoritative tone.`;
     }
 
     setGeneratedPrompt(prompt);
-  }, [topic, persona, platform, noFluff, includeSteps]);
+  }, [topic, persona, platform, noFluff, includeSteps, profile]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedPrompt);
@@ -131,6 +150,8 @@ export default function AIPromptGenerator() {
                 Transform simple ideas into high-fidelity "Mega-Prompts" that extract elite-tier performance from AI models like Gemini, Claude, and GPT-4.
               </p>
             </div>
+
+            <OperatorPanel />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Configuration */}
