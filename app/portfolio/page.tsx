@@ -268,7 +268,7 @@ const projects = [
   },
 ];
 
-export default function PortfolioPage({ searchParams }: { searchParams: any }) {
+export default function PortfolioPage() {
   // Use a hack for client components to get search params if needed, or just use useSearchParams
   const [active, setActive] = useState('All');
   const [selected, setSelected] = useState<typeof projects[0] | null>(null);

@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
 
-import { useSearchParams } from 'next/navigation';
 import { TEMPLATES } from '@/data/templates';
 
 import { useOperatorProfile } from '@/lib/hooks/useOperatorProfile';
@@ -26,7 +25,6 @@ import OperatorPanel from '@/components/tools/OperatorPanel';
 import { Suspense } from 'react';
 
 function LinkedInFormatterContent() {
-  const searchParams = useSearchParams();
   const { profile } = useOperatorProfile();
   const [text, setText] = useSurgicalPersistence('linkedin-draft-text', '');
   const [copied, setCopied] = useState(false);
@@ -35,15 +33,18 @@ function LinkedInFormatterContent() {
   const [_, setGlobalState] = useSurgicalPersistence('linkedin-draft', { title: '' });
 
   useEffect(() => {
-    // Check for template injection
-    const templateId = searchParams.get('template');
-    if (templateId) {
-      const template = TEMPLATES.find(t => t.id === templateId);
-      if (template && template.content.text) {
-        setText(template.content.text);
+    // Check for template injection via native URL search params to avoid build-time CSR bailout
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const templateId = params.get('template');
+      if (templateId) {
+        const template = TEMPLATES.find(t => t.id === templateId);
+        if (template && template.content.text) {
+          setText(template.content.text);
+        }
       }
     }
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     setGlobalState({ title: text.slice(0, 50) + (text.length > 50 ? '...' : '') });

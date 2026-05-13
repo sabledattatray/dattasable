@@ -33,7 +33,6 @@ const PLATFORMS = [
   { id: 'claude', label: 'Claude 3' },
 ];
 
-import { useSearchParams } from 'next/navigation';
 import { TEMPLATES } from '@/data/templates';
 
 import { useOperatorProfile } from '@/lib/hooks/useOperatorProfile';
@@ -42,7 +41,6 @@ import OperatorPanel from '@/components/tools/OperatorPanel';
 import { Suspense } from 'react';
 
 function PromptGeneratorContent() {
-  const searchParams = useSearchParams();
   const { profile } = useOperatorProfile();
   const [topic, setTopic] = useSurgicalPersistence('prompt-topic', '');
   
@@ -68,17 +66,20 @@ function PromptGeneratorContent() {
   const [_, setGlobalState] = useSurgicalPersistence('prompt-state', { topic: '', persona: '', platform: '' });
 
   useEffect(() => {
-    // Check for template injection
-    const templateId = searchParams.get('template');
-    if (templateId) {
-      const template = TEMPLATES.find(t => t.id === templateId);
-      if (template && template.content) {
-        if (template.content.topic) setTopic(template.content.topic);
-        if (template.content.persona) setPersona(template.content.persona);
-        if (template.content.platform) setPlatform(template.content.platform);
+    // Check for template injection via native URL search params to avoid build-time CSR bailout
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const templateId = params.get('template');
+      if (templateId) {
+        const template = TEMPLATES.find(t => t.id === templateId);
+        if (template && template.content) {
+          if (template.content.topic) setTopic(template.content.topic);
+          if (template.content.persona) setPersona(template.content.persona);
+          if (template.content.platform) setPlatform(template.content.platform);
+        }
       }
     }
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     setGlobalState({ topic, persona, platform });
