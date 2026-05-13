@@ -26,10 +26,11 @@ export function middleware(request: NextRequest) {
                          userAgent.includes('Mediapartners-Google') || 
                          userAgent.includes('AdsBot-Google');
   const isBingCrawler = userAgent.includes('bingbot');
+  const isLinkedInBot = userAgent.includes('LinkedInBot');
 
   const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix/i;
   
-  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isCrawlPath) {
+  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isLinkedInBot && !isCrawlPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   }
 
