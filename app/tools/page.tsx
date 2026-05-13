@@ -35,7 +35,7 @@ const TOOLS = [
     icon: <Wand2 size={24} />,
     category: 'AI',
     href: '/tools/ai-prompt-generator',
-    status: 'Coming Soon'
+    status: 'Ready'
   },
   {
     id: 'seo-meta-generator',
