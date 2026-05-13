@@ -9,19 +9,35 @@ import {
   Share2, 
   Trash2, 
   Sparkles, 
-  ArrowLeft 
+  ArrowLeft,
+  Library 
 } from 'lucide-react';
 import Link from 'next/link';
 
 import { useEffect } from 'react';
 import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
 
+import { useSearchParams } from 'next/navigation';
+import { TEMPLATES } from '@/data/templates';
+
 export default function LinkedInAuthorityFormatter() {
+  const searchParams = useSearchParams();
   const [text, setText] = useSurgicalPersistence('linkedin-draft-text', '');
   const [copied, setCopied] = useState(false);
   
   // Save global state for workspace
   const [_, setGlobalState] = useSurgicalPersistence('linkedin-draft', { title: '' });
+
+  useEffect(() => {
+    // Check for template injection
+    const templateId = searchParams.get('template');
+    if (templateId) {
+      const template = TEMPLATES.find(t => t.id === templateId);
+      if (template && template.content.text) {
+        setText(template.content.text);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setGlobalState({ title: text.slice(0, 50) + (text.length > 50 ? '...' : '') });
@@ -139,6 +155,17 @@ export default function LinkedInAuthorityFormatter() {
                       TIP: LinkedIn algorithms prioritize posts with clear vertical spacing and bulleted lists. Ensure your "Hook" (first 2 lines) is punchy.
                     </p>
                   </div>
+
+                  <Link 
+                    href="/templates" 
+                    className="mt-4 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                  >
+                    <div>
+                      <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                      <p className="text-[9px] text-[var(--muted)] mono">Browse high-authority blueprints</p>
+                    </div>
+                    <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
+                  </Link>
                 </div>
 
                 <div className="card" style={{ background: 'var(--bg)', borderStyle: 'dashed' }}>

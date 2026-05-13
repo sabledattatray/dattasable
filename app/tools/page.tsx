@@ -15,8 +15,8 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Surgical Creator Toolkit | AI-Powered SEO & Productivity Tools",
-  description: "A professional suite of high-fidelity tools for creators, developers, and SEO experts. AI prompt generation, LinkedIn formatting, and technical utilities.",
+  title: "Surgical AI Workspace | Professional AI Workflow Infrastructure",
+  description: "A precision-engineered AI workspace for creators, developers, and strategists — built to streamline content workflows, SEO execution, and technical optimization.",
 };
 
 const TOOLS = [
@@ -27,6 +27,15 @@ const TOOLS = [
     icon: <LayoutDashboard size={24} />,
     category: 'Platform',
     href: '/tools/workspace',
+    status: 'Ready'
+  },
+  {
+    id: 'template-packs',
+    title: 'Operator Template Packs',
+    description: 'Scalable knowledge assets: Viral LinkedIn hooks, AI research pipelines, and SEO blueprints.',
+    icon: <Library size={24} />,
+    category: 'Knowledge',
+    href: '/templates',
     status: 'Ready'
   },
   {
@@ -101,13 +110,18 @@ export default function ToolsHub() {
         <section className="section" style={{ paddingTop: 'clamp(6rem, 10vw, 8rem)' }}>
           <div className="container">
             <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
-              <div className="label-tech mb-4">SURGICAL-TOOLKIT-V1.0</div>
+              <div className="label-tech mb-4">SURGICAL-WORKSPACE-V1.1</div>
               <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1, marginBottom: '1.5rem' }}>
-                Creator <span className="hero-title">Utilities</span>
+                AI Workflow <span className="hero-title">Infrastructure</span>
               </h1>
               <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                A professional-grade suite of AI and technical tools designed for high-performance content creators, developers, and data strategists.
+                A precision-engineered AI workspace for creators, developers, and strategists — built to streamline content workflows, prompt engineering, SEO execution, and technical optimization.
               </p>
+            </div>
+
+            <div className="flex items-center gap-2 mb-8">
+              <Zap size={16} className="text-[var(--accent)]" />
+              <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Precision_Modules</h4>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

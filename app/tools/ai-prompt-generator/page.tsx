@@ -13,7 +13,8 @@ import {
   Cpu,
   Target,
   ShieldCheck,
-  RotateCcw
+  RotateCcw,
+  Library
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -32,7 +33,11 @@ const PLATFORMS = [
   { id: 'claude', label: 'Claude 3' },
 ];
 
+import { useSearchParams } from 'next/navigation';
+import { TEMPLATES } from '@/data/templates';
+
 export default function AIPromptGenerator() {
+  const searchParams = useSearchParams();
   const [topic, setTopic] = useSurgicalPersistence('prompt-topic', '');
   const [persona, setPersona] = useSurgicalPersistence('prompt-persona', 'engineer');
   const [platform, setPlatform] = useSurgicalPersistence('prompt-platform', 'gemini');
@@ -41,6 +46,19 @@ export default function AIPromptGenerator() {
   
   // Save global state for workspace
   const [_, setGlobalState] = useSurgicalPersistence('prompt-state', { topic: '', persona: '', platform: '' });
+
+  useEffect(() => {
+    // Check for template injection
+    const templateId = searchParams.get('template');
+    if (templateId) {
+      const template = TEMPLATES.find(t => t.id === templateId);
+      if (template && template.content) {
+        if (template.content.topic) setTopic(template.content.topic);
+        if (template.content.persona) setPersona(template.content.persona);
+        if (template.content.platform) setPlatform(template.content.platform);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setGlobalState({ topic, persona, platform });
@@ -168,6 +186,17 @@ export default function AIPromptGenerator() {
                       <input type="checkbox" checked={includeSteps} onChange={(e) => setIncludeSteps(e.target.checked)} className="accent-[var(--accent)]" />
                     </label>
                   </div>
+
+                  <Link 
+                    href="/templates" 
+                    className="mt-8 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                  >
+                    <div>
+                      <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                      <p className="text-[9px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
+                    </div>
+                    <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
+                  </Link>
                 </div>
               </div>
 
@@ -205,6 +234,41 @@ export default function AIPromptGenerator() {
                     style={{ whiteSpace: 'pre-wrap' }}
                   >
                     {generatedPrompt || 'Your surgical prompt will appear here once you enter a concept...'}
+                  </div>
+                </div>
+
+                {/* Export Node */}
+                <div className="card p-6" style={{ background: 'var(--surface2)' }}>
+                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Export_Node</h4>
+                  <div className="flex gap-4">
+                    <button 
+                      onClick={() => {
+                        const blob = new Blob([generatedPrompt], { type: 'text/markdown' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'surgical_prompt.md';
+                        a.click();
+                      }}
+                      className="btn-outline flex-1 py-2 text-[10px] mono"
+                      disabled={!generatedPrompt}
+                    >
+                      EXPORT_MD
+                    </button>
+                    <button 
+                      onClick={() => {
+                        const blob = new Blob([JSON.stringify({ prompt: generatedPrompt, platform, persona }, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'surgical_prompt.json';
+                        a.click();
+                      }}
+                      className="btn-outline flex-1 py-2 text-[10px] mono"
+                      disabled={!generatedPrompt}
+                    >
+                      EXPORT_JSON
+                    </button>
                   </div>
                 </div>
               </div>

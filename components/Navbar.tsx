@@ -22,7 +22,7 @@ const navLinks = [
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
-  { label: 'Tools', href: '/tools' },
+  { label: 'Workspace', href: '/tools' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
