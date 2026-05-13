@@ -42,6 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/analytics-live',
     '/data-forge',
     '/tools',
+    '/tools/workspace',
     '/tools/linkedin-formatter',
     '/tools/ai-prompt-generator',
     '/tools/seo-meta-generator',

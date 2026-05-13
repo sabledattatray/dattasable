@@ -10,7 +10,8 @@ import {
   Type, 
   Zap, 
   FileJson, 
-  Globe 
+  Globe,
+  LayoutDashboard 
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
 };
 
 const TOOLS = [
+  {
+    id: 'ai-workspace',
+    title: 'Surgical AI Workspace',
+    description: 'The command center for your creative technical workflow. Resume recent sessions and manage cross-tool pipelines.',
+    icon: <LayoutDashboard size={24} />,
+    category: 'Platform',
+    href: '/tools/workspace',
+    status: 'Ready'
+  },
   {
     id: 'linkedin-formatter',
     title: 'LinkedIn Authority Formatter',

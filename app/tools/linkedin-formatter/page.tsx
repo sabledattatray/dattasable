@@ -13,9 +13,19 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function LinkedInFormatter() {
-  const [text, setText] = useState('');
+import { useEffect } from 'react';
+import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
+
+export default function LinkedInAuthorityFormatter() {
+  const [text, setText] = useSurgicalPersistence('linkedin-draft-text', '');
   const [copied, setCopied] = useState(false);
+  
+  // Save global state for workspace
+  const [_, setGlobalState] = useSurgicalPersistence('linkedin-draft', { title: '' });
+
+  useEffect(() => {
+    setGlobalState({ title: text.slice(0, 50) + (text.length > 50 ? '...' : '') });
+  }, [text]);
 
   const formatText = (type: 'hooks' | 'spacing' | 'bullets') => {
     let formatted = text;

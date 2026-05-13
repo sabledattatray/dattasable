@@ -16,11 +16,28 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
+import { useRouter } from 'next/navigation';
+
 export default function SEOMetaGenerator() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [keywords, setKeywords] = useState('');
+  const router = useRouter();
+  const [title, setTitle] = useSurgicalPersistence('seo-title', '');
+  const [description, setDescription] = useSurgicalPersistence('seo-description', '');
+  const [keywords, setKeywords] = useSurgicalPersistence('seo-keywords', '');
   const [copiedType, setCopiedType] = useState<string | null>(null);
+
+  // Save global state for workspace
+  const [_, setGlobalState] = useSurgicalPersistence('seo-meta', { title: '', description: '' });
+
+  useEffect(() => {
+    setGlobalState({ title, description });
+  }, [title, description]);
+
+  const shipToLinkedIn = () => {
+    // Set the LinkedIn draft state directly
+    localStorage.setItem('surgical_linkedin-draft-text', JSON.stringify(title));
+    router.push('/tools/linkedin-formatter');
+  };
 
   const [schema, setSchema] = useState('');
 
@@ -181,6 +198,15 @@ export default function SEOMetaGenerator() {
                     <div className="text-[#bdc1c6] text-sm leading-relaxed line-clamp-2">
                       {description || 'This is how your description will appear in Google search results. Make it compelling to increase your click-through rate.'}
                     </div>
+                  </div>
+
+                  <div className="mt-8">
+                    <button 
+                      onClick={shipToLinkedIn}
+                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-[10px] mono tracking-widest group"
+                    >
+                      SHIP_TO_LINKEDIN_FORMATTER <ArrowRight size={14} className="group-hover:translate-x-1 transition-all" />
+                    </button>
                   </div>
                 </div>
 

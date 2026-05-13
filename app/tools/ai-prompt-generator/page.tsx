@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
+
 const PERSONAS = [
   { id: 'engineer', label: 'Product Engineer', icon: '🛠️' },
   { id: 'seo', label: 'SEO Specialist', icon: '📈' },
@@ -31,11 +33,19 @@ const PLATFORMS = [
 ];
 
 export default function AIPromptGenerator() {
-  const [topic, setTopic] = useState('');
-  const [persona, setPersona] = useState('engineer');
-  const [platform, setPlatform] = useState('gemini');
+  const [topic, setTopic] = useSurgicalPersistence('prompt-topic', '');
+  const [persona, setPersona] = useSurgicalPersistence('prompt-persona', 'engineer');
+  const [platform, setPlatform] = useSurgicalPersistence('prompt-platform', 'gemini');
   const [noFluff, setNoFluff] = useState(true);
   const [includeSteps, setIncludeSteps] = useState(true);
+  
+  // Save global state for workspace
+  const [_, setGlobalState] = useSurgicalPersistence('prompt-state', { topic: '', persona: '', platform: '' });
+
+  useEffect(() => {
+    setGlobalState({ topic, persona, platform });
+  }, [topic, persona, platform]);
+
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [copied, setCopied] = useState(false);
 
