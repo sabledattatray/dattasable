@@ -76,5 +76,19 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Technical Authority',
     definition: 'The collection of EEAT signals (Expertise, Experience, Authoritativeness, Trustworthiness) that establish professional domain dominance on LinkedIn and Search.',
     category: 'SEO'
+  },
+  {
+    id: 'g-ai-hallucination',
+    slug: 'ai-hallucination-risks',
+    term: 'AI Hallucination',
+    definition: 'The phenomenon where a Large Language Model generates information that is factually incorrect or logically inconsistent while maintaining a confident tone. Solved via Surgical Architecture.',
+    category: 'AI'
+  },
+  {
+    id: 'g-data-fidelity',
+    slug: 'data-fidelity-benchmarks',
+    term: 'Data Fidelity',
+    definition: 'The degree of accuracy and consistency in a data set or AI output. High fidelity ensures that automated systems can be trusted for enterprise decision-making.',
+    category: 'Data'
   }
 ];

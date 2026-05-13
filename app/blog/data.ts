@@ -6,7 +6,7 @@ export const posts = [
     category: 'Case Study',
     excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline using proprietary structural constraints.',
     content: `
-      <p>The greatest challenge in scaling AI operations is <strong>Entropy</strong>. As execution volume increases, the probability of "hallucination" or schema breakage in standard LLM outputs approaches 100%. In this case study, we examine how <strong>Surgical Prompt Architecture™</strong> stabilized a 10,000+ execution pipeline.</p>
+      <p>The greatest challenge in scaling AI operations is <strong>Entropy</strong>. As execution volume increases, the probability of <a href="/glossary/ai-hallucination-risks" style="color: var(--accent); text-decoration: underline;">AI hallucination</a> or schema breakage in standard LLM outputs approaches 100%. In this case study, we examine how <strong>Surgical Prompt Architecture™</strong> stabilized a 10,000+ execution pipeline.</p>
 
       <h2>The Challenge: Schema Drift at Scale</h2>
       <p>Our client was experiencing a 15% failure rate in their automated data processing chain. The LLM would occasionally "invent" keys in the JSON output or wrap technical values in unnecessary conversational text, breaking the downstream ingestion engine.</p>
@@ -32,7 +32,7 @@ export const posts = [
       <ul>
         <li><strong>Baseline Hallucination Rate:</strong> 15.2%</li>
         <li><strong>Post-Surgical Hallucination Rate:</strong> 0.2%</li>
-        <li><strong>Structural Fidelity:</strong> 99.8% (Verified via automated schema validation)</li>
+        <li><strong>Structural <a href="/glossary/data-fidelity-benchmarks" style="color: var(--accent); text-decoration: underline;">Fidelity</a>:</strong> 99.8% (Verified via automated schema validation)</li>
       </ul>
 
       <h2>The Verdict: Structural Moats Matter</h2>
@@ -52,9 +52,9 @@ export const posts = [
     category: 'Case Study',
     excerpt: 'An engineering post-mortem on optimizing enterprise context windows to reduce latency and infrastructure costs without losing logical density.',
     content: `
-      <p>In high-volume AI deployments, <strong>Token Inefficiency is a Technical Debt</strong>. This case study analyzes how we applied <strong>Context Compression™</strong> to an enterprise-level RAG system, resulting in massive cost savings and latency reduction.</p>
+      <p>In high-volume AI deployments, <strong>Token Inefficiency is a Technical Debt</strong>. This case study analyzes how we applied <a href="/glossary/semantic-compression" style="color: var(--accent); text-decoration: underline;">Context Compression™</a> to an enterprise-level RAG system, resulting in massive cost savings and latency reduction.</p>
 
-      <h2>The Problem: Bloated Context Windows</h2>
+      <h2>The Problem: Bloated <a href="/glossary/llm-context-window-limits" style="color: var(--accent); text-decoration: underline;">Context Windows</a></h2>
       <p>The original system was feeding 3,000+ tokens of raw documentation into every query. This led to high inference costs and increased the model's "Time to First Token" (TTFT), making the UI feel sluggish.</p>
 
       <h2>The Protocol: Semantic Pruning</h2>
@@ -62,8 +62,8 @@ export const posts = [
 
       <h3>Performance Metrics:</h3>
       <ul>
-        <li><strong>Token Count (Before):</strong> 3,120 Tokens</li>
-        <li><strong>Token Count (After):</strong> 1,795 Tokens</li>
+        <li><strong><a href="/glossary/token-density-optimization" style="color: var(--accent); text-decoration: underline;">Token Density</a> (Before):</strong> 3,120 Tokens</li>
+        <li><strong>Token Density (After):</strong> 1,795 Tokens</li>
         <li><strong>Cost Reduction:</strong> 42.4% monthly recurring infrastructure spend.</li>
         <li><strong>Latency Improvement:</strong> 18% faster response times.</li>
       </ul>
