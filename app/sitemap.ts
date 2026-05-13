@@ -43,6 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/data-forge',
     '/tools',
     '/tools/linkedin-formatter',
+    '/tools/ai-prompt-generator',
+    '/tools/seo-meta-generator',
+    '/tools/image-blade',
+    '/tools/word-counter',
+    '/tools/schema-generator',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

@@ -53,7 +53,7 @@ const TOOLS = [
     icon: <ImageIcon size={24} />,
     category: 'Utility',
     href: '/tools/image-blade',
-    status: 'Coming Soon'
+    status: 'Ready'
   },
   {
     id: 'word-reading-time',
@@ -62,7 +62,7 @@ const TOOLS = [
     icon: <Type size={24} />,
     category: 'Content',
     href: '/tools/word-counter',
-    status: 'Coming Soon'
+    status: 'Ready'
   },
   {
     id: 'json-schema-forge',
@@ -71,7 +71,7 @@ const TOOLS = [
     icon: <FileJson size={24} />,
     category: 'Developer',
     href: '/tools/schema-generator',
-    status: 'Coming Soon'
+    status: 'Ready'
   }
 ];
 
