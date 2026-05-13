@@ -13,7 +13,8 @@ import {
   ArrowRight,
   Code,
   Eye,
-  AlertCircle
+  AlertCircle,
+  Minimize2
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -207,6 +208,15 @@ export default function SEOMetaGenerator() {
                       className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-[10px] mono tracking-widest group"
                     >
                       SHIP_TO_LINKEDIN_FORMATTER <ArrowRight size={14} className="group-hover:translate-x-1 transition-all" />
+                    </button>
+                    <button 
+                      onClick={() => {
+                        localStorage.setItem('surgical_context-optimizer-input', JSON.stringify(title));
+                        router.push('/tools/context-optimizer');
+                      }}
+                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-[10px] mono tracking-widest group mt-3"
+                    >
+                      CONDENSE_FOR_AI <Minimize2 size={14} />
                     </button>
                   </div>
                 </div>

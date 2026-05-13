@@ -10,7 +10,8 @@ import {
   Trash2, 
   Sparkles, 
   ArrowLeft,
-  Library 
+  Library,
+  Minimize2
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -179,6 +180,20 @@ function LinkedInFormatterContent() {
                   </div>
                   <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
                 </Link>
+
+                <button 
+                  onClick={() => {
+                    localStorage.setItem('surgical_context-optimizer-input', JSON.stringify(text));
+                    window.location.href = '/tools/context-optimizer';
+                  }}
+                  className="mt-4 w-full p-4 border border-[var(--border)] rounded flex items-center justify-between group no-underline bg-transparent cursor-pointer"
+                >
+                  <div className="text-left">
+                    <h5 className="text-[10px] mono font-bold text-[var(--text)]">OPTIMIZE_FOR_AI</h5>
+                    <p className="text-[9px] text-[var(--muted)] mono">Reduce tokens for LLM prompts</p>
+                  </div>
+                  <Minimize2 size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-all" />
+                </button>
               </div>
 
               <div className="card" style={{ background: 'var(--bg)', borderStyle: 'dashed' }}>

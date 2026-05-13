@@ -12,7 +12,8 @@ import {
   FileJson, 
   Globe,
   LayoutDashboard,
-  Library
+  Library,
+  Minimize2
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -82,6 +83,15 @@ const TOOLS = [
     icon: <ImageIcon size={24} />,
     category: 'Utility',
     href: '/tools/image-blade',
+    status: 'Ready'
+  },
+  {
+    id: 'ai-context-optimizer',
+    title: 'AI Context Optimizer',
+    description: 'Surgically condense long prompts and technical logs to save tokens and fit into context windows.',
+    icon: <Minimize2 size={24} />,
+    category: 'AI',
+    href: '/tools/context-optimizer',
     status: 'Ready'
   },
   {
