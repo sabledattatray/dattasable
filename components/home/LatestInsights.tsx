@@ -18,6 +18,16 @@ interface Post {
 
 const LATEST_POSTS: Post[] = [
   {
+    id: 'case-study-prompt-precision-2026',
+    slug: 'case-study-surgical-prompt-architecture-consistency',
+    title: 'Case Study: Achieving 99.8% Output Consistency via Surgical Architecture™',
+    category: 'Case Study',
+    excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline.',
+    readTime: 12,
+    date: 'May 14, 2026',
+    image: '/images/blog/case_study_prompt_architecture.webp'
+  },
+  {
     id: 'surgical-prompt-architecture-v1',
     slug: 'surgical-prompt-architecture-framework',
     title: 'Surgical Prompt Architecture™: The Blueprint for Precision AI',
@@ -28,24 +38,14 @@ const LATEST_POSTS: Post[] = [
     image: '/images/blog/surgical_prompt_hero.webp'
   },
   {
-    id: 'operator-intent-mapping-2026',
-    slug: 'operator-intent-mapping-framework',
-    title: 'Operator Intent Mapping™: Aligning Systems with Persona',
-    category: 'Workflow',
-    excerpt: 'A surgical framework for bridging the gap between human professional intent and AI system execution. Perfect for technical founders.',
-    readTime: 12,
-    date: 'May 12, 2026',
-    image: '/images/blog/intent_mapping_hero.webp'
-  },
-  {
-    id: 'context-compression-benchmarks',
-    slug: 'context-compression-framework-benchmarks',
-    title: 'Context Compression™: Optimizing the Information Layer',
-    category: 'Optimization',
-    excerpt: 'Reducing token waste by 40% while preserving logical density. The engineering guide to elite-tier context window management.',
-    readTime: 18,
-    date: 'May 10, 2026',
-    image: '/images/blog/context_window_optimization.webp'
+    id: 'case-study-token-waste-reduction',
+    slug: 'case-study-context-compression-token-waste',
+    title: 'Case Study: Reducing AI Token Waste by 42.4% via Context Compression™',
+    category: 'Case Study',
+    excerpt: 'An engineering post-mortem on optimizing enterprise context windows to reduce latency and infrastructure costs.',
+    readTime: 10,
+    date: 'May 13, 2026',
+    image: '/images/blog/case_study_token_compression.webp'
   }
 ];
 
