@@ -28,7 +28,8 @@ export function middleware(request: NextRequest) {
   const isBingCrawler = userAgent.includes('bingbot');
   const isLinkedInBot = userAgent.includes('LinkedInBot');
 
-  const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix/i;
+  // Comprehensive Malicious/Aggressive Bot Registry
+  const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix|wget|lynx|perl|php|libwww|apachebench|gobuster|dirbuster|mj12bot|ahrefsbot|semrushbot|dotbot|rogerbot|exabot|gigabot|siteexplorer|openlinkprofiler|spyonweb|petalbot|ia_archiver/i;
   
   if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isLinkedInBot && !isCrawlPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
