@@ -44,7 +44,7 @@ const TOOLS = [
     icon: <Search size={24} />,
     category: 'SEO',
     href: '/tools/seo-meta-generator',
-    status: 'Coming Soon'
+    status: 'Ready'
   },
   {
     id: 'image-blade-compressor',
