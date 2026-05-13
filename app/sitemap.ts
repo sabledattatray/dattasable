@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 import { posts as staticBlogPosts } from '@/app/blog/data';
+import { CHAINS } from '@/data/chains';
+import { TEMPLATES } from '@/data/templates';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
@@ -58,6 +60,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1.0 : route === '/tools' ? 0.9 : 0.7,
   }));
 
-  return [...staticUrls, ...dbBlogUrls, ...staticBlogUrls];
+  // 4. Execution Chains
+  const chainUrls = CHAINS.map((chain) => ({
+    url: `${baseUrl}/chains/${chain.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  // 5. Template Packs
+  const templateUrls = TEMPLATES.map((template) => ({
+    url: `${baseUrl}/templates/${template.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticUrls, ...dbBlogUrls, ...staticBlogUrls, ...chainUrls, ...templateUrls];
 }
 

@@ -51,7 +51,7 @@ export default function TemplateHub() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {TEMPLATES.map((template) => (
-                <Link key={template.id} href={`${template.targetModule}?template=${template.id}`} className="no-underline group">
+                <Link key={template.id} href={`/templates/${template.slug}`} className="no-underline group">
                   <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
                     <div className="flex justify-between items-start mb-6">
                       <div style={{ color: 'var(--accent)', opacity: 0.8 }}>
@@ -72,7 +72,7 @@ export default function TemplateHub() {
 
                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
                       <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
-                        DEPLOY_NODE <ArrowRight size={12} />
+                        VIEW_BLUEPRINT <ArrowRight size={12} />
                       </div>
                       <Sparkles size={12} className="text-[var(--muted)] opacity-20" />
                     </div>
