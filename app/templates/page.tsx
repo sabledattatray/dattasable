@@ -7,7 +7,7 @@ import {
   ArrowRight, 
   Sparkles, 
   Zap, 
-  Linkedin, 
+  Share2, 
   Wand2, 
   Search, 
   Layout 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const CATEGORY_ICONS: Record<string, any> = {
-  'LinkedIn': <Linkedin size={18} />,
+  'LinkedIn': <Share2 size={18} />,
   'AI Prompts': <Wand2 size={18} />,
   'SEO': <Search size={18} />,
   'Creator': <Layout size={18} />,
