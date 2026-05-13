@@ -6,56 +6,15 @@ import {
   ChevronRight, 
   Search,
   Zap,
-  Cpu,
-  Scissors,
-  Minimize2,
-  Wand2,
-  Share2
+  ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
+import { GLOSSARY_TERMS } from '@/data/glossary';
 
 export const metadata: Metadata = {
   title: "AI Workflow Glossary | Technical AI & Creator Terminology",
   description: "A comprehensive repository of technical terms for AI prompt engineering, content infrastructure, and surgical creator workflows.",
 };
-
-const GLOSSARY_TERMS = [
-  {
-    term: 'Context Window',
-    slug: 'context-window',
-    definition: 'The total amount of text (tokens) an AI model can process at once. Optimizing this window is critical for cost-efficiency and reasoning depth.',
-    relatedTool: '/tools/context-optimizer',
-    icon: <Minimize2 size={16} />
-  },
-  {
-    term: 'Prompt Chaining',
-    slug: 'prompt-chaining',
-    definition: 'The technique of breaking complex tasks into a sequence of smaller, inter-connected AI prompts where the output of one node informs the next.',
-    relatedTool: '/chains',
-    icon: <Zap size={16} />
-  },
-  {
-    term: 'Semantic Compression',
-    slug: 'semantic-compression',
-    definition: 'Reducing the token count of a prompt by removing linguistic redundancy while preserving the core logical intent for AI processing.',
-    relatedTool: '/tools/context-optimizer',
-    icon: <Scissors size={16} />
-  },
-  {
-    term: 'Operator Blueprint',
-    slug: 'operator-blueprint',
-    definition: 'A pre-configured technical structure (template) designed to be injected into an AI tool to achieve a specific high-authority output.',
-    relatedTool: '/templates',
-    icon: <Book size={16} />
-  },
-  {
-    term: 'Token Density',
-    slug: 'token-density',
-    definition: 'The ratio of information to token count. High token density ensures maximum reasoning performance within a model\'s context limits.',
-    relatedTool: '/tools/ai-prompt-generator',
-    icon: <Cpu size={16} />
-  }
-];
 
 export default function GlossaryPage() {
   return (
@@ -79,32 +38,32 @@ export default function GlossaryPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {GLOSSARY_TERMS.map((item) => (
-                <div key={item.slug} className="card p-8 group transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div style={{ color: 'var(--accent)', opacity: 0.8 }}>
-                      {item.icon}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {GLOSSARY_TERMS.map((term) => (
+                <Link key={term.id} href={`/glossary/${term.slug}`} className="no-underline group">
+                  <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="px-2 py-1 text-[9px] mono font-bold border border-[var(--border)] rounded opacity-60">
+                        {term.category.toUpperCase()}
+                      </div>
+                      <div className="text-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity">
+                         <Search size={18} />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
-                      {item.term}
-                    </h3>
-                  </div>
-                  
-                  <p className="text-[var(--muted)] text-sm leading-relaxed mb-8">
-                    {item.definition}
-                  </p>
 
-                  <div className="flex items-center justify-between pt-6 border-t border-[var(--border)]/30">
-                    <Link 
-                      href={item.relatedTool}
-                      className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest no-underline hover:gap-4 transition-all"
-                    >
-                      EXECUTE_RELATED_TOOL <ChevronRight size={12} />
-                    </Link>
-                    <span className="text-[9px] mono text-[var(--muted)] opacity-40 uppercase">Term_Verified</span>
+                    <h3 className="text-xl font-bold mb-3 text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
+                      {term.term}
+                    </h3>
+                    
+                    <p className="text-[var(--muted)] text-sm leading-relaxed mb-8 flex-1">
+                      {term.definition}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all mt-auto pt-6 border-t border-[var(--border)]/30">
+                      EXPLORE_TERM <ArrowRight size={12} />
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
