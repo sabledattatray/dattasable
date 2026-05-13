@@ -218,49 +218,6 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Tools Section */}
-          <div className="lg:col-span-2 xl:col-span-2">
-            <h3
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '11px',
-                fontWeight: 700,
-                color: 'var(--text)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.2em',
-                marginBottom: '2rem',
-              }}
-            >
-              Expertise
-            </h3>
-            <div 
-              style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(2, 1fr)', 
-                gap: '0.65rem' 
-              }}
-            >
-              {['Surgical AI', 'Power BI', 'Prompt Eng', 'SQL', 'Workflows', 'Automation'].map((tool) => (
-                <span
-                  key={tool}
-                  style={{
-                    padding: '0.6rem 0.5rem',
-                    border: '1px solid var(--border)',
-                    background: 'var(--surface2)',
-                    color: 'var(--muted)',
-                    fontSize: '0.7rem',
-                    fontFamily: "'JetBrains Mono', monospace",
-                    borderRadius: '2px',
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  {tool}
-                </span>
-              ))}
-
-            </div>
           </div>
         </div>
       </div>
