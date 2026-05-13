@@ -18,14 +18,14 @@ interface Post {
 
 const LATEST_POSTS: Post[] = [
   {
-    id: 'case-study-prompt-precision-2026',
-    slug: 'case-study-surgical-prompt-architecture-consistency',
-    title: 'Case Study: Achieving 99.8% Output Consistency via Surgical Architecture™',
+    id: 'case-study-n8n-automation-2026',
+    slug: 'case-study-n8n-automated-authority-scaling',
+    title: "Case Study: Architecting the 'Auto-Operator' via n8n Orchestration",
     category: 'Case Study',
-    excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline.',
+    excerpt: "How we scaled technical distribution for a high-performance creator ecosystem using n8n and multi-agent AI pipelines.",
     readTime: 12,
     date: 'May 14, 2026',
-    image: '/images/blog/case_study_prompt_architecture.webp'
+    image: '/images/blog/case_study_n8n_automation.webp'
   },
   {
     id: 'surgical-prompt-architecture-v1',
@@ -38,14 +38,14 @@ const LATEST_POSTS: Post[] = [
     image: '/images/blog/surgical_prompt_hero.webp'
   },
   {
-    id: 'case-study-token-waste-reduction',
-    slug: 'case-study-context-compression-token-waste',
-    title: 'Case Study: Reducing AI Token Waste by 42.4% via Context Compression™',
+    id: 'case-study-prompt-precision-2026',
+    slug: 'case-study-surgical-prompt-architecture-consistency',
+    title: 'Case Study: Achieving 99.8% Output Consistency via Surgical Architecture™',
     category: 'Case Study',
-    excerpt: 'An engineering post-mortem on optimizing enterprise context windows to reduce latency and infrastructure costs.',
-    readTime: 10,
-    date: 'May 13, 2026',
-    image: '/images/blog/case_study_token_compression.webp'
+    excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline.',
+    readTime: 12,
+    date: 'May 14, 2026',
+    image: '/images/blog/case_study_prompt_architecture.webp'
   }
 ];
 

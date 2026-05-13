@@ -90,5 +90,19 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Data Fidelity',
     definition: 'The degree of accuracy and consistency in a data set or AI output. High fidelity ensures that automated systems can be trusted for enterprise decision-making.',
     category: 'Data'
+  },
+  {
+    id: 'g-n8n-workflow-automation',
+    slug: 'n8n-workflow-orchestration',
+    term: 'n8n',
+    definition: 'A powerful, source-available workflow automation tool that allows for complex, multi-node technical orchestrations. Used for building the "Auto-Operator" infrastructure.',
+    category: 'Workflow'
+  },
+  {
+    id: 'g-workflow-orchestration',
+    slug: 'workflow-orchestration-logic',
+    term: 'Workflow Orchestration',
+    definition: 'The coordination of multiple automated tasks and AI agents into a single, cohesive system that executes professional-grade business logic without human intervention.',
+    category: 'Workflow'
   }
 ];

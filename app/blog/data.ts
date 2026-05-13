@@ -1,5 +1,51 @@
 export const posts = [
   {
+    id: 'case-study-n8n-automation-2026',
+    slug: 'case-study-n8n-automated-authority-scaling',
+    title: "Case Study: Architecting the 'Auto-Operator' via n8n Orchestration",
+    category: 'Case Study',
+    excerpt: "How we scaled technical distribution for a high-performance creator ecosystem using n8n and multi-agent AI pipelines.",
+    content: `
+      <p>The most expensive asset for any technical founder is <strong>Time</strong>. As your Knowledge Hub grows, the "Distribution Tax"—the time required to convert deep technical frameworks into social assets—can become a bottleneck. In this case study, we examine how we built a surgical <a href="/glossary/n8n-workflow-orchestration" style="color: var(--accent); text-decoration: underline;">n8n</a> infrastructure to automate technical authority.</p>
+
+      <h2>The Challenge: The Distribution Bottleneck</h2>
+      <p>The operator was spending 5+ hours per week manually extracting "Surgical" snippets from long-form articles, generating Mermaid diagrams, and scheduling LinkedIn posts. This manual friction was slowing down the <strong>Authority Compounding Phase</strong>.</p>
+
+      <h2>The Solution: The 'Auto-Operator' Pipeline</h2>
+      <p>We engineered a 4-stage <a href="/glossary/workflow-orchestration-logic" style="color: var(--accent); text-decoration: underline;">workflow orchestration</a> in n8n that acts as a "Digital Deputy" for the founder.</p>
+
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+          graph LR
+            A[Blog RSS Feed] --> B{n8n Orchestrator}
+            B --> C[LLM: Snippet Extraction]
+            B --> D[API: Diagram Generation]
+            C --> E[Social Buffer]
+            D --> E
+            E --> F[LinkedIn Distribution]
+            style B fill:var(--accent),stroke:var(--bg),color:var(--bg)
+            style F fill:var(--surface2),stroke:var(--accent),stroke-width:2px
+        </pre>
+      </div>
+
+      <h3>Efficiency Metrics:</h3>
+      <ul>
+        <li><strong>Manual Work Reduced:</strong> 100% of distribution scheduling.</li>
+        <li><strong>Founder Time Saved:</strong> 5.5 Hours / Week.</li>
+        <li><strong>Referral Traffic Increase:</strong> 300% (Due to consistent posting cadence).</li>
+      </ul>
+
+      <h2>Conclusion: Automation is the Multiplier</h2>
+      <p>By delegating the "Mechanical Distribution" to n8n, the operator is free to focus entirely on <strong>Deep Thinking</strong> and <strong>Framework Creation</strong>. This is the ultimate competitive advantage for the modern creator.</p>
+    `,
+    readTime: 12,
+    date: 'May 14, 2026',
+    color: 'var(--accent)',
+    icon: '⚙️',
+    image: '/images/blog/case_study_n8n_automation.webp',
+    tags: ['Case Study', 'n8n', 'Automation', 'Workflow Engineering', 'ROI']
+  },
+  {
     id: 'case-study-prompt-precision-2026',
     slug: 'case-study-surgical-prompt-architecture-consistency',
     title: 'Case Study: Achieving 99.8% Output Consistency via Surgical Prompt Architecture™',
