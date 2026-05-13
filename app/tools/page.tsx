@@ -111,6 +111,15 @@ const TOOLS = [
     category: 'Developer',
     href: '/tools/schema-generator',
     status: 'Ready'
+  },
+  {
+    id: 'mermaid-diagram-forge',
+    title: 'Mermaid Diagram Forge',
+    description: 'Transform technical logic and system prompts into high-fidelity visual architecture diagrams.',
+    icon: <LayoutDashboard size={24} />,
+    category: 'Developer',
+    href: '/tools/mermaid-forge',
+    status: 'Ready'
   }
 ];
 

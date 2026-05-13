@@ -4,6 +4,7 @@ import { posts as staticBlogPosts } from '@/app/blog/data';
 import { CHAINS } from '@/data/chains';
 import { TEMPLATES } from '@/data/templates';
 import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
+import { LANDING_PAGES } from '@/data/landing-pages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
@@ -57,6 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/context-optimizer',
     '/tools/word-counter',
     '/tools/schema-generator',
+    '/tools/mermaid-forge',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
