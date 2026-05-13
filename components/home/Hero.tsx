@@ -43,10 +43,10 @@ export default function Hero() {
             loading="eager"
             fetchPriority="high"
             decoding="sync"
-            quality={65}
+            quality={30}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
             className="object-cover"
-            style={{ objectPosition: 'center right' }}
+            style={{ objectPosition: 'center top' }}
           />
         </div>
         <div

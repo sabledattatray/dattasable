@@ -55,9 +55,16 @@ export default function PerformanceOptimizer({
         <AnalyticsTracker />
       </Suspense>
 
-      {/* 2. Google Sign In - lazyOnload to minimize TBT */}
       <Script 
         src="https://accounts.google.com/gsi/client" 
+        strategy="lazyOnload"
+      />
+
+      {/* 3. Google AdSense - Deferred until interaction */}
+      <Script
+        id="adsbygoogle-deferred"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+        crossOrigin="anonymous"
         strategy="lazyOnload"
       />
 

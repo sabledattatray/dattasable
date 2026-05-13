@@ -149,11 +149,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
-          crossOrigin="anonymous"
-        ></script>
+        <link rel="preconnect" href="https://ep1.adtrafficquality.google" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>
