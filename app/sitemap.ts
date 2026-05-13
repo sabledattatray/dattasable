@@ -41,9 +41,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/start-here',
     '/analytics-live',
     '/data-forge',
-    '/7-best-seo-tools-in-2025',
-    '/top-5-free-tools-every-content-creator-should-be-using-in-2025',
-    '/what-is-seo-in-digital-marketing-and-how-does-it-work-for-beginners',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

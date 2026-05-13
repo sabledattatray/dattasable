@@ -4,8 +4,8 @@ import HeroInteraction from './HeroInteraction';
 
 function TechLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-4 mb-6">
-      <p className="label-tech">{children}</p>
+    <div className="flex items-center gap-4 mb-6" style={{ minHeight: '32px' }}>
+      <div className="label-tech">{children}</div>
     </div>
   );
 }
@@ -40,10 +40,11 @@ export default function Hero() {
             alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
             fill
             priority
+            loading="eager"
             fetchPriority="high"
             decoding="sync"
-            quality={75}
-            sizes="(max-width: 768px) 100vw, 55vw"
+            quality={65}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
             className="object-cover"
             style={{ objectPosition: 'center right' }}
           />
@@ -77,7 +78,8 @@ export default function Hero() {
               letterSpacing: '-0.02em',
               lineHeight: 1.1,
               marginBottom: '1.5rem',
-              display: 'inline-block'
+              display: 'inline-block',
+              minHeight: '1.1em' /* Reserved space for first line */
             }}
           >
             Surgical BI Engineering<br />& Data Strategy
