@@ -11,26 +11,24 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "Professional BI Developer & Data Strategy Consultant | Datta Sable",
-  description: "Datta Sable — Premier BI Developer in India specializing in Tableau, Power BI, SQL, and Python. Delivering strategic data insights and automated reporting solutions.",
+  title: "Surgical AI Workspace | Creator Intelligence Infrastructure",
+  description: "Datta Sable — Architect of the Surgical AI Workspace. High-performance infrastructure for technical founders, AI prompt engineering, and automated creator workflows.",
   keywords: [
+    "Surgical AI Workspace",
+    "Creator Intelligence Ecosystem",
+    "Surgical Prompt Architecture",
+    "Operator Intent Mapping",
+    "AI Workflow Engineering",
+    "Technical Authority Systems",
     "Datta Sable", 
-    "Datta Sable Portfolio",
-    "Business Intelligence Expert", 
-    "BI Developer India",
-    "Tableau Expert", 
-    "Power BI Consultant", 
-    "SQL Automation", 
-    "Python Data Engineering", 
-    "Data Analytics Dashboard", 
-    "Dashboard Development",
-    "Automated Reporting Solutions",
-    "Data Strategy Consultant"
+    "Data Strategy Consultant",
+    "Automated Creator Workflows",
+    "Context Compression Framework"
   ],
   authors: [{ name: "Datta Sable" }],
   openGraph: {
-    title: "Datta Sable | BI & Analytics Expert",
-    description: "Transforming raw data into strategic insights. Expert in Tableau, Power BI, SQL, Python & Advanced Excel.",
+    title: "Surgical AI Workspace | Creator Intelligence Ecosystem",
+    description: "Expert-grade infrastructure for technical founders and AI-native builders. Master your technical authority.",
     type: "website",
     url: "https://dattasable.com",
     images: [
@@ -38,14 +36,14 @@ export const metadata: Metadata = {
         url: "/images/og-main.png",
         width: 1200,
         height: 630,
-        alt: "Datta Sable | BI & Analytics Expert",
+        alt: "Surgical AI Workspace | Creator Intelligence Ecosystem",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Datta Sable | BI & Analytics Expert",
-    description: "Transforming raw data into strategic insights.",
+    title: "Surgical AI Workspace | Creator Intelligence Ecosystem",
+    description: "Expert-grade infrastructure for technical founders and AI-native builders.",
     images: ["/images/og-main.png"],
   },
   icons: {
@@ -104,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "Datta Sable",
+                "name": "Surgical AI Workspace",
                 "url": "https://dattasable.com",
                 "potentialAction": {
                   "@type": "SearchAction",
@@ -117,11 +115,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "@type": "Person",
                 "name": "Datta Sable",
                 "url": "https://dattasable.com",
-                "jobTitle": "Business Intelligence Expert",
-                "description": "Expert in Tableau, Power BI, SQL, Python & Advanced Excel.",
+                "jobTitle": "AI Workflow Architect & Data Strategist",
+                "description": "Architect of the Surgical AI Workspace. Expert in prompt engineering, technical content infrastructure, and data strategy.",
                 "sameAs": [
                   "https://linkedin.com/in/dattasable",
-                  "https://github.com/dattasable"
+                  "https://github.com/sabledattatray"
                 ]
               }
             ])
