@@ -18,34 +18,34 @@ interface Post {
 
 const LATEST_POSTS: Post[] = [
   {
-    id: 'future-web-dev-2026',
-    slug: 'future-of-web-development-2026',
-    title: 'The Future of Web Development in 2026: Beyond the Hype',
-    category: 'Web Dev',
-    excerpt: 'Master the shift toward hybrid edge-first architectures. Learn how Next.js 15 and React 19 are redefining performance.',
-    readTime: 25,
-    date: 'May 08, 2026',
-    image: '/images/blog/web_dev_2026_future.webp'
+    id: 'surgical-prompt-architecture-v1',
+    slug: 'surgical-prompt-architecture-framework',
+    title: 'Surgical Prompt Architecture™: The Blueprint for Precision AI',
+    category: 'Framework',
+    excerpt: 'Master the core technical structure for high-fidelity LLM outputs. Learn how to eliminate hallucination through structural precision.',
+    readTime: 15,
+    date: 'May 14, 2026',
+    image: '/images/blog/surgical_prompt_hero.webp'
   },
   {
-    id: 'performance-manifesto-100-gtmetrix-2026',
-    slug: 'how-to-improve-website-performance-100-gtmetrix',
-    title: 'The Engineering Guide to a 100/100 GTmetrix Score',
-    category: 'Engineering',
-    excerpt: 'Master website performance optimization with the "Elite Tier" techniques used to achieve zero blocking time.',
-    readTime: 20,
-    date: 'May 06, 2026',
-    image: '/images/blog/psi_desk_100.webp'
-  },
-  {
-    id: 'fraud-detection-sentinel-2026',
-    slug: 'architecting-10m-record-fraud-sentinel',
-    title: 'Engineering the Sentinel: Architecting a 10M-Record Fraud System',
-    category: 'Engineering',
-    excerpt: 'Examining the technical requirements of high-volume BFSI fraud detection and data integrity at scale.',
+    id: 'operator-intent-mapping-2026',
+    slug: 'operator-intent-mapping-framework',
+    title: 'Operator Intent Mapping™: Aligning Systems with Persona',
+    category: 'Workflow',
+    excerpt: 'A surgical framework for bridging the gap between human professional intent and AI system execution. Perfect for technical founders.',
     readTime: 12,
-    date: 'May 03, 2026',
-    image: '/images/blog/fraud_sentinel_hero.webp'
+    date: 'May 12, 2026',
+    image: '/images/blog/intent_mapping_hero.webp'
+  },
+  {
+    id: 'context-compression-benchmarks',
+    slug: 'context-compression-framework-benchmarks',
+    title: 'Context Compression™: Optimizing the Information Layer',
+    category: 'Optimization',
+    excerpt: 'Reducing token waste by 40% while preserving logical density. The engineering guide to elite-tier context window management.',
+    readTime: 18,
+    date: 'May 10, 2026',
+    image: '/images/blog/context_window_optimization.webp'
   }
 ];
 
@@ -55,12 +55,12 @@ export default function LatestInsights() {
       <div className="container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div style={{ maxWidth: 500 }}>
-            <div className="label-tech mb-4">LATEST-EDITORIALS</div>
+            <div className="label-tech mb-4">OPERATOR-INTEL-V1.0</div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1, marginBottom: '1rem' }}>
-              Technical <span className="hero-title">Insights</span>
+              Workflow <span className="hero-title">Engineering</span>
             </h2>
             <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
-              Deep-dives into data architecture, BI strategy, and the future of high-performance web engineering.
+              Proprietary frameworks and technical intel for the new era of high-performance AI creator infrastructure.
             </p>
           </div>
           
