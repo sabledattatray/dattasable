@@ -10,6 +10,7 @@ import {
   Trash2, 
   Sparkles, 
   ArrowLeft,
+  ArrowRight,
   Code,
   Eye,
   AlertCircle
