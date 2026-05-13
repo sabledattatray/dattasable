@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { posts as staticBlogPosts } from '@/app/blog/data';
 import { CHAINS } from '@/data/chains';
 import { TEMPLATES } from '@/data/templates';
+import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
@@ -47,6 +48,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/workspace',
     '/templates',
     '/chains',
+    '/knowledge',
+    '/glossary',
     '/tools/linkedin-formatter',
     '/tools/ai-prompt-generator',
     '/tools/seo-meta-generator',
@@ -77,6 +80,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticUrls, ...dbBlogUrls, ...staticBlogUrls, ...chainUrls, ...templateUrls];
+  // 6. Knowledge Hub
+  const knowledgeUrls = KNOWLEDGE_ARTICLES.map((article) => ({
+    url: `${baseUrl}/knowledge/${article.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [
+    ...staticUrls, 
+    ...dbBlogUrls, 
+    ...staticBlogUrls, 
+    ...chainUrls, 
+    ...templateUrls, 
+    ...knowledgeUrls
+  ];
 }
 
