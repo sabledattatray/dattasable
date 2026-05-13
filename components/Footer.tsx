@@ -37,23 +37,29 @@ const NAV_LINKS: NavSection[] = [
 
   },
   {
+    heading: 'Workspace',
+    links: [
+      { label: 'Surgical Tools',   href: '/tools',     icon: Zap },
+      { label: 'Templates Hub',    href: '/templates', icon: Library },
+      { label: 'Workflow Chains',  href: '/chains',    icon: GitBranch },
+      { label: 'Knowledge Hub',    href: '/knowledge', icon: BookOpen },
+    ],
+  },
+  {
     heading: 'Connect',
     links: [
-      { label: 'About',    href: '/about',                  icon: User },
-      { label: 'Contact',  href: '/contact',                icon: MessageSquare },
+      { label: 'About Operator',    href: '/about',                  icon: User },
+      { label: 'Contact Node',     href: '/contact',                icon: MessageSquare },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dattasable/',    icon: Users,      external: true },
-      { label: 'GitHub',   href: 'https://github.com/sabledattatray',      icon: GitBranch,  external: true },
-      { label: 'Telegram', href: 'https://t.me/sabledatta',          icon: Send,       external: true },
       { label: 'Twitter / X', href: 'https://x.com/sabledattatray',    icon: MessageSquare,  external: true },
     ],
   },
   {
     heading: 'Explore',
     links: [
-      { label: 'Blog',       href: '/blog',       icon: BookOpen },
-      { label: 'Live Analytics', href: '/analytics-live', icon: Activity },
-      { label: 'Dashboards', href: '/dashboards', icon: LayoutDashboard },
-      { label: 'Hire Me',    href: '/contact',    icon: Send },
+      { label: 'Technical Blog', href: '/blog',       icon: BookOpen },
+      { label: 'AI Glossary',    href: '/glossary',   icon: Search },
+      { label: 'Sitemap Node',   href: '/sitemap.xml', icon: Globe, external: true },
     ],
   },
 ];
@@ -234,7 +240,7 @@ export default function Footer() {
                 gap: '0.65rem' 
               }}
             >
-              {['Tableau', 'Power BI', 'SQL', 'Python', 'ETL', 'Automation'].map((tool) => (
+              {['Surgical AI', 'Power BI', 'Prompt Eng', 'SQL', 'Workflows', 'Automation'].map((tool) => (
                 <span
                   key={tool}
                   style={{
