@@ -95,6 +95,22 @@ export default function OperatorPanel() {
           </div>
         </div>
       )}
+
+      {/* Founder Insight Layer - Human Signal */}
+      <div className="p-4 bg-[var(--accent)]/5 border-t border-[var(--border)] flex items-start gap-3">
+        <div className="w-8 h-8 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex-shrink-0 flex items-center justify-center overflow-hidden">
+          <span className="text-[10px] mono font-bold text-[var(--accent)]">DS</span>
+        </div>
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <h5 className="mono text-[9px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Insight</h5>
+            <span className="text-[8px] mono text-[var(--muted)] px-1 border border-[var(--border)] rounded">VERIFIED_OPERATOR</span>
+          </div>
+          <p className="text-[10px] leading-relaxed text-[var(--muted)] italic">
+            "Precision is the only scalable advantage. Don't just generate—orchestrate. I built these settings to ensure your technical identity remains consistent across every node."
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

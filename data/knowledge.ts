@@ -8,6 +8,7 @@ export interface KnowledgeArticle {
   associatedBlueprint?: string; // Slug of the template
   associatedTool: string; // Path to the tool
   readingTime: string;
+  operatorNote?: string;
 }
 
 export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
@@ -32,7 +33,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     `,
     associatedBlueprint: 'token-saving-system-prompt',
     associatedTool: '/tools/context-optimizer',
-    readingTime: '5 min'
+    readingTime: '5 min',
+    operatorNote: "I use this exact method to fit 2000-line database schemas into Gemini 1.5 Flash prompts. The secret is the abbreviations—models understand them perfectly, but you save thousands of tokens over a long session."
   },
   {
     id: 'li-authority-storytelling',
@@ -54,6 +56,7 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     `,
     associatedBlueprint: 'founder-authority-system',
     associatedTool: '/tools/linkedin-formatter',
-    readingTime: '4 min'
+    readingTime: '4 min',
+    operatorNote: "Authenticity is the only thing AI can't fake. Use my spacing method to let your personality breathe between the lines of code. It feels more human because it follows natural speech patterns."
   }
 ];

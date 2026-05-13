@@ -73,10 +73,28 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                     </h1>
                   </div>
 
-                  <div className="knowledge-content text-[var(--text)] leading-relaxed">
+                  <div className="knowledge-content text-[var(--text)] leading-relaxed mb-16">
                      {/* In a real app we'd use a markdown renderer, but for this MVP we use a simple structure */}
                      <div dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, '<br/>') }} style={{ fontSize: '1.1rem', opacity: 0.9 }} />
                   </div>
+
+                  {/* Founder Layer: Operator Note */}
+                  {article.operatorNote && (
+                    <div className="p-8 bg-[var(--accent)]/5 border-l-4 border-[var(--accent)] mb-12">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                          <span className="text-xs mono font-bold text-[var(--accent)]">DS</span>
+                        </div>
+                        <div>
+                          <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Breakdown</h5>
+                          <p className="text-[9px] mono text-[var(--muted)]">Expert Commentary by Datta Sable</p>
+                        </div>
+                      </div>
+                      <p className="text-sm leading-relaxed text-[var(--text)] italic opacity-90">
+                        "{article.operatorNote}"
+                      </p>
+                    </div>
+                  )}
                 </article>
 
                 {/* Internal Flywheel: Blueprint CTA */}
