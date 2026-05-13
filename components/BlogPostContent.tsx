@@ -226,6 +226,40 @@ export default function BlogPostContent({ post }: { post: Post }) {
             })
           }}
         />
+
+        {/* ── VideoObject Schema (SEO) ── */}
+        {(() => {
+          // 1. Check for YouTube
+          const youtubeMatch = post.content.match(/youtube\.com\/embed\/([^"?\s]+)/);
+          const youtubeId = youtubeMatch ? youtubeMatch[1] : null;
+          
+          // 2. Check for local video
+          const localVideoMatch = post.content.match(/src="([^"]+\.(mp4|webm|ogg))"/);
+          const localVideoUrl = localVideoMatch ? localVideoMatch[1] : null;
+
+          if (youtubeId || localVideoUrl) {
+            const videoData = {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": post.title,
+              "description": post.excerpt,
+              "thumbnailUrl": youtubeId 
+                ? [`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`, `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`]
+                : [post.image || "https://dattasable.com/images/og-main.png"],
+              "uploadDate": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+              "embedUrl": youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : `https://dattasable.com${localVideoUrl}`,
+              "contentUrl": localVideoUrl ? `https://dattasable.com${localVideoUrl}` : undefined
+            };
+
+            return (
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(videoData) }}
+              />
+            );
+          }
+          return null;
+        })()}
       </div>
     </>
   );

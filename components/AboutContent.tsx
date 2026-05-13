@@ -469,6 +469,23 @@ export default function AboutContent() {
         </div>
       </div>
       <Footer />
+      {/* ── VideoObject Schema (SEO) ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": "Datta Sable Portfolio Technical Walkthrough",
+            "description": "A definitive technical walkthrough showcasing the design logic, responsive orchestration, and engineering principles used to build the Datta Sable ecosystem.",
+            "thumbnailUrl": [
+              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg"
+            ],
+            "uploadDate": "2025-01-01T00:00:00Z",
+            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w"
+          })
+        }}
+      />
     </div>
   );
 }

@@ -178,6 +178,23 @@ export default function StartHerePage() {
         </div>
       </div>
       <Footer />
+      {/* ── VideoObject Schema (SEO) ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": "Full-Stack Web Orchestration Masterclass",
+            "description": "A comprehensive workshop demonstrating the engineering fundamentals of scalable digital infrastructure for BI and Data environments.",
+            "thumbnailUrl": [
+              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg"
+            ],
+            "uploadDate": "2021-01-15T00:00:00Z",
+            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w"
+          })
+        }}
+      />
     </div>
   );
 }
