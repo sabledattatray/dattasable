@@ -29,7 +29,7 @@ export function middleware(request: NextRequest) {
 
   const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix/i;
   
-  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isExemptPath) {
+  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isCrawlPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   }
 

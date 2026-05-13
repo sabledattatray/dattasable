@@ -17,6 +17,10 @@ const FAQ = dynamic(() => import('@/components/home/FAQ'), {
   loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
 });
 
+const LatestInsights = dynamic(() => import('@/components/home/LatestInsights'), {
+  loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
+});
+
 export default function HomePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -33,6 +37,9 @@ export default function HomePage() {
 
         {/* ── PROJECTS (Client Island) ── */}
         <ProjectsGrid />
+
+        {/* ── LATEST INSIGHTS (Client Island) ── */}
+        <LatestInsights />
 
         {/* ── FAQ & SEO (Client Island) ── */}
         <FAQ />

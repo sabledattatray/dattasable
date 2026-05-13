@@ -149,6 +149,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>
@@ -162,7 +167,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <PerformanceOptimizer 
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
-              adSenseClientId="ca-pub-4242010382827250"
             />
           </ThemeProvider>
         </Providers>

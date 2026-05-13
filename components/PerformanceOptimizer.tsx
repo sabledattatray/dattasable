@@ -8,13 +8,11 @@ import GoogleAnalytics from './GoogleAnalytics';
 interface PerformanceOptimizerProps {
   googleAnalyticsId: string;
   googleSignInClientId: string;
-  adSenseClientId: string;
 }
 
 export default function PerformanceOptimizer({
   googleAnalyticsId,
   googleSignInClientId,
-  adSenseClientId,
 }: PerformanceOptimizerProps) {
   const [shouldLoadScripts, setShouldLoadScripts] = useState(false);
 
@@ -63,12 +61,7 @@ export default function PerformanceOptimizer({
         strategy="lazyOnload"
       />
 
-      {/* 3. Google AdSense (Lazy) */}
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseClientId}`}
-        crossOrigin="anonymous"
-      />
+
     </>
   );
 }
