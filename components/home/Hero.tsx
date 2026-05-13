@@ -67,25 +67,25 @@ export default function Hero() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
           <TechLabel>
-            <span className="hidden sm:inline">Business Intelligence Expert & Data Strategy Consultant</span>
-            <span className="inline sm:hidden">BI Expert & Data Strategist</span>
+            <span className="hidden sm:inline">Creator Intelligence Infrastructure & Data Engineering</span>
+            <span className="inline sm:hidden">AI Workflow Architect</span>
           </TechLabel>
           <h1
             className="hero-title lg:mt-12"
             style={{
-              fontSize: 'clamp(2rem, 7vw, 48px)',
+              fontSize: 'clamp(2.5rem, 7vw, 56px)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
-              lineHeight: 1.1,
+              lineHeight: 1,
               marginBottom: '1.5rem',
               display: 'inline-block',
-              minHeight: '1.1em' /* Reserved space for first line */
+              minHeight: '1.1em'
             }}
           >
-            Surgical BI Engineering<br />& Data Strategy
+            Surgical AI <span className="hero-title">Workspace</span><br />& Data Strategy
           </h1>
-          <p style={{ color: 'var(--text)', fontSize: '1.05rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Premier <strong>BI Developer in India</strong>. I simplify complex data ecosystems into actionable executive insights through <strong>SQL Automation</strong>, <strong>Python Data Engineering</strong>, and high-fidelity <strong>Automated Reporting Solutions</strong>.
+          <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
+            Expert-grade <strong>Operator Infrastructure</strong> for modern creators and builders. Deploy <strong>Surgical Prompt Architecture™</strong>, <strong>Operator Intent Mapping™</strong>, and high-fidelity <strong>Execution Chains</strong> to automate technical authority.
           </p>
           
           <HeroInteraction />

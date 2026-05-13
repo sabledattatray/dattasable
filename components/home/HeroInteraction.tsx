@@ -26,14 +26,14 @@ export default function HeroInteraction() {
       )}
 
       <div className="flex flex-col xs:flex-row flex-wrap gap-4">
-        <Link href="/start-here" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
-          <BookOpen size={16} /> EXPLORE SERVICES
+        <Link href="/tools" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
+           LAUNCH AI WORKSPACE
+        </Link>
+        <Link href="/knowledge" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+          OPERATOR GUIDES
         </Link>
         <Link href="/portfolio" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-          PORTFOLIO PROJECTS
-        </Link>
-        <Link href="/contact" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-          HIRE BI EXPERT
+          BI PORTFOLIO
         </Link>
       </div>
     </>
