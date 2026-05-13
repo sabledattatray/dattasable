@@ -22,6 +22,15 @@ export const metadata: Metadata = {
 
 const TOOLS = [
   {
+    id: 'execution-chains',
+    title: 'Surgical Execution Chains™',
+    description: 'Automated multi-node orchestration. One input, multiple high-authority outputs across LinkedIn, SEO, and AI.',
+    icon: <Zap size={24} className="text-[var(--accent)]" />,
+    category: 'Orchestration',
+    href: '/chains',
+    status: 'Elite'
+  },
+  {
     id: 'ai-workspace',
     title: 'Surgical AI Workspace',
     description: 'The command center for your creative technical workflow. Resume recent sessions and manage cross-tool pipelines.',

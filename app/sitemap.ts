@@ -44,6 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools',
     '/tools/workspace',
     '/templates',
+    '/chains',
     '/tools/linkedin-formatter',
     '/tools/ai-prompt-generator',
     '/tools/seo-meta-generator',
