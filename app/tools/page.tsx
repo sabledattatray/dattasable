@@ -11,7 +11,8 @@ import {
   Zap, 
   FileJson, 
   Globe,
-  LayoutDashboard 
+  LayoutDashboard,
+  Library
 } from 'lucide-react';
 
 export const metadata: Metadata = {
