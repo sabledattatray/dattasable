@@ -11,7 +11,8 @@ import {
   ExternalLink,
   Save,
   Trash2,
-  Sparkles
+  Sparkles,
+  Search
 } from 'lucide-react';
 import Link from 'next/link';
 
