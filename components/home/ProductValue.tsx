@@ -12,7 +12,7 @@ const VALUES = [
   {
     icon: <FileCode size={24} />,
     title: "Prompt Architecture Framework",
-    desc: "Standardized templates for high-fidelity prompt engineering and logic mapping."
+    desc: "Standardized templates for precision-engineered prompt engineering and logic mapping."
   },
   {
     icon: <Cpu className="w-8 h-8" />,
@@ -33,7 +33,7 @@ export default function ProductValue() {
         <div className="mb-16">
           <div className="label-tech mb-6">Product Value</div>
           <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif" }}>
-            The <span style={{ color: 'var(--accent)' }}>Surgical Arsenal.</span>
+            The <span style={{ color: 'var(--accent)' }}>AI Workflow Toolkit.</span>
           </h2>
           <p style={{ color: 'var(--muted)', fontSize: '1.1rem', marginTop: '1rem', maxWidth: '600px' }}>
             Everything you need to move from scattered prompts to a production-grade AI infrastructure.

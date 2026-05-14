@@ -32,7 +32,7 @@ const LATEST_POSTS: Post[] = [
     slug: 'surgical-prompt-architecture-framework',
     title: 'Surgical Prompt Architecture™: The Blueprint for Precision AI',
     category: 'Framework',
-    excerpt: 'Master the core technical structure for high-fidelity LLM outputs. Learn how to eliminate hallucination through structural precision.',
+    excerpt: 'Master the core technical structure for production-grade LLM outputs. Learn how to eliminate hallucination through structural precision.',
     readTime: 15,
     date: 'May 14, 2026',
     image: '/images/blog/surgical_prompt_hero.webp'

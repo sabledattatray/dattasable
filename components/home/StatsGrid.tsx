@@ -57,14 +57,14 @@ export default function StatsGrid() {
 
       <div className="container relative z-10">
         <div className="flex flex-col gap-8 mb-20">
-          <TechLabel>Performance Metrics</TechLabel>
+          <TechLabel>Deployment Metrics</TechLabel>
           
           <div className="max-w-2xl">
             <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
-              Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
+              Workflow <span style={{ color: 'var(--accent)' }}>Performance.</span>
             </h2>
             <p className="mt-4" style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-              High-fidelity data metrics from live deployment environments across global territories.
+              Verified system metrics from live deployment environments across global territories.
             </p>
           </div>
         </div>
