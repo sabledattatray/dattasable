@@ -51,6 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/templates',
     '/chains',
     '/knowledge',
+    '/knowledge/architecture',
     '/glossary',
     '/tools/linkedin-formatter',
     '/tools/ai-prompt-generator',
@@ -60,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/word-counter',
     '/tools/schema-generator',
     '/tools/mermaid-forge',
+    '/tools/demo',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
