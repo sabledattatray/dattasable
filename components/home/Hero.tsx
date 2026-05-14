@@ -67,8 +67,8 @@ export default function Hero() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
           <TechLabel>
-            <span className="hidden sm:inline">Creator Intelligence Infrastructure</span>
-            <span className="inline sm:hidden">AI Workflow Architect</span>
+            <span className="hidden sm:inline">AI Workflow Infrastructure for Creators & Builders</span>
+            <span className="inline sm:hidden">AI Workflow Infrastructure</span>
           </TechLabel>
           <h1
             className="hero-title lg:mt-12"
@@ -82,10 +82,10 @@ export default function Hero() {
               minHeight: '1.1em'
             }}
           >
-            Surgical AI Workspace<br />for <span className="hero-title">Builders & Creators</span>
+            Surgical AI <span className="hero-title">Workspace</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Design, automate, and scale <strong>AI-powered workflows</strong> using structured prompt systems and execution frameworks for modern digital work.
+            Design, automate, and scale <strong>AI-powered workflows</strong> using structured prompts and execution systems for modern digital work.
           </p>
           
           <HeroInteraction />
