@@ -38,7 +38,7 @@ export default function ArchitecturePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="label-tech mb-8">System Infrastructure</div>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 800, marginBottom: '2rem', lineHeight: 1.1 }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
               Surgical AI <span style={{ color: 'var(--accent)' }}>Architecture.</span>
             </h1>
             <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
