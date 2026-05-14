@@ -85,7 +85,7 @@ export default function Hero() {
             Surgical AI <span className="hero-title">Workspace</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Design, automate, and scale <strong>AI-powered workflows</strong> using structured prompts and execution systems for modern digital work.
+            Design, automate, and scale <strong>AI-powered workflows</strong> using structured prompts and execution frameworks for modern digital work.
           </p>
           
           <HeroInteraction />
