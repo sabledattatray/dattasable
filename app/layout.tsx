@@ -11,8 +11,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "Surgical AI Workspace | AI Workflow Infrastructure",
-  description: "Datta Sable — Independent AI workflow architect specializing in automation systems, BI infrastructure, and structured analytics design.",
+  title: "dattasable.com | Surgical AI Workspace",
+  description: "Datta Sable — Independent AI workflow architect specializing in precision automation systems, BI infrastructure, and surgical logic design at dattasable.com.",
   keywords: [
     "Surgical AI Workspace",
     "AI Automation Systems",
@@ -29,24 +29,24 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Datta Sable" }],
   openGraph: {
-    title: "Surgical AI Workspace | Creator Intelligence Ecosystem",
-    description: "Expert-grade infrastructure for technical founders and AI-native builders. Master your technical authority.",
+    title: "dattasable.com | Surgical AI Workspace",
+    description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems at dattasable.com.",
     type: "website",
     url: "https://dattasable.com",
     images: [
       {
-        url: "/images/og-main.png",
-        width: 1200,
-        height: 630,
-        alt: "Surgical AI Workspace | Creator Intelligence Ecosystem",
+        url: "https://dattasable.com/images/logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "Datta Sable | Surgical AI Workspace Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Surgical AI Workspace | Creator Intelligence Ecosystem",
-    description: "Expert-grade infrastructure for technical founders and AI-native builders.",
-    images: ["/images/og-main.png"],
+    title: "dattasable.com | Surgical AI Workspace",
+    description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems.",
+    images: ["https://dattasable.com/images/logo.png"],
   },
   icons: {
     icon: [
