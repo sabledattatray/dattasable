@@ -76,7 +76,7 @@ export default function Hero() {
             className="hero-title lg:mt-6"
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 64px)',
-              fontWeight: 800,
+              fontWeight: 600,
               letterSpacing: '-0.03em',
               lineHeight: 1.05,
               marginBottom: '2rem',
