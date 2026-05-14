@@ -66,18 +66,20 @@ export default function Hero() {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
-          <TechLabel>
-            <span className="hidden sm:inline">Surgical AI Workspace</span>
-            <span className="inline sm:hidden">Surgical AI</span>
-          </TechLabel>
+          <div className="mb-8 opacity-60 flex items-center gap-4">
+            <div className="h-[1px] w-8 bg-[var(--accent)]" />
+            <span className="mono text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
+              Surgical AI Workspace
+            </span>
+          </div>
           <h1
-            className="hero-title lg:mt-12"
+            className="hero-title lg:mt-6"
             style={{
-              fontSize: 'clamp(2.5rem, 7vw, 56px)',
-              fontWeight: 600,
-              letterSpacing: '-0.02em',
-              lineHeight: 1,
-              marginBottom: '1.5rem',
+              fontSize: 'clamp(2.5rem, 8vw, 64px)',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.05,
+              marginBottom: '2rem',
               display: 'inline-block',
               minHeight: '1.1em'
             }}

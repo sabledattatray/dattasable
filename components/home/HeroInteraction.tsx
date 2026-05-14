@@ -37,13 +37,13 @@ export default function HeroInteraction() {
         </Link>
       </div>
 
-      {/* Forced Spacing Layer: Ensuring clear separation between CTA and Trust Line */}
+      {/* Forced Spacing Layer: Ensuring clear separation between CTA and Substance Metrics */}
       <div className="flex items-center gap-3 opacity-60" style={{ marginTop: '3.5rem' }}>
         <div className="flex -space-x-2">
           <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
         </div>
         <p className="text-[10px] mono uppercase tracking-widest">
-          No-code / low-code AI systems • Built for creators, developers & operators • Scalable workflow engine
+          50+ Workflow Experiments • AI Systems Across Content & Analytics • Structured Execution Design
         </p>
       </div>
     </>
