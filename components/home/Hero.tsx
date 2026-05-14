@@ -21,7 +21,7 @@ export default function Hero() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        padding: '2rem 0',
+        padding: '6rem 0 2rem 0',
         backgroundColor: 'var(--bg)',
         border: 'none'
       }}
