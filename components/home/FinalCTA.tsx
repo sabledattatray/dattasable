@@ -19,9 +19,9 @@ export default function FinalCTA() {
             <div className="w-2 h-2 border border-[var(--accent)]" />
           </div>
 
-          <div className="relative overflow-hidden border border-[var(--border)] bg-[#050505] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-            {/* Blueprint Grid Background */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+          <div className="relative overflow-hidden border border-[var(--border)] bg-[var(--surface2)] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.1)]">
+            {/* Blueprint Grid Background - Theme Aware */}
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
                  style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
             
             <div className="relative z-10 px-8 py-20 lg:py-32 text-center max-w-3xl mx-auto">
@@ -31,7 +31,7 @@ export default function FinalCTA() {
                  </div>
               </div>
 
-              <h2 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1.1, marginBottom: '2.5rem', letterSpacing: '-0.03em' }}>
+              <h2 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1.1, marginBottom: '2.5rem', letterSpacing: '-0.03em', color: 'var(--text)' }}>
                 Ready to build your <span style={{ color: 'var(--accent)' }}>AI system?</span>
               </h2>
               
