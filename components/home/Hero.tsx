@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image';
 import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
