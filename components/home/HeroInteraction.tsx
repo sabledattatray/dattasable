@@ -25,14 +25,14 @@ export default function HeroInteraction() {
         }} />
       )}
 
-      <div className="flex flex-col xs:flex-row flex-wrap gap-4">
-        <Link href="/tools" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
+      <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4">
+        <Link href="/tools" className="btn-primary w-full sm:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
            START BUILDING WORKFLOWS
         </Link>
-        <Link href="/tools/demo" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+        <Link href="/tools/demo" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
           EXPLORE SYSTEM DEMO
         </Link>
-        <Link href="/knowledge/architecture" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+        <Link href="/knowledge/architecture" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
           VIEW ARCHITECTURE
         </Link>
       </div>
