@@ -685,3 +685,60 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
   }
 }
+
+/* Premium Glossy Header Utility */
+.glossy-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.glossy-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 20%, 
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.light .glossy-header::before {
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.8) 0%, 
+    rgba(255, 255, 255, 0.2) 30%, 
+    transparent 60%
+  );
+}
+
+.glossy-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  z-index: 2;
+}
+
+.light .glossy-header::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+}

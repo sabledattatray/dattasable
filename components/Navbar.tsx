@@ -119,7 +119,7 @@ export default function Navbar() {
       <header 
         className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 flex justify-center ${
           scrolled 
-            ? 'top-4 w-[95%] max-w-[1400px] bg-[var(--navbar-bg)] backdrop-blur-xl py-0 border border-[var(--border)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)]' 
+            ? 'top-4 w-[95%] max-w-[1400px] bg-[var(--navbar-bg)] backdrop-blur-xl py-0 border border-[var(--border)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] glossy-header' 
             : 'top-0 w-full bg-transparent py-4 border-b border-transparent'
         }`}
       >
