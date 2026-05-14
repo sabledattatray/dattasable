@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "dattasable.com | Surgical AI Workspace",
+  title: "Surgical AI Workspace | AI Workflow Infrastructure",
   description: "Datta Sable — Independent AI workflow architect specializing in precision automation systems, BI infrastructure, and surgical logic design at dattasable.com.",
   keywords: [
     "Surgical AI Workspace",
