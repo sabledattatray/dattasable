@@ -48,7 +48,7 @@ export default function ArchitectureViz() {
                 <Database className="text-indigo-500" size={32} />
               </motion.div>
               <div className="text-center">
-                <p className="mono text-[10px] text-indigo-500 uppercase tracking-widest mb-1">Source: Scattered</p>
+                <p className="mono text-[10px] text-indigo-500 uppercase tracking-widest mb-1 font-bold">Source: Scattered</p>
                 <h3 className="text-[14px] font-bold">Unstructured Data</h3>
               </div>
             </div>
@@ -76,7 +76,7 @@ export default function ArchitectureViz() {
                 <Cpu className="text-[var(--accent)]" size={32} />
               </motion.div>
               <div className="text-center">
-                <p className="mono text-[10px] text-[var(--accent)] uppercase tracking-widest mb-1">Module: Surgical™</p>
+                <p className="mono text-[10px] text-[var(--accent)] uppercase tracking-widest mb-1 font-bold">Module: Surgical™</p>
                 <h3 className="text-[14px] font-bold">Logic Processing</h3>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function ArchitectureViz() {
                 <GitBranch className="text-yellow-500" size={32} />
               </motion.div>
               <div className="text-center">
-                <p className="mono text-[10px] text-yellow-500 uppercase tracking-widest mb-1">Layer: n8n Flow</p>
+                <p className="mono text-[10px] text-yellow-500 uppercase tracking-widest mb-1 font-bold">Layer: n8n Flow</p>
                 <h3 className="text-[14px] font-bold">Orchestration</h3>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function ArchitectureViz() {
                 <Zap className="text-cyan-500" size={32} />
               </motion.div>
               <div className="text-center">
-                <p className="mono text-[10px] text-cyan-500 uppercase tracking-widest mb-1">Status: Production</p>
+                <p className="mono text-[10px] text-cyan-500 uppercase tracking-widest mb-1 font-bold">Status: Production</p>
                 <h3 className="text-[14px] font-bold">Automation System</h3>
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function ArchitectureViz() {
                <div className="w-16 h-16 rounded-full border border-indigo-500/30 bg-indigo-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.05)]">
                  <Database className="text-indigo-500" size={24} />
                </div>
-               <div><p className="mono text-[9px] text-indigo-500 uppercase tracking-widest mb-0.5">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
+               <div><p className="mono text-[9px] text-indigo-500 uppercase tracking-widest mb-0.5 font-bold">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
             </motion.div>
 
             {/* Vertical Path 1-2 */}
@@ -171,7 +171,7 @@ export default function ArchitectureViz() {
                <div className="w-16 h-16 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex items-center justify-center shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]">
                  <Cpu className="text-[var(--accent)]" size={24} />
                </div>
-               <div><p className="mono text-[9px] text-[var(--accent)] uppercase tracking-widest mb-0.5">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
+               <div><p className="mono text-[9px] text-[var(--accent)] uppercase tracking-widest mb-0.5 font-bold">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
             </motion.div>
 
             {/* Vertical Path 2-3 */}
@@ -192,7 +192,7 @@ export default function ArchitectureViz() {
                <div className="w-16 h-16 rounded-full border border-yellow-500/30 bg-yellow-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.05)]">
                  <GitBranch className="text-yellow-500" size={24} />
                </div>
-               <div><p className="mono text-[9px] text-yellow-500 uppercase tracking-widest mb-0.5">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
+               <div><p className="mono text-[9px] text-yellow-500 uppercase tracking-widest mb-0.5 font-bold">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
             </motion.div>
 
             {/* Vertical Path 3-4 */}
@@ -213,7 +213,7 @@ export default function ArchitectureViz() {
                <div className="w-16 h-16 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.05)]">
                  <Zap className="text-cyan-500" size={24} />
                </div>
-               <div><p className="mono text-[9px] text-cyan-500 uppercase tracking-widest mb-0.5">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
+               <div><p className="mono text-[9px] text-cyan-500 uppercase tracking-widest mb-0.5 font-bold">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
             </motion.div>
 
           </div>

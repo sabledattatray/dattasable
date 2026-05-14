@@ -42,7 +42,7 @@ export default function Hero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 768px) 100vw, 50vw"
-            quality={75}
+            quality={60}
             className="object-cover"
             style={{ objectPosition: 'center top' }}
           />
