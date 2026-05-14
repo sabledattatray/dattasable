@@ -23,8 +23,6 @@ const navLinks = [
   { label: 'Blog', href: '/blog', mega: true },
   { label: 'Workspace', href: '/tools', mega: true },
   { label: 'Templates', href: '/templates' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 const megaMenuData: Record<string, any> = {
