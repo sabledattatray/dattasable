@@ -33,7 +33,7 @@ export default function FAQ() {
           <div className="lg:w-1/3">
             <div className="label-tech mb-4">RESOURCES-&-FAQ</div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-              Strategic Intelligence Q&A
+              Implementation & Workflow Q&A
             </h2>
             <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
               Deep-diving into the technical protocols and strategic frameworks used to build elite data ecosystems.

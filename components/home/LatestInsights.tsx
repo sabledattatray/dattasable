@@ -22,7 +22,7 @@ const LATEST_POSTS: Post[] = [
     slug: 'case-study-n8n-automated-authority-scaling',
     title: "Case Study: Architecting the 'Auto-Operator' via n8n Orchestration",
     category: 'Case Study',
-    excerpt: "How we scaled technical distribution for a high-performance creator ecosystem using n8n and multi-agent AI pipelines.",
+    excerpt: "How we scaled technical distribution for technical creator workflows using n8n and multi-agent AI pipelines.",
     readTime: 12,
     date: 'May 14, 2026',
     image: '/images/blog/case_study_n8n_automation.webp'
@@ -60,7 +60,7 @@ export default function LatestInsights() {
               Workflow <span className="hero-title">Engineering</span>
             </h2>
             <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
-              Proprietary frameworks and technical intel for the new era of high-performance AI creator infrastructure.
+              Proprietary frameworks and technical intel for the new era of scalable creator automation systems.
             </p>
           </div>
           

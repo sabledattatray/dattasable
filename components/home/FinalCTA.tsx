@@ -36,7 +36,7 @@ export default function FinalCTA() {
               </h2>
               
               <p style={{ color: 'var(--muted)', fontSize: '1.25rem', marginBottom: '4rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 4rem' }}>
-                Stop guessing. Start engineering. Deploy your own <strong>structured AI infrastructure</strong> in minutes.
+                Stop guessing. Start engineering. Deploy your own <strong>reliable workflow orchestration</strong> in minutes.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
