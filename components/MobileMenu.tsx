@@ -32,6 +32,7 @@ export default function MobileMenu({
   return (
     <AnimatePresence>
       {isOpen && (
+        <>
           <motion.div
             key="mobile-menu-backdrop"
             initial={{ opacity: 0 }}
@@ -169,8 +170,8 @@ export default function MobileMenu({
               </div>
             </div>
           </motion.div>
-        )
-      }
+        </>
+      )}
     </AnimatePresence>
   );
 }
