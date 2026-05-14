@@ -12,7 +12,7 @@ export default function FinalCTA() {
           {/* Technical Telemetry Markers */}
           <div className="absolute -top-3 -left-3 flex items-center gap-2 opacity-70">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
-            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">System Status: Finalizing</span>
+            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">System Status: Active Infrastructure</span>
           </div>
           <div className="absolute -bottom-3 -right-3 flex items-center gap-2 opacity-70">
             <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">NodeID: 0x892F</span>
@@ -51,7 +51,7 @@ export default function FinalCTA() {
               <div className="mt-16 flex flex-col items-center gap-6">
                 <div className="h-[1px] w-24 bg-[var(--border)]" />
                 <p className="mono text-[10px] text-[var(--muted)] tracking-[0.5em] uppercase opacity-40">
-                  System Thinking • Structured Logic • Structured AI Execution
+                  System Thinking • System Logic • Reliable Workflow Orchestration
                 </p>
               </div>
             </div>

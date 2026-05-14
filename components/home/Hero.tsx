@@ -85,7 +85,7 @@ export default function Hero() {
             AI Workflow Infrastructure<br />for <span className="hero-title">Creators & Builders</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Build scalable <strong>AI-powered workflows</strong> using structured prompts, operational logic, and automation frameworks.
+            Build scalable <strong>AI-powered workflows</strong> using structured prompts, system logic, and automation frameworks.
           </p>
           
           <div className="p-4 border-l-2 border-[var(--accent)] bg-[var(--surface2)] opacity-80" style={{ marginBottom: '2.625rem' }}>
