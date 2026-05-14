@@ -2,9 +2,20 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { BarChart3, Database, Target, Activity, ArrowRight } from 'lucide-react';
+import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucide-react';
 
 const projects = [
+  {
+    title: 'Surgical Prompt Auditor™',
+    category: 'Interactive Tool',
+    desc: 'Live technical auditor for LLM prompts. Evaluates Fidelity, Entropy, and Context Bloat with surgical precision.',
+    tools: ['Next.js', 'AI Logic', 'Telemetry'],
+    impact: 'Audit in < 1.5s',
+    color: 'var(--accent)',
+    color2: '#00C9F2',
+    icon: <Shield size={20} />,
+    href: '/tools/prompt-auditor'
+  },
   {
     title: 'Surgical Analytics Forge',
     category: 'Big Data Engine',
@@ -127,7 +138,7 @@ export default function ProjectsGrid() {
                   <span className="mono text-[11px] font-normal" style={{ color: 'var(--accent)' }}>{p.impact}</span>
                 </div>
                 <Link 
-                  href="/portfolio" 
+                  href={p.href || "/portfolio"} 
                   className="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
                   aria-label={`View details for ${p.title}`}
                 >

@@ -22,7 +22,7 @@ const navLinks = [
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
-  { label: 'Workspace', href: '/tools' },
+  { label: 'Workspace', href: '/tools', mega: true },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -74,6 +74,14 @@ const megaMenuData: Record<string, any> = {
       { title: 'Custom Solutions', desc: 'Bespoke technical reporting.', icon: <Sparkles size={20} />, href: '/dashboards#custom' },
       { title: 'Sales Tracking', desc: 'CRM and pipeline management.', icon: <BarChart3 size={20} />, href: '/dashboards#sales' },
       { title: 'HR Analytics', desc: 'Retention & performance KPIs.', icon: <Layers size={20} />, href: '/dashboards#hr' },
+    ]
+  },
+  Workspace: {
+    items: [
+      { title: 'Prompt Auditor', desc: 'Surgical audit for LLM prompts.', icon: <Shield size={20} className="text-[var(--accent)]" />, href: '/tools/prompt-auditor' },
+      { title: 'Context Optimizer', desc: 'Token density & bloat analysis.', icon: <Zap size={20} />, href: '/tools/prompt-auditor' },
+      { title: 'Data Forge', desc: 'Synthetic dataset generation.', icon: <Database size={20} />, href: '/data-forge' },
+      { title: 'Analytics Feed', desc: 'Real-time performance metrics.', icon: <Activity size={20} />, href: '/analytics-live' },
     ]
   }
 };
