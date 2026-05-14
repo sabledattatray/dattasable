@@ -1,14 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Database, Cpu, GitBranch, Zap, CheckCircle2, ArrowRight } from 'lucide-react';
 
-const NODE_VARIANTS = {
+const NODE_VARIANTS: Variants = {
   initial: { opacity: 0, scale: 0.9 },
   animate: { opacity: 1, scale: 1 },
 };
 
-const PATH_VARIANTS = {
+const PATH_VARIANTS: Variants = {
   initial: { pathLength: 0, opacity: 0 },
   animate: { 
     pathLength: 1, 
