@@ -31,7 +31,7 @@ export default function HowItWorks() {
         <div className="flex flex-col items-center mb-20 text-center">
           <div className="label-tech mb-6">Execution Lifecycle</div>
           <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif" }}>
-            3 steps to <span style={{ color: 'var(--accent)' }}>automated authority.</span>
+            3 steps to <span style={{ color: 'var(--accent)' }}>structured AI execution.</span>
           </h2>
         </div>
 

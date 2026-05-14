@@ -96,7 +96,7 @@ export default function LatestInsights() {
                   
                   <div className="flex items-center gap-4 mb-4">
                     <span className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--muted)] mono">
-                      <Clock size={12} className="text-[var(--accent)]" /> {post.readTime}M READ
+                      <Clock size={12} className="text-[var(--accent)]" /> {post.readTime} MIN READ
                     </span>
                     <span className="text-[10px] text-[var(--muted)] mono opacity-50 uppercase tracking-widest">{post.date}</span>
                   </div>

@@ -51,7 +51,7 @@ export default function FinalCTA() {
               <div className="mt-16 flex flex-col items-center gap-6">
                 <div className="h-[1px] w-24 bg-[var(--border)]" />
                 <p className="mono text-[10px] text-[var(--muted)] tracking-[0.5em] uppercase opacity-40">
-                  System Thinking • Structured Logic • Automated Authority
+                  System Thinking • Structured Logic • Structured AI Execution
                 </p>
               </div>
             </div>

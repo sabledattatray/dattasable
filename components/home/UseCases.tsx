@@ -37,7 +37,7 @@ export default function UseCases() {
         <div className="mb-16">
           <div className="label-tech mb-6">Target Segments</div>
           <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif" }}>
-            Built for <span style={{ color: 'var(--accent)' }}>modern operators.</span>
+            Built for <span style={{ color: 'var(--accent)' }}>technical creators.</span>
           </h2>
         </div>
 

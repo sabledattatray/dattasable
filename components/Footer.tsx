@@ -49,8 +49,8 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Connect',
     links: [
-      { label: 'About Operator',    href: '/about',                  icon: User },
-      { label: 'Contact Node',     href: '/contact',                icon: MessageSquare },
+      { label: 'About',    href: '/about',                  icon: User },
+      { label: 'Contact',     href: '/contact',                icon: MessageSquare },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dattasable/',    icon: Users,      external: true },
       { label: 'Twitter / X', href: 'https://x.com/sabledattatray',    icon: MessageSquare,  external: true },
     ],
@@ -61,7 +61,7 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
       { label: 'Technical Blog', href: '/blog',       icon: BookOpen },
       { label: 'AI Glossary',    href: '/glossary',   icon: Search },
-      { label: 'Sitemap Node',   href: '/sitemap.xml', icon: Globe, external: true },
+      { label: 'Sitemap',   href: '/sitemap.xml', icon: Globe, external: true },
     ],
   },
 ];
