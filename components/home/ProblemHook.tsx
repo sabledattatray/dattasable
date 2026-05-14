@@ -50,7 +50,7 @@ export default function ProblemHook() {
               >
                 <div className="flex-shrink-0 mt-1">{p.icon}</div>
                 <div>
-                  <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', fontWeight: 600 }}>{p.title}</h4>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', fontWeight: 600 }}>{p.title}</h3>
                   <p style={{ fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.5 }}>{p.desc}</p>
                 </div>
               </motion.div>

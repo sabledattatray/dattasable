@@ -53,7 +53,7 @@ export default function ProductValue() {
               <div className="mb-6 text-[var(--accent)] group-hover:scale-110 transition-transform duration-500">
                 {v.icon}
               </div>
-              <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem' }}>{v.title}</h4>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem' }}>{v.title}</h3>
               <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{v.desc}</p>
             </motion.div>
           ))}

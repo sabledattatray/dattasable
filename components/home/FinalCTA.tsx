@@ -10,12 +10,12 @@ export default function FinalCTA() {
       <div className="container">
         <div className="relative group">
           {/* Technical Telemetry Markers */}
-          <div className="absolute -top-3 -left-3 flex items-center gap-2 opacity-40">
+          <div className="absolute -top-3 -left-3 flex items-center gap-2 opacity-70">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
-            <span className="mono text-[9px] uppercase tracking-[0.3em]">System Status: Finalizing</span>
+            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">System Status: Finalizing</span>
           </div>
-          <div className="absolute -bottom-3 -right-3 flex items-center gap-2 opacity-40">
-            <span className="mono text-[9px] uppercase tracking-[0.3em]">NodeID: 0x892F</span>
+          <div className="absolute -bottom-3 -right-3 flex items-center gap-2 opacity-70">
+            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">NodeID: 0x892F</span>
             <div className="w-2 h-2 border border-[var(--accent)]" />
           </div>
 

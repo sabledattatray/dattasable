@@ -37,14 +37,12 @@ export default function Hero() {
         <div className="relative w-full h-full">
           <Image
             src="/hero-bg.webp"
-            alt="Datta Sable | Business Intelligence Expert & Data Strategy Consultant"
+            alt="Surgical AI Workspace | Creator Intelligence Infrastructure"
             fill
             priority
-            loading="eager"
             fetchPriority="high"
-            decoding="sync"
-            quality={30}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={75}
             className="object-cover"
             style={{ objectPosition: 'center top' }}
           />
