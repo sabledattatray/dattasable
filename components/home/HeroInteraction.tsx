@@ -27,14 +27,23 @@ export default function HeroInteraction() {
 
       <div className="flex flex-col xs:flex-row flex-wrap gap-4">
         <Link href="/tools" className="btn-primary w-full xs:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
-           LAUNCH AI WORKSPACE
+           START BUILDING WORKFLOWS
         </Link>
-        <Link href="/knowledge" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-          OPERATOR GUIDES
+        <Link href="/tools/demo" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+          EXPLORE SYSTEM DEMO
         </Link>
-        <Link href="/portfolio" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
-          BI PORTFOLIO
+        <Link href="/knowledge/architecture" className="btn-outline w-full xs:w-auto text-center" style={{ textDecoration: 'none' }}>
+          VIEW ARCHITECTURE
         </Link>
+      </div>
+
+      <div className="mt-6 flex items-center gap-3 opacity-60">
+        <div className="flex -space-x-2">
+          <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+        </div>
+        <p className="text-[10px] mono uppercase tracking-widest">
+          No-code / low-code AI systems • Built for creators, developers & operators • Scalable workflow engine
+        </p>
       </div>
     </>
   );

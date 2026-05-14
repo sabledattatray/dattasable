@@ -1,0 +1,67 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { CheckCircle2, Workflow, Terminal, Network } from 'lucide-react';
+
+export default function Solution() {
+  const solutions = [
+    {
+      icon: <Terminal className="text-[var(--accent)]" size={28} />,
+      title: "Structured Prompt Architecture",
+      desc: "Moving from guessing to engineering. Precision-built prompts for consistent output."
+    },
+    {
+      icon: <Workflow className="text-[var(--accent)]" size={28} />,
+      title: "Execution-Ready Workflows",
+      desc: "Connect your AI assets into a repeatable engine that works while you sleep."
+    },
+    {
+      icon: <Network className="text-[var(--accent)]" size={28} />,
+      title: "Scalable Automation Pipelines",
+      desc: "Deploy execution chains that handle complex multi-step digital operations."
+    }
+  ];
+
+  return (
+    <section className="section" style={{ background: 'var(--surface2)', overflow: 'hidden' }}>
+      <div className="container">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="label-tech mb-6 justify-center">The Solution</div>
+          <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem', fontFamily: "'Syne', sans-serif" }}>
+            A structured <span style={{ color: 'var(--accent)' }}>AI workflow system.</span>
+          </h2>
+          <p style={{ color: 'var(--muted)', fontSize: '1.2rem', lineHeight: 1.6 }}>
+            Surgical AI Workspace gives you a repeatable infrastructure for building 
+            AI-driven systems that actually deliver.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {solutions.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -10, borderColor: 'var(--accent)' }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="card group"
+              style={{ padding: '3rem 2rem', background: 'var(--bg)', border: '1px solid var(--border)', transition: 'all 0.4s ease' }}
+            >
+              <div className="mb-8 p-4 bg-[var(--surface2)] w-fit rounded-sm group-hover:bg-[var(--accent)] group-hover:text-black transition-colors duration-500">
+                {s.icon}
+              </div>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 600 }}>{s.title}</h3>
+              <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{s.desc}</p>
+              
+              <div className="mt-8 flex items-center gap-2 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <CheckCircle2 size={16} />
+                <span className="mono text-[10px] uppercase tracking-widest">System Ready</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

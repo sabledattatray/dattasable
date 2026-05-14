@@ -5,12 +5,32 @@ import dynamic from 'next/dynamic';
 import Hero from '@/components/home/Hero';
 
 // Dynamic imports for below-the-fold components (Speed Optimization)
+const ProblemHook = dynamic(() => import('@/components/home/ProblemHook'), { 
+  loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
+});
+
+const Solution = dynamic(() => import('@/components/home/Solution'), { 
+  loading: () => <div className="h-[500px] bg-[var(--bg)] animate-pulse" />
+});
+
 const StatsGrid = dynamic(() => import('@/components/home/StatsGrid'), { 
   loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
 });
 
+const HowItWorks = dynamic(() => import('@/components/home/HowItWorks'), { 
+  loading: () => <div className="h-[400px] bg-[var(--bg)] animate-pulse" />
+});
+
 const ProjectsGrid = dynamic(() => import('@/components/home/ProjectsGrid'), { 
   loading: () => <div className="h-[600px] bg-[var(--surface2)] animate-pulse" />
+});
+
+const UseCases = dynamic(() => import('@/components/home/UseCases'), { 
+  loading: () => <div className="h-[500px] bg-[var(--surface2)] animate-pulse" />
+});
+
+const ProductValue = dynamic(() => import('@/components/home/ProductValue'), { 
+  loading: () => <div className="h-[400px] bg-[var(--bg)] animate-pulse" />
 });
 
 const FAQ = dynamic(() => import('@/components/home/FAQ'), {
@@ -21,6 +41,10 @@ const LatestInsights = dynamic(() => import('@/components/home/LatestInsights'),
   loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
 });
 
+const FinalCTA = dynamic(() => import('@/components/home/FinalCTA'), {
+  loading: () => <div className="h-[400px] bg-[var(--bg)] animate-pulse" />
+});
+
 export default function HomePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -29,19 +53,37 @@ export default function HomePage() {
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
         <Crosshair position="tl" />
 
-        {/* ── HERO SECTION (Client Island) ── */}
+        {/* ── 1. HERO SECTION ── */}
         <Hero />
 
-        {/* ── DATA METRICS (Client Island) ── */}
+        {/* ── 2. PROBLEM HOOK ── */}
+        <ProblemHook />
+
+        {/* ── 3. SOLUTION ── */}
+        <Solution />
+
+        {/* ── 4. DATA METRICS ── */}
         <StatsGrid />
 
-        {/* ── PROJECTS (Client Island) ── */}
+        {/* ── 5. HOW IT WORKS ── */}
+        <HowItWorks />
+
+        {/* ── 6. PROJECTS ── */}
         <ProjectsGrid />
 
-        {/* ── LATEST INSIGHTS (Client Island) ── */}
+        {/* ── 7. USE CASES ── */}
+        <UseCases />
+
+        {/* ── 8. PRODUCT VALUE ── */}
+        <ProductValue />
+
+        {/* ── 9. LATEST INSIGHTS ── */}
         <LatestInsights />
 
-        {/* ── FAQ & SEO (Client Island) ── */}
+        {/* ── 10. FINAL CTA ── */}
+        <FinalCTA />
+
+        {/* ── 11. FAQ & SEO ── */}
         <FAQ />
 
         <Crosshair position="br" />
