@@ -82,10 +82,10 @@ export default function Hero() {
               minHeight: '1.1em'
             }}
           >
-            Surgical AI <span className="hero-title">Workspace</span><br />& Data Strategy
+            Surgical AI Workspace<br />for <span className="hero-title">Builders & Creators</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '3rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Expert-grade <strong>Operator Infrastructure</strong> for modern creators and builders. Deploy <strong>Surgical Prompt Architecture™</strong>, <strong>Operator Intent Mapping™</strong>, and high-fidelity <strong>Execution Chains</strong> to automate technical authority.
+            Design, automate, and scale <strong>AI-powered workflows</strong> with structured prompt systems and execution frameworks for modern digital work.
           </p>
           
           <HeroInteraction />
