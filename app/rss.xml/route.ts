@@ -20,7 +20,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Datta Sable | Surgical BI & Engineering</title>
+  <title>Datta Sable | Surgical BI &amp; Engineering</title>
   <link>${baseUrl}/blog</link>
   <description>Technical case studies, BI frameworks, and high-performance engineering insights by Datta Sable.</description>
   <language>en-us</language>
