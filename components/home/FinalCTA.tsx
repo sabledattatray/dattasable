@@ -6,34 +6,54 @@ import { ArrowRight } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
+    <section className="section" style={{ background: 'var(--bg)', paddingTop: '5rem', paddingBottom: '10rem' }}>
       <div className="container">
-        <div className="relative overflow-hidden bg-[var(--surface2)] p-12 lg:p-24 border border-[var(--border)] rounded-sm">
-          {/* Background Pulse Effect */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none" 
-               style={{ backgroundImage: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)' }} />
+        <div className="relative group">
+          {/* Technical Telemetry Markers */}
+          <div className="absolute -top-3 -left-3 flex items-center gap-2 opacity-40">
+            <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
+            <span className="mono text-[9px] uppercase tracking-[0.3em]">System Status: Finalizing</span>
+          </div>
+          <div className="absolute -bottom-3 -right-3 flex items-center gap-2 opacity-40">
+            <span className="mono text-[9px] uppercase tracking-[0.3em]">NodeID: 0x892F</span>
+            <div className="w-2 h-2 border border-[var(--accent)]" />
+          </div>
 
-          <div className="relative z-10 text-center max-w-2xl mx-auto">
-            <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontFamily: "'Syne', sans-serif", lineHeight: 1.1, marginBottom: '2rem' }}>
-              Ready to build your <span style={{ color: 'var(--accent)' }}>AI system?</span>
-            </h2>
-            <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '3rem', lineHeight: 1.6 }}>
-              Stop guessing. Start engineering. Deploy your own structured AI infrastructure in minutes.
-            </p>
+          <div className="relative overflow-hidden border border-[var(--border)] bg-[#050505] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            {/* Blueprint Grid Background */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                 style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            
+            <div className="relative z-10 px-8 py-20 lg:py-32 text-center max-w-3xl mx-auto">
+              <div className="flex justify-center mb-10">
+                 <div className="px-4 py-1 border border-[var(--accent)] border-opacity-30 rounded-full">
+                    <span className="mono text-[10px] text-[var(--accent)] uppercase tracking-[0.4em]">Infrastructure Deployment</span>
+                 </div>
+              </div>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link href="/tools" className="btn-primary flex items-center justify-center gap-3 py-5 px-10">
-                START BUILDING WORKFLOWS <ArrowRight size={18} />
-              </Link>
-              <Link href="/tools/demo" className="btn-outline flex items-center justify-center py-5 px-10">
-                VIEW DEMO SYSTEM
-              </Link>
-            </div>
-
-            <div className="mt-12 pt-12 border-t border-[var(--border)]">
-              <p className="mono text-[10px] text-[var(--muted)] tracking-[0.3em] uppercase">
-                System Thinking • Structured Logic • Automated Authority
+              <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1, marginBottom: '2.5rem', letterSpacing: '-0.04em' }}>
+                Ready to build your <span style={{ color: 'var(--accent)' }}>AI system?</span>
+              </h2>
+              
+              <p style={{ color: 'var(--muted)', fontSize: '1.25rem', marginBottom: '4rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 4rem' }}>
+                Stop guessing. Start engineering. Deploy your own <strong>structured AI infrastructure</strong> in minutes.
               </p>
+
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+                <Link href="/tools" className="btn-primary w-full sm:w-auto flex items-center justify-center gap-4 py-5 px-12 group/btn">
+                  START BUILDING WORKFLOWS <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+                <Link href="/tools/demo" className="btn-outline w-full sm:w-auto flex items-center justify-center py-5 px-12">
+                  VIEW DEMO SYSTEM
+                </Link>
+              </div>
+
+              <div className="mt-16 flex flex-col items-center gap-6">
+                <div className="h-[1px] w-24 bg-[var(--border)]" />
+                <p className="mono text-[10px] text-[var(--muted)] tracking-[0.5em] uppercase opacity-40">
+                  System Thinking • Structured Logic • Automated Authority
+                </p>
+              </div>
             </div>
           </div>
         </div>
