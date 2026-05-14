@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -61,6 +61,7 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
       { label: 'Technical Blog', href: '/blog',       icon: BookOpen },
       { label: 'AI Glossary',    href: '/glossary',   icon: Search },
+      { label: 'Disclaimer',    href: '/disclaimer', icon: Shield },
       { label: 'Sitemap',   href: '/sitemap.xml', icon: Globe, external: true },
     ],
   },
@@ -245,18 +246,15 @@ export default function Footer() {
           >
             © {year} Datta Sable. Built for technical creators.
           </p>
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
-              PRIVACY POLICY
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8">
+            <Link href="/privacy" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+              PRIVACY
             </Link>
-            <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
-              TERMS OF SERVICE
+            <Link href="/terms" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+              TERMS
             </Link>
-            <Link href="/cookies" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
-              COOKIE POLICY
-            </Link>
-            <Link href="/disclaimer" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>
-              DISCLAIMER
+            <Link href="/cookies" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+              COOKIES
             </Link>
           </div>
         </div>
