@@ -56,18 +56,21 @@ export default function StatsGrid() {
            style={{ backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
       <div className="container relative z-10">
-        {/* Nuclear Alignment Grid: Forced Baseline Sync */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12 mb-20">
-          <div className="max-w-xl">
-            <TechLabel>Performance Metrics</TechLabel>
-            <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', fontFamily: "'Syne', sans-serif", lineHeight: 1.1 }}>
-              Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
-            </h2>
-          </div>
-          <div className="flex-shrink-0 md:pb-2">
-            <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '320px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-              High-fidelity data metrics from live deployment environments across global territories.
-            </p>
+        <div className="flex flex-col gap-8 mb-20">
+          <TechLabel>Performance Metrics</TechLabel>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end">
+            <div>
+              <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', lineHeight: 1, fontFamily: "'Syne', sans-serif", fontWeight: 800 }}>
+                Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
+              </h2>
+            </div>
+            
+            <div className="flex items-start gap-6 border-l border-[var(--border)] pl-8 md:mb-2">
+              <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '400px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
+                High-fidelity data metrics from live deployment environments across global territories.
+              </p>
+            </div>
           </div>
         </div>
 
