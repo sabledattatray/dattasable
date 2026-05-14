@@ -59,18 +59,13 @@ export default function StatsGrid() {
         <div className="flex flex-col gap-8 mb-20">
           <TechLabel>Performance Metrics</TechLabel>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end">
-            <div>
-              <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
-                Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
-              </h2>
-            </div>
-            
-            <div className="flex items-start gap-6 border-l border-[var(--border)] pl-8 md:mb-2">
-              <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '400px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-                High-fidelity data metrics from live deployment environments across global territories.
-              </p>
-            </div>
+          <div className="max-w-2xl">
+            <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
+              Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
+            </h2>
+            <p className="mt-4" style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
+              High-fidelity data metrics from live deployment environments across global territories.
+            </p>
           </div>
         </div>
 
