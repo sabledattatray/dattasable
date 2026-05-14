@@ -32,9 +32,8 @@ export default function MobileMenu({
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
           <motion.div
+            key="mobile-menu-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -42,8 +41,8 @@ export default function MobileMenu({
             className="fixed inset-0 z-[190] bg-black/60 backdrop-blur-sm xl:hidden"
           />
           
-          {/* Drawer */}
           <motion.div
+            key="mobile-menu-drawer"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -170,8 +169,8 @@ export default function MobileMenu({
               </div>
             </div>
           </motion.div>
-        </>
-      )}
+        )
+      }
     </AnimatePresence>
   );
 }

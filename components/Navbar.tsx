@@ -167,6 +167,7 @@ export default function Navbar() {
                   <AnimatePresence>
                     {hovered === link.label && megaMenuData[link.label] && (
                       <motion.div
+                        key={`${link.label}-mega-dropdown`}
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
