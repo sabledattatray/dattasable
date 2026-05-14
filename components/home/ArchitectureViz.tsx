@@ -140,22 +140,22 @@ export default function ArchitectureViz() {
           </div>
 
           {/* Mobile Flow (Animated vertical list) */}
-          <div className="lg:hidden flex flex-col gap-12 relative z-10">
+          <div className="lg:hidden flex flex-col gap-12 relative z-10 items-center">
             
             {/* Node 1 */}
             <motion.div 
               variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}
-              className="flex items-center gap-6"
+              className="flex flex-col items-center gap-4 text-center"
             >
-               <div className="w-12 h-12 rounded-full border border-indigo-500/30 bg-indigo-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.05)]">
-                 <Database className="text-indigo-500" size={20} />
+               <div className="w-16 h-16 rounded-full border border-indigo-500/30 bg-indigo-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.05)]">
+                 <Database className="text-indigo-500" size={24} />
                </div>
                <div><p className="mono text-[9px] text-indigo-500 uppercase tracking-widest mb-0.5">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
             </motion.div>
 
             {/* Vertical Path 1-2 */}
-            <div className="relative h-8 ml-6">
-              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+            <div className="relative h-12 w-[1px]">
+              <div className="absolute inset-0 bg-[var(--border)] border-dashed border-l" />
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
@@ -166,17 +166,17 @@ export default function ArchitectureViz() {
             {/* Node 2 */}
             <motion.div 
               variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="flex items-center gap-6"
+              className="flex flex-col items-center gap-4 text-center"
             >
-               <div className="w-12 h-12 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex items-center justify-center shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]">
-                 <Cpu className="text-[var(--accent)]" size={20} />
+               <div className="w-16 h-16 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex items-center justify-center shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]">
+                 <Cpu className="text-[var(--accent)]" size={24} />
                </div>
                <div><p className="mono text-[9px] text-[var(--accent)] uppercase tracking-widest mb-0.5">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
             </motion.div>
 
             {/* Vertical Path 2-3 */}
-            <div className="relative h-8 ml-6">
-              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+            <div className="relative h-12 w-[1px]">
+              <div className="absolute inset-0 bg-[var(--border)] border-dashed border-l" />
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
@@ -187,17 +187,17 @@ export default function ArchitectureViz() {
             {/* Node 3 */}
             <motion.div 
               variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.4 }}
-              className="flex items-center gap-6"
+              className="flex flex-col items-center gap-4 text-center"
             >
-               <div className="w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.05)]">
-                 <GitBranch className="text-yellow-500" size={20} />
+               <div className="w-16 h-16 rounded-full border border-yellow-500/30 bg-yellow-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.05)]">
+                 <GitBranch className="text-yellow-500" size={24} />
                </div>
                <div><p className="mono text-[9px] text-yellow-500 uppercase tracking-widest mb-0.5">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
             </motion.div>
 
             {/* Vertical Path 3-4 */}
-            <div className="relative h-8 ml-6">
-              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+            <div className="relative h-12 w-[1px]">
+              <div className="absolute inset-0 bg-[var(--border)] border-dashed border-l" />
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 1 }}
@@ -208,10 +208,10 @@ export default function ArchitectureViz() {
             {/* Node 4 */}
             <motion.div 
               variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.6 }}
-              className="flex items-center gap-6"
+              className="flex flex-col items-center gap-4 text-center"
             >
-               <div className="w-12 h-12 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.05)]">
-                 <Zap className="text-cyan-500" size={20} />
+               <div className="w-16 h-16 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.05)]">
+                 <Zap className="text-cyan-500" size={24} />
                </div>
                <div><p className="mono text-[9px] text-cyan-500 uppercase tracking-widest mb-0.5">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
             </motion.div>
