@@ -88,7 +88,7 @@ export default function Hero() {
             Build scalable <strong>AI-powered workflows</strong> using structured prompts, execution systems, and automation frameworks.
           </p>
           
-          <div className="mb-12 p-4 border-l-2 border-[var(--accent)] bg-[var(--surface2)] opacity-80">
+          <div className="mb-16 p-4 border-l-2 border-[var(--accent)] bg-[var(--surface2)] opacity-80">
             <p className="mono text-[12px] leading-relaxed">
               Independent AI workflow architect specializing in automation systems, BI infrastructure, and structured execution design.
             </p>
