@@ -21,6 +21,7 @@ const navLinks = [
   { label: 'Live Feed', href: '/analytics-live' },
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
+  { label: 'Dashboards', href: '/dashboards', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
   { label: 'Workspace', href: '/tools', mega: true },
   { label: 'About', href: '/about' },
@@ -69,6 +70,8 @@ const megaMenuData: Record<string, any> = {
   },
   Dashboards: {
     items: [
+      { title: 'Global Sales', desc: 'Real-time revenue monitoring.', icon: <Globe size={20} className="text-[#9b59ff]" />, href: '/dashboards/global-sales-intelligence' },
+      { title: 'EMI Intelligence', desc: 'Real-time collection monitoring.', icon: <Activity size={20} className="text-[var(--accent)]" />, href: '/dashboards/collection-intelligence' },
       { title: 'Financial BI', desc: 'Revenue & cost tracking.', icon: <Activity size={20} />, href: '/dashboards#financial' },
       { title: 'Operational Analytics', desc: 'Supply chain & logic metrics.', icon: <Globe size={20} />, href: '/dashboards#operations' },
       { title: 'Custom Solutions', desc: 'Bespoke technical reporting.', icon: <Sparkles size={20} />, href: '/dashboards#custom' },

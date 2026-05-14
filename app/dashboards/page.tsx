@@ -7,6 +7,35 @@ import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity } from 
 import LiveSiteStats from '@/components/LiveSiteStats';
 
 const dashboards = [
+  // --- FINTECH (1) ---
+  {
+    id: 101,
+    title: 'Global Sales Intelligence',
+    category: 'Analytics',
+    tool: 'Python',
+    color: '#9b59ff',
+    icon: '🌍',
+    image: null,
+    desc: 'Real-time global revenue monitoring with market penetration and conversion funnel analysis.',
+    embed: '/dashboards/global-sales-intelligence',
+    isInternal: true,
+    tags: ['Sales', 'Global', 'BI'],
+    metrics: ['Real-time', 'Market Focus', 'Funnel'],
+  },
+  {
+    id: 102,
+    title: 'EMI Collection Intelligence',
+    category: 'Finance',
+    tool: 'Python',
+    color: '#00d4ff',
+    icon: '💳',
+    image: null, // We'll use a placeholder or the icon for now
+    desc: 'Next-gen collection infrastructure with real-time risk assessment, aging bucket analysis, and automated channel tracking.',
+    embed: '/dashboards/collection-intelligence',
+    isInternal: true,
+    tags: ['FinTech', 'Collections', 'Risk'],
+    metrics: ['₹4.82Cr Coll', '94.7% Eff', '22k+ Loans'],
+  },
   // --- SALES (4) ---
   {
     id: 1,
