@@ -1,32 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Box, FileCode, GitBranch, Layout } from 'lucide-react';
+import { Box, FileCode, Cpu, Network } from 'lucide-react';
+
+const VALUES = [
+  {
+    icon: <Box size={24} />,
+    title: "AI Workflow Builder System",
+    desc: "Full-stack infrastructure for creating, testing, and deploying custom AI systems."
+  },
+  {
+    icon: <FileCode size={24} />,
+    title: "Prompt Architecture Framework",
+    desc: "Standardized templates for high-fidelity prompt engineering and logic mapping."
+  },
+  {
+    icon: <Cpu className="w-8 h-8" />,
+    title: "Automation Pipelines",
+    desc: "Turn scattered prompts into repeatable, automated data workflows."
+  },
+  {
+    icon: <Network className="w-8 h-8" />,
+    title: "Reliable Systems",
+    desc: "Systems built for precision and verifiable output consistency."
+  }
+];
 
 export default function ProductValue() {
-  const values = [
-    {
-      icon: <Box size={24} />,
-      title: "AI Workflow Builder System",
-      desc: "Full-stack infrastructure for creating, testing, and deploying custom AI systems."
-    },
-    {
-      icon: <FileCode size={24} />,
-      title: "Prompt Architecture Framework",
-      desc: "Standardized templates for high-fidelity prompt engineering and logic mapping."
-    },
-    {
-      icon: <Cpu className="w-8 h-8" />,
-      title: "Automation Pipelines",
-      desc: "Turn scattered prompts into repeatable, automated data workflows."
-    },
-    {
-      icon: <Network className="w-8 h-8" />,
-      title: "Reliable Systems",
-      desc: "Systems built for precision and verifiable output consistency."
-    }
-  ];
-
   return (
     <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
       <div className="container">
@@ -41,7 +41,7 @@ export default function ProductValue() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((v, i) => (
+          {VALUES.map((v, i) => (
             <motion.div
               key={v.title}
               initial={{ opacity: 0, y: 20 }}

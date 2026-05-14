@@ -3,25 +3,25 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, Workflow, Terminal, Network } from 'lucide-react';
 
-export default function Solution() {
-  const solutions = [
-    {
-      icon: <Terminal className="text-[var(--accent)]" size={28} />,
-      title: "Structured Prompt Architecture",
-      desc: "Moving from guessing to engineering. Precision-built prompts for consistent output."
-    },
-    {
-      icon: <Workflow className="text-[var(--accent)]" size={28} />,
-      title: "Automation Pipelines",
-      desc: "Connect modular AI systems into reliable end-to-end data pipelines."
-    },
-    {
-      icon: <Network className="text-[var(--accent)]" size={28} />,
-      title: "Operational Accuracy",
-      desc: "Deploy execution chains that handle complex multi-step digital operations with verifiable precision."
-    }
-  ];
+const SOLUTIONS = [
+  {
+    icon: <Terminal className="text-[var(--accent)]" size={28} />,
+    title: "Structured Prompt Architecture",
+    desc: "Moving from guessing to engineering. Precision-built prompts for consistent output."
+  },
+  {
+    icon: <Workflow className="text-[var(--accent)]" size={28} />,
+    title: "Automation Pipelines",
+    desc: "Connect modular AI systems into reliable end-to-end data pipelines."
+  },
+  {
+    icon: <Network className="text-[var(--accent)]" size={28} />,
+    title: "Operational Accuracy",
+    desc: "Deploy execution chains that handle complex multi-step digital operations with verifiable precision."
+  }
+];
 
+export default function Solution() {
   return (
     <section className="section" style={{ background: 'var(--surface2)', overflow: 'hidden' }}>
       <div className="container">
@@ -37,7 +37,7 @@ export default function Solution() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {solutions.map((s, i) => (
+          {SOLUTIONS.map((s, i) => (
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 30 }}
