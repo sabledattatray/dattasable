@@ -1,5 +1,3 @@
-"use client";
-
 import Image from 'next/image';
 import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
@@ -39,8 +37,8 @@ export default function Hero() {
             fill
             priority
             fetchPriority="high"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 55vw"
-            quality={40}
+            sizes="(max-width: 480px) 420px, (max-width: 768px) 640px, (max-width: 1200px) 70vw, 55vw"
+            quality={30}
             className="object-cover"
             style={{ objectPosition: 'center top' }}
           />

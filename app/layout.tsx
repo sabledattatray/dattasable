@@ -153,7 +153,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preload" href="/hero-bg.webp" as="image" type="image/webp" fetchPriority="high" />
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>

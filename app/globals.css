@@ -660,7 +660,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-visual-container {
   opacity: var(--hero-mobile-opacity, 0.35);
-  transition: opacity 0.5s ease;
 }
 
 @media (min-width: 1024px) {
