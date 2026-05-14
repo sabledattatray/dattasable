@@ -139,28 +139,83 @@ export default function ArchitectureViz() {
 
           </div>
 
-          {/* Mobile Flow (Simple vertical list) */}
+          {/* Mobile Flow (Animated vertical list) */}
           <div className="lg:hidden flex flex-col gap-12 relative z-10">
-            {/* ... Mobile implementation (simpler) ... */}
-            <div className="flex items-center gap-6">
-               <div className="w-12 h-12 rounded-full border border-indigo-500/30 flex items-center justify-center"><Database className="text-indigo-500" size={20} /></div>
-               <div><p className="mono text-[9px] text-indigo-500">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
+            
+            {/* Node 1 */}
+            <motion.div 
+              variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}
+              className="flex items-center gap-6"
+            >
+               <div className="w-12 h-12 rounded-full border border-indigo-500/30 bg-indigo-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.05)]">
+                 <Database className="text-indigo-500" size={20} />
+               </div>
+               <div><p className="mono text-[9px] text-indigo-500 uppercase tracking-widest mb-0.5">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
+            </motion.div>
+
+            {/* Vertical Path 1-2 */}
+            <div className="relative h-8 ml-6">
+              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+              <motion.div 
+                animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-[var(--accent)]"
+              />
             </div>
-            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
-            <div className="flex items-center gap-6">
-               <div className="w-12 h-12 rounded-full border border-[var(--accent)] flex items-center justify-center"><Cpu className="text-[var(--accent)]" size={20} /></div>
-               <div><p className="mono text-[9px] text-[var(--accent)]">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
+
+            {/* Node 2 */}
+            <motion.div 
+              variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.2 }}
+              className="flex items-center gap-6"
+            >
+               <div className="w-12 h-12 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex items-center justify-center shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]">
+                 <Cpu className="text-[var(--accent)]" size={20} />
+               </div>
+               <div><p className="mono text-[9px] text-[var(--accent)] uppercase tracking-widest mb-0.5">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
+            </motion.div>
+
+            {/* Vertical Path 2-3 */}
+            <div className="relative h-8 ml-6">
+              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+              <motion.div 
+                animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-yellow-500"
+              />
             </div>
-            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
-            <div className="flex items-center gap-6">
-               <div className="w-12 h-12 rounded-full border border-yellow-500/30 flex items-center justify-center"><GitBranch className="text-yellow-500" size={20} /></div>
-               <div><p className="mono text-[9px] text-yellow-500">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
+
+            {/* Node 3 */}
+            <motion.div 
+              variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.4 }}
+              className="flex items-center gap-6"
+            >
+               <div className="w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.05)]">
+                 <GitBranch className="text-yellow-500" size={20} />
+               </div>
+               <div><p className="mono text-[9px] text-yellow-500 uppercase tracking-widest mb-0.5">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
+            </motion.div>
+
+            {/* Vertical Path 3-4 */}
+            <div className="relative h-8 ml-6">
+              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-[var(--border)] border-dashed border-l" />
+              <motion.div 
+                animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 1 }}
+                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-cyan-500"
+              />
             </div>
-            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
-            <div className="flex items-center gap-6">
-               <div className="w-12 h-12 rounded-full border border-cyan-500/30 flex items-center justify-center"><Zap className="text-cyan-500" size={20} /></div>
-               <div><p className="mono text-[9px] text-cyan-500">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
-            </div>
+
+            {/* Node 4 */}
+            <motion.div 
+              variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.6 }}
+              className="flex items-center gap-6"
+            >
+               <div className="w-12 h-12 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.05)]">
+                 <Zap className="text-cyan-500" size={20} />
+               </div>
+               <div><p className="mono text-[9px] text-cyan-500 uppercase tracking-widest mb-0.5">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
+            </motion.div>
+
           </div>
         </div>
 
