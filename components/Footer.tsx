@@ -18,6 +18,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Work',
     links: [
+      { label: 'Start Here',    href: '/start-here', icon: Sparkles },
       { label: 'Portfolio',     href: '/portfolio', icon: BarChart3 },
       { label: 'Case Studies',  href: '/portfolio', icon: BookOpen },
       { label: 'Dashboards',    href: '/portfolio', icon: LayoutDashboard },
@@ -57,6 +58,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Explore',
     links: [
+      { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
       { label: 'Technical Blog', href: '/blog',       icon: BookOpen },
       { label: 'AI Glossary',    href: '/glossary',   icon: Search },
       { label: 'Sitemap Node',   href: '/sitemap.xml', icon: Globe, external: true },
