@@ -60,7 +60,13 @@ export default function PerformanceOptimizer({
         strategy="lazyOnload"
       />
 
-
+      {/* 3. Google AdSense - Deferred for Elite Performance */}
+      <Script
+        id="adsense-init"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+        strategy="lazyOnload"
+        crossOrigin="anonymous"
+      />
     </>
   );
 }
