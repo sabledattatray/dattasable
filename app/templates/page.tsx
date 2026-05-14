@@ -14,7 +14,8 @@ const TEMPLATES = [
     icon: <Layout className="text-blue-500" size={24} />,
     desc: "Surgical-grade financial dashboard with automated GL consolidation and margin variance tracking.",
     size: "4.2 MB",
-    category: "Business Intelligence"
+    category: "Business Intelligence",
+    downloadUrl: "/templates/financial-blueprint.pbit"
   },
   {
     id: 'n8n-agentic-workflow-01',
@@ -23,7 +24,8 @@ const TEMPLATES = [
     icon: <Zap className="text-yellow-500" size={24} />,
     desc: "Advanced n8n workflow for orchestrating multiple LLM agents for technical content distribution.",
     size: "12 KB",
-    category: "Automation"
+    category: "Automation",
+    downloadUrl: "/templates/multi-agent-orchestrator.json"
   },
   {
     id: 'py-data-cleaner-ultra',
@@ -32,7 +34,8 @@ const TEMPLATES = [
     icon: <Database className="text-cyan-500" size={24} />,
     desc: "Production-grade Python script for cleaning 1M+ record datasets with zero context loss.",
     size: "85 KB",
-    category: "Data Engineering"
+    category: "Data Engineering",
+    downloadUrl: "/templates/data-cleaner.py"
   }
 ];
 
@@ -102,10 +105,14 @@ export default function TemplatesPage() {
                    <span className="mono text-[10px] text-[var(--muted)] opacity-50 uppercase mb-1">Filesize</span>
                    <span className="mono text-[12px] font-bold">{template.size}</span>
                 </div>
-                <button className="btn-outline px-6 py-3 flex items-center gap-3 group/dl">
+                <a 
+                  href={template.downloadUrl} 
+                  download 
+                  className="btn-outline px-6 py-3 flex items-center gap-3 group/dl no-underline"
+                >
                    <Download size={16} className="group-hover/dl:translate-y-0.5 transition-transform" />
                    <span className="mono text-[11px] font-bold">DOWNLOAD</span>
-                </button>
+                </a>
               </div>
             </motion.div>
           ))}
