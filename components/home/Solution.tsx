@@ -16,7 +16,7 @@ const SOLUTIONS = [
   },
   {
     icon: <Network className="text-[var(--accent)]" size={28} />,
-    title: "Operational Accuracy",
+    title: "Execution Precision",
     desc: "Deploy execution chains that handle complex multi-step digital operations with verifiable precision."
   }
 ];

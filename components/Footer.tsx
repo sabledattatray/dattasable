@@ -124,7 +124,7 @@ export default function Footer() {
                 fontFamily: "'Syne', sans-serif",
               }}
             >
-              Premier <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> in India. Specializing in high-fidelity <strong>Automated Reporting Solutions</strong> and <strong>Data Engineering</strong>.
+              Premier <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> in India. Specializing in reliable <strong>Automated Reporting Solutions</strong> and <strong>Data Engineering</strong>.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -243,7 +243,7 @@ export default function Footer() {
               color: 'var(--muted)',
             }}
           >
-            © {year} Datta Sable. Built for high performance.
+            © {year} Datta Sable. Built for technical creators.
           </p>
           <div style={{ display: 'flex', gap: '2rem' }}>
             <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: "'Syne', sans-serif", textDecoration: 'none' }}>

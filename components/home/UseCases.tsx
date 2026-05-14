@@ -21,7 +21,7 @@ export default function UseCases() {
       role: "Marketers",
       icon: <Megaphone size={20} />,
       benefit: "Campaign + Copy automation",
-      desc: "Scale your reach without scaling your headcount. Deploy high-fidelity copy engines that adapt to any campaign intent."
+      desc: "Scale your reach without scaling your headcount. Deploy precision-tuned copy automation that adapts to any campaign intent."
     },
     {
       role: "Founders",
