@@ -688,8 +688,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Premium Glossy Header Utility */
 .glossy-header {
-  position: relative;
-  overflow: hidden;
+  /* position: relative; removed to prevent overriding 'fixed' class */
 }
 
 .glossy-header::before {
@@ -699,6 +698,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 100%;
+  border-radius: inherit;
   background: linear-gradient(
     135deg, 
     rgba(255, 255, 255, 0.05) 0%, 
@@ -725,6 +725,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 1px;
+  border-radius: inherit;
   background: linear-gradient(
     to right,
     transparent,
