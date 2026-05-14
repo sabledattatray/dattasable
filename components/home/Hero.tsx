@@ -25,16 +25,12 @@ export default function Hero() {
         overflow: 'hidden',
         padding: '6rem 0 2rem 0',
         backgroundColor: 'var(--bg)',
-        border: 'none'
       }}
     >
       {/* Layer 1: Right-Side Visual - Optimized for Server Rendering */}
       <div
         id="hero-visual-container"
-        className="absolute top-[45%] right-0 -translate-y-1/2 w-full lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh]"
-        style={{
-          opacity: 0.35,
-        }}
+        className="absolute top-[45%] right-[1px] -translate-y-1/2 w-[calc(100%-2px)] lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh] hero-visual-container"
       >
         <div className="relative w-full h-full">
           <Image
@@ -50,18 +46,10 @@ export default function Hero() {
           />
         </div>
         <div
-          className="absolute inset-0 z-10 pointer-events-none"
-          style={{
-            background: 'linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end))'
-          }}
+          className="absolute inset-0 z-10 pointer-events-none hero-gradient-overlay"
         />
         
-        <div className="block lg:hidden" style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, transparent 50%, var(--bg) 100%)',
-          zIndex: 2,
-        }} />
+        <div className="block lg:hidden hero-mobile-fade" />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -77,9 +65,10 @@ export default function Hero() {
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 64px)',
               marginBottom: '2rem',
+              display: 'block'
             }}
           >
-            AI Workflow Infrastructure<br />for <span className="hero-title-inline">Creators & Builders</span>
+            AI Workflow Infrastructure <span className="text-[var(--muted)]">for</span> <span className="hero-title-inline">Creators & Builders</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6, opacity: 0.8 }}>
             Build scalable <strong>AI-powered workflows</strong> using structured prompts, system logic, and automation frameworks.
@@ -136,28 +125,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <style jsx>{`
-        .hero-title-inline {
-          font-family: var(--font-syne);
-          font-weight: 600;
-          letter-spacing: -0.03em;
-          line-height: 1.05;
-          color: var(--text);
-          background: var(--hero-title-bg);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: var(--hero-title-color);
-          display: inline-block;
-          min-height: 1.1em;
-        }
-        .hero-grid-inline {
-          background-image: 
-            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-          background-size: var(--grid-size) var(--grid-size);
-          will-change: transform;
-        }
-      `}</style>
     </section>
   );
 }

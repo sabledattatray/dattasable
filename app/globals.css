@@ -134,6 +134,7 @@ body {
   background: var(--bg);
   border: 1px solid var(--border);
   position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 1100px) {
@@ -632,12 +633,51 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.5rem;
 }
 
-.hero-title {
+.hero-title, .hero-title-inline {
+  font-family: var(--font-syne);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
   color: var(--text);
   background: var(--hero-title-bg);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: var(--hero-title-color);
+  display: inline-block;
+}
+
+.hero-title-inline {
+  display: inline; /* Changed to inline to prevent forced line breaks within sentences */
+}
+
+.hero-grid-inline {
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  will-change: transform;
+}
+
+.hero-visual-container {
+  opacity: var(--hero-mobile-opacity, 0.35);
+  transition: opacity 0.5s ease;
+}
+
+@media (min-width: 1024px) {
+  .hero-visual-container {
+    opacity: 0.35;
+  }
+}
+
+.hero-gradient-overlay {
+  background: linear-gradient(45deg, var(--hero-gradient-color) 0%, var(--hero-gradient-color) var(--hero-gradient-solid), transparent var(--hero-gradient-end));
+}
+
+.hero-mobile-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
+  z-index: 2;
 }
 
 @media (max-width: 640px) {
