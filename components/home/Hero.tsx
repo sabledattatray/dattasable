@@ -13,7 +13,7 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 export default function Hero() {
   return (
     <section
-      className="section hero-grid"
+      className="section hero-grid-inline"
       style={{
         minHeight: '600px',
         height: 'auto',
@@ -42,7 +42,7 @@ export default function Hero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 768px) 100vw, 50vw"
-            quality={60}
+            quality={45}
             className="object-cover"
             style={{ objectPosition: 'center top' }}
           />
@@ -71,18 +71,13 @@ export default function Hero() {
             </span>
           </div>
           <h1
-            className="hero-title lg:mt-6"
+            className="hero-title-inline lg:mt-6"
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 64px)',
-              fontWeight: 600,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.05,
               marginBottom: '2rem',
-              display: 'inline-block',
-              minHeight: '1.1em'
             }}
           >
-            AI Workflow Infrastructure<br />for <span className="hero-title">Creators & Builders</span>
+            AI Workflow Infrastructure<br />for <span className="hero-title-inline">Creators & Builders</span>
           </h1>
           <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6, opacity: 0.8 }}>
             Build scalable <strong>AI-powered workflows</strong> using structured prompts, system logic, and automation frameworks.
@@ -139,6 +134,28 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .hero-title-inline {
+          font-family: var(--font-syne);
+          font-weight: 600;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+          color: var(--text);
+          background: var(--hero-title-bg);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: var(--hero-title-color);
+          display: inline-block;
+          min-height: 1.1em;
+        }
+        .hero-grid-inline {
+          background-image: 
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+          background-size: var(--grid-size) var(--grid-size);
+          will-change: transform;
+        }
+      `}</style>
     </section>
   );
 }

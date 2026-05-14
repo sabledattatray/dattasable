@@ -164,6 +164,7 @@ body {
     linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
+  will-change: transform;
 }
 
 /* Section styling */
@@ -393,6 +394,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive Footer Grid */
 .footer-grid {
   grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+  will-change: transform;
 }
 
 @media (max-width: 1200px) {

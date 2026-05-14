@@ -73,12 +73,12 @@ export default function PrivacyPage() {
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>7. Data Retention</h2>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>8. Data Retention</h2>
               <p>We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
             </section>
 
             <section>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>8. Contact Us</h2>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>9. Contact Us</h2>
               <p>If you have any questions about this privacy policy or our data practices, please contact us at: <a href="mailto:info@dattasable.com" style={{ color: 'var(--accent)', textDecoration: 'none' }}>info@dattasable.com</a></p>
             </section>
           </div>
