@@ -32,8 +32,8 @@ export default function HeroInteraction() {
         <Link href="/tools/demo" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
           EXPLORE SYSTEM DEMO
         </Link>
-        <Link href="/knowledge/architecture" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
-          VIEW ARCHITECTURE
+        <Link href="/knowledge/architecture" className="btn-minimal w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
+          VIEW ARCHITECTURE →
         </Link>
       </div>
 
