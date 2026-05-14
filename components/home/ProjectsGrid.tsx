@@ -69,7 +69,7 @@ const projects = [
   {
     title: 'BFSI Fraud Sentinel',
     category: 'Security BI',
-    desc: 'Advanced fraud detection suite for 10M+ transaction records using Python heuristics and Power BI visual alerting.',
+    desc: 'Advanced fraud detection suite for 1M+ transaction records using Python heuristics and Power BI visual alerting.',
     tools: ['Python', 'SQL', 'Power BI'],
     impact: '99.9% detection rate',
     color: 'var(--accent)',

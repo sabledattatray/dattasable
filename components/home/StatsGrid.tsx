@@ -89,13 +89,10 @@ export default function StatsGrid() {
                 gap: '1.5rem'
               }}
             >
-              {/* Card Header: Icon & Tech ID */}
+              {/* Card Header: Icon */}
               <div className="flex items-start justify-between">
                 <div className="p-3 bg-[var(--tag-bg)] rounded-sm group-hover:bg-[var(--accent)] group-hover:text-black transition-colors duration-500">
                   <s.icon size={22} strokeWidth={1.5} />
-                </div>
-                <div className="mono text-[10px] px-2 py-1 bg-[var(--border)] text-[var(--muted)] tracking-widest uppercase">
-                  {s.code}
                 </div>
               </div>
 

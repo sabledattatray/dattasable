@@ -11,20 +11,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "Surgical AI Workspace | Creator Intelligence Infrastructure",
-  description: "Datta Sable — Architect of the Surgical AI Workspace. High-performance infrastructure for technical founders, AI prompt engineering, and automated creator workflows.",
+  title: "Surgical AI Workspace | AI Workflow Infrastructure",
+  description: "Datta Sable — Independent AI workflow architect specializing in automation systems, BI infrastructure, and structured analytics design.",
   keywords: [
     "Surgical AI Workspace",
     "AI Automation Systems",
     "Workflow Infrastructure",
     "Scalable AI Systems",
     "Surgical Prompt Architecture",
-    "Operator Intent Mapping",
-    "AI Workflow Engineering",
+    "Analytics Engineering",
+    "AI Workflow Systems",
     "Prompt Engineering Workspace",
     "Datta Sable", 
     "Data Strategy Consultant",
-    "Automated Creator Workflows",
+    "Automated Business Workflows",
     "Context Compression Framework"
   ],
   authors: [{ name: "Datta Sable" }],

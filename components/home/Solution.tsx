@@ -12,13 +12,13 @@ export default function Solution() {
     },
     {
       icon: <Workflow className="text-[var(--accent)]" size={28} />,
-      title: "Execution-Ready Workflows",
-      desc: "Connect your AI assets into a repeatable engine that works while you sleep."
+      title: "Automation Pipelines",
+      desc: "Connect modular AI systems into reliable end-to-end data pipelines."
     },
     {
       icon: <Network className="text-[var(--accent)]" size={28} />,
-      title: "Scalable Automation Pipelines",
-      desc: "Deploy execution chains that handle complex multi-step digital operations."
+      title: "Operational Accuracy",
+      desc: "Deploy execution chains that handle complex multi-step digital operations with verifiable precision."
     }
   ];
 
@@ -51,8 +51,8 @@ export default function Solution() {
               <div className="mb-8 p-4 bg-[var(--surface2)] w-fit rounded-sm group-hover:bg-[var(--accent)] group-hover:text-black transition-colors duration-500">
                 {s.icon}
               </div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 600 }}>{s.title}</h3>
-              <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{s.desc}</p>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem' }}>{s.title}</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{s.desc}</p>
               
               <div className="mt-8 flex items-center gap-2 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <CheckCircle2 size={16} />

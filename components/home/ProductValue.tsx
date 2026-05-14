@@ -16,14 +16,14 @@ export default function ProductValue() {
       desc: "Standardized templates for high-fidelity prompt engineering and logic mapping."
     },
     {
-      icon: <GitBranch size={24} />,
-      title: "Execution Chain Templates",
-      desc: "Pre-built multi-step automation chains for content, data, and digital ops."
+      icon: <Cpu className="w-8 h-8" />,
+      title: "Automation Pipelines",
+      desc: "Turn scattered prompts into repeatable, automated data workflows."
     },
     {
-      icon: <Layout size={24} />,
-      title: "Scalable System Design Patterns",
-      desc: "Architectural blueprints for building high-authority AI platforms that scale."
+      icon: <Network className="w-8 h-8" />,
+      title: "Reliable Systems",
+      desc: "Systems built for precision and verifiable output consistency."
     }
   ];
 
