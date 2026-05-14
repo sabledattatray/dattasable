@@ -70,6 +70,7 @@ input:-webkit-autofill:active {
   --grid-color: #ececec;
   --hero-title-bg: linear-gradient(135deg, #000000 0%, var(--accent) 55%, #0369a1 100%);
   --hero-title-color: transparent;
+  --btn-primary-bg: linear-gradient(135deg, var(--accent) 0%, #003d7a 100%);
   --btn-primary-text: #ffffff;
   --hero-img-overlay: transparent; /* Perfectly clean for light mode */
   --hero-gradient-color: #ffffff; /* White for light mode */
@@ -289,6 +290,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #000;
 }
 
+.light .btn-primary:hover {
+  background: #00478F;
+  color: #fff;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--text);
@@ -308,7 +314,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .light .btn-outline {
-  border-color: #d4d4d8;
+  border-color: #a1a1aa;
+  color: #18181b;
+}
+
+.light .btn-outline:hover {
+  background: #f4f4f5;
+  border-color: #18181b;
 }
 
 /* Scrollbar */
