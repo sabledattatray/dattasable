@@ -17,8 +17,6 @@ const MobileMenu = dynamic(() => import('./MobileMenu'), { ssr: false });
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
-  { label: 'Start Here', href: '/start-here' },
-  { label: 'Live Feed', href: '/analytics-live' },
   { label: 'Services', href: '/services', mega: true },
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Dashboards', href: '/dashboards', mega: true },
@@ -146,7 +144,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`px-6 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
+                    className={`px-4 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
                       pathname === link.href || (hovered === link.label && link.mega)
                         ? 'text-[var(--accent)]' 
                         : 'text-[var(--text)] opacity-75 hover:opacity-100'
