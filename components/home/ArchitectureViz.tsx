@@ -159,7 +159,7 @@ export default function ArchitectureViz() {
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-[var(--accent)]"
+                className="absolute left-[-2.5px] w-[6px] h-[6px] rounded-full bg-[var(--accent)] shadow-[0_0_8px_rgba(var(--accent-rgb),0.5)]"
               />
             </div>
 
@@ -180,7 +180,7 @@ export default function ArchitectureViz() {
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
-                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-yellow-500"
+                className="absolute left-[-2.5px] w-[6px] h-[6px] rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"
               />
             </div>
 
@@ -201,7 +201,7 @@ export default function ArchitectureViz() {
               <motion.div 
                 animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 1 }}
-                className="absolute left-[-1.5px] w-[4px] h-[4px] rounded-full bg-cyan-500"
+                className="absolute left-[-2.5px] w-[6px] h-[6px] rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]"
               />
             </div>
 
