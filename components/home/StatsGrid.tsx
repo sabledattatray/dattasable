@@ -56,17 +56,18 @@ export default function StatsGrid() {
            style={{ backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
       <div className="container relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div>
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-20">
+          <div className="max-w-xl">
             <TechLabel>Performance Metrics</TechLabel>
-            <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', fontFamily: "'Syne', sans-serif" }}>
+            <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', fontFamily: "'Syne', sans-serif", lineHeight: 1.1 }}>
               Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
             </h2>
           </div>
-          <div className="hidden md:block h-[1px] flex-grow mx-8 bg-[var(--border)] opacity-30" />
-          <p style={{ color: 'var(--muted)', fontSize: '0.9rem', maxWidth: '300px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-            High-fidelity data metrics from live deployment environments across global territories.
-          </p>
+          <div className="flex-shrink-0 md:pt-12">
+            <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '320px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
+              High-fidelity data metrics from live deployment environments across global territories.
+            </p>
+          </div>
         </div>
 
         <div className="metrics-grid">
