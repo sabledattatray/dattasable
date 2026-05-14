@@ -43,12 +43,12 @@ export default function ArchitectureViz() {
             <div className="flex flex-col items-center gap-6">
               <motion.div 
                 variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}
-                className="w-20 h-20 rounded-full border border-red-500/30 bg-red-500/5 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.1)]"
+                className="w-20 h-20 rounded-full border border-indigo-500/30 bg-indigo-500/5 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.1)]"
               >
-                <Database className="text-red-500" size={32} />
+                <Database className="text-indigo-500" size={32} />
               </motion.div>
               <div className="text-center">
-                <p className="mono text-[10px] text-red-500 uppercase tracking-widest mb-1">Source: Scattered</p>
+                <p className="mono text-[10px] text-indigo-500 uppercase tracking-widest mb-1">Source: Scattered</p>
                 <h3 className="text-[14px] font-bold">Unstructured Data</h3>
               </div>
             </div>
@@ -143,8 +143,8 @@ export default function ArchitectureViz() {
           <div className="lg:hidden flex flex-col gap-12 relative z-10">
             {/* ... Mobile implementation (simpler) ... */}
             <div className="flex items-center gap-6">
-               <div className="w-12 h-12 rounded-full border border-red-500/30 flex items-center justify-center"><Database className="text-red-500" size={20} /></div>
-               <div><p className="mono text-[9px] text-red-500">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
+               <div className="w-12 h-12 rounded-full border border-indigo-500/30 flex items-center justify-center"><Database className="text-indigo-500" size={20} /></div>
+               <div><p className="mono text-[9px] text-indigo-500">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
             </div>
             <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
             <div className="flex items-center gap-6">
