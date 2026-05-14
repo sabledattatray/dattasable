@@ -13,6 +13,10 @@ const Solution = dynamic(() => import('@/components/home/Solution'), {
   loading: () => <div className="h-[500px] bg-[var(--bg)] animate-pulse" />
 });
 
+const ArchitectureViz = dynamic(() => import('@/components/home/ArchitectureViz'), { 
+  loading: () => <div className="h-[500px] bg-[var(--bg)] animate-pulse" />
+});
+
 const StatsGrid = dynamic(() => import('@/components/home/StatsGrid'), { 
   loading: () => <div className="h-[400px] bg-[var(--surface2)] animate-pulse" />
 });
@@ -62,7 +66,10 @@ export default function HomePage() {
         {/* ── 3. SOLUTION ── */}
         <Solution />
 
-        {/* ── 4. DATA METRICS ── */}
+        {/* ── 4. ARCHITECTURE VIZ ── */}
+        <ArchitectureViz />
+
+        {/* ── 5. DATA METRICS ── */}
         <StatsGrid />
 
         {/* ── 5. HOW IT WORKS ── */}

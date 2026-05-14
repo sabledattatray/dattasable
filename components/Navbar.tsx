@@ -9,7 +9,7 @@ import {
   Menu, X, ArrowUpRight,
   BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown,
   PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings,
-  PenTool
+  PenTool, Library, Archive
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
@@ -22,6 +22,7 @@ const navLinks = [
   { label: 'Dashboards', href: '/dashboards', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
   { label: 'Workspace', href: '/tools', mega: true },
+  { label: 'Templates', href: '/templates' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -79,7 +80,8 @@ const megaMenuData: Record<string, any> = {
   },
   Workspace: {
     items: [
-      { title: 'Prompt Auditor', desc: 'Surgical audit for LLM prompts.', icon: <Shield size={20} className="text-[var(--accent)]" />, href: '/tools/prompt-auditor' },
+      { title: 'Templates Hub', desc: 'Downloadable system blueprints.', icon: <Library size={20} className="text-[var(--accent)]" />, href: '/templates' },
+      { title: 'Prompt Auditor', desc: 'Surgical audit for LLM prompts.', icon: <Shield size={20} />, href: '/tools/prompt-auditor' },
       { title: 'Context Optimizer', desc: 'Token density & bloat analysis.', icon: <Zap size={20} />, href: '/tools/prompt-auditor' },
       { title: 'Data Forge', desc: 'Synthetic dataset generation.', icon: <Database size={20} />, href: '/data-forge' },
       { title: 'Analytics Feed', desc: 'Real-time performance metrics.', icon: <Activity size={20} />, href: '/analytics-live' },

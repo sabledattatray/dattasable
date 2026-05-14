@@ -1,101 +1,122 @@
-import { Metadata } from 'next';
+'use client';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { TEMPLATES } from '@/data/templates';
-import { 
-  Library, 
-  ArrowRight, 
-  Sparkles, 
-  Zap, 
-  Share2, 
-  Wand2, 
-  Search, 
-  Layout 
-} from 'lucide-react';
-import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Download, FileText, Layout, Database, Zap, Search, Filter } from 'lucide-react';
+import { useState } from 'react';
 
-export const metadata: Metadata = {
-  title: "Operator Template Packs | Surgical AI Workflow Assets",
-  description: "A curated collection of high-fidelity templates for LinkedIn, AI Prompt Engineering, and technical SEO. Boost your creative output with operator-grade blueprints.",
-};
+const TEMPLATES = [
+  {
+    id: 'pbi-fin-dashboard-v1',
+    title: "Financial Intelligence Blueprint",
+    type: "Power BI",
+    icon: <Layout className="text-blue-500" size={24} />,
+    desc: "Surgical-grade financial dashboard with automated GL consolidation and margin variance tracking.",
+    size: "4.2 MB",
+    category: "Business Intelligence"
+  },
+  {
+    id: 'n8n-agentic-workflow-01',
+    title: "Multi-Agent AI Orchestrator",
+    type: "n8n JSON",
+    icon: <Zap className="text-yellow-500" size={24} />,
+    desc: "Advanced n8n workflow for orchestrating multiple LLM agents for technical content distribution.",
+    size: "12 KB",
+    category: "Automation"
+  },
+  {
+    id: 'py-data-cleaner-ultra',
+    title: "Data Sanitization Engine",
+    type: "Python",
+    icon: <Database className="text-cyan-500" size={24} />,
+    desc: "Production-grade Python script for cleaning 1M+ record datasets with zero context loss.",
+    size: "85 KB",
+    category: "Data Engineering"
+  }
+];
 
-const CATEGORY_ICONS: Record<string, any> = {
-  'LinkedIn': <Share2 size={18} />,
-  'AI Prompts': <Wand2 size={18} />,
-  'SEO': <Search size={18} />,
-  'Creator': <Layout size={18} />,
-};
+export default function TemplatesPage() {
+  const [search, setSearch] = useState('');
 
-export default function TemplateHub() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       
-      <main className="boxed-wrapper" style={{ marginBottom: '80px' }}>
-        <section className="section" style={{ paddingTop: 'clamp(6rem, 10vw, 8rem)' }}>
-          <div className="container">
-            <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                  <Library size={20} />
-                </div>
-                <div className="label-tech">KNOWLEDGE-ASSETS-V1.0</div>
-              </div>
-              <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1, marginBottom: '1.5rem' }}>
-                Operator <span className="hero-title">Templates</span>
-              </h1>
-              <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                Expert-grade blueprints engineered for high-performance workflows. Inject these structures directly into your modules to achieve surgical results instantly.
-              </p>
-            </div>
+      <main className="container py-32">
+        <header className="mb-16">
+          <div className="label-tech mb-6 text-[var(--accent)]">Asset Library / V1.0</div>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 800, marginBottom: '1.5rem' }}>
+            Technical <span style={{ color: 'var(--accent)' }}>Templates.</span>
+          </h1>
+          <p style={{ color: 'var(--muted)', fontSize: '1.25rem', maxWidth: '600px', lineHeight: 1.6 }}>
+            Download production-grade infrastructure blueprints for your automation and intelligence workflows.
+          </p>
+        </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {TEMPLATES.map((template) => (
-                <Link key={template.id} href={`/templates/${template.slug}`} className="no-underline group">
-                  <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
-                    <div className="flex justify-between items-start mb-6">
-                      <div style={{ color: 'var(--accent)', opacity: 0.8 }}>
-                        {CATEGORY_ICONS[template.category]}
-                      </div>
-                      <div className="px-2 py-1 text-[9px] mono font-bold border border-[var(--border)] rounded opacity-60">
-                        {template.category.toUpperCase()}
-                      </div>
-                    </div>
-
-                    <h3 className="text-lg font-bold mb-3 text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
-                      {template.title}
-                    </h3>
-                    
-                    <p className="text-[var(--muted)] text-xs leading-relaxed mb-8 flex-1">
-                      {template.description}
-                    </p>
-
-                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
-                      <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
-                        VIEW_BLUEPRINT <ArrowRight size={12} />
-                      </div>
-                      <Sparkles size={12} className="text-[var(--muted)] opacity-20" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* Bottom SEO Callout */}
-            <div className="mt-20 p-12 card border-dashed text-center" style={{ background: 'var(--bg)' }}>
-              <Zap size={32} className="text-[var(--accent)] mx-auto mb-6 animate-pulse" />
-              <h2 className="text-2xl font-bold mb-4">Scalable Content Assets</h2>
-              <p className="text-[var(--muted)] max-w-xl mx-auto text-sm leading-relaxed mb-8">
-                Each template is a landing page for high-intent search traffic. Our infrastructure turns these assets into habit-forming creator workflows.
-              </p>
-              <div className="flex justify-center gap-4">
-                <div className="label-tech">90+ PAGESPEED</div>
-                <div className="label-tech">SEO OPTIMIZED</div>
-                <div className="label-tech">AI POWERED</div>
-              </div>
-            </div>
+        {/* Filter Bar */}
+        <div className="flex flex-col md:flex-row gap-6 mb-12">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={18} />
+            <input 
+              type="text"
+              placeholder="Search templates (e.g. n8n, Power BI)..."
+              className="w-full bg-[var(--surface2)] border border-[var(--border)] rounded-sm py-4 pl-12 pr-4 text-white mono text-[14px] focus:outline-none focus:border-[var(--accent)] transition-colors"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-        </section>
+          <button className="flex items-center gap-3 px-8 py-4 bg-[var(--surface2)] border border-[var(--border)] rounded-sm hover:border-[var(--accent)] transition-all">
+            <Filter size={18} className="text-[var(--accent)]" />
+            <span className="mono text-[12px] font-bold tracking-widest">FILTER</span>
+          </button>
+        </div>
+
+        {/* Templates Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TEMPLATES.filter(t => t.title.toLowerCase().includes(search.toLowerCase()) || t.type.toLowerCase().includes(search.toLowerCase())).map((template, i) => (
+            <motion.div
+              key={template.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="card group flex flex-col h-full"
+              style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
+            >
+              <div className="flex items-center justify-between mb-8">
+                <div className="p-4 bg-[var(--bg)] rounded-sm">
+                  {template.icon}
+                </div>
+                <div className="tag mono text-[10px] tracking-[0.2em]">{template.type}</div>
+              </div>
+
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+                {template.title}
+              </h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
+                {template.desc}
+              </p>
+
+              <div className="pt-6 border-t border-[var(--border)] flex items-center justify-between">
+                <div className="flex flex-col">
+                   <span className="mono text-[10px] text-[var(--muted)] opacity-50 uppercase mb-1">Filesize</span>
+                   <span className="mono text-[12px] font-bold">{template.size}</span>
+                </div>
+                <button className="btn-outline px-6 py-3 flex items-center gap-3 group/dl">
+                   <Download size={16} className="group-hover/dl:translate-y-0.5 transition-transform" />
+                   <span className="mono text-[11px] font-bold">DOWNLOAD</span>
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Lead Capture Overlay (Coming soon / CTA) */}
+        <div className="mt-32 p-12 border-2 border-dashed border-[var(--border)] rounded-sm text-center">
+           <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Need a custom architecture?</h3>
+           <p style={{ color: 'var(--muted)', marginBottom: '2.5rem' }}>We build bespoke automation systems tailored to your specific business logic.</p>
+           <a href="/contact" className="btn-primary inline-flex py-4 px-12">REQUEST ARCHITECTURE BUILD</a>
+        </div>
       </main>
 
       <Footer />

@@ -1,0 +1,185 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Database, Cpu, GitBranch, Zap, CheckCircle2, ArrowRight } from 'lucide-react';
+
+const NODE_VARIANTS = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: { opacity: 1, scale: 1 },
+};
+
+const PATH_VARIANTS = {
+  initial: { pathLength: 0, opacity: 0 },
+  animate: { 
+    pathLength: 1, 
+    opacity: 1,
+    transition: { duration: 1.5, ease: "easeInOut" }
+  },
+};
+
+export default function ArchitectureViz() {
+  return (
+    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
+      <div className="container">
+        <div className="mb-20">
+          <div className="label-tech mb-6 text-[var(--accent)]">System Architecture</div>
+          <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif" }}>
+            The <span style={{ color: 'var(--accent)' }}>Surgical Workflow</span> Chain
+          </h2>
+          <p className="mt-4" style={{ color: 'var(--muted)', maxWidth: '500px', lineHeight: 1.6 }}>
+            Visualizing the transformation from scattered data to production-ready automation systems.
+          </p>
+        </div>
+
+        <div className="relative py-20 px-4 border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden">
+          {/* Blueprint Grid Background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+               style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
+          {/* Desktop Flow (Hidden on Mobile) */}
+          <div className="hidden lg:flex items-center justify-between relative z-10 max-w-5xl mx-auto">
+            
+            {/* Node 1: Input */}
+            <div className="flex flex-col items-center gap-6">
+              <motion.div 
+                variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}
+                className="w-20 h-20 rounded-full border border-red-500/30 bg-red-500/5 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.1)]"
+              >
+                <Database className="text-red-500" size={32} />
+              </motion.div>
+              <div className="text-center">
+                <p className="mono text-[10px] text-red-500 uppercase tracking-widest mb-1">Source: Scattered</p>
+                <h3 className="text-[14px] font-bold">Unstructured Data</h3>
+              </div>
+            </div>
+
+            {/* Path 1-2 */}
+            <div className="flex-1 px-8 relative">
+              <svg className="w-full h-8 overflow-visible">
+                <motion.path 
+                  d="M 0 16 L 200 16" fill="transparent" stroke="var(--border)" strokeWidth="1" strokeDasharray="5,5"
+                  variants={PATH_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}
+                />
+                <motion.circle r="3" fill="var(--accent)"
+                  animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+              </svg>
+            </div>
+
+            {/* Node 2: Processing */}
+            <div className="flex flex-col items-center gap-6">
+              <motion.div 
+                variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.3 }}
+                className="w-20 h-20 rounded-full border border-[var(--accent)] bg-[var(--accent)]/5 flex items-center justify-center shadow-[0_0_30px_rgba(var(--accent-rgb),0.1)]"
+              >
+                <Cpu className="text-[var(--accent)]" size={32} />
+              </motion.div>
+              <div className="text-center">
+                <p className="mono text-[10px] text-[var(--accent)] uppercase tracking-widest mb-1">Module: Surgical™</p>
+                <h3 className="text-[14px] font-bold">Logic Processing</h3>
+              </div>
+            </div>
+
+            {/* Path 2-3 */}
+            <div className="flex-1 px-8 relative">
+              <svg className="w-full h-8 overflow-visible">
+                <motion.path 
+                  d="M 0 16 L 200 16" fill="transparent" stroke="var(--border)" strokeWidth="1" strokeDasharray="5,5"
+                  variants={PATH_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.6 }}
+                />
+                <motion.circle r="3" fill="#fff134"
+                  animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                />
+              </svg>
+            </div>
+
+            {/* Node 3: Orchestration */}
+            <div className="flex flex-col items-center gap-6">
+              <motion.div 
+                variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.6 }}
+                className="w-20 h-20 rounded-full border border-yellow-500/30 bg-yellow-500/5 flex items-center justify-center shadow-[0_0_30px_rgba(234,179,8,0.1)]"
+              >
+                <GitBranch className="text-yellow-500" size={32} />
+              </motion.div>
+              <div className="text-center">
+                <p className="mono text-[10px] text-yellow-500 uppercase tracking-widest mb-1">Layer: n8n Flow</p>
+                <h3 className="text-[14px] font-bold">Orchestration</h3>
+              </div>
+            </div>
+
+            {/* Path 3-4 */}
+            <div className="flex-1 px-8 relative">
+              <svg className="w-full h-8 overflow-visible">
+                <motion.path 
+                  d="M 0 16 L 200 16" fill="transparent" stroke="var(--border)" strokeWidth="1" strokeDasharray="5,5"
+                  variants={PATH_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.9 }}
+                />
+                <motion.circle r="3" fill="#00d4ff"
+                  animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
+                />
+              </svg>
+            </div>
+
+            {/* Node 4: Output */}
+            <div className="flex flex-col items-center gap-6">
+              <motion.div 
+                variants={NODE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ delay: 0.9 }}
+                className="w-20 h-20 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.1)]"
+              >
+                <Zap className="text-cyan-500" size={32} />
+              </motion.div>
+              <div className="text-center">
+                <p className="mono text-[10px] text-cyan-500 uppercase tracking-widest mb-1">Status: Production</p>
+                <h3 className="text-[14px] font-bold">Automation System</h3>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Mobile Flow (Simple vertical list) */}
+          <div className="lg:hidden flex flex-col gap-12 relative z-10">
+            {/* ... Mobile implementation (simpler) ... */}
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-12 rounded-full border border-red-500/30 flex items-center justify-center"><Database className="text-red-500" size={20} /></div>
+               <div><p className="mono text-[9px] text-red-500">SOURCE</p><h3 className="text-[12px] font-bold">Unstructured Data</h3></div>
+            </div>
+            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-12 rounded-full border border-[var(--accent)] flex items-center justify-center"><Cpu className="text-[var(--accent)]" size={20} /></div>
+               <div><p className="mono text-[9px] text-[var(--accent)]">MODULE</p><h3 className="text-[12px] font-bold">Surgical Processing</h3></div>
+            </div>
+            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-12 rounded-full border border-yellow-500/30 flex items-center justify-center"><GitBranch className="text-yellow-500" size={20} /></div>
+               <div><p className="mono text-[9px] text-yellow-500">LAYER</p><h3 className="text-[12px] font-bold">Orchestration</h3></div>
+            </div>
+            <div className="w-[1px] h-8 bg-[var(--border)] ml-6" />
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-12 rounded-full border border-cyan-500/30 flex items-center justify-center"><Zap className="text-cyan-500" size={20} /></div>
+               <div><p className="mono text-[9px] text-cyan-500">STATUS</p><h3 className="text-[12px] font-bold">Automation Ready</h3></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Technical Specs Bar */}
+        <div className="mt-8 flex flex-wrap justify-center gap-x-12 gap-y-6">
+          <div className="flex items-center gap-3">
+            <CheckCircle2 size={14} className="text-[var(--accent)]" />
+            <span className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Latency: &lt;200ms</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <CheckCircle2 size={14} className="text-[var(--accent)]" />
+            <span className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Precision: 99.9%</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <CheckCircle2 size={14} className="text-[var(--accent)]" />
+            <span className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Availability: 24/7</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
