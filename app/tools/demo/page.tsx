@@ -3,6 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Play, Activity, Server, Database, Layers, CheckCircle2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -107,7 +108,9 @@ export default function SystemDemoPage() {
 
               <div className="mt-12 p-12 border border-[var(--border)] rounded-sm text-center">
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: 700 }}>Ready to deploy your own system?</h3>
-                <button className="btn-primary">START BUILDING WORKFLOWS</button>
+                <Link href="/tools" className="btn-primary inline-block" style={{ textDecoration: 'none' }}>
+                  START BUILDING WORKFLOWS
+                </Link>
               </div>
             </div>
           </div>
