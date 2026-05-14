@@ -43,10 +43,10 @@ export default function TemplatesPage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       
-      <main className="container py-32">
+      <main className="container py-32" style={{ paddingTop: '160px' }}>
         <header className="mb-16">
           <div className="label-tech mb-6 text-[var(--accent)]">Asset Library / V1.0</div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 800, marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '48px', fontFamily: "'Syne', sans-serif", fontWeight: 800, marginBottom: '1.5rem' }}>
             Technical <span style={{ color: 'var(--accent)' }}>Templates.</span>
           </h1>
           <p style={{ color: 'var(--muted)', fontSize: '1.25rem', maxWidth: '600px', lineHeight: 1.6 }}>
