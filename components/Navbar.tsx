@@ -123,7 +123,7 @@ export default function Navbar() {
             : 'top-0 w-full bg-transparent py-4 border-b border-transparent'
         }`}
       >
-        <div className="w-full max-w-[1448px] lg:px-12" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+        <div className="w-full max-w-[1448px] lg:px-12 relative z-10" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group whitespace-nowrap flex-shrink-0" style={{ textDecoration: 'none' }}>
