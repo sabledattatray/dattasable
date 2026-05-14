@@ -42,7 +42,7 @@ export default function SystemDemoPage() {
           <div className="flex flex-col lg:flex-row gap-16">
             <div className="lg:w-1/3">
               <div className="label-tech mb-8">System Demo</div>
-              <h1 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 800, marginBottom: '2rem', lineHeight: 1.1 }}>
+              <h1 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
                 Live System <span style={{ color: 'var(--accent)' }}>Telemetry.</span>
               </h1>
               <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '3rem' }}>
