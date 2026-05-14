@@ -61,7 +61,7 @@ export default function StatsGrid() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end">
             <div>
-              <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', lineHeight: 1, fontFamily: "'Syne', sans-serif", fontWeight: 800 }}>
+              <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
                 Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
               </h2>
             </div>
