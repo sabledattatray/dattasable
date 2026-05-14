@@ -56,19 +56,18 @@ export default function StatsGrid() {
            style={{ backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
       <div className="container relative z-10">
-        <div className="mb-20">
-          <TechLabel>Performance Metrics</TechLabel>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mt-6">
-            <div className="max-w-xl">
-              <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif", lineHeight: 1.1 }}>
-                Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
-              </h2>
-            </div>
-            <div className="flex-shrink-0 md:pb-2">
-              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '320px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-                High-fidelity data metrics from live deployment environments across global territories.
-              </p>
-            </div>
+        {/* Nuclear Alignment Grid: Forced Baseline Sync */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12 mb-20">
+          <div className="max-w-xl">
+            <TechLabel>Performance Metrics</TechLabel>
+            <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', fontFamily: "'Syne', sans-serif", lineHeight: 1.1 }}>
+              Operational <span style={{ color: 'var(--accent)' }}>Excellence.</span>
+            </h2>
+          </div>
+          <div className="flex-shrink-0 md:pb-2">
+            <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '320px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
+              High-fidelity data metrics from live deployment environments across global territories.
+            </p>
           </div>
         </div>
 
