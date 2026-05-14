@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Sales Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{
+font-family:'Syne',sans-serif;
+transition:all .3s ease;
+}
+.glass{
+backdrop-filter:blur(14px);
+transition:all .3s ease;
+}
+.glass:hover{
+transform:translateY(-4px);
+box-shadow:0 0 25px rgba(34,211,238,.15);
+}
+.light-mode{
+background:#F4F7FC !important;
+color:#0B1120 !important;
+}
+.light-mode .cardbg{
+background:#ffffff !important;
+border-color:#dbe4f0 !important;
+}
+.light-mode .text-gray-300,
+.light-mode .text-gray-400,
+.light-mode .text-gray-500{
+color:#475569 !important;
+}
+.live-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#22c55e;
+animation:pulse 1.5s infinite;
+display:inline-block;
+}
+@keyframes pulse{
+0%{opacity:.5;transform:scale(.9)}
+50%{opacity:1;transform:scale(1.2)}
+100%{opacity:.5;transform:scale(.9)}
+}
+</style>
+</head>
+<body id="dashboard" class="bg-[#0B1120] text-white min-h-screen p-6">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+<div>
+<h1 class="text-4xl font-bold">Revenue Intelligence Dashboard</h1>
+<p class="text-gray-400 mt-2">Interactive Power BI Style Analytics System</p>
+</div>
+
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-[#111827] cardbg border border-gray-700 px-4 py-2 rounded-2xl glass">
+<span class="live-dot"></span>
+<span class="text-sm">Live Analytics</span>
+</div>
+
+<button onclick="toggleTheme()" class="bg-cyan-500 hover:bg-cyan-400 text-black px-5 py-2 rounded-2xl font-semibold transition">
+Toggle Theme
+</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<p class="text-gray-400 text-sm">Total Revenue</p>
+<h2 class="text-4xl font-bold mt-2 counter" data-target="1240">0</h2>
+<p class="text-cyan-400 mt-3">+18.4% this month</p>
+</div>
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<p class="text-gray-400 text-sm">Net Profit</p>
+<h2 class="text-4xl font-bold mt-2 counter" data-target="286">0</h2>
+<p class="text-cyan-400 mt-3">+9.2% this month</p>
+</div>
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<p class="text-gray-400 text-sm">Orders</p>
+<h2 class="text-4xl font-bold mt-2 counter" data-target="18540">0</h2>
+<p class="text-cyan-400 mt-3">+14.7% this month</p>
+</div>
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<p class="text-gray-400 text-sm">Conversion Rate</p>
+<h2 class="text-4xl font-bold mt-2">6.8%</h2>
+<p class="text-cyan-400 mt-3">+2.1% this month</p>
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+
+<div class="xl:col-span-2 bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<div class="flex justify-between items-center mb-5">
+<div>
+<h3 class="text-2xl font-semibold">Revenue Trend</h3>
+<p class="text-gray-400 text-sm">Monthly performance analytics</p>
+</div>
+<span class="text-cyan-400">2026</span>
+</div>
+
+<canvas id="salesChart" height="120"></canvas>
+</div>
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<h3 class="text-2xl font-semibold mb-5">Revenue Sources</h3>
+<canvas id="donutChart"></canvas>
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass">
+<h3 class="text-2xl font-semibold mb-6">Regional Performance</h3>
+
+<div class="space-y-5">
+<div>
+<div class="flex justify-between mb-2">
+<span>North America</span>
+<span>84%</span>
+</div>
+<div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+<div class="bg-cyan-400 h-full rounded-full w-[84%]"></div>
+</div>
+</div>
+
+<div>
+<div class="flex justify-between mb-2">
+<span>Europe</span>
+<span>71%</span>
+</div>
+<div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+<div class="bg-purple-400 h-full rounded-full w-[71%]"></div>
+</div>
+</div>
+
+<div>
+<div class="flex justify-between mb-2">
+<span>Asia Pacific</span>
+<span>63%</span>
+</div>
+<div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+<div class="bg-blue-400 h-full rounded-full w-[63%]"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-[#111827] cardbg border border-gray-800 rounded-3xl p-6 glass overflow-x-auto">
+<div class="flex justify-between items-center mb-5">
+<h3 class="text-2xl font-semibold">Recent Transactions</h3>
+<input type="text" id="searchInput" placeholder="Search..." class="bg-[#0B1120] border border-gray-700 px-4 py-2 rounded-xl outline-none">
+</div>
+
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-gray-700 text-gray-400">
+<th class="py-4">Customer</th>
+<th>Region</th>
+<th>Revenue</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+<tr class="border-b border-gray-800 hover:bg-[#0B1120]">
+<td class="py-4">James Carter</td>
+<td>USA</td>
+<td>$12,450</td>
+<td><span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs">Completed</span></td>
+</tr>
+<tr class="border-b border-gray-800 hover:bg-[#0B1120]">
+<td class="py-4">Sophia Lee</td>
+<td>Germany</td>
+<td>$8,920</td>
+<td><span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">Pending</span></td>
+</tr>
+<tr class="border-b border-gray-800 hover:bg-[#0B1120]">
+<td class="py-4">Aarav Mehta</td>
+<td>India</td>
+<td>$15,780</td>
+<td><span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs">Completed</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function toggleTheme(){
+ document.getElementById('dashboard').classList.toggle('light-mode');
+}
+
+const counters=document.querySelectorAll('.counter');
+counters.forEach(counter=>{
+ counter.innerText='0';
+ const update=()=>{
+ const target=+counter.getAttribute('data-target');
+ const c=+counter.innerText.replace(/,/g,'');
+ const inc=target/50;
+ if(c<target){
+ counter.innerText=Math.ceil(c+inc).toLocaleString();
+ setTimeout(update,30);
+ }else{
+ counter.innerText=target.toLocaleString();
+ }
+ }
+ update();
+});
+
+new Chart(document.getElementById('salesChart'),{
+ type:'line',
+ data:{
+ labels:['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+ datasets:[{
+ label:'Revenue',
+ data:[12,19,14,22,28,24,32],
+ borderColor:'#22d3ee',
+ backgroundColor:'rgba(34,211,238,.15)',
+ tension:.4,
+ fill:true
+ }]
+ },
+ options:{
+ plugins:{legend:{labels:{color:'#fff'}}},
+ scales:{
+ y:{ticks:{color:'#94a3b8'}},
+ x:{ticks:{color:'#94a3b8'}}
+ }
+ }
+});
+
+new Chart(document.getElementById('donutChart'),{
+ type:'doughnut',
+ data:{
+ labels:['Direct','Online','Partner'],
+ datasets:[{
+ data:[45,30,25],
+ backgroundColor:['#22d3ee','#8b5cf6','#3b82f6']
+ }]
+ },
+ options:{
+ plugins:{legend:{labels:{color:'#fff'}}}
+ }
+});
+
+const searchInput=document.getElementById('searchInput');
+searchInput.addEventListener('keyup',function(){
+ const value=this.value.toLowerCase();
+ document.querySelectorAll('#tableBody tr').forEach(row=>{
+ row.style.display=row.innerText.toLowerCase().includes(value)?'':'none';
+ });
+});
+</script>
+
+</body>
+</html>

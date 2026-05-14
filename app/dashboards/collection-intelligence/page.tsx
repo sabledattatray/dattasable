@@ -3,8 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 export default function CollectionIntelligencePage() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
   const [mounted, setMounted] = useState(false);
   const [intensities, setIntensities] = useState<number[]>([]);
   const trendCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,11 +25,11 @@ export default function CollectionIntelligencePage() {
     red: '#ff3366',
     yellow: '#ffd700',
     purple: '#9b59ff',
-    bg: '#000000',
-    card: '#0a0a0a',
-    t1: 'rgba(255,255,255,0.85)',
-    t2: 'rgba(255,255,255,0.45)',
-    t3: 'rgba(255,255,255,0.2)'
+    bg: 'var(--bg)',
+    card: 'var(--surface)',
+    t1: isDark ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)',
+    t2: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.45)',
+    t3: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'
   };
 
   function rgba(hex: string, a: number) {
@@ -63,7 +66,7 @@ export default function CollectionIntelligencePage() {
       [3.5, 4.0, 4.5, 5.0, 5.5].forEach(v => {
         const y = toY(v);
         c.beginPath(); c.moveTo(pad.l, y); c.lineTo(W - pad.r, y);
-        c.strokeStyle = 'rgba(255,255,255,0.05)'; c.lineWidth = 1; c.stroke();
+        c.strokeStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; c.lineWidth = 1; c.stroke();
         c.fillStyle = C.t3; c.font = '10px Rajdhani'; c.textAlign = 'right';
         c.fillText(v.toFixed(1) + 'Cr', pad.l - 4, y + 4);
       });
@@ -106,7 +109,7 @@ export default function CollectionIntelligencePage() {
       const pct = 0.947;
 
       c.beginPath(); c.arc(cx, cy, R, Math.PI, 0);
-      c.lineWidth = 16; c.strokeStyle = 'rgba(255,255,255,0.06)'; c.stroke();
+      c.lineWidth = 16; c.strokeStyle = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'; c.stroke();
 
       const segments = [
         {from:0, to:0.6, color:C.red},
@@ -128,9 +131,9 @@ export default function CollectionIntelligencePage() {
       c.beginPath();
       c.moveTo(cx, cy);
       c.lineTo(cx + (R*0.72) * Math.cos(angle), cy + (R*0.72) * Math.sin(angle));
-      c.strokeStyle = '#fff'; c.lineWidth = 2; c.lineCap = 'round'; c.stroke();
+      c.strokeStyle = isDark ? '#fff' : '#000'; c.lineWidth = 2; c.lineCap = 'round'; c.stroke();
       c.beginPath(); c.arc(cx, cy, 6, 0, Math.PI*2);
-      c.fillStyle = '#fff'; c.fill();
+      c.fillStyle = isDark ? '#fff' : '#000'; c.fill();
     };
 
     // --- DONUT CHART ---
@@ -156,8 +159,8 @@ export default function CollectionIntelligencePage() {
       });
 
       c.beginPath(); c.arc(cx, cy, ir, 0, Math.PI*2);
-      c.fillStyle = '#000'; c.fill();
-      c.fillStyle = '#fff'; c.font = 'bold 18px Rajdhani'; c.textAlign = 'center';
+      c.fillStyle = isDark ? '#000' : '#fff'; c.fill();
+      c.fillStyle = isDark ? '#fff' : '#000'; c.font = 'bold 18px Rajdhani'; c.textAlign = 'center';
       c.fillText('₹482Cr', cx, cy+1);
     };
 
@@ -233,7 +236,7 @@ export default function CollectionIntelligencePage() {
       const pad = {t:10, r:16, b:30, l:40};
       const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
 
-      c.strokeStyle = 'rgba(255,255,255,0.08)'; c.lineWidth = 1;
+      c.strokeStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'; c.lineWidth = 1;
       c.beginPath(); c.moveTo(pad.l, pad.t); c.lineTo(pad.l, H-pad.b); c.stroke();
       c.beginPath(); c.moveTo(pad.l, H-pad.b); c.lineTo(W-pad.r, H-pad.b); c.stroke();
 
@@ -270,7 +273,7 @@ export default function CollectionIntelligencePage() {
     setIntensities(Array.from({ length: 35 }, () => Math.random()));
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-['Exo_2']">
@@ -321,7 +324,7 @@ export default function CollectionIntelligencePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               key={i} 
-              className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl relative overflow-hidden group cursor-pointer hover:border-[#00d4ff]/30 transition-all min-h-[140px] flex flex-col justify-between"
+              className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl relative overflow-hidden group cursor-pointer hover:border-[#00d4ff]/30 transition-all min-h-[140px] flex flex-col justify-between shadow-sm"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] opacity-70" style={{ background: kpi.color }}></div>
               <div>
@@ -341,7 +344,7 @@ export default function CollectionIntelligencePage() {
 
         {/* Charts Row 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-4">
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl overflow-hidden">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl overflow-hidden shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>EMI Collection Trend</div>
               <div className="flex gap-1">
@@ -353,7 +356,7 @@ export default function CollectionIntelligencePage() {
             <canvas ref={trendCanvasRef} className="w-full h-[180px]"></canvas>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl flex flex-col items-center">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl flex flex-col items-center shadow-sm">
             <div className="w-full flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Monthly Target</div>
               <div className="text-[10px] px-2 py-0.5 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-[#00d4ff] font-bold">MAY 2026</div>
@@ -377,7 +380,7 @@ export default function CollectionIntelligencePage() {
             </div>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl flex flex-col">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl flex flex-col shadow-sm">
             <div className="w-full flex items-center mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Portfolio Mix</div>
             </div>
@@ -406,7 +409,7 @@ export default function CollectionIntelligencePage() {
 
         {/* Charts Row 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1.2fr] gap-4">
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Overdue Aging</div>
               <div className="text-[10px] px-2 py-0.5 bg-[#ff3366]/10 border border-[#ff3366]/20 rounded-full text-[#ff3366] font-bold">NPA RISK</div>
@@ -414,7 +417,7 @@ export default function CollectionIntelligencePage() {
             <canvas ref={agingCanvasRef} className="w-full h-[180px]"></canvas>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Branch Performance</div>
             </div>
@@ -446,7 +449,7 @@ export default function CollectionIntelligencePage() {
             </div>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Daily Heatmap</div>
               <div className="text-[10px] text-white/30">May 2026</div>
@@ -476,7 +479,7 @@ export default function CollectionIntelligencePage() {
 
         {/* Bottom Row */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4 mb-10">
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl overflow-x-auto">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl overflow-x-auto shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Recent Transactions</div>
               <button className="text-[10px] px-3 py-1 bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-md text-[#00d4ff] hover:bg-[#00d4ff]/10 transition-all">View All</button>
@@ -519,7 +522,7 @@ export default function CollectionIntelligencePage() {
             </table>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl">
+          <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Risk vs Amount</div>
               <div className="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-white/50 font-bold uppercase">Scatter</div>

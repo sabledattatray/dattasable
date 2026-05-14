@@ -3,8 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 export default function GlobalSalesIntelligencePage() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
+  
   const [mounted, setMounted] = useState(false);
   const [timeRange, setTimeRange] = useState('M');
   const [mapPoints, setMapPoints] = useState<{x: number, y: number, size: number, pulse: number}[]>([]);
@@ -82,11 +86,11 @@ export default function GlobalSalesIntelligencePage() {
     red: '#ff3366',
     yellow: '#ffd700',
     purple: '#9b59ff',
-    bg: '#000000',
-    card: '#0a0a0a',
-    t1: 'rgba(255,255,255,0.85)',
-    t2: 'rgba(255,255,255,0.45)',
-    t3: 'rgba(255,255,255,0.2)'
+    bg: 'var(--bg)',
+    card: 'var(--surface)',
+    t1: isDark ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)',
+    t2: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.45)',
+    t3: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'
   };
 
   function rgba(hex: string, a: number) {
@@ -110,7 +114,7 @@ export default function GlobalSalesIntelligencePage() {
       canvas.height = H;
 
       // Draw stylized grid dots for "World"
-      c.fillStyle = 'rgba(255,255,255,0.03)';
+      c.fillStyle = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)';
       for(let x=0; x<W; x+=15) {
         for(let y=0; y<H; y+=15) {
           c.beginPath(); c.arc(x, y, 1, 0, Math.PI*2); c.fill();
@@ -157,7 +161,7 @@ export default function GlobalSalesIntelligencePage() {
       const maxV = Math.max(...rev) * 1.2;
 
       // Axes
-      c.strokeStyle = 'rgba(255,255,255,0.05)';
+      c.strokeStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
       for(let i=0; i<=5; i++) {
         const y = pad.t + (i/5) * gH;
         c.beginPath(); c.moveTo(pad.l, y); c.lineTo(W-pad.r, y); c.stroke();
@@ -186,7 +190,7 @@ export default function GlobalSalesIntelligencePage() {
       rev.forEach((v, i) => {
         const x = pad.l + (i/(months.length-1)) * gW;
         const y = pad.t + gH - (v/maxV)*gH;
-        c.fillStyle = '#fff'; c.beginPath(); c.arc(x, y, 4, 0, Math.PI*2); c.fill();
+        c.fillStyle = isDark ? '#fff' : '#000'; c.beginPath(); c.arc(x, y, 4, 0, Math.PI*2); c.fill();
         c.strokeStyle = C.cyan; c.lineWidth = 2; c.stroke();
         
         c.fillStyle = C.t2; c.font = '10px Exo 2'; c.textAlign = 'center';
@@ -217,8 +221,8 @@ export default function GlobalSalesIntelligencePage() {
       });
 
       c.beginPath(); c.arc(cx, cy, ir, 0, Math.PI*2);
-      c.fillStyle = C.bg; c.fill();
-      c.fillStyle = '#fff'; c.font = 'bold 16px Rajdhani'; c.textAlign = 'center';
+      c.fillStyle = isDark ? '#000' : '#fff'; c.fill();
+      c.fillStyle = isDark ? '#fff' : '#000'; c.font = 'bold 16px Rajdhani'; c.textAlign = 'center';
       c.fillText('SALES', cx, cy - 2);
       c.font = '10px Rajdhani'; c.fillText('GEOGRAPHY', cx, cy + 12);
     };
@@ -279,7 +283,7 @@ export default function GlobalSalesIntelligencePage() {
       const animId = requestAnimationFrame(animate);
       return () => cancelAnimationFrame(animId);
     }
-  }, [mounted, mapPoints.length, timeRange]);
+  }, [mounted, mapPoints.length, timeRange, resolvedTheme]);
 
   useEffect(() => {
     setMounted(true);
@@ -318,12 +322,12 @@ export default function GlobalSalesIntelligencePage() {
                 <div className="text-[10px] text-[var(--muted)] uppercase tracking-widest">Global Status</div>
                 <div className="text-[#00ff88] text-xs font-bold font-['Rajdhani']">OPERATIONAL_OPTIMAL</div>
               </div>
-              <div className="flex gap-2 bg-[var(--surface2)] border border-[var(--border)] rounded-xl p-1.5">
+              <div className="flex gap-2 bg-[var(--surface2)] border border-[var(--border)] rounded-xl p-1.5 shadow-inner">
                 {['D','W','M','Q','Y'].map(t => (
                   <button 
                     key={t} 
                     onClick={() => setTimeRange(t)}
-                    className={`w-8 h-8 flex items-center justify-center text-[11px] rounded-lg transition-all ${timeRange === t ? 'bg-[#00d4ff] text-black font-bold shadow-[0_0_10px_rgba(0,212,255,0.4)]' : 'text-[var(--muted)] hover:text-white hover:bg-white/5'}`}
+                    className={`w-8 h-8 flex items-center justify-center text-[11px] rounded-lg transition-all ${timeRange === t ? 'bg-[#00d4ff] text-black font-bold shadow-[0_0_10px_rgba(0,212,255,0.4)]' : 'text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5'}`}
                   >
                     {t}
                   </button>
@@ -340,7 +344,7 @@ export default function GlobalSalesIntelligencePage() {
                 initial={{ opacity:0, y:20 }}
                 animate={{ opacity:1, y:0 }}
                 transition={{ delay: i*0.1 }}
-                className="bg-[#0a0a0a] border border-white/5 p-6 md:p-7 rounded-2xl min-h-[150px] flex flex-col justify-between relative group hover:border-[#00d4ff]/30 transition-all cursor-pointer overflow-hidden shadow-2xl"
+                className="bg-[var(--surface)] border border-[var(--border)] p-6 md:p-7 rounded-2xl min-h-[150px] flex flex-col justify-between relative group hover:border-[#00d4ff]/30 transition-all cursor-pointer overflow-hidden shadow-sm"
               >
                 <div className="absolute top-0 left-0 w-full h-[3px] opacity-80" style={{ background: k.color }}></div>
                 <div className="relative z-10">
@@ -351,7 +355,7 @@ export default function GlobalSalesIntelligencePage() {
                   <span className={`font-bold ${k.delta.startsWith('+') ? 'text-[#00ff88]' : 'text-[#ff3366]'}`}>
                     {k.delta.startsWith('+') ? '▲' : '▼'} {k.delta}
                   </span>
-                  <span className="text-white/20 font-medium">vs period</span>
+                  <span className="text-[var(--muted)] font-medium">vs period</span>
                 </div>
                 <div className="absolute top-7 right-7 text-3xl opacity-[0.03] group-hover:opacity-20 group-hover:scale-110 transition-all duration-700 ease-out">{k.icon}</div>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
@@ -361,23 +365,23 @@ export default function GlobalSalesIntelligencePage() {
 
           {/* Main Visuals */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-[#0a0a0a] border border-white/5 rounded-2xl p-6 relative overflow-hidden">
+            <div className="lg:col-span-2 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 relative overflow-hidden shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Global Connectivity Mesh</div>
-                <div className="flex items-center gap-4 text-[10px] text-white/30 uppercase">
+                <div className="flex items-center gap-4 text-[10px] text-[var(--muted)] uppercase">
                   <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]"></div> Active Nodes</div>
                   <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#00ff88]"></div> Optimal</div>
                 </div>
               </div>
               <canvas ref={mapCanvasRef} className="w-full h-[280px] cursor-crosshair"></canvas>
-              <div className="absolute bottom-6 right-6 p-4 bg-black/40 backdrop-blur-md border border-white/5 rounded-xl">
+              <div className="absolute bottom-6 right-6 p-4 bg-[var(--surface2)]/80 backdrop-blur-md border border-[var(--border)] rounded-xl shadow-lg">
                 <div className="text-[9px] text-[var(--muted)] uppercase tracking-widest mb-1">Peak Region</div>
                 <div className="text-[#00d4ff] font-['Rajdhani'] font-bold text-lg">EMEA_CENTRAL</div>
-                <div className="text-[10px] text-white/40 mt-1">Efficiency: 98.4%</div>
+                <div className="text-[10px] text-[var(--muted)] mt-1">Efficiency: 98.4%</div>
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-6 flex flex-col items-center">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 flex flex-col items-center shadow-sm">
               <div className="w-full font-['Rajdhani'] text-sm font-bold tracking-widest uppercase mb-8"><span className="text-[#00d4ff] mr-2">◈</span>Market Distribution</div>
               <canvas ref={regionCanvasRef} className="w-[180px] h-[180px]"></canvas>
               <div className="w-full mt-8 space-y-3">
@@ -388,11 +392,11 @@ export default function GlobalSalesIntelligencePage() {
                   { n: 'Latin America', p: '15%', c: C.green }
                 ].map((r, i) => (
                   <div key={i} className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2 text-white/40">
+                    <div className="flex items-center gap-2 text-[var(--muted)]">
                       <div className="w-2 h-2 rounded-sm" style={{ background: r.c }}></div>
                       {r.n}
                     </div>
-                    <div className="font-['Rajdhani'] font-bold text-white/80">{r.p}</div>
+                    <div className="font-['Rajdhani'] font-bold text-[var(--text)] opacity-80">{r.p}</div>
                   </div>
                 ))}
               </div>
@@ -400,16 +404,16 @@ export default function GlobalSalesIntelligencePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-            <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-6">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
               <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase mb-6"><span className="text-[#00d4ff] mr-2">◈</span>Revenue Forecast</div>
               <canvas ref={revenueCanvasRef} className="w-full h-[200px]"></canvas>
             </div>
-            <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-6">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
               <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase mb-6"><span className="text-[#00d4ff] mr-2">◈</span>Sales Conversion</div>
               <canvas ref={conversionCanvasRef} className="w-full h-[180px]"></canvas>
-              <div className="mt-4 text-[10px] text-white/20 text-center leading-relaxed">Funnel analysis based on last 30 days of global lead ingestion.</div>
+              <div className="mt-4 text-[10px] text-[var(--muted)] text-center leading-relaxed">Funnel analysis based on last 30 days of global lead ingestion.</div>
             </div>
-            <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-6">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Top Categories</div>
                 <div className="text-[10px] text-[#00d4ff] font-bold">LIVE</div>
@@ -424,10 +428,10 @@ export default function GlobalSalesIntelligencePage() {
                 ].map((cat, i) => (
                   <div key={i}>
                     <div className="flex justify-between text-[11px] mb-2">
-                      <span className="text-white/50">{cat.name}</span>
-                      <span className="text-white/80 font-['Rajdhani'] font-bold">{cat.val}%</span>
+                      <span className="text-[var(--muted)]">{cat.name}</span>
+                      <span className="text-[var(--text)] font-['Rajdhani'] font-bold opacity-80">{cat.val}%</span>
                     </div>
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-1 bg-[var(--surface2)] rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: 0 }}
                         animate={{ width: `${cat.val}%` }}
