@@ -31,7 +31,7 @@ export default function FinalCTA() {
                  </div>
               </div>
 
-              <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1, marginBottom: '2.5rem', letterSpacing: '-0.04em' }}>
+              <h2 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1.1, marginBottom: '2.5rem', letterSpacing: '-0.03em' }}>
                 Ready to build your <span style={{ color: 'var(--accent)' }}>AI system?</span>
               </h2>
               
