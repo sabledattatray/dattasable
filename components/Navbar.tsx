@@ -126,8 +126,8 @@ export default function Navbar() {
         <div className="w-full max-w-[1448px] lg:px-12" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" aria-label="Datta Sable - Home" className="flex items-baseline gap-1.5 group whitespace-nowrap flex-shrink-0" style={{ textDecoration: 'none' }}>
-              <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500 relative top-[2px]" />
+            <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group whitespace-nowrap flex-shrink-0" style={{ textDecoration: 'none' }}>
+              <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
               <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
                 Datta Sable
               </span>
