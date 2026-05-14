@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     url: "https://dattasable.com",
     images: [
       {
-        url: "https://dattasable.com/images/logo.png",
-        width: 1024,
-        height: 1024,
-        alt: "Datta Sable | Surgical AI Workspace Logo",
+        url: "https://dattasable.com/images/og-ultra.png",
+        width: 1200,
+        height: 630,
+        alt: "Datta Sable | Surgical AI Workspace Premium Preview",
       },
     ],
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "dattasable.com | Surgical AI Workspace",
     description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems.",
-    images: ["https://dattasable.com/images/logo.png"],
+    images: ["https://dattasable.com/images/og-ultra.png"],
   },
   icons: {
     icon: [
