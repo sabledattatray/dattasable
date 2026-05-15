@@ -53,9 +53,9 @@ input:-webkit-autofill:active {
   --footer-bg: linear-gradient(180deg, #0d0d0d 0%, #050505 50%, #000000 100%);
   --footer-bottom-bg: #000000;
   --footer-shapes-display: none;                    /* Remove shapes in dark mode */
-  --playstore-bg: #000000;
-  --playstore-border: rgba(255, 255, 255, 0.25);
-  --playstore-text: #ffffff;
+  --playstore-bg: #ffffff;
+  --playstore-border: #ffffff;
+  --playstore-text: #000000;
   --footer-ring-1-from: rgba(201, 243, 29, 0.35);   /* Deep dark neon lime glow */
   --footer-ring-1-via: rgba(201, 243, 29, 0.10);    /* Subtle lime mid-tone */
   --footer-ring-2-from: rgba(59, 130, 246, 0.35);   /* Deep dark electric blue */
@@ -99,9 +99,9 @@ input:-webkit-autofill:active {
   --footer-bg: linear-gradient(180deg, var(--bg) 0%, #f4f4f5 50%, #eaeaea 100%);
   --footer-bottom-bg: #e4e4e7;
   --footer-shapes-display: block;                   /* Show shapes in light mode */
-  --playstore-bg: #ffffff;
+  --playstore-bg: #000000;
   --playstore-border: #000000;
-  --playstore-text: #000000;
+  --playstore-text: #ffffff;
   --footer-ring-1-from: rgba(147, 51, 234, 0.70);   /* Rich vibrant purple */
   --footer-ring-1-via: rgba(168, 85, 247, 0.40);    /* Bright purple mid-tone */
   --footer-ring-2-from: rgba(37, 99, 235, 0.70);    /* Rich royal blue */
