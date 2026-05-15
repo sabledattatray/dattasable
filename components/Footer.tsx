@@ -101,8 +101,10 @@ export default function Footer() {
         {/* Overlapping Geometric Swirl / Vortex Rings (Inspired by Premium Lens Aesthetic) */}
         {/* Primary Massive Outer Ring */}
         <div 
-          className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full border border-[var(--accent)]/30 bg-gradient-to-tr from-[var(--accent)]/8 via-transparent to-transparent opacity-60 transform -rotate-12 pointer-events-none blur-[1px]" 
+          className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full opacity-60 transform -rotate-12 pointer-events-none blur-[1px] transition-all duration-700" 
           style={{ 
+            border: '1px solid var(--footer-ring-1-border)',
+            background: 'radial-gradient(circle, var(--footer-ring-1-from) 0%, transparent 70%)',
             maskImage: 'linear-gradient(135deg, black 10%, transparent 60%)', 
             WebkitMaskImage: 'linear-gradient(135deg, black 10%, transparent 60%)' 
           }} 
@@ -110,8 +112,10 @@ export default function Footer() {
         
         {/* Secondary Overlapping Lens Ring */}
         <div 
-          className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full border border-blue-500/30 bg-gradient-to-br from-blue-500/8 via-purple-500/5 to-transparent opacity-50 transform rotate-45 pointer-events-none blur-[1px]" 
+          className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full opacity-50 transform rotate-45 pointer-events-none blur-[1px] transition-all duration-700" 
           style={{ 
+            border: '1px solid var(--footer-ring-2-border)',
+            background: 'radial-gradient(circle, var(--footer-ring-2-from) 0%, transparent 70%)',
             maskImage: 'linear-gradient(225deg, black 15%, transparent 65%)', 
             WebkitMaskImage: 'linear-gradient(225deg, black 15%, transparent 65%)' 
           }} 
@@ -119,18 +123,35 @@ export default function Footer() {
 
         {/* Tertiary Intersecting Deep Ring */}
         <div 
-          className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full border border-[var(--accent)]/30 bg-gradient-to-tl from-[var(--accent)]/8 via-cyan-500/5 to-transparent opacity-40 transform rotate-12 pointer-events-none blur-[1px]" 
+          className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full opacity-40 transform rotate-12 pointer-events-none blur-[1px] transition-all duration-700" 
           style={{ 
+            border: '1px solid var(--footer-ring-3-border)',
+            background: 'radial-gradient(circle, var(--footer-ring-3-from) 0%, transparent 70%)',
             maskImage: 'linear-gradient(315deg, black 10%, transparent 60%)', 
             WebkitMaskImage: 'linear-gradient(315deg, black 10%, transparent 60%)' 
           }} 
         />
 
         {/* Floating 3D Glowing Glass Orb */}
-        <div className="absolute top-[35%] left-[5%] w-28 h-28 rounded-full bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 shadow-[0_0_35px_rgba(255,255,255,0.08)] opacity-70 transform -translate-y-1/2 pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
+        <div 
+          className="absolute top-[35%] left-[5%] w-28 h-28 rounded-full backdrop-blur-md opacity-70 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
+          style={{ 
+            animationDuration: '6s',
+            border: '1px solid rgba(255,255,255,0.15)',
+            background: 'linear-gradient(180deg, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 50%, transparent 100%)',
+            boxShadow: '0 0 35px rgba(0,0,0,0.08)'
+          }} 
+        />
 
         {/* Floating Secondary Glass Orb */}
-        <div className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--accent)]/10 via-white/5 to-transparent backdrop-blur-md border border-[var(--accent)]/20 shadow-[0_0_25px_var(--accent)] opacity-50 pointer-events-none" />
+        <div 
+          className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full backdrop-blur-md opacity-50 pointer-events-none transition-all duration-700" 
+          style={{
+            border: '1px solid var(--footer-orb-2-border)',
+            background: 'linear-gradient(45deg, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.05) 50%, transparent 100%)',
+            boxShadow: '0 0 25px var(--footer-orb-2-from)'
+          }}
+        />
         
         {/* Top Glowing Aurora Highlight */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 via-blue-500/40 to-transparent shadow-[0_0_25px_var(--accent)]" />

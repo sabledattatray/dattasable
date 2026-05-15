@@ -52,6 +52,16 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.3;     /* Visible for dark mode */
   --footer-bg: #000000;
   --footer-bottom-bg: #000000;
+  --footer-ring-1-border: rgba(201, 243, 29, 0.3);
+  --footer-ring-1-from: rgba(201, 243, 29, 0.08);
+  --footer-ring-2-border: rgba(59, 130, 246, 0.3);
+  --footer-ring-2-from: rgba(59, 130, 246, 0.08);
+  --footer-ring-3-border: rgba(201, 243, 29, 0.3);
+  --footer-ring-3-from: rgba(201, 243, 29, 0.08);
+  --footer-orb-1-from: rgba(255, 255, 255, 0.1);
+  --footer-orb-1-via: rgba(255, 255, 255, 0.05);
+  --footer-orb-2-from: rgba(201, 243, 29, 0.10);
+  --footer-orb-2-border: rgba(201, 243, 29, 0.20);
 }
 
 .light {
@@ -81,6 +91,16 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.35;    /* Stronger visibility for light mode */
   --footer-bg: linear-gradient(180deg, var(--bg) 0%, #f4f4f5 50%, #eaeaea 100%);
   --footer-bottom-bg: #e4e4e7;
+  --footer-ring-1-border: rgba(147, 51, 234, 0.35); /* light purple */
+  --footer-ring-1-from: rgba(147, 51, 234, 0.12);
+  --footer-ring-2-border: rgba(37, 99, 235, 0.35); /* royal blue */
+  --footer-ring-2-from: rgba(37, 99, 235, 0.12);
+  --footer-ring-3-border: rgba(168, 85, 247, 0.35); /* vibrant purple */
+  --footer-ring-3-from: rgba(168, 85, 247, 0.12);
+  --footer-orb-1-from: rgba(147, 51, 234, 0.15); /* purple-tinted highlight */
+  --footer-orb-1-via: rgba(37, 99, 235, 0.08); /* blue-tinted via */
+  --footer-orb-2-from: rgba(37, 99, 235, 0.15); /* royal blue */
+  --footer-orb-2-border: rgba(147, 51, 234, 0.30); /* purple border */
 }
 
 /* WordPress Admin Framework Design Tokens */
