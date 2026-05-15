@@ -1,244 +1,130 @@
-<div align="center">
+# 🌗 Datta Sable | BI & Analytics Platform
 
-<img src="https://raw.githubusercontent.com/sabledattatray/dattasable/main/public/images/logo.png" width="450" alt="Datta Sable - Data Science & BI Expert" />
+![Stars](https://img.shields.io/github/stars/sabledattatray/dattasable?style=for-the-badge&logo=github&color=gold)
+![Forks](https://img.shields.io/github/forks/sabledattatray/dattasable?style=for-the-badge&logo=github&color=blue)
+![Build Status](https://img.shields.io/github/actions/workflow/status/sabledattatray/dattasable/ci.yml?branch=main&style=for-the-badge)
+![License](https://img.shields.io/github/license/sabledattatray/dattasable?style=for-the-badge&color=green)
+![Next.js](https://img.shields.io/badge/Next.js-15.0-black.svg?style=for-the-badge&logo=next.js)
+![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?style=for-the-badge&logo=vercel)
 
-# Datta Sable
-### AI Workflow Infrastructure • BI Systems • Automation Engineering
+
+> **Engineering Data and Digital Infrastructure into Strategic Assets.** A high-performance, full-stack Business Intelligence, Automation, and Web Solutions portfolio designed for the 2026 digital landscape.
+
+---
+
+## 📊 Professional Insights
 
 <p align="center">
-  <a href="https://dattasable.com">
-    <img src="https://img.shields.io/badge/Live%20Platform-dattasable.com-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
-  </a>
-  <img src="https://img.shields.io/github/stars/sabledattatray/dattasable?style=for-the-badge&logo=github&color=gold"/>
-  <img src="https://img.shields.io/github/forks/sabledattatray/dattasable?style=for-the-badge&logo=github&color=3b82f6"/>
-  <img src="https://img.shields.io/github/license/sabledattatray/dattasable?style=for-the-badge&color=22c55e"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=sabledattatray&show_icons=true&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Datta's GitHub Stats" height="180px" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sabledattatray&layout=compact&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Top Languages" height="180px" />
 </p>
-
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js%2015-000000?style=flat-square&logo=next.js&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white"/>
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=sabledattatray&theme=vision-friendly-dark&hide_border=true&background=0D1117&stroke=58A6FF&ring=58A6FF&fire=58A6FF&currStreakNum=C9D1D9&sideNums=C9D1D9&sideLabels=C9D1D9&dates=C9D1D9" alt="GitHub Streak" height="180px" />
 </p>
 
----
-
-### Engineering High-Performance Digital Infrastructure for the Modern Internet
-
-A premium full-stack platform focused on Business Intelligence, automation systems, modern web engineering, and scalable creator infrastructure.
-
-Designed with a systems-first philosophy — combining technical authority, performance engineering, and enterprise-grade digital experiences.
-
-</div>
 
 ---
 
-# Overview
+## 💎 Project Overview
 
-This repository powers the official platform of Datta Sable — an integrated ecosystem built around:
+This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap between complex data engineering, seamless automation, and executive-level digital storytelling. Built with a "Modern Tech Stack" philosophy, it features a blazingly fast Next.js frontend, a robust service portfolio, and a custom-built Admin Dashboard for managing large-scale content and project lifecycles.
 
-- AI Workflow Infrastructure
-- Business Intelligence Systems
-- Automation Architecture
-- Modern Web Engineering
-- Technical SEO
-- Analytics Dashboards
-- Content Operations
-
-The platform is designed to operate as both:
-
-1. A high-performance digital presence  
-2. A scalable operational infrastructure layer
+### 🚀 Key Features
+- **Native Mobile Client**: Accompanied by a dedicated [Android Mobile App (ds-droid)](https://github.com/sabledattatray/ds-droid) for seamless cross-platform delivery.
+- **Elite Performance**: Sub-second load times with native `next/image` WebP optimization and edge-caching.
+- **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, n8n Automation, and CorelDRAW Graphic Design.
+- **Dynamic Knowledge Engine**: A high-authority blog featuring 33+ technical case studies and articles across specialized categories.
+- **Restricted Access Portal**: Secure, OAuth-driven gateway for proprietary professional assets and VIP dashboards.
+- **Admin Command Center**: A professional-grade dashboard for real-time CMS, portfolio, and analytics management.
+- **Premium Aesthetics**: A futuristic, highly responsive design system with glassmorphism, dynamic grids, and micro-animations.
 
 ---
 
-# Core Capabilities
+## 📸 Visual Showcase
 
-## AI Workflow Infrastructure
-Structured execution systems, automation pipelines, prompt architecture, and scalable workflow logic for creators, operators, and digital businesses.
-
-## Business Intelligence Systems
-Interactive dashboards, reporting infrastructure, SQL-driven analytics, KPI visualization, and decision-support systems.
-
-## Modern Web Engineering
-Performance-first frontend architecture powered by Next.js, TailwindCSS, server rendering, and optimized asset delivery.
-
-## Technical SEO Infrastructure
-Advanced content architecture, metadata systems, schema optimization, Core Web Vitals tuning, and search visibility engineering.
-
-## Enterprise Automation
-Integrated workflow automation using modern orchestration systems including n8n and API-driven pipelines.
-
----
-
-# Platform Highlights
-
-- Enterprise-grade responsive architecture
-- Optimized Lighthouse performance scoring
-- Dynamic CMS infrastructure
-- Protected admin environment
-- Advanced dashboard systems
-- Mobile-first engineering approach
-- WebP image optimization pipeline
-- SEO-focused content rendering
-- Glassmorphism-based premium UI system
-- Reusable modular component architecture
-
----
-
-# Visual Preview
-
-## Hero Experience
-
-The landing experience is engineered to establish immediate technical authority through structured typography, modern visual systems, and high-density information hierarchy.
+### 🪐 The Experience (Hero Section)
+The landing page establishes immediate authority with a high-fidelity technical visualization and a clear value proposition for data-driven enterprises.
 
 ![Hero Section](./public/images/readme/hero_preview.png)
 
----
+### 📊 Admin Command Center
+A clean, enterprise-grade interface for managing the entire ecosystem. Designed for efficiency and high-stakes data management.
 
-## Admin Infrastructure
-
-A dedicated operational dashboard for managing analytics, projects, content systems, and internal platform workflows.
-
-| Admin Environment | Analytics Dashboard |
+| **Admin Portal (Light Mode)** | **Analytics Showcase** |
 | :--- | :--- |
-| ![Admin Preview](./public/images/readme/admin_preview.png) | ![Dashboard Preview](./public/images/readme/dashboard_preview.png) |
+| ![Admin Login](./public/images/readme/admin_preview.png) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.png) |
 
 ---
 
-# Technology Stack
+## 🛠️ The Tech Stack
 
-## Frontend Engineering
+### **Frontend & UX**
+- ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+- ![Framer](https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
-- Next.js 15
-- React
-- TypeScript
-- TailwindCSS
-- Framer Motion
+### **Backend & Infrastructure**
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+- ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
-## Backend & Infrastructure
+### **Data Engineering & BI**
+- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+- ![Power Bi](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+- ![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=Tableau&logoColor=white)
+- ![SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=sqlite&logoColor=white)
 
-- Node.js
-- PostgreSQL
-- Prisma ORM
-- Vercel Edge Infrastructure
-
-## Data & Analytics
-
-- Python
-- SQL
-- Power BI
-- Tableau
 
 ---
 
-# Performance Standards
+## 📈 Performance Benchmarks
 
-| Category | Score |
-| :--- | :--- |
-| Performance | 98+ |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
+Our latest **Lighthouse Audit** reflects our commitment to technical excellence:
 
-The platform is engineered with a strong emphasis on:
-
-- Core Web Vitals
-- Accessibility compliance
-- Semantic architecture
-- Search engine discoverability
-- Edge-optimized delivery
+| Metric | Score | status |
+| :--- | :--- | :--- |
+| **Performance** | **98+** | 🚀 Blazing Fast |
+| **Accessibility** | **100** | ♿ Universal Access |
+| **Best Practices** | **100** | 🏆 Enterprise Standards |
+| **SEO** | **100** | 🔍 Search Optimized |
 
 ---
 
-# Repository Structure
+## 🛠️ Installation & Setup
 
 ```bash
-.
-├── app/
-├── components/
-├── public/
-├── prisma/
-├── styles/
-├── lib/
-├── dashboard/
-└── api/
-```
-
----
-
-# Local Development
-
-## Clone Repository
-
-```bash
+# Clone the repository
 git clone https://github.com/sabledattatray/dattasable.git
-```
 
-## Install Dependencies
-
-```bash
+# Install dependencies
 npm install
-```
 
-## Configure Environment
-
-```bash
+# Setup Environment Variables
 cp .env.example .env
-```
 
-## Database Initialization
-
-```bash
+# Initialize Database
 npx prisma db push
 npx prisma db seed
-```
 
-## Start Development Server
-
-```bash
+# Launch Development Server
 npm run dev
 ```
 
 ---
 
-# Mobile Ecosystem
+## 🤝 Let's Connect
 
-The platform also includes a dedicated Android client:
+I am currently open to high-impact BI consulting and Data Engineering roles.
 
-- ds-droid
-- WebView-native deployment
-- optimized mobile delivery
-- integrated production experience
+- **Live Website**: [dattasable.com](https://dattasable.com)
+- **LinkedIn**: [Datta Sable](https://linkedin.com/in/dattasable)
+- **Email**: [contact@dattasable.com](mailto:contact@dattasable.com)
 
 ---
-
-# GitHub Analytics
 
 <p align="center">
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=sabledattatray&show_icons=true&theme=transparent&hide_border=true" height="180px"/>
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=sabledattatray&layout=compact&theme=transparent&hide_border=true" height="180px"/>
+  Built with 💻 and ☕ by <b>Datta Sable</b><br>
+  © 2026 Datta Sable. All Rights Reserved.
 </p>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=sabledattatray&theme=transparent&hide_border=true" height="180px"/>
-</p>
-
----
-
-# Connect
-
-- Website → https://dattasable.com
-- LinkedIn → https://linkedin.com/in/dattasable
-- GitHub → https://github.com/sabledattatray
-
----
-
-<div align="center">
-
-### Built by Datta Sable
-
-AI Workflow Architect • BI Systems Engineer • Digital Infrastructure Builder
-
-</div>
