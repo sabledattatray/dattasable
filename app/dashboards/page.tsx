@@ -106,7 +106,22 @@ const dashboards = [
     metrics: ['50 States', 'Live Updates', 'Zip-level Drill'],
   },
 
-  // --- OPERATIONS (4) ---
+  // --- OPERATIONS (5) ---
+  {
+    id: 104,
+    title: 'Surgical AI Workspace',
+    category: 'Operations',
+    tool: 'Internal',
+    color: '#6ee7ff',
+    icon: '⚡',
+    image: null,
+    desc: 'Enterprise-grade AI workflow infrastructure for creators. Monitor intelligent execution chains and scale AI operations.',
+    embed: '/Dashboard/surgical-ai-workspace.html',
+    link: '/dashboards/surgical-ai',
+    isInternal: true,
+    tags: ['AI Operations', 'Automation', 'Infrastructure'],
+    metrics: ['98.4% Success', '18.4M Tokens', '-6.2% Cost'],
+  },
   {
     id: 2,
     title: 'Supply Chain Performance',
