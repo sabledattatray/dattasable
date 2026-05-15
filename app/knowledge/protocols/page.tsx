@@ -68,7 +68,7 @@ export default function ProtocolsPage() {
               </div>
             </div>
             
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: '2rem', lineHeight: 1.1 }}>
+            <h1 style={{ fontSize: '48px', fontFamily: "'Syne', sans-serif", fontWeight: 400, marginBottom: '2rem', lineHeight: 1.1 }}>
               Operator Intent <span style={{ color: 'var(--accent)' }}>Mapping™.</span>
             </h1>
             <p style={{ color: 'var(--muted)', fontSize: '1.25rem', marginBottom: '5rem', lineHeight: 1.7 }}>
