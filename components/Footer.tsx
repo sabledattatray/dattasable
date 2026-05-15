@@ -98,62 +98,64 @@ export default function Footer() {
         <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/5 via-purple-500/2 to-blue-500/5 rounded-full blur-[150px] transform -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/5 via-cyan-500/2 to-[var(--accent)]/5 rounded-full blur-[150px] transform translate-y-1/3" />
         
-        {/* Overlapping 3D Crescent Bubbles / Volumetric Lens Flares (Not Complete Circles) */}
-        {/* Primary Massive Outer Crescent Bubble */}
-        <div 
-          className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-          style={{ 
-            background: 'linear-gradient(135deg, var(--footer-ring-1-from) 0%, var(--footer-ring-1-via) 45%, transparent 80%)',
-            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-            maskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)', 
-            WebkitMaskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)' 
-          }} 
-        />
-        
-        {/* Secondary Overlapping Crescent Bubble */}
-        <div 
-          className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-          style={{ 
-            background: 'linear-gradient(225deg, var(--footer-ring-2-from) 0%, var(--footer-ring-2-via) 45%, transparent 80%)',
-            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-            maskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)', 
-            WebkitMaskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)' 
-          }} 
-        />
+        {/* Overlapping 3D Crescent Bubbles / Volumetric Lens Flares Container (Visible in Light Mode, Removed in Dark Mode) */}
+        <div style={{ display: 'var(--footer-shapes-display, none)' }}>
+          {/* Primary Massive Outer Crescent Bubble */}
+          <div 
+            className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
+            style={{ 
+              background: 'linear-gradient(135deg, var(--footer-ring-1-from) 0%, var(--footer-ring-1-via) 45%, transparent 80%)',
+              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+              maskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)', 
+              WebkitMaskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)' 
+            }} 
+          />
+          
+          {/* Secondary Overlapping Crescent Bubble */}
+          <div 
+            className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
+            style={{ 
+              background: 'linear-gradient(225deg, var(--footer-ring-2-from) 0%, var(--footer-ring-2-via) 45%, transparent 80%)',
+              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+              maskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)', 
+              WebkitMaskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)' 
+            }} 
+          />
 
-        {/* Tertiary Intersecting Deep Crescent Bubble */}
-        <div 
-          className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-          style={{ 
-            background: 'linear-gradient(315deg, var(--footer-ring-3-from) 0%, var(--footer-ring-3-via) 45%, transparent 80%)',
-            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-            maskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)', 
-            WebkitMaskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)' 
-          }} 
-        />
+          {/* Tertiary Intersecting Deep Crescent Bubble */}
+          <div 
+            className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
+            style={{ 
+              background: 'linear-gradient(315deg, var(--footer-ring-3-from) 0%, var(--footer-ring-3-via) 45%, transparent 80%)',
+              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+              maskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)', 
+              WebkitMaskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)' 
+            }} 
+          />
 
-        {/* Floating 3D Volumetric Glass Bubble Orb */}
-        <div 
-          className="absolute top-[32%] left-[6%] w-32 h-32 rounded-full backdrop-blur-xl opacity-85 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
-          style={{ 
-            animationDuration: '6s',
-            border: 'var(--footer-orb-border)',
-            filter: 'var(--footer-orb-blur)',
-            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 60%, transparent 100%)',
-            boxShadow: 'var(--footer-orb-box-shadow)'
-          }} 
-        />
+          {/* Floating 3D Volumetric Glass Bubble Orb */}
+          <div 
+            className="absolute top-[32%] left-[6%] w-32 h-32 rounded-full backdrop-blur-xl opacity-85 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
+            style={{ 
+              animationDuration: '6s',
+              border: 'var(--footer-orb-border)',
+              filter: 'var(--footer-orb-blur)',
+              background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 60%, transparent 100%)',
+              boxShadow: 'var(--footer-orb-box-shadow)'
+            }} 
+          />
 
-        {/* Floating Secondary 3D Glass Bubble Orb */}
-        <div 
-          className="absolute bottom-[22%] right-[12%] w-20 h-20 rounded-full backdrop-blur-xl opacity-75 pointer-events-none transition-all duration-700" 
-          style={{
-            border: 'var(--footer-orb-2-border)',
-            filter: 'var(--footer-orb-blur)',
-            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.1) 60%, transparent 100%)',
-            boxShadow: 'var(--footer-orb-box-shadow)'
-          }}
-        />
+          {/* Floating Secondary 3D Glass Bubble Orb */}
+          <div 
+            className="absolute bottom-[22%] right-[12%] w-20 h-20 rounded-full backdrop-blur-xl opacity-75 pointer-events-none transition-all duration-700" 
+            style={{
+              border: 'var(--footer-orb-2-border)',
+              filter: 'var(--footer-orb-blur)',
+              background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.1) 60%, transparent 100%)',
+              boxShadow: 'var(--footer-orb-box-shadow)'
+            }}
+          />
+        </div>
         
         {/* Top Glowing Aurora Highlight */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 via-blue-500/40 to-transparent shadow-[0_0_25px_var(--accent)]" />
