@@ -58,7 +58,7 @@ export default function TemplatesPage() {
         </header>
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-6 mb-16 max-w-3xl">
+        <div className="flex flex-col md:flex-row gap-6 max-w-3xl" style={{ marginBottom: '4rem' }}>
           <div className="relative flex-1">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={20} />
             <input 
@@ -77,42 +77,42 @@ export default function TemplatesPage() {
         </div>
 
         {/* Templates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {TEMPLATES.filter(t => t.title.toLowerCase().includes(search.toLowerCase()) || t.type.toLowerCase().includes(search.toLowerCase())).map((template, i) => (
             <motion.div
               key={template.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="card group flex flex-col h-full"
+              className="card group flex flex-col h-full shadow-lg hover:border-[var(--accent)] transition-all duration-300"
               style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
             >
               <div className="flex items-center justify-between mb-8">
-                <div className="p-4 bg-[var(--bg)] rounded-sm">
+                <div className="p-4 bg-[var(--bg)] rounded-sm border border-[var(--border)] shadow-inner">
                   {template.icon}
                 </div>
-                <div className="tag mono text-[10px] tracking-[0.2em]">{template.type}</div>
+                <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">{template.type}</div>
               </div>
 
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }} className="group-hover:text-[var(--accent)] transition-colors">
                 {template.title}
               </h2>
-              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2.5rem', flex: 1 }}>
                 {template.desc}
               </p>
 
-              <div className="pt-6 border-t border-[var(--border)] flex items-center justify-between">
+              <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
                 <div className="flex flex-col">
-                   <span className="mono text-[10px] text-[var(--muted)] opacity-50 uppercase mb-1">Filesize</span>
-                   <span className="mono text-[12px] font-bold">{template.size}</span>
+                   <span className="mono text-[10px] text-[var(--muted)] opacity-60 uppercase mb-1 font-bold">Filesize</span>
+                   <span className="mono text-[12px] font-bold text-[var(--accent)]">{template.size}</span>
                 </div>
                 <a 
                   href={template.downloadUrl} 
                   download 
-                  className="btn-outline px-6 py-3 flex items-center gap-3 group/dl no-underline"
+                  className="btn-outline px-6 py-3 flex items-center gap-2.5 group/dl no-underline font-bold text-[12px]"
                 >
-                   <Download size={16} className="group-hover/dl:translate-y-0.5 transition-transform" />
-                   <span className="mono text-[11px] font-bold">DOWNLOAD</span>
+                   <Download size={15} className="group-hover/dl:translate-y-0.5 transition-transform text-[var(--accent)]" />
+                   <span className="mono text-[11px] font-bold tracking-wider">DOWNLOAD</span>
                 </a>
               </div>
             </motion.div>
@@ -120,10 +120,10 @@ export default function TemplatesPage() {
         </div>
 
         {/* Lead Capture Overlay (Coming soon / CTA) */}
-        <div className="mt-32 p-12 border-2 border-dashed border-[var(--border)] rounded-sm text-center">
-           <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Need a custom architecture?</h3>
-           <p style={{ color: 'var(--muted)', marginBottom: '2.5rem' }}>We build bespoke automation systems tailored to your specific business logic.</p>
-           <a href="/contact" className="btn-primary inline-flex py-4 px-12">REQUEST ARCHITECTURE BUILD</a>
+        <div className="border-2 border-dashed border-[var(--border)] rounded-sm text-center shadow-xl bg-[var(--surface1)]" style={{ marginTop: '8rem', padding: '4.5rem 2rem' }}>
+           <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>Need a custom architecture?</h3>
+           <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '1.1rem', maxW: '600px', mx: 'auto' }}>We build bespoke automation systems tailored to your specific business logic.</p>
+           <a href="/contact" className="btn-primary inline-flex py-4 px-12 font-bold tracking-wider text-[13px]">REQUEST ARCHITECTURE BUILD</a>
         </div>
       </main>
 
