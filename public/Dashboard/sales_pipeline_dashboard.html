@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Pipeline Velocity — Analytics Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="dark"] {
+    --bg-base: #0b0f1a;
+    --bg-surface: #111827;
+    --bg-card: #161d2e;
+    --bg-card-hover: #1c2540;
+    --bg-elevated: #1e2a42;
+    --border: rgba(99,120,180,0.13);
+    --border-accent: rgba(99,120,180,0.28);
+    --text-primary: #e8edf8;
+    --text-secondary: #8a9bc4;
+    --text-muted: #4a5878;
+    --accent-blue: #4f8ef7;
+    --accent-cyan: #00d4c8;
+    --accent-purple: #8b5cf6;
+    --accent-amber: #f59e0b;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --accent-pink: #ec4899;
+    --glow-blue: rgba(79,142,247,0.15);
+    --glow-cyan: rgba(0,212,200,0.1);
+    --shadow: 0 8px 32px rgba(0,0,0,0.4);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
+    --grid-line: rgba(99,120,180,0.06);
+    --chart-bar: rgba(79,142,247,0.8);
+    --chart-bar2: rgba(0,212,200,0.75);
+    --chart-bar3: rgba(139,92,246,0.75);
+    --funnel-1: #4f8ef7;
+    --funnel-2: #6c8ef5;
+    --funnel-3: #8b5cf6;
+    --funnel-4: #a855f7;
+    --funnel-5: #10b981;
+    --toggle-bg: #1e2a42;
+    --toggle-knob: #4f8ef7;
+  }
+  :root[data-theme="light"] {
+    --bg-base: #f0f4fc;
+    --bg-surface: #e8eef8;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f5f8ff;
+    --bg-elevated: #eef2fb;
+    --border: rgba(79,120,200,0.12);
+    --border-accent: rgba(79,120,200,0.25);
+    --text-primary: #0f1a35;
+    --text-secondary: #4a5f8a;
+    --text-muted: #9aaac8;
+    --accent-blue: #2563eb;
+    --accent-cyan: #0891b2;
+    --accent-purple: #7c3aed;
+    --accent-amber: #d97706;
+    --accent-green: #059669;
+    --accent-red: #dc2626;
+    --accent-pink: #db2777;
+    --glow-blue: rgba(37,99,235,0.08);
+    --glow-cyan: rgba(8,145,178,0.07);
+    --shadow: 0 8px 32px rgba(79,120,200,0.12);
+    --shadow-sm: 0 2px 12px rgba(79,120,200,0.08);
+    --grid-line: rgba(79,120,200,0.06);
+    --chart-bar: rgba(37,99,235,0.75);
+    --chart-bar2: rgba(8,145,178,0.7);
+    --chart-bar3: rgba(124,58,237,0.7);
+    --funnel-1: #2563eb;
+    --funnel-2: #4f46e5;
+    --funnel-3: #7c3aed;
+    --funnel-4: #9333ea;
+    --funnel-5: #059669;
+    --toggle-bg: #dce6f8;
+    --toggle-knob: #2563eb;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background 0.35s, color 0.35s;
+    overflow-x: hidden;
+  }
+
+  /* BG mesh */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 0%, var(--glow-blue) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 90%, var(--glow-cyan) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .shell { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* ─── HEADER ─── */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+    transition: background 0.35s, border-color 0.35s;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: #fff;
+    box-shadow: 0 4px 16px rgba(79,142,247,0.35);
+  }
+  .logo-text { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-sub { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-top: 1px; }
+
+  .header-center { display: flex; gap: 6px; }
+  .tab {
+    padding: 6px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    color: var(--text-secondary); cursor: pointer; border: none; background: none;
+    transition: all 0.2s;
+  }
+  .tab.active, .tab:hover {
+    background: var(--bg-elevated); color: var(--text-primary);
+  }
+  .tab.active { color: var(--accent-blue); }
+
+  .header-right { display: flex; align-items: center; gap: 14px; }
+
+  .date-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--text-muted);
+    background: var(--bg-elevated);
+    padding: 5px 10px; border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: relative; width: 52px; height: 28px;
+    background: var(--toggle-bg);
+    border-radius: 14px; cursor: pointer;
+    border: 1px solid var(--border-accent);
+    transition: background 0.3s, border-color 0.3s;
+    flex-shrink: 0;
+  }
+  .theme-toggle::after {
+    content: '';
+    position: absolute; top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    background: var(--toggle-knob);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  [data-theme="light"] .theme-toggle::after { transform: translateX(24px); }
+  .toggle-icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; font-size: 12px; pointer-events: none; }
+
+  .filter-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    color: var(--text-secondary); cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+  /* ─── MAIN ─── */
+  main { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; gap: 24px; }
+
+  /* Period selector */
+  .period-row { display: flex; align-items: center; justify-content: space-between; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); }
+  .period-tabs { display: flex; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+  .period-tab {
+    padding: 5px 14px; border-radius: 7px; font-size: 12px; font-weight: 500;
+    color: var(--text-secondary); cursor: pointer; border: none;
+    background: none; transition: all 0.2s;
+  }
+  .period-tab.active { background: var(--accent-blue); color: #fff; box-shadow: 0 2px 10px rgba(79,142,247,0.35); }
+
+  /* ─── KPI CARDS ─── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+  .kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s, background 0.35s;
+    animation: fadeUp 0.5s ease both;
+  }
+  .kpi-card:nth-child(1) { animation-delay: 0.05s; }
+  .kpi-card:nth-child(2) { animation-delay: 0.1s; }
+  .kpi-card:nth-child(3) { animation-delay: 0.15s; }
+  .kpi-card:nth-child(4) { animation-delay: 0.2s; }
+  .kpi-card:nth-child(5) { animation-delay: 0.25s; }
+  .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-accent); background: var(--bg-card-hover); }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+  .kpi-card.blue::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+  .kpi-card.purple::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
+  .kpi-card.green::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+  .kpi-card.amber::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
+  .kpi-card.cyan::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); }
+
+  .kpi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .kpi-label { font-size: 11px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.3px; }
+  .kpi-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .kpi-icon.blue { background: rgba(79,142,247,0.15); }
+  .kpi-icon.purple { background: rgba(139,92,246,0.15); }
+  .kpi-icon.green { background: rgba(16,185,129,0.15); }
+  .kpi-icon.amber { background: rgba(245,158,11,0.15); }
+  .kpi-icon.cyan { background: rgba(0,212,200,0.15); }
+
+  .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+  .kpi-card.blue .kpi-value { color: var(--accent-blue); }
+  .kpi-card.purple .kpi-value { color: var(--accent-purple); }
+  .kpi-card.green .kpi-value { color: var(--accent-green); }
+  .kpi-card.amber .kpi-value { color: var(--accent-amber); }
+  .kpi-card.cyan .kpi-value { color: var(--accent-cyan); }
+
+  .kpi-footer { display: flex; align-items: center; gap: 6px; }
+  .kpi-delta { font-size: 12px; font-weight: 600; padding: 2px 7px; border-radius: 5px; }
+  .kpi-delta.up { color: var(--accent-green); background: rgba(16,185,129,0.12); }
+  .kpi-delta.down { color: var(--accent-red); background: rgba(239,68,68,0.12); }
+  .kpi-period { font-size: 11px; color: var(--text-muted); }
+
+  .kpi-sparkline { margin-top: 12px; }
+
+  /* ─── ROW 2 ─── */
+  .charts-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
+  .charts-row-3 { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 16px; }
+
+  /* ─── CARD ─── */
+  .panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    transition: background 0.35s, border-color 0.35s;
+    animation: fadeUp 0.5s ease both;
+    position: relative; overflow: hidden;
+  }
+  .panel-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+  .panel-title { font-size: 14px; font-weight: 600; }
+  .panel-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .panel-badge {
+    font-size: 10px; font-weight: 600; padding: 3px 8px;
+    border-radius: 5px; letter-spacing: 0.4px;
+  }
+  .panel-badge.live { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+  .panel-badge.warn { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+
+  /* ─── VELOCITY CHART (bar + line) ─── */
+  .velocity-chart { height: 220px; position: relative; }
+  .vc-canvas { width: 100%; height: 100%; }
+
+  /* ─── FUNNEL ─── */
+  .funnel-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .funnel-stage { display: flex; align-items: center; gap: 12px; }
+  .funnel-label { font-size: 12px; color: var(--text-secondary); width: 96px; flex-shrink: 0; white-space: nowrap; }
+  .funnel-bar-wrap { flex: 1; height: 32px; background: var(--bg-elevated); border-radius: 8px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.18s; }
+  .funnel-bar-wrap:hover { transform: scaleY(1.06); }
+  .funnel-bar {
+    height: 100%; border-radius: 8px;
+    display: flex; align-items: center; padding-left: 12px;
+    font-size: 12px; font-weight: 600; color: #fff;
+    position: relative;
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .funnel-meta { width: 80px; text-align: right; flex-shrink: 0; }
+  .funnel-count { font-size: 13px; font-weight: 700; }
+  .funnel-val { font-size: 10px; color: var(--text-muted); }
+  .funnel-drop { font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 4px; }
+  .funnel-drop.ok { color: var(--accent-green); background: rgba(16,185,129,0.12); }
+  .funnel-drop.warn { color: var(--accent-amber); background: rgba(245,158,11,0.12); }
+  .funnel-drop.bad { color: var(--accent-red); background: rgba(239,68,68,0.12); }
+
+  /* ─── VELOCITY GAUGE ─── */
+  .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .gauge-svg { width: 160px; height: 100px; overflow: visible; }
+  .gauge-value { font-size: 32px; font-weight: 700; color: var(--accent-blue); letter-spacing: -1px; }
+  .gauge-label { font-size: 11px; color: var(--text-muted); }
+  .gauge-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; width: 100%; }
+  .g-metric { background: var(--bg-elevated); border-radius: 10px; padding: 10px 12px; }
+  .g-m-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+  .g-m-val { font-size: 15px; font-weight: 700; }
+
+  /* ─── WIN/LOSS CHART ─── */
+  .donut-row { display: flex; align-items: center; gap: 20px; }
+  .donut-wrap { position: relative; flex-shrink: 0; }
+  .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut-pct { font-size: 24px; font-weight: 700; color: var(--accent-green); }
+  .donut-sub { font-size: 10px; color: var(--text-muted); }
+  .donut-legend { display: flex; flex-direction: column; gap: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-name { font-size: 12px; color: var(--text-secondary); }
+  .legend-val { font-size: 13px; font-weight: 600; margin-left: auto; padding-left: 12px; }
+
+  /* ─── DEALS TABLE ─── */
+  .deals-table { width: 100%; border-collapse: collapse; }
+  .deals-table th {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--text-muted); padding: 8px 12px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .deals-table td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid var(--grid-line); vertical-align: middle; }
+  .deals-table tr:last-child td { border-bottom: none; }
+  .deals-table tr:hover td { background: var(--bg-elevated); }
+  .deal-name { font-weight: 600; }
+  .deal-stage-pill {
+    font-size: 10px; font-weight: 600; padding: 3px 8px;
+    border-radius: 5px; white-space: nowrap;
+  }
+  .prob-bar-wrap { width: 80px; height: 6px; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; }
+  .prob-bar { height: 100%; border-radius: 3px; }
+  .health-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  /* ─── BOTTLENECK SECTION ─── */
+  .bottleneck-list { display: flex; flex-direction: column; gap: 10px; }
+  .bn-item {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg-elevated); border-radius: 10px; padding: 12px 14px;
+    border-left: 3px solid;
+    transition: transform 0.18s;
+  }
+  .bn-item:hover { transform: translateX(4px); }
+  .bn-item.red { border-color: var(--accent-red); }
+  .bn-item.amber { border-color: var(--accent-amber); }
+  .bn-item.blue { border-color: var(--accent-blue); }
+  .bn-icon { font-size: 18px; }
+  .bn-text { flex: 1; }
+  .bn-title { font-size: 13px; font-weight: 600; }
+  .bn-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .bn-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 5px; }
+  .bn-badge.red { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+  .bn-badge.amber { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .bn-badge.blue { background: rgba(79,142,247,0.15); color: var(--accent-blue); }
+
+  /* ─── PREDICTION ─── */
+  .pred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pred-card {
+    background: var(--bg-elevated); border-radius: 10px; padding: 14px;
+    text-align: center; border: 1px solid var(--border);
+    transition: transform 0.18s;
+  }
+  .pred-card:hover { transform: translateY(-2px); }
+  .pred-month { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .pred-val { font-size: 20px; font-weight: 700; }
+  .pred-prob { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .pred-bar-h { height: 4px; border-radius: 2px; background: var(--bg-card); margin-top: 8px; overflow: hidden; }
+  .pred-bar-fill { height: 100%; border-radius: 2px; transition: width 1.5s cubic-bezier(.4,0,.2,1); }
+
+  /* ─── REPS TABLE ─── */
+  .rep-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--grid-line);
+  }
+  .rep-row:last-child { border-bottom: none; }
+  .rep-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .rep-info { flex: 1; }
+  .rep-name { font-size: 13px; font-weight: 600; }
+  .rep-deals { font-size: 10px; color: var(--text-muted); }
+  .rep-quota-bar-wrap { width: 70px; height: 6px; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; }
+  .rep-quota-bar { height: 100%; border-radius: 3px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+  .rep-val { font-size: 13px; font-weight: 700; width: 52px; text-align: right; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes countUp {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes drawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+
+  /* footer */
+  footer {
+    padding: 14px 32px; text-align: center;
+    font-size: 11px; color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-icon">⚡</div>
+    <div>
+      <div class="logo-text">Pipeline Velocity</div>
+      <div class="logo-sub">Sales Intelligence Platform</div>
+    </div>
+  </div>
+  <div class="header-center">
+    <button class="tab active">Overview</button>
+    <button class="tab">Funnel</button>
+    <button class="tab">Forecast</button>
+    <button class="tab">Team</button>
+  </div>
+  <div class="header-right">
+    <div class="date-badge">Q2 2025 · Updated 2 min ago</div>
+    <button class="filter-btn">⚙ Filters</button>
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+      <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- Period row -->
+  <div class="period-row">
+    <span class="section-label">Key Performance Indicators</span>
+    <div class="period-tabs">
+      <button class="period-tab">WTD</button>
+      <button class="period-tab">MTD</button>
+      <button class="period-tab active">QTD</button>
+      <button class="period-tab">YTD</button>
+    </div>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <div class="kpi-card blue">
+      <div class="kpi-header">
+        <div class="kpi-label">Pipeline Value</div>
+        <div class="kpi-icon blue">💰</div>
+      </div>
+      <div class="kpi-value">$8.4M</div>
+      <div class="kpi-footer">
+        <span class="kpi-delta up">▲ 14.2%</span>
+        <span class="kpi-period">vs last Q</span>
+      </div>
+      <div class="kpi-sparkline">
+        <svg width="100%" height="28" viewBox="0 0 120 28">
+          <polyline points="0,20 20,16 40,18 55,10 70,12 85,6 100,8 120,2" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <polygon points="0,20 20,16 40,18 55,10 70,12 85,6 100,8 120,2 120,28 0,28" fill="var(--accent-blue)" opacity="0.08"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="kpi-card green">
+      <div class="kpi-header">
+        <div class="kpi-label">Win Rate</div>
+        <div class="kpi-icon green">🏆</div>
+      </div>
+      <div class="kpi-value">38.6%</div>
+      <div class="kpi-footer">
+        <span class="kpi-delta up">▲ 3.1%</span>
+        <span class="kpi-period">vs last Q</span>
+      </div>
+      <div class="kpi-sparkline">
+        <svg width="100%" height="28" viewBox="0 0 120 28">
+          <polyline points="0,22 20,20 40,19 55,15 70,14 85,11 100,10 120,7" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <polygon points="0,22 20,20 40,19 55,15 70,14 85,11 100,10 120,7 120,28 0,28" fill="var(--accent-green)" opacity="0.08"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="kpi-card purple">
+      <div class="kpi-header">
+        <div class="kpi-label">Avg Deal Cycle</div>
+        <div class="kpi-icon purple">⏱</div>
+      </div>
+      <div class="kpi-value">43d</div>
+      <div class="kpi-footer">
+        <span class="kpi-delta up">▼ 7d</span>
+        <span class="kpi-period">faster this Q</span>
+      </div>
+      <div class="kpi-sparkline">
+        <svg width="100%" height="28" viewBox="0 0 120 28">
+          <polyline points="0,6 20,8 40,10 55,12 70,10 85,15 100,18 120,20" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <polygon points="0,6 20,8 40,10 55,12 70,10 85,15 100,18 120,20 120,28 0,28" fill="var(--accent-purple)" opacity="0.08"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="kpi-card amber">
+      <div class="kpi-header">
+        <div class="kpi-label">Deals at Risk</div>
+        <div class="kpi-icon amber">⚠️</div>
+      </div>
+      <div class="kpi-value">17</div>
+      <div class="kpi-footer">
+        <span class="kpi-delta down">▲ 4</span>
+        <span class="kpi-period">need attention</span>
+      </div>
+      <div class="kpi-sparkline">
+        <svg width="100%" height="28" viewBox="0 0 120 28">
+          <polyline points="0,18 20,14 40,16 55,12 70,18 85,14 100,10 120,12" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <polygon points="0,18 20,14 40,16 55,12 70,18 85,14 100,10 120,12 120,28 0,28" fill="var(--accent-amber)" opacity="0.08"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="kpi-card cyan">
+      <div class="kpi-header">
+        <div class="kpi-label">Q2 Forecast</div>
+        <div class="kpi-icon cyan">📈</div>
+      </div>
+      <div class="kpi-value">$3.2M</div>
+      <div class="kpi-footer">
+        <span class="kpi-delta up">89% conf.</span>
+        <span class="kpi-period">of $3.6M target</span>
+      </div>
+      <div class="kpi-sparkline">
+        <svg width="100%" height="28" viewBox="0 0 120 28">
+          <polyline points="0,22 20,18 40,16 55,12 70,10 85,8 100,5 120,3" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <polygon points="0,22 20,18 40,16 55,12 70,10 85,8 100,5 120,3 120,28 0,28" fill="var(--accent-cyan)" opacity="0.08"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Velocity chart + Win/Loss donut -->
+  <div class="charts-row" style="animation-delay:0.3s">
+
+    <!-- Pipeline Velocity Over Time -->
+    <div class="panel" style="animation-delay:0.3s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Pipeline Velocity Trend</div>
+          <div class="panel-sub">Weekly deal movement velocity · Bars = new deals · Line = closed won</div>
+        </div>
+        <span class="panel-badge live">● Live</span>
+      </div>
+      <canvas class="vc-canvas" id="velocityCanvas" height="210"></canvas>
+    </div>
+
+    <!-- Win/Loss by Source -->
+    <div class="panel" style="animation-delay:0.35s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Win / Loss by Source</div>
+          <div class="panel-sub">Overall close rate distribution</div>
+        </div>
+        <span class="panel-badge live">● Q2</span>
+      </div>
+      <div class="donut-row" style="margin-top:10px">
+        <div class="donut-wrap">
+          <svg width="130" height="130" viewBox="0 0 130 130" id="donutSvg">
+            <circle cx="65" cy="65" r="50" fill="none" stroke="var(--bg-elevated)" stroke-width="18"/>
+            <!-- segments drawn by JS -->
+          </svg>
+          <div class="donut-center">
+            <div class="donut-pct">38%</div>
+            <div class="donut-sub">Win Rate</div>
+          </div>
+        </div>
+        <div class="donut-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div><div class="legend-name">Won</div><div class="legend-val" style="color:var(--accent-green)">156</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent-red)"></div><div class="legend-name">Lost</div><div class="legend-val" style="color:var(--accent-red)">98</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent-amber)"></div><div class="legend-name">No Decision</div><div class="legend-val" style="color:var(--accent-amber)">52</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--text-muted)"></div><div class="legend-name">Disqualified</div><div class="legend-val" style="color:var(--text-muted)">28</div></div>
+        </div>
+      </div>
+      <!-- Source breakdown mini bars -->
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px">Win Rate by Source</div>
+        <div id="sourceBars"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Funnel + Gauge + Predictions -->
+  <div class="charts-row-3">
+
+    <!-- Funnel -->
+    <div class="panel" style="animation-delay:0.4s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Deal Funnel Stages</div>
+          <div class="panel-sub">Conversion rates & bottleneck detection</div>
+        </div>
+        <span class="panel-badge warn">⚠ 2 Gaps</span>
+      </div>
+      <div class="funnel-wrap" id="funnelWrap"></div>
+    </div>
+
+    <!-- Velocity Gauge -->
+    <div class="panel" style="animation-delay:0.45s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Velocity Score</div>
+          <div class="panel-sub">Composite pipeline health index</div>
+        </div>
+      </div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="var(--accent-red)"/>
+              <stop offset="50%" stop-color="var(--accent-amber)"/>
+              <stop offset="100%" stop-color="var(--accent-green)"/>
+            </linearGradient>
+          </defs>
+          <path d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="var(--bg-elevated)" stroke-width="14" stroke-linecap="round"/>
+          <path id="gaugeArc" d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="55" style="transition:stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1)"/>
+          <line id="gaugeNeedle" x1="80" y1="85" x2="80" y2="25" stroke="var(--text-primary)" stroke-width="2.5" stroke-linecap="round" transform-origin="80 85" style="transform:rotate(20deg);transition:transform 1.8s cubic-bezier(.4,0,.2,1)"/>
+          <circle cx="80" cy="85" r="5" fill="var(--text-primary)"/>
+          <text x="15" y="100" font-size="8" fill="var(--text-muted)" font-family="DM Sans">Low</text>
+          <text x="130" y="100" font-size="8" fill="var(--text-muted)" font-family="DM Sans">High</text>
+        </svg>
+        <div class="gauge-value">74</div>
+        <div class="gauge-label">out of 100 · Good</div>
+        <div class="gauge-metrics">
+          <div class="g-metric">
+            <div class="g-m-label">Avg Days/Stage</div>
+            <div class="g-m-val" style="color:var(--accent-blue)">8.6d</div>
+          </div>
+          <div class="g-metric">
+            <div class="g-m-label">Deals Advancing</div>
+            <div class="g-m-val" style="color:var(--accent-green)">68%</div>
+          </div>
+          <div class="g-metric">
+            <div class="g-m-label">Stale > 14d</div>
+            <div class="g-m-val" style="color:var(--accent-amber)">22</div>
+          </div>
+          <div class="g-metric">
+            <div class="g-m-label">Avg Deal Size</div>
+            <div class="g-m-val" style="color:var(--accent-purple)">$43K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 Closure Predictions -->
+    <div class="panel" style="animation-delay:0.5s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Quarterly Closure Predictions</div>
+          <div class="panel-sub">AI-weighted probability model · Weekly outlook</div>
+        </div>
+      </div>
+      <div class="pred-grid" id="predGrid"></div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Bottlenecks + Hot Deals + Rep Performance -->
+  <div class="charts-row-3">
+
+    <!-- Bottleneck analysis -->
+    <div class="panel" style="animation-delay:0.55s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Bottleneck Analysis</div>
+          <div class="panel-sub">Detected friction points in pipeline</div>
+        </div>
+      </div>
+      <div class="bottleneck-list">
+        <div class="bn-item red">
+          <div class="bn-icon">🔴</div>
+          <div class="bn-text">
+            <div class="bn-title">Proposal → Negotiation</div>
+            <div class="bn-desc">Avg 19 days stuck — 2.2× industry norm</div>
+          </div>
+          <span class="bn-badge red">Critical</span>
+        </div>
+        <div class="bn-item amber">
+          <div class="bn-icon">🟡</div>
+          <div class="bn-text">
+            <div class="bn-title">Demo → Proposal Drop-off</div>
+            <div class="bn-desc">41% fall-out — pricing mismatch flagged</div>
+          </div>
+          <span class="bn-badge amber">High</span>
+        </div>
+        <div class="bn-item amber">
+          <div class="bn-icon">🟡</div>
+          <div class="bn-text">
+            <div class="bn-title">Legal Review Delay</div>
+            <div class="bn-desc">Avg 11 days added for enterprise deals</div>
+          </div>
+          <span class="bn-badge amber">Medium</span>
+        </div>
+        <div class="bn-item blue">
+          <div class="bn-icon">🔵</div>
+          <div class="bn-text">
+            <div class="bn-title">Qualification Speed</div>
+            <div class="bn-desc">Improving — down 3d vs last quarter</div>
+          </div>
+          <span class="bn-badge blue">Positive</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hot Deals Table -->
+    <div class="panel" style="animation-delay:0.6s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Hot Deals Tracker</div>
+          <div class="panel-sub">Expected close within 30 days</div>
+        </div>
+        <span class="panel-badge live">● 12 deals</span>
+      </div>
+      <table class="deals-table">
+        <thead>
+          <tr>
+            <th>Deal</th>
+            <th>Stage</th>
+            <th>Value</th>
+            <th>Prob</th>
+            <th>Health</th>
+          </tr>
+        </thead>
+        <tbody id="dealsBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Rep Performance -->
+    <div class="panel" style="animation-delay:0.65s">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Rep Pipeline Contribution</div>
+          <div class="panel-sub">Active pipeline value vs quota attainment</div>
+        </div>
+      </div>
+      <div id="repList"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Sales Pipeline Velocity Dashboard · Powered by CRM Integration · Data as of May 15 2025</footer>
+</div>
+
+<script>
+// ─── THEME TOGGLE ───
+const toggle = document.getElementById('themeToggle');
+toggle.addEventListener('click', () => {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  setTimeout(drawVelocityChart, 50);
+  setTimeout(drawDonut, 50);
+});
+
+// ─── PERIOD TABS ───
+document.querySelectorAll('.period-tab').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.period-tab').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+document.querySelectorAll('.tab').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+
+// ─── VELOCITY CHART ───
+function getCSSVar(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+function drawVelocityChart() {
+  const canvas = document.getElementById('velocityCanvas');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const W = rect.width - 44, H = 210;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const weeks = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'];
+  const newDeals = [18,22,17,28,24,31,26,34,29,38,33,42];
+  const closedWon = [6,9,7,12,10,14,11,18,14,20,17,25];
+  const closedLost = [4,5,3,6,5,7,4,8,6,9,5,10];
+
+  const pad = { top:20, right:20, bottom:36, left:42 };
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+  const maxVal = 45;
+  const barW = (chartW / weeks.length) * 0.6;
+
+  const textPrimary = getCSSVar('--text-primary');
+  const textMuted = getCSSVar('--text-muted');
+  const gridLine = getCSSVar('--grid-line');
+  const accentBlue = getCSSVar('--accent-blue');
+  const accentGreen = getCSSVar('--accent-green');
+  const accentRed = getCSSVar('--accent-red');
+  const accentCyan = getCSSVar('--accent-cyan');
+
+  // Grid lines
+  for (let i = 0; i <= 5; i++) {
+    const y = pad.top + (chartH / 5) * i;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y);
+    ctx.strokeStyle = gridLine; ctx.lineWidth = 1; ctx.stroke();
+    const val = Math.round(maxVal - (maxVal / 5) * i);
+    ctx.fillStyle = textMuted; ctx.font = '10px DM Sans'; ctx.textAlign = 'right';
+    ctx.fillText(val, pad.left - 6, y + 4);
+  }
+
+  // Bars
+  weeks.forEach((w, i) => {
+    const x = pad.left + (chartW / weeks.length) * i + (chartW / weeks.length - barW) / 2;
+
+    // New deals bar (stacked: won + lost + remaining)
+    const nd = newDeals[i], cw = closedWon[i], cl = closedLost[i];
+    const barH = (nd / maxVal) * chartH;
+    const wonH = (cw / maxVal) * chartH;
+    const lostH = (cl / maxVal) * chartH;
+
+    // Base bar (new deals)
+    const gbar = ctx.createLinearGradient(0, pad.top + chartH - barH, 0, pad.top + chartH);
+    gbar.addColorStop(0, accentBlue + 'cc'); gbar.addColorStop(1, accentBlue + '44');
+    ctx.fillStyle = gbar;
+    ctx.beginPath();
+    const bx = x, by = pad.top + chartH - barH, bw = barW, bh = barH;
+    ctx.roundRect ? ctx.roundRect(bx, by, bw, bh, [4,4,0,0]) : ctx.rect(bx, by, bw, bh);
+    ctx.fill();
+
+    // Won overlay
+    const gwon = ctx.createLinearGradient(0, pad.top + chartH - wonH, 0, pad.top + chartH);
+    gwon.addColorStop(0, accentGreen + 'dd'); gwon.addColorStop(1, accentGreen + '66');
+    ctx.fillStyle = gwon;
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(bx, pad.top + chartH - wonH, bw, wonH, [4,4,0,0]) : ctx.rect(bx, pad.top + chartH - wonH, bw, wonH);
+    ctx.fill();
+
+    // Week label
+    ctx.fillStyle = textMuted; ctx.font = '10px DM Sans'; ctx.textAlign = 'center';
+    ctx.fillText(w, x + barW/2, pad.top + chartH + 18);
+  });
+
+  // Closed Won line
+  ctx.beginPath();
+  weeks.forEach((w, i) => {
+    const x = pad.left + (chartW / weeks.length) * i + (chartW / weeks.length) / 2;
+    const y = pad.top + chartH - (closedWon[i] / maxVal) * chartH;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = accentCyan; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+  ctx.setLineDash([0]); ctx.stroke();
+
+  // Dots
+  weeks.forEach((w, i) => {
+    const x = pad.left + (chartW / weeks.length) * i + (chartW / weeks.length) / 2;
+    const y = pad.top + chartH - (closedWon[i] / maxVal) * chartH;
+    ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI*2);
+    ctx.fillStyle = accentCyan; ctx.fill();
+    ctx.strokeStyle = getCSSVar('--bg-card'); ctx.lineWidth = 1.5; ctx.stroke();
+  });
+
+  // Legend
+  const lx = pad.left;
+  ctx.fillStyle = accentBlue; ctx.fillRect(lx, 4, 10, 8);
+  ctx.fillStyle = textMuted; ctx.font = '10px DM Sans'; ctx.textAlign = 'left';
+  ctx.fillText('New Deals', lx + 14, 12);
+  ctx.fillStyle = accentGreen; ctx.fillRect(lx + 90, 4, 10, 8);
+  ctx.fillText('Closed Won', lx + 104, 12);
+  ctx.beginPath(); ctx.moveTo(lx + 194, 8); ctx.lineTo(lx + 204, 8);
+  ctx.strokeStyle = accentCyan; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = textMuted; ctx.fillText('Win Trend', lx + 208, 12);
+}
+
+// ─── DONUT CHART ───
+function drawDonut() {
+  const svg = document.getElementById('donutSvg');
+  // Remove old segments
+  svg.querySelectorAll('.seg').forEach(s => s.remove());
+  const cx=65, cy=65, r=50, sw=18;
+  const data = [
+    {val:156, color:'var(--accent-green)'},
+    {val:98, color:'var(--accent-red)'},
+    {val:52, color:'var(--accent-amber)'},
+    {val:28, color:'var(--text-muted)'}
+  ];
+  const total = data.reduce((a,b)=>a+b.val,0);
+  const circ = 2*Math.PI*r;
+  let offset = 0;
+  // Start from top
+  data.forEach(d => {
+    const pct = d.val/total;
+    const dashArr = circ*pct - 2;
+    const dashOff = -(circ*offset);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
+    circle.setAttribute('fill','none');
+    circle.setAttribute('stroke', d.color);
+    circle.setAttribute('stroke-width', sw);
+    circle.setAttribute('stroke-dasharray', `${dashArr} ${circ}`);
+    circle.setAttribute('stroke-dashoffset', dashOff);
+    circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+    circle.classList.add('seg');
+    circle.style.transition = 'stroke-dasharray 1.2s ease';
+    svg.appendChild(circle);
+    offset += pct;
+  });
+}
+
+// ─── SOURCE BARS ───
+function buildSourceBars() {
+  const sources = [
+    {name:'Outbound SDR', rate:44, color:'var(--accent-blue)'},
+    {name:'Inbound / SEO', rate:52, color:'var(--accent-green)'},
+    {name:'Partner Referral', rate:61, color:'var(--accent-cyan)'},
+    {name:'Events', rate:29, color:'var(--accent-amber)'},
+  ];
+  const wrap = document.getElementById('sourceBars');
+  wrap.innerHTML = sources.map(s => `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <span style="font-size:11px;color:var(--text-secondary);width:110px;flex-shrink:0">${s.name}</span>
+      <div style="flex:1;height:6px;background:var(--bg-elevated);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:${s.rate}%;background:${s.color};border-radius:3px;transition:width 1.2s cubic-bezier(.4,0,.2,1)"></div>
+      </div>
+      <span style="font-size:11px;font-weight:700;color:${s.color};width:32px;text-align:right">${s.rate}%</span>
+    </div>
+  `).join('');
+}
+
+// ─── FUNNEL ───
+function buildFunnel() {
+  const stages = [
+    {name:'Prospecting', count:342, val:'$14.2M', pct:100, drop:null, color:'var(--funnel-1)'},
+    {name:'Qualification', count:228, val:'$9.8M', pct:67, drop:{label:'-33%',cls:'ok'}, color:'var(--funnel-2)'},
+    {name:'Demo / Discovery', count:156, val:'$6.7M', pct:46, drop:{label:'-32%',cls:'ok'}, color:'var(--funnel-3)'},
+    {name:'Proposal Sent', count:91, val:'$4.1M', pct:27, drop:{label:'-42%',cls:'warn'}, color:'var(--funnel-4)'},
+    {name:'Negotiation', count:38, val:'$1.9M', pct:11, drop:{label:'-58%',cls:'bad'}, color:'var(--funnel-5)'},
+  ];
+  const wrap = document.getElementById('funnelWrap');
+  wrap.innerHTML = stages.map((s,i) => `
+    <div class="funnel-stage">
+      <div class="funnel-label">${s.name}</div>
+      <div class="funnel-bar-wrap" style="max-width:100%">
+        <div class="funnel-bar" style="width:${s.pct}%;background:${s.color}">
+          <span>${s.count}</span>
+        </div>
+      </div>
+      <div class="funnel-meta">
+        <div class="funnel-count">${s.val}</div>
+        ${s.drop ? `<span class="funnel-drop ${s.drop.cls}">${s.drop.label}</span>` : '<span class="funnel-val">Top</span>'}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── PREDICTIONS ───
+function buildPredictions() {
+  const preds = [
+    {month:'Week 3', val:'$680K', prob:94, color:'var(--accent-green)'},
+    {month:'Week 4', val:'$520K', prob:87, color:'var(--accent-green)'},
+    {month:'May Close', val:'$1.2M', prob:81, color:'var(--accent-blue)'},
+    {month:'Jun Forecast', val:'$2.0M', prob:72, color:'var(--accent-purple)'},
+    {month:'Q2 Total', val:'$3.2M', prob:89, color:'var(--accent-cyan)'},
+    {month:'Q3 Pipeline', val:'$5.8M', prob:61, color:'var(--accent-amber)'},
+  ];
+  const grid = document.getElementById('predGrid');
+  grid.innerHTML = preds.map(p => `
+    <div class="pred-card">
+      <div class="pred-month">${p.month}</div>
+      <div class="pred-val" style="color:${p.color}">${p.val}</div>
+      <div class="pred-prob">${p.prob}% confidence</div>
+      <div class="pred-bar-h"><div class="pred-bar-fill" style="width:${p.prob}%;background:${p.color}"></div></div>
+    </div>
+  `).join('');
+}
+
+// ─── HOT DEALS ───
+function buildDeals() {
+  const deals = [
+    {name:'Acme Corp', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$320K', prob:82, health:'green'},
+    {name:'DataFlow Inc', stage:'Proposal', stageColor:'var(--accent-blue)', val:'$185K', prob:68, health:'green'},
+    {name:'FinEdge Ltd', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$440K', prob:74, health:'amber'},
+    {name:'Horizon SaaS', stage:'Demo', stageColor:'var(--accent-cyan)', val:'$97K', prob:55, health:'green'},
+    {name:'NovaTech', stage:'Proposal', stageColor:'var(--accent-blue)', val:'$260K', prob:61, health:'red'},
+    {name:'PeakLogic', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$510K', prob:88, health:'green'},
+    {name:'Stratix AI', stage:'Demo', stageColor:'var(--accent-cyan)', val:'$130K', prob:45, health:'amber'},
+  ];
+  const colorMap = {green:'var(--accent-green)',amber:'var(--accent-amber)',red:'var(--accent-red)'};
+  const body = document.getElementById('dealsBody');
+  body.innerHTML = deals.map(d => `
+    <tr>
+      <td class="deal-name">${d.name}</td>
+      <td><span class="deal-stage-pill" style="background:${d.stageColor}22;color:${d.stageColor}">${d.stage}</span></td>
+      <td style="font-weight:600">${d.val}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div class="prob-bar-wrap"><div class="prob-bar" style="width:${d.prob}%;background:${d.prob>70?'var(--accent-green)':d.prob>50?'var(--accent-amber)':'var(--accent-red)'}"></div></div>
+          <span style="font-size:11px;color:var(--text-muted)">${d.prob}%</span>
+        </div>
+      </td>
+      <td><span class="health-dot" style="background:${colorMap[d.health]}"></span></td>
+    </tr>
+  `).join('');
+}
+
+// ─── REPS ───
+function buildReps() {
+  const reps = [
+    {name:'Sarah Chen', deals:12, val:'$1.8M', quota:92, color:'#4f8ef7'},
+    {name:'Marcus Webb', deals:9, val:'$1.4M', quota:78, color:'#8b5cf6'},
+    {name:'Priya Nair', deals:15, val:'$2.1M', quota:105, color:'#10b981'},
+    {name:'Tom Keller', deals:7, val:'$0.9M', quota:58, color:'#f59e0b'},
+    {name:'Aisha Okafor', deals:11, val:'$1.6M', quota:87, color:'#ec4899'},
+  ];
+  const list = document.getElementById('repList');
+  list.innerHTML = reps.map(r => {
+    const initials = r.name.split(' ').map(x=>x[0]).join('');
+    const qColor = r.quota >= 100 ? 'var(--accent-green)' : r.quota >= 70 ? 'var(--accent-blue)' : 'var(--accent-amber)';
+    return `
+    <div class="rep-row">
+      <div class="rep-avatar" style="background:${r.color}">${initials}</div>
+      <div class="rep-info">
+        <div class="rep-name">${r.name}</div>
+        <div class="rep-deals">${r.deals} active deals</div>
+      </div>
+      <div class="rep-quota-bar-wrap">
+        <div class="rep-quota-bar" style="width:${Math.min(r.quota,100)}%;background:${qColor}"></div>
+      </div>
+      <div class="rep-val" style="color:${qColor}">${r.quota}%</div>
+    </div>
+  `}).join('');
+}
+
+// ─── INIT ───
+window.addEventListener('load', () => {
+  buildSourceBars();
+  buildFunnel();
+  buildPredictions();
+  buildDeals();
+  buildReps();
+  drawDonut();
+  setTimeout(drawVelocityChart, 80);
+});
+
+window.addEventListener('resize', () => {
+  drawVelocityChart();
+});
+</script>
+</body>
+</html>
