@@ -12,8 +12,8 @@ const TEMPLATES = [
     title: "Financial Intelligence Blueprint",
     type: "Power BI",
     icon: <Layout className="text-blue-500" size={24} />,
-    desc: "Surgical-grade financial dashboard with automated GL consolidation and margin variance tracking.",
-    size: "4.2 MB",
+    desc: "Surgical-grade financial dashboard architected for 16M+ row SQL Server 2022 datasets. Features automated GL consolidation, query folding, and zero-latency margin variance tracking.",
+    size: "4.86 MB",
     category: "Business Intelligence",
     downloadUrl: "/templates/financial-blueprint.pbit"
   },
@@ -58,8 +58,8 @@ export default function TemplatesPage() {
         </header>
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-6 max-w-3xl" style={{ marginBottom: '4rem' }}>
-          <div className="relative flex-1">
+        <div className="max-w-2xl" style={{ marginBottom: '2rem' }}>
+          <div className="relative w-full">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={20} />
             <input 
               type="text"
@@ -70,10 +70,6 @@ export default function TemplatesPage() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <button className="flex items-center justify-center gap-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm hover:border-[var(--accent)] transition-all shadow-md font-bold" style={{ padding: '0 2.5rem', height: '64px' }}>
-            <Filter size={18} className="text-[var(--accent)]" />
-            <span className="mono text-[13px] font-bold tracking-widest">FILTER</span>
-          </button>
         </div>
 
         {/* Templates Grid */}

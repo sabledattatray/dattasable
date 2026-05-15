@@ -45,7 +45,7 @@ export const ARCHITECTURES: Architecture[] = [
   {
     id: 'bi-data-orchestrator',
     title: 'BI Data Orchestrator',
-    description: 'Infrastructure for real-time sales intelligence and revenue forecasting using SQL and Power BI integration.',
+    description: 'Infrastructure for real-time sales intelligence and revenue forecasting using SQL Server 2022 (SSMS) and Power BI integration over 16M+ row datasets.',
     category: 'BI',
     diagram: `graph LR
     A[Stripe/SQL] --> B[ETL Pipeline]
@@ -58,6 +58,7 @@ export const ARCHITECTURES: Architecture[] = [
       "Optimize the query for indexing and performance..."
     ],
     outcomes: [
+      "Engineered query folding over 16M+ row SQL Server 2022 datasets.",
       "Eliminated 40+ manual reporting hours per week.",
       "Zero-latency visibility for global stakeholders.",
       "Identified $200k in unoptimized revenue leakage."
