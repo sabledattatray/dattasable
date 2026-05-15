@@ -1,14 +1,11 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Interactive Analytics Showcases | Surgical BI Dashboards',
-  description: 'Explore a curated collection of high-performance, interactive BI dashboards across Fintech, Global Sales, and Operations. Engineered with Next.js, Canvas APIs, and Tableau.',
-  keywords: ['BI Showcase', 'Data Visualization Portfolio', 'Fintech Analytics', 'Next.js BI', 'Surgical Dashboards', 'Sales Intelligence'],
-  openGraph: {
-    title: 'Interactive Analytics Showcases | Surgical BI Dashboards',
-    description: 'Expert-grade data visualizations for executive decision-making.',
-    images: ['/images/dashboards/global_sales_kpi.png'],
+  title: {
+    template: '%s | Surgical Dashboards',
+    default: 'Interactive Analytics Showcases | Surgical BI Dashboards',
   },
+  description: 'Explore a curated collection of high-performance, interactive BI dashboards.',
   alternates: {
     canonical: '/dashboards',
   }
