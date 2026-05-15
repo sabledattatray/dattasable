@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Github } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -49,10 +49,11 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Connect',
     links: [
-      { label: 'About',    href: '/about',                  icon: User },
-      { label: 'Contact',     href: '/contact',                icon: MessageSquare },
-      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dattasable/',    icon: Users,      external: true },
-      { label: 'Twitter / X', href: 'https://x.com/sabledattatray',    icon: MessageSquare,  external: true },
+      { label: 'About',       href: '/about',                                   icon: User },
+      { label: 'Contact',     href: '/contact',                                 icon: MessageSquare },
+      { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/dattasable/',  icon: Users,          external: true },
+      { label: 'Twitter / X', href: 'https://x.com/sabledattatray',             icon: MessageSquare,  external: true },
+      { label: 'GitHub',      href: 'https://github.com/sabledattatray',        icon: Github,         external: true },
     ],
   },
   {
