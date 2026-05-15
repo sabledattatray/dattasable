@@ -544,7 +544,14 @@
   <main class="main">
 
     <div class="topbar">
-      <input class="search" placeholder="Search AI workflows, prompts, agents, analytics..." />
+      <div style="display:flex; gap:10px;">
+        <div class="period-tabs" style="display:flex; background:var(--panel); border:1px solid var(--panel-border); border-radius:14px; padding:4px;">
+          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">WTD</button>
+          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">MTD</button>
+          <button class="p-tab active" style="background:var(--primary); border:none; color:#000; padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600; box-shadow:0 4px 12px rgba(110,231,255,.3);">QTD</button>
+          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">YTD</button>
+        </div>
+      </div>
       <div class="actions">
         <button class="btn">Deploy Workflow</button>
         <button class="toggle" id="themeToggle">☾</button>
@@ -563,7 +570,7 @@
 
       <div class="hero-card">
         <h4>AI Execution Success</h4>
-        <div class="big">98.4%</div>
+        <div class="big" id="execSuccess">98.4%</div>
         <div class="status">● Live AI orchestration stable</div>
       </div>
     </section>
@@ -572,25 +579,25 @@
 
       <div class="card kpi">
         <h3>AI Agent Runtime</h3>
-        <div class="value">14h 32m</div>
+        <div class="value" id="runtimeVal">14h 32m</div>
         <span class="badge">+12.4% Efficiency</span>
       </div>
 
       <div class="card kpi">
         <h3>Prompt Accuracy</h3>
-        <div class="value">92.8%</div>
+        <div class="value" id="accuracyVal">92.8%</div>
         <span class="badge">High Fidelity</span>
       </div>
 
       <div class="card kpi">
         <h3>Token Consumption</h3>
-        <div class="value">18.4M</div>
+        <div class="value" id="tokenVal">18.4M</div>
         <span class="badge">Optimized Usage</span>
       </div>
 
       <div class="card kpi">
         <h3>AI Operational Cost</h3>
-        <div class="value">$8,412</div>
+        <div class="value" id="costVal">$8,412</div>
         <span class="badge">-6.2% Reduction</span>
       </div>
 
@@ -608,19 +615,19 @@
             <div class="intent-item">
               <strong>Execution Precision</strong>
               Autonomous workflow routing confidence
-              <div class="bar"><span style="width:94%"></span></div>
+              <div class="bar"><span id="bar1" style="width:94%"></span></div>
             </div>
 
             <div class="intent-item">
               <strong>Prompt Optimization</strong>
               Semantic intent stability monitoring
-              <div class="bar"><span style="width:87%"></span></div>
+              <div class="bar"><span id="bar2" style="width:87%"></span></div>
             </div>
 
             <div class="intent-item">
               <strong>Automation Trust Layer</strong>
               AI execution governance score
-              <div class="bar"><span style="width:91%"></span></div>
+              <div class="bar"><span id="bar3" style="width:91%"></span></div>
             </div>
           </div>
         </div>
@@ -642,7 +649,7 @@
       <div class="card activity">
         <h3>Live Activity Feed</h3>
 
-        <div class="activity-feed">
+        <div class="activity-feed" id="activityFeed">
           <div class="feed">
             <div class="dot"></div>
             <p>Operator workflow “Surgical Prompt Architecture™” deployed successfully.</p>
@@ -670,7 +677,7 @@
           <span></span><span></span><span></span>
         </div>
 
-        <div class="logs">
+        <div class="logs" id="terminalLogs">
           [SYSTEM] AI orchestration layer initialized...<br>
           [SUCCESS] Workflow Intelligence API connected.<br>
           [INFO] Prompt execution fidelity: 98.4%<br>
@@ -690,9 +697,68 @@
 </div>
 
 <script>
-  const ctx = document.getElementById('analyticsChart');
+  let currentPeriod = 'QTD';
+  const pMult = { 'WTD': 0.1, 'MTD': 0.35, 'QTD': 1.0, 'YTD': 4.2 };
+  let chart;
 
-  new Chart(ctx, {
+  function randomRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  function updateData() {
+    const m = pMult[currentPeriod];
+    
+    // Update KPIs
+    document.getElementById('execSuccess').innerText = (95 + Math.random() * 4.5).toFixed(1) + '%';
+    document.getElementById('runtimeVal').innerText = Math.floor(10 + Math.random() * 20 * m) + 'h ' + randomRange(10, 59) + 'm';
+    document.getElementById('accuracyVal').innerText = (90 + Math.random() * 8).toFixed(1) + '%';
+    document.getElementById('tokenVal').innerText = (18.4 * m + Math.random() * 2).toFixed(1) + 'M';
+    document.getElementById('costVal').innerText = '$' + Math.floor(8412 * m + Math.random() * 500).toLocaleString();
+
+    // Update Bars
+    document.getElementById('bar1').style.width = randomRange(85, 98) + '%';
+    document.getElementById('bar2').style.width = randomRange(80, 95) + '%';
+    document.getElementById('bar3').style.width = randomRange(88, 99) + '%';
+
+    // Update Chart
+    if (chart) {
+      chart.data.datasets[0].data = Array.from({length: 7}, () => randomRange(60, 100));
+      chart.data.datasets[1].data = Array.from({length: 7}, () => randomRange(50, 90));
+      chart.update();
+    }
+
+    // Add random log
+    const logs = document.getElementById('terminalLogs');
+    const newLog = document.createElement('div');
+    const types = ['[INFO]', '[SUCCESS]', '[TRACE]', '[SYSTEM]'];
+    const msgs = [
+      'Semantic intent synchronized.',
+      'AI Agent #'+randomRange(1,20)+' optimized.',
+      'Token compression active.',
+      'Execution chain validated.',
+      'Surgical mapping updated.'
+    ];
+    newLog.innerHTML = `${types[randomRange(0,3)]} ${msgs[randomRange(0,4)]}`;
+    logs.prepend(newLog);
+    if(logs.children.length > 15) logs.lastElementChild.remove();
+  }
+
+  // Tabs
+  document.querySelectorAll('.p-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.p-tab').forEach(b => {
+        b.style.background = 'none';
+        b.style.color = 'var(--muted)';
+        b.style.boxShadow = 'none';
+      });
+      btn.style.background = 'var(--primary)';
+      btn.style.color = '#000';
+      btn.style.boxShadow = '0 4px 12px rgba(110,231,255,.3)';
+      currentPeriod = btn.innerText;
+      updateData();
+    });
+  });
+
+  const ctx = document.getElementById('analyticsChart');
+  chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
@@ -717,6 +783,7 @@
     },
     options:{
       responsive:true,
+      maintainAspectRatio: false,
       plugins:{
         legend:{
           labels:{
@@ -746,14 +813,13 @@
   });
 
   const toggle = document.getElementById("themeToggle");
-
   toggle.addEventListener("click",()=>{
     document.body.classList.toggle("light");
-
-    toggle.innerHTML = document.body.classList.contains("light")
-      ? "☀"
-      : "☾";
+    toggle.innerHTML = document.body.classList.contains("light") ? "☀" : "☾";
+    setTimeout(() => chart.update(), 100);
   });
+
+  window.addEventListener('load', updateData);
 </script>
 
 </body>
