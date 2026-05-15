@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Github } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Clock, Phone, Smartphone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Github } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -226,7 +226,7 @@ export default function Footer() {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  <Mail size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform" />
+                  <Mail size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform flex-shrink-0" />
                   info@dattasable.com
                 </a>
                 <a
@@ -237,7 +237,7 @@ export default function Footer() {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  <Clock size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform" />
+                  <Phone size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform flex-shrink-0" />
                   +91 8010803756
                 </a>
                 <span
@@ -247,9 +247,53 @@ export default function Footer() {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  <MapPin size={15} className="text-[var(--accent)]" />
+                  <MapPin size={15} className="text-[var(--accent)] flex-shrink-0" />
                   Mumbai, Maharashtra, India
                 </span>
+
+                {/* Available on Play Store Button */}
+                <div className="pt-3">
+                  <a
+                    href="https://play.google.com/store"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/playstore inline-flex items-center gap-3.5 px-5 py-3 rounded-xl bg-gradient-to-r from-[var(--surface2)] via-[var(--surface)] to-[var(--surface2)] border border-[var(--border)] hover:border-[var(--accent)] shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_25px_rgba(0,89,179,0.25)] transition-all duration-500 no-underline transform hover:-translate-y-1 relative overflow-hidden"
+                  >
+                    {/* Subtle inner glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/10 to-[var(--accent)]/0 opacity-0 group-hover/playstore:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    
+                    {/* Smartphone Icon */}
+                    <div className="p-2.5 rounded-lg bg-[var(--accent)]/10 group-hover/playstore:bg-[var(--accent)] transition-colors duration-500 flex items-center justify-center shadow-inner flex-shrink-0">
+                      <Smartphone size={22} className="text-[var(--accent)] group-hover/playstore:text-white transition-colors duration-500" />
+                    </div>
+                    
+                    <div className="flex flex-col text-left">
+                      <span 
+                        style={{ 
+                          fontSize: '0.65rem', 
+                          fontFamily: "'JetBrains Mono', monospace", 
+                          textTransform: 'uppercase', 
+                          letterSpacing: '0.15em', 
+                          color: 'var(--muted)' 
+                        }}
+                      >
+                        Available on
+                      </span>
+                      <span 
+                        style={{ 
+                          fontSize: '1rem', 
+                          fontFamily: "'Syne', sans-serif", 
+                          fontWeight: 700, 
+                          color: 'var(--text)',
+                          letterSpacing: '-0.01em' 
+                        }}
+                        className="group-hover/playstore:text-[var(--accent)] transition-colors duration-500"
+                      >
+                        Google Play
+                      </span>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
