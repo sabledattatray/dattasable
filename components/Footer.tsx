@@ -114,51 +114,6 @@ export default function Footer() {
         {/* Floating Secondary Glass Orb */}
         <div className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--accent)]/10 via-white/5 to-transparent backdrop-blur-md border border-[var(--accent)]/20 shadow-[0_0_25px_var(--accent)] opacity-50 pointer-events-none" />
         
-        {/* Surgical Precision Shapes & HUD Crosshairs */}
-        {/* Top-Left Calibration Crosshair */}
-        <div className="absolute top-[15%] left-[8%] opacity-40 transform scale-75">
-          <div className="absolute w-8 h-[1px] bg-[var(--border)] -left-4 top-0" />
-          <div className="absolute h-8 w-[1px] bg-[var(--border)] -top-4 left-0" />
-          <div className="absolute w-1.5 h-1.5 bg-[var(--accent)] rounded-full -left-[3px] -top-[3px] shadow-[0_0_10px_var(--accent)]" />
-          <span className="absolute -left-10 -top-6 text-[9px] font-mono text-[var(--muted)] tracking-widest select-none">SYS.01</span>
-        </div>
-
-        {/* Top-Right Surgical Target */}
-        <div className="absolute top-[25%] right-[12%] opacity-30 transform scale-100">
-          <div className="absolute w-12 h-12 border border-[var(--border)] rounded-full -left-6 -top-6" />
-          <div className="absolute w-3 h-3 border border-[var(--accent)] -left-1.5 -top-1.5 rotate-45" />
-          <div className="absolute w-16 h-[1px] bg-[var(--border)] -left-8 top-0" />
-          <div className="absolute h-16 w-[1px] bg-[var(--border)] -top-8 left-0" />
-          <span className="absolute left-8 top-2 text-[9px] font-mono text-[var(--muted)] tracking-widest select-none">BI_CALIB://99.8%</span>
-        </div>
-
-        {/* Bottom-Left Tech Bracket */}
-        <div className="absolute bottom-[20%] left-[15%] opacity-40">
-          <div className="absolute w-6 h-6 border-l-2 border-b-2 border-[var(--muted)] -left-3 -bottom-3" />
-          <div className="absolute w-1 h-1 bg-[var(--accent)] left-4 bottom-0 shadow-[0_0_8px_var(--accent)]" />
-          <div className="absolute w-1 h-1 bg-[var(--muted)] left-7 bottom-0" />
-          <div className="absolute w-1 h-1 bg-[var(--muted)] left-10 bottom-0" />
-          <span className="absolute left-14 -bottom-1 text-[9px] font-mono text-[var(--muted)] tracking-widest select-none">SEC_NODE:OK</span>
-        </div>
-
-        {/* Bottom-Right Precision Marker */}
-        <div className="absolute bottom-[30%] right-[8%] opacity-40 transform scale-75">
-          <div className="absolute w-10 h-[1px] bg-[var(--border)] -left-5 top-0" />
-          <div className="absolute h-10 w-[1px] bg-[var(--border)] -top-5 left-0" />
-          <div className="absolute w-2 h-2 border border-[var(--accent)] -left-1 -top-1" />
-          <span className="absolute -left-12 bottom-4 text-[9px] font-mono text-[var(--muted)] tracking-widest select-none">ALT.802</span>
-        </div>
-
-        {/* Center-Top Micro Grid Tic */}
-        <div className="absolute top-[10%] left-[55%] opacity-25">
-          <div className="flex gap-2">
-            <div className="w-1 h-3 bg-[var(--border)]" />
-            <div className="w-1 h-3 bg-[var(--border)]" />
-            <div className="w-1 h-3 bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
-            <div className="w-1 h-3 bg-[var(--border)]" />
-          </div>
-          <span className="absolute left-8 -top-0.5 text-[8px] font-mono text-[var(--muted)] tracking-widest select-none">FLOW_RATE</span>
-        </div>
         {/* Top Glowing Aurora Highlight */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 via-blue-500/40 to-transparent shadow-[0_0_25px_var(--accent)]" />
       </div>
