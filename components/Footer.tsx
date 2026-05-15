@@ -109,7 +109,10 @@ export default function Footer() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
           {/* Brand Section Glass Card */}
-          <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between p-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] group/brand hover:border-white/[0.1] transition-all duration-500 relative overflow-hidden">
+          <div 
+            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] group/brand hover:border-white/[0.1] transition-all duration-500 relative overflow-hidden"
+            style={{ padding: '3.5rem 3rem' }}
+          >
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--accent)]/40 to-transparent opacity-0 group-hover/brand:opacity-100 transition-opacity duration-500" />
             <div>
               <Link
@@ -192,7 +195,10 @@ export default function Footer() {
           </div>
 
           {/* Navigation Columns Glass Container */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10 p-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500">
+          <div 
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500"
+            style={{ padding: '3.5rem 3rem' }}
+          >
             {NAV_LINKS.map((col) => (
               <div key={col.heading} className="flex flex-col">
                 <h3
