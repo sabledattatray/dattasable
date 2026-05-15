@@ -687,9 +687,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Premium Glossy Header Utility */
-.glossy-header {
-  /* position: relative; removed to prevent overriding 'fixed' class */
-}
 
 .glossy-header::before {
   content: '';

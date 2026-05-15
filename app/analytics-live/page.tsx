@@ -9,6 +9,7 @@ import {
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 const REFRESH_INTERVAL = 5; // seconds
 
