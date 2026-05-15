@@ -11,8 +11,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
-  title: "Surgical AI Workspace | AI Workflow Infrastructure",
-  description: "Datta Sable — Independent AI workflow architect specializing in precision automation systems, BI infrastructure, and surgical logic design at dattasable.com.",
+  title: {
+    template: '%s | Datta Sable',
+    default: 'Surgical AI Workspace | AI Workflow Infrastructure',
+  },
+  description: "Datta Sable — Independent AI workflow architect specializing in precision automation systems, BI infrastructure, and surgical logic design.",
   keywords: [
     "Surgical AI Workspace",
     "AI Automation Systems",
@@ -29,24 +32,23 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Datta Sable" }],
   openGraph: {
-    title: "dattasable.com | Surgical AI Workspace",
-    description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems at dattasable.com.",
+    title: "Surgical AI Workspace | AI Workflow Infrastructure",
+    description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems.",
     type: "website",
-    url: "https://dattasable.com",
     images: [
       {
-        url: "https://dattasable.com/images/og-ultra.png",
+        url: "/images/og-ultra.png",
         width: 1200,
         height: 630,
-        alt: "Datta Sable | Surgical AI Workspace Premium Preview",
+        alt: "Datta Sable | Surgical AI Workspace",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "dattasable.com | Surgical AI Workspace",
+    title: "Surgical AI Workspace | AI Workflow Infrastructure",
     description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems.",
-    images: ["https://dattasable.com/images/og-ultra.png"],
+    images: ["/images/og-ultra.png"],
   },
   icons: {
     icon: [
