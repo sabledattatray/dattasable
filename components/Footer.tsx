@@ -66,6 +66,16 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Sitemap',   href: '/sitemap.xml', icon: Globe, external: true },
     ],
   },
+  {
+    heading: 'Resources',
+    links: [
+      { label: 'Microsoft BI',   href: 'https://powerbi.microsoft.com/', icon: Database, external: true },
+      { label: 'n8n Workflow',   href: 'https://n8n.io/',                icon: Zap,      external: true },
+      { label: 'Next.js 14',     href: 'https://nextjs.org/',            icon: Code2,    external: true },
+      { label: 'Vercel Cloud',   href: 'https://vercel.com/',            icon: Globe,    external: true },
+      { label: 'Tailwind CSS',   href: 'https://tailwindcss.com/',       icon: Sparkles, external: true },
+    ],
+  },
 ];
 
 export default function Footer() {
@@ -197,7 +207,7 @@ export default function Footer() {
 
           {/* Navigation Columns Glass Container */}
           <div 
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500"
             style={{ padding: '3.5rem 3rem' }}
           >
             {NAV_LINKS.map((col) => (
