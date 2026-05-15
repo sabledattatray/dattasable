@@ -56,39 +56,39 @@ export default function ProtocolsPage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       
-      <div className="boxed-wrapper pt-32 pb-24">
+      <div className="boxed-wrapper" style={{ padding: '12rem 2rem 8rem 2rem' }}>
         <Crosshair position="tl" />
         
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <div className="label-tech text-[var(--accent)]">Protocol Specification v1.4.2</div>
-              <div className="flex items-center gap-2 mono text-[10px] opacity-40">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" /> STABLE_RELEASE
+              <div className="label-tech text-[var(--accent)]" style={{ fontSize: '0.85rem', fontWeight: 700, tracking: '0.1em' }}>Protocol Specification v1.4.2</div>
+              <div className="flex items-center gap-2 mono text-[11px] opacity-60 font-bold tracking-widest">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" /> STABLE_RELEASE
               </div>
             </div>
             
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: '2rem', lineHeight: 1.1 }}>
               Operator Intent <span style={{ color: 'var(--accent)' }}>Mapping™.</span>
             </h1>
-            <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--muted)', fontSize: '1.25rem', marginBottom: '5rem', lineHeight: 1.7 }}>
               The definitive protocol for aligning Large Language Model execution with professional 
               human persona and authority. This framework eliminates the "Intent Gap" in enterprise AI.
             </p>
 
             {/* Semantic Links */}
-            <div className="flex flex-wrap gap-4 mb-20 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
-              <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Related Standards:</span>
-              <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[11px] mono hover:text-[var(--accent)] transition-colors">
-                <LinkIcon size={12} /> EXECUTION_CHAIN_TAXONOMY_V2
+            <div className="flex flex-wrap items-center gap-6 rounded-sm shadow-md" style={{ padding: '1.75rem 2.5rem', marginBottom: '6rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}>
+              <span className="mono text-[11px] uppercase opacity-50 w-full mb-1 font-bold tracking-widest">Related Standards:</span>
+              <Link href="/knowledge/taxonomy" className="flex items-center gap-2.5 text-[12px] mono font-bold hover:text-[var(--accent)] transition-colors no-underline">
+                <LinkIcon size={14} className="text-[var(--accent)]" /> EXECUTION_CHAIN_TAXONOMY_V2
               </Link>
-              <div className="w-px h-3 bg-[var(--border)]" />
-              <Link href="/knowledge/standards" className="flex items-center gap-2 text-[11px] mono hover:text-[var(--accent)] transition-colors">
-                <LinkIcon size={12} /> PROMPT_HARDENING_STANDARDS_V1
+              <div className="w-px h-4 bg-[var(--border)] hidden sm:block" />
+              <Link href="/knowledge/standards" className="flex items-center gap-2.5 text-[12px] mono font-bold hover:text-[var(--accent)] transition-colors no-underline">
+                <LinkIcon size={14} className="text-[var(--accent)]" /> PROMPT_HARDENING_STANDARDS_V1
               </Link>
             </div>
 
-            <div className="space-y-12 mb-32">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem', marginBottom: '8rem' }}>
               {steps.map((step, i) => (
                 <motion.div
                   key={step.code}
@@ -97,21 +97,21 @@ export default function ProtocolsPage() {
                   transition={{ delay: i * 0.1 }}
                   className="group relative"
                 >
-                  <div className="flex flex-col md:flex-row gap-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-start">
                     <div className="md:w-1/4">
-                      <div className="sticky top-32">
-                        <span className="mono text-[10px] text-[var(--accent)] block mb-4">{step.code}</span>
-                        <h3 className="text-xl font-bold mb-4">{step.title}</h3>
-                        <div className="w-12 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-700" />
+                      <div className="sticky top-32 pt-2">
+                        <span className="mono text-[11px] text-[var(--accent)] block mb-3 font-bold tracking-widest">{step.code}</span>
+                        <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>{step.title}</h3>
+                        <div className="w-16 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-700 shadow-[0_0_8px_var(--accent)]" />
                       </div>
                     </div>
-                    <div className="flex-1 p-8 bg-[var(--surface1)] border border-[var(--border)] rounded-sm">
-                      <p className="text-[var(--muted)] leading-relaxed mb-8">{step.desc}</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div className="flex-1 rounded-sm shadow-lg hover:border-[var(--accent)] transition-all duration-300" style={{ padding: '3rem', background: 'var(--surface1)', border: '1px solid var(--border)' }}>
+                      <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>{step.desc}</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[var(--border)] border-opacity-60">
                         {step.details.map((detail, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 size={12} className="text-[var(--accent)]" />
-                            <span className="mono text-[10px] opacity-60 uppercase">{detail}</span>
+                          <div key={idx} className="flex items-center gap-3">
+                            <CheckCircle2 size={15} className="text-[var(--accent)] flex-shrink-0" />
+                            <span className="mono text-[11px] font-bold opacity-80 uppercase tracking-wider">{detail}</span>
                           </div>
                         ))}
                       </div>
@@ -121,38 +121,42 @@ export default function ProtocolsPage() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
-              <div className="p-10 border border-[var(--border)] bg-[var(--bg)] rounded-sm">
-                <h2 className="text-2xl font-bold mb-6">Technical Moat Analysis</h2>
-                <p className="text-sm text-[var(--muted)] leading-relaxed mb-8">
-                  The OIM Protocol creates a "Technical Moat" by encoding your unique professional reasoning 
-                  into the system's logic loop. This ensures that AI-generated assets are indistinguishable 
-                  from expert-level human output.
-                </p>
-                <div className="flex gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '3rem', marginBottom: '8rem' }}>
+              <div className="rounded-sm shadow-xl flex flex-col justify-between" style={{ padding: '3.5rem 3rem', border: '1px solid var(--border)', background: 'var(--bg)' }}>
+                <div>
+                  <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "'Syne', sans-serif" }}>Technical Moat Analysis</h2>
+                  <p style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '3rem' }}>
+                    The OIM Protocol creates a "Technical Moat" by encoding your unique professional reasoning 
+                    into the system's logic loop. This ensures that AI-generated assets are indistinguishable 
+                    from expert-level human output.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border)] border-opacity-60">
                   <button 
                     onClick={handleDownload}
-                    className="btn-primary py-3 px-6 flex items-center gap-2"
+                    className="btn-primary flex items-center gap-2.5 font-bold tracking-wider"
+                    style={{ padding: '1rem 1.75rem', fontSize: '12px' }}
                   >
-                    <Download size={16} /> Download PDF Protocol
+                    <Download size={16} /> DOWNLOAD PDF PROTOCOL
                   </button>
                   <button 
                     onClick={handleShare}
-                    className="btn-outline py-3 px-6 flex items-center gap-2"
+                    className="btn-outline flex items-center gap-2.5 font-bold tracking-wider"
+                    style={{ padding: '1rem 1.75rem', fontSize: '12px' }}
                   >
-                    <Share2 size={16} /> Share
+                    <Share2 size={16} /> SHARE
                   </button>
                 </div>
               </div>
-              <div className="p-10 border border-[var(--border)] bg-[var(--surface2)] rounded-sm flex flex-col justify-center">
-                <div className="flex items-center gap-4 mb-6">
-                  <Fingerprint size={32} className="text-[var(--accent)]" />
+              <div className="rounded-sm shadow-xl flex flex-col justify-center" style={{ padding: '3.5rem 3rem', border: '1px solid var(--border)', background: 'var(--surface2)' }}>
+                <div className="flex items-center gap-5 mb-8 pb-6 border-b border-[var(--border)] border-opacity-60">
+                  <Fingerprint size={36} className="text-[var(--accent)] flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold">Persona Integrity</h4>
-                    <p className="text-[10px] mono uppercase opacity-40">System Security Layer</p>
+                    <h4 className="font-bold text-xl mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>Persona Integrity</h4>
+                    <p className="text-[11px] mono uppercase font-bold text-[var(--accent)] tracking-widest">System Security Layer</p>
                   </div>
                 </div>
-                <p className="text-sm text-[var(--muted)] leading-relaxed italic">
+                <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.8 }} className="italic font-light">
                   "Intent Mapping is the difference between a tool that 'chats' and a tool that 'executes' on your behalf."
                 </p>
               </div>
