@@ -252,7 +252,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div
         style={{
-          background: 'var(--surface1)',
+          background: '#000000',
           borderTop: '1px solid var(--border)',
           padding: '1.5rem 3rem',
         }}
