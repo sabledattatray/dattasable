@@ -45,12 +45,11 @@ export default function PerformanceOptimizer({
 
   return (
     <>
-      <Suspense fallback={null}>
-        <AnalyticsTracker />
-      </Suspense>
-
       {shouldLoadScripts && (
         <>
+          <Suspense fallback={null}>
+            <AnalyticsTracker />
+          </Suspense>
           <GoogleAnalytics id={googleAnalyticsId} />
           <Script 
             src="https://accounts.google.com/gsi/client" 

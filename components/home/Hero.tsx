@@ -38,7 +38,7 @@ export default function Hero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 480px) 190px, (max-width: 768px) 320px, (max-width: 1200px) 50vw, 33vw"
-            quality={60}
+            quality={45}
             className="object-cover"
             style={{ objectPosition: 'center top' }}
           />
