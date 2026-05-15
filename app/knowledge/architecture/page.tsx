@@ -103,37 +103,41 @@ export default function ArchitecturePage() {
               
               <div className="grid grid-cols-1 gap-12">
                 {ARCHITECTURES.map((arch) => (
-                  <div key={arch.id} className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card">
-                    <div className="flex flex-col lg:flex-row gap-12">
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-4">
+                  <div key={arch.id} className="p-8 lg:p-12 border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]">
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+                      <div className="flex-1 w-full">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                           <div className="flex items-center gap-3">
-                            <span className="mono text-[10px] uppercase tracking-widest px-2 py-1 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">{arch.category}</span>
-                            <h3 className="text-2xl font-bold">{arch.title}</h3>
+                            <span className="mono text-[10px] uppercase tracking-widest px-3 py-1 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 rounded-sm font-bold">{arch.category}</span>
+                            <h3 className="text-2xl font-bold tracking-tight">{arch.title}</h3>
                           </div>
-                          <Link href={`/blog/${arch.caseStudySlug}`} className="flex items-center gap-2 text-[10px] mono text-[var(--accent)] hover:underline">
-                            CASE_STUDY <ArrowUpRight size={12} />
+                          <Link href={`/blog/${arch.caseStudySlug}`} className="flex items-center gap-2 text-[11px] mono text-[var(--accent)] hover:underline font-bold bg-[var(--surface2)] px-3 py-1.5 border border-[var(--border)] rounded-sm w-fit">
+                            CASE_STUDY <ArrowUpRight size={14} />
                           </Link>
                         </div>
-                        <p className="text-[var(--muted)] mb-8 leading-relaxed">{arch.description}</p>
+                        <p className="text-[var(--muted)] mb-10" style={{ lineHeight: 1.8, fontSize: '1.05rem' }}>{arch.description}</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 pt-6 border-t border-[var(--border)] border-opacity-60">
                           <div>
-                            <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] mb-4">Prompt Chain:</h4>
-                            <div className="space-y-2">
+                            <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-5 font-bold flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-pulse" /> Prompt Chain:
+                            </h4>
+                            <div className="flex flex-col gap-3.5">
                               {arch.promptChain.map((prompt, idx) => (
-                                <div key={idx} className="p-3 bg-[var(--surface2)] border border-[var(--border)] text-[12px] mono italic opacity-80">
-                                  {prompt}
+                                <div key={idx} className="p-4 bg-[var(--surface2)] border border-[var(--border)] text-[12.5px] mono italic opacity-90 rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
+                                  "{prompt}"
                                 </div>
                               ))}
                             </div>
                           </div>
                           <div>
-                            <h4 className="mono text-[10px] uppercase tracking-widest text-emerald-500 mb-4">Measured Outcomes:</h4>
-                            <div className="space-y-3">
+                            <h4 className="mono text-[11px] uppercase tracking-wider text-emerald-500 mb-5 font-bold flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" /> Measured Outcomes:
+                            </h4>
+                            <div className="flex flex-col gap-4">
                               {arch.outcomes.map((outcome, idx) => (
-                                <div key={idx} className="flex items-start gap-2 text-[12px] leading-relaxed opacity-80">
-                                  <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 flex-shrink-0" />
+                                <div key={idx} className="flex items-start gap-3.5 text-[13.5px] opacity-90 p-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
+                                  <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 flex-shrink-0" />
                                   <span>{outcome}</span>
                                 </div>
                               ))}
@@ -141,10 +145,10 @@ export default function ArchitecturePage() {
                           </div>
                         </div>
                         
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border)] border-opacity-60">
                           <button 
                             onClick={() => handleDownload(arch.template, `${arch.id}-blueprint.json`)}
-                            className="btn-primary flex items-center gap-2 py-3 px-6"
+                            className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
                           >
                             <Download size={16} /> Download Blueprint
                           </button>
@@ -175,7 +179,7 @@ export default function ArchitecturePage() {
                                 window.prompt("Copy this embed code:", embedCode);
                               }
                             }}
-                            className="btn-outline flex items-center gap-2 py-3 px-6 transition-all duration-300"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px] transition-all duration-300"
                           >
                             <Code size={16} /> Embed
                           </button>
@@ -183,7 +187,7 @@ export default function ArchitecturePage() {
                             href={`https://github.com/sabledattatray/dattasable`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
                           >
                             <GitBranch size={16} /> GitHub
                           </a>
@@ -192,21 +196,23 @@ export default function ArchitecturePage() {
                               const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://dattasable.com/knowledge/architecture?id=${arch.id}`)}`;
                               window.open(url, '_blank');
                             }}
-                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
                           >
                             <Share2 size={16} /> LinkedIn
                           </button>
                         </div>
                       </div>
-                      <div className="lg:w-1/3 p-6 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
-                        <h4 className="mono text-[10px] uppercase tracking-widest mb-6 opacity-50">System Diagram:</h4>
-                        <div className="p-4 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
-                          <pre className="text-[10px] mono text-cyan-500 overflow-x-auto">
+                      <div className="lg:w-1/3 p-8 bg-[var(--bg)] border border-[var(--border)] rounded-sm w-full lg:sticky lg:top-28 shadow-inner">
+                        <h4 className="mono text-[11px] uppercase tracking-widest mb-6 opacity-60 font-bold flex items-center gap-2">
+                          <Terminal size={14} className="text-cyan-500" /> System Diagram:
+                        </h4>
+                        <div className="p-5 bg-[var(--surface2)] border border-[var(--border)] rounded-sm shadow-sm">
+                          <pre className="text-[11px] mono text-cyan-400 overflow-x-auto leading-relaxed" style={{ lineHeight: 1.75 }}>
                             {arch.diagram}
                           </pre>
                         </div>
-                        <div className="mt-8 flex items-center justify-between text-[10px] mono uppercase opacity-50">
-                          <span>Status: Production</span>
+                        <div className="mt-8 flex items-center justify-between text-[11px] mono uppercase opacity-60 font-bold border-t border-[var(--border)] pt-4">
+                          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Status: Production</span>
                           <span>Ver: 1.0.4</span>
                         </div>
                       </div>
