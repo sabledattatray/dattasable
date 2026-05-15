@@ -22,8 +22,8 @@ const TEMPLATES = [
     title: "Multi-Agent AI Orchestrator",
     type: "n8n JSON",
     icon: <Zap className="text-yellow-500" size={24} />,
-    desc: "Advanced n8n workflow for orchestrating multiple LLM agents for technical content distribution.",
-    size: "12 KB",
+    desc: "Advanced n8n workflow orchestrating 5+ specialized LLM agents for technical content distribution. Features automated Gemini deep research, zero-fluff surgical style transfer, viral LinkedIn hook generation, and Google Rich Results JSON-LD schema forging.",
+    size: "5.88 KB",
     category: "Automation",
     downloadUrl: "/templates/multi-agent-orchestrator.json"
   },
@@ -32,8 +32,8 @@ const TEMPLATES = [
     title: "Data Sanitization Engine",
     type: "Python",
     icon: <Database className="text-cyan-500" size={24} />,
-    desc: "Production-grade Python script for cleaning 1M+ record datasets with zero context loss.",
-    size: "85 KB",
+    desc: "Production-grade Python script engineered for cleaning 10M+ record datasets with zero context loss. Features active memory chunking, automatic dtype downcasting, median/mode imputation, IQR outlier clamping, and direct PyArrow Parquet serialization.",
+    size: "12.98 KB",
     category: "Data Engineering",
     downloadUrl: "/templates/data-cleaner.py"
   }
