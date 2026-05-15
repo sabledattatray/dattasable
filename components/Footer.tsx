@@ -53,7 +53,7 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Contact',     href: '/contact',                                 icon: MessageSquare },
       { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/dattasable/',  icon: Users,          external: true },
       { label: 'Twitter / X', href: 'https://x.com/sabledattatray',             icon: MessageSquare,  external: true },
-      { label: 'GitHub',      href: 'https://github.com/sabledattatray',        icon: Github,         external: true },
+      { label: 'GitHub',      href: 'https://github.com/sabledattatray',        icon: Code2,          external: true },
     ],
   },
   {
