@@ -12,8 +12,8 @@ export default function SalesPipelineDashboardPage() {
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-gradient-to-br from-[var(--accent)] to-green-600 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(201,243,29,0.2)]">📈</div>
               <div>
-                <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)]">SALES<span className="text-[var(--accent)]">PIPELINE</span></div>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">B2B Revenue Analytics & Forecasting</div>
+                <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Pipeline <span className="text-[var(--accent)]">Velocity</span></div>
+                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Showcase: B2B Revenue Analytics</div>
               </div>
             </div>
             <div className="flex items-center gap-4">

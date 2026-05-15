@@ -12,8 +12,8 @@ export default function SurgicalAIDashboardPage() {
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-gradient-to-br from-[#6ee7ff] to-[#7c5cff] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(110,231,255,0.2)]">⚡</div>
               <div>
-                <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)]">SURGICAL<span className="text-[#6ee7ff]">AI</span></div>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Enterprise Workflow Intelligence Workspace</div>
+                <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Surgical <span className="text-[#6ee7ff]">AI</span></div>
+                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Interactive Prototype: Enterprise Workflow Intelligence</div>
               </div>
             </div>
             <div className="flex items-center gap-4">

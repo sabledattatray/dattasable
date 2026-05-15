@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Sales Pipeline Velocity | Revenue Analytics Dashboard",
-  description: "Advanced B2B sales pipeline analytics and forecasting dashboard. Track deal movement and optimize conversion rates.",
+  title: "Sales Pipeline Velocity (Technical Showcase) | Datta Sable",
+  description: "A high-fidelity B2B revenue analytics showcase. Interactive sales pipeline modeling and forecasting by Datta Sable.",
   openGraph: {
-    title: "Sales Pipeline Velocity | Revenue Analytics Dashboard",
-    description: "Interactive B2B sales pipeline infrastructure. Real-time deal tracking and quarterly forecasting.",
+    title: "Sales Pipeline Velocity (Technical Showcase)",
+    description: "Interactive B2B sales pipeline infrastructure showcase. Real-time deal tracking and quarterly forecasting simulations.",
     images: ["/images/dashboards/sales_pipeline_preview.png"],
     url: "https://dattasable.com/dashboards/sales-pipeline",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sales Pipeline Velocity | Revenue Analytics Dashboard",
+    title: "Sales Pipeline Velocity (Technical Showcase)",
     images: ["/images/dashboards/sales_pipeline_preview.png"],
   },
   alternates: {
