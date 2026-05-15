@@ -98,6 +98,22 @@ export default function Footer() {
         <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/5 via-purple-500/2 to-blue-500/5 rounded-full blur-[150px] transform -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/5 via-cyan-500/2 to-[var(--accent)]/5 rounded-full blur-[150px] transform translate-y-1/3" />
         
+        {/* Overlapping Geometric Swirl / Vortex Rings (Inspired by Premium Lens Aesthetic) */}
+        {/* Primary Massive Outer Ring */}
+        <div className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full border border-[var(--accent)]/15 bg-gradient-to-tr from-[var(--accent)]/5 via-transparent to-transparent opacity-60 transform -rotate-12 pointer-events-none" />
+        
+        {/* Secondary Overlapping Lens Ring */}
+        <div className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full border border-blue-500/20 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-50 transform rotate-45 pointer-events-none" />
+
+        {/* Tertiary Intersecting Deep Ring */}
+        <div className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full border border-[var(--accent)]/15 bg-gradient-to-tl from-[var(--accent)]/5 via-cyan-500/5 to-transparent opacity-40 transform rotate-12 pointer-events-none" />
+
+        {/* Floating 3D Glowing Glass Orb */}
+        <div className="absolute top-[35%] left-[5%] w-28 h-28 rounded-full bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 shadow-[0_0_35px_rgba(255,255,255,0.08)] opacity-70 transform -translate-y-1/2 pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
+
+        {/* Floating Secondary Glass Orb */}
+        <div className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--accent)]/10 via-white/5 to-transparent backdrop-blur-md border border-[var(--accent)]/20 shadow-[0_0_25px_var(--accent)] opacity-50 pointer-events-none" />
+        
         {/* Surgical Precision Shapes & HUD Crosshairs */}
         {/* Top-Left Calibration Crosshair */}
         <div className="absolute top-[15%] left-[8%] opacity-40 transform scale-75">
