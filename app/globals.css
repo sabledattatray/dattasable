@@ -442,7 +442,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Premium Footer Card */
+/* Premium Footer Card & Responsive Padding Utilities */
+.footer-container-pad { padding: 2rem 3rem 4rem 3rem; }
+.footer-card-pad { padding: 3.5rem 3rem; }
+.footer-bottom-pad { padding: 1.5rem 3rem; }
+
+@media (max-width: 768px) {
+  .footer-container-pad { padding: 2rem 1rem 3rem 1rem !important; }
+  .footer-card-pad { padding: 2rem 1.5rem !important; }
+  .footer-bottom-pad { padding: 1.5rem 1rem !important; }
+}
+
 .footer-card {
   position: relative;
   background: linear-gradient(135deg, #0d0d0d 0%, #0a0a0a 100%);
