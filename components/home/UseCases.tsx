@@ -32,7 +32,7 @@ export default function UseCases() {
   ];
 
   return (
-    <section className="section" style={{ background: 'var(--surface2)' }}>
+    <section className="section" style={{ background: 'var(--surface2)', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
         <div className="mb-16">
           <div className="label-tech mb-6">Target Segments</div>

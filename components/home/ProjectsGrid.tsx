@@ -78,7 +78,7 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 
 export default function ProjectsGrid() {
   return (
-    <section className="section" style={{ background: 'var(--surface2)', padding: '8rem 0' }}>
+    <section className="section" style={{ background: 'var(--surface2)', padding: '4rem 0' }}>
       <div className="container">
         <div className="mb-12">
           <TechLabel>Active Deployments</TechLabel>

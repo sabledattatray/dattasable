@@ -19,7 +19,7 @@ const PATH_VARIANTS: Variants = {
 
 export default function ArchitectureViz() {
   return (
-    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
+    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', overflow: 'hidden', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
         <div className="mb-20">
           <div className="label-tech mb-6 text-[var(--accent)]">System Architecture</div>
@@ -31,7 +31,7 @@ export default function ArchitectureViz() {
           </p>
         </div>
 
-        <div className="relative py-20 px-4 border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden">
+        <div className="relative border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden" style={{ padding: '4rem 3rem' }}>
           {/* Blueprint Grid Background */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />

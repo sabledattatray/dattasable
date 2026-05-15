@@ -132,12 +132,12 @@ export default function Navbar() {
       <header 
         className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 flex justify-center ${
           scrolled 
-            ? 'top-4 w-[95%] max-w-[1400px] bg-[var(--navbar-bg)] backdrop-blur-xl py-0 border border-[var(--border)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] glossy-header' 
+            ? 'top-4 w-[95%] max-w-[1400px] bg-[var(--navbar-bg)] backdrop-blur-xl py-0 border border-[var(--border)] rounded-2xl' 
             : 'top-0 w-full bg-transparent py-4 border-b border-transparent'
         }`}
       >
         <div className="w-full max-w-[1448px] lg:px-12 relative z-10" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-14 lg:h-16">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group whitespace-nowrap flex-shrink-0" style={{ textDecoration: 'none' }}>
               <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500" />

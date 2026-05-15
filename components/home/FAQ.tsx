@@ -1,78 +1,154 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, HelpCircle, Terminal, Zap, Shield, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 
 const faqs = [
   {
+    id: "SYS-01",
+    tag: "ROI & Impact",
+    icon: <BarChart3 size={16} className="text-[var(--accent)]" />,
     question: "What is the ROI of a professional Business Intelligence implementation?",
     answer: "A surgical BI implementation typically results in a 20-30% reduction in operational waste by identifying performance bottlenecks in real-time. By automating manual reporting, organizations save hundreds of engineering hours annually, allowing teams to focus on strategic growth rather than data cleaning."
   },
   {
+    id: "PERF-02",
+    tag: "High-Density Data",
+    icon: <Terminal size={16} className="text-[#00C9F2]" />,
     question: "How do you handle 10M+ row datasets in Power BI or Tableau?",
     answer: "For high-density datasets, we implement a 'Surgical Data Architecture' using technologies like DuckDB, Snowflake, or optimized Postgres. By using incremental refreshes, efficient indexing, and star-schema modeling, we ensure dashboards load in under 2 seconds even with millions of records."
   },
   {
+    id: "AUTO-03",
+    tag: "Workflow Automation",
+    icon: <Zap size={16} className="text-[#FFF134]" />,
     question: "Can you automate existing manual Excel reporting workflows?",
     answer: "Yes. Using Python and SQL Automation, we can transform 'Manual Excel Chaos' into automated, high-fidelity dashboards. This ensures 100% data accuracy and delivers live insights to stakeholders without any human intervention."
   },
   {
+    id: "STRAT-04",
+    tag: "Core Methodology",
+    icon: <Shield size={16} className="text-[#00D4FF]" />,
     question: "What is the 'Surgical' approach to Data Strategy?",
     answer: "My 'Surgical' approach focuses on precision. We don't build charts for the sake of charts. We identify the 3-5 critical KPIs that actually drive your business revenue and build high-performance infrastructure specifically to master those metrics."
   }
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="section" style={{ borderTop: '1px solid var(--border)', paddingBottom: '6rem' }}>
+    <section className="section" style={{ borderTop: '1px solid var(--border)', paddingTop: '2.5rem', paddingBottom: '2.5rem', background: 'var(--bg)' }}>
       <div className="container">
-        <div className="flex flex-col lg:flex-row gap-16">
-          <div className="lg:w-1/3">
-            <div className="label-tech mb-4">RESOURCES-&-FAQ</div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-              Implementation & Workflow Q&A
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          <div className="lg:w-1/3 lg:sticky lg:top-28">
+            <div className="label-tech mb-4">RESOURCES & FAQ</div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', lineHeight: 1.1, marginBottom: '1.5rem', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>
+              Implementation & <span style={{ color: 'var(--accent)' }}>Workflow Q&A</span>
             </h2>
-            <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--muted)', lineHeight: 1.6, fontSize: '1.1rem', marginBottom: '2rem' }}>
               Deep-diving into the technical protocols and strategic frameworks used to build elite data ecosystems.
             </p>
+            <div className="bg-[var(--surface2)] border border-[var(--border)] rounded-sm hidden lg:block relative overflow-hidden" style={{ padding: '2.5rem 2rem', marginTop: '2rem' }}>
+              <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)]" />
+              <div className="flex items-center gap-2 mb-3">
+                <HelpCircle size={16} className="text-[var(--accent)]" />
+                <span className="mono text-[11px] font-bold uppercase tracking-wider text-[var(--text)]">Have a custom requirement?</span>
+              </div>
+              <p className="text-[13px] text-[var(--muted)] mb-6 leading-relaxed">
+                Need an architecture audit or specialized data pipeline? Let's discuss your specific technical constraints.
+              </p>
+              <a href="/tools" className="mono text-[11px] font-bold text-[var(--accent)] hover:underline flex items-center gap-1">
+                OPEN WORKFLOW SUITE →
+              </a>
+            </div>
           </div>
 
-          <div className="lg:w-2/3 flex flex-col gap-4">
-            {faqs.map((faq, index) => (
-              <div 
-                key={index}
-                style={{ 
-                  border: '1px solid var(--border)', 
-                  background: openIndex === index ? 'var(--surface2)' : 'transparent',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-6 text-left"
-                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          <div className="lg:w-2/3 flex flex-col gap-4 w-full">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <motion.div 
+                  key={faq.id}
+                  className="group relative rounded-sm overflow-hidden transition-all duration-500"
+                  style={{ 
+                    border: '1px solid var(--border)', 
+                    background: isOpen ? 'var(--surface2)' : 'var(--surface)',
+                  }}
                 >
-                  <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text)', paddingRight: '2rem' }}>
-                    {faq.question}
-                  </span>
-                  {openIndex === index ? <Minus size={20} color="var(--accent)" /> : <Plus size={20} color="var(--muted)" />}
-                </button>
-                
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    className="px-6 pb-6"
-                    style={{ color: 'var(--muted)', lineHeight: 1.7 }}
+                  {/* Glowing left accent bar on active */}
+                  <div 
+                    className="absolute top-0 left-0 w-[2px] h-full transition-all duration-500"
+                    style={{ background: isOpen ? 'var(--accent)' : 'transparent' }} 
+                  />
+
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="w-full text-left flex items-start justify-between gap-6"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '2rem' }}
                   >
-                    {faq.answer}
-                  </motion.div>
-                )}
-              </div>
-            ))}
+                    <div className="flex-1 pr-4">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="mono text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded font-bold" style={{ color: 'var(--accent)' }}>
+                          {faq.id}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[11px] text-[var(--muted)] font-mono uppercase tracking-wider">
+                          {faq.icon} {faq.tag}
+                        </div>
+                      </div>
+                      <h3 
+                        style={{ 
+                          fontSize: '1.2rem', 
+                          fontWeight: 700, 
+                          color: isOpen ? 'var(--text)' : 'var(--text)', 
+                          lineHeight: 1.4,
+                          transition: 'color 0.3s ease'
+                        }}
+                        className="group-hover:text-[var(--accent)]"
+                      >
+                        {faq.question}
+                      </h3>
+                    </div>
+                    
+                    <div 
+                      className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 mt-2 border"
+                      style={{ 
+                        background: isOpen ? 'var(--accent)' : 'var(--surface2)',
+                        borderColor: isOpen ? 'var(--accent)' : 'var(--border)',
+                        color: isOpen ? '#000' : 'var(--text)'
+                      }}
+                    >
+                      <ChevronRight 
+                        size={16} 
+                        className="transition-transform duration-500"
+                        style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)' }} 
+                      />
+                    </div>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      >
+                        <div 
+                          className="border-t border-[var(--border)] border-opacity-50"
+                          style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '1.05rem', padding: '2rem 2rem 2.5rem 2rem', marginTop: '1rem' }}
+                        >
+                          <p className="pl-6 border-l-2 border-[var(--accent)] border-opacity-40 my-2 py-2">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 

@@ -23,10 +23,10 @@ const SOLUTIONS = [
 
 export default function Solution() {
   return (
-    <section className="section" style={{ background: 'var(--surface2)', overflow: 'hidden' }}>
+    <section className="section" style={{ background: 'var(--surface2)', overflow: 'hidden', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="label-tech mb-6 justify-center">The Solution</div>
+        <div className="max-w-3xl mb-24">
+          <div className="label-tech mb-6">The Solution</div>
           <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem', fontFamily: "'Syne', sans-serif" }}>
             A structured <span style={{ color: 'var(--accent)' }}>AI workflow system.</span>
           </h2>

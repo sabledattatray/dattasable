@@ -28,7 +28,7 @@ const VALUES = [
 
 export default function ProductValue() {
   return (
-    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
+    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
         <div className="mb-16">
           <div className="label-tech mb-6">Product Value</div>

@@ -26,7 +26,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="section" style={{ background: 'var(--bg)' }}>
+    <section className="section" style={{ background: 'var(--bg)', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
         <div className="flex flex-col items-center mb-20 text-center">
           <div className="label-tech mb-6">Execution Lifecycle</div>

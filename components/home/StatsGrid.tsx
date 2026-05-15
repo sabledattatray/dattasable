@@ -50,7 +50,7 @@ function TechLabel({ children }: { children: React.ReactNode }) {
 
 export default function StatsGrid() {
   return (
-    <section className="section" style={{ background: 'var(--surface2)', padding: '6rem 0', position: 'relative', overflow: 'hidden' }}>
+    <section className="section" style={{ background: 'var(--surface2)', padding: '3rem 0', position: 'relative', overflow: 'hidden' }}>
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />

@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section className="section" style={{ background: 'var(--bg)', paddingTop: '5rem', paddingBottom: '10rem' }}>
+    <section className="section" style={{ background: 'var(--bg)', padding: '6rem 0' }}>
       <div className="container">
         <div className="relative group">
           {/* Technical Telemetry Markers */}
@@ -19,17 +19,12 @@ export default function FinalCTA() {
             <div className="w-2 h-2 border border-[var(--accent)]" />
           </div>
 
-          <div className="relative overflow-hidden border border-[var(--border)] bg-[var(--surface2)] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.1)]">
+          <div className="relative overflow-hidden border border-[var(--border)] bg-[var(--surface2)] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center min-h-[450px]">
             {/* Blueprint Grid Background - Theme Aware */}
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
                  style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
             
-            <div className="relative z-10 px-8 py-20 lg:py-32 text-center max-w-3xl mx-auto">
-              <div className="flex justify-center mb-10">
-                 <div className="px-4 py-1 border border-[var(--accent)] border-opacity-30 rounded-full">
-                    <span className="mono text-[10px] text-[var(--accent)] uppercase tracking-[0.4em]">Infrastructure Deployment</span>
-                 </div>
-              </div>
+            <div className="relative z-10 px-8 py-20 lg:py-24 flex flex-col items-center justify-center text-center max-w-3xl mx-auto w-full">
 
               <h2 style={{ fontSize: '3rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1.1, marginBottom: '2.5rem', letterSpacing: '-0.03em', color: 'var(--text)' }}>
                 Ready to build your <span style={{ color: 'var(--accent)' }}>AI system?</span>

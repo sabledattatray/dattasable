@@ -23,7 +23,7 @@ export default function ProblemHook() {
   ];
 
   return (
-    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
+    <section className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           <div className="max-w-xl">
