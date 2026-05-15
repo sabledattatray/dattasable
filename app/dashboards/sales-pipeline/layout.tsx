@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     title: "Sales Pipeline Velocity | Revenue Analytics Dashboard",
     images: ["/images/dashboards/sales_pipeline_preview.png"],
   },
+  alternates: {
+    canonical: "/dashboards/sales-pipeline",
+  },
 };
 
 export default function SalesPipelineLayout({ children }: { children: React.ReactNode }) {

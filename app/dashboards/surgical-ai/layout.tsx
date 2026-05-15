@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     title: "Surgical AI Workspace | Workflow Intelligence Dashboard",
     images: ["/images/dashboards/surgical_ai_preview.png"],
   },
+  alternates: {
+    canonical: "/dashboards/surgical-ai",
+  },
 };
 
 export default function SurgicalLayout({ children }: { children: React.ReactNode }) {

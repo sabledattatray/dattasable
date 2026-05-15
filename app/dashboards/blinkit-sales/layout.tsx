@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     description: "Interactive quick commerce analytics infrastructure.",
     images: ["/images/dashboards/blinkit_sales_dashboard.png"],
   },
+  alternates: {
+    canonical: "/dashboards/blinkit-sales",
+  },
 };
 
 export default function BlinkitLayout({ children }: { children: React.ReactNode }) {

@@ -6,9 +6,6 @@ export const metadata: Metadata = {
     default: 'Interactive Analytics Showcases | Surgical BI Dashboards',
   },
   description: 'Explore a curated collection of high-performance, interactive BI dashboards.',
-  alternates: {
-    canonical: '/dashboards',
-  }
 };
 
 export default function DashboardsLayout({ children }: { children: React.ReactNode }) {
