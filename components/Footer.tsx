@@ -243,7 +243,8 @@ export default function Footer() {
               color: 'var(--muted)',
             }}
           >
-            © {year} Datta Sable. Built for technical creators & enterprise BI architectures.
+            <span className="hidden sm:inline">© {year} Datta Sable. Built for technical creators & enterprise BI architectures.</span>
+            <span className="sm:hidden">© {year} Datta Sable. Enterprise BI Architect.</span>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
             <Link href="/privacy" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
