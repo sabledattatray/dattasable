@@ -101,7 +101,7 @@ export default function Footer() {
         {/* Overlapping 3D Crescent Bubbles / Volumetric Lens Flares (Not Complete Circles) */}
         {/* Primary Massive Outer Crescent Bubble */}
         <div 
-          className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none transition-all duration-700" 
+          className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
           style={{ 
             background: 'linear-gradient(135deg, var(--footer-ring-1-from) 0%, var(--footer-ring-1-via) 45%, transparent 80%)',
             boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
@@ -112,7 +112,7 @@ export default function Footer() {
         
         {/* Secondary Overlapping Crescent Bubble */}
         <div 
-          className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none transition-all duration-700" 
+          className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
           style={{ 
             background: 'linear-gradient(225deg, var(--footer-ring-2-from) 0%, var(--footer-ring-2-via) 45%, transparent 80%)',
             boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
@@ -123,7 +123,7 @@ export default function Footer() {
 
         {/* Tertiary Intersecting Deep Crescent Bubble */}
         <div 
-          className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none transition-all duration-700" 
+          className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
           style={{ 
             background: 'linear-gradient(315deg, var(--footer-ring-3-from) 0%, var(--footer-ring-3-via) 45%, transparent 80%)',
             boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
