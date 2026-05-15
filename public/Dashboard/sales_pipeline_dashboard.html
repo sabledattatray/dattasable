@@ -748,30 +748,72 @@
 </div>
 
 <script>
+// ─── STATE & UTILS ───
+let currentPeriod = 'QTD';
+function randomRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function formatCurrency(num) { 
+  if(num >= 1000000) return '$' + (num/1000000).toFixed(1) + 'M';
+  if(num >= 1000) return '$' + (num/1000).toFixed(0) + 'K';
+  return '$' + num;
+}
+
+// Multipliers for different periods
+const pMult = { 'WTD': 0.15, 'MTD': 0.4, 'QTD': 1.0, 'YTD': 3.5 };
+
 // ─── THEME TOGGLE ───
 const toggle = document.getElementById('themeToggle');
 toggle.addEventListener('click', () => {
   const html = document.documentElement;
   html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-  setTimeout(drawVelocityChart, 50);
-  setTimeout(drawDonut, 50);
+  setTimeout(() => { drawVelocityChart(); drawDonut(); }, 50);
 });
 
-// ─── PERIOD TABS ───
+// ─── TAB INTERACTIONS ───
 document.querySelectorAll('.period-tab').forEach(b => {
-  b.addEventListener('click', () => {
+  b.addEventListener('click', (e) => {
     document.querySelectorAll('.period-tab').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
+    currentPeriod = e.target.innerText;
+    updateAllData();
   });
 });
 document.querySelectorAll('.tab').forEach(b => {
   b.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
+    // Simulate loading a different view by slightly refreshing data
+    updateAllData();
   });
 });
 
-// ─── VELOCITY CHART ───
+// ─── DYNAMIC DATA GENERATORS ───
+
+function updateKPIs() {
+  const m = pMult[currentPeriod];
+  
+  // Pipeline Value
+  const pipeBase = 8400000 * m;
+  const pipeVal = pipeBase + (Math.random() * pipeBase * 0.2);
+  document.querySelector('.kpi-card.blue .kpi-value').innerText = formatCurrency(pipeVal);
+  
+  // Win Rate
+  const winRate = 30 + (Math.random() * 15);
+  document.querySelector('.kpi-card.green .kpi-value').innerText = winRate.toFixed(1) + '%';
+  
+  // Avg Deal Cycle
+  const cycle = Math.floor(25 + (Math.random() * 40));
+  document.querySelector('.kpi-card.purple .kpi-value').innerText = cycle + 'd';
+  
+  // Deals at Risk
+  const risk = Math.floor(5 + (Math.random() * 20 * m));
+  document.querySelector('.kpi-card.amber .kpi-value').innerText = risk;
+  
+  // Forecast
+  const fcBase = 3200000 * m;
+  const fcVal = fcBase + (Math.random() * fcBase * 0.1);
+  document.querySelector('.kpi-card.cyan .kpi-value').innerText = formatCurrency(fcVal);
+}
+
 function getCSSVar(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
 
 function drawVelocityChart() {
@@ -785,14 +827,19 @@ function drawVelocityChart() {
   ctx.scale(dpr, dpr);
 
   const weeks = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'];
-  const newDeals = [18,22,17,28,24,31,26,34,29,38,33,42];
-  const closedWon = [6,9,7,12,10,14,11,18,14,20,17,25];
-  const closedLost = [4,5,3,6,5,7,4,8,6,9,5,10];
+  
+  // Dynamic data
+  const m = pMult[currentPeriod];
+  const baseDeals = 20 * m;
+  
+  const newDeals = weeks.map(() => Math.floor(baseDeals + Math.random() * baseDeals * 0.8));
+  const closedWon = newDeals.map(d => Math.floor(d * (0.2 + Math.random() * 0.3)));
+  const closedLost = newDeals.map(d => Math.floor(d * (0.1 + Math.random() * 0.2)));
 
   const pad = { top:20, right:20, bottom:36, left:42 };
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
-  const maxVal = 45;
+  const maxVal = Math.max(...newDeals) + 5;
   const barW = (chartW / weeks.length) * 0.6;
 
   const textPrimary = getCSSVar('--text-primary');
@@ -800,8 +847,9 @@ function drawVelocityChart() {
   const gridLine = getCSSVar('--grid-line');
   const accentBlue = getCSSVar('--accent-blue');
   const accentGreen = getCSSVar('--accent-green');
-  const accentRed = getCSSVar('--accent-red');
   const accentCyan = getCSSVar('--accent-cyan');
+
+  ctx.clearRect(0, 0, W, H);
 
   // Grid lines
   for (let i = 0; i <= 5; i++) {
@@ -817,11 +865,9 @@ function drawVelocityChart() {
   weeks.forEach((w, i) => {
     const x = pad.left + (chartW / weeks.length) * i + (chartW / weeks.length - barW) / 2;
 
-    // New deals bar (stacked: won + lost + remaining)
-    const nd = newDeals[i], cw = closedWon[i], cl = closedLost[i];
+    const nd = newDeals[i], cw = closedWon[i];
     const barH = (nd / maxVal) * chartH;
     const wonH = (cw / maxVal) * chartH;
-    const lostH = (cl / maxVal) * chartH;
 
     // Base bar (new deals)
     const gbar = ctx.createLinearGradient(0, pad.top + chartH - barH, 0, pad.top + chartH);
@@ -853,7 +899,7 @@ function drawVelocityChart() {
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
   });
   ctx.strokeStyle = accentCyan; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
-  ctx.setLineDash([0]); ctx.stroke();
+  ctx.stroke();
 
   // Dots
   weeks.forEach((w, i) => {
@@ -876,24 +922,48 @@ function drawVelocityChart() {
   ctx.fillStyle = textMuted; ctx.fillText('Win Trend', lx + 208, 12);
 }
 
-// ─── DONUT CHART ───
 function drawDonut() {
   const svg = document.getElementById('donutSvg');
-  // Remove old segments
   svg.querySelectorAll('.seg').forEach(s => s.remove());
+  
   const cx=65, cy=65, r=50, sw=18;
+  
+  // Dynamic percentages
+  const won = randomRange(30, 45);
+  const lost = randomRange(20, 35);
+  const nodec = randomRange(10, 20);
+  const disq = 100 - won - lost - nodec;
+  
+  document.querySelector('.donut-pct').innerText = won + '%';
+  
+  const m = pMult[currentPeriod];
+  const baseDeals = 300 * m;
+  const dWon = Math.floor(baseDeals * (won/100));
+  const dLost = Math.floor(baseDeals * (lost/100));
+  const dNodec = Math.floor(baseDeals * (nodec/100));
+  const dDisq = Math.floor(baseDeals * (disq/100));
+
+  // Update Legend Values
+  const vals = document.querySelectorAll('.legend-val');
+  if(vals.length >= 4) {
+    vals[0].innerText = dWon;
+    vals[1].innerText = dLost;
+    vals[2].innerText = dNodec;
+    vals[3].innerText = dDisq;
+  }
+
   const data = [
-    {val:156, color:'var(--accent-green)'},
-    {val:98, color:'var(--accent-red)'},
-    {val:52, color:'var(--accent-amber)'},
-    {val:28, color:'var(--text-muted)'}
+    {val: won, color:'var(--accent-green)'},
+    {val: lost, color:'var(--accent-red)'},
+    {val: nodec, color:'var(--accent-amber)'},
+    {val: disq, color:'var(--text-muted)'}
   ];
-  const total = data.reduce((a,b)=>a+b.val,0);
+  
   const circ = 2*Math.PI*r;
   let offset = 0;
-  // Start from top
+  
   data.forEach(d => {
-    const pct = d.val/total;
+    const pct = d.val/100;
     const dashArr = circ*pct - 2;
     const dashOff = -(circ*offset);
     const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -911,13 +981,12 @@ function drawDonut() {
   });
 }
 
-// ─── SOURCE BARS ───
 function buildSourceBars() {
   const sources = [
-    {name:'Outbound SDR', rate:44, color:'var(--accent-blue)'},
-    {name:'Inbound / SEO', rate:52, color:'var(--accent-green)'},
-    {name:'Partner Referral', rate:61, color:'var(--accent-cyan)'},
-    {name:'Events', rate:29, color:'var(--accent-amber)'},
+    {name:'Outbound SDR', rate: randomRange(35, 55), color:'var(--accent-blue)'},
+    {name:'Inbound / SEO', rate: randomRange(40, 65), color:'var(--accent-green)'},
+    {name:'Partner Referral', rate: randomRange(50, 75), color:'var(--accent-cyan)'},
+    {name:'Events', rate: randomRange(20, 40), color:'var(--accent-amber)'},
   ];
   const wrap = document.getElementById('sourceBars');
   wrap.innerHTML = sources.map(s => `
@@ -931,119 +1000,194 @@ function buildSourceBars() {
   `).join('');
 }
 
-// ─── FUNNEL ───
 function buildFunnel() {
+  const m = pMult[currentPeriod];
+  const baseCount = 300 * m;
+  
+  let currentCount = Math.floor(baseCount);
+  let currentVal = 14000000 * m;
+  
   const stages = [
-    {name:'Prospecting', count:342, val:'$14.2M', pct:100, drop:null, color:'var(--funnel-1)'},
-    {name:'Qualification', count:228, val:'$9.8M', pct:67, drop:{label:'-33%',cls:'ok'}, color:'var(--funnel-2)'},
-    {name:'Demo / Discovery', count:156, val:'$6.7M', pct:46, drop:{label:'-32%',cls:'ok'}, color:'var(--funnel-3)'},
-    {name:'Proposal Sent', count:91, val:'$4.1M', pct:27, drop:{label:'-42%',cls:'warn'}, color:'var(--funnel-4)'},
-    {name:'Negotiation', count:38, val:'$1.9M', pct:11, drop:{label:'-58%',cls:'bad'}, color:'var(--funnel-5)'},
+    {name:'Prospecting', pct:100, color:'var(--funnel-1)'},
+    {name:'Qualification', pct:randomRange(60, 75), dropCls:'ok', color:'var(--funnel-2)'},
+    {name:'Demo / Discovery', pct:randomRange(40, 55), dropCls:'ok', color:'var(--funnel-3)'},
+    {name:'Proposal Sent', pct:randomRange(20, 35), dropCls:'warn', color:'var(--funnel-4)'},
+    {name:'Negotiation', pct:randomRange(8, 15), dropCls:'bad', color:'var(--funnel-5)'},
   ];
+
+  let prevCount = currentCount;
+  
   const wrap = document.getElementById('funnelWrap');
-  wrap.innerHTML = stages.map((s,i) => `
+  wrap.innerHTML = stages.map((s,i) => {
+    let c = Math.floor(baseCount * (s.pct/100));
+    let v = currentVal * (s.pct/100);
+    
+    let dropStr = '';
+    if(i > 0) {
+      let dropPct = Math.round((1 - (c/prevCount)) * 100);
+      dropStr = `<span class="funnel-drop ${s.dropCls}">-${dropPct}%</span>`;
+    } else {
+      dropStr = '<span class="funnel-val">Top</span>';
+    }
+    prevCount = c;
+    
+    return `
     <div class="funnel-stage">
       <div class="funnel-label">${s.name}</div>
       <div class="funnel-bar-wrap" style="max-width:100%">
         <div class="funnel-bar" style="width:${s.pct}%;background:${s.color}">
-          <span>${s.count}</span>
+          <span>${c}</span>
         </div>
       </div>
       <div class="funnel-meta">
-        <div class="funnel-count">${s.val}</div>
-        ${s.drop ? `<span class="funnel-drop ${s.drop.cls}">${s.drop.label}</span>` : '<span class="funnel-val">Top</span>'}
+        <div class="funnel-count">${formatCurrency(v)}</div>
+        ${dropStr}
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
-// ─── PREDICTIONS ───
+function buildVelocityGauge() {
+  const score = randomRange(60, 95);
+  document.querySelector('.gauge-value').innerText = score;
+  const status = score > 85 ? 'Excellent' : score > 70 ? 'Good' : 'Warning';
+  document.querySelector('.gauge-label').innerText = `out of 100 · ${status}`;
+  
+  // Update gauge arc
+  const arc = document.getElementById('gaugeArc');
+  if(arc) {
+    const totalDash = 204; 
+    // dashoffset 204 = 0%, 0 = 100%
+    const offset = totalDash - (totalDash * (score/100));
+    arc.style.strokeDashoffset = offset;
+  }
+  
+  // Update Needle
+  const needle = document.getElementById('gaugeNeedle');
+  if(needle) {
+    // rotate from -90 to 90
+    const deg = -90 + (180 * (score/100));
+    needle.style.transform = `rotate(${deg}deg)`;
+  }
+  
+  // Randomize metrics below gauge
+  const m = pMult[currentPeriod];
+  const mVals = document.querySelectorAll('.g-m-val');
+  if(mVals.length >= 4) {
+    mVals[0].innerText = (5 + Math.random()*8).toFixed(1) + 'd'; // Days/Stage
+    mVals[1].innerText = Math.floor(50 + Math.random()*30) + '%'; // Advancing
+    mVals[2].innerText = Math.floor(10 + Math.random()*30 * m); // Stale
+    mVals[3].innerText = formatCurrency(Math.floor(20000 + Math.random()*40000)); // Avg Size
+  }
+}
+
 function buildPredictions() {
+  const m = pMult[currentPeriod];
   const preds = [
-    {month:'Week 3', val:'$680K', prob:94, color:'var(--accent-green)'},
-    {month:'Week 4', val:'$520K', prob:87, color:'var(--accent-green)'},
-    {month:'May Close', val:'$1.2M', prob:81, color:'var(--accent-blue)'},
-    {month:'Jun Forecast', val:'$2.0M', prob:72, color:'var(--accent-purple)'},
-    {month:'Q2 Total', val:'$3.2M', prob:89, color:'var(--accent-cyan)'},
-    {month:'Q3 Pipeline', val:'$5.8M', prob:61, color:'var(--accent-amber)'},
+    {month:'Week 1', val: Math.floor(600000 * m), prob: randomRange(85, 98), color:'var(--accent-green)'},
+    {month:'Week 2', val: Math.floor(500000 * m), prob: randomRange(75, 90), color:'var(--accent-green)'},
+    {month:'Month Close', val: Math.floor(1200000 * m), prob: randomRange(70, 85), color:'var(--accent-blue)'},
+    {month:'Next Forecast', val: Math.floor(2000000 * m), prob: randomRange(60, 80), color:'var(--accent-purple)'},
+    {month:'Quarter Total', val: Math.floor(3200000 * m), prob: randomRange(80, 95), color:'var(--accent-cyan)'},
+    {month:'Next Pipeline', val: Math.floor(5800000 * m), prob: randomRange(50, 70), color:'var(--accent-amber)'},
   ];
   const grid = document.getElementById('predGrid');
   grid.innerHTML = preds.map(p => `
     <div class="pred-card">
       <div class="pred-month">${p.month}</div>
-      <div class="pred-val" style="color:${p.color}">${p.val}</div>
+      <div class="pred-val" style="color:${p.color}">${formatCurrency(p.val)}</div>
       <div class="pred-prob">${p.prob}% confidence</div>
       <div class="pred-bar-h"><div class="pred-bar-fill" style="width:${p.prob}%;background:${p.color}"></div></div>
     </div>
   `).join('');
 }
 
-// ─── HOT DEALS ───
 function buildDeals() {
-  const deals = [
-    {name:'Acme Corp', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$320K', prob:82, health:'green'},
-    {name:'DataFlow Inc', stage:'Proposal', stageColor:'var(--accent-blue)', val:'$185K', prob:68, health:'green'},
-    {name:'FinEdge Ltd', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$440K', prob:74, health:'amber'},
-    {name:'Horizon SaaS', stage:'Demo', stageColor:'var(--accent-cyan)', val:'$97K', prob:55, health:'green'},
-    {name:'NovaTech', stage:'Proposal', stageColor:'var(--accent-blue)', val:'$260K', prob:61, health:'red'},
-    {name:'PeakLogic', stage:'Negotiation', stageColor:'var(--accent-purple)', val:'$510K', prob:88, health:'green'},
-    {name:'Stratix AI', stage:'Demo', stageColor:'var(--accent-cyan)', val:'$130K', prob:45, health:'amber'},
+  const m = pMult[currentPeriod];
+  const dealNames = ['Acme Corp', 'DataFlow Inc', 'FinEdge Ltd', 'Horizon SaaS', 'NovaTech', 'PeakLogic', 'Stratix AI', 'Globex', 'Initech', 'Soylent'];
+  
+  // Shuffle array
+  const shuffled = [...dealNames].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 7);
+  
+  const stages = [
+    {s:'Negotiation', c:'var(--accent-purple)'},
+    {s:'Proposal', c:'var(--accent-blue)'},
+    {s:'Demo', c:'var(--accent-cyan)'}
   ];
+  
   const colorMap = {green:'var(--accent-green)',amber:'var(--accent-amber)',red:'var(--accent-red)'};
+  
   const body = document.getElementById('dealsBody');
-  body.innerHTML = deals.map(d => `
+  body.innerHTML = selected.map(name => {
+    const stageObj = stages[Math.floor(Math.random()*stages.length)];
+    const val = formatCurrency(Math.floor(50000 + Math.random()*450000));
+    const prob = randomRange(40, 95);
+    const health = prob > 75 ? 'green' : prob > 50 ? 'amber' : 'red';
+    
+    return `
     <tr>
-      <td class="deal-name">${d.name}</td>
-      <td><span class="deal-stage-pill" style="background:${d.stageColor}22;color:${d.stageColor}">${d.stage}</span></td>
-      <td style="font-weight:600">${d.val}</td>
+      <td class="deal-name">${name}</td>
+      <td><span class="deal-stage-pill" style="background:${stageObj.c}22;color:${stageObj.c}">${stageObj.s}</span></td>
+      <td style="font-weight:600">${val}</td>
       <td>
         <div style="display:flex;align-items:center;gap:6px">
-          <div class="prob-bar-wrap"><div class="prob-bar" style="width:${d.prob}%;background:${d.prob>70?'var(--accent-green)':d.prob>50?'var(--accent-amber)':'var(--accent-red)'}"></div></div>
-          <span style="font-size:11px;color:var(--text-muted)">${d.prob}%</span>
+          <div class="prob-bar-wrap"><div class="prob-bar" style="width:${prob}%;background:${prob>70?'var(--accent-green)':prob>50?'var(--accent-amber)':'var(--accent-red)'}"></div></div>
+          <span style="font-size:11px;color:var(--text-muted)">${prob}%</span>
         </div>
       </td>
-      <td><span class="health-dot" style="background:${colorMap[d.health]}"></span></td>
+      <td><span class="health-dot" style="background:${colorMap[health]}"></span></td>
     </tr>
-  `).join('');
+  `}).join('');
 }
 
-// ─── REPS ───
 function buildReps() {
+  const m = pMult[currentPeriod];
   const reps = [
-    {name:'Sarah Chen', deals:12, val:'$1.8M', quota:92, color:'#4f8ef7'},
-    {name:'Marcus Webb', deals:9, val:'$1.4M', quota:78, color:'#8b5cf6'},
-    {name:'Priya Nair', deals:15, val:'$2.1M', quota:105, color:'#10b981'},
-    {name:'Tom Keller', deals:7, val:'$0.9M', quota:58, color:'#f59e0b'},
-    {name:'Aisha Okafor', deals:11, val:'$1.6M', quota:87, color:'#ec4899'},
+    {name:'Sarah Chen', color:'#4f8ef7'},
+    {name:'Marcus Webb', color:'#8b5cf6'},
+    {name:'Priya Nair', color:'#10b981'},
+    {name:'Tom Keller', color:'#f59e0b'},
+    {name:'Aisha Okafor', color:'#ec4899'},
   ];
   const list = document.getElementById('repList');
   list.innerHTML = reps.map(r => {
+    const deals = Math.floor(5 + Math.random()*15 * m);
+    const quota = randomRange(40, 110);
+    
     const initials = r.name.split(' ').map(x=>x[0]).join('');
-    const qColor = r.quota >= 100 ? 'var(--accent-green)' : r.quota >= 70 ? 'var(--accent-blue)' : 'var(--accent-amber)';
+    const qColor = quota >= 100 ? 'var(--accent-green)' : quota >= 70 ? 'var(--accent-blue)' : 'var(--accent-amber)';
     return `
     <div class="rep-row">
       <div class="rep-avatar" style="background:${r.color}">${initials}</div>
       <div class="rep-info">
         <div class="rep-name">${r.name}</div>
-        <div class="rep-deals">${r.deals} active deals</div>
+        <div class="rep-deals">${deals} active deals</div>
       </div>
       <div class="rep-quota-bar-wrap">
-        <div class="rep-quota-bar" style="width:${Math.min(r.quota,100)}%;background:${qColor}"></div>
+        <div class="rep-quota-bar" style="width:${Math.min(quota,100)}%;background:${qColor}"></div>
       </div>
-      <div class="rep-val" style="color:${qColor}">${r.quota}%</div>
+      <div class="rep-val" style="color:${qColor}">${quota}%</div>
     </div>
   `}).join('');
 }
 
-// ─── INIT ───
-window.addEventListener('load', () => {
+// ─── MASTER UPDATE ───
+function updateAllData() {
+  updateKPIs();
+  drawVelocityChart();
+  drawDonut();
   buildSourceBars();
   buildFunnel();
+  buildVelocityGauge();
   buildPredictions();
   buildDeals();
   buildReps();
-  drawDonut();
-  setTimeout(drawVelocityChart, 80);
+}
+
+// ─── INIT ───
+window.addEventListener('load', () => {
+  updateAllData();
 });
 
 window.addEventListener('resize', () => {
