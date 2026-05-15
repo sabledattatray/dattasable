@@ -76,7 +76,7 @@ export default function Footer() {
         background: 'var(--bg)',
         borderTop: '1px solid var(--border)',
         width: '100%',
-        paddingTop: '6rem',
+        paddingTop: '3rem',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -104,7 +104,7 @@ export default function Footer() {
         style={{ 
           maxWidth: '1448px', 
           margin: '0 auto', 
-          padding: '5rem 3rem 6rem 3rem' 
+          padding: '2rem 3rem 4rem 3rem' 
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
