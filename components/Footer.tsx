@@ -104,7 +104,7 @@ export default function Footer() {
         style={{ 
           maxWidth: '1448px', 
           margin: '0 auto', 
-          padding: '0 2rem 6rem' 
+          padding: '5rem 3rem 6rem 3rem' 
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
@@ -248,7 +248,7 @@ export default function Footer() {
         style={{
           background: 'var(--surface1)',
           borderTop: '1px solid var(--border)',
-          padding: '1.5rem 2rem',
+          padding: '1.5rem 3rem',
         }}
       >
         <div 
