@@ -137,9 +137,10 @@ export default function Footer() {
           className="absolute top-[32%] left-[6%] w-32 h-32 rounded-full backdrop-blur-xl opacity-85 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
           style={{ 
             animationDuration: '6s',
-            border: '1px solid var(--footer-orb-2-border)',
+            border: 'var(--footer-orb-border)',
+            filter: 'var(--footer-orb-blur)',
             background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 60%, transparent 100%)',
-            boxShadow: 'inset 15px 15px 25px rgba(255,255,255,0.5), inset -15px -15px 35px rgba(0,0,0,0.4), 0 10px 40px rgba(0,0,0,0.15)'
+            boxShadow: 'var(--footer-orb-box-shadow)'
           }} 
         />
 
@@ -147,9 +148,10 @@ export default function Footer() {
         <div 
           className="absolute bottom-[22%] right-[12%] w-20 h-20 rounded-full backdrop-blur-xl opacity-75 pointer-events-none transition-all duration-700" 
           style={{
-            border: '1px solid var(--footer-orb-2-border)',
-            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.2) 60%, transparent 100%)',
-            boxShadow: 'inset 10px 10px 20px rgba(255,255,255,0.5), inset -10px -10px 25px rgba(0,0,0,0.4), 0 8px 30px rgba(0,0,0,0.15)'
+            border: 'var(--footer-orb-2-border)',
+            filter: 'var(--footer-orb-blur)',
+            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.1) 60%, transparent 100%)',
+            boxShadow: 'var(--footer-orb-box-shadow)'
           }}
         />
         
