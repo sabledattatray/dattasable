@@ -39,7 +39,7 @@ export const posts = [
     date: 'May 15, 2026',
     color: 'var(--accent)',
     icon: '🔗',
-    image: '/images/blog/execution_chains_hero.webp',
+    image: '/images/blog/execution_chains_hero.png',
     tags: ['Execution Chains', 'AI Infrastructure', 'Workflow Engineering', 'Deterministic AI']
   },
   {
@@ -70,7 +70,7 @@ export const posts = [
     date: 'May 15, 2026',
     color: 'var(--accent)',
     icon: '🧩',
-    image: '/images/blog/modular_ai_hero.webp',
+    image: '/images/blog/modular_ai_hero.png',
     tags: ['Modular AI', 'Workflow Systems', 'System Architecture', 'Scalability']
   },
   {
