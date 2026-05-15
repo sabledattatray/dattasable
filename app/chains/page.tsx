@@ -41,40 +41,40 @@ export default function ChainHub() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {CHAINS.map((chain) => (
-                <Link key={chain.id} href={`/chains/${chain.slug}`} className="no-underline group">
-                  <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
+                <Link key={chain.id} href={`/chains/${chain.slug}`} className="no-underline group block h-full">
+                  <div className="card h-full flex flex-col transition-all duration-300 hover:border-[var(--accent)] shadow-lg" style={{ background: 'var(--surface2)', padding: '2.5rem', border: '1px solid var(--border)' }}>
                     <div className="flex justify-between items-start mb-6">
                       <div className="p-3 bg-[var(--bg)] border border-[var(--border)] rounded text-[var(--accent)]">
                         <Zap size={20} />
                       </div>
-                      <div className="px-2 py-1 text-[9px] mono font-bold border border-[var(--accent)] text-[var(--accent)] rounded animate-pulse">
+                      <div className="px-2.5 py-1 text-[10px] mono font-bold border border-[var(--accent)] text-[var(--accent)] rounded animate-pulse">
                         LIVE_PIPELINE
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold mb-3 text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
+                    <h3 className="text-xl font-bold mb-4 text-[var(--text)] group-hover:text-[var(--accent)] transition-all tracking-tight">
                       {chain.title}
                     </h3>
                     
-                    <p className="text-[var(--muted)] text-xs leading-relaxed mb-8 flex-1">
+                    <p className="text-[var(--muted)] text-sm leading-relaxed mb-8 flex-1" style={{ lineHeight: 1.7 }}>
                       {chain.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-8">
+                    <div className="flex flex-wrap gap-2 mb-8 pt-4 border-t border-[var(--border)] border-opacity-40">
                       {chain.nodes.map(node => (
-                        <div key={node} className="px-2 py-1 text-[8px] mono bg-[var(--surface)] border border-[var(--border)] text-[var(--muted)]">
+                        <div key={node} className="px-2.5 py-1 text-[10px] mono bg-[var(--surface)] border border-[var(--border)] text-[var(--muted)] font-bold">
                           {node.toUpperCase()}
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
-                      <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
-                        INITIATE_CHAIN <ArrowRight size={12} />
+                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)] border-opacity-60">
+                      <div className="flex items-center gap-2 text-[var(--accent)] text-[11px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
+                        INITIATE_CHAIN <ArrowRight size={14} />
                       </div>
-                      <Layers size={12} className="text-[var(--muted)] opacity-20" />
+                      <Layers size={14} className="text-[var(--muted)] opacity-30" />
                     </div>
                   </div>
                 </Link>
@@ -82,19 +82,19 @@ export default function ChainHub() {
             </div>
 
             {/* Orchestration Feature Callout */}
-            <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="card p-12" style={{ background: 'var(--surface2)' }}>
-                <Cpu size={32} className="text-[var(--accent)] mb-6" />
-                <h3 className="text-xl font-bold mb-4">Programmable Infrastructure</h3>
-                <p className="text-[var(--muted)] text-sm leading-relaxed mb-6">
+            <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-center border border-[var(--border)] bg-[var(--surface1)] p-8 lg:p-16 rounded-sm shadow-xl" style={{ padding: '4rem' }}>
+              <div className="card" style={{ background: 'var(--surface2)', padding: '3.5rem', border: '1px solid var(--border)' }}>
+                <Cpu size={36} className="text-[var(--accent)] mb-6" />
+                <h3 className="text-2xl font-bold mb-4 tracking-tight">Programmable Infrastructure</h3>
+                <p className="text-[var(--muted)] text-base leading-relaxed mb-8" style={{ lineHeight: 1.8 }}>
                   Surgical Execution Chains aren't just automations. They are context-aware cognitive pipelines that adapt based on your persona and distribution intent.
                 </p>
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-2 text-[10px] mono text-[var(--muted)]">
-                    <ShieldCheck size={12} className="text-[var(--accent)]" /> OPERATOR_AWARE
+                <div className="flex flex-wrap gap-6 pt-6 border-t border-[var(--border)] border-opacity-60">
+                  <div className="flex items-center gap-2 text-[11px] mono text-[var(--muted)] font-bold tracking-wider">
+                    <ShieldCheck size={16} className="text-[var(--accent)]" /> OPERATOR_AWARE
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] mono text-[var(--muted)]">
-                    <ShieldCheck size={12} className="text-[var(--accent)]" /> PERSISTENT_MEMORY
+                  <div className="flex items-center gap-2 text-[11px] mono text-[var(--muted)] font-bold tracking-wider">
+                    <ShieldCheck size={16} className="text-[var(--accent)]" /> PERSISTENT_MEMORY
                   </div>
                 </div>
               </div>
