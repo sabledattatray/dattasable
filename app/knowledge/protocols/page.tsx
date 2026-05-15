@@ -62,7 +62,7 @@ export default function ProtocolsPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <div className="label-tech text-[var(--accent)]" style={{ fontSize: '0.85rem', fontWeight: 700, tracking: '0.1em' }}>Protocol Specification v1.4.2</div>
+              <div className="label-tech text-[var(--accent)]" style={{ fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.1em' }}>Protocol Specification v1.4.2</div>
               <div className="flex items-center gap-2 mono text-[11px] opacity-60 font-bold tracking-widest">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" /> STABLE_RELEASE
               </div>
