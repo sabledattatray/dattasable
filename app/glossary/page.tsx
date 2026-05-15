@@ -1,87 +1,104 @@
-import { Metadata } from 'next';
+'use client';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { 
-  Book, 
-  ChevronRight, 
-  Search,
-  Zap,
-  ArrowRight
-} from 'lucide-react';
+import Crosshair from '@/components/Crosshair';
+import { motion } from 'framer-motion';
+import { Book, Search, Hash, Link as LinkIcon, ExternalLink, ArrowLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 import { GLOSSARY_TERMS } from '@/data/glossary';
 
-export const metadata: Metadata = {
-  title: "AI Workflow Glossary | Technical AI & Creator Terminology",
-  description: "A comprehensive repository of technical terms for AI prompt engineering, content infrastructure, and surgical creator workflows.",
-};
+export default function GlossaryIndex() {
+  const [searchTerm, setSearchTerm] = useState('');
 
-export default function GlossaryPage() {
+  const filteredTerms = GLOSSARY_TERMS.filter(t => 
+    t.term.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    t.definition.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <main className="boxed-wrapper" style={{ marginBottom: '80px' }}>
-        <section className="section" style={{ paddingTop: 'clamp(6rem, 10vw, 8rem)' }}>
-          <div className="container">
-            <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                  <Book size={20} />
-                </div>
-                <div className="label-tech">KNOWLEDGE-INFRASTRUCTURE-V1.0</div>
-              </div>
-              <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1, marginBottom: '1.5rem' }}>
-                AI Workflow <span className="hero-title">Glossary</span>
-              </h1>
-              <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                The technical lexicon for high-performance AI engineering and creator workflows. Master the terminology to dominate the new orchestration economy.
-              </p>
+      
+      <div className="boxed-wrapper pt-32 pb-24">
+        <Crosshair position="tl" />
+        
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <Link href="/knowledge" className="mono text-[10px] text-[var(--accent)] hover:underline flex items-center gap-2">
+                ← BACK_TO_KNOWLEDGE_HUB
+              </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {GLOSSARY_TERMS.map((term) => (
-                <Link key={term.id} href={`/glossary/${term.slug}`} className="no-underline group">
-                  <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="px-2 py-1 text-[9px] mono font-bold border border-[var(--border)] rounded opacity-60">
-                        {term.category.toUpperCase()}
-                      </div>
-                      <div className="text-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity">
-                         <Search size={18} />
-                      </div>
-                    </div>
+            <div className="label-tech mb-8 text-[var(--accent)]">Technical Dictionary</div>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
+              Infrastructure <span style={{ color: 'var(--accent)' }}>Glossary.</span>
+            </h1>
+            <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
+              A definitive index of the terminology, acronyms, and protocols defining the 
+              Surgical AI Workspace.
+            </p>
 
-                    <h3 className="text-xl font-bold mb-3 text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
-                      {term.term}
-                    </h3>
-                    
-                    <p className="text-[var(--muted)] text-sm leading-relaxed mb-8 flex-1">
-                      {term.definition}
-                    </p>
+            <div className="relative mb-16">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={20} />
+              <input 
+                type="text" 
+                placeholder="Search terminology, acronyms, or categories..."
+                className="w-full bg-[var(--surface1)] border border-[var(--border)] rounded-sm py-5 pl-16 pr-6 text-sm focus:border-[var(--accent)] transition-colors outline-none"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
 
-                    <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all mt-auto pt-6 border-t border-[var(--border)]/30">
-                      EXPLORE_TERM <ArrowRight size={12} />
+            <div className="grid grid-cols-1 gap-4 mb-32">
+              {filteredTerms.map((t, i) => (
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm group hover:border-[var(--accent)]/30 transition-colors"
+                >
+                  <Link href={`/glossary/${t.slug}`} className="no-underline">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <Hash size={14} className="text-[var(--accent)]" />
+                        <h3 className="text-xl font-bold group-hover:text-[var(--accent)] transition-colors">{t.term}</h3>
+                        <span className="mono text-[9px] px-2 py-0.5 bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 rounded-full">{t.category}</span>
+                      </div>
+                      <span className="mono text-[10px] opacity-40">ID: {t.id}</span>
                     </div>
-                  </div>
-                </Link>
+                    <p className="text-sm text-[var(--muted)] leading-relaxed mb-6">{t.definition}</p>
+                    <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
+                      VIEW_DETAILED_LEXICON <ChevronRight size={12} />
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
+              {filteredTerms.length === 0 && (
+                <div className="p-20 text-center border border-dashed border-[var(--border)] rounded-sm">
+                  <p className="text-[var(--muted)]">No matching terminology found in the current index.</p>
+                </div>
+              )}
             </div>
 
-            {/* Scale Callout */}
-            <div className="mt-20 p-12 card border-dashed text-center" style={{ background: 'var(--bg)' }}>
-               <h2 className="text-2xl font-bold mb-4">Scaling Topical Authority</h2>
-               <p className="text-[var(--muted)] max-w-xl mx-auto text-sm leading-relaxed mb-8">
-                 This glossary is part of our **Content Authority Infrastructure**. We are indexing hundreds of technical terms to provide the ultimate knowledge base for modern creators.
-               </p>
-               <div className="flex justify-center gap-4 flex-wrap">
-                  <div className="label-tech">SEO_WEDGE</div>
-                  <div className="label-tech">E-E-A-T_SIGNALS</div>
-                  <div className="label-tech">CROSS_LINKED_DATA</div>
-               </div>
+            <div className="p-12 border border-[var(--border)] bg-[var(--surface2)] rounded-sm text-center">
+              <h2 className="text-2xl font-bold mb-4">Request Terminology Addition</h2>
+              <p className="text-[var(--muted)] mb-8 max-w-md mx-auto">
+                Is there a framework component missing from our technical dictionary? Submit a request for term indexing.
+              </p>
+              <button className="btn-primary py-3 px-8 flex items-center gap-2 mx-auto">
+                <ExternalLink size={16} /> Submit Term Proposal
+              </button>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+        
+        <Crosshair position="br" />
+      </div>
+      
       <Footer />
     </div>
   );

@@ -1,5 +1,79 @@
 export const posts = [
   {
+    id: 'execution-chain-infrastructure-2026',
+    slug: 'execution-chain-infrastructure-explained',
+    title: 'Execution Chain Infrastructure: The Backbone of Deterministic AI',
+    category: 'Engineering',
+    excerpt: 'How to move beyond simple prompts and build robust execution chains that maintain state and handle errors at enterprise scale.',
+    content: `
+      <p>The transition from "AI as a Chatbot" to "AI as an Infrastructure" requires a fundamental shift in how we handle data flow. In this technical deep-dive, we explore the architecture of <strong>Execution Chains</strong>—the hardened pipelines that allow AI systems to perform complex, multi-step operations with total reliability.</p>
+
+      <h2>The Problem with Linear Prompts</h2>
+      <p>In a standard interaction, a user sends a prompt and receives an output. If the operation requires multiple steps (e.g., research, synthesis, and formatting), a single prompt often collapses under the weight of its own context. Hallucinations increase, and structural fidelity drops.</p>
+
+      <h2>The Execution Chain Solution</h2>
+      <p>An execution chain breaks a complex goal into a series of discrete, validated nodes. Each node has a specific responsibility and a defined output schema.</p>
+
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+          graph TD
+            A[Input Intent] --> B[Logical Decomposition]
+            B --> C[Node 01: Data Extraction]
+            C --> D[Validation Gate]
+            D -- "Valid" --> E[Node 02: Synthesis]
+            D -- "Invalid" --> C
+            E --> F[Final Formatting]
+        </pre>
+      </div>
+
+      <h3>Core Benefits:</h3>
+      <ul>
+        <li><strong>State Persistence:</strong> Maintaining context across multiple execution cycles.</li>
+        <li><strong>Error Isolation:</strong> If one node fails, the entire system doesn't collapse; only the specific node is retried.</li>
+        <li><strong>Scalability:</strong> Parallelizing operations across multiple agents or compute instances.</li>
+      </ul>
+
+      <p>Explore our <a href="/knowledge/architecture" style="color: var(--accent); text-decoration: underline;">Architecture Library</a> for downloadable blueprints of these systems.</p>
+    `,
+    readTime: 18,
+    date: 'May 15, 2026',
+    color: 'var(--accent)',
+    icon: '🔗',
+    image: '/images/blog/execution_chains_hero.webp',
+    tags: ['Execution Chains', 'AI Infrastructure', 'Workflow Engineering', 'Deterministic AI']
+  },
+  {
+    id: 'modular-ai-workflow-systems-2026',
+    slug: 'building-modular-ai-workflow-systems',
+    title: 'Building Modular AI Workflow Systems for Scale',
+    category: 'Workflow',
+    excerpt: 'A guide to architecting modular AI systems that allow for plug-and-play capability across different models and data sources.',
+    content: `
+      <p>In the rapidly evolving AI landscape, <strong>Vendor Lock-in</strong> is a significant risk. If your entire infrastructure is built around a single model's idiosyncrasies, you lose the ability to pivot as better technology emerges. The solution is <strong>Modular Workflow Systems</strong>.</p>
+
+      <h2>The Principle of Modularity</h2>
+      <p>Modular AI design treats the LLM as a "Logic Processor" rather than a hard-coded backend. By abstracting the model interaction layer, we can swap between OpenAI, Anthropic, or local models without rewriting our core business logic.</p>
+
+      <h3>Components of a Modular System:</h3>
+      <ul>
+        <li><strong>The Model Adapter:</strong> A layer that translates universal intents into model-specific syntax.</li>
+        <li><strong>The Data Connector:</strong> Decoupling your data sources (SQL, Notion, API) from the AI logic.</li>
+        <li><strong>The Orchestration Layer:</strong> Managing the timing and flow of data between modules (using tools like n8n or custom Python).</li>
+      </ul>
+
+      <h2>Case Study: The 'Surgical Content Engine'</h2>
+      <p>Our <a href="/knowledge/architecture" style="color: var(--accent); text-decoration: underline;">Surgical Content Engine</a> is a prime example of modularity. It uses different agents for research, writing, and style transfer, allowing us to upgrade individual components without taking the entire system offline.</p>
+
+      <p>Ready to build? Download the <a href="/knowledge/architecture" style="color: var(--accent); text-decoration: underline;">Infrastructure Blueprints</a> to see how we structure our production nodes.</p>
+    `,
+    readTime: 20,
+    date: 'May 15, 2026',
+    color: 'var(--accent)',
+    icon: '🧩',
+    image: '/images/blog/modular_ai_hero.webp',
+    tags: ['Modular AI', 'Workflow Systems', 'System Architecture', 'Scalability']
+  },
+  {
     id: 'case-study-n8n-automation-2026',
     slug: 'case-study-n8n-automated-authority-scaling',
     title: "Case Study: Architecting the 'Auto-Operator' via n8n Orchestration",
@@ -176,7 +250,7 @@ export const posts = [
       </ul>
 
       <h2>Beyond the Chatbox</h2>
-      <p>When you deploy a <a href="/tools/surgical-forge" style="color: var(--accent); text-decoration: underline;">Surgical Forge Agent</a>, you aren't just sending a message; you are injecting an execution chain. This is the difference between a "good output" and a "production-ready asset."</p>
+      <p>When you deploy a <a href="/surgical-forge" style="color: var(--accent); text-decoration: underline;">Surgical Forge Agent</a>, you aren't just sending a message; you are injecting an execution chain. This is the difference between a "good output" and a "production-ready asset."</p>
 
       <p>Explore our related <a href="/blog/operator-intent-mapping-framework" style="color: var(--accent); text-decoration: underline;">Operator Intent Mapping</a> or dive into the <a href="/glossary" style="color: var(--accent); text-decoration: underline;">Technical Glossary</a>.</p>
     `,

@@ -114,7 +114,7 @@ const projects = [
     solution: 'Implemented demand forecasting models in Python with automated reorder alerts via Power BI.',
     impact: '-18% Inventory Cost, $72K Annual Savings, 100% Automated Reorders',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 3,
@@ -129,7 +129,7 @@ const projects = [
     solution: 'Developed custom Python connectors to HR APIs and built an automated Tableau reporting suite.',
     impact: '97% Time Saved, -15% Attrition Rate, Zero Reporting Errors',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/blog',
+    live: '/blog',
   },
   {
     id: 4,
@@ -144,7 +144,7 @@ const projects = [
     solution: 'Automated P&L and Cash Flow generation using Python/Pandas with a secure SQL backend.',
     impact: '80% Faster Close, 18 Months Error-Free, CFO Approval 9.5/10',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 5,
@@ -159,7 +159,7 @@ const projects = [
     solution: 'Integrated GA4, Meta, and Shopify APIs into a unified Tableau dashboard with custom attribution models.',
     impact: '+35% ROAS improvement, 22% reduction in CAC, Data-Driven Budgets',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 6,
@@ -174,7 +174,7 @@ const projects = [
     solution: 'Built a distributed web scraping infrastructure in Python to feed a real-time Tableau pricing dashboard.',
     impact: '$500M Expansion Greenlit, Competitor Gaps Identified, Live Pricing',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/blog',
+    live: '/blog',
   },
   {
     id: 13,
@@ -189,7 +189,7 @@ const projects = [
     solution: 'Connected IoT sensors to a real-time Looker dashboard with instant SMS alerts for threshold breaches.',
     impact: 'Zero Product Loss, 100% Compliance, Real-time Visuals',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 14,
@@ -204,7 +204,7 @@ const projects = [
     solution: 'Developed a random forest forecasting model in Python and deployed it via Power BI.',
     impact: '+12% Seasonal Sales, -15% Stockouts, Accurate Buy-plans',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 15,
@@ -219,7 +219,7 @@ const projects = [
     solution: 'Built an NLP-based classification engine in Python that extracts key clauses into a structured database.',
     impact: '90% Processing Speedup, $40k/yr Cost Savings, High Accuracy',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/blog',
+    live: '/blog',
   },
   {
     id: 16,
@@ -234,7 +234,7 @@ const projects = [
     solution: 'Integrated EMR data into a real-time Tableau dashboard with predictive wait-time models.',
     impact: '-25% ER Wait Times, +18% Bed Turnaround, Improved Care',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
   {
     id: 17,
@@ -249,7 +249,7 @@ const projects = [
     solution: 'Performed multi-dimensional cohort analysis in BigQuery and visualized findings in Looker.',
     impact: '-20% Churn in Segment A, Identified Product Gaps, Live LTV',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/blog',
+    live: '/blog',
   },
   {
     id: 18,
@@ -264,7 +264,7 @@ const projects = [
     solution: 'Built an XGBoost regression model using weather and historical usage data, visualized in Power BI.',
     impact: '98% Forecast Accuracy, Zero Brownouts in 2025, Efficient Sourcing',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://dattasable.com/dashboards',
+    live: '/dashboards',
   },
 ];
 

@@ -62,6 +62,8 @@ export default function ArchitectureViz() {
                 />
                 <motion.circle r="3" fill="var(--accent)"
                   cx={0}
+                  cy={16}
+                  initial={{ cx: 0, opacity: 0 }}
                   animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
@@ -91,6 +93,8 @@ export default function ArchitectureViz() {
                 />
                 <motion.circle r="3" fill="#fff134"
                   cx={0}
+                  cy={16}
+                  initial={{ cx: 0, opacity: 0 }}
                   animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
                 />
@@ -120,6 +124,8 @@ export default function ArchitectureViz() {
                 />
                 <motion.circle r="3" fill="#00d4ff"
                   cx={0}
+                  cy={16}
+                  initial={{ cx: 0, opacity: 0 }}
                   animate={{ cx: [0, 200], opacity: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
                 />

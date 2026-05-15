@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity } from 'lucide-react';
+import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity, Share2, Code2 } from 'lucide-react';
 import LiveSiteStats from '@/components/LiveSiteStats';
 
 const dashboards = [
@@ -579,13 +579,41 @@ export default function DashboardsPage() {
                       {d.tags.map(t => <span key={t} className="tag">{t}</span>)}
                     </div>
 
-                    <button
-                      onClick={() => setPreview(d)}
-                      className="w-full btn-outline flex items-center justify-center gap-2"
-                      style={{ fontSize: '0.85rem' }}
-                    >
-                      <ExternalLink size={14} /> View Dashboard
-                    </button>
+                    <div className="flex gap-2 mb-4">
+                      <button
+                        onClick={() => setPreview(d)}
+                        className="flex-1 btn-primary flex items-center justify-center gap-2 py-3"
+                        style={{ fontSize: '0.85rem' }}
+                      >
+                        <ExternalLink size={14} /> Live Preview
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          alert('Schema and Component Code for this dashboard will be available soon in the Infrastructure Hub.');
+                        }}
+                        className="btn-outline p-3 flex items-center justify-center"
+                        title="View Component Schema"
+                      >
+                        <Code2 size={16} />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (navigator.share) {
+                            navigator.share({
+                              title: d.title,
+                              text: d.desc,
+                              url: window.location.href,
+                            });
+                          }
+                        }}
+                        className="btn-outline p-3 flex items-center justify-center"
+                        title="Share Dashboard"
+                      >
+                        <Share2 size={16} />
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}

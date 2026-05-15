@@ -20,9 +20,9 @@ const NAV_LINKS: NavSection[] = [
     links: [
       { label: 'Start Here',    href: '/start-here', icon: Sparkles },
       { label: 'Portfolio',     href: '/portfolio', icon: BarChart3 },
-      { label: 'Case Studies',  href: '/portfolio', icon: BookOpen },
-      { label: 'Dashboards',    href: '/portfolio', icon: LayoutDashboard },
-      { label: 'Automation',    href: '/portfolio', icon: Zap },
+      { label: 'Case Studies',  href: '/portfolio?category=Analysis', icon: BookOpen },
+      { label: 'Dashboards',    href: '/portfolio?category=Dashboard', icon: LayoutDashboard },
+      { label: 'Automation',    href: '/portfolio?category=Automation', icon: Zap },
     ],
   },
   {

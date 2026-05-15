@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSession, signOut } from 'next-auth/react';
 import {
   Menu, X, ArrowUpRight,
-  BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown,
+  BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp, ChevronRight, ChevronDown, Network,
   PieChart, Activity, Box, Layers, Briefcase, FileText, Send, Sparkles, User, LogOut, Settings,
-  PenTool, Library, Archive
+  PenTool, Library, Archive, LayoutGrid, UserCog, Scale, Book
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
@@ -21,6 +21,7 @@ const navLinks = [
   { label: 'Portfolio', href: '/portfolio', mega: true },
   { label: 'Dashboards', href: '/dashboards', mega: true },
   { label: 'Blog', href: '/blog', mega: true },
+  { label: 'Knowledge', href: '/knowledge/architecture', mega: true },
   { label: 'Workspace', href: '/tools', mega: true },
   { label: 'Templates', href: '/templates' },
 ];
@@ -80,9 +81,21 @@ const megaMenuData: Record<string, any> = {
     items: [
       { title: 'Templates Hub', desc: 'Downloadable system blueprints.', icon: <Library size={20} className="text-[var(--accent)]" />, href: '/templates' },
       { title: 'Prompt Auditor', desc: 'Surgical audit for LLM prompts.', icon: <Shield size={20} />, href: '/tools/prompt-auditor' },
-      { title: 'Context Optimizer', desc: 'Token density & bloat analysis.', icon: <Zap size={20} />, href: '/tools/prompt-auditor' },
+      { title: 'Context Optimizer', desc: 'Token density & bloat analysis.', icon: <Zap size={20} />, href: '/tools/context-optimizer' },
       { title: 'Data Forge', desc: 'Synthetic dataset generation.', icon: <Database size={20} />, href: '/data-forge' },
       { title: 'Analytics Feed', desc: 'Real-time performance metrics.', icon: <Activity size={20} />, href: '/analytics-live' },
+    ]
+  },
+  Knowledge: {
+    items: [
+      { title: 'Architecture Library', desc: 'Downloadable system blueprints.', icon: <Layers size={20} className="text-[var(--accent)]" />, href: '/knowledge/architecture' },
+      { title: 'RFC Directory', desc: 'Technical Requests for Comments.', icon: <FileText size={20} className="text-blue-500" />, href: '/knowledge/rfc' },
+      { title: 'Workflow Patterns', desc: 'Canonical design frameworks.', icon: <LayoutGrid size={20} className="text-cyan-500" />, href: '/knowledge/patterns' },
+      { title: 'Hardening Standards', desc: 'Prompt engineering benchmarks.', icon: <Shield size={20} className="text-emerald-500" />, href: '/knowledge/standards' },
+      { title: 'System Glossary', desc: 'Technical terminology index.', icon: <Book size={20} />, href: '/glossary' },
+      { title: 'Framework Analysis', desc: 'Methodology comparisons.', icon: <Scale size={20} className="text-amber-500" />, href: '/knowledge/comparisons' },
+      { title: 'Reference Release', desc: 'Surgical AI v2026.1 Release.', icon: <Activity size={20} className="text-[var(--accent)]" />, href: '/knowledge/architecture' },
+      { title: 'Intent Protocols', desc: 'Operator alignment frameworks.', icon: <UserCog size={20} />, href: '/knowledge/protocols' },
     ]
   }
 };

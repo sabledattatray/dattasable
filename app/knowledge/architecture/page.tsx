@@ -3,8 +3,12 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Shield, Zap, Cpu, Network, Database, Terminal } from 'lucide-react';
+
+import { ARCHITECTURES } from '@/data/architectures';
+import { Download, Share2, GitBranch, Code, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 export default function ArchitecturePage() {
   const layers = [
@@ -28,6 +32,23 @@ export default function ArchitecturePage() {
     }
   ];
 
+  const handleDownload = (content: string, filename: string) => {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const copyEmbedCode = (id: string) => {
+    const embedCode = `<iframe src="https://dattasable.com/knowledge/architecture?embed=${id}" width="100%" height="600" frameborder="0"></iframe>`;
+    navigator.clipboard.writeText(embedCode);
+    alert('Embed code copied to clipboard!');
+  };
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
@@ -37,7 +58,7 @@ export default function ArchitecturePage() {
         
         <div className="container">
           <div className="max-w-4xl mx-auto">
-            <div className="label-tech mb-8">System Infrastructure</div>
+            <div className="label-tech mb-8 text-[var(--accent)]">System Infrastructure</div>
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
               Surgical AI <span style={{ color: 'var(--accent)' }}>Architecture.</span>
             </h1>
@@ -76,6 +97,101 @@ export default function ArchitecturePage() {
                       </ul>
                     </div>
                   </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Architecture Library (Link Magnets) */}
+            <div className="mb-32">
+              <div className="label-tech mb-8 text-cyan-500">Architecture Library</div>
+              <h2 className="text-4xl font-bold mb-12" style={{ fontFamily: 'Syne, sans-serif' }}>Downloadable <span className="text-cyan-500">Blueprints</span></h2>
+              
+              <div className="grid grid-cols-1 gap-12">
+                {ARCHITECTURES.map((arch) => (
+                  <div key={arch.id} className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card">
+                    <div className="flex flex-col lg:flex-row gap-12">
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <span className="mono text-[10px] uppercase tracking-widest px-2 py-1 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">{arch.category}</span>
+                            <h3 className="text-2xl font-bold">{arch.title}</h3>
+                          </div>
+                          <Link href={`/blog/${arch.caseStudySlug}`} className="flex items-center gap-2 text-[10px] mono text-[var(--accent)] hover:underline">
+                            CASE_STUDY <ArrowUpRight size={12} />
+                          </Link>
+                        </div>
+                        <p className="text-[var(--muted)] mb-8 leading-relaxed">{arch.description}</p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                          <div>
+                            <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] mb-4">Prompt Chain:</h4>
+                            <div className="space-y-2">
+                              {arch.promptChain.map((prompt, idx) => (
+                                <div key={idx} className="p-3 bg-[var(--surface2)] border border-[var(--border)] text-[12px] mono italic opacity-80">
+                                  {prompt}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <h4 className="mono text-[10px] uppercase tracking-widest text-emerald-500 mb-4">Measured Outcomes:</h4>
+                            <div className="space-y-3">
+                              {arch.outcomes.map((outcome, idx) => (
+                                <div key={idx} className="flex items-start gap-2 text-[12px] leading-relaxed opacity-80">
+                                  <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 flex-shrink-0" />
+                                  <span>{outcome}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-4">
+                          <button 
+                            onClick={() => handleDownload(arch.template, `${arch.id}-blueprint.json`)}
+                            className="btn-primary flex items-center gap-2 py-3 px-6"
+                          >
+                            <Download size={16} /> Download Blueprint
+                          </button>
+                          <button 
+                            onClick={() => copyEmbedCode(arch.id)}
+                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                          >
+                            <Code size={16} /> Embed
+                          </button>
+                          <a 
+                            href={`https://github.com/sabledattatray/surgical-ai-architectures/tree/main/${arch.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                          >
+                            <GitBranch size={16} /> GitHub
+                          </a>
+                          <button 
+                            onClick={() => {
+                              const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://dattasable.com/knowledge/architecture?id=${arch.id}`)}`;
+                              window.open(url, '_blank');
+                            }}
+                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                          >
+                            <Share2 size={16} /> LinkedIn
+                          </button>
+                        </div>
+                      </div>
+                      <div className="lg:w-1/3 p-6 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
+                        <h4 className="mono text-[10px] uppercase tracking-widest mb-6 opacity-50">System Diagram:</h4>
+                        <div className="p-4 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
+                          <pre className="text-[10px] mono text-cyan-500 overflow-x-auto">
+                            {arch.diagram}
+                          </pre>
+                        </div>
+                        <div className="mt-8 flex items-center justify-between text-[10px] mono uppercase opacity-50">
+                          <span>Status: Production</span>
+                          <span>Ver: 1.0.4</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

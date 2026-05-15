@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, Lock, Globe } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+import Link from 'next/link';
 import OfficialGoogleButton from './OfficialGoogleButton';
 
 interface LoginModalProps {
@@ -177,7 +178,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             {/* Footer */}
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
               <p style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>
-                By continuing, you agree to our <a href="#" style={{ color: 'var(--text)', fontWeight: 600 }}>Privacy Policy</a> and <a href="#" style={{ color: 'var(--text)', fontWeight: 600 }}>Terms of Service</a>.
+                By continuing, you agree to our <Link href="/privacy" style={{ color: 'var(--text)', fontWeight: 600 }}>Privacy Policy</Link> and <Link href="/terms" style={{ color: 'var(--text)', fontWeight: 600 }}>Terms of Service</Link>.
               </p>
             </div>
           </motion.div>

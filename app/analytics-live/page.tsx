@@ -234,9 +234,12 @@ export default function AnalyticsLivePage() {
                 <Activity size={24} className="mb-4" />
                 <h4 className="text-sm font-black uppercase mb-1">Integrity: 100%</h4>
                 <p className="text-[12px] opacity-80 mb-6">All regional nodes responding within nominal latency parameters.</p>
-                <button className="w-full py-2 bg-black text-white text-[10px] font-black uppercase tracking-widest rounded hover:opacity-80 transition-opacity">
+                <Link 
+                  href="/knowledge/architecture"
+                  className="block w-full py-2 bg-black text-white text-center text-[10px] font-black uppercase tracking-widest rounded hover:opacity-80 transition-opacity no-underline"
+                >
                   View Full Report
-                </button>
+                </Link>
               </div>
 
               <div className="bg-[var(--surface)] border border-[var(--border)] rounded p-5 space-y-4">
