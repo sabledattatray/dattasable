@@ -251,17 +251,21 @@ export default function Footer() {
                   Mumbai, Maharashtra, India
                 </span>
 
-                {/* Official Google Play Store Badge */}
+                {/* Official Theme-Aware Google Play Store Badge */}
                 <div className="pt-4 pb-2">
                   <a
                     href="https://play.google.com/store"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-4 px-6 py-3.5 rounded-xl bg-black border border-[#a6a6a6]/40 hover:border-white transition-all duration-300 no-underline shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                    style={{ minWidth: '190px' }}
+                    className="inline-flex items-center gap-3.5 px-5 py-2.5 rounded-[8px] transition-all duration-300 no-underline shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    style={{ 
+                      background: 'var(--playstore-bg)',
+                      border: '1px solid var(--playstore-border)',
+                      minWidth: '170px' 
+                    }}
                   >
                     {/* Official Google Play SVG Logo */}
-                    <svg className="w-9 h-9 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3.609 1.814C3.218 2.078 3 2.553 3 3.204v17.592c0 .651.218 1.126.609 1.39l.065.037L13.51 12.38 3.674 1.777l-.065.037z" fill="#00c853"/>
                       <path d="M17.411 16.142l-3.901-3.762 3.901-3.762.083.047 4.636 2.632c.66.375.66.985 0 1.36l-4.636 2.632-.083.053z" fill="#ffd54f"/>
                       <path d="M17.494 7.865L13.51 11.75 3.674 1.777C4.168 1.332 4.96.166 5.892.694l11.602 6.586.002.585z" fill="#2979ff"/>
@@ -271,26 +275,26 @@ export default function Footer() {
                     <div className="flex flex-col text-left">
                       <span 
                         style={{ 
-                          fontSize: '11px', 
+                          fontSize: '10px', 
                           fontFamily: 'Roboto, sans-serif', 
                           fontWeight: 500,
                           textTransform: 'uppercase', 
-                          letterSpacing: '0.75px', 
-                          color: '#ffffff',
-                          lineHeight: '12px',
-                          marginBottom: '2px'
+                          letterSpacing: '0.5px', 
+                          color: 'var(--playstore-text)',
+                          lineHeight: '11px',
+                          marginBottom: '1px'
                         }}
                       >
                         GET IT ON
                       </span>
                       <span 
                         style={{ 
-                          fontSize: '21px', 
+                          fontSize: '18px', 
                           fontFamily: 'Roboto, sans-serif', 
                           fontWeight: 600, 
-                          color: '#ffffff',
+                          color: 'var(--playstore-text)',
                           letterSpacing: '-0.3px',
-                          lineHeight: '22px'
+                          lineHeight: '19px'
                         }}
                       >
                         Google Play
