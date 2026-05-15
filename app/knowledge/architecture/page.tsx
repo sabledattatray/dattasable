@@ -103,7 +103,7 @@ export default function ArchitecturePage() {
               
               <div className="grid grid-cols-1 gap-12">
                 {ARCHITECTURES.map((arch) => (
-                  <div key={arch.id} className="p-8 lg:p-12 border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]">
+                  <div key={arch.id} className="border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]" style={{ padding: '3rem' }}>
                     <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                       <div className="flex-1 w-full">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
