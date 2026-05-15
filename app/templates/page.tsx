@@ -58,20 +58,21 @@ export default function TemplatesPage() {
         </header>
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-6 mb-12">
+        <div className="flex flex-col md:flex-row gap-6 mb-16 max-w-3xl">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={18} />
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={20} />
             <input 
               type="text"
               placeholder="Search templates (e.g. n8n, Power BI)..."
-              className="w-full bg-[var(--surface2)] border border-[var(--border)] rounded-sm py-4 pl-12 pr-4 text-white mono text-[14px] focus:outline-none focus:border-[var(--accent)] transition-colors"
+              className="w-full bg-[var(--surface2)] border border-[var(--border)] rounded-sm text-white mono focus:outline-none focus:border-[var(--accent)] transition-colors shadow-inner"
+              style={{ padding: '1.25rem 1.5rem 1.25rem 3.5rem', height: '64px', fontSize: '0.95rem' }}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <button className="flex items-center gap-3 px-8 py-4 bg-[var(--surface2)] border border-[var(--border)] rounded-sm hover:border-[var(--accent)] transition-all">
+          <button className="flex items-center justify-center gap-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm hover:border-[var(--accent)] transition-all shadow-md font-bold" style={{ padding: '0 2.5rem', height: '64px' }}>
             <Filter size={18} className="text-[var(--accent)]" />
-            <span className="mono text-[12px] font-bold tracking-widest">FILTER</span>
+            <span className="mono text-[13px] font-bold tracking-widest">FILTER</span>
           </button>
         </div>
 
