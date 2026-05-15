@@ -81,21 +81,22 @@ export default function Footer() {
         overflow: 'hidden',
       }}
     >
-      {/* Premium Ambient Background Structure */}
+      {/* Ultra-Premium Aurora & Starfield Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Subtle Cyber Grid */}
+        {/* Deep Space Aurora Mesh */}
+        <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/12 via-purple-500/5 to-blue-500/12 rounded-full blur-[150px] transform -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/12 via-cyan-500/5 to-[var(--accent)]/12 rounded-full blur-[150px] transform translate-y-1/3" />
+        
+        {/* Subtle Starfield / Dust Particles */}
         <div 
-          className="absolute inset-0 opacity-[0.03]" 
+          className="absolute inset-0 opacity-25" 
           style={{ 
-            backgroundImage: 'linear-gradient(to right, var(--text) 1px, transparent 1px), linear-gradient(to bottom, var(--text) 1px, transparent 1px)', 
-            backgroundSize: '4rem 4rem' 
+            backgroundImage: 'radial-gradient(circle at 20% 30%, var(--text) 1px, transparent 1px), radial-gradient(circle at 80% 40%, var(--text) 1px, transparent 1px), radial-gradient(circle at 40% 80%, var(--text) 1px, transparent 1px), radial-gradient(circle at 75% 90%, var(--text) 1px, transparent 1px)', 
+            backgroundSize: '180px 180px' 
           }} 
         />
-        {/* Ambient Glow Orbs */}
-        <div className="absolute -top-24 left-1/4 w-96 h-96 bg-[var(--accent)] opacity-[0.08] rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-500 opacity-[0.05] rounded-full blur-[120px]" />
-        {/* Top Gradient Highlight */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/50 to-transparent shadow-[0_0_15px_var(--accent)]" />
+        {/* Top Glowing Aurora Highlight */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 via-blue-500/40 to-transparent shadow-[0_0_25px_var(--accent)]" />
       </div>
 
       <div 
@@ -106,9 +107,10 @@ export default function Footer() {
           padding: '0 2rem 6rem' 
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-16">
-          {/* Brand Section */}
-          <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
+          {/* Brand Section Glass Card */}
+          <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between p-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] group/brand hover:border-white/[0.1] transition-all duration-500 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--accent)]/40 to-transparent opacity-0 group-hover/brand:opacity-100 transition-opacity duration-500" />
             <div>
               <Link
                 href="/"
@@ -189,8 +191,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation Columns */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10">
+          {/* Navigation Columns Glass Container */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10 p-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500">
             {NAV_LINKS.map((col) => (
               <div key={col.heading} className="flex flex-col">
                 <h3
