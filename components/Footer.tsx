@@ -157,7 +157,7 @@ export default function Footer() {
                 Premier <strong className="text-[var(--text)]">Business Intelligence Expert</strong> and <strong className="text-[var(--text)]">Data Strategy Consultant</strong> in India. Specializing in reliable <strong className="text-[var(--text)]">Automated Reporting Solutions</strong> and <strong className="text-[var(--text)]">Data Engineering</strong>.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="pt-6 border-t border-[var(--border)] border-opacity-60">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '2.5rem', paddingTop: '2rem' }} className="border-t border-[var(--border)] border-opacity-60">
                 <a
                   href="mailto:info@dattasable.com"
                   className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
