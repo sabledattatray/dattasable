@@ -77,9 +77,29 @@ export default function Footer() {
         borderTop: '1px solid var(--border)',
         width: '100%',
         paddingTop: '6rem',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      {/* Premium Ambient Background Structure */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Subtle Cyber Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{ 
+            backgroundImage: 'linear-gradient(to right, var(--text) 1px, transparent 1px), linear-gradient(to bottom, var(--text) 1px, transparent 1px)', 
+            backgroundSize: '4rem 4rem' 
+          }} 
+        />
+        {/* Ambient Glow Orbs */}
+        <div className="absolute -top-24 left-1/4 w-96 h-96 bg-[var(--accent)] opacity-[0.08] rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-500 opacity-[0.05] rounded-full blur-[120px]" />
+        {/* Top Gradient Highlight */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/50 to-transparent shadow-[0_0_15px_var(--accent)]" />
+      </div>
+
       <div 
+        className="relative z-10"
         style={{ 
           maxWidth: '1448px', 
           margin: '0 auto', 
