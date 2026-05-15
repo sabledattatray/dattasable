@@ -88,96 +88,91 @@ export default function Footer() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-16">
           {/* Brand Section */}
-          <div className="lg:col-span-4 xl:col-span-2">
-            <Link
-              href="/"
-              className="group no-underline"
-              aria-label="Datta Sable - Home"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                textDecoration: 'none',
-                marginBottom: '2rem',
-              }}
-            >
-              <LogoIcon className="w-7 h-7 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
-              <span
+          <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between">
+            <div>
+              <Link
+                href="/"
+                className="group no-underline"
+                aria-label="Datta Sable - Home"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  textDecoration: 'none',
+                  marginBottom: '1.75rem',
+                }}
+              >
+                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-500 shadow-inner">
+                  <LogoIcon className="w-6 h-6 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
+                </div>
+                <span
+                  style={{
+                    fontFamily: "'Syne', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '1.35rem',
+                    color: 'var(--text)',
+                    letterSpacing: '-0.02em',
+                  }}
+                  className="group-hover:text-[var(--accent)] transition-colors"
+                >
+                  Datta Sable
+                </span>
+              </Link>
+
+              <p
+                style={{
+                  color: 'var(--muted)',
+                  fontSize: '0.95rem',
+                  lineHeight: 1.7,
+                  maxWidth: '90%',
+                  marginBottom: '2.5rem',
                   fontFamily: "'Syne', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '1.25rem',
-                  color: 'var(--text)',
-                  letterSpacing: '-0.02em',
                 }}
               >
-                Datta Sable
-              </span>
-            </Link>
+                Premier <strong className="text-[var(--text)]">Business Intelligence Expert</strong> and <strong className="text-[var(--text)]">Data Strategy Consultant</strong> in India. Specializing in reliable <strong className="text-[var(--text)]">Automated Reporting Solutions</strong> and <strong className="text-[var(--text)]">Data Engineering</strong>.
+              </p>
 
-            <p
-              style={{
-                color: 'var(--muted)',
-                fontSize: '0.95rem',
-                lineHeight: 1.6,
-                maxWidth: '100%',
-                marginBottom: '2.5rem',
-                fontFamily: "'Syne', sans-serif",
-              }}
-            >
-              Premier <strong>Business Intelligence Expert</strong> and <strong>Data Strategy Consultant</strong> in India. Specializing in reliable <strong>Automated Reporting Solutions</strong> and <strong>Data Engineering</strong>.
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <a
-                href="mailto:info@dattasable.com"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  color: 'var(--muted)',
-                  fontSize: '0.85rem',
-                  fontFamily: "'JetBrains Mono', monospace",
-                  textDecoration: 'none',
-                }}
-              >
-                <Mail size={14} />
-                info@dattasable.com
-              </a>
-              <a
-                href="tel:+918010803756"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  color: 'var(--muted)',
-                  fontSize: '0.85rem',
-                  fontFamily: "'JetBrains Mono', monospace",
-                  textDecoration: 'none',
-                }}
-              >
-                <Clock size={14} />
-                +91 8010803756
-              </a>
-              <span
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  color: 'var(--muted)',
-                  fontSize: '0.85rem',
-                  fontFamily: "'JetBrains Mono', monospace",
-                }}
-              >
-                <MapPin size={14} />
-                Mumbai, Maharashtra, India
-              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="pt-6 border-t border-[var(--border)] border-opacity-60">
+                <a
+                  href="mailto:info@dattasable.com"
+                  className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
+                  style={{
+                    fontSize: '0.85rem',
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
+                  <Mail size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform" />
+                  info@dattasable.com
+                </a>
+                <a
+                  href="tel:+918010803756"
+                  className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
+                  style={{
+                    fontSize: '0.85rem',
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
+                  <Clock size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform" />
+                  +91 8010803756
+                </a>
+                <span
+                  className="flex items-center gap-3 text-[var(--muted)]"
+                  style={{
+                    fontSize: '0.85rem',
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
+                  <MapPin size={15} className="text-[var(--accent)]" />
+                  Mumbai, Maharashtra, India
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 md:contents lg:contents">
+          {/* Navigation Columns */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-8 gap-10">
             {NAV_LINKS.map((col) => (
-              <div key={col.heading} className="lg:col-span-2 xl:col-span-2">
+              <div key={col.heading} className="flex flex-col">
                 <h3
                   style={{
                     fontFamily: "'JetBrains Mono', monospace",
@@ -188,34 +183,37 @@ export default function Footer() {
                     letterSpacing: '0.2em',
                     marginBottom: '2rem',
                   }}
+                  className="flex items-center gap-2"
                 >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
                   {col.heading}
                 </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {col.links.map((lnk) => (
-                        <li key={lnk.label}>
-                      <Link
-                        href={lnk.href}
-                        target={lnk.external ? '_blank' : undefined}
-                        rel={lnk.external ? 'noopener noreferrer' : undefined}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                          color: 'var(--muted)',
-                          fontSize: '0.9rem',
-                          fontFamily: "'Syne', sans-serif",
-                          textDecoration: 'none',
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {lnk.label}
-                        {lnk.external && (
-                          <ArrowUpRight size={12} style={{ opacity: 0.5 }} />
-                        )}
-                      </Link>
-                    </li>
-                  ))}
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+                  {col.links.map((lnk) => {
+                    const IconComponent = lnk.icon;
+                    return (
+                      <li key={lnk.label}>
+                        <Link
+                          href={lnk.href}
+                          target={lnk.external ? '_blank' : undefined}
+                          rel={lnk.external ? 'noopener noreferrer' : undefined}
+                          className="group/link flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--accent)] hover:translate-x-1 transition-all duration-300 no-underline"
+                          style={{
+                            fontSize: '0.9rem',
+                            fontFamily: "'Syne', sans-serif",
+                          }}
+                        >
+                          {IconComponent && (
+                            <IconComponent size={14} className="text-[var(--muted)] group-hover/link:text-[var(--accent)] transition-colors flex-shrink-0 opacity-60 group-hover/link:opacity-100" />
+                          )}
+                          <span>{lnk.label}</span>
+                          {lnk.external && (
+                            <ArrowUpRight size={12} className="opacity-40 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+                          )}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -226,8 +224,9 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div
         style={{
+          background: 'var(--surface1)',
           borderTop: '1px solid var(--border)',
-          padding: '1.25rem 2rem',
+          padding: '1.5rem 2rem',
         }}
       >
         <div 
@@ -240,20 +239,20 @@ export default function Footer() {
           <p
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
               color: 'var(--muted)',
             }}
           >
-            © {year} Datta Sable. Built for technical creators.
+            © {year} Datta Sable. Built for technical creators & enterprise BI architectures.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8">
-            <Link href="/privacy" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+            <Link href="/privacy" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
               PRIVACY
             </Link>
-            <Link href="/terms" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+            <Link href="/terms" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
               TERMS
             </Link>
-            <Link href="/cookies" style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", textDecoration: 'none', letterSpacing: '0.1em' }}>
+            <Link href="/cookies" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
               COOKIES
             </Link>
           </div>
