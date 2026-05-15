@@ -145,7 +145,7 @@ export default function ArchitecturePage() {
                           </div>
                         </div>
                         
-                        <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border)] border-opacity-60">
+                        <div className="flex flex-wrap gap-4 border-t border-[var(--border)] border-opacity-60" style={{ paddingTop: '2.5rem', marginTop: '1rem' }}>
                           <button 
                             onClick={() => handleDownload(arch.template, `${arch.id}-blueprint.json`)}
                             className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
