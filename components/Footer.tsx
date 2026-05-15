@@ -251,43 +251,46 @@ export default function Footer() {
                   Mumbai, Maharashtra, India
                 </span>
 
-                {/* Available on Play Store Button */}
-                <div className="pt-3">
+                {/* Official Google Play Store Badge */}
+                <div className="pt-2">
                   <a
                     href="https://play.google.com/store"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/playstore inline-flex items-center gap-3.5 px-5 py-3 rounded-xl bg-gradient-to-r from-[var(--surface2)] via-[var(--surface)] to-[var(--surface2)] border border-[var(--border)] hover:border-[var(--accent)] shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_25px_rgba(0,89,179,0.25)] transition-all duration-500 no-underline transform hover:-translate-y-1 relative overflow-hidden"
+                    className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-black border border-[#a6a6a6]/40 hover:border-white transition-all duration-300 no-underline shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    style={{ minWidth: '150px' }}
                   >
-                    {/* Subtle inner glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/10 to-[var(--accent)]/0 opacity-0 group-hover/playstore:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    
-                    {/* Smartphone Icon */}
-                    <div className="p-2.5 rounded-lg bg-[var(--accent)]/10 group-hover/playstore:bg-[var(--accent)] transition-colors duration-500 flex items-center justify-center shadow-inner flex-shrink-0">
-                      <Smartphone size={22} className="text-[var(--accent)] group-hover/playstore:text-white transition-colors duration-500" />
-                    </div>
-                    
+                    {/* Official Google Play SVG Logo */}
+                    <svg className="w-7 h-7 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.609 1.814C3.218 2.078 3 2.553 3 3.204v17.592c0 .651.218 1.126.609 1.39l.065.037L13.51 12.38 3.674 1.777l-.065.037z" fill="#00c853"/>
+                      <path d="M17.411 16.142l-3.901-3.762 3.901-3.762.083.047 4.636 2.632c.66.375.66.985 0 1.36l-4.636 2.632-.083.053z" fill="#ffd54f"/>
+                      <path d="M17.494 7.865L13.51 11.75 3.674 1.777C4.168 1.332 4.96.166 5.892.694l11.602 6.586.002.585z" fill="#2979ff"/>
+                      <path d="M17.494 16.135l-.002.585-11.602 6.586c-.932.528-1.724-.638-2.218-1.083l9.836-9.973 3.986 3.885z" fill="#ff1744"/>
+                    </svg>
+
                     <div className="flex flex-col text-left">
                       <span 
                         style={{ 
-                          fontSize: '0.65rem', 
-                          fontFamily: "'JetBrains Mono', monospace", 
+                          fontSize: '9px', 
+                          fontFamily: 'Roboto, sans-serif', 
+                          fontWeight: 500,
                           textTransform: 'uppercase', 
-                          letterSpacing: '0.15em', 
-                          color: 'var(--muted)' 
+                          letterSpacing: '0.5px', 
+                          color: '#ffffff',
+                          lineHeight: '10px'
                         }}
                       >
-                        Available on
+                        GET IT ON
                       </span>
                       <span 
                         style={{ 
-                          fontSize: '1rem', 
-                          fontFamily: "'Syne', sans-serif", 
-                          fontWeight: 700, 
-                          color: 'var(--text)',
-                          letterSpacing: '-0.01em' 
+                          fontSize: '16px', 
+                          fontFamily: 'Roboto, sans-serif', 
+                          fontWeight: 600, 
+                          color: '#ffffff',
+                          letterSpacing: '-0.2px',
+                          lineHeight: '18px'
                         }}
-                        className="group-hover/playstore:text-[var(--accent)] transition-colors duration-500"
                       >
                         Google Play
                       </span>
