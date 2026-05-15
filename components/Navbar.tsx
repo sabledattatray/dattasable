@@ -70,11 +70,13 @@ const megaMenuData: Record<string, any> = {
     items: [
       { title: 'Global Sales', desc: 'Real-time revenue monitoring.', icon: <Globe size={20} className="text-[#9b59ff]" />, href: '/dashboards/global-sales-intelligence' },
       { title: 'EMI Intelligence', desc: 'Real-time collection monitoring.', icon: <Activity size={20} className="text-[var(--accent)]" />, href: '/dashboards/collection-intelligence' },
-      { title: 'Financial BI', desc: 'Revenue & cost tracking.', icon: <Activity size={20} />, href: '/dashboards#financial' },
-      { title: 'Operational Analytics', desc: 'Supply chain & logic metrics.', icon: <Globe size={20} />, href: '/dashboards#operations' },
-      { title: 'Custom Solutions', desc: 'Bespoke technical reporting.', icon: <Sparkles size={20} />, href: '/dashboards#custom' },
-      { title: 'Sales Tracking', desc: 'CRM and pipeline management.', icon: <BarChart3 size={20} />, href: '/dashboards#sales' },
-      { title: 'HR Analytics', desc: 'Retention & performance KPIs.', icon: <Layers size={20} />, href: '/dashboards#hr' },
+      { title: 'Revenue Intelligence', desc: 'SQL & Power BI MoM forecasting.', icon: <TrendingUp size={20} className="text-blue-500" />, href: '/dashboards/revenue-intelligence' },
+      { title: 'Sales Pipeline', desc: 'Deal velocity & CRM conversion.', icon: <BarChart3 size={20} className="text-emerald-500" />, href: '/dashboards/sales-pipeline' },
+      { title: 'Blinkit Sales', desc: '10M+ row quick-commerce metrics.', icon: <Box size={20} className="text-amber-500" />, href: '/dashboards/blinkit-sales' },
+      { title: 'Surgical AI', desc: 'Executive C-suite command center.', icon: <Sparkles size={20} className="text-[var(--accent)]" />, href: '/dashboards/surgical-ai' },
+      { title: 'Interactive Demo', desc: 'Live embedded BI experience.', icon: <Layers size={20} className="text-cyan-500" />, href: '/dashboards/interactive' },
+      { title: 'All Dashboards', desc: 'Explore the full BI portfolio hub.', icon: <LayoutGrid size={20} />, href: '/dashboards' },
+      { title: 'Custom Solutions', desc: 'Bespoke SQL/DAX reporting architectures.', icon: <Shield size={20} className="text-[#9b59ff]" />, href: '/contact' },
     ]
   },
   Workspace: {
