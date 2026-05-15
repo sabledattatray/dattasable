@@ -73,7 +73,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: 'linear-gradient(180deg, var(--bg) 0%, #080808 50%, #030303 100%)',
+        background: 'var(--footer-bg)',
         borderTop: '1px solid var(--border)',
         width: '100%',
         paddingTop: '3rem',
@@ -252,7 +252,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div
         style={{
-          background: '#000000',
+          background: 'var(--footer-bottom-bg)',
           borderTop: '1px solid var(--border)',
           padding: '1.5rem 3rem',
         }}
