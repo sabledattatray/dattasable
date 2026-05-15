@@ -48,7 +48,7 @@ export default function ArchitecturePage() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       
-      <div className="boxed-wrapper" style={{ paddingTop: '12rem', paddingBottom: '10rem' }}>
+      <div className="boxed-wrapper" style={{ paddingTop: '6rem', paddingBottom: '5rem' }}>
         <Crosshair position="tl" />
         
         <div className="container">
