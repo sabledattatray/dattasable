@@ -1,6 +1,21 @@
-'use client';
+import { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Surgical AI Workspace Dashboard | Workflow Intelligence",
+  description: "Enterprise-grade AI workflow infrastructure dashboard. Monitor intelligent execution chains and scale AI operations.",
+  openGraph: {
+    title: "Surgical AI Workspace | Workflow Intelligence",
+    description: "Monitor live AI agent execution chains and optimize automation fidelity.",
+    images: ["/images/dashboards/surgical_ai_preview.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Surgical AI Workspace | Workflow Intelligence",
+    images: ["/images/dashboards/surgical_ai_preview.png"],
+  },
+};
 
 export default function SurgicalAIDashboardPage() {
   return (
