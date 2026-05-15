@@ -95,8 +95,8 @@ export default function Footer() {
       {/* Ultra-Premium Aurora & Starfield Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Deep Space Aurora Mesh */}
-        <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/12 via-purple-500/5 to-blue-500/12 rounded-full blur-[150px] transform -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/12 via-cyan-500/5 to-[var(--accent)]/12 rounded-full blur-[150px] transform translate-y-1/3" />
+        <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/5 via-purple-500/2 to-blue-500/5 rounded-full blur-[150px] transform -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/5 via-cyan-500/2 to-[var(--accent)]/5 rounded-full blur-[150px] transform translate-y-1/3" />
         
         {/* Surgical Precision Shapes & HUD Crosshairs */}
         {/* Top-Left Calibration Crosshair */}

@@ -50,7 +50,7 @@ input:-webkit-autofill:active {
   --hero-gradient-solid: 20%;     /* Strong for dark mode */
   --hero-gradient-end: 85%;       /* Long for dark mode */
   --hero-mobile-opacity: 0.3;     /* Visible for dark mode */
-  --footer-bg: linear-gradient(180deg, var(--bg) 0%, #080808 50%, #030303 100%);
+  --footer-bg: #000000;
   --footer-bottom-bg: #000000;
 }
 
