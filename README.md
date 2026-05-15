@@ -1,130 +1,148 @@
-# 🌗 Datta Sable | BI & Analytics Platform
-
-![Stars](https://img.shields.io/github/stars/sabledattatray/dattasable?style=for-the-badge&logo=github&color=gold)
-![Forks](https://img.shields.io/github/forks/sabledattatray/dattasable?style=for-the-badge&logo=github&color=blue)
-![Build Status](https://img.shields.io/github/actions/workflow/status/sabledattatray/dattasable/ci.yml?branch=main&style=for-the-badge)
-![License](https://img.shields.io/github/license/sabledattatray/dattasable?style=for-the-badge&color=green)
-![Next.js](https://img.shields.io/badge/Next.js-15.0-black.svg?style=for-the-badge&logo=next.js)
-![Vercel](https://img.shields.io/badge/Vercel-Production-black.svg?style=for-the-badge&logo=vercel)
-
-
-> **Engineering Data and Digital Infrastructure into Strategic Assets.** A high-performance, full-stack Business Intelligence, Automation, and Web Solutions portfolio designed for the 2026 digital landscape.
-
----
-
-## 📊 Professional Insights
-
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=sabledattatray&show_icons=true&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Datta's GitHub Stats" height="180px" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sabledattatray&layout=compact&theme=vision-friendly-dark&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF" alt="Top Languages" height="180px" />
-</p>
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=sabledattatray&theme=vision-friendly-dark&hide_border=true&background=0D1117&stroke=58A6FF&ring=58A6FF&fire=58A6FF&currStreakNum=C9D1D9&sideNums=C9D1D9&sideLabels=C9D1D9&dates=C9D1D9" alt="GitHub Streak" height="180px" />
+  <img src="./public/favicon.svg" width="80" alt="Datta Sable Logo" />
 </p>
 
+<h1 align="center">Surgical AI Workspace</h1>
+
+<p align="center">
+  <strong>Engineering Data & Logic into Strategic Assets.</strong><br>
+  A high-performance, full-stack Business Intelligence, Automation, and Web Solutions ecosystem.
+</p>
+
+<p align="center">
+  <a href="https://github.com/sabledattatray/dattasable/stargazers"><img src="https://img.shields.io/github/stars/sabledattatray/dattasable?style=for-the-badge&logo=github&color=C9F31D&labelColor=000000" alt="Stars" /></a>
+  <a href="https://github.com/sabledattatray/dattasable/network/members"><img src="https://img.shields.io/github/forks/sabledattatray/dattasable?style=for-the-badge&logo=github&color=00d4ff&labelColor=000000" alt="Forks" /></a>
+  <a href="https://dattasable.com"><img src="https://img.shields.io/badge/Live-Production-black.svg?style=for-the-badge&logo=vercel&color=00ff88&labelColor=000000" alt="Live Site" /></a>
+  <a href="https://github.com/sabledattatray/dattasable/blob/main/LICENSE"><img src="https://img.shields.io/github/license/sabledattatray/dattasable?style=for-the-badge&color=888888&labelColor=000000" alt="License" /></a>
+</p>
+
+<br />
 
 ---
 
-## 💎 Project Overview
+## 📊 Technical Performance & Stats
 
-This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap between complex data engineering, seamless automation, and executive-level digital storytelling. Built with a "Modern Tech Stack" philosophy, it features a blazingly fast Next.js frontend, a robust service portfolio, and a custom-built Admin Dashboard for managing large-scale content and project lifecycles.
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=sabledattatray&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="Datta's GitHub Stats" height="195px" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sabledattatray&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" height="195px" />
+</p>
 
-### 🚀 Key Features
-- **Native Mobile Client**: Accompanied by a dedicated [Android Mobile App (ds-droid)](https://github.com/sabledattatray/ds-droid) for seamless cross-platform delivery.
-- **Elite Performance**: Sub-second load times with native `next/image` WebP optimization and edge-caching.
-- **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, n8n Automation, and CorelDRAW Graphic Design.
-- **Dynamic Knowledge Engine**: A high-authority blog featuring 33+ technical case studies and articles across specialized categories.
-- **Restricted Access Portal**: Secure, OAuth-driven gateway for proprietary professional assets and VIP dashboards.
-- **Admin Command Center**: A professional-grade dashboard for real-time CMS, portfolio, and analytics management.
-- **Premium Aesthetics**: A futuristic, highly responsive design system with glassmorphism, dynamic grids, and micro-animations.
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=sabledattatray&theme=tokyonight&hide_border=true" alt="GitHub Streak" height="195px" />
+</p>
 
 ---
 
-## 📸 Visual Showcase
+## 💎 The Ecosystem
 
-### 🪐 The Experience (Hero Section)
-The landing page establishes immediate authority with a high-fidelity technical visualization and a clear value proposition for data-driven enterprises.
+This platform is a **Surgical Enterprise Architecture**. It bridges the gap between deep data engineering, autonomous automation, and executive-tier digital storytelling.
+
+### 🚀 Core Pillars
+- **⚡ Elite Performance**: Sub-second load times via Next.js 15, React 19 Server Components, and Edge Optimization.
+- **🛡️ Surgical BI**: Real-time intelligence dashboards featuring 10M+ row processing and autonomous data auditing.
+- **⚙️ n8n Automation**: Complex multi-agent workflow orchestration for scaling technical authority.
+- **📚 Knowledge Hub**: A high-authority semantic mesh of Technical RFCs, Frameworks, and Case Studies.
+- **📱 Native Interop**: Fully integrated with the [ds-droid](https://github.com/sabledattatray/ds-droid) native mobile client.
+
+---
+
+## 📸 Technical Showcase
+
+### 🪐 The Surgical Experience (Hero)
+The landing page establishes immediate authority with high-fidelity technical visualization and surgical logic design.
 
 ![Hero Section](./public/images/readme/hero_preview.png)
 
-### 📊 Admin Command Center
-A clean, enterprise-grade interface for managing the entire ecosystem. Designed for efficiency and high-stakes data management.
+### 📊 Intelligence Command Center
+Clean, enterprise-grade interfaces designed for high-stakes decision making and real-time telemetry.
 
-| **Admin Portal (Light Mode)** | **Analytics Showcase** |
+| **Admin Infrastructure** | **Analytics Telemetry** |
 | :--- | :--- |
-| ![Admin Login](./public/images/readme/admin_preview.png) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.png) |
+| ![Admin Portal](./public/images/readme/admin_preview.png) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.png) |
 
 ---
 
-## 🛠️ The Tech Stack
+## 🛠️ The Surgical Stack
 
-### **Frontend & UX**
-- ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-- ![Framer](https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-
-### **Backend & Infrastructure**
-- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-- ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-- ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
-- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-
-### **Data Engineering & BI**
-- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-- ![Power Bi](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-- ![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=Tableau&logoColor=white)
-- ![SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=sqlite&logoColor=white)
-
+<table width="100%">
+  <tr>
+    <td width="33%" valign="top">
+      <h4>Frontend & UX</h4>
+      <ul>
+        <li>Next.js 15 (App Router)</li>
+        <li>React 19 Server Components</li>
+        <li>Tailwind CSS 4.0</li>
+        <li>Framer Motion (Micro-interactions)</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Backend & Data</h4>
+      <ul>
+        <li>PostgreSQL (Prisma ORM)</li>
+        <li>DuckDB (Analytical Engine)</li>
+        <li>Node.js (Technical Runtime)</li>
+        <li>NextAuth (Secure OAuth)</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Engineering & BI</h4>
+      <ul>
+        <li>Python (Automation)</li>
+        <li>Power BI / Tableau (Advanced)</li>
+        <li>SQL (Surgical Optimization)</li>
+        <li>n8n (Workflow Orchestration)</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📈 Performance Benchmarks
+## 📈 Search & Performance Authority
 
-Our latest **Lighthouse Audit** reflects our commitment to technical excellence:
-
-| Metric | Score | status |
+| Metric | Score | Signal |
 | :--- | :--- | :--- |
-| **Performance** | **98+** | 🚀 Blazing Fast |
-| **Accessibility** | **100** | ♿ Universal Access |
-| **Best Practices** | **100** | 🏆 Enterprise Standards |
-| **SEO** | **100** | 🔍 Search Optimized |
+| **Performance** | **98+** | 🚀 Zero Blocking Time |
+| **Accessibility** | **100** | ♿ Universal Fidelity |
+| **Best Practices** | **100** | 🏆 Enterprise Grade |
+| **SEO Authority** | **100** | 🔍 Crawl-Optimized |
 
 ---
 
-## 🛠️ Installation & Setup
+## 🛠️ Infrastructure Setup
 
 ```bash
-# Clone the repository
+# Clone the infrastructure
 git clone https://github.com/sabledattatray/dattasable.git
 
-# Install dependencies
+# Install technical dependencies
 npm install
 
-# Setup Environment Variables
+# Initialize local environment
 cp .env.example .env
 
-# Initialize Database
+# Provision Database & Seed
 npx prisma db push
 npx prisma db seed
 
-# Launch Development Server
+# Launch Surgical Workspace
 npm run dev
 ```
 
 ---
 
-## 🤝 Let's Connect
+## 🤝 Establish Contact
 
-I am currently open to high-impact BI consulting and Data Engineering roles.
+Currently accepting high-impact **BI Consulting** and **Workflow Architecture** engagements.
 
-- **Live Website**: [dattasable.com](https://dattasable.com)
-- **LinkedIn**: [Datta Sable](https://linkedin.com/in/dattasable)
-- **Email**: [contact@dattasable.com](mailto:contact@dattasable.com)
-
----
+- **Technical Portfolio**: [dattasable.com](https://dattasable.com)
+- **LinkedIn Authority**: [/in/dattasable](https://linkedin.com/in/dattasable)
+- **Direct Intel**: [info@dattasable.com](mailto:info@dattasable.com)
 
 <p align="center">
-  Built with 💻 and ☕ by <b>Datta Sable</b><br>
-  © 2026 Datta Sable. All Rights Reserved.
+  <br />
+  <img src="https://img.shields.io/badge/Designed%20with-Surgical%20Logic-C9F31D?style=for-the-badge&labelColor=000000" alt="Surgical Logic" />
+  <br />
+  <br />
+  © 2026 Datta Sable. Built for the 2026 Distribution Economy.
 </p>
