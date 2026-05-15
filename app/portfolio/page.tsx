@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,7 +17,7 @@ const projects = [
     title: 'Surgical AI-BI Forge',
     category: 'AI Infrastructure',
     image: '/images/portfolio/surgical_forge.png',
-    color: '#FF3B30',
+    color: 'var(--accent)',
     tools: ['Python', 'DuckDB', 'Next.js', 'Heuristic Logic'],
     client: 'Industrial Big Data Audit',
     desc: 'An autonomous, high-performance BI engine capable of auditing 1M+ records in real-time using in-memory OLAP (DuckDB).',
@@ -114,7 +115,7 @@ const projects = [
     solution: 'Implemented demand forecasting models in Python with automated reorder alerts via Power BI.',
     impact: '-18% Inventory Cost, $72K Annual Savings, 100% Automated Reorders',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 3,
@@ -129,7 +130,7 @@ const projects = [
     solution: 'Developed custom Python connectors to HR APIs and built an automated Tableau reporting suite.',
     impact: '97% Time Saved, -15% Attrition Rate, Zero Reporting Errors',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/blog',
+    live: 'https://dattasable.com/blog',
   },
   {
     id: 4,
@@ -144,7 +145,7 @@ const projects = [
     solution: 'Automated P&L and Cash Flow generation using Python/Pandas with a secure SQL backend.',
     impact: '80% Faster Close, 18 Months Error-Free, CFO Approval 9.5/10',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 5,
@@ -159,7 +160,7 @@ const projects = [
     solution: 'Integrated GA4, Meta, and Shopify APIs into a unified Tableau dashboard with custom attribution models.',
     impact: '+35% ROAS improvement, 22% reduction in CAC, Data-Driven Budgets',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 6,
@@ -174,7 +175,7 @@ const projects = [
     solution: 'Built a distributed web scraping infrastructure in Python to feed a real-time Tableau pricing dashboard.',
     impact: '$500M Expansion Greenlit, Competitor Gaps Identified, Live Pricing',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/blog',
+    live: 'https://dattasable.com/blog',
   },
   {
     id: 13,
@@ -189,7 +190,7 @@ const projects = [
     solution: 'Connected IoT sensors to a real-time Looker dashboard with instant SMS alerts for threshold breaches.',
     impact: 'Zero Product Loss, 100% Compliance, Real-time Visuals',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 14,
@@ -204,7 +205,7 @@ const projects = [
     solution: 'Developed a random forest forecasting model in Python and deployed it via Power BI.',
     impact: '+12% Seasonal Sales, -15% Stockouts, Accurate Buy-plans',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 15,
@@ -219,7 +220,7 @@ const projects = [
     solution: 'Built an NLP-based classification engine in Python that extracts key clauses into a structured database.',
     impact: '90% Processing Speedup, $40k/yr Cost Savings, High Accuracy',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/blog',
+    live: 'https://dattasable.com/blog',
   },
   {
     id: 16,
@@ -234,7 +235,7 @@ const projects = [
     solution: 'Integrated EMR data into a real-time Tableau dashboard with predictive wait-time models.',
     impact: '-25% ER Wait Times, +18% Bed Turnaround, Improved Care',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
   {
     id: 17,
@@ -249,7 +250,7 @@ const projects = [
     solution: 'Performed multi-dimensional cohort analysis in BigQuery and visualized findings in Looker.',
     impact: '-20% Churn in Segment A, Identified Product Gaps, Live LTV',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/blog',
+    live: 'https://dattasable.com/blog',
   },
   {
     id: 18,
@@ -264,25 +265,21 @@ const projects = [
     solution: 'Built an XGBoost regression model using weather and historical usage data, visualized in Power BI.',
     impact: '98% Forecast Accuracy, Zero Brownouts in 2025, Efficient Sourcing',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards',
+    live: 'https://dattasable.com/dashboards',
   },
 ];
 
-export default function PortfolioPage() {
-  // Use a hack for client components to get search params if needed, or just use useSearchParams
+function PortfolioContent() {
+  const searchParams = useSearchParams();
   const [active, setActive] = useState('All');
   const [selected, setSelected] = useState<typeof projects[0] | null>(null);
 
-  // We'll use useEffect to handle the search params since this is a client component
-  useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const cat = params.get('category');
-      if (cat && categories.includes(cat)) {
-        setActive(cat);
-      }
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat && categories.includes(cat)) {
+      setActive(cat);
     }
-  });
+  }, [searchParams]);
 
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
 
@@ -509,12 +506,14 @@ export default function PortfolioPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <a href={selected.github} className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', flex: '1 1 auto', justifyContent: 'center' }}>
+                  <a href={selected.github} target="_blank" rel="noopener noreferrer" className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', flex: '1 1 auto', justifyContent: 'center' }}>
                     <GitBranch size={18} /> Documentation
                   </a>
-                  <a href={selected.live} className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', position: 'relative', zIndex: 1, flex: '1 1 auto', justifyContent: 'center' }}>
-                    <ExternalLink size={18} /> Live Deployment
-                  </a>
+                  {selected.live.startsWith('http') && (
+                    <a href={selected.live} target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', position: 'relative', zIndex: 1, flex: '1 1 auto', justifyContent: 'center' }}>
+                      <ExternalLink size={18} /> Live Deployment
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -525,5 +524,13 @@ export default function PortfolioPage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+export default function PortfolioPage() {
+  return (
+    <Suspense fallback={<div style={{ background: 'var(--bg)', minHeight: '100vh' }} />}>
+      <PortfolioContent />
+    </Suspense>
   );
 }

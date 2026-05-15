@@ -43,11 +43,6 @@ export default function ArchitecturePage() {
     document.body.removeChild(link);
   };
 
-  const copyEmbedCode = (id: string) => {
-    const embedCode = `<iframe src="https://dattasable.com/knowledge/architecture?embed=${id}" width="100%" height="600" frameborder="0"></iframe>`;
-    navigator.clipboard.writeText(embedCode);
-    alert('Embed code copied to clipboard!');
-  };
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -154,13 +149,38 @@ export default function ArchitecturePage() {
                             <Download size={16} /> Download Blueprint
                           </button>
                           <button 
-                            onClick={() => copyEmbedCode(arch.id)}
-                            className="btn-outline flex items-center gap-2 py-3 px-6"
+                            onClick={(e) => {
+                              const btn = e.currentTarget;
+                              const embedCode = `<iframe src="https://dattasable.com/knowledge/architecture?embed=${arch.id}" width="100%" height="600" frameborder="0"></iframe>`;
+                              
+                              const handleSuccess = () => {
+                                const originalText = btn.innerHTML;
+                                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg> Copied!';
+                                btn.style.borderColor = 'var(--accent)';
+                                btn.style.color = 'var(--accent)';
+                                setTimeout(() => {
+                                  btn.innerHTML = originalText;
+                                  btn.style.borderColor = '';
+                                  btn.style.color = '';
+                                }, 2000);
+                              };
+
+                              if (navigator.clipboard && window.isSecureContext) {
+                                navigator.clipboard.writeText(embedCode)
+                                  .then(handleSuccess)
+                                  .catch(() => {
+                                    window.prompt("Copy this embed code:", embedCode);
+                                  });
+                              } else {
+                                window.prompt("Copy this embed code:", embedCode);
+                              }
+                            }}
+                            className="btn-outline flex items-center gap-2 py-3 px-6 transition-all duration-300"
                           >
                             <Code size={16} /> Embed
                           </button>
                           <a 
-                            href={`https://github.com/sabledattatray/surgical-ai-architectures/tree/main/${arch.id}`}
+                            href={`https://github.com/sabledattatray/dattasable`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-outline flex items-center gap-2 py-3 px-6"

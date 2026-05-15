@@ -43,30 +43,27 @@ export default function PerformanceOptimizer({
     };
   }, [shouldLoadScripts]);
 
-  if (!shouldLoadScripts) return null;
-
   return (
     <>
-      {/* 1. Google Analytics - uses standard Script inside with its own strategy */}
-      <GoogleAnalytics id={googleAnalyticsId} />
-
-      {/* 2. Analytics Tracker (Internal) */}
       <Suspense fallback={null}>
         <AnalyticsTracker />
       </Suspense>
 
-      <Script 
-        src="https://accounts.google.com/gsi/client" 
-        strategy="lazyOnload"
-      />
-
-      {/* 3. Google AdSense - Deferred for Elite Performance */}
-      <Script
-        id="adsense-init"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
-        strategy="lazyOnload"
-        crossOrigin="anonymous"
-      />
+      {shouldLoadScripts && (
+        <>
+          <GoogleAnalytics id={googleAnalyticsId} />
+          <Script 
+            src="https://accounts.google.com/gsi/client" 
+            strategy="lazyOnload"
+          />
+          <Script
+            id="adsense-init"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+            strategy="lazyOnload"
+            crossOrigin="anonymous"
+          />
+        </>
+      )}
     </>
   );
 }

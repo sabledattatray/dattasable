@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity, Share2, Code2 } from 'lucide-react';
-import LiveSiteStats from '@/components/LiveSiteStats';
 
 const dashboards = [
   // --- FINTECH (1) ---
@@ -15,7 +14,7 @@ const dashboards = [
     tool: 'Python',
     color: '#9b59ff',
     icon: '🌍',
-    image: null,
+    image: '/images/dashboards/global_sales_intelligence.png',
     desc: 'Real-time global revenue monitoring with market penetration and conversion funnel analysis.',
     embed: '/dashboards/global-sales-intelligence',
     isInternal: true,
@@ -29,7 +28,7 @@ const dashboards = [
     tool: 'Python',
     color: '#00d4ff',
     icon: '💳',
-    image: null, // We'll use a placeholder or the icon for now
+    image: '/images/dashboards/emi_collection_intelligence.png',
     desc: 'Next-gen collection infrastructure with real-time risk assessment, aging bucket analysis, and automated channel tracking.',
     embed: '/dashboards/collection-intelligence',
     isInternal: true,
@@ -434,7 +433,6 @@ export default function DashboardsPage() {
               Real-world analytics platforms engineered for high-stakes decision making. Filter by industry or stack.
             </p>
 
-            <LiveSiteStats />
 
             {/* Filter Control Center */}
             <div style={{ 
@@ -582,8 +580,8 @@ export default function DashboardsPage() {
                     <div className="flex gap-2 mb-4">
                       <button
                         onClick={() => setPreview(d)}
-                        className="flex-1 btn-primary flex items-center justify-center gap-2 py-3"
-                        style={{ fontSize: '0.85rem' }}
+                        className="flex-1 btn-primary flex items-center justify-center gap-2"
+                        style={{ fontSize: '0.75rem', height: '38px', whiteSpace: 'nowrap', padding: '0 1rem', textTransform: 'uppercase', fontWeight: 500, letterSpacing: '0.05em' }}
                       >
                         <ExternalLink size={14} /> Live Preview
                       </button>
@@ -592,7 +590,8 @@ export default function DashboardsPage() {
                           e.stopPropagation();
                           alert('Schema and Component Code for this dashboard will be available soon in the Infrastructure Hub.');
                         }}
-                        className="btn-outline p-3 flex items-center justify-center"
+                        className="btn-outline flex items-center justify-center"
+                        style={{ width: '38px', height: '38px', padding: 0 }}
                         title="View Component Schema"
                       >
                         <Code2 size={16} />
@@ -608,7 +607,8 @@ export default function DashboardsPage() {
                             });
                           }
                         }}
-                        className="btn-outline p-3 flex items-center justify-center"
+                        className="btn-outline flex items-center justify-center"
+                        style={{ width: '38px', height: '38px', padding: 0 }}
                         title="Share Dashboard"
                       >
                         <Share2 size={16} />
@@ -633,24 +633,24 @@ export default function DashboardsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.98)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.98)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}
             onClick={() => setPreview(null)}
           >
             <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
+              initial={{ scale: 0.98, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.98, y: 10 }}
               onClick={e => e.stopPropagation()}
-              style={{ width: '100%', maxWidth: 900, background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 0, overflow: 'hidden' }}
+              style={{ width: '100%', height: '100%', maxWidth: '1440px', maxHeight: '95vh', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
             >
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
                 <div>
                   <h3 style={{ fontSize: '1.1rem', color: 'var(--text)', marginBottom: '0.25rem' }}>{preview.title}</h3>
                   <span className="mono" style={{ color: preview.color, fontSize: '0.8rem' }}>{preview.tool} · {preview.category}</span>
                 </div>
                 <button
                   onClick={() => setPreview(null)}
-                  style={{ background: 'var(--tag-bg)', border: '1px solid var(--border)', padding: '0.4rem 0.8rem', cursor: 'pointer', color: 'var(--muted)', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase' }}
+                  style={{ background: 'var(--tag-bg)', border: '1px solid var(--border)', padding: '0.6rem 1.2rem', cursor: 'pointer', color: 'var(--muted)', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase' }}
                 >
                   Close ✕
                 </button>
@@ -665,7 +665,8 @@ export default function DashboardsPage() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  color: 'var(--muted)'
+                  color: 'var(--muted)',
+                  flexShrink: 0
                 }}>
                   <div style={{ width: 8, height: 8, background: 'var(--accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--accent)' }} />
                   <span><strong>REDACTED CASE STUDY:</strong> This visualization uses anonymized data to demonstrate advanced technical orchestration. Detailed architectural breakdowns are available for peer review.</span>
@@ -673,26 +674,26 @@ export default function DashboardsPage() {
               )}
 
               {/* Embed or placeholder */}
-              <div style={{ height: 480, background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}>
+              <div style={{ flex: 1, background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 {preview.embed ? (
                   <iframe
                     src={preview.embed}
                     width="100%"
-                    height="480"
+                    height="100%"
                     frameBorder="0"
-                    style={{ border: 'none' }}
+                    style={{ border: 'none', position: 'absolute', inset: 0 }}
                     title={preview.title}
                     allowFullScreen
                   />
                 ) : (
-                  <>
-                    <div style={{ fontSize: '5rem' }}>{preview.icon}</div>
-                    <div style={{ textAlign: 'center', color: 'var(--muted)', maxWidth: 400, lineHeight: 1.7 }}>
+                  <div style={{ padding: '2rem', textAlign: 'center' }}>
+                    <div style={{ fontSize: '5rem', marginBottom: '1.5rem' }}>{preview.icon}</div>
+                    <div style={{ color: 'var(--muted)', maxWidth: 400, lineHeight: 1.7 }}>
                       <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.5rem' }}>Live Preview Available on Request</p>
                       <p style={{ fontSize: '0.875rem' }}>This dashboard was built under NDA. Contact me for a live demo walkthrough.</p>
                     </div>
-                    <a href="/contact" className="btn-primary" style={{ textDecoration: 'none', fontSize: '0.875rem' }}>Request Demo →</a>
-                  </>
+                    <a href="/contact" className="btn-primary mt-8" style={{ textDecoration: 'none', fontSize: '0.875rem', display: 'inline-block' }}>Request Demo →</a>
+                  </div>
                 )}
               </div>
             </motion.div>
