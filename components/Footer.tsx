@@ -98,58 +98,58 @@ export default function Footer() {
         <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/5 via-purple-500/2 to-blue-500/5 rounded-full blur-[150px] transform -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/5 via-cyan-500/2 to-[var(--accent)]/5 rounded-full blur-[150px] transform translate-y-1/3" />
         
-        {/* Overlapping Geometric Swirl / Vortex Rings (Inspired by Premium Lens Aesthetic) */}
-        {/* Primary Massive Outer Ring */}
+        {/* Overlapping 3D Crescent Bubbles / Volumetric Lens Flares (Not Complete Circles) */}
+        {/* Primary Massive Outer Crescent Bubble */}
         <div 
-          className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full opacity-60 transform -rotate-12 pointer-events-none blur-[1px] transition-all duration-700" 
+          className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none transition-all duration-700" 
           style={{ 
-            border: '1px solid var(--footer-ring-1-border)',
-            background: 'radial-gradient(circle, var(--footer-ring-1-from) 0%, transparent 70%)',
-            maskImage: 'linear-gradient(135deg, black 10%, transparent 60%)', 
-            WebkitMaskImage: 'linear-gradient(135deg, black 10%, transparent 60%)' 
+            background: 'linear-gradient(135deg, var(--footer-ring-1-from) 0%, var(--footer-ring-1-via) 45%, transparent 80%)',
+            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+            maskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)', 
+            WebkitMaskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)' 
           }} 
         />
         
-        {/* Secondary Overlapping Lens Ring */}
+        {/* Secondary Overlapping Crescent Bubble */}
         <div 
-          className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full opacity-50 transform rotate-45 pointer-events-none blur-[1px] transition-all duration-700" 
+          className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none transition-all duration-700" 
           style={{ 
-            border: '1px solid var(--footer-ring-2-border)',
-            background: 'radial-gradient(circle, var(--footer-ring-2-from) 0%, transparent 70%)',
-            maskImage: 'linear-gradient(225deg, black 15%, transparent 65%)', 
-            WebkitMaskImage: 'linear-gradient(225deg, black 15%, transparent 65%)' 
+            background: 'linear-gradient(225deg, var(--footer-ring-2-from) 0%, var(--footer-ring-2-via) 45%, transparent 80%)',
+            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+            maskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)', 
+            WebkitMaskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)' 
           }} 
         />
 
-        {/* Tertiary Intersecting Deep Ring */}
+        {/* Tertiary Intersecting Deep Crescent Bubble */}
         <div 
-          className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full opacity-40 transform rotate-12 pointer-events-none blur-[1px] transition-all duration-700" 
+          className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none transition-all duration-700" 
           style={{ 
-            border: '1px solid var(--footer-ring-3-border)',
-            background: 'radial-gradient(circle, var(--footer-ring-3-from) 0%, transparent 70%)',
-            maskImage: 'linear-gradient(315deg, black 10%, transparent 60%)', 
-            WebkitMaskImage: 'linear-gradient(315deg, black 10%, transparent 60%)' 
+            background: 'linear-gradient(315deg, var(--footer-ring-3-from) 0%, var(--footer-ring-3-via) 45%, transparent 80%)',
+            boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
+            maskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)', 
+            WebkitMaskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)' 
           }} 
         />
 
-        {/* Floating 3D Glowing Glass Orb */}
+        {/* Floating 3D Volumetric Glass Bubble Orb */}
         <div 
-          className="absolute top-[35%] left-[5%] w-28 h-28 rounded-full backdrop-blur-md opacity-70 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
+          className="absolute top-[32%] left-[6%] w-32 h-32 rounded-full backdrop-blur-xl opacity-85 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
           style={{ 
             animationDuration: '6s',
-            border: '1px solid rgba(255,255,255,0.15)',
-            background: 'linear-gradient(180deg, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 50%, transparent 100%)',
-            boxShadow: '0 0 35px rgba(0,0,0,0.08)'
+            border: '1px solid var(--footer-orb-2-border)',
+            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 60%, transparent 100%)',
+            boxShadow: 'inset 15px 15px 25px rgba(255,255,255,0.5), inset -15px -15px 35px rgba(0,0,0,0.4), 0 10px 40px rgba(0,0,0,0.15)'
           }} 
         />
 
-        {/* Floating Secondary Glass Orb */}
+        {/* Floating Secondary 3D Glass Bubble Orb */}
         <div 
-          className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full backdrop-blur-md opacity-50 pointer-events-none transition-all duration-700" 
+          className="absolute bottom-[22%] right-[12%] w-20 h-20 rounded-full backdrop-blur-xl opacity-75 pointer-events-none transition-all duration-700" 
           style={{
             border: '1px solid var(--footer-orb-2-border)',
-            background: 'linear-gradient(45deg, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.05) 50%, transparent 100%)',
-            boxShadow: '0 0 25px var(--footer-orb-2-from)'
+            background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.2) 60%, transparent 100%)',
+            boxShadow: 'inset 10px 10px 20px rgba(255,255,255,0.5), inset -10px -10px 25px rgba(0,0,0,0.4), 0 8px 30px rgba(0,0,0,0.15)'
           }}
         />
         

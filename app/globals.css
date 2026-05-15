@@ -52,16 +52,16 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.3;     /* Visible for dark mode */
   --footer-bg: #000000;
   --footer-bottom-bg: #000000;
-  --footer-ring-1-border: rgba(201, 243, 29, 0.3);
-  --footer-ring-1-from: rgba(201, 243, 29, 0.08);
-  --footer-ring-2-border: rgba(59, 130, 246, 0.3);
-  --footer-ring-2-from: rgba(59, 130, 246, 0.08);
-  --footer-ring-3-border: rgba(201, 243, 29, 0.3);
-  --footer-ring-3-from: rgba(201, 243, 29, 0.08);
-  --footer-orb-1-from: rgba(255, 255, 255, 0.1);
-  --footer-orb-1-via: rgba(255, 255, 255, 0.05);
-  --footer-orb-2-from: rgba(201, 243, 29, 0.10);
-  --footer-orb-2-border: rgba(201, 243, 29, 0.20);
+  --footer-ring-1-from: rgba(201, 243, 29, 0.40);
+  --footer-ring-1-via: rgba(201, 243, 29, 0.15);
+  --footer-ring-2-from: rgba(59, 130, 246, 0.40);
+  --footer-ring-2-via: rgba(147, 51, 234, 0.15);
+  --footer-ring-3-from: rgba(6, 182, 212, 0.40);
+  --footer-ring-3-via: rgba(59, 130, 246, 0.15);
+  --footer-orb-1-from: rgba(255, 255, 255, 0.3);
+  --footer-orb-1-via: rgba(201, 243, 29, 0.2);
+  --footer-orb-2-from: rgba(201, 243, 29, 0.3);
+  --footer-orb-2-border: rgba(255, 255, 255, 0.5);
 }
 
 .light {
@@ -91,16 +91,16 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.35;    /* Stronger visibility for light mode */
   --footer-bg: linear-gradient(180deg, var(--bg) 0%, #f4f4f5 50%, #eaeaea 100%);
   --footer-bottom-bg: #e4e4e7;
-  --footer-ring-1-border: rgba(147, 51, 234, 0.85); /* Bold light purple */
-  --footer-ring-1-from: rgba(147, 51, 234, 0.35);   /* Rich purple fill */
-  --footer-ring-2-border: rgba(37, 99, 235, 0.85);  /* Bold royal blue */
-  --footer-ring-2-from: rgba(37, 99, 235, 0.35);    /* Rich blue fill */
-  --footer-ring-3-border: rgba(168, 85, 247, 0.85); /* Bold vibrant purple */
-  --footer-ring-3-from: rgba(168, 85, 247, 0.35);   /* Rich purple fill */
-  --footer-orb-1-from: rgba(147, 51, 234, 0.60);    /* Vivid purple highlight */
-  --footer-orb-1-via: rgba(37, 99, 235, 0.40);      /* Vivid blue via */
-  --footer-orb-2-from: rgba(37, 99, 235, 0.50);     /* Vivid royal blue */
-  --footer-orb-2-border: rgba(147, 51, 234, 0.80);  /* Bold purple border */
+  --footer-ring-1-from: rgba(147, 51, 234, 0.70);   /* Rich vibrant purple */
+  --footer-ring-1-via: rgba(168, 85, 247, 0.40);    /* Bright purple mid-tone */
+  --footer-ring-2-from: rgba(37, 99, 235, 0.70);    /* Rich royal blue */
+  --footer-ring-2-via: rgba(96, 165, 250, 0.40);    /* Bright sky blue mid-tone */
+  --footer-ring-3-from: rgba(192, 38, 211, 0.70);   /* Rich magenta */
+  --footer-ring-3-via: rgba(232, 121, 249, 0.40);   /* Bright pink mid-tone */
+  --footer-orb-1-from: rgba(147, 51, 234, 0.85);    /* Intense purple highlight */
+  --footer-orb-1-via: rgba(59, 130, 246, 0.65);     /* Intense blue core */
+  --footer-orb-2-from: rgba(37, 99, 235, 0.85);     /* Intense royal blue */
+  --footer-orb-2-border: rgba(255, 255, 255, 0.90); /* True 3D glass specular rim */
 }
 
 /* WordPress Admin Framework Design Tokens */
