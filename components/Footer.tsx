@@ -100,13 +100,31 @@ export default function Footer() {
         
         {/* Overlapping Geometric Swirl / Vortex Rings (Inspired by Premium Lens Aesthetic) */}
         {/* Primary Massive Outer Ring */}
-        <div className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full border border-[var(--accent)]/15 bg-gradient-to-tr from-[var(--accent)]/5 via-transparent to-transparent opacity-60 transform -rotate-12 pointer-events-none" />
+        <div 
+          className="absolute -top-[200px] -left-[100px] w-[800px] h-[800px] rounded-full border border-[var(--accent)]/30 bg-gradient-to-tr from-[var(--accent)]/8 via-transparent to-transparent opacity-60 transform -rotate-12 pointer-events-none blur-[1px]" 
+          style={{ 
+            maskImage: 'linear-gradient(135deg, black 10%, transparent 60%)', 
+            WebkitMaskImage: 'linear-gradient(135deg, black 10%, transparent 60%)' 
+          }} 
+        />
         
         {/* Secondary Overlapping Lens Ring */}
-        <div className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full border border-blue-500/20 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-50 transform rotate-45 pointer-events-none" />
+        <div 
+          className="absolute top-[50px] left-[200px] w-[700px] h-[700px] rounded-full border border-blue-500/30 bg-gradient-to-br from-blue-500/8 via-purple-500/5 to-transparent opacity-50 transform rotate-45 pointer-events-none blur-[1px]" 
+          style={{ 
+            maskImage: 'linear-gradient(225deg, black 15%, transparent 65%)', 
+            WebkitMaskImage: 'linear-gradient(225deg, black 15%, transparent 65%)' 
+          }} 
+        />
 
         {/* Tertiary Intersecting Deep Ring */}
-        <div className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full border border-[var(--accent)]/15 bg-gradient-to-tl from-[var(--accent)]/5 via-cyan-500/5 to-transparent opacity-40 transform rotate-12 pointer-events-none" />
+        <div 
+          className="absolute -bottom-[300px] right-[100px] w-[900px] h-[900px] rounded-full border border-[var(--accent)]/30 bg-gradient-to-tl from-[var(--accent)]/8 via-cyan-500/5 to-transparent opacity-40 transform rotate-12 pointer-events-none blur-[1px]" 
+          style={{ 
+            maskImage: 'linear-gradient(315deg, black 10%, transparent 60%)', 
+            WebkitMaskImage: 'linear-gradient(315deg, black 10%, transparent 60%)' 
+          }} 
+        />
 
         {/* Floating 3D Glowing Glass Orb */}
         <div className="absolute top-[35%] left-[5%] w-28 h-28 rounded-full bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 shadow-[0_0_35px_rgba(255,255,255,0.08)] opacity-70 transform -translate-y-1/2 pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
