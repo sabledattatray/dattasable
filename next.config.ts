@@ -58,6 +58,40 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/what-is-seo-in-digital-marketing-and-how-does-it-work-for-beginners',
+        destination: '/blog/what-is-seo-digital-marketing-guide',
+        permanent: true,
+      },
+      {
+        source: '/7-best-seo-tools-in-2025',
+        destination: '/blog/7-best-seo-tools-2025',
+        permanent: true,
+      },
+      {
+        source: '/top-5-free-tools-every-content-creator-should-be-using-in-2025',
+        destination: '/blog/top-5-free-content-creator-tools-2025',
+        permanent: true,
+      },
+      {
+        source: '/about-us',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/blog-post',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/portfolio-item',
+        destination: '/portfolio',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
