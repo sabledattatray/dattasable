@@ -26,6 +26,7 @@ input:-webkit-autofill:active {
   --bg: #000000;
   --surface: #000000;
   --surface2: #000000;
+  --cta-bg: #070707;
   --border: #1a1a1a;
   --accent: #c9f31d;
   --accent2: #b5da1a;
@@ -50,7 +51,8 @@ input:-webkit-autofill:active {
   --hero-gradient-solid: 20%;     /* Strong for dark mode */
   --hero-gradient-end: 85%;       /* Long for dark mode */
   --hero-mobile-opacity: 0.3;     /* Visible for dark mode */
-  --footer-bg: linear-gradient(180deg, #0d0d0d 0%, #050505 50%, #000000 100%);
+  --footer-bg: #000000;
+  --footer-card-bg: #070707;
   --footer-bottom-bg: #000000;
   --footer-shapes-display: none;                    /* Remove shapes in dark mode */
   --playstore-bg: #ffffff;
@@ -75,6 +77,7 @@ input:-webkit-autofill:active {
   --bg: #fcfcfc;
   --surface: #ffffff;
   --surface2: #f4f4f5;
+  --cta-bg: #f4f4f5;
   --border: #d1d5db;
   --accent: #0059B3;
   --accent2: #006BD6;
@@ -96,8 +99,9 @@ input:-webkit-autofill:active {
   --hero-gradient-solid: 5%;      /* Minimal for maximum visibility */
   --hero-gradient-end: 50%;       /* Shorter for maximum visibility */
   --hero-mobile-opacity: 0.35;    /* Stronger visibility for light mode */
-  --footer-bg: linear-gradient(180deg, var(--bg) 0%, #f4f4f5 50%, #eaeaea 100%);
-  --footer-bottom-bg: #e4e4e7;
+  --footer-bg: #f8f9fa;
+  --footer-card-bg: #ffffff;
+  --footer-bottom-bg: #f1f3f5;
   --footer-shapes-display: block;                   /* Show shapes in light mode */
   --playstore-bg: #000000;
   --playstore-border: #000000;

@@ -92,74 +92,8 @@ export default function Footer() {
         overflow: 'hidden',
       }}
     >
-      {/* Ultra-Premium Aurora & Starfield Background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Deep Space Aurora Mesh */}
-        <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-gradient-to-tr from-[var(--accent)]/5 via-purple-500/2 to-blue-500/5 rounded-full blur-[150px] transform -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-gradient-to-bl from-blue-600/5 via-cyan-500/2 to-[var(--accent)]/5 rounded-full blur-[150px] transform translate-y-1/3" />
-        
-        {/* Overlapping 3D Crescent Bubbles / Volumetric Lens Flares Container (Visible in Light Mode, Removed in Dark Mode) */}
-        <div style={{ display: 'var(--footer-shapes-display, none)' }}>
-          {/* Primary Massive Outer Crescent Bubble */}
-          <div 
-            className="absolute -top-[200px] -left-[100px] w-[850px] h-[850px] rounded-full opacity-70 transform -rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-            style={{ 
-              background: 'linear-gradient(135deg, var(--footer-ring-1-from) 0%, var(--footer-ring-1-via) 45%, transparent 80%)',
-              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-              maskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)', 
-              WebkitMaskImage: 'radial-gradient(circle at 35% 35%, black 10%, transparent 72%)' 
-            }} 
-          />
-          
-          {/* Secondary Overlapping Crescent Bubble */}
-          <div 
-            className="absolute top-[20px] left-[180px] w-[750px] h-[750px] rounded-full opacity-65 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-            style={{ 
-              background: 'linear-gradient(225deg, var(--footer-ring-2-from) 0%, var(--footer-ring-2-via) 45%, transparent 80%)',
-              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-              maskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)', 
-              WebkitMaskImage: 'radial-gradient(circle at 65% 35%, black 10%, transparent 72%)' 
-            }} 
-          />
+      {/* Clean Solid Background */}
 
-          {/* Tertiary Intersecting Deep Crescent Bubble */}
-          <div 
-            className="absolute -bottom-[250px] right-[50px] w-[950px] h-[950px] rounded-full opacity-60 transform rotate-12 pointer-events-none blur-[4px] transition-all duration-700" 
-            style={{ 
-              background: 'linear-gradient(315deg, var(--footer-ring-3-from) 0%, var(--footer-ring-3-via) 45%, transparent 80%)',
-              boxShadow: 'inset 30px 30px 80px rgba(255, 255, 255, 0.4), inset -30px -30px 80px rgba(0, 0, 0, 0.2)',
-              maskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)', 
-              WebkitMaskImage: 'radial-gradient(circle at 65% 65%, black 10%, transparent 72%)' 
-            }} 
-          />
-
-          {/* Floating 3D Volumetric Glass Bubble Orb */}
-          <div 
-            className="absolute top-[32%] left-[6%] w-32 h-32 rounded-full backdrop-blur-xl opacity-85 transform -translate-y-1/2 pointer-events-none animate-pulse transition-all duration-700" 
-            style={{ 
-              animationDuration: '6s',
-              border: 'var(--footer-orb-border)',
-              filter: 'var(--footer-orb-blur)',
-              background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-1-from) 0%, var(--footer-orb-1-via) 60%, transparent 100%)',
-              boxShadow: 'var(--footer-orb-box-shadow)'
-            }} 
-          />
-
-          {/* Floating Secondary 3D Glass Bubble Orb */}
-          <div 
-            className="absolute bottom-[22%] right-[12%] w-20 h-20 rounded-full backdrop-blur-xl opacity-75 pointer-events-none transition-all duration-700" 
-            style={{
-              border: 'var(--footer-orb-2-border)',
-              filter: 'var(--footer-orb-blur)',
-              background: 'radial-gradient(circle at 30% 30%, var(--footer-orb-2-from) 0%, rgba(255,255,255,0.1) 60%, transparent 100%)',
-              boxShadow: 'var(--footer-orb-box-shadow)'
-            }}
-          />
-        </div>
-        
-        {/* Top Glowing Aurora Highlight */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 via-blue-500/40 to-transparent shadow-[0_0_25px_var(--accent)]" />
-      </div>
 
       <div 
         className="relative z-10 footer-container-pad"
@@ -169,11 +103,9 @@ export default function Footer() {
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
-          {/* Brand Section Glass Card */}
           <div 
-            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] group/brand hover:border-white/[0.1] transition-all duration-500 relative overflow-hidden footer-card-pad"
+            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--border)] transition-all duration-500 relative overflow-hidden footer-card-pad"
           >
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--accent)]/40 to-transparent opacity-0 group-hover/brand:opacity-100 transition-opacity duration-500" />
             <div>
               <Link
                 href="/"
@@ -187,7 +119,7 @@ export default function Footer() {
                   marginBottom: '1.75rem',
                 }}
               >
-                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-500 shadow-inner">
+                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-500">
                   <LogoIcon className="w-6 h-6 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
                 </div>
                 <span
@@ -257,7 +189,7 @@ export default function Footer() {
                     href="https://play.google.com/store"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3.5 px-5 py-2.5 rounded-[8px] transition-all duration-300 no-underline shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-3.5 px-5 py-2.5 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
                     style={{ 
                       background: 'var(--playstore-bg)',
                       border: '1px solid var(--playstore-border)',
@@ -308,7 +240,7 @@ export default function Footer() {
 
           {/* Navigation Columns Glass Container */}
           <div 
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-white/[0.015] border border-white/[0.05] backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:border-white/[0.1] transition-all duration-500 footer-card-pad"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--border)] transition-all duration-500 footer-card-pad"
           >
             {NAV_LINKS.map((col) => (
               <div key={col.heading} className="flex flex-col">

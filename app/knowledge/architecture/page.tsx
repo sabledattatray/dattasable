@@ -47,10 +47,10 @@ export default function ArchitecturePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      
+
       <div className="boxed-wrapper" style={{ paddingTop: '6rem', paddingBottom: '5rem' }}>
         <Crosshair position="tl" />
-        
+
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="label-tech mb-8 text-[var(--accent)]">System Infrastructure</div>
@@ -58,14 +58,14 @@ export default function ArchitecturePage() {
               Surgical AI <span style={{ color: 'var(--accent)' }}>Architecture.</span>
             </h1>
             <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
-              A technical deep-dive into the deterministic infrastructure powering modern AI workflows. 
+              A technical deep-dive into the deterministic infrastructure powering modern AI workflows.
               Our architecture moves beyond "chatting" into high-fidelity execution systems.
             </p>
 
             {/* Visual Blueprint */}
             <div className="relative mb-32 p-8 lg:p-16 border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden">
               <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, var(--accent) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                 {layers.map((layer, i) => (
                   <motion.div
@@ -80,7 +80,7 @@ export default function ArchitecturePage() {
                     <div className="mb-6 text-[var(--accent)]">{layer.icon}</div>
                     <h3 className="mono text-[14px] uppercase tracking-widest mb-4">{layer.title}</h3>
                     <p style={{ fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '2rem' }}>{layer.desc}</p>
-                    
+
                     <div className="mt-auto pt-6 border-t border-[var(--border)]">
                       <ul className="space-y-3">
                         {layer.features.map(f => (
@@ -100,7 +100,7 @@ export default function ArchitecturePage() {
             <div className="mb-32">
               <div className="label-tech mb-8 text-cyan-500">Architecture Library</div>
               <h2 className="text-4xl font-bold mb-12" style={{ fontFamily: 'Syne, sans-serif' }}>Downloadable <span className="text-cyan-500">Blueprints</span></h2>
-              
+
               <div className="grid grid-cols-1 gap-12">
                 {ARCHITECTURES.map((arch) => (
                   <div key={arch.id} className="border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]" style={{ padding: '3rem' }}>
@@ -116,7 +116,7 @@ export default function ArchitecturePage() {
                           </Link>
                         </div>
                         <p className="text-[var(--muted)] mb-10" style={{ lineHeight: 1.8, fontSize: '1.05rem' }}>{arch.description}</p>
-                        
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 pt-6 border-t border-[var(--border)] border-opacity-60">
                           <div>
                             <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-5 font-bold flex items-center gap-2">
@@ -144,19 +144,19 @@ export default function ArchitecturePage() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="flex flex-wrap gap-4 border-t border-[var(--border)] border-opacity-60" style={{ paddingTop: '2.5rem', marginTop: '1rem' }}>
-                          <button 
+                          <button
                             onClick={() => handleDownload(arch.template, `${arch.id}-blueprint.json`)}
                             className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
                           >
                             <Download size={16} /> Download Blueprint
                           </button>
-                          <button 
+                          <button
                             onClick={(e) => {
                               const btn = e.currentTarget;
                               const embedCode = `<iframe src="https://dattasable.com/knowledge/architecture?embed=${arch.id}" width="100%" height="600" frameborder="0"></iframe>`;
-                              
+
                               const handleSuccess = () => {
                                 const originalText = btn.innerHTML;
                                 btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg> Copied!';
@@ -183,7 +183,7 @@ export default function ArchitecturePage() {
                           >
                             <Code size={16} /> Embed
                           </button>
-                          <a 
+                          <a
                             href={`https://github.com/sabledattatray/dattasable`}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -191,7 +191,7 @@ export default function ArchitecturePage() {
                           >
                             <GitBranch size={16} /> GitHub
                           </a>
-                          <button 
+                          <button
                             onClick={() => {
                               const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://dattasable.com/knowledge/architecture?id=${arch.id}`)}`;
                               window.open(url, '_blank');
@@ -226,7 +226,7 @@ export default function ArchitecturePage() {
               <div>
                 <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', fontWeight: 700 }}>Deterministic Workflow Scaling</h2>
                 <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                  The core challenge of modern AI is consistency. Our architecture utilizes <strong>Prompt Hardening™</strong> and 
+                  The core challenge of modern AI is consistency. Our architecture utilizes <strong>Prompt Hardening™</strong> and
                   <strong>System-Led Execution</strong> to ensure that every workflow scale is reproducible.
                 </p>
                 <div className="p-6 bg-[var(--surface2)] border-l-2 border-[var(--accent)]">
@@ -238,17 +238,17 @@ export default function ArchitecturePage() {
               <div>
                 <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', fontWeight: 700 }}>Security & State Management</h2>
                 <p style={{ color: 'var(--muted)', lineHeight: 1.8 }}>
-                  Our pipelines are built on top of robust state management layers. This allows for complex, long-running 
+                  Our pipelines are built on top of robust state management layers. This allows for complex, long-running
                   AI operations that can recover from errors, maintain context across days, and scale across global deployment zones.
                 </p>
               </div>
             </div>
           </div>
         </div>
-        
+
         <Crosshair position="br" />
       </div>
-      
+
       <Footer />
     </div>
   );

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "Analytics Engineering",
     "AI Workflow Systems",
     "Prompt Engineering Workspace",
-    "Datta Sable", 
+    "Datta Sable",
     "Data Strategy Consultant",
     "Automated Business Workflows",
     "Context Compression Framework"
@@ -78,8 +78,8 @@ const syne = Syne({
   display: 'swap',
 });
 
-const inter = Inter({ 
-  subsets: ['latin'], 
+const inter = Inter({
+  subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap'
 });
@@ -96,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
-        
+
         <Script
           id="json-ld"
           type="application/ld+json"
@@ -163,9 +163,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <ClientOnlyWrapper />
-            
+
             {/* High-Performance Third-Party Script Optimization */}
-            <PerformanceOptimizer 
+            <PerformanceOptimizer
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
             />

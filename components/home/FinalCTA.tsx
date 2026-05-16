@@ -19,7 +19,7 @@ export default function FinalCTA() {
             <div className="w-2 h-2 border border-[var(--accent)]" />
           </div>
 
-          <div className="relative overflow-hidden border border-[var(--border)] bg-[var(--surface2)] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center min-h-[450px]">
+          <div className="relative overflow-hidden border border-[var(--border)] bg-[var(--cta-bg)] rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center min-h-[450px]">
             {/* Blueprint Grid Background - Theme Aware */}
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
                  style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
