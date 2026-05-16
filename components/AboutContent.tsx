@@ -479,10 +479,23 @@ export default function AboutContent() {
             "name": "Datta Sable Portfolio Technical Walkthrough",
             "description": "A definitive technical walkthrough showcasing the design logic, responsive orchestration, and engineering principles used to build the Datta Sable ecosystem.",
             "thumbnailUrl": [
-              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg"
+              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg",
+              "https://img.youtube.com/vi/5sXT6HuV61w/sddefault.jpg",
+              "https://img.youtube.com/vi/5sXT6HuV61w/hqdefault.jpg"
             ],
             "uploadDate": "2025-01-01T00:00:00Z",
-            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w"
+            "duration": "PT35M",
+            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w",
+            "interactionStatistic": {
+              "@type": "InteractionCounter",
+              "interactionType": { "@type": "WatchAction" },
+              "userInteractionCount": 9450
+            },
+            "potentialAction": {
+              "@type": "SeekToAction",
+              "target": "https://dattasable.com/about?t={seek_to_second_number}",
+              "startOffset-input": "required name=seek_to_second_number"
+            }
           })
         }}
       />

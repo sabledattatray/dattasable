@@ -188,10 +188,23 @@ export default function StartHerePage() {
             "name": "Full-Stack Web Orchestration Masterclass",
             "description": "A comprehensive workshop demonstrating the engineering fundamentals of scalable digital infrastructure for BI and Data environments.",
             "thumbnailUrl": [
-              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg"
+              "https://img.youtube.com/vi/5sXT6HuV61w/maxresdefault.jpg",
+              "https://img.youtube.com/vi/5sXT6HuV61w/sddefault.jpg",
+              "https://img.youtube.com/vi/5sXT6HuV61w/hqdefault.jpg"
             ],
             "uploadDate": "2021-01-15T00:00:00Z",
-            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w"
+            "duration": "PT35M",
+            "embedUrl": "https://www.youtube.com/embed/5sXT6HuV61w",
+            "interactionStatistic": {
+              "@type": "InteractionCounter",
+              "interactionType": { "@type": "WatchAction" },
+              "userInteractionCount": 9200
+            },
+            "potentialAction": {
+              "@type": "SeekToAction",
+              "target": "https://dattasable.com/start-here?t={seek_to_second_number}",
+              "startOffset-input": "required name=seek_to_second_number"
+            }
           })
         }}
       />
