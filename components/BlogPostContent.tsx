@@ -144,22 +144,24 @@ export default function BlogPostContent({ post }: { post: Post }) {
         {/* Featured Image */}
         <div style={{ 
           width: '100%', 
-          height: 'clamp(240px, 45vw, 450px)', 
           marginBottom: '2.5rem',
           position: 'relative',
           overflow: 'hidden',
-          border: '1px solid var(--border)'
+          border: '1px solid var(--border)',
+          borderRadius: '4px',
+          background: 'var(--surface2)'
         }}>
           <Image 
             src={post.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'} 
             alt={post.title}
-            fill
+            width={1200}
+            height={675}
             priority
-            style={{ objectFit: 'cover' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
             sizes="(max-width: 768px) 100vw, 760px"
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.4))' }} />
-          <div className="mono" style={{ position: 'absolute', bottom: '15px', right: '15px', fontSize: '10px', color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)', padding: '4px 10px', letterSpacing: '0.2em' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.3))', pointerEvents: 'none' }} />
+          <div className="mono" style={{ position: 'absolute', bottom: '15px', right: '15px', fontSize: '10px', color: '#fff', backgroundColor: 'rgba(0,0,0,0.6)', padding: '4px 10px', letterSpacing: '0.2em', backdropFilter: 'blur(4px)' }}>
             LOG_ID: {post.slug?.toUpperCase()}
           </div>
         </div>
