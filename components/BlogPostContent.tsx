@@ -33,8 +33,56 @@ export default function BlogPostContent({ post }: { post: Post }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    // ── DYNAMIC MERMAID FLOWCHART RENDERING ──
+    const renderMermaidDiagrams = async () => {
+      const mermaidElements = document.querySelectorAll('.mermaid');
+      if (mermaidElements.length === 0) return;
+
+      try {
+        const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        const mermaid = (await import(/* @vite-ignore */ MERMAID_CDN)).default;
+        
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          securityLevel: 'loose',
+          themeVariables: {
+            background: '#0d1117',
+            primaryColor: '#00e5ff',
+            primaryTextColor: '#fff',
+            lineColor: '#2f363d'
+          }
+        });
+
+        for (let i = 0; i < mermaidElements.length; i++) {
+          const element = mermaidElements[i] as HTMLElement;
+          const text = element.innerText || element.textContent || '';
+          if (!text.trim()) continue;
+
+          const id = `mermaid-svg-${i}`;
+          try {
+            const { svg } = await mermaid.render(id, text);
+            element.innerHTML = svg;
+            element.style.background = 'transparent';
+          } catch (renderError) {
+            console.error('Error rendering diagram:', renderError);
+          }
+        }
+      } catch (err) {
+        console.error('Mermaid init failed inside blog:', err);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      renderMermaidDiagrams();
+    }, 100);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, [post]);
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();

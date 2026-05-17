@@ -19,64 +19,15 @@ export const posts = [
       <h2>What is Microsoft Fabric? The SaaS Data Revolution</h2>
       <p>Before mapping the architecture, we must establish a baseline understanding of Microsoft Fabric. At its core, Microsoft Fabric is a unified SaaS analytics platform that consolidates data movement, data lake storage, data engineering, data science, real-time analytics, and business intelligence into a single, managed workspace.</p>
 
-      <!-- ── BEAUTIFUL CSS ONE-LAKE HIERARCHY FLOWCHART ── -->
-      <div style="background: var(--surface2); padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0; font-family: Inter, sans-serif;">
-        <!-- OneLake Root Card -->
-        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-          <div style="background: var(--bg); border: 2px solid var(--accent); border-radius: 6px; padding: 1rem 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0, 229, 255, 0.15); max-width: 320px; width: 100%;">
-            <span style="font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase;">Central Storage</span>
-            <h4 style="margin: 0.25rem 0 0; color: var(--text); font-size: 1rem; font-weight: 600;">OneLake: Single Source of Truth</h4>
-            <span style="font-size: 0.7rem; color: var(--muted); display: block; margin-top: 0.25rem;">Delta Parquet Format</span>
-          </div>
-        </div>
-
-        <!-- Connector Line Down -->
-        <div style="display: flex; justify-content: center; margin: -2rem 0 0 0;">
-          <div style="width: 2px; height: 24px; background: var(--border);"></div>
-        </div>
-
-        <!-- Horizontal Connector Bar -->
-        <div style="max-width: 520px; margin: 0 auto; display: flex; justify-content: space-between; border-top: 2px solid var(--border); height: 20px;">
-          <div style="width: 2px; height: 16px; background: var(--border);"></div>
-          <div style="width: 2px; height: 16px; background: var(--border);"></div>
-          <div style="width: 2px; height: 16px; background: var(--border);"></div>
-          <div style="width: 2px; height: 16px; background: var(--border);"></div>
-          <div style="width: 2px; height: 16px; background: var(--border);"></div>
-        </div>
-
-        <!-- 5 Compute Engines Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; justify-content: center;">
-          <!-- Card 1 -->
-          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 100px;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;">Data Factory</span>
-            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text); margin: 0.4rem 0;">Pipelines & Dataflows</div>
-            <span style="font-size: 0.6rem; color: var(--muted);">Low-code Ingestion</span>
-          </div>
-          <!-- Card 2 -->
-          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 100px;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;">Synapse Eng</span>
-            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text); margin: 0.4rem 0;">Lakehouse & Notebooks</div>
-            <span style="font-size: 0.6rem; color: var(--muted);">High-scale Spark</span>
-          </div>
-          <!-- Card 3 -->
-          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 100px;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;">Data WH</span>
-            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text); margin: 0.4rem 0;">Serverless SQL</div>
-            <span style="font-size: 0.6rem; color: var(--muted);">Gold Modeling</span>
-          </div>
-          <!-- Card 4 -->
-          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 100px;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;">Synapse Sci</span>
-            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text); margin: 0.4rem 0;">ML Models & Runs</div>
-            <span style="font-size: 0.6rem; color: var(--muted);">Data Science</span>
-          </div>
-          <!-- Card 5 -->
-          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 100px;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase;">Power BI</span>
-            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text); margin: 0.4rem 0;">Direct Lake Models</div>
-            <span style="font-size: 0.6rem; color: var(--muted);">Zero-copy Reports</span>
-          </div>
-        </div>
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+          graph TD
+            A[OneLake: The Single Source of Truth] --> B(Data Factory: Pipelines & Dataflows Gen2)
+            A --> C(Synapse Data Engineering: Lakehouse & Spark Notebooks)
+            A --> D(Synapse Data Warehouse: Serverless T-SQL)
+            A --> E(Synapse Data Science: ML Models & Experiments)
+            A --> F(Power BI: Direct Lake Semantic Models)
+        </pre>
       </div>
 
       <p>Fabric decouples computing from storage by introducing <strong>OneLake</strong>—a single, logical, multi-cloud data lake built on the open Delta Parquet format. Underneath the unified interface lie several key computing engines:</p>
@@ -127,50 +78,14 @@ export const posts = [
       <h2>Putting it All Together: The End-to-End Fabric Workflow</h2>
       <p>How do these layers connect in a live enterprise? Let's trace the journey of an order transaction at a multi-national logistics company using a unified Medallion pipeline:</p>
 
-      <!-- ── BEAUTIFUL VERTICAL PIPELINE STEP CHART ── -->
-      <div style="background: var(--surface2); padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0; font-family: Inter, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-        <!-- Step 1 -->
-        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1.5rem; text-align: center; width: 100%; max-width: 400px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;">
-          <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;">Source</span>
-          <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Raw Order API Payload</span>
-        </div>
-        <!-- Arrow -->
-        <div style="font-size: 1rem; color: var(--accent); line-height: 1;">▼</div>
-        <!-- Step 2 -->
-        <div style="background: var(--bg); border: 1px solid var(--border); border-left: 4px solid #cd7f32; border-radius: 4px; padding: 0.75rem 1.5rem; width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.2rem; box-sizing: border-box;">
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <span style="font-size: 0.65rem; font-weight: 700; color: #cd7f32; text-transform: uppercase; letter-spacing: 0.05em;">1. Bronze Layer</span>
-            <span style="font-size: 0.7rem; color: var(--muted);">Fabric Lakehouse (Files)</span>
-          </div>
-          <div style="font-size: 0.8rem; font-weight: 600; color: var(--text); margin-top: 0.25rem;">order_2026_05_17.csv</div>
-        </div>
-        <!-- Arrow -->
-        <div style="font-size: 1rem; color: var(--accent); line-height: 1;">▼</div>
-        <!-- Step 3 -->
-        <div style="background: var(--bg); border: 1px solid var(--border); border-left: 4px solid #c0c0c0; border-radius: 4px; padding: 0.75rem 1.5rem; width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.2rem; box-sizing: border-box;">
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <span style="font-size: 0.65rem; font-weight: 700; color: #c0c0c0; text-transform: uppercase; letter-spacing: 0.05em;">2. Silver Layer</span>
-            <span style="font-size: 0.7rem; color: var(--muted);">Conformed Delta Table</span>
-          </div>
-          <div style="font-size: 0.8rem; font-weight: 600; color: var(--text); margin-top: 0.25rem;">tbl_silver_logistics_orders</div>
-        </div>
-        <!-- Arrow -->
-        <div style="font-size: 1rem; color: var(--accent); line-height: 1;">▼</div>
-        <!-- Step 4 -->
-        <div style="background: var(--bg); border: 1px solid var(--border); border-left: 4px solid #ffd700; border-radius: 4px; padding: 0.75rem 1.5rem; width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.2rem; box-sizing: border-box;">
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <span style="font-size: 0.65rem; font-weight: 700; color: #ffd700; text-transform: uppercase; letter-spacing: 0.05em;">3. Gold Layer</span>
-            <span style="font-size: 0.7rem; color: var(--muted);">SQL Star Schema</span>
-          </div>
-          <div style="font-size: 0.8rem; font-weight: 600; color: var(--text); margin-top: 0.25rem;">FactOrders & DimCustomer</div>
-        </div>
-        <!-- Arrow -->
-        <div style="font-size: 1rem; color: var(--accent); line-height: 1;">▼</div>
-        <!-- Step 5 -->
-        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1.5rem; text-align: center; width: 100%; max-width: 400px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;">
-          <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;">Output</span>
-          <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Power BI Direct Lake Dashboard</span>
-        </div>
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+          graph TD
+            Source[Raw Order API] --> Bronze[Bronze Layer: Order CSV]
+            Bronze --> Silver[Silver Layer: Conformed Delta Table]
+            Silver --> Gold[Gold Layer: SQL Star Schema]
+            Gold --> Output[Power BI Direct Lake Dashboard]
+        </pre>
       </div>
 
       <p>By separating the architecture into these discrete segments, you achieve a level of clarity that transforms how your data engineering and analytical departments collaborate: Data Engineers own the ingestion and transformation pipelines from Bronze to Silver, while Data Analysts & Business Intelligence Specialists own the Gold layer modeling and Power BI dashboard creation, free from the complexities of cleaning corrupt raw formats.</p>
