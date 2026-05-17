@@ -29,6 +29,10 @@ const ProjectsGrid = dynamic(() => import('@/components/home/ProjectsGrid'), {
   loading: () => <div className="h-[600px] bg-[var(--surface2)] animate-pulse" />
 });
 
+const Testimonials = dynamic(() => import('@/components/home/Testimonials'), { 
+  loading: () => <div className="h-[500px] bg-[var(--surface2)] animate-pulse" />
+});
+
 const UseCases = dynamic(() => import('@/components/home/UseCases'), { 
   loading: () => <div className="h-[500px] bg-[var(--surface2)] animate-pulse" />
 });
@@ -78,7 +82,10 @@ export default function HomePage() {
         {/* ── 6. PROJECTS ── */}
         <ProjectsGrid />
 
-        {/* ── 7. USE CASES ── */}
+        {/* ── 7. STAKEHOLDER TESTIMONIALS ── */}
+        <Testimonials />
+
+        {/* ── 8. USE CASES ── */}
         <UseCases />
 
         {/* ── 8. PRODUCT VALUE ── */}
