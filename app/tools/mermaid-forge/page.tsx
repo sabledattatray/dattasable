@@ -32,7 +32,7 @@ export default function MermaidForge() {
   useEffect(() => {
     const initMermaid = async () => {
       try {
-        const mermaid = (await import(/* webpackIgnore: true */ MERMAID_CDN)).default;
+        const mermaid = (await import('mermaid')).default;
         mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
         renderDiagram();
       } catch (err) {
@@ -51,7 +51,7 @@ export default function MermaidForge() {
     setError(null);
     
     try {
-      const mermaid = (await import(/* webpackIgnore: true */ MERMAID_CDN)).default;
+      const mermaid = (await import('mermaid')).default;
       const { svg } = await mermaid.render('mermaid-svg', input);
       previewRef.current.innerHTML = svg;
     } catch (err: any) {
