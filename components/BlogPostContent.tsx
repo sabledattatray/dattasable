@@ -47,8 +47,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
           theme: 'dark',
           securityLevel: 'loose',
           flowchart: {
-            useMaxWidth: false,
-            htmlLabels: true
+            useMaxWidth: true,
+            htmlLabels: false
           },
           themeVariables: {
             background: '#0d1117',
