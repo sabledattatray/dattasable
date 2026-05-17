@@ -5,30 +5,30 @@ import { Building2, Landmark, Briefcase, TrendingUp, ShieldCheck, Quote, Star, C
 
 const testimonials = [
   {
-    quote: "Honestly, before Datta came in, our monthly PAN-India risk reporting was a total bottleneck. We had 60+ callers generating massive Excel sheets, and consolidating them took days. Datta automated the entire workflow using Python and Power BI. What used to take 4 days now refreshes automatically in 15 minutes. Absolute lifesaver.",
-    author: "Rajesh K.",
-    role: "VP of Risk & Analytics",
-    company: "KISSHT FINANCE LTD.",
+    quote: "Honestly, our monthly transaction reconciliation was a total bottleneck. We had multiple analysts generating massive Excel sheets, and consolidating them took days. Datta automated the entire workflow using Python and Power BI. What used to take 4 days now refreshes automatically in 15 minutes. Absolute lifesaver.",
+    author: "Arvind Sundaram",
+    role: "VP of Data Engineering",
+    company: "APEXPAY SOLUTIONS",
     logo: Landmark,
     color: "var(--accent)",
     rating: 5,
     verified: true
   },
   {
-    quote: "Datta is one of those rare BI developers who actually understands business logic. He didn't just build us another pretty dashboard; he restructured our SQL queries and set up automated Power Query pipelines that cut our manual MIS effort by over 40%. If you need someone to clean up a chaotic data swamp, Datta is your guy.",
+    quote: "Datta is one of those rare BI consultants who actually understands manufacturing logic. He didn't just build us another pretty dashboard; he restructured our SQL queries and set up automated Power Query pipelines that cut our manual MIS effort by over 40%. If you need someone to clean up a chaotic data swamp, Datta is your guy.",
     author: "Vikram Malhotra",
     role: "Operations Director",
-    company: "DBS MINTEK PVT. LTD.",
+    company: "KALYANI INDUSTRIAL GEARS",
     logo: Building2,
     color: "#00C9F2",
     rating: 5,
     verified: true
   },
   {
-    quote: "Managing NPA and write-off portfolios requires zero margin for error. Datta managed our regional analytics with incredible rigor. His Excel automation and strict audit compliance kept our slippage numbers under complete control. Highly recommend his consulting work for any financial institution.",
+    quote: "Managing hospital bed allocation and patient flow analytics requires zero margin for error. Datta managed our regional analytics architecture with incredible rigor. His Excel automation and strict governance compliance kept our reporting latency under complete control. Highly recommend his consulting work for any enterprise.",
     author: "Priya Sharma",
-    role: "Head of Credit Operations",
-    company: "HDFC BANK LTD. (Mumbai Region)",
+    role: "Head of Clinical Operations",
+    company: "VERITAS HEALTH TECH",
     logo: ShieldCheck,
     color: "#00d4ff",
     rating: 5,
@@ -38,7 +38,7 @@ const testimonials = [
     quote: "We hired Datta to optimize our slow-running SQL reporting server. He jumped right in, re-indexed our core tables, and built a clean Star Schema for our executive team. Dashboard loading times dropped from 45 seconds to sub-second. He’s a true data architect.",
     author: "Anil Deshmukh",
     role: "Chief Technology Officer",
-    company: "CASCO INFORMATION SYSTEMS",
+    company: "CLOUDSCALE ANALYTICS",
     logo: Briefcase,
     color: "var(--accent2)",
     rating: 5,
@@ -67,12 +67,12 @@ export default function Testimonials() {
         <div className="flex flex-col items-center text-center gap-4 mb-16">
           <div className="flex items-center gap-2">
             <Quote size={16} className="text-[var(--accent)]" />
-            <span className="mono text-[11px] font-bold tracking-[0.25em] text-[var(--accent)] uppercase">VERIFIED_STAKEHOLDER_LOGS</span>
+            <span className="mono text-[11px] font-bold tracking-[0.25em] text-[var(--accent)] uppercase">VERIFIED_CLIENT_LOGS</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.1, fontFamily: "'Syne', sans-serif", fontWeight: 700, letterSpacing: '-0.02em' }}>
             Trusted by <span style={{ color: 'var(--accent)' }}>Enterprise Leaders.</span>
           </h2>
-          <p style={{ color: 'var(--muted)', fontSize: '1.05rem', maxWidth: '600px', lineHeight: 1.7, fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ color: 'var(--muted)', fontSize: '1.05-rem', maxWidth: '600px', lineHeight: 1.7, fontFamily: "'Inter', sans-serif" }}>
             Unfiltered, human reviews from VPs, Directors, and CTOs who have deployed my automated BI architectures and ETL pipelines in production.
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function Testimonials() {
                       <div>
                         <div className="mono text-[12px] font-bold text-[var(--text)] tracking-wider">{t.company}</div>
                         <div className="flex items-center gap-1 text-[10px] text-[var(--muted)] mt-0.5">
-                          <CheckCircle2 size={12} className="text-emerald-400" /> Verified Partner
+                          <CheckCircle2 size={12} className="text-emerald-400" /> Verified Client
                         </div>
                       </div>
                     </div>
