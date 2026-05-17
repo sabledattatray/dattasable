@@ -47,6 +47,10 @@ export default function BlogPostContent({ post }: { post: Post }) {
           startOnLoad: false,
           theme: 'dark',
           securityLevel: 'loose',
+          flowchart: {
+            useMaxWidth: false,
+            htmlLabels: true
+          },
           themeVariables: {
             background: '#0d1117',
             primaryColor: '#00e5ff',
