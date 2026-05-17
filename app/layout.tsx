@@ -93,7 +93,7 @@ const jetbrains = JetBrains_Mono({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`light ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`dark ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
 
@@ -136,15 +136,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');
-                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                  if (!theme && supportDarkMode) theme = 'light';
-                  if (!theme) theme = 'light';
-                  if (theme === 'dark') {
-                    document.documentElement.classList.remove('light');
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.add('light');
+                  if (!theme) theme = 'dark';
+                  if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
                   }
                 } catch (e) {}
               })();
