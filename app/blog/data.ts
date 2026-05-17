@@ -21,7 +21,7 @@ export const posts = [
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
         <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
-          graph LR
+          graph TD
             A[OneLake: The Single Source of Truth] --> B(Data Factory: Pipelines & Dataflows Gen2)
             A --> C(Synapse Data Engineering: Lakehouse & Spark Notebooks)
             A --> D(Synapse Data Warehouse: Serverless T-SQL)
