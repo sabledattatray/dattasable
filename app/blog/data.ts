@@ -20,7 +20,7 @@ export const posts = [
       <p>Before mapping the architecture, we must establish a baseline understanding of Microsoft Fabric. At its core, Microsoft Fabric is a unified SaaS analytics platform that consolidates data movement, data lake storage, data engineering, data science, real-time analytics, and business intelligence into a single, managed workspace.</p>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
-        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+        <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
           graph TD
             A[OneLake: The Single Source of Truth] --> B(Data Factory: Pipelines & Dataflows Gen2)
             A --> C(Synapse Data Engineering: Lakehouse & Spark Notebooks)
@@ -79,7 +79,7 @@ export const posts = [
       <p>How do these layers connect in a live enterprise? Let's trace the journey of an order transaction at a multi-national logistics company using a unified Medallion pipeline:</p>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
-        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+        <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
           graph TD
             Source[Raw Order API] --> Bronze[Bronze Layer: Order CSV]
             Bronze --> Silver[Silver Layer: Conformed Delta Table]
@@ -130,7 +130,7 @@ export const posts = [
       <p>An execution chain breaks a complex goal into a series of discrete, validated nodes. Each node has a specific responsibility and a defined output schema.</p>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
-        <pre className="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+        <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
           graph TD
             A[Input Intent] --> B[Logical Decomposition]
             B --> C[Node 01: Data Extraction]
