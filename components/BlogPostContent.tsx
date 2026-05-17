@@ -41,7 +41,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
 
       try {
         const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        const mermaid = (await import(/* @vite-ignore */ MERMAID_CDN)).default;
+        const mermaid = (await import(/* webpackIgnore: true */ MERMAID_CDN)).default;
         
         mermaid.initialize({
           startOnLoad: false,
