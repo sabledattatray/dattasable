@@ -142,11 +142,14 @@ export default function Footer() {
                   fontSize: '0.95rem',
                   lineHeight: 1.7,
                   maxWidth: '90%',
-                  marginBottom: '2.5rem',
+                  marginBottom: '1.5rem',
                   fontFamily: "'Syne', sans-serif",
                 }}
               >
                 Premier <strong className="text-[var(--text)]">Business Intelligence Expert</strong> and <strong className="text-[var(--text)]">Data Strategy Consultant</strong> in India. Specializing in reliable <strong className="text-[var(--text)]">Automated Reporting Solutions</strong> and <strong className="text-[var(--text)]">Data Engineering</strong>.
+              </p>
+              <p className="text-[11px] text-[var(--muted)] leading-relaxed mb-6 border-t border-white/10 pt-3">
+                <em>Brand Notice:</em> Datta Sable is an independent BI consultant. This platform is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed &quot;Datta Able&quot; admin dashboard template.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1.5rem', paddingTop: '1.5rem' }} className="border-t border-[var(--border)] border-opacity-60">

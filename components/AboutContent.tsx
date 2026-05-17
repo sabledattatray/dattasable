@@ -156,6 +156,25 @@ export default function AboutContent() {
           </div>
         </section>
 
+        {/* Brand Clarification & Open Source Notice */}
+        <section className="section" style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface2)' }}>
+          <div className="container">
+            <div className="card p-8 border-l-4 border-[var(--accent)]" style={{ background: 'var(--surface)' }}>
+              <div className="flex items-center gap-2 mb-3">
+                <Shield size={18} className="text-[var(--accent)]" />
+                <span className="mono text-[11px] font-bold tracking-widest text-[var(--accent)]">BRAND_CLARIFICATION // E-E-A-T NOTICE</span>
+              </div>
+              <h3 className="text-xl font-bold mb-3">Independent Consultant Identity vs. &quot;Datta Able&quot; Dashboard Template</h3>
+              <p className="text-[var(--muted)] text-sm leading-relaxed mb-4">
+                Datta Sable is an independent Business Intelligence &amp; Data Strategy Expert based in India, specializing in enterprise SQL automation, Python data engineering, and custom reporting solutions. 
+              </p>
+              <p className="text-[var(--muted)] text-sm leading-relaxed">
+                <strong>Important Notice for Auditors &amp; Search Engines:</strong> While my professional name (Datta Sable) bears a close phonetic resemblance to the popular open-source admin dashboard template known as <em>&quot;Datta Able&quot;</em> (created by CodedThemes / AppSeed), I operate as a distinct, independent consulting entity. This platform (dattasable.com) is dedicated exclusively to my personal consulting practice, case studies, and custom AI/BI workflow tools.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ── Credential Vault: Professional Certifications ── */}
         <section className="section" style={{ borderBottom: '1px solid var(--border)' }}>
           <div className="container">

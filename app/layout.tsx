@@ -106,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "Surgical AI Workspace",
+                "name": "Surgical AI Workspace | Datta Sable",
                 "url": "https://dattasable.com",
                 "potentialAction": {
                   "@type": "SearchAction",
@@ -117,14 +117,46 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {
                 "@context": "https://schema.org",
                 "@type": "Person",
+                "@id": "https://dattasable.com/#person",
                 "name": "Datta Sable",
                 "url": "https://dattasable.com",
-                "jobTitle": "AI Workflow Architect & Data Strategist",
-                "description": "Architect of the Surgical AI Workspace. Expert in prompt engineering, technical content infrastructure, and data strategy.",
+                "jobTitle": "Business Intelligence Expert & Data Strategy Consultant",
+                "description": "Premier Business Intelligence Expert and Data Strategy Consultant in India. Specializing in Tableau, Power BI, SQL automation, Python data engineering, and custom reporting solutions.",
+                "knowsAbout": ["Business Intelligence", "Data Analytics", "SQL Automation", "Python Data Engineering", "Power BI", "Tableau", "Data Strategy", "Microsoft Fabric"],
                 "sameAs": [
                   "https://linkedin.com/in/dattasable",
-                  "https://github.com/sabledattatray"
+                  "https://github.com/sabledattatray",
+                  "https://x.com/sabledattatray",
+                  "https://dev.to/dattasable"
                 ]
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ProfessionalService",
+                "@id": "https://dattasable.com/#service",
+                "name": "Datta Sable BI & Analytics Consulting",
+                "url": "https://dattasable.com",
+                "logo": "https://dattasable.com/favicon.svg",
+                "image": "https://dattasable.com/images/datta.webp",
+                "description": "Independent Business Intelligence and Data Strategy consulting practice operated by Datta Sable in Mumbai, India. Providing custom dashboard development, SQL automation, and Python ETL pipelines.",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Mumbai",
+                  "addressRegion": "Maharashtra",
+                  "addressCountry": "IN"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": "19.0760",
+                  "longitude": "72.8777"
+                },
+                "telephone": "+918010803756",
+                "email": "info@dattasable.com",
+                "priceRange": "$$$",
+                "founder": {
+                  "@id": "https://dattasable.com/#person"
+                },
+                "disambiguatingDescription": "Datta Sable is an independent Business Intelligence consulting practice and is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed 'Datta Able' admin dashboard template."
               }
             ])
           }}

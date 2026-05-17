@@ -20,7 +20,7 @@ const stats: Stat[] = [
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(value);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
 
