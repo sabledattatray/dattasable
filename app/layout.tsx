@@ -96,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`dark ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
+        <link rel="preload" href="/hero-bg.webp" as="image" fetchPriority="high" />
 
         <Script
           id="json-ld"
