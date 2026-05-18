@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
 
@@ -31,16 +30,13 @@ export default function Hero() {
         className="absolute top-[45%] right-[1px] -translate-y-1/2 w-[calc(100%-2px)] lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh] hero-visual-container"
       >
         <div className="relative w-full h-full">
-          <Image
+          <img
             src="/hero-bg.webp"
             alt="Surgical AI Workspace | Creator Intelligence Infrastructure"
-            fill
-            priority
-            fetchPriority="high"
-            sizes="(max-width: 480px) 190px, (max-width: 768px) 320px, (max-width: 1200px) 50vw, 33vw"
-            quality={35}
-            className="object-cover"
+            className="object-cover w-full h-full"
             style={{ objectPosition: 'center top' }}
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
         <div
