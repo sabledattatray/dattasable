@@ -14,9 +14,9 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: 50, suffix: '+', label: 'Projects Delivered', code: 'PRJ-OK', icon: BarChart3 },
-  { value: 30, suffix: '+', label: 'Happy Clients', code: 'CLI-SAT', icon: Users },
-  { value: 10, suffix: '+', label: 'Years Experience', code: 'EXP-YR', icon: Clock },
-  { value: 100, suffix: 'K+', label: 'Rows Analyzed', code: 'DAT-ROW', icon: Database },
+  { value: 35, suffix: 'm+', label: 'Avg Reader Engagement', code: 'ENG-TIME', icon: Clock },
+  { value: 13, suffix: '.9K+', label: 'Monthly Key Events', code: 'TEL-EVT', icon: Database },
+  { value: 1240, suffix: '%', label: 'Active User Growth', code: 'USR-GRW', icon: Users },
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -57,14 +57,14 @@ export default function StatsGrid() {
 
       <div className="container relative z-10">
         <div className="flex flex-col gap-8 mb-20">
-          <TechLabel>Deployment Metrics</TechLabel>
+          <TechLabel>Live Platform Telemetry</TechLabel>
           
           <div className="max-w-2xl">
             <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
-              Workflow <span style={{ color: 'var(--accent)' }}>Performance.</span>
+              Verified <span style={{ color: 'var(--accent)' }}>Impact.</span>
             </h2>
             <p className="mt-4" style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-              Verified system metrics from live deployment environments across global territories.
+              Live Google Analytics telemetry tracking enterprise decision-maker engagement and global platform reach.
             </p>
           </div>
         </div>
