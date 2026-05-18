@@ -40,7 +40,7 @@ export default function EditorBlockNode({ block }: EditorBlockNodeProps) {
   const handleAddBlock = () => {
     const newId = `block-${Date.now()}`;
     const currentIndex = blocks.findIndex(b => b.id === block.id);
-    addBlock({ id: newId, type: 'paragraph', content: '' }, currentIndex + 1);
+    addBlock({ id: newId, type: 'paragraph', content: '', metadata: {} }, currentIndex + 1);
   };
 
   const handleDuplicate = () => {

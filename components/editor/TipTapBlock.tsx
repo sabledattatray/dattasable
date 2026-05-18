@@ -57,7 +57,7 @@ export default function TipTapBlock({ block, isActive }: TipTapBlockProps) {
           event.preventDefault();
           const newId = `block-${Date.now()}`;
           const currentIndex = useEditorStore.getState().blocks.findIndex(b => b.id === block.id);
-          addBlock({ id: newId, type: 'paragraph', content: '' }, currentIndex + 1);
+          addBlock({ id: newId, type: 'paragraph', content: '', metadata: {} }, currentIndex + 1);
           return true;
         }
         return false;

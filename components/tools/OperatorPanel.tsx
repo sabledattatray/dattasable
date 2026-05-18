@@ -13,7 +13,7 @@ export default function OperatorPanel() {
   const STYLES: OperatorStyle[] = ['Surgical', 'Executive', 'Analytical', 'Narrative', 'Minimalist'];
 
   return (
-    <div className="card mb-8 overflow-hidden" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderOpacity: 0.2 }}>
+    <div className="card mb-8 overflow-hidden" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderColor: 'rgba(201, 243, 29, 0.2)' }}>
       <div 
         className="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all"
         onClick={() => setIsOpen(!isOpen)}

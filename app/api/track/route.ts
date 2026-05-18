@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const { url, referrer } = body;
     
     const userAgent = req.headers.get('user-agent') || 'unknown';
-    const ip = req.headers.get('x-forwarded-for') || req.ip || '127.0.0.1';
+    const ip = req.headers.get('x-forwarded-for') || (req as any).ip || '127.0.0.1';
     
     // Hash IP for privacy compliance (GDPR)
     const ipHash = crypto.createHash('sha256').update(ip).digest('hex').substring(0, 16);

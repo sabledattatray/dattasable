@@ -35,7 +35,7 @@ function EditorContent() {
           if (post.blocks && post.blocks.length > 0) {
             setBlocks(post.blocks);
           } else if (post.content) {
-            setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content }]);
+            setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
           }
         }
       }

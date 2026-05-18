@@ -7,7 +7,7 @@ export interface EditorBlock {
   id: string;
   type: BlockType;
   content: string; // HTML string from TipTap
-  metadata?: Record<string, unknown>; // For image URLs, heading levels, etc.
+  metadata: Record<string, any>; // For image URLs, heading levels, etc.
 }
 
 interface EditorState {
@@ -40,7 +40,7 @@ interface EditorState {
 
 export const useEditorStore = create<EditorState>((set) => ({
   blocks: [
-    { id: 'initial-block', type: 'paragraph', content: '' }
+    { id: 'initial-block', type: 'paragraph', content: '', metadata: {} }
   ],
   activeBlockId: null,
   activeEditor: null,

@@ -118,7 +118,7 @@ export default function TemplatesPage() {
         {/* Lead Capture Overlay (Coming soon / CTA) */}
         <div className="border-2 border-dashed border-[var(--border)] rounded-sm text-center shadow-xl bg-[var(--surface1)]" style={{ marginTop: '8rem', padding: '4.5rem 2rem' }}>
            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>Need a custom architecture?</h3>
-           <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '1.1rem', maxW: '600px', mx: 'auto' }}>We build bespoke automation systems tailored to your specific business logic.</p>
+           <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>We build bespoke automation systems tailored to your specific business logic.</p>
            <a href="/contact" className="btn-primary inline-flex py-4 px-12 font-bold tracking-wider text-[13px]">REQUEST ARCHITECTURE BUILD</a>
         </div>
       </main>

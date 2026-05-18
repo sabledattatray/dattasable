@@ -171,7 +171,7 @@ export default function GlobalSalesIntelligencePage() {
 
       // Line
       c.beginPath();
-      rev.forEach((v, i) => {
+      rev.forEach((v: number, i: number) => {
         const x = pad.l + (i/(months.length-1)) * gW;
         const y = pad.t + gH - (v/maxV)*gH;
         if(i===0) c.moveTo(x, y); else c.lineTo(x, y);
@@ -187,7 +187,7 @@ export default function GlobalSalesIntelligencePage() {
       c.fillStyle = grad; c.fill();
 
       // Points
-      rev.forEach((v, i) => {
+      rev.forEach((v: number, i: number) => {
         const x = pad.l + (i/(months.length-1)) * gW;
         const y = pad.t + gH - (v/maxV)*gH;
         c.fillStyle = isDark ? '#fff' : '#000'; c.beginPath(); c.arc(x, y, 4, 0, Math.PI*2); c.fill();
@@ -212,7 +212,7 @@ export default function GlobalSalesIntelligencePage() {
       const colors = [C.cyan, C.blue, C.purple, C.green];
       let start = -Math.PI/2;
 
-      data.forEach((v, i) => {
+      data.forEach((v: number, i: number) => {
         const sweep = (v/100) * Math.PI * 2;
         c.beginPath(); c.moveTo(cx, cy);
         c.arc(cx, cy, R, start, start + sweep);
