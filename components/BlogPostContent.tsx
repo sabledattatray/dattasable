@@ -161,9 +161,6 @@ export default function BlogPostContent({ post }: { post: Post }) {
             sizes="(max-width: 768px) 100vw, 760px"
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.3))', pointerEvents: 'none' }} />
-          <div className="mono" style={{ position: 'absolute', bottom: '15px', right: '15px', fontSize: '10px', color: '#fff', backgroundColor: 'rgba(0,0,0,0.6)', padding: '4px 10px', letterSpacing: '0.2em', backdropFilter: 'blur(4px)' }}>
-            LOG_ID: {post.slug?.toUpperCase()}
-          </div>
         </div>
 
         <div className="flex items-center gap-3 mb-8 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
@@ -248,6 +245,49 @@ export default function BlogPostContent({ post }: { post: Post }) {
             </div>
           </div>
         </div>
+
+        {/* ── Article Schema (SEO E-E-A-T) ── */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              "headline": post.title,
+              "description": post.excerpt,
+              "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.png`,
+              "datePublished": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+              "dateModified": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+              "author": {
+                "@type": "Person",
+                "name": "Datta Sable",
+                "url": "https://dattasable.com/about",
+                "jobTitle": "Senior BI Developer & Data Architect",
+                "sameAs": [
+                  "https://www.linkedin.com/in/dattatraysable/",
+                  "https://community.fabric.microsoft.com/t5/user/viewprofilepage/user-id/1594798"
+                ]
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Datta Sable | BI & Analytics Consulting",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://dattasable.com/images/logo.png"
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://dattasable.com/blog/${post.slug}`
+              },
+              "keywords": post.title.includes("Compound AI") 
+                ? "Microsoft Fabric, Compound AI Systems, OneLake Vector Search, LangGraph Python, Enterprise RAG Architecture, Synapse Serverless SQL, Semantic Caching Redis, Multi-Agent Workflows"
+                : post.title.includes("Medallion") 
+                ? "Microsoft Fabric, Medallion Architecture, Bronze Silver Gold Lakehouse, OneLake, Synapse Data Engineering, Direct Lake Power BI, Data Governance"
+                : "BI Strategy, Data Architecture, Analytics, Power BI, Python"
+            })
+          }}
+        />
 
         {/* ── Breadcrumb Schema (SEO) ── */}
         <script
