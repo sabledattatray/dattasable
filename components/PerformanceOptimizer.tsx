@@ -46,8 +46,9 @@ export default function PerformanceOptimizer({
       setLoadAnalytics(true);
     };
 
-    // Load on first interaction (user starts browsing)
-    const interactionEvents = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'scroll'];
+    // Load only on actual user input interactions.
+    // Excluded 'scroll' and 'mousemove' since automated bots or layout shifts can trigger them programmatically.
+    const interactionEvents = ['mousedown', 'keydown', 'touchstart'];
     const handleInteraction = () => {
       triggerLoad();
       cleanup();
