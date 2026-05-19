@@ -22,16 +22,26 @@ export function middleware(request: NextRequest) {
                      lowerPath === '/sitemap.xml' ||
                      !!lowerPath.match(/\.(png|jpg|jpeg|webp|gif|svg|ico)$/i);
   
-  const isGoogleCrawler = userAgent.includes('Googlebot') || 
-                         userAgent.includes('Mediapartners-Google') || 
-                         userAgent.includes('AdsBot-Google');
-  const isBingCrawler = userAgent.includes('bingbot');
-  const isLinkedInBot = userAgent.includes('LinkedInBot');
+  // Allow legitimate search engine and social media crawlers
+  const isFriendlyBot = 
+    /google/i.test(userAgent) || 
+    /bing/i.test(userAgent) || 
+    /msnbot/i.test(userAgent) ||
+    /linkedin/i.test(userAgent) ||
+    /twitterbot/i.test(userAgent) ||
+    /facebookexternalhit|facebot/i.test(userAgent) ||
+    /slackbot/i.test(userAgent) ||
+    /discordbot/i.test(userAgent) ||
+    /applebot/i.test(userAgent) ||
+    /duckduck/i.test(userAgent) ||
+    /pinterest/i.test(userAgent) ||
+    /whatsapp/i.test(userAgent) ||
+    /telegrambot/i.test(userAgent);
 
   // Comprehensive Malicious/Aggressive Bot Registry
   const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix|wget|lynx|perl|php|libwww|apachebench|gobuster|dirbuster|mj12bot|ahrefsbot|semrushbot|dotbot|rogerbot|exabot|gigabot|siteexplorer|openlinkprofiler|spyonweb|petalbot|ia_archiver/i;
   
-  if (suspiciousBots.test(userAgent) && !isGoogleCrawler && !isBingCrawler && !isLinkedInBot && !isCrawlPath) {
+  if (suspiciousBots.test(userAgent) && !isFriendlyBot && !isCrawlPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   }
 

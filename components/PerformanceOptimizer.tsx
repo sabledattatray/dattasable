@@ -17,11 +17,18 @@ export default function PerformanceOptimizer({
   const [shouldLoadScripts, setShouldLoadScripts] = useState(false);
 
   useEffect(() => {
-    // Strategy: Load third-party scripts ONLY after first interaction or 4s delay
-    // This is the "Elite Tier" technique to maximize TBT and LCP scores.
+    if (shouldLoadScripts) return;
+
+    // Load scripts immediately for search engines, AdSense crawlers, and performance bots (e.g. Lighthouse)
+    const isBot = typeof window !== 'undefined' && 
+      /bot|google|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent);
     
+    if (isBot) {
+      setShouldLoadScripts(true);
+      return;
+    }
+
     const loadScripts = () => {
-      if (shouldLoadScripts) return;
       setShouldLoadScripts(true);
     };
 
