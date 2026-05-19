@@ -12,7 +12,7 @@ interface AdSenseProps {
 export default function AdSense({ slot, format = 'auto', responsive = 'true', style }: AdSenseProps) {
   useEffect(() => {
     try {
-      // @ts-ignore
+      // @ts-expect-error
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {
       console.error('AdSense error:', err);

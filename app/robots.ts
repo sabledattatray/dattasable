@@ -11,6 +11,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Mediapartners-Google',
         allow: '/',
+      },
+      {
+        userAgent: 'Google-Display-Ads-Bot',
+        allow: '/',
+      },
+      {
+        userAgent: 'AdsBot-Google',
+        allow: '/',
       }
     ],
     sitemap: 'https://dattasable.com/sitemap.xml',
