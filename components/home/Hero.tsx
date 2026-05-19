@@ -28,7 +28,7 @@ export default function Hero() {
       {/* Layer 1: Right-Side Visual - Optimized for Server Rendering */}
       <div
         id="hero-visual-container"
-        className="absolute top-[45%] right-[1px] -translate-y-1/2 w-[calc(100%-2px)] lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh] hero-visual-container"
+        className="hidden lg:block absolute top-[45%] right-[1px] -translate-y-1/2 w-[55%] z-0 pointer-events-none overflow-hidden lg:h-[80vh] hero-visual-container"
       >
         <div className="relative w-full h-full">
           <Image
