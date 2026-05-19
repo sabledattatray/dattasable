@@ -1,5 +1,6 @@
 import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
+import Image from 'next/image';
 
 function TechLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -30,13 +31,14 @@ export default function Hero() {
         className="absolute top-[45%] right-[1px] -translate-y-1/2 w-[calc(100%-2px)] lg:w-[55%] z-0 pointer-events-none overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[80vh] hero-visual-container"
       >
         <div className="relative w-full h-full">
-          <img
+          <Image
             src="/hero-bg.webp"
             alt="Surgical AI Workspace | Creator Intelligence Infrastructure"
-            className="object-cover w-full h-full"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            className="object-cover"
             style={{ objectPosition: 'center top' }}
-            fetchPriority="high"
-            decoding="async"
           />
         </div>
         <div
