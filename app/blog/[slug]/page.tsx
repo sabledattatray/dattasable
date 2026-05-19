@@ -11,6 +11,30 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const { posts: staticPosts } = await import('../data');
+  
+  let dbSlugs: string[] = [];
+  try {
+    const dbPosts = await prisma.post.findMany({
+      select: { slug: true },
+      where: { published: true }
+    });
+    dbSlugs = dbPosts.map(p => p.slug);
+  } catch (e) {
+    console.warn('Could not query database slugs for generateStaticParams:', e);
+  }
+
+  const allSlugs = new Set([
+    ...staticPosts.map(p => p.slug),
+    ...dbSlugs
+  ]);
+
+  return Array.from(allSlugs).map((slug) => ({
+    slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const baseUrl = 'https://dattasable.com';
