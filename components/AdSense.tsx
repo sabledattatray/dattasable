@@ -12,7 +12,7 @@ interface AdSenseProps {
 export default function AdSense({ slot, format = 'auto', responsive = 'true', style }: AdSenseProps) {
   useEffect(() => {
     try {
-      // @ts-expect-error
+      // @ts-expect-error - adsbygoogle is dynamically injected on the window object
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {
       console.error('AdSense error:', err);

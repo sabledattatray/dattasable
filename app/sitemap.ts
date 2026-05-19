@@ -123,7 +123,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [
+  const allUrls = [
     ...staticUrls, 
     ...dbBlogUrls, 
     ...staticBlogUrls, 
@@ -133,5 +133,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...landingPageUrls,
     ...glossaryUrls
   ];
+
+  // De-duplicate by URL to prevent crawler warnings in Search Console
+  const uniqueUrlsMap = new Map<string, typeof allUrls[0]>();
+  for (const item of allUrls) {
+    if (!uniqueUrlsMap.has(item.url)) {
+      uniqueUrlsMap.set(item.url, item);
+    } else {
+      const existing = uniqueUrlsMap.get(item.url)!;
+      // Prefer specific database modification dates over generic new Date() instances
+      const existingIsToday = existing.lastModified instanceof Date && 
+        new Date().toDateString() === existing.lastModified.toDateString();
+      const itemIsToday = item.lastModified instanceof Date && 
+        new Date().toDateString() === item.lastModified.toDateString();
+      
+      if (existingIsToday && !itemIsToday) {
+        uniqueUrlsMap.set(item.url, item);
+      }
+    }
+  }
+
+  return Array.from(uniqueUrlsMap.values());
 }
 
