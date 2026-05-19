@@ -52,6 +52,12 @@ export default function PerformanceOptimizer({
 
   return (
     <>
+      <Script
+        id="adsense-init"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+        strategy="afterInteractive"
+        crossOrigin="anonymous"
+      />
       {shouldLoadScripts && (
         <>
           <Suspense fallback={null}>
@@ -61,12 +67,6 @@ export default function PerformanceOptimizer({
           <Script 
             src="https://accounts.google.com/gsi/client" 
             strategy="lazyOnload"
-          />
-          <Script
-            id="adsense-init"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
           />
         </>
       )}
