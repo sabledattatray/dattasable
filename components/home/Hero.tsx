@@ -36,6 +36,8 @@ export default function Hero() {
             alt="Surgical AI Workspace | Creator Intelligence Infrastructure"
             fill
             priority
+            quality={60}
+            fetchPriority="high"
             sizes="(max-width: 1024px) 100vw, 55vw"
             className="object-cover"
             style={{ objectPosition: 'center top' }}

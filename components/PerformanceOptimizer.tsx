@@ -12,7 +12,7 @@ interface PerformanceOptimizerProps {
 
 export default function PerformanceOptimizer({
   googleAnalyticsId,
-  googleSignInClientId, // Kept for prop-types signature compatibility
+  googleSignInClientId,
 }: PerformanceOptimizerProps) {
   const [loadAdSense, setLoadAdSense] = useState(false);
   const [loadAnalytics, setLoadAnalytics] = useState(false);
@@ -21,28 +21,24 @@ export default function PerformanceOptimizer({
     if (typeof window === 'undefined') return;
 
     const ua = navigator.userAgent;
-    const isGoogleBot = /google|adsbot|mediapartners/i.test(ua);
-    const isLighthouse = /lighthouse|chrome-lighthouse/i.test(ua);
+    
+    // Only load immediately for AdSense verification crawlers
+    // Standard Googlebot / PageSpeed Insights / Lighthouse will load scripts lazily
+    const isAdSenseVerificationBot = /adsbot|mediapartners|ads-bot|google-display-ads-bot/i.test(ua);
 
-    if (isGoogleBot && !isLighthouse) {
-      // Load both immediately for crawler verification bots
+    if (isAdSenseVerificationBot) {
       setLoadAdSense(true);
       setLoadAnalytics(true);
       return;
     }
 
-    if (isLighthouse) {
-      // Do not load heavy scripts for Lighthouse tests to secure 95+ score permanently
-      return;
-    }
-
-    // For real human users, load scripts lazily to optimize Core Web Vitals
+    // For real human users and PageSpeed Insights, load scripts lazily to keep mobile score 95+
     const triggerLoad = () => {
       setLoadAdSense(true);
       setLoadAnalytics(true);
     };
 
-    // 1. Load on first user interaction (touch, click, scroll)
+    // 1. Load on first user interaction
     const interactionEvents = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'scroll'];
     const handleInteraction = () => {
       triggerLoad();
@@ -59,7 +55,7 @@ export default function PerformanceOptimizer({
       window.addEventListener(event, handleInteraction, { once: true, passive: true });
     });
 
-    // 2. Load when browser is idle (fallback after 4 seconds)
+    // 2. Load when browser is idle (fallback after 4.5 seconds)
     let idleId: number;
     const timer = setTimeout(() => {
       if ('requestIdleCallback' in window) {
@@ -67,7 +63,7 @@ export default function PerformanceOptimizer({
       } else {
         triggerLoad();
       }
-    }, 4000);
+    }, 4500);
 
     return () => {
       cleanup();
