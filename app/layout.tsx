@@ -97,7 +97,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content="ca-pub-4242010382827250" />
-        <link rel="preload" href="/hero-bg.webp" as="image" fetchPriority="high" />
 
         <Script
           id="json-ld"
