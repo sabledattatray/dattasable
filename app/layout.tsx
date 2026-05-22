@@ -92,11 +92,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
+  const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
+
   return (
     <html lang="en" suppressHydrationWarning className={`dark ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
-        <meta name="google-adsense-account" content="ca-pub-4242010382827250" />
+        <meta name="google-adsense-account" content={formattedAdsenseId} />
 
         <Script
           id="json-ld"

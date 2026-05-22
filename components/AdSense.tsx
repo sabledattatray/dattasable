@@ -10,6 +10,9 @@ interface AdSenseProps {
 }
 
 export default function AdSense({ slot, format = 'auto', responsive = 'true', style }: AdSenseProps) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
+  const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
+
   useEffect(() => {
     try {
       // @ts-expect-error - adsbygoogle is dynamically injected on the window object
@@ -39,7 +42,7 @@ export default function AdSense({ slot, format = 'auto', responsive = 'true', st
       <ins
         className="adsbygoogle"
         style={{ display: 'block', minWidth: '250px' }}
-        data-ad-client="ca-pub-4242010382827250"
+        data-ad-client={formattedAdsenseId}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive}

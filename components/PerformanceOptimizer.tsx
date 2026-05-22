@@ -17,13 +17,16 @@ export default function PerformanceOptimizer({
   const [loadAdSense, setLoadAdSense] = useState(false);
   const [loadAnalytics, setLoadAnalytics] = useState(false);
 
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
+  const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const ua = navigator.userAgent;
     
-    // 1. Identify specific AdSense verification bots (must load immediately)
-    const isAdSenseVerificationBot = /adsbot|mediapartners|ads-bot|google-display-ads-bot/i.test(ua);
+    // 1. Identify specific AdSense verification bots and search indexers (must load immediately)
+    const isAdSenseVerificationBot = /adsbot|mediapartners|ads-bot|google-display-ads-bot|googlebot/i.test(ua);
 
     if (isAdSenseVerificationBot) {
       setLoadAdSense(true);
@@ -88,7 +91,7 @@ export default function PerformanceOptimizer({
       {loadAdSense && (
         <Script
           id="adsense-init"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
           strategy="afterInteractive"
           crossOrigin="anonymous"
         />
