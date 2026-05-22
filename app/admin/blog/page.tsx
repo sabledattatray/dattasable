@@ -184,78 +184,78 @@ export default function AdminBlog() {
           )}
         </AnimatePresence>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ position: 'relative', width: '300px' }}>
-            <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+        <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between mb-4">
+          <div className="relative w-full sm:w-80">
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input 
               type="text" 
               placeholder="Search articles..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              style={{ 
-                width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', 
-                background: '#ffffff', border: '1px solid #e2e8f0', 
-                borderRadius: '12px', color: '#0f172a', fontSize: '14px', outline: 'none'
-              }} 
+              className="w-full bg-white border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500 transition-colors shadow-sm placeholder-slate-400 font-medium"
             />
           </div>
-          <Link href="/admin/editor" style={{ background: '#000', color: '#fff', fontWeight: 600, padding: '0.75rem 1.5rem', borderRadius: '12px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link href="/admin/editor" className="bg-slate-950 hover:bg-slate-850 text-white font-semibold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors w-full sm:w-auto text-center">
             <Plus size={18} /> Write New Story
           </Link>
         </div>
 
-        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Story</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Category</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Visibility</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Reach</th>
-                <th style={{ padding: '1.25rem 1.5rem', fontSize: '13px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((post) => (
-                <tr key={post.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = '#fcfdfe'} onMouseLeave={e => e.currentTarget.style.background = 'none'}>
-                  <td style={{ padding: '1.5rem' }}>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>{post.title}</div>
-                    <div style={{ fontSize: '13px', color: '#64748b', marginTop: '4px' }}>{post.date} &bull; /blog/{post.slug}</div>
-                  </td>
-                  <td style={{ padding: '1.5rem' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 600, background: '#f0fdf4', padding: '4px 12px', borderRadius: '6px', color: '#16a34a', textTransform: 'uppercase' }}>{post.category}</span>
-                  </td>
-                  <td style={{ padding: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: post.status === 'Published' ? '#22c55e' : '#00C9F2' }} />
-                      <span style={{ fontSize: '14px', color: post.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 600 }}>{post.status}</span>
-                    </div>
-                  </td>
-                  <td style={{ padding: '1.5rem', color: '#0f172a', fontWeight: 600 }}>{post.views}</td>
-                  <td style={{ padding: '1.5rem' }}>
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <Link 
-                        href={`/admin/editor?id=${post.id}`}
-                        style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s', display: 'flex', textDecoration: 'none' }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9', e.currentTarget.style.color = '#0f172a')}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
-                      >
-                        <Edit2 size={18} />
-                      </Link>
-                      <button 
-                        onClick={() => handleDeleteClick(post.id)} 
-                        style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(201, 243, 29, 0.05)', e.currentTarget.style.color = 'var(--accent)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
-                      >
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
+        <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full min-w-[900px] border-collapse text-left">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50">
+                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Story</th>
+                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Category</th>
+                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Visibility</th>
+                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Reach</th>
+                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filtered.map((post) => (
+                  <tr key={post.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                    <td className="px-6 py-4 max-w-[400px]">
+                      <div className="line-clamp-2 text-sm font-semibold text-slate-900 leading-snug" title={post.title}>{post.title}</div>
+                      <div className="text-xs text-slate-400 font-medium mt-1">{post.date} &bull; /blog/{post.slug}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="inline-flex items-center text-[10px] font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full uppercase tracking-wider">{post.category}</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        post.status === 'Published' 
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
+                          : 'bg-blue-50 text-blue-700 border border-blue-100'
+                      }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${post.status === 'Published' ? 'bg-emerald-500' : 'bg-blue-500'}`} />
+                        {post.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm font-semibold text-slate-600">{post.views}</td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                        <Link 
+                          href={`/admin/editor?id=${post.id}`}
+                          className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all"
+                          title="Edit"
+                        >
+                          <Edit2 size={16} />
+                        </Link>
+                        <button 
+                          onClick={() => handleDeleteClick(post.id)} 
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          title="Delete"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

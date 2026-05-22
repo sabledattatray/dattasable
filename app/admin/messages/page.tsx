@@ -16,14 +16,19 @@ const initialMessages = [
 export default function MessagesInbox() {
   const [messages, setMessages] = useState(initialMessages);
   const [selected, setSelected] = useState<typeof initialMessages[0] | null>(null);
+  const [isDetailViewMobile, setIsDetailViewMobile] = useState(false);
   const [search, setSearch] = useState('');
 
   const filtered = messages.filter(m => m.name.toLowerCase().includes(search.toLowerCase()) || m.subject.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '1.5rem', height: 'calc(100vh - 200px)' }}>
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-[calc(100vh-220px)]">
       {/* List */}
-      <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+      <div 
+        className={`${
+          selected && isDetailViewMobile ? 'hidden lg:flex' : 'flex'
+        } flex-col overflow-hidden bg-white border border-slate-200 rounded-[24px] shadow-sm lg:col-span-2`}
+      >
         <div style={{ padding: '1rem', borderBottom: '1px solid #f1f5f9' }}>
           <div style={{ position: 'relative' }}>
             <Search size={14} style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
@@ -46,7 +51,10 @@ export default function MessagesInbox() {
           {filtered.map((msg) => (
             <div
               key={msg.id}
-              onClick={() => setSelected(msg)}
+              onClick={() => {
+                setSelected(msg);
+                setIsDetailViewMobile(true);
+              }}
               style={{
                 padding: '1.25rem',
                 borderBottom: '1px solid #f1f5f9',
@@ -71,7 +79,11 @@ export default function MessagesInbox() {
       </div>
 
       {/* Content */}
-      <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+      <div 
+        className={`${
+          !selected || !isDetailViewMobile ? 'hidden lg:flex' : 'flex'
+        } flex-col overflow-hidden bg-white border border-slate-200 rounded-[24px] shadow-sm lg:col-span-3`}
+      >
         <AnimatePresence mode="wait">
           {selected ? (
             <motion.div
@@ -81,8 +93,14 @@ export default function MessagesInbox() {
               exit={{ opacity: 0, y: -10 }}
               style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
             >
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ padding: '1.5rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div className="flex gap-3 items-center">
+                  <button 
+                    onClick={() => setIsDetailViewMobile(false)}
+                    className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
                   <div style={{ width: 42, height: 42, borderRadius: '12px', background: 'linear-gradient(135deg, #f1f5f9, #e2e8f0)', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 600, fontSize: '14px' }}>
                     {selected.name.charAt(0)}
                   </div>

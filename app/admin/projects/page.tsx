@@ -58,91 +58,98 @@ export default function ProjectsManager() {
   const filtered = projects.filter(p => p.title.toLowerCase().includes(search.toLowerCase()) || p.client.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div className="flex flex-col gap-6">
       {/* Action Bar */}
-      <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', padding: '1.25rem', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-        <div style={{ position: 'relative', width: 320 }}>
-          <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+      <div className="bg-white border border-slate-200 p-5 rounded-3xl flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between shadow-sm">
+        <div className="relative w-full sm:w-80">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="Search projects..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            style={{
-              width: '100%', padding: '0.6rem 1rem 0.6rem 2.75rem',
-              background: '#f8fafc', border: '1px solid #e2e8f0',
-              borderRadius: '10px', color: '#0f172a', fontSize: '0.875rem',
-              outline: 'none'
-            }}
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500 transition-colors placeholder-slate-400 font-medium"
           />
         </div>
-        <button onClick={handleOpenAdd} style={{ background: '#000', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '10px', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button onClick={handleOpenAdd} className="bg-slate-950 hover:bg-slate-850 text-white border-none py-2.5 px-4 rounded-xl font-semibold text-sm cursor-pointer flex items-center justify-center gap-2 shadow-sm transition-colors w-full sm:w-auto">
           <Plus size={18} /> Add New Project
         </button>
       </div>
 
       {/* Projects Table */}
-      <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.02)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Project</th>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Client</th>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Stack</th>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Status</th>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Views</th>
-              <th style={{ padding: '1.25rem', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((p) => (
-              <tr key={p.id} style={{ borderBottom: '1px solid #f1f5f9' }} className="hover:bg-slate-50 transition-colors">
-                <td style={{ padding: '1.25rem' }}>
-                  <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '14px' }}>{p.title}</div>
-                  <div style={{ fontSize: '13px', color: '#64748b' }}>{p.category}</div>
-                </td>
-                <td style={{ padding: '1.25rem', fontSize: '0.875rem', color: '#0f172a', fontWeight: 500 }}>{p.client}</td>
-                <td style={{ padding: '1.25rem' }}>
-                  <span style={{ fontSize: '13px', background: '#f1f5f9', padding: '4px 10px', borderRadius: '6px', color: '#64748b', fontWeight: 600 }}>{p.tool}</span>
-                </td>
-                <td style={{ padding: '1.25rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: p.status === 'Published' ? '#22c55e' : '#00C9F2' }} />
-                    <span style={{ fontSize: '14px', color: p.status === 'Published' ? '#16a34a' : '#00C9F2', fontWeight: 600 }}>{p.status}</span>
-                  </div>
-                </td>
-                <td style={{ padding: '1.25rem', fontSize: '0.875rem', color: '#94a3b8', fontWeight: 600 }}>{p.views}</td>
-                <td style={{ padding: '1.25rem', textAlign: 'right' }}>
-                  <div className="flex gap-2 justify-end">
-                    <button 
-                      onClick={() => handleOpenEdit(p)} 
-                      style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                      onMouseEnter={e => (e.currentTarget.style.background = '#f1f5f9', e.currentTarget.style.color = '#0f172a')}
-                      onMouseLeave={e => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
-                    >
-                      <Edit2 size={16} />
-                    </button>
-                    <button 
-                      style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                      onMouseEnter={e => (e.currentTarget.style.background = '#f1f5f9', e.currentTarget.style.color = '#0f172a')}
-                      onMouseLeave={e => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
-                    >
-                      <Eye size={16} />
-                    </button>
-                    <button 
-                      onClick={() => handleDelete(p.id)} 
-                      style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '8px', borderRadius: '8px', transition: 'all 0.2s' }}
-                      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(201, 243, 29, 0.05)', e.currentTarget.style.color = 'var(--accent)')}
-                      onMouseLeave={e => (e.currentTarget.style.background = 'none', e.currentTarget.style.color = '#94a3b8')}
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </td>
+      <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+        <div className="overflow-x-auto w-full">
+          <table className="w-full min-w-[850px] border-collapse text-left">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Project</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Client</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Stack</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Views</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((p) => (
+                <tr key={p.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                  <td className="px-6 py-4">
+                    <div className="font-semibold text-slate-900 text-sm">{p.title}</div>
+                    <div className="text-xs text-slate-400 font-medium mt-1">{p.category}</div>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-slate-650 font-semibold">{p.client}</td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
+                      p.tool === 'Tableau' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
+                      p.tool === 'Power BI' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
+                      p.tool === 'Excel' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                      p.tool === 'Python' ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' :
+                      p.tool === 'Looker' ? 'bg-purple-50 text-purple-700 border border-purple-100' :
+                      'bg-slate-50 text-slate-700 border border-slate-100'
+                    }`}>
+                      {p.tool}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                      p.status === 'Published' 
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
+                        : 'bg-blue-50 text-blue-700 border border-blue-100'
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${p.status === 'Published' ? 'bg-emerald-500' : 'bg-blue-500'}`} />
+                      {p.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-semibold text-slate-400">{p.views}</td>
+                  <td className="px-6 py-4 text-right">
+                    <div className="flex gap-1.5 justify-end">
+                      <button 
+                        onClick={() => handleOpenEdit(p)} 
+                        className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all border-none bg-none cursor-pointer"
+                        title="Edit"
+                      >
+                        <Edit2 size={15} />
+                      </button>
+                      <button 
+                        className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all border-none bg-none cursor-pointer"
+                        title="View"
+                      >
+                        <Eye size={15} />
+                      </button>
+                      <button 
+                        onClick={() => handleDelete(p.id)} 
+                        className="p-2 text-slate-400 hover:text-red-650 hover:bg-red-50 rounded-lg transition-all border-none bg-none cursor-pointer"
+                        title="Delete"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Edit/Add Modal */}

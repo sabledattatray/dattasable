@@ -9,51 +9,54 @@ const testimonials = [
 
 export default function AdminTestimonials() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between mb-2">
         <div>
-          <h2 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: 600 }}>Client Testimonials</h2>
-          <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>Review and approve client feedback for your portfolio</p>
+          <h2 className="text-2xl font-bold text-slate-900">Client Testimonials</h2>
+          <p className="text-sm text-slate-500 mt-1 font-medium">Review and approve client feedback for your portfolio</p>
         </div>
-        <div style={{ position: 'relative', width: '320px' }}>
-          <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-          <input type="text" placeholder="Search feedback..." style={{ width: '100%', padding: '0.8rem 1rem 0.8rem 2.75rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', color: '#0f172a', fontSize: '14px', fontWeight: 500 }} />
+        <div className="relative w-full sm:w-80">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input 
+            type="text" 
+            placeholder="Search feedback..." 
+            className="w-full bg-white border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500 transition-colors shadow-sm placeholder-slate-400 font-medium" 
+          />
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '2rem' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.map((t) => (
-          <div key={t.id} style={{ 
-            background: '#ffffff', 
-            border: '1px solid #e2e8f0', 
-            borderRadius: '28px',
-            padding: '2.25rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.75rem' }}>
-              <div style={{ display: 'flex', gap: '4px' }}>
-                {[...Array(t.rating)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}
+          <div key={t.id} className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+            <div className="flex justify-between items-start mb-5">
+              <div className="flex gap-0.5 text-amber-400">
+                {[...Array(t.rating)].map((_, i) => <Star key={i} size={15} fill="currentColor" stroke="currentColor" />)}
               </div>
-              <div style={{ fontSize: '13px', background: t.status === 'Approved' ? '#f0fdf4' : '#f5f3ff', color: t.status === 'Approved' ? '#16a34a' : '#00C9F2', padding: '5px 12px', borderRadius: '8px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                t.status === 'Approved' 
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
+                  : 'bg-blue-50 text-blue-700 border border-blue-100'
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${t.status === 'Approved' ? 'bg-emerald-500' : 'bg-blue-500'}`} />
                 {t.status}
-              </div>
+              </span>
             </div>
-            <p style={{ color: '#334155', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2rem', fontStyle: 'italic', fontWeight: 500 }}>
+            <p className="text-slate-600 font-medium italic text-[14px] leading-relaxed mb-6 flex-1">
               "{t.content}"
             </p>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', fontWeight: 600, fontSize: '14px' }}>
+            <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 font-bold text-sm select-none shadow-sm">
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <div style={{ fontSize: '1rem', fontWeight: 600, color: '#0f172a' }}>{t.name}</div>
-                  <div style={{ fontSize: '14px', color: '#64748b', fontWeight: 500 }}>{t.role} @ {t.company}</div>
+                  <div className="text-sm font-bold text-slate-900">{t.name}</div>
+                  <div className="text-xs text-slate-400 font-semibold">{t.role} @ {t.company}</div>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button style={{ width: 36, height: 36, borderRadius: '10px', background: '#f0fdf4', border: '1px solid #bbf7d0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#16a34a', cursor: 'pointer', transition: 'transform 0.2s' }} onMouseDown={e => e.currentTarget.style.transform = 'scale(0.9)'} onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}><CheckCircle size={18} /></button>
-                <button style={{ width: 36, height: 36, borderRadius: '10px', background: 'rgba(201, 243, 29, 0.05)', border: '1px solid rgba(201, 243, 29, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', cursor: 'pointer', transition: 'transform 0.2s' }} onMouseDown={e => e.currentTarget.style.transform = 'scale(0.9)'} onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}><XCircle size={18} /></button>
+              <div className="flex gap-1.5">
+                <button className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-all border-none flex items-center justify-center cursor-pointer" title="Approve"><CheckCircle size={16} /></button>
+                <button className="w-9 h-9 rounded-lg bg-red-50 text-red-650 hover:bg-red-150 transition-all border-none flex items-center justify-center cursor-pointer" title="Decline"><XCircle size={16} /></button>
               </div>
             </div>
           </div>
