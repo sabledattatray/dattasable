@@ -1,11 +1,15 @@
 'use client';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Plus, Search, Edit2, Trash2, ExternalLink,
-  ChevronLeft, ChevronRight, X, Image as ImageIcon,
-  Save, Eye
-} from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Eye, X, Save } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
+
+const toolColors: Record<string, { bg: string; color: string }> = {
+  Tableau:  { bg: 'rgba(59,130,246,0.1)',  color: '#3b82f6' },
+  'Power BI': { bg: 'rgba(245,158,11,0.1)', color: '#f59e0b' },
+  Excel:    { bg: 'rgba(16,185,129,0.1)',  color: '#10b981' },
+  Python:   { bg: 'rgba(99,102,241,0.1)',  color: '#6366f1' },
+  Looker:   { bg: 'rgba(168,85,247,0.1)',  color: '#a855f7' },
+};
 
 const initialProjects = [
   { id: 1, title: 'Sales Performance Dashboard', category: 'Dashboard', tool: 'Tableau', client: 'RetailMax', status: 'Published', views: '1.2K' },
@@ -15,215 +19,177 @@ const initialProjects = [
   { id: 5, title: 'E-Commerce Suite', category: 'Dashboard', tool: 'Tableau', client: 'D2C Brand', status: 'Published', views: '920' },
 ];
 
+const emptyForm = { title: '', category: 'Dashboard', tool: 'Tableau', client: '', status: 'Published' };
+
 export default function ProjectsManager() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  const css = isDark
+    ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', hoverBg: 'rgba(255,255,255,0.02)' }
+    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', hoverBg: 'rgba(0,0,0,0.015)' };
+
   const [projects, setProjects] = useState(initialProjects);
   const [editing, setEditing] = useState<any>(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [formData, setFormData] = useState({ title: '', category: 'Dashboard', tool: 'Tableau', client: '', status: 'Published' });
+  const [form, setForm] = useState(emptyForm);
 
-  const handleOpenEdit = (p: any) => {
-    setEditing(p);
-    setFormData({ title: p.title, category: p.category, tool: p.tool, client: p.client, status: p.status });
-  };
-
-  const handleOpenAdd = () => {
-    setEditing(null);
-    setFormData({ title: '', category: 'Dashboard', tool: 'Tableau', client: '', status: 'Published' });
-    setIsAddModalOpen(true);
-  };
+  const openEdit = (p: any) => { setEditing(p); setForm({ title: p.title, category: p.category, tool: p.tool, client: p.client, status: p.status }); setModalOpen(true); };
+  const openAdd = () => { setEditing(null); setForm(emptyForm); setModalOpen(true); };
+  const closeModal = () => { setModalOpen(false); setEditing(null); };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editing) {
-      setProjects(projects.map(p => p.id === editing.id ? { ...p, ...formData } : p));
+      setProjects(ps => ps.map(p => p.id === editing.id ? { ...p, ...form } : p));
     } else {
-      const newProj = {
-        id: projects.length + 1,
-        ...formData,
-        views: '0'
-      };
-      setProjects([newProj, ...projects]);
+      setProjects(ps => [{ id: Date.now(), ...form, views: '0' }, ...ps]);
     }
-    setEditing(null);
-    setIsAddModalOpen(false);
+    closeModal();
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('Delete this project?')) {
-      setProjects(projects.filter(p => p.id !== id));
-    }
-  };
+  const handleDelete = (id: number) => setProjects(ps => ps.filter(p => p.id !== id));
 
-  const filtered = projects.filter(p => p.title.toLowerCase().includes(search.toLowerCase()) || p.client.toLowerCase().includes(search.toLowerCase()));
+  const filtered = projects.filter(p =>
+    p.title.toLowerCase().includes(search.toLowerCase()) ||
+    p.client.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const InputStyle = { width: '100%', padding: '11px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 11, fontSize: 13, color: css.text, outline: 'none', boxSizing: 'border-box' as const, fontFamily: "'Inter', sans-serif" };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Action Bar */}
-      <div className="bg-white border border-slate-200 p-5 rounded-3xl flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between shadow-sm">
-        <div className="relative w-full sm:w-80">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search projects..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500 transition-colors placeholder-slate-400 font-medium"
-          />
+    <div style={{ padding: '32px 28px', minHeight: '100%' }}>
+
+      {/* Modal */}
+      {modalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: isDark ? 'rgba(0,0,0,0.7)' : 'rgba(15,23,42,0.35)', backdropFilter: 'blur(8px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 24, padding: '32px', width: '100%', maxWidth: 560, boxShadow: css.hoverShadow }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
+              <h3 style={{ fontSize: 20, fontWeight: 800, color: css.text, margin: 0 }}>{editing ? 'Edit Project' : 'New Project'}</h3>
+              <button onClick={closeModal} style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, padding: 4 }}><X size={20} /></button>
+            </div>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>Project Title</label>
+                  <input required value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="e.g. Sales Dashboard" style={InputStyle}
+                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>Client</label>
+                  <input required value={form.client} onChange={e => setForm(f => ({ ...f, client: e.target.value }))} placeholder="Client name" style={InputStyle}
+                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>Category</label>
+                  <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))} style={InputStyle}>
+                    {['Dashboard', 'Analysis', 'Report', 'Automation'].map(o => <option key={o}>{o}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>Tool</label>
+                  <select value={form.tool} onChange={e => setForm(f => ({ ...f, tool: e.target.value }))} style={InputStyle}>
+                    {['Tableau', 'Power BI', 'Excel', 'Python', 'Looker'].map(o => <option key={o}>{o}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>Status</label>
+                <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} style={InputStyle}>
+                  <option>Published</option><option>Draft</option>
+                </select>
+              </div>
+              <div style={{ display: 'flex', gap: 10, paddingTop: 8 }}>
+                <button type="button" onClick={closeModal} style={{ flex: 1, padding: '12px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 11, color: css.text, fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>Cancel</button>
+                <button type="submit" style={{ flex: 1, padding: '12px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 11, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+                  <Save size={15} /> {editing ? 'Update' : 'Publish'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <button onClick={handleOpenAdd} className="bg-slate-950 hover:bg-slate-850 text-white border-none py-2.5 px-4 rounded-xl font-semibold text-sm cursor-pointer flex items-center justify-center gap-2 shadow-sm transition-colors w-full sm:w-auto">
-          <Plus size={18} /> Add New Project
-        </button>
+      )}
+
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
+        <div>
+          <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Content</p>
+          <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Projects</h1>
+          <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>{filtered.length} project{filtered.length !== 1 ? 's' : ''}</p>
+        </div>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
+            <Search size={14} color={css.muted} />
+            <input type="text" placeholder="Search projects..." value={search} onChange={e => setSearch(e.target.value)}
+              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 180 }} />
+          </div>
+          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40`, whiteSpace: 'nowrap' }}>
+            <Plus size={17} /> Add Project
+          </button>
+        </div>
       </div>
 
-      {/* Projects Table */}
-      <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
-        <div className="overflow-x-auto w-full">
-          <table className="w-full min-w-[850px] border-collapse text-left">
+      {/* Table */}
+      <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', minWidth: 780, borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Project</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Client</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Stack</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Views</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+              <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
+                {['Project', 'Client', 'Tool', 'Status', 'Views', 'Actions'].map(h => (
+                  <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {filtered.map((p) => (
-                <tr key={p.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="font-semibold text-slate-900 text-sm">{p.title}</div>
-                    <div className="text-xs text-slate-400 font-medium mt-1">{p.category}</div>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-slate-650 font-semibold">{p.client}</td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
-                      p.tool === 'Tableau' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
-                      p.tool === 'Power BI' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
-                      p.tool === 'Excel' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
-                      p.tool === 'Python' ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' :
-                      p.tool === 'Looker' ? 'bg-purple-50 text-purple-700 border border-purple-100' :
-                      'bg-slate-50 text-slate-700 border border-slate-100'
-                    }`}>
-                      {p.tool}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      p.status === 'Published' 
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
-                        : 'bg-blue-50 text-blue-700 border border-blue-100'
-                    }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${p.status === 'Published' ? 'bg-emerald-500' : 'bg-blue-500'}`} />
-                      {p.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm font-semibold text-slate-400">{p.views}</td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex gap-1.5 justify-end">
-                      <button 
-                        onClick={() => handleOpenEdit(p)} 
-                        className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all border-none bg-none cursor-pointer"
-                        title="Edit"
-                      >
-                        <Edit2 size={15} />
-                      </button>
-                      <button 
-                        className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all border-none bg-none cursor-pointer"
-                        title="View"
-                      >
-                        <Eye size={15} />
-                      </button>
-                      <button 
-                        onClick={() => handleDelete(p.id)} 
-                        className="p-2 text-slate-400 hover:text-red-650 hover:bg-red-50 rounded-lg transition-all border-none bg-none cursor-pointer"
-                        title="Delete"
-                      >
-                        <Trash2 size={15} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {filtered.length === 0 && (
+                <tr><td colSpan={6} style={{ padding: '48px', textAlign: 'center', color: css.muted, fontSize: 14 }}>No projects found.</td></tr>
+              )}
+              {filtered.map((p, i) => {
+                const tool = toolColors[p.tool] || { bg: 'rgba(100,116,139,0.1)', color: '#64748b' };
+                return (
+                  <tr key={p.id}
+                    style={{ borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none', transition: 'background 0.15s' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+                  >
+                    <td style={{ padding: '16px 20px', maxWidth: 300 }}>
+                      <div style={{ fontSize: 13.5, fontWeight: 700, color: css.text, marginBottom: 3 }}>{p.title}</div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{p.category}</div>
+                    </td>
+                    <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.muted, whiteSpace: 'nowrap' }}>{p.client}</td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, background: tool.bg, color: tool.color, border: `1px solid ${tool.color}30`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' }}>{p.tool}</span>
+                    </td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, background: p.status === 'Published' ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', color: p.status === 'Published' ? '#10b981' : '#f59e0b', border: `1px solid ${p.status === 'Published' ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: p.status === 'Published' ? '#10b981' : '#f59e0b' }} />{p.status}
+                      </span>
+                    </td>
+                    <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{p.views}</td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        {[
+                          { Icon: Edit2, action: () => openEdit(p), title: 'Edit', hoverColor: css.accent },
+                          { Icon: Trash2, action: () => handleDelete(p.id), title: 'Delete', hoverColor: '#ef4444' },
+                        ].map(({ Icon, action, title, hoverColor }) => (
+                          <button key={title} onClick={action} title={title}
+                            style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = hoverColor; (e.currentTarget as HTMLElement).style.borderColor = `${hoverColor}50`; (e.currentTarget as HTMLElement).style.background = `${hoverColor}08`; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
+                          ><Icon size={14} /></button>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </div>
-
-      {/* Edit/Add Modal */}
-      <AnimatePresence>
-        {(editing || isAddModalOpen) && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.3)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
-            onClick={() => { setEditing(null); setIsAddModalOpen(false); }}
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              onClick={e => e.stopPropagation()}
-              style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 32, width: '100%', maxWidth: 700, padding: '3rem', boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                <h2 style={{ fontSize: '1.75rem', fontWeight: 600, color: '#0f172a' }}>
-                  {editing ? 'Edit Project' : 'Create Project'}
-                </h2>
-                <button onClick={() => { setEditing(null); setIsAddModalOpen(false); }} style={{ background: '#f1f5f9', border: 'none', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b' }}>
-                  <X size={20} />
-                </button>
-              </div>
-
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Project Title</label>
-                    <input type="text" required value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 500 }} />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Category</label>
-                    <select value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 600 }}>
-                      <option>Dashboard</option>
-                      <option>Analysis</option>
-                      <option>Report</option>
-                      <option>Automation</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Client Name</label>
-                    <input type="text" required value={formData.client} onChange={e => setFormData({ ...formData, client: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 500 }} />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Primary Tool</label>
-                    <select value={formData.tool} onChange={e => setFormData({ ...formData, tool: e.target.value })} style={{ width: '100%', padding: '0.8rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, color: '#0f172a', fontWeight: 600 }}>
-                      <option>Tableau</option>
-                      <option>Power BI</option>
-                      <option>Excel</option>
-                      <option>Python</option>
-                      <option>Looker</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 justify-end pt-6" style={{ borderTop: '1px solid #f1f5f9' }}>
-                  <button type="button" onClick={() => { setEditing(null); setIsAddModalOpen(false); }} style={{ flex: 1, padding: '0.85rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', color: '#0f172a', fontWeight: 600, cursor: 'pointer' }}>Discard</button>
-                  <button type="submit" style={{ flex: 1, padding: '0.85rem', background: '#000', color: '#fff', fontWeight: 600, border: 'none', borderRadius: '12px', cursor: 'pointer' }}>
-                    {editing ? 'Update Project' : 'Publish Project'}
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
-

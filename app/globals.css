@@ -1,10 +1,11 @@
+@import "tailwindcss";
+
 :root {
   --font-syne: 'Syne', sans-serif;
   --font-inter: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-@import "tailwindcss";
 
 @theme {
   --breakpoint-xs: 400px;
@@ -545,7 +546,7 @@ h1, h2, h3, h4, h5, h6 {
 .bg-slate-800 { background-color: #1e293b !important; }
 
 [type='text'], [type='password'], [type='email'], [type='number'], [type='url'], [type='tel'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='time'], [type='week'], [multiple], textarea, select {
-  border-color: #cbd5e1 !important;
+  border-color: #cbd5e1;
 }
 
 /* Crosshair Decorator */
@@ -792,3 +793,15 @@ h1, h2, h3, h4, h5, h6 {
     transparent
   );
 }
+
+
+/* ──────────────────────────────────────────────────────────
+   ADMIN DASHBOARD — base reset (layout is handled inline)
+   ────────────────────────────────────────────────────────── */
+
+body:has(.admin-layout-root) {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+

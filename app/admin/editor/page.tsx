@@ -7,14 +7,21 @@ import { ArrowLeft, Save, Eye, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTheme } from '@/components/ThemeProvider';
 
 function EditorContent() {
   const { postMetadata, updatePostMetadata, blocks, setBlocks } = useEditorStore();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get('id');
+  const [previewMode, setPreviewMode] = useState(false);
 
-  // Load existing post if editId is present
+  const css = isDark
+    ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
+    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
+
   useEffect(() => {
     if (editId) {
       const saved = localStorage.getItem('admin_posts');
@@ -23,20 +30,12 @@ function EditorContent() {
         const post = posts.find((p: any) => p.id.toString() === editId);
         if (post) {
           updatePostMetadata({
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
+            title: post.title, slug: post.slug, excerpt: post.excerpt,
             categories: [post.category || 'Tech Trends'],
-            status: post.status,
-            date: post.date,
-            featuredImage: post.image || '',
+            status: post.status, date: post.date, featuredImage: post.image || '',
           });
-          // Hydrate blocks from content
-          if (post.blocks && post.blocks.length > 0) {
-            setBlocks(post.blocks);
-          } else if (post.content) {
-            setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
-          }
+          if (post.blocks?.length > 0) setBlocks(post.blocks);
+          else if (post.content) setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
         }
       }
     }
@@ -45,115 +44,92 @@ function EditorContent() {
   const handlePublish = (status: 'Draft' | 'Published') => {
     const saved = localStorage.getItem('admin_posts');
     const posts = saved ? JSON.parse(saved) : [];
-    
-    // Compile content from blocks
     const compiledContent = blocks.map(b => b.content).join('');
-
     const postData = {
       id: editId ? parseInt(editId) : Date.now(),
       title: postMetadata.title || 'Untitled Post',
       slug: postMetadata.slug || (postMetadata.title || 'untitled-post').toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
       category: postMetadata.categories[0] || 'Tech Trends',
-      status: status,
-      date: postMetadata.date,
-      views: editId ? posts.find((p:any) => p.id.toString() === editId)?.views : '0',
-      excerpt: postMetadata.excerpt,
-      content: compiledContent,
-      blocks: blocks,
-      image: postMetadata.featuredImage || '/images/blog/bi-career.png'
+      status, date: postMetadata.date,
+      views: editId ? posts.find((p: any) => p.id.toString() === editId)?.views : '0',
+      excerpt: postMetadata.excerpt, content: compiledContent, blocks,
+      image: postMetadata.featuredImage || '/images/blog/bi-career.png',
     };
-
-    let updatedPosts;
-    if (editId) {
-      updatedPosts = posts.map((p: any) => p.id.toString() === editId ? postData : p);
-    } else {
-      updatedPosts = [postData, ...posts];
-    }
-
+    const updatedPosts = editId
+      ? posts.map((p: any) => p.id.toString() === editId ? postData : p)
+      : [postData, ...posts];
     localStorage.setItem('admin_posts', JSON.stringify(updatedPosts));
     router.push('/admin/blog');
   };
 
-  const [previewMode, setPreviewMode] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      // Auto-save logic could go here
-    }, 30000);
-    return () => clearInterval(timer);
-  }, []);
-
-
   return (
-    <div className={`flex flex-col h-screen ${previewMode ? 'bg-white' : 'bg-[#f8fafc]'} text-slate-900 transition-colors`}>
-      {/* Top Navbar */}
-      <header className={`h-16 border-b border-slate-200 bg-white shadow-sm flex items-center justify-between px-6 shrink-0 z-20 ${previewMode ? 'hidden' : 'flex'}`}>
-        <div className="flex items-center gap-4">
-          <Link href="/admin/blog" className="text-slate-400 hover:text-slate-600 transition-colors">
-            <ArrowLeft size={20} />
-          </Link>
-          <div className="w-px h-6 bg-slate-200 mx-1"></div>
-          <MainToolbar />
-        </div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: previewMode ? css.surface : css.bg, color: css.text, transition: 'background 0.3s' }}>
 
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setPreviewMode(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
-          >
-            <Eye size={16} /> Preview
-          </button>
-          <button 
-            onClick={() => handlePublish('Draft')}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
-          >
-            <Save size={16} /> Save Draft
-          </button>
-          <button 
-            onClick={() => handlePublish('Published')}
-            className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-sm"
-          >
-            <Send size={16} /> Publish
-          </button>
-        </div>
-      </header>
+      {/* Top bar */}
+      {!previewMode && (
+        <header style={{
+          height: 56, background: css.surface, borderBottom: `1px solid ${css.border}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '0 20px', flexShrink: 0, zIndex: 20,
+          boxShadow: isDark ? '0 1px 0 rgba(255,255,255,0.03)' : '0 1px 0 rgba(0,0,0,0.04)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <Link href="/admin/blog" style={{ color: css.muted, display: 'flex', alignItems: 'center', transition: 'color 0.15s' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = css.text}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = css.muted}
+            >
+              <ArrowLeft size={20} />
+            </Link>
+            <div style={{ width: 1, height: 24, background: css.border }} />
+            <MainToolbar />
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.borderColor = css.accent; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; }}
+            >
+              <Eye size={15} /> Preview
+            </button>
+            <button onClick={() => handlePublish('Draft')} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: 'none', border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.background = css.surface2; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.background = 'none'; }}
+            >
+              <Save size={15} /> Save Draft
+            </button>
+            <button onClick={() => handlePublish('Published')} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', boxShadow: `0 4px 12px ${css.accent}40` }}>
+              <Send size={15} /> Publish
+            </button>
+          </div>
+        </header>
+      )}
 
-      {/* Floating Exit Preview Button */}
+      {/* Exit preview button */}
       {previewMode && (
-        <button 
-          onClick={() => setPreviewMode(false)}
-          className="fixed top-6 left-1/2 -translate-x-1/2 px-6 py-2 bg-slate-900 text-white font-bold rounded-full shadow-2xl z-50 hover:bg-slate-800 transition-transform hover:scale-105 flex items-center gap-2 text-sm"
-        >
-          <Eye size={16} /> Exit Preview Mode
+        <button onClick={() => setPreviewMode(false)} style={{ position: 'fixed', top: 24, left: '50%', transform: 'translateX(-50%)', padding: '10px 24px', background: isDark ? '#1e293b' : '#0f172a', color: '#fff', fontWeight: 700, borderRadius: 999, boxShadow: '0 8px 24px rgba(0,0,0,0.3)', zIndex: 50, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
+          <Eye size={15} /> Exit Preview
         </button>
       )}
 
-      {/* Main Workspace */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Editor Area */}
-        <main className={`flex-1 overflow-y-auto relative scroll-smooth bg-slate-50/30 ${previewMode ? 'max-w-5xl mx-auto w-full' : ''}`}>
-          <div className="p-6 lg:p-10">
+      {/* Main workspace */}
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        <main style={{ flex: 1, overflowY: 'auto', background: css.bg, padding: previewMode ? '60px 40px' : '40px 40px' }}>
+          <div style={{ maxWidth: previewMode ? 860 : 800, margin: '0 auto' }}>
             {!previewMode && (
-              <div className="max-w-4xl mx-auto mb-6">
-                <div className="mb-6 pb-6 border-b border-slate-300 mt-4">
-                  <input 
-                    type="text" 
-                    placeholder="Post Title..."
-                    value={postMetadata.title}
-                    onChange={(e) => updatePostMetadata({ title: e.target.value })}
-                    className="w-full text-4xl font-extrabold text-slate-900 bg-transparent outline-none placeholder:text-slate-400 font-syne"
-                  />
-                </div>
+              <div style={{ marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${css.border}` }}>
+                <input
+                  type="text"
+                  placeholder="Post Title..."
+                  value={postMetadata.title}
+                  onChange={e => updatePostMetadata({ title: e.target.value })}
+                  style={{ width: '100%', fontSize: '2.4rem', fontWeight: 900, background: 'none', border: 'none', outline: 'none', color: css.text, letterSpacing: '-0.03em', lineHeight: 1.2, fontFamily: "'Inter', sans-serif" }}
+                />
               </div>
             )}
-            
-            <div className={`${previewMode ? 'max-w-none' : 'max-w-4xl'} mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 min-h-[calc(100vh-250px)]`}>
+            <div style={{ background: css.surface, borderRadius: 16, border: `1px solid ${css.border}`, padding: '32px 40px', minHeight: 'calc(100vh - 300px)', boxShadow: isDark ? '0 4px 24px rgba(0,0,0,0.35)' : '0 4px 24px rgba(0,0,0,0.06)' }}>
               <EditorCanvas />
             </div>
           </div>
         </main>
-
-        {/* Settings Sidebar */}
         {!previewMode && <EditorSidebar />}
       </div>
     </div>
@@ -162,7 +138,7 @@ function EditorContent() {
 
 export default function AdvancedEditorPage() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading editor...</div>}>
+    <Suspense fallback={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>Loading editor...</div>}>
       <EditorContent />
     </Suspense>
   );

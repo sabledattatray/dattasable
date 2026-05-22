@@ -16,8 +16,8 @@ async function main() {
   console.log('Updating Admin User...');
   await prisma.user.upsert({
     where: { email },
-    update: { password: hashedPassword, role: 'ADMIN' },
-    create: { email, name: 'Admin User', password: hashedPassword, role: 'ADMIN' },
+    update: { password: hashedPassword, role: 'ADMIN', emailVerified: new Date() },
+    create: { email, name: 'Admin User', password: hashedPassword, role: 'ADMIN', emailVerified: new Date() },
   });
 
   // 2. Seed original blogs with FULL content

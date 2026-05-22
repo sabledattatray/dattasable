@@ -1,212 +1,118 @@
 'use client';
 import { useEditorStore } from '@/store/editorStore';
-import { 
-  Bold, Italic, Underline, Strikethrough, 
-  AlignLeft, AlignCenter, AlignRight, 
-  List, ListOrdered, Quote, Code, 
-  Heading1, Heading2, Heading3, 
-  Link as LinkIcon, Undo, Redo, 
-  Palette, Highlighter, Eraser, 
-  Type, ChevronDown, Plus, Minus
+import { useTheme } from '@/components/ThemeProvider';
+import {
+  Bold, Italic, Underline, Strikethrough,
+  AlignLeft, AlignCenter, AlignRight,
+  List, ListOrdered, Quote, Code,
+  Heading1, Heading2, Heading3,
+  Link as LinkIcon, Undo, Redo,
+  Palette, Eraser,
 } from 'lucide-react';
 import { useState } from 'react';
 
-interface ToolbarButtonProps {
-  onClick: () => void;
-  isActive?: boolean;
-  children: React.ReactNode;
-  title: string;
-  disabled?: boolean;
-}
-
-const ToolbarButton = ({ onClick, isActive = false, children, title, disabled }: ToolbarButtonProps) => (
-  <button
-    onClick={(e) => { e.preventDefault(); onClick(); }}
-    disabled={disabled}
-    className={`p-2 rounded hover:bg-slate-100 transition-colors ${isActive ? 'bg-slate-100 text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'} ${disabled ? 'opacity-30 cursor-not-allowed' : ''}`}
-    title={title}
-  >
-    {children}
-  </button>
-);
-
 export default function MainToolbar() {
   const { activeEditor } = useEditorStore();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [showColors, setShowColors] = useState(false);
 
   const editor = activeEditor;
-  const colors = ['#0f172a', '#c9f31d', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'];
+  const colors = ['#0f172a', '#6366f1', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#8b5cf6'];
+
+  const btnBase: React.CSSProperties = {
+    padding: '6px', borderRadius: 7, border: 'none', cursor: 'pointer',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    transition: 'background 0.15s, color 0.15s', background: 'none',
+  };
+
+  const Btn = ({ onClick, isActive, title, disabled, children }: { onClick: () => void; isActive?: boolean; title: string; disabled?: boolean; children: React.ReactNode }) => (
+    <button
+      onClick={e => { e.preventDefault(); onClick(); }}
+      disabled={disabled}
+      title={title}
+      style={{
+        ...btnBase,
+        color: isActive ? (isDark ? '#fff' : '#0f172a') : (isDark ? '#64748b' : '#64748b'),
+        background: isActive ? (isDark ? 'rgba(99,102,241,0.2)' : 'rgba(79,70,229,0.08)') : 'none',
+        opacity: disabled ? 0.3 : 1,
+        cursor: disabled ? 'not-allowed' : 'pointer',
+      }}
+      onMouseEnter={e => { if (!disabled && !isActive) (e.currentTarget as HTMLElement).style.background = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'; }}
+      onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'none'; }}
+    >
+      {children}
+    </button>
+  );
+
+  const Divider = () => (
+    <div style={{ width: 1, height: 20, background: isDark ? '#1e293b' : '#e2e8f0', margin: '0 4px', flexShrink: 0 }} />
+  );
 
   return (
-    <div className={`editor-toolbar flex flex-wrap items-center gap-1 transition-all duration-300 ${!editor ? 'grayscale' : ''}`}>
-      <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().undo().run()} title="Undo">
-          <Undo size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().redo().run()} title="Redo">
-          <Redo size={16} />
-        </ToolbarButton>
-      </div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2, filter: !editor ? 'grayscale(1) opacity(0.5)' : 'none' }}>
+      {/* Undo/Redo */}
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().undo().run()} title="Undo"><Undo size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().redo().run()} title="Redo"><Redo size={15} /></Btn>
+      <Divider />
 
-      <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleBold().run()} 
-          isActive={editor?.isActive('bold')}
-          title="Bold"
-        >
-          <Bold size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleItalic().run()} 
-          isActive={editor?.isActive('italic')}
-          title="Italic"
-        >
-          <Italic size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleUnderline().run()} 
-          isActive={editor?.isActive('underline')}
-          title="Underline"
-        >
-          <Underline size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleStrike().run()} 
-          isActive={editor?.isActive('strike')}
-          title="Strikethrough"
-        >
-          <Strikethrough size={16} />
-        </ToolbarButton>
-      </div>
+      {/* Inline formatting */}
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleBold().run()} isActive={editor?.isActive('bold')} title="Bold"><Bold size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleItalic().run()} isActive={editor?.isActive('italic')} title="Italic"><Italic size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleUnderline().run()} isActive={editor?.isActive('underline')} title="Underline"><Underline size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleStrike().run()} isActive={editor?.isActive('strike')} title="Strike"><Strikethrough size={15} /></Btn>
+      <Divider />
 
-      <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} 
-          isActive={editor?.isActive('heading', { level: 1 })}
-          title="Heading 1"
-        >
-          <Heading1 size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} 
-          isActive={editor?.isActive('heading', { level: 2 })}
-          title="Heading 2"
-        >
-          <Heading2 size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} 
-          isActive={editor?.isActive('heading', { level: 3 })}
-          title="Heading 3"
-        >
-          <Heading3 size={16} />
-        </ToolbarButton>
-      </div>
+      {/* Headings */}
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} isActive={editor?.isActive('heading', { level: 1 })} title="H1"><Heading1 size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} isActive={editor?.isActive('heading', { level: 2 })} title="H2"><Heading2 size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} isActive={editor?.isActive('heading', { level: 3 })} title="H3"><Heading3 size={15} /></Btn>
+      <Divider />
 
-      <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().setTextAlign('left').run()} 
-          isActive={editor?.isActive({ textAlign: 'left' })}
-          title="Align Left"
-        >
-          <AlignLeft size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().setTextAlign('center').run()} 
-          isActive={editor?.isActive({ textAlign: 'center' })}
-          title="Align Center"
-        >
-          <AlignCenter size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().setTextAlign('right').run()} 
-          isActive={editor?.isActive({ textAlign: 'right' })}
-          title="Align Right"
-        >
-          <AlignRight size={16} />
-        </ToolbarButton>
-      </div>
+      {/* Alignment */}
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().setTextAlign('left').run()} isActive={editor?.isActive({ textAlign: 'left' })} title="Left"><AlignLeft size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().setTextAlign('center').run()} isActive={editor?.isActive({ textAlign: 'center' })} title="Center"><AlignCenter size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().setTextAlign('right').run()} isActive={editor?.isActive({ textAlign: 'right' })} title="Right"><AlignRight size={15} /></Btn>
+      <Divider />
 
-      <div className="flex items-center gap-1 border-r border-slate-200 pr-1 mr-1">
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleBulletList().run()} 
-          isActive={editor?.isActive('bulletList')}
-          title="Bullet List"
-        >
-          <List size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleOrderedList().run()} 
-          isActive={editor?.isActive('orderedList')}
-          title="Ordered List"
-        >
-          <ListOrdered size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleBlockquote().run()} 
-          isActive={editor?.isActive('blockquote')}
-          title="Quote"
-        >
-          <Quote size={16} />
-        </ToolbarButton>
-        <ToolbarButton disabled={!editor} 
-          onClick={() => editor?.chain().focus().toggleCodeBlock().run()} 
-          isActive={editor?.isActive('codeBlock')}
-          title="Code Block"
-        >
-          <Code size={16} />
-        </ToolbarButton>
-      </div>
+      {/* Lists */}
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleBulletList().run()} isActive={editor?.isActive('bulletList')} title="Bullet List"><List size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleOrderedList().run()} isActive={editor?.isActive('orderedList')} title="Ordered List"><ListOrdered size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleBlockquote().run()} isActive={editor?.isActive('blockquote')} title="Quote"><Quote size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().toggleCodeBlock().run()} isActive={editor?.isActive('codeBlock')} title="Code Block"><Code size={15} /></Btn>
+      <Divider />
 
-      <div className="flex items-center gap-1 relative">
-        <ToolbarButton disabled={!editor} onClick={() => setShowColors(!showColors)} title="Colors">
-          <Palette size={16} />
-        </ToolbarButton>
-        
+      {/* Colors */}
+      <div style={{ position: 'relative' }}>
+        <Btn disabled={!editor} onClick={() => setShowColors(v => !v)} title="Colors"><Palette size={15} /></Btn>
         {showColors && (
-          <div className="absolute top-full left-0 mt-2 p-3 bg-white border border-slate-200 rounded-xl shadow-xl z-50 animate-in fade-in zoom-in-95 duration-200 min-w-[200px]">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Text Color</div>
-            <div className="flex flex-wrap gap-2 mb-3">
+          <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, background: isDark ? '#0f172a' : '#fff', border: `1px solid ${isDark ? '#1e293b' : '#e2e8f0'}`, borderRadius: 14, padding: 14, zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.2)', minWidth: 200 }}>
+            <p style={{ fontSize: 9, fontWeight: 800, color: isDark ? '#64748b' : '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px' }}>Text Color</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
               {colors.map(c => (
-                <button 
-                  key={c} 
-                  onClick={() => { editor?.chain().focus().setColor(c).run(); setShowColors(false); }}
-                  className="w-6 h-6 rounded-full border border-slate-100 hover:scale-110 transition-transform shadow-sm" 
-                  style={{ backgroundColor: c }}
+                <button key={c} onClick={() => { editor?.chain().focus().setColor(c).run(); setShowColors(false); }}
+                  style={{ width: 22, height: 22, borderRadius: '50%', background: c, border: `2px solid ${isDark ? '#1e293b' : '#f1f5f9'}`, cursor: 'pointer', transition: 'transform 0.1s' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1.2)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1)'}
                 />
               ))}
             </div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Highlight</div>
-            <div className="flex flex-wrap gap-2">
-              {colors.map(c => (
-                <button 
-                  key={`bg-${c}`} 
-                  onClick={() => { editor?.chain().focus().setHighlight({ color: c }).run(); setShowColors(false); }}
-                  className="w-6 h-6 rounded border border-slate-100 hover:scale-110 transition-transform flex items-center justify-center text-[10px] text-white shadow-sm" 
-                  style={{ backgroundColor: c }}
-                >
-                  H
-                </button>
+            <p style={{ fontSize: 9, fontWeight: 800, color: isDark ? '#64748b' : '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px' }}>Highlight</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {['#fef08a', '#bfdbfe', '#bbf7d0', '#fecaca', '#ddd6fe', '#fbcfe8', '#ffedd5', '#e0f2fe'].map(c => (
+                <button key={c} onClick={() => { editor?.chain().focus().setHighlight({ color: c }).run(); setShowColors(false); }}
+                  style={{ width: 22, height: 22, borderRadius: 6, background: c, border: `2px solid ${isDark ? '#1e293b' : '#f1f5f9'}`, cursor: 'pointer', transition: 'transform 0.1s' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1.2)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1)'}
+                />
               ))}
             </div>
           </div>
         )}
-
-        <ToolbarButton disabled={!editor} 
-          onClick={() => {
-            const url = window.prompt('URL', editor?.getAttributes('link').href);
-            if (url && editor) editor.chain().focus().setLink({ href: url }).run();
-          }} 
-          isActive={editor?.isActive('link')}
-          title="Insert Link"
-        >
-          <LinkIcon size={16} />
-        </ToolbarButton>
-
-        <ToolbarButton disabled={!editor} onClick={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()} title="Clear Formatting">
-          <Eraser size={16} />
-        </ToolbarButton>
       </div>
+
+      <Btn disabled={!editor} onClick={() => { const url = window.prompt('URL', editor?.getAttributes('link').href); if (url && editor) editor.chain().focus().setLink({ href: url }).run(); }} isActive={editor?.isActive('link')} title="Insert Link"><LinkIcon size={15} /></Btn>
+      <Btn disabled={!editor} onClick={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()} title="Clear Formatting"><Eraser size={15} /></Btn>
     </div>
   );
 }

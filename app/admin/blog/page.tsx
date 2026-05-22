@@ -1,17 +1,14 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FileText, Plus, Search, Filter, Edit2, Trash2, Eye, 
-  ChevronLeft, Bold, Italic, Link as LinkIcon, 
-  Heading1, Heading2, List, Image as ImageIcon, Code, Save, Settings,
-  AlignLeft, AlignCenter, AlignRight, AlignJustify, Type, Highlighter, Underline
+import {
+  FileText, Plus, Search, Trash2, Edit2,
+  ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
+  Type, Highlighter, Save, Settings, Image as ImageIcon
 } from 'lucide-react';
-
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { useTheme } from '@/components/ThemeProvider';
 
 const initialPosts = mainPosts.map((p, idx) => ({
   id: idx + 1,
@@ -23,61 +20,70 @@ const initialPosts = mainPosts.map((p, idx) => ({
   views: Math.floor(Math.random() * 2000).toString(),
   excerpt: p.excerpt,
   content: p.content,
-  image: p.image
+  image: p.image,
 }));
 
 export default function AdminBlog() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const [posts, setPosts] = useState<any[]>([]);
   const [categories, setCategories] = useState(['Tech Trends', 'Tutorials', 'Technical', 'BI Tools', 'SQL']);
   const [newCat, setNewCat] = useState('');
   const [search, setSearch] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState('document');
   const [formData, setFormData] = useState({
-    title: '', slug: '', category: 'Tech Trends', status: 'Draft', 
-    excerpt: '', content: '', metaTitle: '', metaDesc: '', image: '', date: ''
+    title: '', slug: '', category: 'Tech Trends', status: 'Draft',
+    excerpt: '', content: '', image: '', date: '',
   });
-
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
   const [showHighlightPicker, setShowHighlightPicker] = useState(false);
-
   const editorRef = useRef<HTMLDivElement>(null);
 
-  // Load posts on mount
+  // Theme-aware CSS variables
+  const css = isDark
+    ? {
+        bg: '#0a0f1e',
+        surface: '#0f172a',
+        surface2: '#1e293b',
+        border: '#1e293b',
+        text: '#f1f5f9',
+        muted: '#64748b',
+        accent: '#6366f1',
+        inputBg: '#1e293b',
+        shadow: '0 4px 24px rgba(0,0,0,0.35)',
+        hoverBg: 'rgba(255,255,255,0.03)',
+      }
+    : {
+        bg: '#f0f4ff',
+        surface: '#ffffff',
+        surface2: '#f8faff',
+        border: '#e2e8f0',
+        text: '#0f172a',
+        muted: '#64748b',
+        accent: '#4f46e5',
+        inputBg: '#f8faff',
+        shadow: '0 4px 24px rgba(0,0,0,0.07)',
+        hoverBg: 'rgba(0,0,0,0.02)',
+      };
+
   useEffect(() => {
     const saved = localStorage.getItem('admin_posts');
-    if (saved) {
-      setPosts(JSON.parse(saved));
-    } else {
-      setPosts(initialPosts);
-    }
+    setPosts(saved ? JSON.parse(saved) : initialPosts);
   }, []);
 
-  // Sync contentEditable with formData
   useEffect(() => {
     if (isEditing && editorRef.current && editorRef.current.innerHTML !== formData.content) {
       editorRef.current.innerHTML = formData.content;
     }
   }, [isEditing]);
 
-  const handleEditorChange = () => {
-    if (editorRef.current) {
-      setFormData({ ...formData, content: editorRef.current.innerHTML });
-    }
-  };
-
-  const execCommand = (command: string, value: string = '') => {
-    document.execCommand(command, false, value);
-    handleEditorChange();
-  };
-
-  // Save helper
-  const saveToDisk = (updatedPosts: any[]) => {
-    setPosts(updatedPosts);
-    localStorage.setItem('admin_posts', JSON.stringify(updatedPosts));
+  const saveToDisk = (updated: any[]) => {
+    setPosts(updated);
+    localStorage.setItem('admin_posts', JSON.stringify(updated));
   };
 
   const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
@@ -99,155 +105,355 @@ export default function AdminBlog() {
         status: post.status,
         excerpt: post.excerpt || '',
         content: post.content || '',
-        metaTitle: post.title,
-        metaDesc: post.excerpt || '',
         image: post.image || '',
-        date: post.date
+        date: post.date,
       });
     } else {
       setEditingPost(null);
       setFormData({
         title: '', slug: '', category: 'Tech Trends', status: 'Draft',
-        excerpt: '', content: '', metaTitle: '', metaDesc: '', image: '',
-        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        excerpt: '', content: '', image: '',
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       });
     }
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    let updated;
-    if (editingPost) {
-      updated = posts.map(p => p.id === editingPost.id ? { ...p, ...formData, status: 'Published' } : p);
-    } else {
-      const newPost = { id: Date.now(), ...formData, status: 'Published', views: '0' };
-      updated = [newPost, ...posts];
-    }
+    const updated = editingPost
+      ? posts.map(p => p.id === editingPost.id ? { ...p, ...formData, status: 'Published' } : p)
+      : [{ id: Date.now(), ...formData, status: 'Published', views: '0' }, ...posts];
     saveToDisk(updated);
     setIsEditing(false);
   };
 
-  const handleDeleteClick = (id: number) => {
-    setDeleteId(id);
-    setShowDeleteModal(true);
-  };
-
   const confirmDelete = () => {
     if (deleteId) {
-      const updated = posts.filter(p => p.id !== deleteId);
-      saveToDisk(updated);
+      saveToDisk(posts.filter(p => p.id !== deleteId));
       setShowDeleteModal(false);
       setDeleteId(null);
     }
+  };
+
+  const handleEditorChange = () => {
+    if (editorRef.current) setFormData(f => ({ ...f, content: editorRef.current!.innerHTML }));
+  };
+
+  const execCommand = (cmd: string, val = '') => {
+    document.execCommand(cmd, false, val);
+    handleEditorChange();
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result as string });
-      };
+      reader.onloadend = () => setFormData(f => ({ ...f, image: reader.result as string }));
       reader.readAsDataURL(file);
     }
   };
 
-  const triggerUpload = () => {
-    document.getElementById('featured-image-input')?.click();
-  };
-
+  // ═══════════════════════════════════════════════════════
+  //  BLOG LIST VIEW
+  // ═══════════════════════════════════════════════════════
   if (!isEditing) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {/* Custom Delete Modal */}
-        <AnimatePresence>
-          {showDeleteModal && (
-            <motion.div 
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(8px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}
-            >
-              <motion.div 
-                initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2.5rem', maxWidth: '400px', textAlign: 'center', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}
-              >
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(201, 243, 29, 0.05)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-                  <Trash2 size={30} />
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.75rem' }}>Delete Story?</h3>
-                <p style={{ color: '#64748b', fontSize: '14px', lineHeight: 1.6, marginBottom: '2rem' }}>This action is permanent and cannot be undone. The story will be removed from your public blog.</p>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <button onClick={() => setShowDeleteModal(false)} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                  <button onClick={confirmDelete} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', background: 'var(--accent)', border: 'none', color: '#000', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '4px 0' }}>
 
-        <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between mb-4">
-          <div className="relative w-full sm:w-80">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input 
-              type="text" 
-              placeholder="Search articles..." 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500 transition-colors shadow-sm placeholder-slate-400 font-medium"
-            />
+        {/* Delete Confirmation Modal */}
+        {showDeleteModal && (
+          <div
+            style={{
+              position: 'fixed', inset: 0,
+              background: isDark ? 'rgba(0,0,0,0.7)' : 'rgba(15,23,42,0.3)',
+              backdropFilter: 'blur(8px)',
+              zIndex: 2000,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+            }}
+          >
+            <div
+              style={{
+                background: css.surface,
+                border: `1px solid ${css.border}`,
+                borderRadius: 24,
+                padding: '2.5rem',
+                maxWidth: 400,
+                width: '100%',
+                textAlign: 'center',
+                boxShadow: css.shadow,
+              }}
+            >
+              <div
+                style={{
+                  width: 64, height: 64, borderRadius: '50%',
+                  background: 'rgba(239,68,68,0.1)',
+                  color: '#ef4444',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 20px',
+                  fontSize: 28,
+                }}
+              >
+                🗑️
+              </div>
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: css.text, margin: '0 0 10px' }}>
+                Delete this article?
+              </h3>
+              <p style={{ color: css.muted, fontSize: 14, lineHeight: 1.6, margin: '0 0 28px' }}>
+                This action is permanent and cannot be undone. The story will be removed from your public blog.
+              </p>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button
+                  onClick={() => setShowDeleteModal(false)}
+                  style={{
+                    flex: 1, padding: '12px', borderRadius: 12,
+                    background: css.surface2, border: `1px solid ${css.border}`,
+                    color: css.text, fontWeight: 600, cursor: 'pointer', fontSize: 14,
+                    transition: 'opacity 0.15s',
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  style={{
+                    flex: 1, padding: '12px', borderRadius: 12,
+                    background: '#ef4444', border: 'none',
+                    color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 14,
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
-          <Link href="/admin/editor" className="bg-slate-950 hover:bg-slate-850 text-white font-semibold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors w-full sm:w-auto text-center">
-            <Plus size={18} /> Write New Story
-          </Link>
+        )}
+
+        {/* Page Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>
+              Content
+            </p>
+            <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>
+              Blog Articles
+            </h1>
+            <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0', fontWeight: 500 }}>
+              {filtered.length} article{filtered.length !== 1 ? 's' : ''} {search ? 'found' : 'published'}
+            </p>
+          </div>
+          <button
+            onClick={() => handleOpenEditor()}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
+              border: 'none', color: '#fff',
+              fontWeight: 700, fontSize: 14,
+              padding: '11px 20px', borderRadius: 12,
+              cursor: 'pointer',
+              boxShadow: `0 4px 14px ${css.accent}40`,
+              transition: 'opacity 0.15s',
+            }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.88'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
+          >
+            <Plus size={17} /> Write New Story
+          </button>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
-          <div className="overflow-x-auto w-full">
-            <table className="w-full min-w-[900px] border-collapse text-left">
+        {/* Search Bar */}
+        <div
+          style={{
+            background: css.surface, border: `1px solid ${css.border}`,
+            borderRadius: 16, padding: '14px 20px',
+            display: 'flex', alignItems: 'center', gap: 12,
+            boxShadow: css.shadow,
+          }}
+        >
+          <Search size={16} color={css.muted} style={{ flexShrink: 0 }} />
+          <input
+            type="text"
+            placeholder="Search articles by title..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{
+              flex: 1, background: 'none', border: 'none', outline: 'none',
+              fontSize: 14, color: css.text, fontWeight: 500,
+            }}
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: css.muted, fontSize: 13, fontWeight: 600,
+              }}
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        {/* Articles Table */}
+        <div
+          style={{
+            background: css.surface, border: `1px solid ${css.border}`,
+            borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow,
+          }}
+        >
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', minWidth: 860, borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50">
-                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Story</th>
-                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Category</th>
-                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Visibility</th>
-                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Reach</th>
-                  <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Actions</th>
+                <tr
+                  style={{
+                    background: css.surface2,
+                    borderBottom: `1px solid ${css.border}`,
+                  }}
+                >
+                  {['STORY', 'CATEGORY', 'VISIBILITY', 'REACH', 'ACTIONS'].map(h => (
+                    <th
+                      key={h}
+                      style={{
+                        padding: '14px 20px',
+                        fontSize: 10, fontWeight: 800,
+                        color: css.muted, letterSpacing: '0.1em',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((post) => (
-                  <tr key={post.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-4 max-w-[400px]">
-                      <div className="line-clamp-2 text-sm font-semibold text-slate-900 leading-snug" title={post.title}>{post.title}</div>
-                      <div className="text-xs text-slate-400 font-medium mt-1">{post.date} &bull; /blog/{post.slug}</div>
+                {filtered.length === 0 && (
+                  <tr>
+                    <td colSpan={5} style={{ padding: '48px 20px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+                      No articles found.
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center text-[10px] font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full uppercase tracking-wider">{post.category}</span>
+                  </tr>
+                )}
+                {filtered.map((post, i) => (
+                  <tr
+                    key={post.id}
+                    style={{
+                      borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+                  >
+                    {/* Title */}
+                    <td style={{ padding: '16px 20px', maxWidth: 420 }}>
+                      <div
+                        style={{
+                          fontSize: 13.5, fontWeight: 700, color: css.text,
+                          lineHeight: 1.45,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        } as any}
+                        title={post.title}
+                      >
+                        {post.title}
+                      </div>
+                      <div style={{ fontSize: 11, color: css.muted, marginTop: 4, fontWeight: 500 }}>
+                        {post.date} &bull; /blog/{post.slug}
+                      </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        post.status === 'Published' 
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
-                          : 'bg-blue-50 text-blue-700 border border-blue-100'
-                      }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${post.status === 'Published' ? 'bg-emerald-500' : 'bg-blue-500'}`} />
+
+                    {/* Category */}
+                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          fontSize: 10, fontWeight: 700,
+                          background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
+                          color: css.accent,
+                          border: `1px solid ${css.accent}30`,
+                          padding: '3px 10px', borderRadius: 999,
+                          textTransform: 'uppercase', letterSpacing: '0.07em',
+                        }}
+                      >
+                        {post.category}
+                      </span>
+                    </td>
+
+                    {/* Status */}
+                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
+                      <span
+                        style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 6,
+                          fontSize: 10, fontWeight: 700,
+                          background: post.status === 'Published'
+                            ? 'rgba(16,185,129,0.1)' : 'rgba(59,130,246,0.1)',
+                          color: post.status === 'Published' ? '#10b981' : '#3b82f6',
+                          border: `1px solid ${post.status === 'Published' ? '#10b98130' : '#3b82f630'}`,
+                          padding: '3px 10px', borderRadius: 999,
+                          textTransform: 'uppercase', letterSpacing: '0.07em',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: 6, height: 6, borderRadius: '50%',
+                            background: post.status === 'Published' ? '#10b981' : '#3b82f6',
+                          }}
+                        />
                         {post.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm font-semibold text-slate-600">{post.views}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-2">
-                        <Link 
-                          href={`/admin/editor?id=${post.id}`}
-                          className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all"
+
+                    {/* Views */}
+                    <td style={{ padding: '16px 20px', fontSize: 14, fontWeight: 700, color: css.text, whiteSpace: 'nowrap' }}>
+                      {parseInt(post.views || '0').toLocaleString()}
+                    </td>
+
+                    {/* Actions */}
+                    <td style={{ padding: '16px 20px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <button
+                          onClick={() => handleOpenEditor(post)}
                           title="Edit"
+                          style={{
+                            background: 'none', border: `1px solid ${css.border}`,
+                            borderRadius: 9, padding: '7px', cursor: 'pointer',
+                            color: css.muted, display: 'flex', alignItems: 'center',
+                            transition: 'all 0.15s',
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.color = css.accent;
+                            (e.currentTarget as HTMLElement).style.borderColor = css.accent;
+                            (e.currentTarget as HTMLElement).style.background = `${css.accent}10`;
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.color = css.muted;
+                            (e.currentTarget as HTMLElement).style.borderColor = css.border;
+                            (e.currentTarget as HTMLElement).style.background = 'none';
+                          }}
                         >
-                          <Edit2 size={16} />
-                        </Link>
-                        <button 
-                          onClick={() => handleDeleteClick(post.id)} 
-                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          <Edit2 size={14} />
+                        </button>
+                        <button
+                          onClick={() => { setDeleteId(post.id); setShowDeleteModal(true); }}
                           title="Delete"
+                          style={{
+                            background: 'none', border: `1px solid ${css.border}`,
+                            borderRadius: 9, padding: '7px', cursor: 'pointer',
+                            color: css.muted, display: 'flex', alignItems: 'center',
+                            transition: 'all 0.15s',
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.color = '#ef4444';
+                            (e.currentTarget as HTMLElement).style.borderColor = '#ef444440';
+                            (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)';
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.color = css.muted;
+                            (e.currentTarget as HTMLElement).style.borderColor = css.border;
+                            (e.currentTarget as HTMLElement).style.background = 'none';
+                          }}
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     </td>
@@ -261,196 +467,325 @@ export default function AdminBlog() {
     );
   }
 
+  // ═══════════════════════════════════════════════════════
+  //  EDITOR VIEW
+  // ═══════════════════════════════════════════════════════
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      style={{ 
-        position: 'fixed', inset: 0, background: '#ffffff', 
-        display: 'flex', flexDirection: 'column', color: '#0f172a', zIndex: 1000
+    <div
+      style={{
+        position: 'fixed', inset: 0,
+        background: css.bg,
+        display: 'flex', flexDirection: 'column',
+        color: css.text, zIndex: 1000,
+        fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* WordPress Top Bar */}
-      <header style={{ 
-        height: '56px', background: '#ffffff', borderBottom: '1px solid #e2e8f0', 
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' 
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button 
+      {/* Editor Top Bar */}
+      <header
+        style={{
+          height: 56,
+          background: css.surface,
+          borderBottom: `1px solid ${css.border}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '0 20px',
+          boxShadow: isDark ? '0 1px 0 rgba(255,255,255,0.03)' : '0 1px 0 rgba(0,0,0,0.04)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button
             onClick={() => setIsEditing(false)}
-            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', padding: '8px' }}
+            style={{
+              background: 'none', border: `1px solid ${css.border}`,
+              borderRadius: 9, padding: '7px 12px',
+              cursor: 'pointer', color: css.muted,
+              display: 'flex', alignItems: 'center', gap: 6,
+              fontSize: 13, fontWeight: 600,
+              transition: 'all 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.color = css.text;
+              (e.currentTarget as HTMLElement).style.background = css.surface2;
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.color = css.muted;
+              (e.currentTarget as HTMLElement).style.background = 'none';
+            }}
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={16} /> Back
           </button>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button style={{ background: '#f1f5f9', border: 'none', color: '#0f172a', padding: '6px', borderRadius: '4px' }}><Plus size={20} /></button>
-          </div>
+          <span
+            style={{
+              fontSize: 13, fontWeight: 700,
+              color: css.muted, padding: '3px 10px',
+              background: css.surface2, borderRadius: 8,
+            }}
+          >
+            {editingPost ? 'Editing article' : 'New article'}
+          </span>
         </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <span style={{ fontSize: '14px', color: '#94a3b8' }}>Draft Saved</span>
-          <button style={{ background: 'none', border: 'none', color: '#0f172a', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>Preview</button>
-          <button 
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
+          <button
             onClick={handleSave}
-            style={{ background: '#000', border: 'none', color: '#fff', padding: '6px 16px', borderRadius: '6px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
+            style={{
+              background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
+              border: 'none', color: '#fff',
+              padding: '8px 20px', borderRadius: 10,
+              fontSize: 14, fontWeight: 700, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 7,
+              boxShadow: `0 4px 12px ${css.accent}40`,
+            }}
           >
-            Publish
+            <Save size={15} /> Publish
           </button>
-          <button style={{ background: 'none', border: 'none', color: '#64748b', padding: '8px' }}><Settings size={20} /></button>
         </div>
       </header>
 
-      {/* Editor Main Area */}
+      {/* Editor Main */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        <div style={{ flex: 1, overflowY: 'auto', background: '#ffffff', display: 'flex', justifyContent: 'center', padding: '80px 40px' }}>
-          <div style={{ 
-            width: '100%', maxWidth: '800px',
-            display: 'flex', flexDirection: 'column', gap: '1rem'
-          }}>
-            {/* CONTINUOUS FLOW EDITOR */}
-            <textarea 
-              placeholder="Title" 
+        {/* Writing area */}
+        <div
+          style={{
+            flex: 1, overflowY: 'auto',
+            background: css.bg,
+            display: 'flex', justifyContent: 'center',
+            padding: '60px 40px',
+          }}
+        >
+          <div style={{ width: '100%', maxWidth: 780 }}>
+            {/* Title */}
+            <textarea
+              placeholder="Article title..."
               value={formData.title}
-              onChange={e => setFormData({ ...formData, title: e.target.value })}
-              style={{ 
-                width: '100%', fontSize: '3.8rem', fontWeight: 600, background: 'none', border: 'none', 
-                color: '#0f172a', outline: 'none', resize: 'none',
-                height: 'auto', padding: '0', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: '2rem'
+              onChange={e => setFormData(f => ({ ...f, title: e.target.value }))}
+              rows={2}
+              style={{
+                width: '100%', fontSize: '2.6rem', fontWeight: 800,
+                background: 'none', border: 'none',
+                color: css.text, outline: 'none', resize: 'none',
+                lineHeight: 1.2, letterSpacing: '-0.03em', marginBottom: '1.5rem',
+                fontFamily: "'Inter', sans-serif",
               }}
             />
-            
-            <div style={{ 
-              position: 'sticky', top: '0', zIndex: 10, background: 'rgba(255,255,255,0.9)', 
-              backdropFilter: 'blur(10px)', padding: '12px 0', borderBottom: '1px solid #f1f5f9',
-              display: 'flex', flexWrap: 'wrap', gap: '0.75rem', width: '100%', marginBottom: '2rem'
-            }}>
-              {/* Typography */}
-              <div style={{ display: 'flex', gap: '4px', borderRight: '1px solid #e2e8f0', paddingRight: '0.75rem' }}>
-                <button onClick={() => execCommand('formatBlock', '<h1>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H1</button>
-                <button onClick={() => execCommand('formatBlock', '<h2>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H2</button>
-                <button onClick={() => execCommand('formatBlock', '<h3>')} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer', padding: '4px 8px', fontSize: '14px', fontWeight: 600, borderRadius: '4px' }}>H3</button>
-              </div>
 
-              {/* Formatting */}
-              <div style={{ display: 'flex', gap: '4px', borderRight: '1px solid #e2e8f0', paddingRight: '0.75rem' }}>
-                <button onClick={() => execCommand('bold')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Bold size={18} /></button>
-                <button onClick={() => execCommand('italic')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Italic size={18} /></button>
-                <button onClick={() => execCommand('underline')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Underline size={18} /></button>
-              </div>
-
-              {/* Alignment */}
-              <div style={{ display: 'flex', gap: '4px', borderRight: '1px solid #e2e8f0', paddingRight: '0.75rem' }}>
-                <button onClick={() => execCommand('justifyLeft')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><AlignLeft size={18} /></button>
-                <button onClick={() => execCommand('justifyCenter')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><AlignCenter size={18} /></button>
-                <button onClick={() => execCommand('justifyRight')} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><AlignRight size={18} /></button>
-              </div>
-
-              {/* Colors */}
-              <div style={{ display: 'flex', gap: '8px', position: 'relative' }}>
-                <button onClick={() => setShowTextColorPicker(!showTextColorPicker)} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Type size={18} /></button>
-                {showTextColorPicker && (
-                  <div style={{ position: 'absolute', top: '100%', left: 0, background: '#ffffff', border: '1px solid #e2e8f0', padding: '8px', borderRadius: '12px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                    {['#000000', '#22c55e', '#c9f31d', '#3b82f6', '#10b981', '#f59e0b', '#00C9F2', '#ec4899'].map(c => (
-                      <div key={c} onClick={() => { execCommand('foreColor', c); setShowTextColorPicker(false); }} style={{ width: '20px', height: '20px', background: c, borderRadius: '6px', cursor: 'pointer', border: '1px solid #f1f5f9' }} />
-                    ))}
-                  </div>
-                )}
-                <button onClick={() => setShowHighlightPicker(!showHighlightPicker)} style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '6px' }}><Highlighter size={18} /></button>
-                {showHighlightPicker && (
-                  <div style={{ position: 'absolute', top: '100%', left: 0, background: '#ffffff', border: '1px solid #e2e8f0', padding: '8px', borderRadius: '12px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                    {['transparent', '#fef08a', '#fecaca', '#bfdbfe', '#bbf7d0', '#ffedd5', '#ddd6fe', '#fbcfe8'].map(c => (
-                      <div key={c} onClick={() => { execCommand('hiliteColor', c); setShowHighlightPicker(false); }} style={{ width: '20px', height: '20px', background: c, borderRadius: '6px', cursor: 'pointer', border: '1px solid #f1f5f9' }} />
-                    ))}
-                  </div>
-                )}
-              </div>
+            {/* Toolbar */}
+            <div
+              style={{
+                position: 'sticky', top: 0, zIndex: 10,
+                background: isDark ? 'rgba(10,15,30,0.92)' : 'rgba(240,244,255,0.92)',
+                backdropFilter: 'blur(12px)',
+                padding: '10px 0', borderBottom: `1px solid ${css.border}`,
+                display: 'flex', flexWrap: 'wrap', gap: 8,
+                marginBottom: '1.5rem',
+              }}
+            >
+              {/* Headings */}
+              {['H1', 'H2', 'H3'].map((h, i) => (
+                <button
+                  key={h}
+                  onClick={() => execCommand('formatBlock', `<h${i + 1}>`)}
+                  style={{
+                    background: css.surface, border: `1px solid ${css.border}`,
+                    color: css.text, cursor: 'pointer',
+                    padding: '4px 10px', fontSize: 13, fontWeight: 700, borderRadius: 7,
+                  }}
+                >
+                  {h}
+                </button>
+              ))}
+              <div style={{ width: 1, background: css.border, margin: '0 4px' }} />
+              {[
+                { cmd: 'bold', Icon: Bold },
+                { cmd: 'italic', Icon: Italic },
+                { cmd: 'underline', Icon: Underline },
+              ].map(({ cmd, Icon }) => (
+                <button
+                  key={cmd}
+                  onClick={() => execCommand(cmd)}
+                  style={{
+                    background: 'none', border: 'none', color: css.muted,
+                    cursor: 'pointer', padding: '6px', borderRadius: 7,
+                    display: 'flex', alignItems: 'center', transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = css.surface2; (e.currentTarget as HTMLElement).style.color = css.text; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = css.muted; }}
+                >
+                  <Icon size={17} />
+                </button>
+              ))}
+              <div style={{ width: 1, background: css.border, margin: '0 4px' }} />
+              {[
+                { cmd: 'justifyLeft', Icon: AlignLeft },
+                { cmd: 'justifyCenter', Icon: AlignCenter },
+                { cmd: 'justifyRight', Icon: AlignRight },
+              ].map(({ cmd, Icon }) => (
+                <button
+                  key={cmd}
+                  onClick={() => execCommand(cmd)}
+                  style={{
+                    background: 'none', border: 'none', color: css.muted,
+                    cursor: 'pointer', padding: '6px', borderRadius: 7,
+                    display: 'flex', alignItems: 'center', transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = css.surface2; (e.currentTarget as HTMLElement).style.color = css.text; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = css.muted; }}
+                >
+                  <Icon size={17} />
+                </button>
+              ))}
             </div>
 
-            <div 
+            {/* Content editable */}
+            <div
               ref={editorRef}
               contentEditable
+              suppressContentEditableWarning
               onInput={handleEditorChange}
-              style={{ 
-                width: '100%', fontSize: '1.2rem', lineHeight: 1.8, background: 'none', border: 'none', 
-                color: '#334155', outline: 'none', minHeight: '800px',
-                fontFamily: 'Inter, sans-serif', padding: '0'
+              style={{
+                width: '100%', fontSize: '1.15rem', lineHeight: 1.85,
+                background: 'none', border: 'none',
+                color: css.text, outline: 'none', minHeight: 600,
+                fontFamily: "'Inter', sans-serif",
               }}
             />
           </div>
         </div>
 
-        {/* SUPERIOR SIDEBAR */}
-        <aside style={{ width: '340px', background: '#f8fafc', borderLeft: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column' }}>
-          <div style={{ padding: '1.5rem', borderBottom: '1px solid #e2e8f0' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Post Settings</h3>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              {/* Category Dropdown */}
+        {/* Settings sidebar */}
+        <aside
+          style={{
+            width: 310, background: css.surface,
+            borderLeft: `1px solid ${css.border}`,
+            display: 'flex', flexDirection: 'column',
+            overflowY: 'auto',
+          }}
+        >
+          <div style={{ padding: '20px 20px', borderBottom: `1px solid ${css.border}` }}>
+            <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
+              Post Settings
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              {/* Category */}
               <div>
-                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Category</label>
-                <select 
+                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  Category
+                </label>
+                <select
                   value={formData.category}
-                  onChange={e => setFormData({ ...formData, category: e.target.value })}
-                  style={{ width: '100%', background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', padding: '10px', borderRadius: '8px', outline: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 600 }}
+                  onChange={e => setFormData(f => ({ ...f, category: e.target.value }))}
+                  style={{
+                    width: '100%', background: css.inputBg,
+                    border: `1px solid ${css.border}`, color: css.text,
+                    padding: '10px 12px', borderRadius: 10, outline: 'none',
+                    cursor: 'pointer', fontSize: 13, fontWeight: 600,
+                  }}
                 >
                   {categories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
-                <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-                  <input 
-                    type="text" value={newCat} onChange={e => setNewCat(e.target.value)}
-                    placeholder="New cat..."
-                    style={{ flex: 1, background: 'none', border: 'none', borderBottom: '1px solid #cbd5e1', color: '#0f172a', fontSize: '14px', outline: 'none' }}
+                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+                  <input
+                    type="text" value={newCat}
+                    onChange={e => setNewCat(e.target.value)}
+                    placeholder="New category..."
+                    style={{
+                      flex: 1, background: css.inputBg,
+                      border: `1px solid ${css.border}`, color: css.text,
+                      padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12,
+                    }}
                   />
-                  <button onClick={handleAddCategory} style={{ background: '#0f172a', border: 'none', borderRadius: '6px', padding: '4px 12px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', color: '#fff' }}>ADD</button>
+                  <button
+                    onClick={handleAddCategory}
+                    style={{
+                      background: css.accent, border: 'none',
+                      borderRadius: 8, padding: '8px 12px',
+                      fontSize: 11, fontWeight: 700, cursor: 'pointer', color: '#fff',
+                    }}
+                  >
+                    ADD
+                  </button>
                 </div>
               </div>
 
-              {/* URL Slug */}
+              {/* Slug */}
               <div>
-                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>URL Slug</label>
-                <input 
+                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  URL Slug
+                </label>
+                <input
                   type="text" value={formData.slug}
-                  onChange={e => setFormData({ ...formData, slug: e.target.value })}
-                  style={{ width: '100%', background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', padding: '10px', borderRadius: '8px', outline: 'none', fontSize: '12px' }}
+                  onChange={e => setFormData(f => ({ ...f, slug: e.target.value }))}
+                  style={{
+                    width: '100%', background: css.inputBg,
+                    border: `1px solid ${css.border}`, color: css.text,
+                    padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                  }}
                 />
               </div>
 
-              {/* Featured Image */}
+              {/* Featured image */}
               <div>
-                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Featured Image</label>
-                <div 
-                  onClick={triggerUpload}
-                  style={{ width: '100%', height: '140px', background: '#ffffff', border: '1px dashed #cbd5e1', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', overflow: 'hidden' }}
+                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  Featured Image
+                </label>
+                <div
+                  onClick={() => document.getElementById('featured-image-input')?.click()}
+                  style={{
+                    width: '100%', height: 130,
+                    background: css.inputBg,
+                    border: `2px dashed ${css.border}`,
+                    borderRadius: 12,
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', overflow: 'hidden', position: 'relative',
+                  }}
                 >
                   {formData.image ? (
                     <Image src={formData.image} fill style={{ objectFit: 'cover' }} alt="Featured" />
-
                   ) : (
-                    <div style={{ textAlign: 'center' }}>
-                      <ImageIcon size={24} style={{ color: '#cbd5e1', marginBottom: '8px' }} />
-                      <div style={{ fontSize: '13px', color: '#94a3b8' }}>Set featured image</div>
-                    </div>
+                    <>
+                      <ImageIcon size={22} color={css.muted} />
+                      <span style={{ fontSize: 12, color: css.muted, marginTop: 6, fontWeight: 500 }}>
+                        Set featured image
+                      </span>
+                    </>
                   )}
                 </div>
                 <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
-                {formData.image && <button onClick={() => setFormData({...formData, image: ''})} style={{ marginTop: '8px', background: 'none', border: 'none', color: 'var(--accent)', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Remove image</button>}
+                {formData.image && (
+                  <button
+                    onClick={() => setFormData(f => ({ ...f, image: '' }))}
+                    style={{ marginTop: 6, background: 'none', border: 'none', color: '#ef4444', fontSize: 12, fontWeight: 600, cursor: 'pointer', padding: 0 }}
+                  >
+                    Remove image
+                  </button>
+                )}
               </div>
 
               {/* Excerpt */}
               <div>
-                <label style={{ display: 'block', fontSize: '13px', color: '#64748b', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>Excerpt</label>
-                <textarea 
+                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  Excerpt
+                </label>
+                <textarea
                   value={formData.excerpt}
-                  onChange={e => setFormData({ ...formData, excerpt: e.target.value })}
-                  style={{ width: '100%', background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', padding: '10px', borderRadius: '8px', outline: 'none', fontSize: '12px', resize: 'none', height: '100px', lineHeight: 1.6 }}
+                  onChange={e => setFormData(f => ({ ...f, excerpt: e.target.value }))}
+                  rows={4}
+                  style={{
+                    width: '100%', background: css.inputBg,
+                    border: `1px solid ${css.border}`, color: css.text,
+                    padding: '10px 12px', borderRadius: 10, outline: 'none',
+                    fontSize: 12, resize: 'none', lineHeight: 1.6,
+                    fontFamily: "'Inter', sans-serif",
+                  }}
                 />
               </div>
             </div>
           </div>
         </aside>
       </div>
-    </motion.div>
+    </div>
   );
 }
