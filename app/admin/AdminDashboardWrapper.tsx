@@ -95,7 +95,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 
       {/* Sidebar Drawer */}
       <aside
-        className={`w-64 bg-white border-r border-slate-200 flex flex-col fixed left-0 top-0 h-full z-40 transition-transform duration-300 ease-in-out md:translate-x-0 ${
+        className={`w-64 bg-white border-r border-slate-200 flex flex-col fixed md:sticky md:h-screen md:top-0 left-0 top-0 h-full z-40 transition-transform duration-300 ease-in-out md:translate-x-0 ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -147,7 +147,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
       </aside>
 
       {/* Main Page Area */}
-      <div className="flex-1 flex flex-col min-h-screen md:pl-64">
+      <div className="flex-1 flex flex-col min-h-screen">
         
         {/* Sticky Top Header */}
         <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-30 shadow-sm">
