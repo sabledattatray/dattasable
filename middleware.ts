@@ -1,17 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const host = request.headers.get('host');
-
-  // 0. Redirect www to non-www
-  if (host?.startsWith('www.')) {
-    const newHost = host.replace('www.', '');
-    url.host = newHost;
-    return NextResponse.redirect(url, 301);
-  }
-
-  // 0.1 Block Suspicious Bots and Scanners
+  // Block Suspicious Bots and Scanners
   const userAgent = request.headers.get('user-agent') || '';
   const path = request.nextUrl.pathname;
   
@@ -41,7 +31,7 @@ export function middleware(request: NextRequest) {
   // Comprehensive Malicious/Aggressive Bot Registry
   const suspiciousBots = /bot|spider|crawl|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix|wget|lynx|perl|php|libwww|apachebench|gobuster|dirbuster|mj12bot|ahrefsbot|semrushbot|dotbot|rogerbot|exabot|gigabot|siteexplorer|openlinkprofiler|spyonweb|petalbot|ia_archiver/i;
   
-  if (suspiciousBots.test(userAgent) && !isFriendlyBot && !isCrawlPath) {
+  if (process.env.NODE_ENV === 'production' && suspiciousBots.test(userAgent) && !isFriendlyBot && !isCrawlPath) {
     return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   }
 
