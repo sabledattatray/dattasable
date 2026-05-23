@@ -41,8 +41,8 @@ const navItems = [
     category: 'Content',
     links: [
       { name: 'Projects', href: '/admin/projects', icon: Briefcase, exact: false, badge: null },
-      { name: 'Blog Posts', href: '/admin/blog', icon: FileText, exact: false, badge: null },
-      { name: 'Page Editor', href: '/admin/editor', icon: Edit, exact: false, badge: null },
+      { name: 'All Posts', href: '/admin/blog', icon: FileText, exact: false, badge: null },
+      { name: 'Write Post', href: '/admin/editor', icon: Edit, exact: false, badge: null },
     ],
   },
   {
