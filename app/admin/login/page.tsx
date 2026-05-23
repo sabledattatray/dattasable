@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-// @ts-ignore - next-auth is not installed in this environment but is required for production Next.js
 import { signIn } from 'next-auth/react';
 import { 
   Mail, 

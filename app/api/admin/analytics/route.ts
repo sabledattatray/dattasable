@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
     let totalViews = 0;
     let uniqueVisitors = 0;
-    let dayCounts: Record<string, number> = {};
+    const dayCounts: Record<string, number> = {};
     let topPages: any[] = [];
 
     if ((prisma as any).pageView) {

@@ -25,51 +25,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "App": [
-        "./admin-dashboard/src/App.tsx"
-      ],
-      "config": [
-        "./admin-dashboard/src/config.ts"
-      ],
-      "components/*": [
-        "./admin-dashboard/src/components/*"
-      ],
-      "config/*": [
-        "./admin-dashboard/src/config/*"
-      ],
-      "data/*": [
-        "./admin-dashboard/src/data/*"
-      ],
-      "helpers/*": [
-        "./admin-dashboard/src/helpers/*"
-      ],
-      "hooks/*": [
-        "./admin-dashboard/src/hooks/*"
-      ],
-      "layouts/*": [
-        "./admin-dashboard/src/layouts/*"
-      ],
-      "lib/*": [
-        "./admin-dashboard/src/lib/*"
-      ],
-      "pages/*": [
-        "./admin-dashboard/src/pages/*"
-      ],
-      "providers/*": [
-        "./admin-dashboard/src/providers/*"
-      ],
-      "reducers/*": [
-        "./admin-dashboard/src/reducers/*"
-      ],
-      "routes/*": [
-        "./admin-dashboard/src/routes/*"
-      ],
-      "theme/*": [
-        "./admin-dashboard/src/theme/*"
-      ],
-      "types/*": [
-        "./admin-dashboard/src/types/*"
       ]
     }
   },

@@ -37,7 +37,7 @@ export default function SchemaForge() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    let jsonLd: any = {
+    const jsonLd: any = {
       "@context": "https://schema.org"
     };
 

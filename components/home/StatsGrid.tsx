@@ -26,7 +26,6 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
   useEffect(() => {
     if (!inView) return;
-    let start = 0;
     const duration = 2000;
     const step = (timestamp: number, startTime: number) => {
       const progress = Math.min((timestamp - startTime) / duration, 1);

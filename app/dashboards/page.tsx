@@ -6,7 +6,24 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { ExternalLink, Filter, BarChart3, TrendingUp, PieChart, Activity, Share2, Code2 } from 'lucide-react';
 
-const dashboards = [
+interface DashboardItem {
+  id: number;
+  title: string;
+  category: string;
+  tool: string;
+  color: string;
+  icon: string;
+  image: string | null;
+  desc: string;
+  embed: string | null;
+  link?: string;
+  isInternal?: boolean;
+  tags: string[];
+  metrics: string[];
+  isNDA?: boolean;
+}
+
+const dashboards: DashboardItem[] = [
   {
     id: 103,
     title: 'Blinkit Sales Dashboard',
@@ -65,6 +82,34 @@ const dashboards = [
     isInternal: true,
     tags: ['FinTech', 'Collections', 'Risk'],
     metrics: ['₹4.82Cr Coll', '94.7% Eff', '22k+ Loans'],
+  },
+  {
+    id: 105,
+    title: 'Revenue Intelligence',
+    category: 'Finance',
+    tool: 'Power BI',
+    color: '#3b82f6',
+    icon: '📈',
+    image: null,
+    desc: 'SQL & Power BI MoM forecasting model displaying revenue streams, conversion drivers, and run-rate variance.',
+    embed: '/dashboards/revenue-intelligence',
+    isInternal: true,
+    tags: ['Revenue', 'Forecasting', 'SQL'],
+    metrics: ['MoM Forecast', 'SQL Native', 'Power BI'],
+  },
+  {
+    id: 106,
+    title: 'Interactive Demo',
+    category: 'Analytics',
+    tool: 'Tableau',
+    color: '#06b6d4',
+    icon: '🎭',
+    image: null,
+    desc: 'Live embedded BI experience showcasing interactive parameters, advanced level-of-detail queries, and custom tooltips.',
+    embed: '/dashboards/interactive',
+    isInternal: true,
+    tags: ['Interactive', 'BI', 'Embedded'],
+    metrics: ['Live Embedded', 'Interactive UX', 'Tableau'],
   },
   // --- SALES (4) ---
   {
@@ -614,7 +659,7 @@ export default function DashboardsPage() {
 
                     <div className="flex gap-2 mb-4">
                       <Link
-                        href={(d as any).link || d.embed || '#'}
+                        href={d.link || d.embed || '#'}
                         className="flex-1 btn-primary flex items-center justify-center gap-2"
                         style={{ fontSize: '0.75rem', height: '38px', whiteSpace: 'nowrap', padding: '0 1rem', textTransform: 'uppercase', fontWeight: 500, letterSpacing: '0.05em' }}
                         target={d.embed && d.embed.startsWith('http') ? "_blank" : undefined}
@@ -638,7 +683,7 @@ export default function DashboardsPage() {
                           
                           let shareUrl = window.location.href;
                           // Use the 'link' property if it exists, otherwise fall back to 'embed' if it's a dedicated page
-                          const targetPath = (d as any).link || d.embed;
+                          const targetPath = d.link || d.embed;
                           if (targetPath) {
                             if (targetPath.startsWith('/')) {
                               shareUrl = window.location.origin + targetPath;

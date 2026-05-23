@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, Phone, Smartphone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Clock, Phone, Smartphone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -40,10 +40,11 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Workspace',
     links: [
-      { label: 'Surgical Tools',   href: '/tools',     icon: Zap },
-      { label: 'Templates Hub',    href: '/templates', icon: Library },
-      { label: 'Workflow Chains',  href: '/chains',    icon: GitBranch },
-      { label: 'Knowledge Hub',    href: '/knowledge', icon: BookOpen },
+      { label: 'Surgical Tools',   href: '/tools',          icon: Zap },
+      { label: 'Templates Hub',    href: '/templates',      icon: Library },
+      { label: 'Workflow Chains',  href: '/chains',         icon: GitBranch },
+      { label: 'Knowledge Hub',    href: '/knowledge',      icon: BookOpen },
+      { label: 'Infrastructure Hub', href: '/infrastructure', icon: Layers },
     ],
   },
   {
