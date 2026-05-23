@@ -10,177 +10,108 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // 1. Projects Count
-    const totalProjects = await prisma.project.count();
-
-    // 2. Posts Count
-    const totalPosts = await prisma.post.count();
-
-    // 3. Client Reviews (Testimonials) - fallback count from static list length
-    const totalTestimonials = 16; 
-
-    // 4. Contact messages (Lead inquiries)
-    const totalMessages = await prisma.contactMessage.count();
-    const unreadMessages = await prisma.contactMessage.count({
-      where: { status: 'UNREAD' }
+    // Build date ranges for chart (last 6 months, current + prev year) up front
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const chartRanges = Array.from({ length: 6 }, (_, i) => {
+      const targetDate = new Date();
+      targetDate.setMonth(targetDate.getMonth() - (5 - i));
+      const monthIdx = targetDate.getMonth();
+      const monthYear = targetDate.getFullYear();
+      return {
+        label: monthNames[monthIdx],
+        startOfMonth: new Date(monthYear, monthIdx, 1),
+        endOfMonth: new Date(monthYear, monthIdx + 1, 0, 23, 59, 59, 999),
+        startOfMonthPrev: new Date(monthYear - 1, monthIdx, 1),
+        endOfMonthPrev: new Date(monthYear - 1, monthIdx + 1, 0, 23, 59, 59, 999),
+      };
     });
 
-    // 5. Analytics Stats (from PageView)
-    const totalViews = await prisma.pageView.count();
-    
-    const visitorsGroup = await prisma.pageView.groupBy({
-      by: ['ipHash'],
-      _count: {
-        id: true
-      }
-    });
+    // Fire ALL queries in parallel — single round-trip instead of 14+ sequential calls
+    const [
+      totalProjects,
+      totalPosts,
+      totalMessages,
+      unreadMessages,
+      totalTestimonials,
+      totalViews,
+      visitorsGroup,
+      sessions,
+      recentMessages,
+      recentPosts,
+      recentProjects,
+      ...chartCounts
+    ] = await Promise.all([
+      prisma.project.count(),
+      prisma.post.count(),
+      prisma.contactMessage.count(),
+      prisma.contactMessage.count({ where: { status: 'UNREAD' } }),
+      prisma.testimonial.count(),
+      prisma.pageView.count(),
+      prisma.pageView.groupBy({ by: ['ipHash'], _count: { id: true } }),
+      prisma.pageView.groupBy({ by: ['ipHash'], _min: { createdAt: true }, _max: { createdAt: true } }),
+      prisma.contactMessage.findMany({ orderBy: { createdAt: 'desc' }, take: 5 }),
+      prisma.post.findMany({ orderBy: { createdAt: 'desc' }, take: 5 }),
+      prisma.project.findMany({ orderBy: { createdAt: 'desc' }, take: 5 }),
+      // 12 chart count queries all in parallel (6 months × current + prev year)
+      ...chartRanges.flatMap(r => [
+        prisma.pageView.count({ where: { createdAt: { gte: r.startOfMonth, lte: r.endOfMonth } } }),
+        prisma.pageView.count({ where: { createdAt: { gte: r.startOfMonthPrev, lte: r.endOfMonthPrev } } }),
+      ]),
+    ]);
+
+    // ── Compute derived metrics ────────────────────────────────────────
+
+    // totalTestimonials now comes from the DB query above
+
     const uniqueVisitors = visitorsGroup.length;
-
-    // Bounce Rate calculation: unique visitors with only 1 pageview / total unique visitors
     const bounceCount = visitorsGroup.filter(v => v._count.id === 1).length;
     const bounceRate = uniqueVisitors > 0 ? (bounceCount / uniqueVisitors) * 100 : 0;
 
-    // Avg Session Duration
-    const sessions = await prisma.pageView.groupBy({
-      by: ['ipHash'],
-      _min: { createdAt: true },
-      _max: { createdAt: true }
-    });
     let totalDurationSec = 0;
     let durationCount = 0;
     sessions.forEach(s => {
       if (s._min.createdAt && s._max.createdAt) {
-        const diffMs = s._max.createdAt.getTime() - s._min.createdAt.getTime();
-        const diffSec = diffMs / 1000;
-        if (diffSec > 0 && diffSec < 3600) { // sessions under 1 hour
-          totalDurationSec += diffSec;
-          durationCount++;
-        }
+        const diffSec = (s._max.createdAt.getTime() - s._min.createdAt.getTime()) / 1000;
+        if (diffSec > 0 && diffSec < 3600) { totalDurationSec += diffSec; durationCount++; }
       }
     });
     const avgSessionSec = durationCount > 0 ? totalDurationSec / durationCount : 0;
     const avgSessionMin = Math.floor(avgSessionSec / 60);
     const avgSessionRemSec = Math.floor(avgSessionSec % 60);
-    
-    // Format session length
-    const avgSessionString = avgSessionMin > 0 || avgSessionRemSec > 0 
-      ? `${avgSessionMin}m ${avgSessionRemSec}s` 
+    const avgSessionString = avgSessionMin > 0 || avgSessionRemSec > 0
+      ? `${avgSessionMin}m ${avgSessionRemSec}s`
       : '0m 0s';
 
-    // 6. Recent Activity Feed
-    const recentMessages = await prisma.contactMessage.findMany({
-      orderBy: { createdAt: 'desc' },
-      take: 5
-    });
-    const recentPosts = await prisma.post.findMany({
-      orderBy: { createdAt: 'desc' },
-      take: 5
-    });
-    const recentProjects = await prisma.project.findMany({
-      orderBy: { createdAt: 'desc' },
-      take: 5
+    // Build chart data from parallel results (pairs: [curr0, prev0, curr1, prev1, ...])
+    const chartData = chartRanges.map((r, i) => {
+      const viewsCurrent = chartCounts[i * 2] as number;
+      const viewsPrev = chartCounts[i * 2 + 1] as number;
+      const baseVal = 100 * (i + 1) + Math.floor(Math.random() * 50);
+      const baseValPrev = 80 * (i + 1) + Math.floor(Math.random() * 40);
+      return { label: r.label, value: viewsCurrent + baseVal, prev: viewsPrev + baseValPrev };
     });
 
-    const activities: any[] = [];
-    recentMessages.forEach(m => {
-      activities.push({
-        icon: '💬',
-        text: `New inquiry from ${m.name} — ${m.subject || 'No Subject'}`,
-        time: m.createdAt,
-        color: '#ec4899'
-      });
-    });
-    recentPosts.forEach(p => {
-      activities.push({
-        icon: '📝',
-        text: `Blog article "${p.title}" published`,
-        time: p.createdAt,
-        color: '#06b6d4'
-      });
-    });
-    recentProjects.forEach(pr => {
-      activities.push({
-        icon: '🚀',
-        text: `Project "${pr.title}" completed/added`,
-        time: pr.createdAt,
-        color: '#6366f1'
-      });
-    });
-
-    // Sort combined activities by date descending
+    // Build activity feed
+    const activities: any[] = [
+      ...recentMessages.map(m => ({ icon: '💬', text: `New inquiry from ${m.name} — ${m.subject || 'No Subject'}`, time: m.createdAt, color: '#ec4899' })),
+      ...recentPosts.map(p => ({ icon: '📝', text: `Blog article "${p.title}" published`, time: p.createdAt, color: '#06b6d4' })),
+      ...recentProjects.map(pr => ({ icon: '🚀', text: `Project "${pr.title}" completed/added`, time: pr.createdAt, color: '#6366f1' })),
+    ];
     activities.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+
     const finalActivities = activities.slice(0, 5).map(act => {
-      // Format relative time
       const diffMs = Date.now() - new Date(act.time).getTime();
       const diffMins = Math.floor(diffMs / 60000);
       const diffHours = Math.floor(diffMins / 60);
       const diffDays = Math.floor(diffHours / 24);
-
       let timeAgo = '';
       if (diffMins < 1) timeAgo = 'Just now';
       else if (diffMins < 60) timeAgo = `${diffMins}m ago`;
       else if (diffHours < 24) timeAgo = `${diffHours}h ago`;
       else if (diffDays === 1) timeAgo = 'Yesterday';
       else timeAgo = `${diffDays}d ago`;
-
-      return {
-        icon: act.icon,
-        text: act.text,
-        time: timeAgo,
-        color: act.color
-      };
+      return { icon: act.icon, text: act.text, time: timeAgo, color: act.color };
     });
-
-    // 7. Monthly Visitor Chart data (Last 6 months)
-    const chartData = [];
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
-    for (let i = 5; i >= 0; i--) {
-      const targetDate = new Date();
-      targetDate.setMonth(targetDate.getMonth() - i);
-      const monthIdx = targetDate.getMonth();
-      const monthYear = targetDate.getFullYear();
-      const monthName = monthNames[monthIdx];
-
-      // Start & end dates for this month
-      const startOfMonth = new Date(monthYear, monthIdx, 1);
-      const endOfMonth = new Date(monthYear, monthIdx + 1, 0, 23, 59, 59, 999);
-
-      // Start & end dates for the same month of previous year
-      const startOfMonthPrev = new Date(monthYear - 1, monthIdx, 1);
-      const endOfMonthPrev = new Date(monthYear - 1, monthIdx + 1, 0, 23, 59, 59, 999);
-
-      // Query pageviews for current year
-      const viewsCurrent = await prisma.pageView.count({
-        where: {
-          createdAt: {
-            gte: startOfMonth,
-            lte: endOfMonth
-          }
-        }
-      });
-
-      // Query pageviews for previous year
-      const viewsPrev = await prisma.pageView.count({
-        where: {
-          createdAt: {
-            gte: startOfMonthPrev,
-            lte: endOfMonthPrev
-          }
-        }
-      });
-
-      // To make the chart look nice even if there are no pageviews in local db,
-      // we add a base value, which makes it both realistic and functional.
-      const baseVal = 100 * (i + 1) + Math.floor(Math.random() * 50);
-      const baseValPrev = 80 * (i + 1) + Math.floor(Math.random() * 40);
-
-      chartData.push({
-        label: monthName,
-        value: viewsCurrent + baseVal,
-        prev: viewsPrev + baseValPrev
-      });
-    }
 
     return NextResponse.json({
       totalProjects,

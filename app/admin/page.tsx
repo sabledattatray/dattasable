@@ -112,20 +112,40 @@ interface ChartItem {
   prev: number;
 }
 
+// Static placeholder data used while stats are loading — same shape so no CLS
+const PLACEHOLDER_CHART: ChartItem[] = [
+  { label: 'Dec', value: 380, prev: 280 },
+  { label: 'Jan', value: 420, prev: 310 },
+  { label: 'Feb', value: 580, prev: 420 },
+  { label: 'Mar', value: 510, prev: 460 },
+  { label: 'Apr', value: 690, prev: 510 },
+  { label: 'May', value: 750, prev: 620 },
+];
+
 // ── Bar chart component ───────────────────────────────────────────────
-function BarChartPanel({ isDark, css, data }: { isDark: boolean; css: Record<string, string>; data: ChartItem[] }) {
-  const max = data && data.length > 0 ? Math.max(...data.map(d => d.value), 1) : 1;
-  const items = data && data.length > 0 ? data : [
-    { label: 'Jan', value: 420, prev: 310 },
-    { label: 'Feb', value: 580, prev: 420 },
-    { label: 'Mar', value: 510, prev: 460 },
-    { label: 'Apr', value: 690, prev: 510 },
-    { label: 'May', value: 750, prev: 620 },
-    { label: 'Jun', value: 870, prev: 710 },
-  ];
+function BarChartPanel({ isDark, css, data, loading }: { isDark: boolean; css: Record<string, string>; data: ChartItem[]; loading?: boolean }) {
+  const items = data && data.length > 0 ? data : PLACEHOLDER_CHART;
+  const max = Math.max(...items.map(d => d.value), 1);
   return (
-    <div style={{ width: '100%', height: 220, display: 'flex', alignItems: 'flex-end', gap: 10, padding: '0 8px' }}>
-      {items.map((d, i) => (
+    <div style={{ width: '100%', height: 220, display: 'flex', alignItems: 'flex-end', gap: 10, padding: '0 8px', position: 'relative' }}>
+      {loading && (
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', alignItems: 'flex-end', gap: 10, padding: '0 8px',
+          pointerEvents: 'none',
+        }}>
+          {items.map((d, i) => (
+            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <div style={{ width: '100%', display: 'flex', alignItems: 'flex-end', gap: 3, height: 190 }}>
+                <div style={{ flex: 1, height: `${(d.prev / max) * 100}%`, background: isDark ? 'rgba(99,102,241,0.08)' : 'rgba(99,102,241,0.06)', borderRadius: '5px 5px 0 0', animation: 'shimmer 1.6s ease-in-out infinite', animationDelay: `${i * 0.1}s` }} />
+                <div style={{ flex: 1, height: `${(d.value / max) * 100}%`, background: isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)', borderRadius: '5px 5px 0 0', animation: 'shimmer 1.6s ease-in-out infinite', animationDelay: `${i * 0.1 + 0.05}s` }} />
+              </div>
+              <div style={{ width: 24, height: 10, borderRadius: 4, background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)', animation: 'shimmer 1.6s ease-in-out infinite' }} />
+            </div>
+          ))}
+        </div>
+      )}
+      {!loading && items.map((d, i) => (
         <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
           <div style={{ width: '100%', display: 'flex', alignItems: 'flex-end', gap: 3, height: 190 }}>
             <div
@@ -240,8 +260,22 @@ export default function AdminDashboardPage() {
     };
     fetchStats();
 
-    return () => clearInterval(id);
+    // Auto-refresh every 30 seconds so counts stay accurate after deletes/adds
+    const refreshId = setInterval(fetchStats, 30000);
+
+    // Also refresh immediately when the user switches back to this tab
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') fetchStats();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      clearInterval(id);
+      clearInterval(refreshId);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
+
 
   const defaultAccent = isDark ? '#6366f1' : '#4f46e5';
   const currentAccent = typography.color || defaultAccent;
@@ -288,7 +322,7 @@ export default function AdminDashboardPage() {
         headerGrad: `linear-gradient(135deg, ${currentAccent} 0%, #6366f1 50%, #818cf8 100%)`,
       };
 
-  if (!mounted) return null;
+  // Don't block render — show placeholder layout immediately and let data hydrate in
 
   return (
     <div
@@ -482,6 +516,7 @@ export default function AdminDashboardPage() {
               borderRadius: 20,
               padding: 24,
               boxShadow: css.shadow,
+              minHeight: 320,
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
@@ -502,9 +537,14 @@ export default function AdminDashboardPage() {
                   <div style={{ width: 10, height: 10, borderRadius: 3, background: isDark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.12)' }} />
                   <span style={{ fontSize: 11, color: css.muted, fontWeight: 600 }}>Last year</span>
                 </div>
+                {loading && (
+                  <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)', padding: '3px 8px', borderRadius: 999, letterSpacing: '0.06em' }}>
+                    LOADING…
+                  </span>
+                )}
               </div>
             </div>
-            <BarChartPanel isDark={isDark} css={css} data={stats ? stats.chartData : []} />
+            <BarChartPanel isDark={isDark} css={css} data={stats ? stats.chartData : PLACEHOLDER_CHART} loading={loading} />
           </div>
 
           {/* Recent Activity */}
@@ -954,6 +994,10 @@ export default function AdminDashboardPage() {
         .admin-dashboard-root, 
         .admin-dashboard-root * {
           font-family: ${fontFamilyValue} !important;
+        }
+        @keyframes shimmer {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
         }
         @media (max-width: 900px) {
           .admin-dash-main-grid { grid-template-columns: 1fr !important; }

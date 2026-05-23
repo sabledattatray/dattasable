@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
-import { ArrowLeft, Save, Eye, EyeOff, AlertCircle, CheckCircle2, ChevronRight, Layers } from 'lucide-react';
+import { ArrowLeft, Save, Eye, EyeOff, AlertCircle, CheckCircle2, ChevronRight, Layers, X } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';

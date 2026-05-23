@@ -320,7 +320,8 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
             padding: '0 24px',
             position: 'sticky',
             top: 0,
-            zIndex: 30,
+            zIndex: 60,
+            overflow: 'visible',
             boxShadow: isDark
               ? '0 1px 0 rgba(255,255,255,0.03), 0 4px 16px rgba(0,0,0,0.2)'
               : '0 1px 0 rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)',
@@ -614,12 +615,12 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
                     position: 'absolute',
                     right: 0,
                     top: 'calc(100% + 8px)',
-                    width: 220,
+                    width: 240,
                     background: css.cardBg,
                     border: `1px solid ${css.border}`,
                     borderRadius: 16,
-                    boxShadow: css.shadow,
-                    zIndex: 100,
+                    boxShadow: '0 8px 40px rgba(0,0,0,0.25)',
+                    zIndex: 9999,
                     overflow: 'hidden',
                   }}
                 >
@@ -966,7 +967,7 @@ function SidebarContent({
               {userInitial}
             </div>
             <div style={{ minWidth: 0, flex: 1 }}>
-              <p style={{ fontWeight: 700, fontSize: 12, color: css.text, margin: 0, truncate: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+              <p style={{ fontWeight: 700, fontSize: 12, color: css.text, margin: 0, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
                 {userName}
               </p>
               <p style={{ fontSize: 10, color: css.muted, margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

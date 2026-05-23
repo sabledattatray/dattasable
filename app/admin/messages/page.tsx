@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Trash2, Mail, MailOpen, Clock, X, Reply } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -20,23 +20,85 @@ export default function MessagesInbox() {
     ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', activeBg: 'rgba(99,102,241,0.08)' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', activeBg: 'rgba(79,70,229,0.05)' };
 
-  const [messages, setMessages] = useState(initialMessages);
-  const [selected, setSelected] = useState<typeof initialMessages[0] | null>(null);
+  const [messages, setMessages] = useState<any[]>([]);
+  const [selected, setSelected] = useState<any | null>(null);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  const fetchMessages = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/admin/messages');
+      if (res.ok) {
+        const data = await res.json();
+        const mapped = data.map((m: any, i: number) => {
+          const diffMs = Date.now() - new Date(m.createdAt).getTime();
+          const diffMins = Math.floor(diffMs / 60000);
+          const diffHours = Math.floor(diffMins / 60);
+          const diffDays = Math.floor(diffHours / 24);
+
+          let relativeTime = '';
+          if (diffMins < 1) relativeTime = 'Just now';
+          else if (diffMins < 60) relativeTime = `${diffMins}m ago`;
+          else if (diffHours < 24) relativeTime = `${diffHours}h ago`;
+          else if (diffDays === 1) relativeTime = 'Yesterday';
+          else relativeTime = `${diffDays}d ago`;
+
+          return {
+            id: m.id,
+            name: m.name,
+            email: m.email,
+            subject: m.subject || 'No Subject',
+            message: m.message,
+            date: relativeTime,
+            read: m.status === 'READ',
+            createdAt: m.createdAt,
+          };
+        });
+        setMessages(mapped);
+      }
+    } catch (e) {
+      console.error('Failed to fetch messages', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   const filtered = messages.filter(m =>
     m.name.toLowerCase().includes(search.toLowerCase()) ||
     m.subject.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleSelect = (m: typeof initialMessages[0]) => {
-    setMessages(ms => ms.map(msg => msg.id === m.id ? { ...msg, read: true } : msg));
+  const handleSelect = async (m: any) => {
     setSelected(m);
+    if (!m.read) {
+      setMessages(ms => ms.map(msg => msg.id === m.id ? { ...msg, read: true } : msg));
+      try {
+        await fetch(`/api/admin/messages/${m.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'READ' }),
+        });
+      } catch (e) {
+        console.error('Failed to mark message as read', e);
+      }
+    }
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: string | number) => {
     setMessages(ms => ms.filter(m => m.id !== id));
     if (selected?.id === id) setSelected(null);
+    try {
+      await fetch(`/api/admin/messages/${id}`, {
+        method: 'DELETE',
+      });
+    } catch (e) {
+      console.error('Failed to delete message', e);
+    }
   };
 
   const unreadCount = messages.filter(m => !m.read).length;
@@ -74,40 +136,43 @@ export default function MessagesInbox() {
           </div>
           {/* List items */}
           <div style={{ marginTop: 12 }}>
-            {filtered.length === 0 && (
+            {loading ? (
+              <div style={{ padding: '40px 20px', textAlign: 'center', color: css.muted, fontSize: 13 }}>Loading messages...</div>
+            ) : filtered.length === 0 ? (
               <div style={{ padding: '40px 20px', textAlign: 'center', color: css.muted, fontSize: 13 }}>No messages found</div>
-            )}
-            {filtered.map((m, i) => {
-              const isActive = selected?.id === m.id;
-              return (
-                <div key={m.id}
-                  onClick={() => handleSelect(m)}
-                  style={{
-                    display: 'flex', gap: 12, padding: '14px 16px', cursor: 'pointer',
-                    background: isActive ? css.activeBg : 'transparent',
-                    borderLeft: isActive ? `3px solid ${css.accent}` : '3px solid transparent',
-                    borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none',
-                    transition: 'background 0.15s',
-                    alignItems: 'flex-start',
-                  }}
-                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = css.surface2; }}
-                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
-                >
-                  <div style={{ width: 38, height: 38, borderRadius: '50%', background: avatarColors[i % avatarColors.length], display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 14, flexShrink: 0 }}>
-                    {m.name.charAt(0)}
-                  </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
-                      <span style={{ fontSize: 13, fontWeight: m.read ? 600 : 800, color: css.text }}>{m.name}</span>
-                      <span style={{ fontSize: 10, color: css.muted, flexShrink: 0, marginLeft: 8 }}>{m.date}</span>
+            ) : (
+              filtered.map((m, i) => {
+                const isActive = selected?.id === m.id;
+                return (
+                  <div key={m.id}
+                    onClick={() => handleSelect(m)}
+                    style={{
+                      display: 'flex', gap: 12, padding: '14px 16px', cursor: 'pointer',
+                      background: isActive ? css.activeBg : 'transparent',
+                      borderLeft: isActive ? `3px solid ${css.accent}` : '3px solid transparent',
+                      borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none',
+                      transition: 'background 0.15s',
+                      alignItems: 'flex-start',
+                    }}
+                    onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = css.surface2; }}
+                    onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+                  >
+                    <div style={{ width: 38, height: 38, borderRadius: '50%', background: avatarColors[i % avatarColors.length], display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 14, flexShrink: 0 }}>
+                      {m.name.charAt(0)}
                     </div>
-                    <div style={{ fontSize: 12, fontWeight: m.read ? 500 : 700, color: m.read ? css.muted : css.text, marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</div>
-                    <div style={{ fontSize: 11, color: css.muted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
+                        <span style={{ fontSize: 13, fontWeight: m.read ? 600 : 800, color: css.text }}>{m.name}</span>
+                        <span style={{ fontSize: 10, color: css.muted, flexShrink: 0, marginLeft: 8 }}>{m.date}</span>
+                      </div>
+                      <div style={{ fontSize: 12, fontWeight: m.read ? 500 : 700, color: m.read ? css.muted : css.text, marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</div>
+                      <div style={{ fontSize: 11, color: css.muted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</div>
+                    </div>
+                    {!m.read && <span style={{ width: 7, height: 7, borderRadius: '50%', background: css.accent, flexShrink: 0, marginTop: 6 }} />}
                   </div>
-                  {!m.read && <span style={{ width: 7, height: 7, borderRadius: '50%', background: css.accent, flexShrink: 0, marginTop: 6 }} />}
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
 
