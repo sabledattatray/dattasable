@@ -100,11 +100,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
-        <script
+        <Script
           id="google-adsense"
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
 
         <Script
