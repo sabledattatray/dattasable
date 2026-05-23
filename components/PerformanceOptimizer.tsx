@@ -88,14 +88,6 @@ export default function PerformanceOptimizer({
 
   return (
     <>
-      {loadAdSense && (
-        <Script
-          id="adsense-init"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
-      )}
       {loadAnalytics && (
         <>
           <Suspense fallback={null}>
