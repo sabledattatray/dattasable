@@ -183,6 +183,41 @@ export default function AdminDashboardPage() {
   const [time, setTime] = useState('');
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [typography, setTypography] = useState({
+    fontFamily: 'Inter',
+    fontSize: '14px',
+    color: '',
+    fontWeight: '500',
+  });
+
+  // Load typography from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('admin_typography');
+      if (saved) {
+        try {
+          setTypography(JSON.parse(saved));
+        } catch (e) {
+          console.error('Failed to parse typography settings', e);
+        }
+      }
+    }
+  }, []);
+
+  // Dynamically inject selected Google Font
+  useEffect(() => {
+    if (typography.fontFamily && typography.fontFamily !== 'Inter' && typeof window !== 'undefined') {
+      const linkId = 'google-font-import';
+      let link = document.getElementById(linkId) as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.id = linkId;
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+      link.href = `https://fonts.googleapis.com/css2?family=${typography.fontFamily.replace(/\s+/g, '+')}:wght@300;400;500;600;700;800;900&display=swap`;
+    }
+  }, [typography.fontFamily]);
 
   useEffect(() => {
     setMounted(true);
@@ -208,6 +243,18 @@ export default function AdminDashboardPage() {
     return () => clearInterval(id);
   }, []);
 
+  const defaultAccent = isDark ? '#6366f1' : '#4f46e5';
+  const currentAccent = typography.color || defaultAccent;
+  
+  const getGlow = (hex: string, alpha: number) => {
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+    const r = parseInt(c.substring(0, 2), 16) || 99;
+    const g = parseInt(c.substring(2, 4), 16) || 102;
+    const b = parseInt(c.substring(4, 6), 16) || 241;
+    return `rgba(${r},${g},${b},${alpha})`;
+  };
+
   const css = isDark
     ? {
         bg: '#0a0f1e',
@@ -216,12 +263,12 @@ export default function AdminDashboardPage() {
         border: '#1e293b',
         text: '#f1f5f9',
         muted: '#64748b',
-        accent: '#6366f1',
-        accentGlow: 'rgba(99,102,241,0.12)',
+        accent: currentAccent,
+        accentGlow: getGlow(currentAccent, 0.12),
         card: '#0f172a',
         shadow: '0 4px 24px rgba(0,0,0,0.35)',
         shadowHover: '0 8px 32px rgba(0,0,0,0.5)',
-        headerGrad: 'linear-gradient(135deg, #1e1b4b 0%, #1e293b 50%, #0f172a 100%)',
+        headerGrad: `linear-gradient(135deg, ${getGlow(currentAccent, 0.15)} 0%, #1e293b 50%, #0f172a 100%)`,
       }
     : {
         bg: '#f0f4ff',
@@ -230,18 +277,26 @@ export default function AdminDashboardPage() {
         border: '#e2e8f0',
         text: '#0f172a',
         muted: '#64748b',
-        accent: '#4f46e5',
-        accentGlow: 'rgba(79,70,229,0.07)',
+        accent: currentAccent,
+        accentGlow: getGlow(currentAccent, 0.07),
         card: '#ffffff',
         shadow: '0 4px 24px rgba(0,0,0,0.07)',
         shadowHover: '0 8px 32px rgba(0,0,0,0.12)',
-        headerGrad: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%)',
+        headerGrad: `linear-gradient(135deg, ${currentAccent} 0%, #6366f1 50%, #818cf8 100%)`,
       };
 
   if (!mounted) return null;
 
   return (
-    <div style={{ minHeight: '100vh', background: css.bg }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: css.bg,
+        fontFamily: typography.fontFamily && typography.fontFamily !== 'Inter' ? `'${typography.fontFamily}', sans-serif` : 'inherit',
+        fontSize: typography.fontSize || '14px',
+        fontWeight: typography.fontWeight ? (typography.fontWeight as any) : '500',
+      }}
+    >
 
       {/* ═══════════ HERO HEADER BANNER ═══════════ */}
       <div
@@ -510,11 +565,11 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* ── QUICK ACTIONS + SITE STATS ROW ── */}
+        {/* ── QUICK ACTIONS + SITE STATS + TYPOGRAPHY ROW ── */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: 20,
           }}
           className="admin-dash-bottom-grid"
@@ -590,7 +645,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* Site Performance Stats */}
+          {/* Site Performance Metrics */}
           <div
             style={{
               background: css.card,
@@ -613,7 +668,7 @@ export default function AdminDashboardPage() {
                   value: stats ? stats.totalViews.toLocaleString('en-IN') : '...',
                   change: stats ? '+24%' : '+18%',
                   bar: stats ? Math.min(100, Math.max(15, Math.round((stats.totalViews / Math.max(stats.uniqueVisitors * 5, 100)) * 100))) : 78,
-                  color: '#6366f1',
+                  color: css.accent,
                 },
                 {
                   label: 'Unique Visitors',
@@ -695,6 +750,199 @@ export default function AdminDashboardPage() {
             >
               <Globe size={13} /> View Live Site <ArrowUpRight size={12} />
             </Link>
+          </div>
+
+          {/* Typography Customizer Card */}
+          <div
+            style={{
+              background: css.card,
+              border: `1px solid ${css.border}`,
+              borderRadius: 20,
+              padding: 24,
+              boxShadow: css.shadow,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div>
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>
+                  Aesthetics
+                </p>
+                <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: 0 }}>Styling & Fonts</h3>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {/* Font Family selector */}
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Google Font
+                  </label>
+                  <select
+                    value={typography.fontFamily}
+                    onChange={e => {
+                      const newTypo = { ...typography, fontFamily: e.target.value };
+                      setTypography(newTypo);
+                      localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      background: css.surface2,
+                      border: `1px solid ${css.border}`,
+                      borderRadius: 10,
+                      color: css.text,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      outline: 'none',
+                    }}
+                  >
+                    {['Inter', 'Poppins', 'Outfit', 'Montserrat', 'Playfair Display', 'Lora', 'Fira Code', 'Space Grotesk', 'Syne', 'Roboto', 'Open Sans', 'Merriweather'].map(f => (
+                      <option key={f} value={f} style={{ background: css.surface, color: css.text }}>{f}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Font Size selector */}
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Font Size
+                  </label>
+                  <select
+                    value={typography.fontSize}
+                    onChange={e => {
+                      const newTypo = { ...typography, fontSize: e.target.value };
+                      setTypography(newTypo);
+                      localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      background: css.surface2,
+                      border: `1px solid ${css.border}`,
+                      borderRadius: 10,
+                      color: css.text,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      outline: 'none',
+                    }}
+                  >
+                    {[
+                      { label: 'Compact (13px)', value: '13px' },
+                      { label: 'Normal (14px)', value: '14px' },
+                      { label: 'Comfort (15px)', value: '15px' },
+                      { label: 'Large (16px)', value: '16px' },
+                    ].map(sz => (
+                      <option key={sz.value} value={sz.value} style={{ background: css.surface, color: css.text }}>{sz.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Font Weight selector */}
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Font Weight (Body)
+                  </label>
+                  <select
+                    value={typography.fontWeight}
+                    onChange={e => {
+                      const newTypo = { ...typography, fontWeight: e.target.value };
+                      setTypography(newTypo);
+                      localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      background: css.surface2,
+                      border: `1px solid ${css.border}`,
+                      borderRadius: 10,
+                      color: css.text,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      outline: 'none',
+                    }}
+                  >
+                    {[
+                      { label: 'Light (300)', value: '300' },
+                      { label: 'Regular (400)', value: '400' },
+                      { label: 'Medium (500)', value: '500' },
+                      { label: 'Semi-Bold (600)', value: '600' },
+                      { label: 'Bold (700)', value: '700' },
+                    ].map(w => (
+                      <option key={w.value} value={w.value} style={{ background: css.surface, color: css.text }}>{w.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Color Accent Picker */}
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Color Accent Theme
+                  </label>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {[
+                      { name: 'Default', hex: '' },
+                      { name: 'Indigo', hex: '#6366f1' },
+                      { name: 'Emerald', hex: '#10b981' },
+                      { name: 'Cyan', hex: '#06b6d4' },
+                      { name: 'Amber', hex: '#f59e0b' },
+                      { name: 'Rose', hex: '#ec4899' },
+                      { name: 'Violet', hex: '#8b5cf6' },
+                      { name: 'Orange', hex: '#f97316' },
+                    ].map(c => (
+                      <button
+                        key={c.name}
+                        onClick={() => {
+                          const newTypo = { ...typography, color: c.hex };
+                          setTypography(newTypo);
+                          localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                        }}
+                        title={c.name}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          borderRadius: '50%',
+                          background: c.hex || (isDark ? '#6366f1' : '#4f46e5'),
+                          border: typography.color === c.hex ? `2px solid ${css.text}` : '2px solid transparent',
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                          transition: 'all 0.2s',
+                          transform: 'scale(1)',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Typography Live Preview */}
+            <div
+              style={{
+                marginTop: 20,
+                padding: 12,
+                borderRadius: 12,
+                background: css.surface2,
+                border: `1.5px dashed ${css.border}`,
+              }}
+            >
+              <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Live Preview</span>
+              <p
+                style={{
+                  margin: '4px 0 0',
+                  fontFamily: typography.fontFamily === 'Inter' ? 'inherit' : `'${typography.fontFamily}', sans-serif`,
+                  fontSize: typography.fontSize,
+                  fontWeight: parseInt(typography.fontWeight) || 500,
+                  color: css.accent,
+                  lineHeight: 1.4,
+                }}
+              >
+                The quick brown fox jumps over the lazy dog.
+              </p>
+            </div>
           </div>
         </div>
       </div>
