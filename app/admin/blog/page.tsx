@@ -9,6 +9,7 @@ import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from '@/components/ThemeProvider';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const initialPosts = mainPosts.map((p, idx) => ({
   id: idx + 1,
@@ -525,6 +526,7 @@ export default function AdminBlog() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
+          <ThemeToggle />
           <button
             onClick={handleSave}
             style={{
@@ -641,6 +643,7 @@ export default function AdminBlog() {
               contentEditable
               suppressContentEditableWarning
               onInput={handleEditorChange}
+              className="prose prose-slate dark:prose-invert max-w-none focus:outline-none"
               style={{
                 width: '100%', fontSize: '1.15rem', lineHeight: 1.85,
                 background: 'none', border: 'none',

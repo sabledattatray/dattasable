@@ -14,7 +14,7 @@ export default function CalloutBlock({ block, isActive }: { block: EditorBlock; 
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: 'prose prose-slate max-w-none focus:outline-none min-h-[1.5em]',
+        class: 'prose prose-slate dark:prose-invert max-w-none focus:outline-none min-h-[1.5em]',
       }
     },
     onUpdate: ({ editor }) => {
@@ -29,22 +29,22 @@ export default function CalloutBlock({ block, isActive }: { block: EditorBlock; 
   }, [isActive, editor]);
 
   const themes = {
-    info: { bg: 'bg-blue-50', border: 'border-blue-200', icon: <Info className="text-blue-500" size={24} /> },
-    warning: { bg: 'bg-yellow-50', border: 'border-yellow-200', icon: <AlertTriangle className="text-yellow-500" size={24} /> },
-    tip: { bg: 'bg-emerald-50', border: 'border-emerald-200', icon: <Lightbulb className="text-emerald-500" size={24} /> },
+    info: { bg: 'bg-blue-50 dark:bg-blue-950/20', border: 'border-blue-200 dark:border-blue-800/40', icon: <Info className="text-blue-500 dark:text-blue-400" size={24} /> },
+    warning: { bg: 'bg-yellow-50 dark:bg-yellow-950/20', border: 'border-yellow-200 dark:border-yellow-800/40', icon: <AlertTriangle className="text-yellow-500 dark:text-yellow-400" size={24} /> },
+    tip: { bg: 'bg-emerald-50 dark:bg-emerald-950/20', border: 'border-emerald-200 dark:border-emerald-800/40', icon: <Lightbulb className="text-emerald-500 dark:text-emerald-400" size={24} /> },
   };
 
   const currentTheme = themes[theme as keyof typeof themes] || themes.info;
 
   return (
-    <div className={`w-full relative transition-all ${isActive ? 'ring-2 ring-slate-900 shadow-md' : ''} rounded-xl`}>
+    <div className={`w-full relative transition-all ${isActive ? 'ring-2 ring-slate-900 dark:ring-slate-100 shadow-md' : ''} rounded-xl`}>
       {isActive && (
-        <div className="absolute -top-10 left-0 bg-white border border-slate-200 rounded-lg shadow-xl p-1 flex gap-1 z-50">
+        <div className="absolute -top-10 left-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl p-1 flex gap-1 z-50">
           {(Object.keys(themes) as Array<keyof typeof themes>).map(t => (
             <button
               key={t}
               onClick={() => updateBlock(block.id, { metadata: { ...block.metadata, theme: t } })}
-              className={`px-3 py-1 text-xs font-semibold rounded-md capitalize transition-colors ${theme === t ? 'bg-slate-100 text-slate-900' : 'text-slate-500 hover:bg-slate-50'}`}
+              className={`px-3 py-1 text-xs font-semibold rounded-md capitalize transition-colors ${theme === t ? 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50'}`}
             >
               {t}
             </button>

@@ -57,28 +57,28 @@ export default function EditorBlockNode({ block }: EditorBlockNodeProps) {
     <div 
       ref={setNodeRef} 
       style={style}
-      className={`group relative flex items-start gap-2 -ml-20 p-2 rounded-lg transition-colors ${isActive ? 'bg-slate-50/50' : 'hover:bg-slate-50/30'}`}
+      className={`group relative flex items-start gap-2 -ml-20 p-2 rounded-lg transition-colors ${isActive ? 'bg-slate-50/50 dark:bg-slate-800/40' : 'hover:bg-slate-50/30 dark:hover:bg-slate-800/20'}`}
       onClick={() => setActiveBlock(block.id)}
     >
       {/* Drag Handle & Controls */}
       <div className={`flex items-center gap-1 mt-1 opacity-0 transition-opacity ${isActive || 'group-hover:opacity-100'} w-18 justify-end`}>
         <button 
           onClick={(e) => { e.stopPropagation(); handleAddBlock(); }}
-          className="p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded"
+          className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded"
           title="Add Block Below"
         >
           <Plus size={16} />
         </button>
         <button 
           onClick={(e) => { e.stopPropagation(); handleDuplicate(); }}
-          className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded"
+          className="p-1 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded"
           title="Duplicate Block"
         >
           <Copy size={16} />
         </button>
         <button 
           onClick={(e) => { e.stopPropagation(); handleDelete(); }}
-          className="p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded"
+          className="p-1 text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded"
           title="Delete Block"
         >
           <Trash2 size={16} />
@@ -86,7 +86,7 @@ export default function EditorBlockNode({ block }: EditorBlockNodeProps) {
         <button 
           {...attributes} 
           {...listeners}
-          className="p-1 text-slate-400 hover:text-slate-600 cursor-grab active:cursor-grabbing hover:bg-slate-100 rounded"
+          className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-grab active:cursor-grabbing hover:bg-slate-100 dark:hover:bg-slate-800 rounded"
           title="Drag to Move"
         >
           <GripVertical size={16} />

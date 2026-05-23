@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useEffect, Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
+import ThemeToggle from '@/components/ThemeToggle';
 
 function EditorContent() {
   const { postMetadata, updatePostMetadata, blocks, setBlocks } = useEditorStore();
@@ -84,6 +85,7 @@ function EditorContent() {
             <MainToolbar />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <ThemeToggle />
             <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.borderColor = css.accent; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; }}

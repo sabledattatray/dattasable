@@ -43,7 +43,7 @@ export default function TipTapBlock({ block, isActive }: TipTapBlockProps) {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: 'prose prose-slate max-w-none focus:outline-none min-h-[1.5em]',
+        class: 'prose prose-slate dark:prose-invert max-w-none focus:outline-none min-h-[1.5em]',
       },
       handleKeyDown: (view, event) => {
         // Handle Backspace at start of block

@@ -72,14 +72,14 @@ function BlockNode({ block }: { block: EditorBlock }) {
 
     case 'callout':
       const themes = {
-        info: 'bg-blue-50/50 border-blue-200 text-blue-900',
-        warning: 'bg-yellow-50/50 border-yellow-200 text-yellow-900',
-        tip: 'bg-emerald-50/50 border-emerald-200 text-emerald-900',
+        info: 'bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800/40 text-blue-900 dark:text-blue-100',
+        warning: 'bg-yellow-50/50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800/40 text-yellow-900 dark:text-yellow-100',
+        tip: 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-100',
       };
       const t = themes[(metadata?.theme as keyof typeof themes) || 'info'];
       return (
         <div className={`${wrapperClass} p-6 rounded-2xl border ${t}`} style={customStyles}>
-          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate max-w-none prose-p:leading-relaxed" />
+          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate dark:prose-invert max-w-none prose-p:leading-relaxed" />
         </div>
       );
 
@@ -175,7 +175,7 @@ function BlockNode({ block }: { block: EditorBlock }) {
       // Text-based blocks handled via generic HTML injection with Tailwind Typography
       return (
         <div className={wrapperClass} style={customStyles}>
-          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-xl" />
+          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-xl" />
         </div>
       );
   }

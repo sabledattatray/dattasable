@@ -13,9 +13,9 @@ export default function ButtonBlock({ block, isActive }: { block: EditorBlock; i
   };
 
   return (
-    <div className={`w-full relative flex py-4 transition-all ${isActive ? 'bg-slate-50 rounded-xl px-4 ring-2 ring-slate-900 shadow-sm' : ''}`}>
+    <div className={`w-full relative flex py-4 transition-all ${isActive ? 'bg-slate-50 dark:bg-slate-800/40 rounded-xl px-4 ring-2 ring-slate-900 dark:ring-slate-100 shadow-sm' : ''}`}>
       {isActive && (
-        <div className="absolute -top-12 left-0 bg-white border border-slate-200 rounded-lg shadow-xl p-2 flex gap-3 z-50 items-center">
+        <div className="absolute -top-12 left-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl p-2 flex gap-3 z-50 items-center">
           <div className="flex items-center gap-2">
             <LinkIcon size={14} className="text-slate-400" />
             <input 
@@ -26,10 +26,10 @@ export default function ButtonBlock({ block, isActive }: { block: EditorBlock; i
                 setUrl(e.target.value);
                 handleUpdate({ url: e.target.value });
               }}
-              className="w-48 px-2 py-1 text-sm outline-none border border-slate-200 rounded focus:border-slate-400"
+              className="w-48 px-2 py-1 text-sm bg-transparent border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded focus:border-slate-400 dark:focus:border-slate-500 outline-none"
             />
           </div>
-          <div className="w-px h-4 bg-slate-200"></div>
+          <div className="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
           <div className="flex gap-1">
             {['primary', 'outline', 'subtle'].map(s => (
               <button
@@ -38,7 +38,7 @@ export default function ButtonBlock({ block, isActive }: { block: EditorBlock; i
                   setStyle(s);
                   handleUpdate({ style: s });
                 }}
-                className={`px-2 py-1 text-xs font-semibold rounded-md capitalize transition-colors ${style === s ? 'bg-slate-100 text-slate-900' : 'text-slate-500 hover:bg-slate-50'}`}
+                className={`px-2 py-1 text-xs font-semibold rounded-md capitalize transition-colors ${style === s ? 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50'}`}
               >
                 {s}
               </button>
@@ -58,9 +58,9 @@ export default function ButtonBlock({ block, isActive }: { block: EditorBlock; i
             }}
             className={`
               px-6 py-3 font-semibold text-center outline-none transition-all
-              ${style === 'primary' ? 'bg-slate-900 text-white rounded-xl' : ''}
-              ${style === 'outline' ? 'bg-transparent border-2 border-slate-900 text-slate-900 rounded-xl' : ''}
-              ${style === 'subtle' ? 'bg-slate-100 text-slate-900 rounded-xl hover:bg-slate-200' : ''}
+              ${style === 'primary' ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-xl' : ''}
+              ${style === 'outline' ? 'bg-transparent border-2 border-slate-900 dark:border-slate-100 text-slate-900 dark:text-slate-100 rounded-xl' : ''}
+              ${style === 'subtle' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700' : ''}
             `}
             style={{ minWidth: '120px' }}
           />
@@ -70,9 +70,9 @@ export default function ButtonBlock({ block, isActive }: { block: EditorBlock; i
             onClick={(e) => e.preventDefault()}
             className={`
               inline-block px-6 py-3 font-semibold text-center transition-all cursor-pointer
-              ${style === 'primary' ? 'bg-slate-900 text-white rounded-xl' : ''}
-              ${style === 'outline' ? 'bg-transparent border-2 border-slate-900 text-slate-900 rounded-xl' : ''}
-              ${style === 'subtle' ? 'bg-slate-100 text-slate-900 rounded-xl hover:bg-slate-200' : ''}
+              ${style === 'primary' ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-xl' : ''}
+              ${style === 'outline' ? 'bg-transparent border-2 border-slate-900 dark:border-slate-100 text-slate-900 dark:text-slate-100 rounded-xl' : ''}
+              ${style === 'subtle' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700' : ''}
             `}
           >
             {label}

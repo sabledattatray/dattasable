@@ -33,8 +33,8 @@ export default function SlashCommandMenu({ blockId, onClose }: SlashCommandMenuP
   ];
 
   return (
-    <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-slate-200 z-50 overflow-hidden animate-in fade-in zoom-in-95">
-      <div className="text-xs font-bold text-slate-400 uppercase tracking-wider px-4 py-3 border-b border-slate-100">
+    <div className="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 z-50 overflow-hidden animate-in fade-in zoom-in-95">
+      <div className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-4 py-3 border-b border-slate-100 dark:border-slate-800">
         Basic Blocks
       </div>
       <div className="max-h-[300px] overflow-y-auto p-2">
@@ -49,14 +49,14 @@ export default function SlashCommandMenu({ blockId, onClose }: SlashCommandMenuP
                 handleSelect(item.type);
               }
             }}
-            className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 transition-colors text-left"
+            className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
           >
-            <div className="w-10 h-10 rounded-md bg-white border border-slate-200 flex items-center justify-center text-slate-700 shadow-sm">
+            <div className="w-10 h-10 rounded-md bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 shadow-sm">
               {item.icon}
             </div>
             <div>
-              <div className="text-sm font-semibold text-slate-800">{item.label}</div>
-              <div className="text-xs text-slate-500">{item.desc}</div>
+              <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">{item.label}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">{item.desc}</div>
             </div>
           </button>
         ))}
