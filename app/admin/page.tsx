@@ -245,6 +245,9 @@ export default function AdminDashboardPage() {
 
   const defaultAccent = isDark ? '#6366f1' : '#4f46e5';
   const currentAccent = typography.color || defaultAccent;
+  const fontFamilyValue = typography.fontFamily && typography.fontFamily !== 'Inter' 
+    ? `'${typography.fontFamily}', sans-serif` 
+    : 'inherit';
   
   const getGlow = (hex: string, alpha: number) => {
     let c = hex.replace('#', '');
@@ -289,10 +292,10 @@ export default function AdminDashboardPage() {
 
   return (
     <div
+      className="admin-dashboard-root"
       style={{
         minHeight: '100vh',
         background: css.bg,
-        fontFamily: typography.fontFamily && typography.fontFamily !== 'Inter' ? `'${typography.fontFamily}', sans-serif` : 'inherit',
         fontSize: typography.fontSize || '14px',
         fontWeight: typography.fontWeight ? (typography.fontWeight as any) : '500',
       }}
@@ -948,6 +951,10 @@ export default function AdminDashboardPage() {
       </div>
 
       <style>{`
+        .admin-dashboard-root, 
+        .admin-dashboard-root * {
+          font-family: ${fontFamilyValue} !important;
+        }
         @media (max-width: 900px) {
           .admin-dash-main-grid { grid-template-columns: 1fr !important; }
           .admin-dash-bottom-grid { grid-template-columns: 1fr !important; }
