@@ -1,9 +1,14 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  // Allow direct access to ads.txt, robots.txt, sitemap.xml without further processing
+  if (['/ads.txt', '/robots.txt', '/sitemap.xml'].includes(path)) {
+    return NextResponse.next();
+  }
   // Block Suspicious Bots and Scanners
   const userAgent = request.headers.get('user-agent') || '';
-  const path = request.nextUrl.pathname;
+
   
   // Allow common crawlers and exempt critical public files
   const lowerPath = path.toLowerCase();

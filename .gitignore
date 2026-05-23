@@ -42,4 +42,5 @@ next-env.d.ts
 
 # Large local projects
 /fraud-detection-system/
+/node_modules_old/
 surgical-forge-lab/public/staging/*.csv
