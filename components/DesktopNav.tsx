@@ -60,19 +60,23 @@ export default function DesktopNav() {
                 style={{ top: '60px' }}
               >
                 <div className="grid grid-cols-3">
-                  {megaMenuData[link.label].items.map((item: any, idx: number) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.1 + (idx * 0.05) }}
-                      className={`border-b border-[var(--border)] ${idx % 3 !== 2 ? 'border-r' : ''}`}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className="group/item block no-underline p-12 hover:bg-white/[0.02] transition-colors h-full min-h-[120px] flex flex-col justify-center"
-                        onClick={() => setHovered(null)}
+                  {megaMenuData[link.label].items.map((item: any, idx: number) => {
+                    const isExternal = item.href.startsWith('http');
+                    return (
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 + (idx * 0.05) }}
+                        className={`border-b border-[var(--border)] ${idx % 3 !== 2 ? 'border-r' : ''}`}
                       >
+                        <Link 
+                          href={item.href} 
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                          className="group/item block no-underline p-12 hover:bg-white/[0.02] transition-colors h-full min-h-[120px] flex flex-col justify-center"
+                          onClick={() => setHovered(null)}
+                        >
                         <div className="flex items-center gap-1.5">
                           <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover/item:border-[var(--accent)] transition-all duration-500">
                             {item.icon}
@@ -89,7 +93,8 @@ export default function DesktopNav() {
                         </div>
                       </Link>
                     </motion.div>
-                  ))}
+                    );
+                  })}
                 </div>
               </motion.div>
             )}

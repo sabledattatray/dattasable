@@ -57,8 +57,10 @@ const quickActions = [
   { label: 'New Project', href: '/admin/projects', icon: Briefcase, color: '#6366f1' },
   { label: 'Write Article', href: '/admin/editor', icon: Edit, color: '#06b6d4' },
   { label: 'View Messages', href: '/admin/messages', icon: MessageSquare, color: '#ec4899' },
-  { label: 'Add Service', href: '/admin/services', icon: Layers, color: '#f59e0b' },
-  { label: 'Testimonials', href: '/admin/testimonials', icon: Star, color: '#10b981' },
+  { label: 'Umami Analytics', href: 'https://analytics.dattasable.com', icon: Activity, color: '#10b981' },
+  { label: 'n8n Automation', href: 'https://automate.dattasable.com', icon: Zap, color: '#f59e0b' },
+  { label: 'Add Service', href: '/admin/services', icon: Layers, color: '#e0a96d' },
+  { label: 'Testimonials', href: '/admin/testimonials', icon: Star, color: '#f43f5e' },
   { label: 'Settings', href: '/admin/settings', icon: Settings, color: '#8b5cf6' },
 ];
 
@@ -636,11 +638,14 @@ export default function AdminDashboardPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
               {quickActions.map((action, i) => {
                 const Icon = action.icon;
+                const isExternal = action.href.startsWith('http');
                 return (
                   <Link
-                    key={i}
-                    href={action.href}
-                    style={{
+                      key={i}
+                      href={action.href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      style={{
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',

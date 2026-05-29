@@ -106,23 +106,28 @@ export default function MobileMenuDrawer({
                         className="overflow-hidden bg-[var(--surface2)] border-l-2 border-[var(--accent)]/20 ml-2"
                       >
                         <div style={{ padding: '0.375rem' }} className="flex flex-col gap-1">
-                          {megaMenuData[link.label].items.map((sub: any) => (
-                            <Link
-                              key={sub.title}
-                              href={sub.href}
-                              onClick={onClose}
-                              style={{ padding: '0.75rem' }}
-                              className="flex items-center gap-4 rounded-lg hover:bg-white/5 no-underline group"
-                            >
-                              <div style={{ width: '2.25rem', height: '2.25rem' }} className="flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">
-                                {sub.icon}
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                <span className="text-[12px] text-[var(--muted)]">{sub.desc}</span>
-                              </div>
-                            </Link>
-                          ))}
+                          {megaMenuData[link.label].items.map((sub: any) => {
+                            const isExternal = sub.href.startsWith('http');
+                            return (
+                              <Link
+                                key={sub.title}
+                                href={sub.href}
+                                target={isExternal ? '_blank' : undefined}
+                                rel={isExternal ? 'noopener noreferrer' : undefined}
+                                onClick={onClose}
+                                style={{ padding: '0.75rem' }}
+                                className="flex items-center gap-4 rounded-lg hover:bg-white/5 no-underline group"
+                              >
+                                <div style={{ width: '2.25rem', height: '2.25rem' }} className="flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">
+                                  {sub.icon}
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
+                                  <span className="text-[12px] text-[var(--muted)]">{sub.desc}</span>
+                                </div>
+                              </Link>
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}

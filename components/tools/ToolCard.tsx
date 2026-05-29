@@ -11,10 +11,13 @@ interface ToolCardProps {
   category: string;
   href: string;
   status: string;
+  external?: boolean;
 }
 
-export default function ToolCard({ title, description, icon, category, href, status }: ToolCardProps) {
+export default function ToolCard({ title, description, icon, category, href, status, external }: ToolCardProps) {
   const isComingSoon = status === 'Coming Soon';
+  const target = external ? '_blank' : undefined;
+  const rel = external ? 'noopener noreferrer' : undefined;
 
   return (
     <motion.div
@@ -23,6 +26,8 @@ export default function ToolCard({ title, description, icon, category, href, sta
     >
       <Link 
         href={isComingSoon ? '#' : href} 
+        target={target}
+        rel={rel}
         className={`group no-underline block h-full ${isComingSoon ? 'cursor-not-allowed' : ''}`}
       >
         <div 

@@ -94,6 +94,13 @@ export default function PerformanceOptimizer({
             <AnalyticsTracker />
           </Suspense>
           <GoogleAnalytics id={googleAnalyticsId} />
+          {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+            <Script 
+              src="https://analytics.dattasable.com/script.js"
+              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+              strategy="lazyOnload"
+            />
+          )}
           <Script 
             src="https://accounts.google.com/gsi/client" 
             strategy="lazyOnload"
