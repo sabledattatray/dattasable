@@ -18,11 +18,11 @@ export function middleware(request: NextRequest) {
   const isFriendlyBot = /google|bing|yahoo|duckduck|baidu|yandex|linkedin|twitter|facebook|slack|discord|apple|pinterest|whatsapp|telegram|ahrefs|semrush|openai|claudebot/i.test(userAgent);
 
   // Malicious or aggressive scraping/vulnerability scanning tools (not using generic "bot" word to avoid false positives)
-  const suspiciousBots = /scrapy|headlesschrome|selenium|puppeteer|playwright|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix|wget|lynx|perl|php|libwww|apachebench|gobuster|dirbuster|mj12bot|dotbot|rogerbot|exabot|gigabot|siteexplorer|openlinkprofiler|spyonweb|petalbot|ia_archiver/i;
+  // const suspiciousBots = /scrapy|headlesschrome|selenium|puppeteer|playwright|curl|postman|python|go-http|sqlmap|nikto|burp|metasploit|nmap|acunetix|wget|lynx|perl|php|libwww|apachebench|gobuster|dirbuster|mj12bot|dotbot|rogerbot|exabot|gigabot|siteexplorer|openlinkprofiler|spyonweb|petalbot|ia_archiver/i;
 
-  if (process.env.NODE_ENV === 'production' && suspiciousBots.test(userAgent) && !isFriendlyBot && !isStaticAsset) {
-    return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
-  }
+  // if (process.env.NODE_ENV === 'production' && suspiciousBots.test(userAgent) && !isFriendlyBot && !isStaticAsset) {
+  //   return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
+  // }
 
   const response = NextResponse.next();
 
