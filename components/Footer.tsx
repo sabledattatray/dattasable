@@ -70,8 +70,8 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Resources',
     links: [
-      { label: 'n8n Automation', href: 'https://automate.dattasable.com', icon: Zap,      external: true },
-      { label: 'Live Analytics',  href: '/analytics-live',                  icon: Activity  },
+      { label: 'n8n Automation', href: 'https://n8n.io', icon: Zap, external: true },
+      { label: 'Live Analytics',  href: '/analytics-live',  icon: Activity  },
       { label: 'Microsoft BI',   href: 'https://powerbi.microsoft.com/', icon: Database, external: true },
       { label: 'Next.js 15',     href: 'https://nextjs.org/',            icon: Code2,    external: true },
       { label: 'Vercel Cloud',   href: 'https://vercel.com/',            icon: Globe,    external: true },
