@@ -96,7 +96,7 @@ export default function PerformanceOptimizer({
           <GoogleAnalytics id={googleAnalyticsId} />
           {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
             <Script 
-              src="https://analytics.dattasable.com/script.js"
+              src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || 'https://cloud.umami.is/script.js'}
               data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
               strategy="lazyOnload"
             />
