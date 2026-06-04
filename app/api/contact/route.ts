@@ -39,20 +39,6 @@ const saveJsonMessage = (msg: any) => {
   }
 };
 
-export async function GET() {
-  try {
-    // Try Prisma first
-    const messages = await (prisma as any).contactMessage.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-    return NextResponse.json(messages);
-  } catch (error) {
-    console.warn("DB Fetch Failed, falling back to JSON store.");
-    // Fallback to JSON file
-    return NextResponse.json(getJsonMessages());
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';

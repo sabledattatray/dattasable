@@ -26,10 +26,8 @@ export async function POST(req: NextRequest) {
     } else {
       // Fallback: Use raw SQL because the Prisma client is out of sync with the schema
       const id = 'pv_' + Math.random().toString(36).substring(2, 15);
-      await prisma.$executeRawUnsafe(
-        'INSERT INTO "PageView" (id, url, referrer, "userAgent", "ipHash", "createdAt") VALUES ($1, $2, $3, $4, $5, NOW())',
-        id, url, referrer || null, userAgent, ipHash
-      );
+      const refVal = referrer || null;
+      await prisma.$executeRaw`INSERT INTO "PageView" (id, url, referrer, "userAgent", "ipHash", "createdAt") VALUES (${id}, ${url}, ${refVal}, ${userAgent}, ${ipHash}, NOW())`;
     }
 
     return NextResponse.json({ success: true });

@@ -76,6 +76,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/dashboards/collection-intelligence',
     '/dashboards/revenue-intelligence',
     '/dashboards/interactive',
+    '/dashboards/blinkit-sales',
+    '/dashboards/sales-pipeline',
+    '/dashboards/surgical-ai',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

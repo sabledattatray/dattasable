@@ -107,14 +107,18 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async jwt({ token, user, account }) {
+      const now = Math.floor(Date.now() / 1000);
+
       if (user) {
         const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim().toLowerCase()) || [];
-        const role = (user.email && adminEmails.includes(user.email.toLowerCase())) ? 'ADMIN' : 'USER';
+        const userEmail = user.email?.toLowerCase() || '';
+        const role = (userEmail && adminEmails.includes(userEmail)) ? 'ADMIN' : 'USER';
+        const uniqueEmail = userEmail || `${account?.providerAccountId}@${account?.provider}.placeholder`;
         
         // Persist user to DB if they don't exist (important for OAuth users)
         try {
           const dbUser = await prisma.user.upsert({
-            where: { email: user.email as string },
+            where: { email: uniqueEmail },
             update: { 
               name: user.name, 
               role: role,
@@ -122,7 +126,7 @@ export const authOptions: NextAuthOptions = {
               lastLoginAt: new Date()
             },
             create: {
-              email: user.email as string,
+              email: uniqueEmail,
               name: user.name,
               role: role,
               image: (user as any).image,
@@ -143,10 +147,29 @@ export const authOptions: NextAuthOptions = {
 
           token.id = dbUser.id;
           token.role = dbUser.role;
+          token.lastRoleCheck = now;
         } catch (error) {
           console.error("Error updating user activity:", error);
           token.id = user.id;
           token.role = role;
+          token.lastRoleCheck = now;
+        }
+      } else if (token.id) {
+        // Stale privilege propagation check: Query the database at most once every 30 seconds
+        const lastCheck = (token.lastRoleCheck as number) || 0;
+        if (now - lastCheck > 30) {
+          try {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: token.id as string },
+              select: { role: true }
+            });
+            if (dbUser) {
+              token.role = dbUser.role;
+              token.lastRoleCheck = now;
+            }
+          } catch (error) {
+            console.error("Error refreshing role from database:", error);
+          }
         }
       }
       return token;

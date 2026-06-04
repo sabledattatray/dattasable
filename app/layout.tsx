@@ -100,12 +100,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
-        <Script
-          id="google-adsense"
+        <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
 
         <Script
@@ -174,6 +172,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           id="theme-init"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
