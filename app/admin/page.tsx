@@ -57,7 +57,7 @@ const quickActions = [
   { label: 'New Project', href: '/admin/projects', icon: Briefcase, color: '#6366f1' },
   { label: 'Write Article', href: '/admin/editor', icon: Edit, color: '#06b6d4' },
   { label: 'View Messages', href: '/admin/messages', icon: MessageSquare, color: '#ec4899' },
-  { label: 'Umami Analytics', href: 'https://analytics.dattasable.com', icon: Activity, color: '#10b981' },
+  { label: 'Live Analytics', href: '/analytics-live', icon: Activity, color: '#10b981' },
   { label: 'n8n Automation', href: 'https://automate.dattasable.com', icon: Zap, color: '#f59e0b' },
   { label: 'Add Service', href: '/admin/services', icon: Layers, color: '#e0a96d' },
   { label: 'Testimonials', href: '/admin/testimonials', icon: Star, color: '#f43f5e' },

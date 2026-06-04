@@ -67,7 +67,7 @@ export const megaMenuData: Record<string, any> = {
     items: [
       { title: 'Templates Hub', desc: 'Downloadable system blueprints.', icon: <Library size={20} className="text-[var(--accent)]" />, href: '/templates' },
       { title: 'n8n Automation', desc: 'Self-hosted execution console.', icon: <Zap size={20} className="text-yellow-500" />, href: 'https://automate.dattasable.com' },
-      { title: 'Umami Analytics', desc: 'Self-hosted traffic dashboards.', icon: <BarChart3 size={20} className="text-emerald-500" />, href: 'https://analytics.dattasable.com' },
+      { title: 'Umami Analytics', desc: 'Live site analytics dashboard.', icon: <BarChart3 size={20} className="text-emerald-500" />, href: '/analytics-live' },
       { title: 'Prompt Auditor', desc: 'Surgical audit for LLM prompts.', icon: <Shield size={20} />, href: '/tools/prompt-auditor' },
       { title: 'Context Optimizer', desc: 'Token density & bloat analysis.', icon: <Zap size={20} />, href: '/tools/context-optimizer' },
       { title: 'Data Forge', desc: 'Synthetic dataset generation.', icon: <Database size={20} />, href: '/data-forge' },

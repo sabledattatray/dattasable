@@ -53,6 +53,11 @@ const nextConfig = {
         destination: '/portfolio',
         permanent: true,
       },
+      {
+        source: '/live-dashboard',
+        destination: '/analytics-live',
+        permanent: true,
+      },
     ];
   },
   async headers() {
