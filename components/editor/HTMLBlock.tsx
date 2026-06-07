@@ -1,6 +1,7 @@
 import { EditorBlock, useEditorStore } from '@/store/editorStore';
 import { Code2, Eye, Code } from 'lucide-react';
 import { useState } from 'react';
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function HTMLBlock({ block, isActive }: { block: EditorBlock; isActive: boolean }) {
   const { updateBlock } = useEditorStore();
@@ -44,7 +45,7 @@ export default function HTMLBlock({ block, isActive }: { block: EditorBlock; isA
       ) : (
         <div 
           className="w-full p-6 min-h-[12rem] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
-          dangerouslySetInnerHTML={{ __html: html }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
         />
       )}
     </div>

@@ -40,6 +40,7 @@
     "echarts": "^6.0.0",
     "echarts-for-react": "^3.0.6",
     "framer-motion": "^12.38.0",
+    "isomorphic-dompurify": "^3.16.0",
     "lodash.merge": "^4.6.2",
     "lru-cache": "^11.3.5",
     "lucide-react": "^1.11.0",
@@ -75,8 +76,8 @@
     "tailwindcss": "^4",
     "tar": "^7.5.13",
     "ts-node": "^10.9.2",
-    "typescript": "^5",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "typescript": "^5"
   },
   "prisma": {
     "seed": "npx tsx scripts/create-admin.ts"

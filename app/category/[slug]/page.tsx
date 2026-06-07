@@ -1,8 +1,7 @@
-import { prisma } from '@/lib/prisma';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogList from '@/components/BlogList';
-import { posts as staticPosts } from '../../blog/data';
+import { filterPostsByCategory, getPublishedBlogPosts } from '@/lib/blog-posts';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,27 +16,12 @@ export default async function CategoryPage({ params }: Props) {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  const dbPosts = await prisma.post.findMany({
-    where: { 
-      published: true,
-      category: { contains: categoryName, mode: 'insensitive' }
-    },
-    orderBy: { createdAt: 'desc' }
-  });
-
-  // Filter static posts by category
-  const filteredStatic = staticPosts.filter(p => 
-    p.category.toLowerCase() === categoryName.toLowerCase() ||
-    p.category.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
-  );
-
-  // Merge posts
-  const allPostsMap = new Map();
-  filteredStatic.forEach(p => allPostsMap.set(p.slug, p));
-  dbPosts.forEach(p => allPostsMap.set(p.slug, p));
-  
-  const posts = Array.from(allPostsMap.values())
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  let posts: any[] = [];
+  try {
+    posts = filterPostsByCategory(await getPublishedBlogPosts(), categoryName, slug);
+  } catch (error) {
+    console.error(`Failed to retrieve category posts for ${slug}:`, error);
+  }
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>

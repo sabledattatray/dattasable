@@ -1,7 +1,7 @@
-import { prisma } from '@/lib/prisma';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogList from '@/components/BlogList';
+import { getPublishedBlogPosts } from '@/lib/blog-posts';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -9,20 +9,12 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
   const resolvedParams = await searchParams;
   const category = resolvedParams.category || 'All';
 
-  const dbPosts = await prisma.post.findMany({
-    where: { published: true },
-    orderBy: { createdAt: 'desc' }
-  });
-
-  const { posts: staticPosts } = await import('./data');
-  
-  // Merge posts, using slug as unique key (DB takes priority)
-  const allPostsMap = new Map();
-  staticPosts.forEach(p => allPostsMap.set(p.slug, p));
-  dbPosts.forEach(p => allPostsMap.set(p.slug, p));
-  
-  const posts = Array.from(allPostsMap.values())
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  let posts: any[] = [];
+  try {
+    posts = await getPublishedBlogPosts();
+  } catch (error) {
+    console.error('Failed to retrieve blog posts:', error);
+  }
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>

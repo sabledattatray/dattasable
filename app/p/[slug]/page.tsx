@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import DOMPurify from 'isomorphic-dompurify';
 
 export const revalidate = 3600; // Revalidate dynamic pages every hour
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const page = await prisma.page.findUnique({
     where: { slug }
-  });
+  }).catch(() => null);
 
   if (!page) return { title: 'Page Not Found' };
 
@@ -53,11 +54,13 @@ export default async function CustomPage({ params }: Props) {
 
   const page = await prisma.page.findUnique({
     where: { slug }
-  });
+  }).catch(() => null);
 
   if (!page || !page.published) {
     notFound();
   }
+
+  const cleanContent = DOMPurify.sanitize(page.content);
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -118,7 +121,7 @@ export default async function CustomPage({ params }: Props) {
                 lineHeight: 1.8, 
                 color: 'var(--text-muted)' 
               }}
-              dangerouslySetInnerHTML={{ __html: page.content }}
+              dangerouslySetInnerHTML={{ __html: cleanContent }}
             />
           </div>
         </section>

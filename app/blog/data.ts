@@ -1094,6 +1094,8 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
           muted 
           loop 
           playsinline 
+          preload="metadata"
+          poster="/images/dashboards/surgical_ai_preview.png"
           style="width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);"
         ></video>
       </div>

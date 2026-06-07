@@ -1,6 +1,7 @@
 import { EditorBlock } from '@/store/editorStore';
 import { MessageCircle, Globe, Link } from 'lucide-react';
 import Image from 'next/image';
+import DOMPurify from 'isomorphic-dompurify';
 
 
 interface BlockRendererProps {
@@ -79,7 +80,7 @@ function BlockNode({ block }: { block: EditorBlock }) {
       const t = themes[(metadata?.theme as keyof typeof themes) || 'info'];
       return (
         <div className={`${wrapperClass} p-6 rounded-2xl border ${t}`} style={customStyles}>
-          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate dark:prose-invert max-w-none prose-p:leading-relaxed" />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} className="prose prose-slate dark:prose-invert max-w-none prose-p:leading-relaxed" />
         </div>
       );
 
@@ -127,7 +128,7 @@ function BlockNode({ block }: { block: EditorBlock }) {
     case 'html':
       if (!metadata?.html) return null;
       return (
-        <div className={wrapperClass} style={customStyles} dangerouslySetInnerHTML={{ __html: metadata.html }} />
+        <div className={wrapperClass} style={customStyles} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(metadata.html) }} />
       );
 
     case 'embed':
@@ -175,7 +176,7 @@ function BlockNode({ block }: { block: EditorBlock }) {
       // Text-based blocks handled via generic HTML injection with Tailwind Typography
       return (
         <div className={wrapperClass} style={customStyles}>
-          <div dangerouslySetInnerHTML={{ __html: content }} className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-xl" />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-xl" />
         </div>
       );
   }

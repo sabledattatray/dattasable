@@ -1,21 +1,29 @@
-import { prisma } from '@/lib/prisma';
-import { posts as staticPosts } from '../blog/data';
+import { getPublishedBlogPosts } from '@/lib/blog-posts';
 
 export async function GET() {
-  const dbPosts = await prisma.post.findMany({
-    where: { published: true },
-    orderBy: { createdAt: 'desc' }
-  });
-
-  // Merge and sort posts
-  const allPostsMap = new Map();
-  staticPosts.forEach(p => allPostsMap.set(p.slug, p));
-  dbPosts.forEach(p => allPostsMap.set(p.slug, p));
-  
-  const posts = Array.from(allPostsMap.values())
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  let posts: any[] = [];
+  try {
+    posts = await getPublishedBlogPosts();
+  } catch (error) {
+    console.error('Failed to retrieve blog posts for RSS:', error);
+  }
 
   const baseUrl = 'https://dattasable.com';
+
+  const rssItems = posts.map(post => {
+    const postDate = (post as any).date || (post as any).createdAt || (post as any).updatedAt || new Date();
+    const formattedDate = new Date(postDate).toUTCString();
+    
+    return `
+  <item>
+    <title><![CDATA[${post.title}]]></title>
+    <link>${baseUrl}/blog/${post.slug}</link>
+    <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
+    <pubDate>${formattedDate}</pubDate>
+    <category><![CDATA[${post.category}]]></category>
+    <description><![CDATA[${post.excerpt}]]></description>
+  </item>`;
+  }).join('');
 
   const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -26,15 +34,7 @@ export async function GET() {
   <language>en-us</language>
   <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
   <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
-  ${posts.map(post => `
-  <item>
-    <title><![CDATA[${post.title}]]></title>
-    <link>${baseUrl}/blog/${post.slug}</link>
-    <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
-    <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-    <category><![CDATA[${post.category}]]></category>
-    <description><![CDATA[${post.excerpt}]]></description>
-  </item>`).join('')}
+  ${rssItems}
 </channel>
 </rss>`;
 

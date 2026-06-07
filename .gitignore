@@ -44,3 +44,6 @@ next-env.d.ts
 /fraud-detection-system/
 /node_modules_old/
 surgical-forge-lab/public/staging/*.csv
+
+# Scratch directory
+/scratch/

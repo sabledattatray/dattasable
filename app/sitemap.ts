@@ -9,6 +9,7 @@ import { GLOSSARY_TERMS } from '@/data/glossary';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
+  const baselineDate = new Date('2026-05-18');
 
   // 1. Fetch DB blog posts (if any)
   const dbPosts = await prisma.post.findMany({
@@ -26,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Fetch Static blog posts from data.ts
   const staticBlogUrls = staticBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(),
+    lastModified: new Date(post.date),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
@@ -81,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/dashboards/surgical-ai',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'monthly' as const,
     priority: route === '' ? 1.0 : route === '/tools' ? 0.9 : 0.7,
   }));
@@ -89,7 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 4. Execution Chains
   const chainUrls = CHAINS.map((chain) => ({
     url: `${baseUrl}/chains/${chain.slug}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }));
@@ -97,7 +98,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 5. Template Packs
   const templateUrls = TEMPLATES.map((template) => ({
     url: `${baseUrl}/templates/${template.slug}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
@@ -105,7 +106,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 6. Knowledge Hub
   const knowledgeUrls = KNOWLEDGE_ARTICLES.map((article) => ({
     url: `${baseUrl}/knowledge/${article.slug}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
@@ -113,7 +114,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 7. Micro-Landing Pages
   const landingPageUrls = LANDING_PAGES.map((lp) => ({
     url: `${baseUrl}/lp/${lp.slug}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }));
@@ -121,7 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 8. Glossary Terms
   const glossaryUrls = GLOSSARY_TERMS.map((term) => ({
     url: `${baseUrl}/glossary/${term.slug}`,
-    lastModified: new Date(),
+    lastModified: baselineDate,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
@@ -144,13 +145,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       uniqueUrlsMap.set(item.url, item);
     } else {
       const existing = uniqueUrlsMap.get(item.url)!;
-      // Prefer specific database modification dates over generic new Date() instances
-      const existingIsToday = existing.lastModified instanceof Date && 
-        new Date().toDateString() === existing.lastModified.toDateString();
-      const itemIsToday = item.lastModified instanceof Date && 
-        new Date().toDateString() === item.lastModified.toDateString();
+      // Prefer specific database modification dates over generic baselineDate instances
+      const existingIsBaseline = existing.lastModified.getTime() === baselineDate.getTime();
+      const itemIsBaseline = item.lastModified.getTime() === baselineDate.getTime();
       
-      if (existingIsToday && !itemIsToday) {
+      if (existingIsBaseline && !itemIsBaseline) {
         uniqueUrlsMap.set(item.url, item);
       }
     }
@@ -158,4 +157,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return Array.from(uniqueUrlsMap.values());
 }
-

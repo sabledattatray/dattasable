@@ -104,6 +104,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
           <input 
             type="text" 
             placeholder="SEARCH LOGS..." 
+            aria-label="Search logs"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{

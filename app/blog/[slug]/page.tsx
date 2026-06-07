@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostContent from '@/components/BlogPostContent';
+import { getPublishedBlogPost, getPublishedBlogSlugs } from '@/lib/blog-posts';
 
 export const revalidate = 3600; // Revalidate every 1 hour
 
@@ -12,25 +12,9 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const { posts: staticPosts } = await import('../data');
-  
-  let dbSlugs: string[] = [];
-  try {
-    const dbPosts = await prisma.post.findMany({
-      select: { slug: true },
-      where: { published: true }
-    });
-    dbSlugs = dbPosts.map(p => p.slug);
-  } catch (e) {
-    console.warn('Could not query database slugs for generateStaticParams:', e);
-  }
+  const slugs = await getPublishedBlogSlugs();
 
-  const allSlugs = new Set([
-    ...staticPosts.map(p => p.slug),
-    ...dbSlugs
-  ]);
-
-  return Array.from(allSlugs).map((slug) => ({
+  return slugs.map((slug) => ({
     slug,
   }));
 }
@@ -38,14 +22,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const baseUrl = 'https://dattasable.com';
-  let post = await prisma.post.findUnique({
-    where: { slug }
-  });
-
-  // Fallback to static data if not in DB
-  if (!post) {
-    const { posts } = await import('../data');
-    post = posts.find(p => p.slug === slug) as any;
+  let post = null;
+  try {
+    post = await getPublishedBlogPost(slug);
+  } catch (error) {
+    console.error(`Failed to retrieve blog post metadata for ${slug}:`, error);
   }
 
   if (!post) return { title: 'Post Not Found' };
@@ -54,7 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${baseUrl}${(post as any).image}`
     : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
     
-  const publishDate = post.createdAt ? post.createdAt.toISOString() : new Date((post as any).date || Date.now()).toISOString();
+  const publishDate = (post as any).createdAt
+    ? (post as any).createdAt.toISOString()
+    : new Date((post as any).date || Date.now()).toISOString();
 
   return {
     title: `${post.title} | Datta Sable Blog`,
@@ -81,14 +64,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  let post = await prisma.post.findUnique({
-    where: { slug }
-  });
-
-  // Fallback to static data if not in DB
-  if (!post) {
-    const { posts } = await import('../data');
-    post = posts.find(p => p.slug === slug) as any;
+  let post = null;
+  try {
+    post = await getPublishedBlogPost(slug);
+  } catch (error) {
+    console.error(`Failed to retrieve blog post details for ${slug}:`, error);
   }
 
   if (!post) {

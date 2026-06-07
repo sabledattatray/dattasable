@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `${domain}/admin/auth/verify?token=${token}&email=${email}`;
+  const confirmLink = `${domain}/api/auth/verify?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`;
 
   await transporter.sendMail({
     from: `"Datta Sable Admin" <${process.env.EMAIL_FROM || "no-reply@dattasable.com"}>`,

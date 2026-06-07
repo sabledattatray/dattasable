@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import type { Viewport } from 'next';
+import { Providers } from "@/components/Providers";
+import { Suspense } from 'react';
+import Script from 'next/script';
+import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
+import PerformanceOptimizer from "@/components/PerformanceOptimizer";
+import { headers } from 'next/headers';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -63,50 +69,19 @@ export const metadata: Metadata = {
   },
 };
 
-import { Providers } from "@/components/Providers";
-import { Suspense } from 'react';
-import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
-import Script from 'next/script';
-import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
-import PerformanceOptimizer from "@/components/PerformanceOptimizer";
-
-
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-syne',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap'
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '600'],
-  variable: '--font-mono',
-  display: 'swap',
-});
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
   const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
+  const nonce = (await headers()).get('x-nonce') || undefined;
 
   return (
-    <html lang="en" suppressHydrationWarning className={`dark ${syne.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
-          crossOrigin="anonymous"
-        />
 
         <Script
+          nonce={nonce}
           id="json-ld"
           type="application/ld+json"
           strategy="afterInteractive"
@@ -171,6 +146,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <script
+          nonce={nonce}
           id="theme-init"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{

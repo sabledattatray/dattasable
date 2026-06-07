@@ -69,6 +69,7 @@ export default function NewsletterCapture() {
                     <input 
                       type="email" 
                       placeholder="Enter professional email..."
+                      aria-label="Email address for newsletter"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
