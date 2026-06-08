@@ -36,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
     
   const publishDate = (post as any).createdAt
-    ? (post as any).createdAt.toISOString()
+    ? (typeof (post as any).createdAt.toISOString === 'function'
+        ? (post as any).createdAt.toISOString()
+        : (post as any).createdAt)
     : new Date((post as any).date || Date.now()).toISOString();
 
   return {
