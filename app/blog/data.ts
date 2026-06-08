@@ -46,9 +46,6 @@ export const posts = [
               TableStorage <--> SQL[Synapse SQL Data Warehouse]
               TableStorage <--> BI[Power BI Direct Lake Semantic Model]
             end
-
-            style TableStorage fill:#c9f31d,stroke:#000000,color:#000000
-            style BI fill:#111111,stroke:#c9f31d,stroke-width:2px,color:#ffffff
         </pre>
       </div>
 
