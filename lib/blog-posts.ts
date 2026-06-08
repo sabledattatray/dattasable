@@ -9,21 +9,31 @@ function getPostTimestamp(post: BlogPost) {
   return Number.isFinite(timestamp) ? timestamp : 0;
 }
 
+function serializeDbPost(dbPost: any) {
+  if (!dbPost) return null;
+  return {
+    ...dbPost,
+    createdAt: dbPost.createdAt instanceof Date ? dbPost.createdAt.toISOString() : dbPost.createdAt,
+    updatedAt: dbPost.updatedAt instanceof Date ? dbPost.updatedAt.toISOString() : dbPost.updatedAt,
+  };
+}
+
 export async function getPublishedBlogPosts() {
-  let dbPosts: BlogPost[] = [];
+  let dbPosts: any[] = [];
 
   try {
-    dbPosts = await prisma.post.findMany({
+    const rawDbPosts = await prisma.post.findMany({
       where: { published: true },
       orderBy: { createdAt: 'desc' },
     });
+    dbPosts = rawDbPosts.map(serializeDbPost);
   } catch (error) {
     console.warn('Database unavailable for blog posts; using static posts only.', error);
   }
 
   const postsBySlug = new Map<string, BlogPost>();
   staticPosts.forEach((post) => postsBySlug.set(post.slug, post));
-  dbPosts.forEach((post) => postsBySlug.set((post as any).slug, post));
+  dbPosts.forEach((post) => postsBySlug.set(post.slug, post));
 
   return Array.from(postsBySlug.values()).sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
 }
@@ -35,7 +45,7 @@ export async function getPublishedBlogPost(slug: string) {
     });
 
     if (dbPost?.published) {
-      return dbPost;
+      return serializeDbPost(dbPost);
     }
   } catch (error) {
     console.warn(`Database unavailable for blog post "${slug}"; checking static posts.`, error);
