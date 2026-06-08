@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import DOMPurify from 'isomorphic-dompurify';
+import { sanitizeHtml } from '@/lib/sanitize';
 
 export const revalidate = 3600; // Revalidate dynamic pages every hour
 
@@ -60,7 +60,7 @@ export default async function CustomPage({ params }: Props) {
     notFound();
   }
 
-  const cleanContent = DOMPurify.sanitize(page.content);
+  const cleanContent = sanitizeHtml(page.content);
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

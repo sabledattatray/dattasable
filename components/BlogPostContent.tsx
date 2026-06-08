@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
-import DOMPurify from 'isomorphic-dompurify';
+import { sanitizeHtml } from '@/lib/sanitize';
 
 const parseSafeDate = (dateStr: any): string => {
   if (!dateStr) return new Date().toISOString();
@@ -233,7 +233,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
           <div
             className="blog-content"
             style={{ color: 'var(--muted)', lineHeight: 1.9, fontSize: '1rem' }}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content)
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content)
               .replace(/<h3>/g, `<h3 style="color:var(--text);font-size:1.15rem;margin:1.75rem 0 0.75rem;font-family:Inter,sans-serif;">`)
               .replace(/<p>/g, `<p style="margin-bottom:1rem;">`)
               .replace(/<pre><code>/g, `<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;overflow-x:auto;margin:1rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);">`)
