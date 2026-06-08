@@ -71,11 +71,13 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
 
                 <div className="knowledge-content text-[var(--text)] leading-relaxed mb-12">
                    <h3 className="text-2xl font-bold mb-6">Operator's Perspective</h3>
-                   <p className="mb-6 opacity-80">
-                      In the new creator infrastructure, **{term.term}** isn't just a definition—it's a tactical advantage. Mastering this concept allows you to build more resilient, cost-effective, and precise AI systems.
+                   <p className="mb-6 opacity-80 leading-relaxed">
+                      {term.operatorsPerspective}
                    </p>
-                   <p className="opacity-80">
-                      Most people treat this as a theoretical concept. We treat it as an engineering constraint. Whether you're optimizing for LinkedIn authority or scaling B2B data pipelines, this term represents a core pillar of your technical moat.
+                   
+                   <h3 className="text-xl font-bold mt-12 mb-6">Technical Application</h3>
+                   <p className="mb-6 opacity-80 leading-relaxed">
+                      {term.technicalApplication}
                    </p>
                 </div>
 
@@ -87,8 +89,8 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                       </div>
                       <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Note</h5>
                    </div>
-                   <p className="text-xs italic text-[var(--muted)] leading-relaxed">
-                      "I spent months refining this methodology in real-world data environments. When you get this right, your workflow speed increases by 40%. It's the difference between a 'prompt generator' and a 'surgical engine'."
+                   <p className="text-sm italic text-[var(--text)] leading-relaxed">
+                      "{term.founderNote}"
                    </p>
                 </div>
               </div>

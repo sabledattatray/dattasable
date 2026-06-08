@@ -79,11 +79,13 @@ export default async function LandingPageDetail({ params }: { params: Promise<{ 
 
                 <div className="knowledge-content text-[var(--text)] leading-relaxed mb-12">
                    <h3 className="text-2xl font-bold mb-6">The Surgical Strategy</h3>
-                   <p className="mb-6 opacity-80">
-                      Most {lp.persona} fail because they use generic templates. Our **{lp.title}** is precision-engineered to bridge the gap between technical complexity and audience impact.
+                   <p className="mb-6 opacity-80 leading-relaxed">
+                      {lp.detailedStrategy}
                    </p>
-                   <p className="opacity-80">
-                      By deploying this system, you leverage our high-fidelity infrastructure to automate the heavy lifting of content formatting and prompt engineering.
+                   
+                   <h3 className="text-xl font-bold mt-12 mb-6">Real-World Scenario</h3>
+                   <p className="mb-6 opacity-80 leading-relaxed">
+                      {lp.realWorldScenario}
                    </p>
                 </div>
 

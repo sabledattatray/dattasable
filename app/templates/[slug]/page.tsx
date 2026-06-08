@@ -89,7 +89,34 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                   </pre>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-[var(--muted)] mono p-4 border border-dashed border-[var(--border)]">
+                {/* Rich Details Sections */}
+                <div className="knowledge-content text-[var(--text)] leading-relaxed mb-12">
+                  <h3 className="text-2xl font-bold mb-6">Architectural Breakdown</h3>
+                  <p className="mb-8 opacity-80 leading-relaxed">
+                    {template.detailedExplanation}
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                      <h4 className="text-lg font-bold mb-4">Recommended Use Cases</h4>
+                      <ul className="list-disc pl-5 space-y-2 opacity-80 text-sm">
+                        {template.useCases.map((useCase, index) => (
+                          <li key={index}>{useCase}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold mb-4">Implementation Best Practices</h4>
+                      <ul className="list-disc pl-5 space-y-2 opacity-80 text-sm">
+                        {template.bestPractices.map((practice, index) => (
+                          <li key={index}>{practice}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-[var(--muted)] mono p-4 border border-dashed border-[var(--border)] mb-12">
                   <Sparkles size={14} className="text-[var(--accent)]" /> 
                   System Note: This blueprint is a static-generated knowledge asset. 100% crawlable for maximum authority.
                 </div>

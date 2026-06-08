@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og-ultra.png",
+        url: "/images/dattasable.com.webp",
         width: 1200,
         height: 630,
         alt: "Datta Sable | Surgical AI Workspace",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Surgical AI Workspace | AI Workflow Infrastructure",
     description: "Independent AI workflow architect and data strategist. Building precision-engineered automation systems.",
-    images: ["/images/og-ultra.png"],
+    images: ["/images/dattasable.com.webp"],
   },
   icons: {
     icon: [
