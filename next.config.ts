@@ -22,6 +22,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   async redirects() {
     return [
       {
