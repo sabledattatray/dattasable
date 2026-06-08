@@ -35,11 +35,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${baseUrl}${(post as any).image}`
     : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
     
-  const publishDate = (post as any).createdAt
-    ? (typeof (post as any).createdAt.toISOString === 'function'
-        ? (post as any).createdAt.toISOString()
-        : (post as any).createdAt)
-    : new Date((post as any).date || Date.now()).toISOString();
+  let publishDate = new Date().toISOString();
+  if ((post as any).createdAt) {
+    publishDate = typeof (post as any).createdAt.toISOString === 'function'
+      ? (post as any).createdAt.toISOString()
+      : (post as any).createdAt;
+  } else if ((post as any).date) {
+    const parsed = new Date((post as any).date);
+    if (!isNaN(parsed.getTime())) {
+      publishDate = parsed.toISOString();
+    } else {
+      try {
+        const parts = (post as any).date.split(/[\s,]+/);
+        if (parts.length >= 3) {
+          const months: Record<string, number> = {
+            jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+            jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+          };
+          const monthStr = parts[0].toLowerCase().substring(0, 3);
+          const day = parseInt(parts[1], 10);
+          const year = parseInt(parts[2], 10);
+          if (monthStr in months && !isNaN(day) && !isNaN(year)) {
+            publishDate = new Date(year, months[monthStr], day).toISOString();
+          }
+        }
+      } catch (e) {}
+    }
+  }
 
   return {
     title: `${post.title} | Datta Sable Blog`,

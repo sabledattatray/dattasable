@@ -8,6 +8,35 @@ import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import DOMPurify from 'isomorphic-dompurify';
 
+const parseSafeDate = (dateStr: any): string => {
+  if (!dateStr) return new Date().toISOString();
+  
+  const dateObj = new Date(dateStr);
+  if (!isNaN(dateObj.getTime())) {
+    return dateObj.toISOString();
+  }
+
+  try {
+    const parts = dateStr.split(/[\s,]+/);
+    if (parts.length >= 3) {
+      const months: Record<string, number> = {
+        jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+      };
+      const monthStr = parts[0].toLowerCase().substring(0, 3);
+      const day = parseInt(parts[1], 10);
+      const year = parseInt(parts[2], 10);
+      if (monthStr in months && !isNaN(day) && !isNaN(year)) {
+        return new Date(year, months[monthStr], day).toISOString();
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  return new Date().toISOString();
+};
+
 interface Post {
   slug: string;
   title: string;
@@ -257,8 +286,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
               "headline": post.title,
               "description": post.excerpt,
               "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.png`,
-              "datePublished": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
-              "dateModified": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+              "datePublished": parseSafeDate(post.date),
+              "dateModified": parseSafeDate(post.date),
               "author": {
                 "@type": "Person",
                 "name": "Datta Sable",
@@ -350,7 +379,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
                     `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
                   ]
                 : [getAbsoluteUrl(post.image || "/images/og-main.png")],
-              "uploadDate": post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
+              "uploadDate": parseSafeDate(post.date),
               "embedUrl": youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : getAbsoluteUrl(localVideoUrl || ''),
               "contentUrl": localVideoUrl ? getAbsoluteUrl(localVideoUrl) : undefined,
               "duration": "PT5M", // Default duration for SEO richness
