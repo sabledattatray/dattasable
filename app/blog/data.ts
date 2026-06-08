@@ -91,8 +91,6 @@ export const posts = [
                 SQL-->>RAM: Returns database cursor
                 RAM->>PBI: Displays chart with query lag (2s - 15s)
             end
-            
-            style RAM fill:#c9f31d,stroke:#000000,color:#000000
         </pre>
       </div>
 
