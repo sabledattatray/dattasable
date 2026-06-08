@@ -24,7 +24,15 @@ export function middleware(request: NextRequest) {
   //   return new NextResponse('Access Denied: Malicious traffic detected.', { status: 403 });
   // }
 
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+  // Safely generate a base64-encoded nonce without using Node.js Buffer (which causes ReferenceErrors in the Edge Runtime)
+  const uuid = typeof globalThis.crypto !== 'undefined' && typeof globalThis.crypto.randomUUID === 'function'
+    ? globalThis.crypto.randomUUID()
+    : Array.from({ length: 4 }, () => Math.random().toString(36).substring(2, 10)).join('-');
+  
+  const nonce = typeof btoa !== 'undefined'
+    ? btoa(uuid)
+    : Buffer.from(uuid).toString('base64');
+  
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
 
