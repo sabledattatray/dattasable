@@ -188,7 +188,7 @@ export default function Footer() {
                 </span>
 
                 {/* Official Theme-Aware Google Play Store Badge */}
-                <div className="pt-4 pb-2">
+                <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
                   <a
                     href="https://play.google.com/store"
                     target="_blank"
