@@ -39,7 +39,7 @@ export default function KnowledgeHub() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
               {KNOWLEDGE_ARTICLES.map((article) => (
                 <Link key={article.id} href={`/knowledge/${article.slug}`} className="no-underline group">
                   <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
@@ -69,6 +69,35 @@ export default function KnowledgeHub() {
                   </div>
                 </Link>
               ))}
+
+              {/* Comparisons Page Link */}
+              <Link href="/knowledge/comparisons" className="no-underline group">
+                <div className="card h-full flex flex-col p-8 transition-all duration-300 hover:border-[var(--accent)]" style={{ background: 'var(--surface2)' }}>
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="px-2 py-1 text-[9px] mono font-bold border border-[var(--border)] rounded opacity-60">
+                      ENGINEERING ANALYSIS
+                    </div>
+                    <div className="text-[var(--muted)] opacity-20">
+                       <Target size={24} />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold mb-3 text-[var(--text)] group-hover:text-[var(--accent)] transition-all">
+                    Surgical AI Framework Comparisons
+                  </h3>
+                  
+                  <p className="text-[var(--muted)] text-sm leading-relaxed mb-8 flex-1">
+                    A technical framework analysis positioning Surgical AI precision against conventional recursive autonomous agents.
+                  </p>
+
+                  <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
+                    <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
+                      COMPARE_FRAMEWORKS <ArrowRight size={12} />
+                    </div>
+                    <span className="text-[10px] mono text-[var(--muted)]">6 min</span>
+                  </div>
+                </div>
+              </Link>
             </div>
 
             {/* Newsletter Integration */}

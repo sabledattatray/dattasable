@@ -3,8 +3,11 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { Download, FileText, Layout, Database, Zap, Search, Filter } from 'lucide-react';
+import { Download, FileText, Layout, Database, Zap, Search, Filter, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
+import { TEMPLATES as interactiveTemplates } from '@/data/templates';
+import { LANDING_PAGES as landingPages } from '@/data/landing-pages';
 
 const TEMPLATES = [
   {
@@ -113,6 +116,99 @@ export default function TemplatesPage() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Interactive Tool Blueprints & Presets Section */}
+        <div style={{ marginTop: '8rem' }}>
+          <header className="mb-10">
+            <div className="label-tech mb-4 text-[var(--accent2)]">Interactive Presets / AI & Marketing</div>
+            <h2 style={{ fontSize: '32px', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '1rem' }}>
+              Interactive <span style={{ color: 'var(--accent2)' }}>Blueprints.</span>
+            </h2>
+            <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '600px', lineHeight: 1.6 }}>
+              Directly load these blueprints and precision structures into our Surgical Workspace tools.
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {interactiveTemplates.filter(t => t.title.toLowerCase().includes(search.toLowerCase()) || t.category.toLowerCase().includes(search.toLowerCase())).map((item, i) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                className="card flex flex-col h-full shadow-lg hover:border-[var(--accent2)] transition-all duration-300"
+                style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
+              >
+                <div className="flex items-center justify-between mb-8">
+                  <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
+                    {item.category.toUpperCase()}
+                  </div>
+                  <div className="tag mono text-[10px] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
+                    {item.targetModule.split('/').pop()}
+                  </div>
+                </div>
+                
+                <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+                  {item.title}
+                </h2>
+                <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2.5rem', flex: 1 }}>
+                  {item.description}
+                </p>
+
+                <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
+                  <Link href={`/templates/${item.slug}`} className="mono text-[11px] font-bold text-[var(--accent2)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
+                    VIEW BLUEPRINT <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+        {/* Technical Growth Playbooks (Landing Pages) */}
+        <div style={{ marginTop: '8rem' }}>
+          <header className="mb-10">
+            <div className="label-tech mb-4 text-[var(--accent3)]">Growth Frameworks & Playbooks</div>
+            <h2 style={{ fontSize: '32px', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '1rem' }}>
+              Growth <span style={{ color: 'var(--accent3)' }}>Playbooks.</span>
+            </h2>
+            <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '600px', lineHeight: 1.6 }}>
+              Deep-dive marketing and authority execution strategies tailored for data experts and SaaS builders.
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {landingPages.filter(lp => lp.title.toLowerCase().includes(search.toLowerCase()) || lp.persona.toLowerCase().includes(search.toLowerCase())).map((item, i) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                className="card flex flex-col h-full shadow-lg hover:border-[var(--accent3)] transition-all duration-300"
+                style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
+              >
+                <div className="flex items-center justify-between mb-8">
+                  <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
+                    {item.persona.toUpperCase()}
+                  </div>
+                  <div className="tag mono text-[10px] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
+                    {item.intent.toUpperCase()}
+                  </div>
+                </div>
+                
+                <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+                  {item.title}
+                </h2>
+                <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2.5rem', flex: 1 }}>
+                  {item.description}
+                </p>
+
+                <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
+                  <Link href={`/lp/${item.slug}`} className="mono text-[11px] font-bold text-[var(--accent3)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
+                    READ PLAYBOOK <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Lead Capture Overlay (Coming soon / CTA) */}
