@@ -28,8 +28,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!article) return { title: 'Article Not Found' };
   
+  const finalTitle = article.title.length > 50 ? article.title : `${article.title} | Datta Sable`;
+  
   return {
-    title: `${article.title} | Surgical Knowledge Hub`,
+    title: { absolute: finalTitle },
     description: article.description,
   };
 }

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Global Sales Intelligence | Real-time Revenue Engine',
+  title: { absolute: 'Global Sales Intelligence | Surgical BI' },
   description: 'Interactive global sales dashboard featuring connectivity mesh mapping, revenue forecasting, and market distribution intelligence.',
   keywords: ['Global Sales Dashboard', 'Revenue Intelligence', 'Market Distribution', 'Sales Analytics', 'Real-time BI', 'Data Visualization'],
   openGraph: {

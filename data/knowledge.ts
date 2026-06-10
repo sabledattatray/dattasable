@@ -16,7 +16,7 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     id: 'ai-context-opt-guide',
     slug: 'optimizing-ai-context-windows',
     title: 'Surgical Prompt Architecture™: Optimizing Context Windows',
-    description: 'Learn the technical art of semantic compression and token density to fit massive logic into narrow LLM windows.',
+    description: 'Learn the technical art of semantic compression, token density optimization, and prompt engineering to fit massive code logic into narrow LLM context windows.',
     category: 'AI Workflow',
     content: `
       ### The Context Window Bottleneck
@@ -40,7 +40,7 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     id: 'li-authority-storytelling',
     slug: 'technical-storytelling-for-founders',
     title: 'Operator Intent Mapping™: Technical Storytelling for Founders',
-    description: 'A surgical breakdown of how to turn messy technical wins into viral LinkedIn authority assets.',
+    description: 'Discover the Operator Intent Mapping framework to translate complex codebases, software architectures, and engineering milestones into high-authority LinkedIn posts.',
     category: 'LinkedIn Authority',
     content: `
       ### Why Technical Posts Fail

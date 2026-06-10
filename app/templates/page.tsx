@@ -163,6 +163,9 @@ export default function TemplatesPage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+
         {/* Technical Growth Playbooks (Landing Pages) */}
         <div style={{ marginTop: '8rem' }}>
           <header className="mb-10">

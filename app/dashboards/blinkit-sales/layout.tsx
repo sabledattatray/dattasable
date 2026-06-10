@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Blinkit Sales Intelligence (Simulated Case Study) | Datta Sable",
+  title: { absolute: "Blinkit Sales Intelligence Showcase" },
   description: "A high-fidelity technical showcase of quick commerce analytics using simulated Blinkit data. Interactive performance modeling by Datta Sable.",
   openGraph: {
     title: "Blinkit Sales Intelligence (Simulated Case Study)",

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Sales Pipeline Velocity (Technical Showcase) | Datta Sable",
+  title: { absolute: "Sales Pipeline Velocity Showcase" },
   description: "A high-fidelity B2B revenue analytics showcase. Interactive sales pipeline modeling and forecasting by Datta Sable.",
   openGraph: {
     title: "Sales Pipeline Velocity (Technical Showcase)",

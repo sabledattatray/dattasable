@@ -27,8 +27,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!lp) return { title: 'Landing Page Not Found' };
   
+  const finalTitle = lp.title.length > 50 ? lp.title : `${lp.title} | Datta Sable`;
+  
   return {
-    title: `${lp.title} | Surgical AI Workspace`,
+    title: { absolute: finalTitle },
     description: lp.description,
   };
 }

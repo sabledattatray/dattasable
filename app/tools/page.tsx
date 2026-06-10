@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Surgical AI Workspace | Professional AI Workflow Infrastructure",
+  title: { absolute: "Surgical AI Workspace | AI Workflows" },
   description: "A precision-engineered AI workspace for creators, developers, and strategists — built to streamline content workflows, SEO execution, and technical optimization.",
 };
 

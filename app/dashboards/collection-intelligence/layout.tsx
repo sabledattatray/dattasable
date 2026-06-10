@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'EMI Collection Intelligence | Surgical BI Dashboard',
+  title: { absolute: 'EMI Collection Intelligence | Surgical BI' },
   description: 'Advanced fintech analytics dashboard for real-time EMI collection monitoring, overdue aging analysis, and portfolio risk management.',
   keywords: ['EMI Analytics', 'Fintech Dashboard', 'Collection Intelligence', 'Loan Portfolio Management', 'BI Dashboard', 'Next.js Analytics'],
   openGraph: {

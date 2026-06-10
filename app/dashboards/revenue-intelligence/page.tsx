@@ -145,7 +145,19 @@ export default function RevenueIntelligence() {
     }]
   };
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">
+        <Navbar />
+        <main className="boxed-wrapper mt-24 mb-12 relative z-10 overflow-hidden">
+          <div className="py-24 text-center text-xs text-[var(--muted)] mono uppercase tracking-widest">
+            Initializing Revenue Intelligence Engine...
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">

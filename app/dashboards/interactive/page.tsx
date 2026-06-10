@@ -162,7 +162,19 @@ export default function InteractiveDashboard() {
     }]
   };
 
-  if (!mounted) return <div className="min-h-screen bg-black" />;
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">
+        <Navbar />
+        <main className="boxed-wrapper relative z-10 overflow-hidden">
+          <div className="py-24 text-center text-xs text-[var(--muted)] mono uppercase tracking-widest">
+            Initializing Interactive Analytics...
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">

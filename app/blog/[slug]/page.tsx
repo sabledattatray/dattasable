@@ -63,15 +63,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const finalTitle = post.title.length > 50 ? post.title : `${post.title} | Datta Sable`;
+  let seoDesc = post.excerpt || '';
+  if (seoDesc.length < 120) {
+    seoDesc = `${seoDesc} Read the full technical breakdown, system architecture benchmarks, and implementation strategies.`.slice(0, 155);
+  }
+
   return {
-    title: `${post.title} | Datta Sable Blog`,
-    description: post.excerpt,
+    title: { absolute: finalTitle },
+    description: seoDesc,
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: seoDesc,
       images: [ogImage],
       type: 'article',
       publishedTime: publishDate,
@@ -80,7 +86,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description: seoDesc,
       images: [ogImage],
     }
   };

@@ -17,7 +17,7 @@ export const TEMPLATES: Template[] = [
     id: 'li-viral-hook-1',
     slug: 'viral-linkedin-hooks-pack',
     title: 'The Viral Hook Pack',
-    description: '10+ High-conversion hooks for technical founders and data specialists.',
+    description: 'Unlock 10+ high-conversion, copy-pasteable LinkedIn hooks engineered specifically for technical founders, data analysts, and software engineers to drive organic reach.',
     category: 'LinkedIn',
     targetModule: '/tools/linkedin-formatter',
     content: {
@@ -39,7 +39,7 @@ export const TEMPLATES: Template[] = [
     id: 'li-founder-auth',
     slug: 'founder-authority-system',
     title: 'Founder Authority System',
-    description: 'Position yourself as a technical expert with this structural blueprint.',
+    description: 'Elevate your professional brand with this structural blueprint designed to translate complex engineering feats and system architectures into founder authority.',
     category: 'LinkedIn',
     targetModule: '/tools/linkedin-formatter',
     content: {
@@ -63,7 +63,7 @@ export const TEMPLATES: Template[] = [
     id: 'prompt-gemini-research',
     slug: 'gemini-research-pipeline',
     title: 'Gemini Research Pipeline',
-    description: 'High-fidelity prompt for deep technical research and data synthesis.',
+    description: 'A comprehensive, high-fidelity system prompt designed to orchestrate Gemini for deep technical research, literature synthesis, and structured report output.',
     category: 'AI Prompts',
     targetModule: '/tools/ai-prompt-generator',
     content: {
@@ -87,7 +87,7 @@ export const TEMPLATES: Template[] = [
     id: 'prompt-token-optimizer',
     slug: 'token-saving-system-prompt',
     title: 'Token-Saving System Prompt',
-    description: 'Reduce context window usage by 40% with this hyper-concise technical instruction set.',
+    description: 'Optimize your LLM billing and prompt latency. Shrink your system instruction token usage by up to 40% with this highly-condensed technical instruction set.',
     category: 'AI Prompts',
     targetModule: '/tools/ai-prompt-generator',
     content: {
@@ -111,7 +111,7 @@ export const TEMPLATES: Template[] = [
     id: 'prompt-agent-chain',
     slug: 'ai-agent-chain-blueprint',
     title: 'AI Agent Chain Blueprint',
-    description: 'A multi-step reasoning chain for building autonomous agentic workflows.',
+    description: 'Implement deterministic, multi-step agentic workflows with this comprehensive blueprint for planning, self-correction, execution, and output validation.',
     category: 'AI Prompts',
     targetModule: '/tools/ai-prompt-generator',
     content: {
@@ -137,7 +137,7 @@ export const TEMPLATES: Template[] = [
     id: 'li-b2b-retention',
     slug: 'b2b-retention-post-blueprint',
     title: 'B2B Retention Blueprint',
-    description: 'A strategic post structure for highlighting client success and retention metrics.',
+    description: 'Learn the exact post structure and psychological angles to showcase B2B client success stories, retention rates, and ROI metrics to generate inbound leads.',
     category: 'LinkedIn',
     targetModule: '/tools/linkedin-formatter',
     content: {
@@ -161,7 +161,7 @@ export const TEMPLATES: Template[] = [
     id: 'seo-high-ctr',
     slug: 'high-ctr-meta-structures',
     title: 'High-CTR Meta Structures',
-    description: 'Proven meta title and description templates to win the SERP click.',
+    description: 'Deploy these pre-tested search engine optimization templates for titles and meta descriptions engineered to capture maximum clicks and dominate search results.',
     category: 'SEO',
     targetModule: '/tools/seo-meta-generator',
     content: {
@@ -184,7 +184,7 @@ export const TEMPLATES: Template[] = [
     id: 'seo-jsonld-product',
     slug: 'saas-product-schema-blueprint',
     title: 'SaaS Product Schema',
-    description: 'Technical JSON-LD structure to get rich snippets for your software product.',
+    description: 'Optimize your software landing pages with this compliant JSON-LD schema blueprint designed to secure rich search results snippets and boost click-through rates.',
     category: 'SEO',
     targetModule: '/tools/seo-meta-generator',
     content: {
