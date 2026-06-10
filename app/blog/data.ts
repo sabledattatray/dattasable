@@ -1829,7 +1829,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
   },
 
   // --- TECH STACK & ENGINEERING ---
-{
+  {
     id: 'modern-bi-stack-2026',
     slug: 'modern-bi-stack-2026',
     title: 'The 2026 Modern Data Stack: Orchestrating Intelligence at Scale',
@@ -2819,7 +2819,7 @@ def audit_dataset(file_path):
     date: 'May 10, 2026',
     color: '#10b981',
     icon: '🧪',
-    image: '/images/blog/feature_engineering.png',
+    image: '/images/blog/feature_engineering.webp',
     tags: ['Data Science', 'Feature Engineering', 'Machine Learning', 'Python', 'SQL']
   },
   {
