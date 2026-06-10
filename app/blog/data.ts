@@ -1079,7 +1079,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
       </ul>
 
       <h2>Beyond the Chatbox</h2>
-      <p>When you deploy a <a href="/surgical-forge" style="color: var(--accent); text-decoration: underline;">Surgical Forge Agent</a>, you aren't just sending a message; you are injecting an execution chain. This is the difference between a "good output" and a "production-ready asset."</p>
+      <p>When you deploy a <a href="/dashboards/surgical-ai" style="color: var(--accent); text-decoration: underline;">Surgical AI Workspace</a>, you aren't just sending a message; you are injecting an execution chain. This is the difference between a "good output" and a "production-ready asset."</p>
 
       <p>Explore our related <a href="/blog/operator-intent-mapping-framework" style="color: var(--accent); text-decoration: underline;">Operator Intent Mapping</a> or dive into the <a href="/glossary" style="color: var(--accent); text-decoration: underline;">Technical Glossary</a>.</p>
     `,
@@ -1213,7 +1213,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
       <h2>Accessibility: Professionalism Includes Inclusivity</h2>
       <p>A Surgical UI must be <strong>WCAG AA Compliant</strong>. Professionalism isn't just for the able-bodied; it's about providing the same <a href="/blog/strategic-bi-guide-india-2026" style="color: var(--accent); text-decoration: underline;">Decision Clarity</a> to every stakeholder.</p>
 
-      <p><strong>External Reference</strong>: <a href="https://www.nngroup.com/articles/dashboard-design/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Nielsen Norman Group on Dashboard Design</a></p>
+      <p><strong>External Reference</strong>: <a href="https://www.nngroup.com/videos/data-visualizations-dashboards/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Nielsen Norman Group on Dashboard Design</a></p>
     `,
     readTime: 18,
     date: 'May 08, 2026',
@@ -2742,7 +2742,7 @@ def audit_dataset(file_path):
       <p>The most common security failure in enterprise BI is "Over-Permissioning." We often give full database access to an analyst who only needs to see aggregated regional sales. A <strong>Surgical UI</strong> must implement Row-Level Security (RLS) at the architectural level. This ensures that a manager in Mumbai can only see data for the West Zone, while the CFO sees the global picture, all within the same dashboard.</p>
 
       <h2>Encryption at Rest and in Transit</h2>
-      <p>It is a standard but often poorly implemented rule: data must be encrypted at every stage. In our <a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: underline;">Postgres and Snowflake architectures</a>, we utilize AES-256 encryption for data at rest. However, the "Transit" part is where many fail. Every API call between your frontend and your data engine must be secured via TLS 1.3, with strict Content Security Policies (CSP) enforced via <a href="/middleware.ts" style="color: var(--accent); text-decoration: underline;">Next.js Middleware</a>.</p>
+      <p>It is a standard but poorly implemented rule: data must be encrypted at every stage. In our <a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: underline;">Postgres and Snowflake architectures</a>, we utilize AES-256 encryption for data at rest. However, the "Transit" part is where many fail. Every API call between your frontend and your data engine must be secured via TLS 1.3, with strict Content Security Policies (CSP) enforced via <a href="https://github.com/sabledattatray/dattasable/blob/main/middleware.ts" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Next.js Middleware</a>.</p>
 
       <h2>The Threat of "Data Scraping" by Rogue AI</h2>
       <p>In 2026, we face a new threat: automated AI bots that "scrape" dashboards to reverse-engineer company strategy. To counter this, we implement <strong>Anonymization Pipelines</strong>. Before data even hits the visualization layer, sensitive PII (Personally Identifiable Information) is salted and hashed using high-performance Python scripts, as detailed in my <a href="/blog/python-engineering-2026" style="color: var(--accent); text-decoration: underline;">Python Data Engineering guide</a>.</p>
