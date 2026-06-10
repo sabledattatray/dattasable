@@ -95,6 +95,7 @@ model Post {
   icon      String?
   image     String?
   published Boolean  @default(true)
+  blocks    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

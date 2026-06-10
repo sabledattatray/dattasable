@@ -23,44 +23,78 @@ function EditorContent() {
     ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (editId) {
-      const saved = localStorage.getItem('admin_posts');
-      if (saved) {
-        const posts = JSON.parse(saved);
-        const post = posts.find((p: any) => p.id.toString() === editId);
-        if (post) {
-          updatePostMetadata({
-            title: post.title, slug: post.slug, excerpt: post.excerpt,
-            categories: [post.category || 'Tech Trends'],
-            status: post.status, date: post.date, featuredImage: post.image || '',
-          });
-          if (post.blocks?.length > 0) setBlocks(post.blocks);
-          else if (post.content) setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
+      const loadPost = async () => {
+        setLoading(true);
+        try {
+          const res = await fetch(`/api/admin/blog/${editId}`);
+          if (!res.ok) throw new Error('Failed to load post');
+          const post = await res.json();
+          if (post) {
+            updatePostMetadata({
+              title: post.title,
+              slug: post.slug,
+              excerpt: post.excerpt,
+              categories: [post.category || 'Tech Trends'],
+              status: post.published ? 'Published' : 'Draft',
+              date: post.date,
+              featuredImage: post.image || '',
+            });
+            if (post.blocks && Array.isArray(post.blocks)) {
+              setBlocks(post.blocks);
+            } else if (post.content) {
+              setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
+            }
+          }
+        } catch (err: any) {
+          alert('Error loading post: ' + err.message);
+        } finally {
+          setLoading(false);
         }
-      }
+      };
+      loadPost();
     }
   }, [editId]);
 
-  const handlePublish = (status: 'Draft' | 'Published') => {
-    const saved = localStorage.getItem('admin_posts');
-    const posts = saved ? JSON.parse(saved) : [];
+  const handlePublish = async (status: 'Draft' | 'Published') => {
     const compiledContent = blocks.map(b => b.content).join('');
-    const postData = {
-      id: editId ? parseInt(editId) : Date.now(),
+    const payload = {
       title: postMetadata.title || 'Untitled Post',
       slug: postMetadata.slug || (postMetadata.title || 'untitled-post').toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
       category: postMetadata.categories[0] || 'Tech Trends',
-      status, date: postMetadata.date,
-      views: editId ? posts.find((p: any) => p.id.toString() === editId)?.views : '0',
-      excerpt: postMetadata.excerpt, content: compiledContent, blocks,
+      excerpt: postMetadata.excerpt || '',
+      content: compiledContent,
+      blocks: blocks,
       image: postMetadata.featuredImage || '/images/blog/bi-career.png',
+      date: postMetadata.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      published: status === 'Published',
     };
-    const updatedPosts = editId
-      ? posts.map((p: any) => p.id.toString() === editId ? postData : p)
-      : [postData, ...posts];
-    localStorage.setItem('admin_posts', JSON.stringify(updatedPosts));
-    router.push('/admin/blog');
+
+    try {
+      setLoading(true);
+      const url = editId ? `/api/admin/blog/${editId}` : '/api/admin/blog';
+      const method = editId ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Failed to save post');
+      }
+
+      router.push('/admin/blog');
+    } catch (err: any) {
+      alert(err.message || 'Error saving post');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

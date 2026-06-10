@@ -81,13 +81,46 @@ export default function EditorSidebar() {
             {/* Featured Image */}
             <div>
               <label style={labelStyle}>Featured Image</label>
-              <div style={{ width: '100%', height: 110, border: `2px dashed ${css.border}`, borderRadius: 12, background: css.inputBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'border-color 0.15s' }}
+              <div 
+                onClick={() => document.getElementById('sidebar-featured-image-input')?.click()}
+                style={{ width: '100%', height: 110, border: `2px dashed ${css.border}`, borderRadius: 12, background: css.inputBg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'border-color 0.15s', overflow: 'hidden', position: 'relative' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = css.accent}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = css.border}
               >
-                <ImageIcon size={22} color={css.muted} />
-                <span style={{ fontSize: 11, color: css.muted, marginTop: 6, fontWeight: 500 }}>Click to upload</span>
+                {postMetadata.featuredImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={postMetadata.featuredImage} alt="Featured" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <>
+                    <ImageIcon size={22} color={css.muted} />
+                    <span style={{ fontSize: 11, color: css.muted, marginTop: 6, fontWeight: 500 }}>Click to upload</span>
+                  </>
+                )}
               </div>
+              <input 
+                id="sidebar-featured-image-input" 
+                type="file" 
+                hidden 
+                accept="image/*" 
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    try {
+                      const form = new FormData();
+                      form.append('file', file);
+                      const res = await fetch('/api/admin/upload', {
+                        method: 'POST',
+                        body: form,
+                      });
+                      if (!res.ok) throw new Error('Upload failed');
+                      const data = await res.json();
+                      updatePostMetadata({ featuredImage: data.url });
+                    } catch (err: any) {
+                      alert('Image upload failed: ' + err.message);
+                    }
+                  }
+                }} 
+              />
             </div>
 
             {/* Categories */}

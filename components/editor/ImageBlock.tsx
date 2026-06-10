@@ -15,14 +15,27 @@ export default function ImageBlock({ block, isActive }: { block: EditorBlock; is
     updateBlock(block.id, { metadata: { ...block.metadata, url, alt } });
   };
 
-  const handleFileUpload = (file: File) => {
+  const handleFileUpload = async (file: File) => {
     if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      updateBlock(block.id, { metadata: { ...block.metadata, url: result, alt: file.name } });
-    };
-    reader.readAsDataURL(file);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Upload failed');
+      }
+
+      const data = await res.json();
+      updateBlock(block.id, { metadata: { ...block.metadata, url: data.url, alt: file.name } });
+    } catch (err: any) {
+      alert('Failed to upload image: ' + err.message);
+    }
   };
 
   const handleDrop = (e: React.DragEvent) => {

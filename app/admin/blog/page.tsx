@@ -71,9 +71,32 @@ export default function AdminBlog() {
         hoverBg: 'rgba(0,0,0,0.02)',
       };
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/admin/blog');
+      if (!res.ok) throw new Error('Failed to fetch posts');
+      const data = await res.json();
+      const mapped = data.map((p: any) => ({
+        ...p,
+        status: p.published ? 'Published' : 'Draft',
+        views: p.views || '0',
+      }));
+      setPosts(mapped);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'An error occurred while loading posts.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const saved = localStorage.getItem('admin_posts');
-    setPosts(saved ? JSON.parse(saved) : initialPosts);
+    fetchPosts();
   }, []);
 
   useEffect(() => {
@@ -81,11 +104,6 @@ export default function AdminBlog() {
       editorRef.current.innerHTML = formData.content;
     }
   }, [isEditing]);
-
-  const saveToDisk = (updated: any[]) => {
-    setPosts(updated);
-    localStorage.setItem('admin_posts', JSON.stringify(updated));
-  };
 
   const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
 
@@ -120,19 +138,62 @@ export default function AdminBlog() {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    const updated = editingPost
-      ? posts.map(p => p.id === editingPost.id ? { ...p, ...formData, status: 'Published' } : p)
-      : [{ id: Date.now(), ...formData, status: 'Published', views: '0' }, ...posts];
-    saveToDisk(updated);
-    setIsEditing(false);
+  const handleSave = async () => {
+    try {
+      setLoading(true);
+      const url = editingPost ? `/api/admin/blog/${editingPost.id}` : '/api/admin/blog';
+      const method = editingPost ? 'PUT' : 'POST';
+      
+      const payload = {
+        title: formData.title,
+        slug: formData.slug || formData.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
+        category: formData.category,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        image: formData.image || null,
+        date: formData.date,
+        published: formData.status === 'Published',
+      };
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Failed to save post');
+      }
+
+      setIsEditing(false);
+      await fetchPosts();
+    } catch (err: any) {
+      alert(err.message || 'Error saving post');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (deleteId) {
-      saveToDisk(posts.filter(p => p.id !== deleteId));
-      setShowDeleteModal(false);
-      setDeleteId(null);
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/admin/blog/${deleteId}`, {
+          method: 'DELETE',
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to delete post');
+        }
+        setShowDeleteModal(false);
+        setDeleteId(null);
+        await fetchPosts();
+      } catch (err: any) {
+        alert(err.message || 'Error deleting post');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -145,12 +206,31 @@ export default function AdminBlog() {
     handleEditorChange();
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setFormData(f => ({ ...f, image: reader.result as string }));
-      reader.readAsDataURL(file);
+      try {
+        setLoading(true);
+        const form = new FormData();
+        form.append('file', file);
+        
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: form,
+        });
+
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Upload failed');
+        }
+
+        const data = await res.json();
+        setFormData(f => ({ ...f, image: data.url }));
+      } catch (err: any) {
+        alert('Image upload failed: ' + err.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
