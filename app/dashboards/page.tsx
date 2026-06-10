@@ -472,6 +472,34 @@ const toolColors: Record<string, string> = {
   Python: '#3776ab',
 };
 
+const DASHBOARD_READING_PATHS = [
+  {
+    title: 'Interactive Dashboard Demo',
+    href: '/dashboards/interactive',
+    label: 'LIVE DEMO'
+  },
+  {
+    title: 'Sales Pipeline Velocity',
+    href: '/dashboards/sales-pipeline',
+    label: 'SALES BI'
+  },
+  {
+    title: 'Dashboard Psychology',
+    href: '/blog/psychology-of-high-fidelity-dashboard-design',
+    label: 'DESIGN'
+  },
+  {
+    title: 'Natural Language Query Engines',
+    href: '/blog/natural-language-query-engines',
+    label: 'AI BI'
+  },
+  {
+    title: 'Execution Chain Infrastructure',
+    href: '/blog/execution-chain-infrastructure-explained',
+    label: 'AI OPS'
+  }
+];
+
 export default function DashboardsPage() {
   const [activeCat, setActiveCat] = useState('All');
   const [activeTool, setActiveTool] = useState('All Tools');
@@ -586,6 +614,25 @@ export default function DashboardsPage() {
               </div>
             </div>
           </motion.div>
+
+          <div className="mb-10 border border-[var(--border)] bg-[var(--surface2)] p-6">
+            <div className="label-tech mb-5 text-[var(--accent)]">Dashboard Research Paths</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+              {DASHBOARD_READING_PATHS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
+                >
+                  <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                  <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
+                    <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
+                    <ExternalLink size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* Dashboard grid */}
           <motion.div layout style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.5rem' }}>

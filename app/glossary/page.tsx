@@ -9,6 +9,29 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { GLOSSARY_TERMS } from '@/data/glossary';
 
+const RELATED_LEXICON_PATHS = [
+  {
+    title: 'Few-Shot Prompting Strategies',
+    href: '/glossary/few-shot-prompting-strategies',
+    label: 'PROMPTING'
+  },
+  {
+    title: 'Gemini SEO Pipelines',
+    href: '/lp/gemini-seo-pipelines-for-marketers',
+    label: 'SEO'
+  },
+  {
+    title: 'High-CTR Meta Structures',
+    href: '/templates/high-ctr-meta-structures',
+    label: 'META'
+  },
+  {
+    title: 'Surgical AI Framework Comparisons',
+    href: '/knowledge/comparisons',
+    label: 'ANALYSIS'
+  }
+];
+
 export default function GlossaryIndex() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -40,6 +63,25 @@ export default function GlossaryIndex() {
               A definitive index of the terminology, acronyms, and protocols defining the 
               Surgical AI Workspace.
             </p>
+
+            <div className="mb-16 border border-[var(--border)] bg-[var(--surface2)] p-6">
+              <div className="label-tech mb-5 text-[var(--accent)]">Related Lexicon Paths</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {RELATED_LEXICON_PATHS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
+                  >
+                    <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                    <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
+                      <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
+                      <ChevronRight size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             <div className="relative mb-16">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={20} />

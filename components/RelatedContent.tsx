@@ -31,6 +31,34 @@ const RELATED_LINKS = [
     icon: <Library size={18} />,
     href: '/templates',
     type: 'Blueprints'
+  },
+  {
+    title: 'Execution Chain Infrastructure',
+    desc: 'Understand the architecture behind multi-step AI workflows.',
+    icon: <Zap size={18} />,
+    href: '/blog/execution-chain-infrastructure-explained',
+    type: 'GUIDE'
+  },
+  {
+    title: 'Natural Language Query Engines',
+    desc: 'Design conversational analytics systems for BI teams.',
+    icon: <BookOpen size={18} />,
+    href: '/blog/natural-language-query-engines',
+    type: 'GUIDE'
+  },
+  {
+    title: 'Gemini SEO Pipelines',
+    desc: 'Scale technical SEO research with structured Gemini prompts.',
+    icon: <Library size={18} />,
+    href: '/lp/gemini-seo-pipelines-for-marketers',
+    type: 'PLAYBOOK'
+  },
+  {
+    title: 'SaaS Product Schema',
+    desc: 'Use JSON-LD blueprints for product search visibility.',
+    icon: <Library size={18} />,
+    href: '/templates/saas-product-schema-blueprint',
+    type: 'TEMPLATE'
   }
 ];
 

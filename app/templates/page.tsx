@@ -42,6 +42,29 @@ const TEMPLATES = [
   }
 ];
 
+const PRIORITY_TEMPLATE_PATHS = [
+  {
+    title: 'Gemini SEO Pipelines',
+    href: '/lp/gemini-seo-pipelines-for-marketers',
+    label: 'SEO PLAYBOOK'
+  },
+  {
+    title: 'B2B Retention Blueprint',
+    href: '/templates/b2b-retention-post-blueprint',
+    label: 'LINKEDIN'
+  },
+  {
+    title: 'SaaS Product Schema',
+    href: '/templates/saas-product-schema-blueprint',
+    label: 'JSON-LD'
+  },
+  {
+    title: 'High-CTR Meta Structures',
+    href: '/templates/high-ctr-meta-structures',
+    label: 'SEO'
+  }
+];
+
 export default function TemplatesPage() {
   const [search, setSearch] = useState('');
 
@@ -72,6 +95,25 @@ export default function TemplatesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
+          </div>
+        </div>
+
+        <div className="border border-[var(--border)] bg-[var(--surface2)]" style={{ marginBottom: '4rem', padding: '1.5rem' }}>
+          <div className="label-tech mb-5 text-[var(--accent3)]">Priority Asset Paths</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {PRIORITY_TEMPLATE_PATHS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent3)] transition-colors"
+              >
+                <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
+                  <span className="text-sm font-bold group-hover:text-[var(--accent3)] transition-colors">{item.title}</span>
+                  <ArrowRight size={13} className="text-[var(--accent3)] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 

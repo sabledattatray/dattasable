@@ -22,6 +22,44 @@ interface Post {
   image: string | null;
 }
 
+const PRIORITY_READING_LINKS = [
+  {
+    title: 'Dashboard Psychology',
+    href: '/blog/psychology-of-high-fidelity-dashboard-design',
+    context: 'High-fidelity BI design'
+  },
+  {
+    title: 'Execution Chain Infrastructure',
+    href: '/blog/execution-chain-infrastructure-explained',
+    context: 'Agent workflow systems'
+  },
+  {
+    title: 'Natural Language Query Engines',
+    href: '/blog/natural-language-query-engines',
+    context: 'Conversational analytics'
+  },
+  {
+    title: 'Autonomous AI Agent Workflows',
+    href: '/blog/mastering-autonomous-ai-agents-workflows-2026',
+    context: 'AI orchestration'
+  },
+  {
+    title: 'AI Agents Replacing Apps',
+    href: '/blog/how-ai-agents-are-replacing-apps-2026',
+    context: 'Product architecture'
+  },
+  {
+    title: 'Next.js Performance Manifesto',
+    href: '/blog/nextjs-15-react-19-performance-manifesto-2026',
+    context: 'Web performance'
+  },
+  {
+    title: 'Deep Work Protocol',
+    href: '/blog/deep-work-protocol-technical-focus-2026',
+    context: 'Technical focus'
+  }
+];
+
 export default function BlogList({ initialPosts, initialCategory = 'All' }: { initialPosts: Post[], initialCategory?: string }) {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState(initialCategory);
@@ -57,6 +95,27 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
           Documenting my journey through data architecture, BI strategy, and automated analytics. Read the latest technical insights.
         </p>
       </motion.div>
+
+      {activeCategory === 'All' && !search && (
+        <div className="mb-16 border border-[var(--border)] bg-[var(--surface2)] p-6">
+          <div className="label-tech mb-5 text-[var(--accent)]">Priority Reading Paths</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {PRIORITY_READING_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
+              >
+                <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.context}</span>
+                <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
+                  <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
+                  <ArrowRight size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Featured Log Highlight */}
       {initialPosts.length > 0 && activeCategory === 'All' && !search && (

@@ -17,6 +17,69 @@ export const metadata: Metadata = {
   description: "Expert-grade educational resources for high-performance AI engineering, LinkedIn authority systems, and SEO infrastructure.",
 };
 
+const PRIORITY_KNOWLEDGE_PATHS = [
+  {
+    title: 'Framework Comparisons',
+    href: '/knowledge/comparisons',
+    label: 'ANALYSIS'
+  },
+  {
+    title: 'Few-Shot Prompting Strategies',
+    href: '/glossary/few-shot-prompting-strategies',
+    label: 'GLOSSARY'
+  },
+  {
+    title: 'Interactive Dashboard Demo',
+    href: '/dashboards/interactive',
+    label: 'DASHBOARD'
+  },
+  {
+    title: 'Sales Pipeline Dashboard',
+    href: '/dashboards/sales-pipeline',
+    label: 'DASHBOARD'
+  },
+  {
+    title: 'Gemini SEO Pipelines',
+    href: '/lp/gemini-seo-pipelines-for-marketers',
+    label: 'PLAYBOOK'
+  },
+  {
+    title: 'SaaS Product Schema',
+    href: '/templates/saas-product-schema-blueprint',
+    label: 'TEMPLATE'
+  },
+  {
+    title: 'B2B Retention Blueprint',
+    href: '/templates/b2b-retention-post-blueprint',
+    label: 'TEMPLATE'
+  },
+  {
+    title: 'High-CTR Meta Structures',
+    href: '/templates/high-ctr-meta-structures',
+    label: 'TEMPLATE'
+  },
+  {
+    title: 'Autonomous AI Agent Workflows',
+    href: '/blog/mastering-autonomous-ai-agents-workflows-2026',
+    label: 'AI'
+  },
+  {
+    title: 'AI Agents Replacing Apps',
+    href: '/blog/how-ai-agents-are-replacing-apps-2026',
+    label: 'AI'
+  },
+  {
+    title: 'Next.js Performance Manifesto',
+    href: '/blog/nextjs-15-react-19-performance-manifesto-2026',
+    label: 'WEB'
+  },
+  {
+    title: 'Deep Work Protocol',
+    href: '/blog/deep-work-protocol-technical-focus-2026',
+    label: 'FOCUS'
+  }
+];
+
 export default function KnowledgeHub() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -98,6 +161,25 @@ export default function KnowledgeHub() {
                   </div>
                 </div>
               </Link>
+            </div>
+
+            <div className="mb-20 border border-[var(--border)] bg-[var(--surface2)] p-6">
+              <div className="label-tech mb-5 text-[var(--accent)]">Priority Knowledge Paths</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {PRIORITY_KNOWLEDGE_PATHS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
+                  >
+                    <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                    <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
+                      <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
+                      <ArrowRight size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Newsletter Integration */}
