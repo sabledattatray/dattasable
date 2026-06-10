@@ -76,7 +76,7 @@ const projects = [
     id: 7,
     title: 'Telecom Collection Intelligence (Vodafone)',
     category: 'Analysis',
-    image: '/images/dashboards/fleet_logistics.png',
+    image: '/images/dashboards/fleet_logistics.webp',
     color: 'var(--accent)',
     tools: ['Power BI', 'Telecom CRM', 'SQL', 'Predictive Analysis'],
     client: 'Telecom Sector (Postpaid)',

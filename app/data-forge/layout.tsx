@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Synthetic Data Forge PRO | Datta Sable",
     description: "Generate professional synthetic datasets in seconds. Industry-standard schemas for BFSI, Health, and more.",
-    images: ["/images/dashboards/fleet_logistics.png"],
+    images: ["/images/dashboards/fleet_logistics.webp"],
   }
 };
 
