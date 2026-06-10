@@ -193,11 +193,12 @@ export default function Footer() {
                     href="https://play.google.com/store"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3.5 px-5 py-2.5 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-3.5 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
                     style={{ 
                       background: 'var(--playstore-bg)',
                       border: '1px solid var(--playstore-border)',
-                      minWidth: '170px' 
+                      minWidth: '170px',
+                      padding: '10px 18px'
                     }}
                   >
                     {/* Official Google Play SVG Logo */}
