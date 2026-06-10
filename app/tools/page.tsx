@@ -10,7 +10,6 @@ import {
   Type, 
   Zap, 
   FileJson, 
-  Globe,
   LayoutDashboard,
   Library,
   Minimize2
@@ -22,26 +21,8 @@ export const metadata: Metadata = {
 };
 
 const TOOLS = [
-  {
-    id: 'n8n-automation',
-    title: 'n8n Automation Console',
-    description: 'Self-hosted workflow automation engine running multi-agent orchestrations, API triggers, and cron triggers.',
-    icon: <Zap size={24} className="text-yellow-500" />,
-    category: 'Automation',
-    href: 'https://automate.dattasable.com',
-    status: 'Live',
-    external: true
-  },
-  {
-    id: 'umami-analytics-dashboard',
-    title: 'Umami Analytics Dashboard',
-    description: 'Self-hosted, privacy-first web analytics platform tracking real-time events and user metrics across subdomains.',
-    icon: <Globe size={24} className="text-emerald-500" />,
-    category: 'Analytics',
-    href: 'https://analytics.dattasable.com',
-    status: 'Live',
-    external: true
-  },
+
+
   {
     id: 'execution-chains',
     title: 'Surgical Execution Chains™',
