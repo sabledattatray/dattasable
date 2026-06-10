@@ -72,13 +72,18 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
   const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
-  const nonce = (await headers()).get('x-nonce') || undefined;
+  const headerList = await headers();
+  const nonce = headerList.get('x-nonce') || undefined;
+  const pathname = headerList.get('x-pathname') || '/';
+  const cleanPathname = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const canonicalUrl = `https://dattasable.com${cleanPathname}`;
 
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
+        <link rel="canonical" href={canonicalUrl} />
 
         <Script
           nonce={nonce}
