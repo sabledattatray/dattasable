@@ -181,7 +181,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Contact form */}
+              {/* Right column / Contact form */}
               <div>
                 <div className="card" style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
                   <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>Send a Message</h2>
