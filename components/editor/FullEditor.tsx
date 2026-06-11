@@ -274,10 +274,25 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           className="toolbar-select"
         >
           <option value="default" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Font Style</option>
-          <option value="Inter" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Default (Inter)</option>
-          <option value="Syne" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Creative (Syne)</option>
-          <option value="JetBrains Mono" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Monospace</option>
-          <option value="Georgia" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Serif (Georgia)</option>
+          <optgroup label="Preloaded Fonts" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#6366f1' : '#4f46e5', fontWeight: 'bold' }}>
+            <option value="Inter" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Inter' }}>Default (Inter)</option>
+            <option value="Syne" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Syne' }}>Creative (Syne)</option>
+            <option value="JetBrains Mono" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'JetBrains Mono' }}>Developer (JetBrains Mono)</option>
+          </optgroup>
+          <optgroup label="Instant System Sans-Serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#6366f1' : '#4f46e5', fontWeight: 'bold' }}>
+            <option value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'system-ui' }}>System UI (OS Native)</option>
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Helvetica' }}>Helvetica / Arial (Classic)</option>
+            <option value="'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', sans-serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Trebuchet MS' }}>Trebuchet MS (Geometric)</option>
+          </optgroup>
+          <optgroup label="Instant System Serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#6366f1' : '#4f46e5', fontWeight: 'bold' }}>
+            <option value="Georgia, Cambria, 'Times New Roman', Times, serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Georgia' }}>Georgia (Editorial Serif)</option>
+            <option value="'Apple Garamond', Baskerville, 'Times New Roman', Garamond, serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Garamond' }}>Garamond / Baskerville (Elegant)</option>
+            <option value="'Courier New', Courier, monospace" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Courier New' }}>Courier New (Typewriter)</option>
+          </optgroup>
+          <optgroup label="Instant System Display" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#6366f1' : '#4f46e5', fontWeight: 'bold' }}>
+            <option value="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Impact' }}>Impact (Bold Heading)</option>
+            <option value="'Comic Sans MS', 'Comic Sans', cursive" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000', fontFamily: 'Comic Sans MS' }}>Comic Sans (Casual/Dyslexia Friendly)</option>
+          </optgroup>
         </select>
 
         {/* Font Size */}
