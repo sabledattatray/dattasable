@@ -37,21 +37,7 @@ function ToolbarButton({ onClick, active, disabled, title, children }: {
       onClick={onClick}
       disabled={disabled}
       title={title}
-      style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        width: 32, height: 32, borderRadius: 6, border: 'none',
-        background: active ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
-        color: active ? '#6366f1' : 'inherit',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.4 : 1,
-        transition: 'all 0.15s',
-      }}
-      onMouseEnter={e => {
-        if (!active && !disabled) (e.currentTarget as HTMLElement).style.background = 'rgba(100,116,139,0.1)';
-      }}
-      onMouseLeave={e => {
-        if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent';
-      }}
+      className={`toolbar-btn ${active ? 'active' : ''}`}
     >
       {children}
     </button>
@@ -59,7 +45,7 @@ function ToolbarButton({ onClick, active, disabled, title, children }: {
 }
 
 function ToolbarSep() {
-  return <div style={{ width: 1, height: 20, background: 'currentColor', opacity: 0.12, margin: '0 4px' }} />;
+  return <div className="toolbar-sep" />;
 }
 
 export default function FullEditor({ content, onChange, isDark }: FullEditorProps) {
@@ -207,13 +193,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
   return (
     <div>
       {/* Toolbar */}
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2,
-        padding: '8px 12px', marginBottom: 16,
-        background: css.surface, border: `1px solid ${css.border}`, borderRadius: 10,
-        position: 'sticky', top: 0, zIndex: 10,
-        color: css.muted,
-      }}>
+      <div className="editor-toolbar">
         {/* Undo/Redo */}
         <ToolbarButton onClick={() => editor.chain().focus().undo().run()} disabled={isSourceMode || !editor.can().undo()} title="Undo">
           <Undo size={16} />
@@ -291,11 +271,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           }}
           disabled={isSourceMode}
           title="Font Style"
-          style={{
-            height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
-            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
-            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none',
-          }}
+          className="toolbar-select"
         >
           <option value="default" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Font Style</option>
           <option value="Inter" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Default (Inter)</option>
@@ -317,11 +293,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           }}
           disabled={isSourceMode}
           title="Font Size"
-          style={{
-            height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
-            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
-            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none',
-          }}
+          className="toolbar-select"
         >
           <option value="default" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Size</option>
           <option value="12px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>12</option>
@@ -376,11 +348,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           }}
           disabled={isSourceMode}
           title="Insert custom blocks and templates"
-          style={{
-            height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
-            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
-            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none', marginLeft: 4, marginRight: 4,
-          }}
+          className="toolbar-select"
         >
           <option value="default" disabled style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>+ Insert Block</option>
           <option value="mermaid" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>📊 Mermaid Diagram</option>
@@ -411,7 +379,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
         {/* Link */}
         {showLinkInput ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <input
               type="url"
               placeholder="https://..."
@@ -419,14 +387,10 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
               onChange={e => setLinkUrl(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') setLink(); if (e.key === 'Escape') setShowLinkInput(false); }}
               autoFocus
-              style={{
-                width: 200, padding: '4px 8px', fontSize: 13,
-                background: css.bg, border: `1px solid ${css.border}`, borderRadius: 6,
-                color: css.text, outline: 'none',
-              }}
+              className="toolbar-input"
             />
-            <button onClick={setLink} style={{ padding: '4px 10px', fontSize: 12, background: css.accent, color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}>Set</button>
-            <button onClick={() => setShowLinkInput(false)} style={{ padding: '4px 8px', fontSize: 12, background: 'transparent', color: css.muted, border: `1px solid ${css.border}`, borderRadius: 6, cursor: 'pointer' }}>✕</button>
+            <button onClick={setLink} className="toolbar-btn-set">Set</button>
+            <button onClick={() => setShowLinkInput(false)} className="toolbar-btn-cancel">✕</button>
           </div>
         ) : (
           <>
@@ -463,11 +427,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
       {/* Bubble Menu (appears on text selection) */}
       {!isSourceMode && (
         <Menu editor={editor} tippyOptions={{ duration: 150 }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 2, padding: '4px 8px',
-            background: isDark ? '#1e293b' : '#0f172a', borderRadius: 8,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-          }}>
+          <div className="bubble-menu-container">
             {[
               { icon: <Bold size={14} />, action: () => editor.chain().focus().toggleBold().run(), active: editor.isActive('bold'), title: 'Bold' },
               { icon: <Italic size={14} />, action: () => editor.chain().focus().toggleItalic().run(), active: editor.isActive('italic'), title: 'Italic' },
@@ -479,13 +439,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
                 key={i}
                 onClick={btn.action}
                 title={btn.title}
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  width: 28, height: 28, borderRadius: 4, border: 'none',
-                  background: btn.active ? 'rgba(99,102,241,0.3)' : 'transparent',
-                  color: btn.active ? '#a5b4fc' : '#e2e8f0',
-                  cursor: 'pointer',
-                }}
+                className={`bubble-menu-btn ${btn.active ? 'active' : ''}`}
               >
                 {btn.icon}
               </button>
@@ -552,6 +506,204 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
       {/* Editor Styles */}
       <style jsx global>{`
+        /* Premium Editor Toolbar & Component Styles */
+        .editor-toolbar {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 6px;
+          padding: 10px 16px;
+          margin-bottom: 20px;
+          background: ${isDark ? 'rgba(10, 10, 10, 0.75)' : 'rgba(255, 255, 255, 0.8)'};
+          border: 1px solid ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.08)'};
+          border-radius: 12px;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          color: ${css.muted};
+          backdrop-filter: blur(16px) saturate(180%);
+          -webkit-backdrop-filter: blur(16px) saturate(180%);
+          box-shadow: ${isDark 
+            ? '0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)' 
+            : '0 4px 30px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.5)'};
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .editor-toolbar:hover {
+          border-color: ${isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'};
+        }
+
+        .toolbar-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 8px;
+          border: 1px solid transparent;
+          background: transparent;
+          color: ${css.muted};
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          outline: none;
+        }
+
+        .toolbar-btn:hover:not(:disabled) {
+          background: ${isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(15, 23, 42, 0.05)'};
+          border-color: ${isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.08)'};
+          color: ${isDark ? '#f1f5f9' : '#0f172a'};
+          transform: translateY(-1px);
+        }
+
+        .toolbar-btn:active:not(:disabled) {
+          transform: translateY(0);
+          background: ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'};
+        }
+
+        .toolbar-btn.active:not(:disabled) {
+          background: ${isDark ? 'rgba(99, 102, 241, 0.2)' : 'rgba(99, 102, 241, 0.1)'};
+          border-color: rgba(99, 102, 241, 0.35);
+          color: #6366f1;
+          box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+        }
+
+        .toolbar-btn:disabled {
+          cursor: not-allowed;
+          opacity: 0.35;
+        }
+
+        .toolbar-sep {
+          width: 1px;
+          height: 22px;
+          background: linear-gradient(to bottom, 
+            transparent, 
+            ${isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(15, 23, 42, 0.1)'} 20%, 
+            ${isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(15, 23, 42, 0.1)'} 80%, 
+            transparent
+          );
+          margin: 0 6px;
+        }
+
+        .toolbar-select {
+          height: 34px;
+          padding: 0 10px;
+          font-size: 13px;
+          font-weight: 600;
+          background: ${isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(15, 23, 42, 0.02)'};
+          border: 1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'};
+          border-radius: 8px;
+          color: ${isDark ? '#f1f5f9' : '#0f172a'};
+          cursor: pointer;
+          outline: none;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toolbar-select:hover:not(:disabled) {
+          background: ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.05)'};
+          border-color: ${isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(15, 23, 42, 0.15)'};
+          color: ${isDark ? '#ffffff' : '#000000'};
+        }
+
+        .toolbar-select:focus:not(:disabled) {
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+        }
+
+        .toolbar-select:disabled {
+          cursor: not-allowed;
+          opacity: 0.35;
+        }
+
+        .toolbar-input {
+          width: 200px;
+          padding: 6px 12px;
+          font-size: 13px;
+          background: ${css.bg};
+          border: 1px solid ${css.border};
+          border-radius: 8px;
+          color: ${css.text};
+          outline: none;
+          transition: all 0.2s;
+        }
+
+        .toolbar-input:focus {
+          border-color: rgba(99, 102, 241, 0.5);
+          box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+        }
+
+        .toolbar-btn-set {
+          padding: 6px 14px;
+          font-size: 12px;
+          background: ${css.accent};
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.2s;
+          box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+        }
+
+        .toolbar-btn-set:hover {
+          background: ${isDark ? '#4f46e5' : '#4338ca'};
+          box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .toolbar-btn-cancel {
+          padding: 6px 10px;
+          font-size: 12px;
+          background: transparent;
+          color: ${css.muted};
+          border: 1px solid ${css.border};
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .toolbar-btn-cancel:hover {
+          background: ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'};
+          color: ${css.text};
+        }
+
+        .bubble-menu-container {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 6px 10px;
+          background: ${isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(15, 23, 42, 0.95)'};
+          border-radius: 10px;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .bubble-menu-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 6px;
+          border: 1px solid transparent;
+          background: transparent;
+          color: #e2e8f0;
+          cursor: pointer;
+          transition: all 0.2s;
+          outline: none;
+        }
+
+        .bubble-menu-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #ffffff;
+        }
+
+        .bubble-menu-btn.active {
+          background: rgba(99, 102, 241, 0.3);
+          border-color: rgba(99, 102, 241, 0.4);
+          color: #a5b4fc;
+        }
+
         .full-editor-content .tiptap {
           outline: none;
         }
