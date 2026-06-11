@@ -174,21 +174,28 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
   const Menu = BubbleMenu as any;
 
-  // Compute live statistics for words, characters, and read time
+  // Compute live statistics for words, characters, paragraphs, and read time
   const getStats = () => {
     let text = '';
+    let html = '';
     if (isSourceMode) {
       text = sourceHtml.replace(/<[^>]*>/g, ' ');
+      html = sourceHtml;
     } else {
       text = editor.getText();
+      html = editor.getHTML();
     }
     const words = text.trim().split(/\s+/).filter(Boolean).length;
     const chars = text.length;
-    const minutes = Math.max(1, Math.ceil(words / 200));
-    return { words, chars, minutes };
+    
+    // Count paragraphs using block tags
+    const paragraphs = (html.match(/<(p|h1|h2|h3|blockquote|pre)[^>]*>/g) || []).length;
+    const minutes = Math.max(1, Math.ceil(words / 220));
+    
+    return { words, chars, paragraphs, minutes };
   };
 
-  const { words, chars, minutes } = getStats();
+  const { words, chars, paragraphs, minutes } = getStats();
 
   return (
     <div style={{ paddingBottom: '100px' }}>
@@ -513,6 +520,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         <div style={{ display: 'flex', gap: 16 }}>
           <span><strong>{words}</strong> words</span>
           <span><strong>{chars}</strong> characters</span>
+          <span><strong>{paragraphs}</strong> paragraphs</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span>⏱️ {minutes} min read</span>

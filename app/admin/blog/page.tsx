@@ -151,7 +151,7 @@ function calculateReadTime(content: string): number {
     textContent = content.replace(/<[^>]*>/g, '');
   }
   const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wordCount / 200));
+  return Math.max(1, Math.ceil(wordCount / 220));
 }
 
 export default function AdminBlog() {
@@ -184,6 +184,17 @@ export default function AdminBlog() {
   const [renameValue, setRenameValue] = useState('');
   const [isReadTimeManual, setIsReadTimeManual] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
+
+  // Phase 1: Writer Experience Foundation States
+  const [isSlugManual, setIsSlugManual] = useState(false);
+  const [slugError, setSlugError] = useState('');
+  const [imageTab, setImageTab] = useState<'upload' | 'url' | 'library'>('upload');
+  const [urlInput, setUrlInput] = useState('');
+  const [libraryImages, setLibraryImages] = useState<any[]>([]);
+  const [loadingLibrary, setLoadingLibrary] = useState(false);
+  const [isDraggingImage, setIsDraggingImage] = useState(false);
+  const [showRecoveryModal, setShowRecoveryModal] = useState(false);
+  const triggerAutosaveRef = useRef<(() => void) | null>(null);
 
 
   // Theme-aware CSS variables
@@ -531,41 +542,163 @@ export default function AdminBlog() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [isEditing, formData, originalData]);
 
-  // 2. Local autosave debounced writing loop
+  // Slug formatting helper
+  const generateSlug = (title: string): string => {
+    return title
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '') // remove special chars
+      .replace(/\s+/g, '-')         // replace spaces with -
+      .replace(/-+/g, '-');         // remove multiple consecutive -
+  };
+
+  // Debounced Slug uniqueness check
+  useEffect(() => {
+    if (!isEditing || !formData.slug) {
+      setSlugError('');
+      return;
+    }
+    const timer = setTimeout(async () => {
+      try {
+        const excludeParam = editingPost ? `&excludeId=${editingPost.id}` : '';
+        const res = await fetch(`/api/admin/blog/validate-slug?slug=${formData.slug}${excludeParam}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.exists) {
+            setSlugError('This URL slug is already in use by another article.');
+          } else {
+            setSlugError('');
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [formData.slug, isEditing, editingPost]);
+
+  // Primary Autosave function to PostgreSQL
+  const triggerAutosave = async () => {
+    if (!isEditing || !originalData) return;
+    const isDirty = JSON.stringify(formData) !== JSON.stringify(originalData);
+    if (!isDirty || saveStatus === 'saving') return;
+
+    if (!formData.title.trim() || !formData.content.trim()) {
+      return; // Skip if title or content is empty (API requires both)
+    }
+
+    setSaveStatus('saving');
+    try {
+      const url = editingPost ? `/api/admin/blog/${editingPost.id}` : '/api/admin/blog';
+      const method = editingPost ? 'PUT' : 'POST';
+      
+      const payload = {
+        title: formData.title,
+        slug: formData.slug || generateSlug(formData.title),
+        category: formData.category,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        image: formData.image || null,
+        date: formData.date,
+        published: editingPost ? editingPost.published : false, // defaults to draft
+        readTime: Number(formData.readTime) || 1,
+        blocks: {
+          focusedKeyword: formData.focusedKeyword || '',
+        },
+      };
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(errData.error || 'Database autosave failed');
+      }
+
+      const data = await res.json();
+      const mappedPost = {
+        ...data,
+        status: data.published ? 'Published' : 'Draft',
+        views: data.views || '0',
+      };
+
+      // Update local storage backup to be in sync with DB
+      try {
+        localStorage.setItem(
+          'admin_blog_autosave',
+          JSON.stringify({
+            editingId: mappedPost.id,
+            formData,
+            timestamp: Date.now()
+          })
+        );
+      } catch (e) {}
+
+      if (!editingPost) {
+        setEditingPost(mappedPost);
+      }
+      
+      setOriginalData(formData);
+      setSaveStatus('saved');
+      fetchPosts(); // refresh list in background
+    } catch (err) {
+      console.error('Autosave error:', err);
+      setSaveStatus('dirty');
+    }
+  };
+
+  // Keep triggerAutosaveRef updated
+  useEffect(() => {
+    triggerAutosaveRef.current = triggerAutosave;
+  }, [formData, isEditing, originalData, editingPost, saveStatus]);
+
+  // Debounced trigger for typing autosave (keeps UI responsive)
   useEffect(() => {
     if (!isEditing || !originalData) return;
     
-    const dirty = JSON.stringify(formData) !== JSON.stringify(originalData);
-    if (dirty) {
+    const isDirty = JSON.stringify(formData) !== JSON.stringify(originalData);
+    if (isDirty) {
       setSaveStatus('dirty');
       
+      // Save local backup immediately to avoid crash loss
+      try {
+        localStorage.setItem(
+          'admin_blog_autosave',
+          JSON.stringify({
+            editingId: editingPost ? editingPost.id : 'new',
+            formData,
+            timestamp: Date.now()
+          })
+        );
+      } catch (e) {}
+
       const timer = setTimeout(() => {
-        setSaveStatus('saving');
-        try {
-          localStorage.setItem(
-            'admin_blog_autosave',
-            JSON.stringify({
-              editingId: editingPost ? editingPost.id : 'new',
-              formData,
-              timestamp: Date.now()
-            })
-          );
-          setSaveStatus('saved');
-        } catch (e) {
-          console.error('Failed to auto-save draft to localStorage', e);
-        }
-      }, 2000); // 2 seconds debounce after editing stops
+        if (triggerAutosaveRef.current) triggerAutosaveRef.current();
+      }, 2000); // 2 seconds after user stops typing
       
       return () => clearTimeout(timer);
     } else {
       setSaveStatus('saved');
     }
-  }, [formData, isEditing, originalData, editingPost]);
+  }, [formData, isEditing, originalData]);
 
-  // 3. Auto-recovery check when entering editing mode
+  // Interval trigger for autosave (every 20 seconds)
+  useEffect(() => {
+    if (!isEditing) return;
+    const interval = setInterval(() => {
+      if (triggerAutosaveRef.current) triggerAutosaveRef.current();
+    }, 20000);
+    return () => clearInterval(interval);
+  }, [isEditing]);
+
+  // Auto-recovery check when entering editing mode
   useEffect(() => {
     if (!isEditing) {
       setHasAutosaveToRestore(null);
+      setShowRecoveryModal(false);
       return;
     }
     
@@ -576,13 +709,13 @@ export default function AdminBlog() {
         const currentId = editingPost ? editingPost.id : 'new';
         
         if (parsed.editingId === currentId) {
-          // Check if there are meaningful differences
           const isDifferent = parsed.formData.title !== formData.title || 
                               parsed.formData.content !== formData.content ||
                               parsed.formData.excerpt !== formData.excerpt;
           
           if (isDifferent) {
             setHasAutosaveToRestore(parsed);
+            setShowRecoveryModal(true);
           }
         }
       }
@@ -668,7 +801,9 @@ export default function AdminBlog() {
     setEditorMode('edit');
     setSidebarTab('settings');
     setSaveStatus('saved');
+    setSlugError('');
     if (post) {
+      setIsSlugManual(true);
       let keyword = '';
       if (post.blocks && typeof post.blocks === 'object') {
         keyword = (post.blocks as any).focusedKeyword || '';
@@ -692,6 +827,7 @@ export default function AdminBlog() {
       setFormData(initEdit);
       setOriginalData(initEdit);
     } else {
+      setIsSlugManual(false);
       setIsReadTimeManual(false);
       setEditingPost(null);
       const initNew = {
