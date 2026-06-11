@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import {
   FileText, Plus, Search, Trash2, Edit2,
   ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
-  Type, Highlighter, Save, Settings, Image as ImageIcon
+  Type, Highlighter, Save, Settings, Image as ImageIcon,
+  Eye, EyeOff
 } from 'lucide-react';
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
@@ -162,6 +163,7 @@ export default function AdminBlog() {
   const [newCat, setNewCat] = useState('');
   const [search, setSearch] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [previewMode, setPreviewMode] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
   const [sidebarTab, setSidebarTab] = useState<'settings' | 'seo'>('settings');
   const [formData, setFormData] = useState({
@@ -249,6 +251,58 @@ export default function AdminBlog() {
     }
   }, [isEditing]);
 
+  useEffect(() => {
+    if (!previewMode) return;
+
+    const renderMermaidDiagrams = async () => {
+      const mermaidElements = document.querySelectorAll('.blog-editor-preview-area .mermaid');
+      if (mermaidElements.length === 0) return;
+
+      try {
+        const mermaid = (await import('mermaid')).default;
+        
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          securityLevel: 'loose',
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: false
+          },
+          themeVariables: {
+            background: '#0d1117',
+            primaryColor: '#00e5ff',
+            primaryTextColor: '#fff',
+            lineColor: '#2f363d'
+          }
+        });
+
+        for (let i = 0; i < mermaidElements.length; i++) {
+          const element = mermaidElements[i] as HTMLElement;
+          const text = element.innerText || element.textContent || '';
+          if (!text.trim()) continue;
+
+          const id = `mermaid-svg-preview-${i}`;
+          try {
+            const { svg } = await mermaid.render(id, text);
+            element.innerHTML = svg;
+            element.style.background = 'transparent';
+          } catch (renderError) {
+            console.error('Error rendering diagram in preview:', renderError);
+          }
+        }
+      } catch (err) {
+        console.error('Mermaid init failed inside blog preview:', err);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      renderMermaidDiagrams();
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [previewMode, formData.content]);
+
   const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
 
   const handleAddCategory = () => {
@@ -323,6 +377,7 @@ export default function AdminBlog() {
   };
 
   const handleOpenEditor = (post: any = null) => {
+    setPreviewMode(false);
     setSidebarTab('settings');
     if (post) {
       let keyword = '';
@@ -982,6 +1037,35 @@ export default function AdminBlog() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span className="editor-header-draft-label" style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
+          <button
+            type="button"
+            onClick={() => setPreviewMode(!previewMode)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              padding: '8px 16px',
+              background: css.surface2,
+              border: `1px solid ${css.border}`,
+              borderRadius: 10,
+              fontSize: 13,
+              fontWeight: 600,
+              color: css.muted,
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.color = css.text;
+              (e.currentTarget as HTMLElement).style.borderColor = css.accent;
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.color = css.muted;
+              (e.currentTarget as HTMLElement).style.borderColor = css.border;
+            }}
+          >
+            {previewMode ? <EyeOff size={14} /> : <Eye size={14} />}
+            {previewMode ? 'Edit Mode' : 'Live Preview'}
+          </button>
           <ThemeToggle />
           <button
             onClick={handleSave}
@@ -1001,8 +1085,209 @@ export default function AdminBlog() {
 
       {/* Editor Main */}
       <div className="blog-editor-main" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {/* Writing area */}
-        <div
+        {previewMode ? (
+          /* Live Preview Container */
+          <div
+            className="blog-editor-preview-area"
+            style={{
+              flex: 1,
+              overflowY: 'auto',
+              background: css.bg,
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '60px 20px',
+            }}
+          >
+            <div style={{ width: '100%', maxWidth: 760, paddingBottom: 80 }}>
+              {/* Nav / Category Info */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    color: css.accent,
+                    borderColor: `${css.accent}44`,
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                    padding: '3px 10px',
+                    borderRadius: 999,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.07em',
+                  }}
+                >
+                  {formData.category}
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: css.muted, fontSize: '0.8rem' }}>
+                  ⏱️ {formData.readTime || '5'} min read
+                </span>
+                <span style={{ color: css.muted, fontSize: '0.8rem' }}>
+                  {formData.date}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h1
+                style={{
+                  fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+                  lineHeight: 1.2,
+                  fontWeight: 900,
+                  color: css.text,
+                  marginBottom: '2rem',
+                }}
+              >
+                {formData.title || 'Untitled Story'}
+              </h1>
+
+              {/* Featured Image */}
+              {formData.image && (
+                <div
+                  style={{
+                    width: '100%',
+                    marginBottom: '2.5rem',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    border: `1px solid ${css.border}`,
+                    borderRadius: '12px',
+                    background: css.surface2,
+                    aspectRatio: '16/9',
+                  }}
+                >
+                  <Image
+                    src={formData.image}
+                    alt={formData.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              )}
+
+              {/* Author Box */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  marginBottom: '2rem',
+                  paddingBottom: '1.5rem',
+                  borderBottom: `1px solid ${css.border}`,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    border: `2px solid ${css.accent}`,
+                    flexShrink: 0,
+                    position: 'relative',
+                  }}
+                >
+                  <Image
+                    src="/images/datta.webp"
+                    alt="Datta Sable"
+                    fill
+                    style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
+                  />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: '0.9rem', color: css.text }}>
+                    Datta Sable
+                  </div>
+                  <div style={{ color: css.muted, fontSize: '0.8rem' }}>
+                    BI & Analytics Expert
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Renderer */}
+              <div
+                className="blog-content"
+                style={{ color: css.muted, lineHeight: 1.9, fontSize: '1.05rem', fontFamily: 'inherit' }}
+                dangerouslySetInnerHTML={{
+                  __html: (formData.content || '<p style="color:var(--muted)">Write some content to preview it.</p>')
+                    .replace(/<h3>/g, `<h3 style="color:${css.text};font-size:1.4rem;margin:2rem 0 1rem;font-weight:700;font-family:inherit;">`)
+                    .replace(/<h2>/g, `<h2 style="color:${css.text};font-size:1.75rem;margin:2.25rem 0 1.25rem;font-weight:800;font-family:inherit;">`)
+                    .replace(/<h1>/g, `<h1 style="color:${css.text};font-size:2.1rem;margin:2.5rem 0 1.5rem;font-weight:900;font-family:inherit;">`)
+                    .replace(/<p>/g, `<p style="margin-bottom:1.2rem;font-family:inherit;">`)
+                    .replace(/<pre><code>/g, `<pre style="background:${css.surface2};border:1px solid ${css.border};border-radius:12px;padding:1.2rem;overflow-x:auto;margin:1.5rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:${css.accent};">`)
+                    .replace(/<\/code><\/pre>/g, `</code></pre>`)
+                    .replace(/<ul>/g, `<ul style="list-style-type:disc;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
+                    .replace(/<ol>/g, `<ol style="list-style-type:decimal;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
+                    .replace(/<li>/g, `<li style="line-height:1.7;font-family:inherit;">`)
+                    .replace(/<blockquote>/g, `<blockquote style="border-left:4px solid ${css.accent};padding-left:1rem;color:${css.text};font-style:italic;margin:1.5rem 0;font-family:inherit;">`)
+                }}
+              />
+
+              {/* Author Bio Box */}
+              <div
+                style={{
+                  marginTop: '5rem',
+                  padding: '2.5rem',
+                  background: css.surface2,
+                  border: `1px solid ${css.border}`,
+                  borderRadius: '16px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '4px',
+                    height: '100%',
+                    background: css.accent,
+                  }}
+                />
+                <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                  <div
+                    style={{
+                      width: 72,
+                      height: 72,
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      border: `3px solid ${css.accent}`,
+                      flexShrink: 0,
+                      position: 'relative',
+                    }}
+                  >
+                    <Image
+                      src="/images/datta.webp"
+                      alt="Datta Sable"
+                      fill
+                      style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
+                    />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 260 }}>
+                    <div
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 800,
+                        color: css.accent,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        marginBottom: 8,
+                      }}
+                    >
+                      Verified Author
+                    </div>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: css.text, margin: '0 0 10px' }}>
+                      Datta Sable
+                    </h3>
+                    <p style={{ color: css.muted, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
+                      Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Writing area */}
+            <div
           className="blog-editor-writing-area"
           style={{
             flex: 1, overflowY: 'auto',
@@ -1367,6 +1652,8 @@ export default function AdminBlog() {
             </div>
           )}
         </aside>
+          </>
+        )}
       </div>
       <style>{`
         @media (max-width: 900px) {
