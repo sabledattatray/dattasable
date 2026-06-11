@@ -72,7 +72,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   const css = isDark
-    ? { bg: '#0f172a', surface: '#1e293b', border: '#334155', text: '#f1f5f9', muted: '#94a3b8', accent: '#6366f1' }
+    ? { bg: '#000000', surface: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#94a3b8', accent: '#6366f1' }
     : { bg: '#ffffff', surface: '#f8fafc', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
 
   const editor = useEditor({
@@ -523,7 +523,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           font-style: italic;
         }
         .full-editor-content .tiptap pre {
-          background: ${isDark ? '#0a0f1e' : '#f1f5f9'};
+          background: ${isDark ? '#000000' : '#f1f5f9'};
           border-radius: 8px;
           padding: 1em;
           overflow-x: auto;

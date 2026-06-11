@@ -17,7 +17,7 @@ export default function MessagesInbox() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', activeBg: 'rgba(99,102,241,0.08)' }
+    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', activeBg: 'rgba(99,102,241,0.08)' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', activeBg: 'rgba(79,70,229,0.05)' };
 
   const [messages, setMessages] = useState<any[]>([]);
@@ -124,7 +124,7 @@ export default function MessagesInbox() {
       {/* Main layout */}
       <div style={{ display: 'grid', gridTemplateColumns: selected ? '340px 1fr' : '1fr', gap: 20, alignItems: 'flex-start' }} className="msg-grid">
         {/* Message list */}
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
+        <div className={selected ? "msg-list-pane msg-list-pane-hidden" : "msg-list-pane"} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
           {/* Search */}
           <div style={{ padding: '16px 16px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 14px' }}>
@@ -226,7 +226,10 @@ export default function MessagesInbox() {
       </div>
 
       <style>{`
-        @media (max-width: 860px) { .msg-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 768px) {
+          .msg-grid { grid-template-columns: 1fr !important; }
+          .msg-list-pane-hidden { display: none !important; }
+        }
       `}</style>
     </div>
   );

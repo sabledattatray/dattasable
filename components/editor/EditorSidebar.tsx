@@ -11,7 +11,7 @@ export default function EditorSidebar() {
   const [tab, setTab] = useState<'post' | 'block'>('post');
 
   const css = isDark
-    ? { surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', inputBg: '#1e293b' }
+    ? { surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', inputBg: '#121212' }
     : { surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', inputBg: '#f8faff' };
 
   const activeBlock = blocks.find(b => b.id === activeBlockId);

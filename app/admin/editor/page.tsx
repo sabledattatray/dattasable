@@ -22,7 +22,7 @@ function EditorContent() {
   const [autoSaveLabel, setAutoSaveLabel] = useState('');
 
   const css = isDark
-    ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
+    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
 
   // Load existing post for editing
@@ -71,7 +71,7 @@ function EditorContent() {
       category: postMetadata.categories[0] || 'Tech Trends',
       excerpt: postMetadata.excerpt || '',
       content: editorHtml,
-      image: postMetadata.featuredImage || '/images/blog/bi-career.png',
+      image: postMetadata.featuredImage || '/images/blog/bi-career.webp',
       date: postMetadata.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       published: status === 'Published',
     };

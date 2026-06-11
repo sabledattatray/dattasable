@@ -13,7 +13,7 @@ function EditorContent() {
   const editId = searchParams.get('id');
 
   const css = isDark
-    ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', inputBg: '#1e293b', shadow: '0 4px 24px rgba(0,0,0,0.35)' }
+    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', inputBg: '#121212', shadow: '0 4px 24px rgba(0,0,0,0.35)' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', inputBg: '#f8faff', shadow: '0 4px 24px rgba(0,0,0,0.07)' };
 
   const [title, setTitle] = useState('');
@@ -204,7 +204,7 @@ function EditorContent() {
         </div>
       ) : (
         /* Edit Form Controls */
-        <form onSubmit={handleSave} style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
+        <form onSubmit={handleSave} className="pages-editor-form" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
           
           {/* Main Content Column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow }}>
@@ -278,6 +278,13 @@ function EditorContent() {
 
         </form>
       )}
+      <style>{`
+        @media (max-width: 768px) {
+          .pages-editor-form {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

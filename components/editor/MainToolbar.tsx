@@ -86,7 +86,7 @@ export default function MainToolbar() {
       <div style={{ position: 'relative' }}>
         <Btn disabled={!editor} onClick={() => setShowColors(v => !v)} title="Colors"><Palette size={15} /></Btn>
         {showColors && (
-          <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, background: isDark ? '#0f172a' : '#fff', border: `1px solid ${isDark ? '#1e293b' : '#e2e8f0'}`, borderRadius: 14, padding: 14, zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.2)', minWidth: 200 }}>
+          <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, background: isDark ? '#000000' : '#fff', border: `1px solid ${isDark ? '#1a1a1a' : '#e2e8f0'}`, borderRadius: 14, padding: 14, zIndex: 100, boxShadow: '0 10px 30px rgba(0,0,0,0.2)', minWidth: 200 }}>
             <p style={{ fontSize: 9, fontWeight: 800, color: isDark ? '#64748b' : '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px' }}>Text Color</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
               {colors.map(c => (

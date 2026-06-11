@@ -10,10 +10,10 @@ export default function PagesManager() {
 
   const css = isDark
     ? { 
-        bg: '#0a0f1e', 
-        surface: '#0f172a', 
-        surface2: '#1e293b', 
-        border: '#1e293b', 
+        bg: '#000000', 
+        surface: '#000000', 
+        surface2: '#121212', 
+        border: '#1a1a1a', 
         text: '#f1f5f9', 
         muted: '#64748b', 
         accent: '#6366f1', 

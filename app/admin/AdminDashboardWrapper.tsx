@@ -28,38 +28,148 @@ import {
   Inbox,
   TrendingUp,
   Zap,
+  Users,
+  Building,
+  CreditCard,
+  ShoppingBag,
+  BarChart3,
+  Megaphone,
+  Terminal,
+  LifeBuoy,
 } from 'lucide-react';
 
 const navItems = [
   {
-    category: 'Overview',
+    category: 'Core',
     links: [
       { name: 'Dashboard', href: '/admin', icon: LayoutDashboard, exact: true, badge: null },
     ],
   },
   {
-    category: 'Content',
+    category: 'Management',
     links: [
-      { name: 'Projects', href: '/admin/projects', icon: Briefcase, exact: false, badge: null },
-      { name: 'All Posts', href: '/admin/blog', icon: FileText, exact: false, badge: null },
-      { name: 'All Pages', href: '/admin/pages', icon: Layers, exact: false, badge: null },
-      { name: 'Add Page', href: '/admin/pages/editor', icon: Sparkles, exact: false, badge: null },
-    ],
+      {
+        name: 'User Management',
+        icon: Users,
+        submenu: [
+          { name: 'All Users', href: '/admin/users', exact: false },
+          { name: 'Roles & Permissions', href: '/admin/users/roles', exact: false },
+        ]
+      },
+      {
+        name: 'Organization',
+        icon: Building,
+        submenu: [
+          { name: 'Company Profile', href: '/admin/org/profile', exact: false },
+          { name: 'Branches & Locations', href: '/admin/org/branches', exact: false },
+        ]
+      },
+    ]
   },
   {
-    category: 'Offerings',
+    category: 'Sales & Finance',
     links: [
-      { name: 'Services', href: '/admin/services', icon: Layers, exact: false, badge: null },
-      { name: 'Testimonials', href: '/admin/testimonials', icon: Star, exact: false, badge: null },
-    ],
+      {
+        name: 'Billing & Subscriptions',
+        icon: CreditCard,
+        submenu: [
+          { name: 'Subscriptions', href: '/admin/billing/subs', exact: false },
+          { name: 'Invoices', href: '/admin/billing/invoices', exact: false },
+          { name: 'Payment Methods', href: '/admin/billing/methods', exact: false },
+        ]
+      },
+      {
+        name: 'Orders / Transactions',
+        icon: ShoppingBag,
+        submenu: [
+          { name: 'Orders List', href: '/admin/orders', exact: false },
+          { name: 'Transactions', href: '/admin/orders/transactions', exact: false },
+        ]
+      },
+    ]
   },
   {
-    category: 'System',
+    category: 'Marketing & Analytics',
     links: [
-      { name: 'Messages', href: '/admin/messages', icon: MessageSquare, exact: false, badge: '4' },
-      { name: 'Settings', href: '/admin/settings', icon: Settings, exact: false, badge: null },
-    ],
+      {
+        name: 'Analytics',
+        icon: BarChart3,
+        submenu: [
+          { name: 'Overview', href: '/admin/analytics', exact: false },
+          { name: 'Traffic & Behavior', href: '/admin/analytics/traffic', exact: false },
+          { name: 'Custom Reports', href: '/admin/analytics/reports', exact: false },
+        ]
+      },
+      {
+        name: 'Marketing',
+        icon: Megaphone,
+        submenu: [
+          { name: 'Campaigns', href: '/admin/marketing/campaigns', exact: false },
+          { name: 'Coupons & Deals', href: '/admin/marketing/coupons', exact: false },
+        ]
+      },
+    ]
   },
+  {
+    category: 'CMS & Services',
+    links: [
+      {
+        name: 'CMS',
+        icon: Layers,
+        submenu: [
+          { name: 'Pages', href: '/admin/pages', exact: false },
+          { name: 'Blog', href: '/admin/blog', exact: false },
+          { name: 'Media Library', href: '/admin/cms/media', exact: false },
+          { name: 'Projects', href: '/admin/projects', exact: false },
+          { name: 'Services', href: '/admin/services', exact: false },
+        ]
+      },
+    ]
+  },
+  {
+    category: 'System Configuration',
+    links: [
+      {
+        name: 'System Settings',
+        icon: Settings,
+        submenu: [
+          { name: 'General Settings', href: '/admin/settings', exact: false },
+          { name: 'Security & Auth', href: '/admin/settings/security', exact: false },
+          { name: 'Integrations', href: '/admin/settings/integrations', exact: false },
+        ]
+      },
+      {
+        name: 'Notifications',
+        icon: Bell,
+        submenu: [
+          { name: 'Inbox Messages', href: '/admin/messages', exact: false, badge: '4' },
+          { name: 'Alerts & Events', href: '/admin/notifications/alerts', exact: false },
+        ]
+      },
+      {
+        name: 'Developer Tools',
+        icon: Terminal,
+        submenu: [
+          { name: 'API Keys', href: '/admin/developer/keys', exact: false },
+          { name: 'Webhooks', href: '/admin/developer/webhooks', exact: false },
+          { name: 'System Logs', href: '/admin/developer/logs', exact: false },
+        ]
+      },
+    ]
+  },
+  {
+    category: 'Support',
+    links: [
+      {
+        name: 'Support / Tickets',
+        icon: LifeBuoy,
+        submenu: [
+          { name: 'All Tickets', href: '/admin/support/tickets', exact: false },
+          { name: 'Testimonials', href: '/admin/testimonials', exact: false },
+        ]
+      },
+    ]
+  }
 ];
 
 export default function AdminDashboardWrapper({ children }: { children: React.ReactNode }) {
@@ -125,23 +235,23 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
   // CSS variables for theming
   const css = isDark
     ? {
-        bg: '#0a0f1e',
-        surface: '#0f172a',
-        surface2: '#1e293b',
-        border: '#1e293b',
+        bg: '#000000',
+        surface: '#000000',
+        surface2: '#121212',
+        border: '#1a1a1a',
         text: '#f1f5f9',
         muted: '#64748b',
         accent: '#6366f1',
         accentGlow: 'rgba(99,102,241,0.15)',
-        headerBg: 'rgba(15,23,42,0.9)',
-        sidebarBg: 'linear-gradient(180deg, #0f172a 0%, #0a0f1e 100%)',
-        cardBg: '#0f172a',
+        headerBg: 'rgba(0,0,0,0.9)',
+        sidebarBg: 'linear-gradient(180deg, #000000 0%, #000000 100%)',
+        cardBg: '#000000',
         badgeBg: '#6366f1',
         activeBg: 'rgba(99,102,241,0.12)',
         activeBorder: '#6366f1',
         hoverBg: 'rgba(99,102,241,0.06)',
-        shadow: '0 4px 24px rgba(0,0,0,0.4)',
-        glassBg: 'rgba(15,23,42,0.8)',
+        shadow: '0 4px 24px rgba(0,0,0,0.8)',
+        glassBg: 'rgba(0,0,0,0.8)',
       }
     : {
         bg: '#f0f4ff',
@@ -709,6 +819,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
             padding: pathname === '/admin' ? 0 : '28px 28px',
             overflowY: 'auto',
           }}
+          className="admin-main-content"
         >
           <div
             style={{
@@ -731,6 +842,11 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: ${css.border}; border-radius: 999px; }
+        @media (max-width: 768px) {
+          .admin-main-content {
+            padding: ${pathname === '/admin' ? '0' : '16px 16px'} !important;
+          }
+        }
       `}</style>
     </div>
   );
@@ -746,7 +862,7 @@ function SidebarContent({
   css: Record<string, string>;
   pathname: string | null;
   isActive: (href: string, exact: boolean) => boolean;
-  navItems: Array<{ category: string; links: Array<{ name: string; href: string; icon: any; exact: boolean; badge: string | null }> }>;
+  navItems: any[];
   userName: string;
   userEmail: string;
   userInitial: string;
@@ -755,6 +871,31 @@ function SidebarContent({
   onSignOut: () => void;
   isMobile: boolean;
 }) {
+  const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
+
+  const toggleSubmenu = (name: string) => {
+    setExpandedMenus(prev => ({
+      ...prev,
+      [name]: !prev[name]
+    }));
+  };
+
+  useEffect(() => {
+    // Automatically expand the submenu containing the active item
+    const newExpanded: Record<string, boolean> = {};
+    navItems.forEach((group: any) => {
+      group.links.forEach((link: any) => {
+        if (link.submenu) {
+          const hasActiveChild = link.submenu.some((sub: any) => isActive(sub.href, !!sub.exact));
+          if (hasActiveChild) {
+            newExpanded[link.name] = true;
+          }
+        }
+      });
+    });
+    setExpandedMenus(prev => ({ ...newExpanded, ...prev }));
+  }, [pathname, navItems]);
+
   return (
     <>
       {/* Logo */}
@@ -849,7 +990,7 @@ function SidebarContent({
                   fontSize: 10,
                   fontWeight: 700,
                   letterSpacing: '0.1em',
-                  color: css.muted,
+                  color: isDark ? 'rgba(255, 255, 255, 0.45)' : css.muted,
                   textTransform: 'uppercase',
                   padding: '10px 10px 4px',
                   margin: 0,
@@ -861,64 +1002,186 @@ function SidebarContent({
               <div style={{ height: 1, background: css.border, margin: '8px 4px' }} />
             )}
             {group.links.map((link: any) => {
-              const active = isActive(link.href, link.exact);
+              const hasSubmenu = !!link.submenu;
+              const active = hasSubmenu 
+                ? link.submenu.some((sub: any) => isActive(sub.href, !!sub.exact))
+                : isActive(link.href, !!link.exact);
+              const isExpanded = !!expandedMenus[link.name];
               const Icon = link.icon;
+
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  title={isCollapsed ? link.name : undefined}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: isCollapsed ? '10px 0' : '9px 10px',
-                    borderRadius: 10,
-                    textDecoration: 'none',
-                    fontSize: 13.5,
-                    fontWeight: active ? 700 : 500,
-                    color: active ? css.accent : css.muted,
-                    background: active ? css.activeBg : 'transparent',
-                    borderLeft: active && !isCollapsed ? `3px solid ${css.activeBorder}` : '3px solid transparent',
-                    transition: 'all 0.15s',
-                    justifyContent: isCollapsed ? 'center' : 'flex-start',
-                    marginBottom: 1,
-                    position: 'relative',
-                  }}
-                  onMouseEnter={e => {
-                    if (!active) {
-                      (e.currentTarget as HTMLElement).style.background = css.hoverBg;
-                      (e.currentTarget as HTMLElement).style.color = css.text;
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!active) {
-                      (e.currentTarget as HTMLElement).style.background = 'transparent';
-                      (e.currentTarget as HTMLElement).style.color = css.muted;
-                    }
-                  }}
-                >
-                  <Icon size={18} style={{ flexShrink: 0 }} />
-                  {!isCollapsed && (
-                    <>
-                      <span style={{ flex: 1 }}>{link.name}</span>
-                      {link.badge && (
-                        <span
-                          style={{
-                            background: css.accent,
-                            color: '#fff',
-                            fontSize: 10,
-                            fontWeight: 700,
-                            padding: '1px 7px',
-                            borderRadius: 999,
-                          }}
-                        >
-                          {link.badge}
-                        </span>
+                <div key={link.name} style={{ display: 'flex', flexDirection: 'column' }}>
+                  {hasSubmenu ? (
+                    <button
+                      onClick={() => {
+                        if (isCollapsed) {
+                          onToggleCollapse();
+                          setExpandedMenus(prev => ({ ...prev, [link.name]: true }));
+                        } else {
+                          toggleSubmenu(link.name);
+                        }
+                      }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 10,
+                        padding: isCollapsed ? '10px 0' : '9px 10px',
+                        borderRadius: 10,
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: 13.5,
+                        fontWeight: active ? 700 : 500,
+                        color: active ? (isDark ? '#ffffff' : css.accent) : (isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted),
+                        background: active ? css.activeBg : 'transparent',
+                        borderLeft: active && !isCollapsed ? `3px solid ${css.activeBorder}` : '3px solid transparent',
+                        transition: 'all 0.15s',
+                        justifyContent: isCollapsed ? 'center' : 'flex-start',
+                        marginBottom: 1,
+                        position: 'relative',
+                        width: '100%',
+                        textAlign: 'left',
+                      }}
+                      onMouseEnter={e => {
+                        if (!active) {
+                          (e.currentTarget as HTMLElement).style.background = css.hoverBg;
+                          (e.currentTarget as HTMLElement).style.color = isDark ? '#ffffff' : css.text;
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (!active) {
+                          (e.currentTarget as HTMLElement).style.background = 'transparent';
+                          (e.currentTarget as HTMLElement).style.color = isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted;
+                        }
+                      }}
+                    >
+                      <Icon size={18} style={{ flexShrink: 0 }} />
+                      {!isCollapsed && (
+                        <>
+                          <span style={{ flex: 1 }}>{link.name}</span>
+                          <ChevronDown 
+                            size={14} 
+                            style={{ 
+                              transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                              transition: 'transform 0.2s',
+                              color: 'inherit',
+                              opacity: 0.7
+                            }} 
+                          />
+                        </>
                       )}
-                    </>
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      title={isCollapsed ? link.name : undefined}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 10,
+                        padding: isCollapsed ? '10px 0' : '9px 10px',
+                        borderRadius: 10,
+                        textDecoration: 'none',
+                        fontSize: 13.5,
+                        fontWeight: active ? 700 : 500,
+                        color: active ? (isDark ? '#ffffff' : css.accent) : (isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted),
+                        background: active ? css.activeBg : 'transparent',
+                        borderLeft: active && !isCollapsed ? `3px solid ${css.activeBorder}` : '3px solid transparent',
+                        transition: 'all 0.15s',
+                        justifyContent: isCollapsed ? 'center' : 'flex-start',
+                        marginBottom: 1,
+                        position: 'relative',
+                      }}
+                      onMouseEnter={e => {
+                        if (!active) {
+                          (e.currentTarget as HTMLElement).style.background = css.hoverBg;
+                          (e.currentTarget as HTMLElement).style.color = isDark ? '#ffffff' : css.text;
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (!active) {
+                          (e.currentTarget as HTMLElement).style.background = 'transparent';
+                          (e.currentTarget as HTMLElement).style.color = isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted;
+                        }
+                      }}
+                    >
+                      <Icon size={18} style={{ flexShrink: 0 }} />
+                      {!isCollapsed && (
+                        <>
+                          <span style={{ flex: 1 }}>{link.name}</span>
+                          {link.badge && (
+                            <span
+                              style={{
+                                background: css.accent,
+                                color: '#fff',
+                                fontSize: 10,
+                                fontWeight: 700,
+                                padding: '1px 7px',
+                                borderRadius: 999,
+                              }}
+                            >
+                              {link.badge}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Link>
                   )}
-                </Link>
+
+                  {/* Nested Submenu rendering */}
+                  {hasSubmenu && isExpanded && !isCollapsed && (
+                    <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: 24, gap: 1, marginTop: 1, marginBottom: 4 }}>
+                      {link.submenu.map((sub: any) => {
+                        const subActive = isActive(sub.href, !!sub.exact);
+                        return (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              padding: '7px 10px',
+                              borderRadius: 8,
+                              textDecoration: 'none',
+                              fontSize: 12.5,
+                              fontWeight: subActive ? 700 : 500,
+                              color: subActive ? (isDark ? '#ffffff' : css.accent) : (isDark ? 'rgba(255, 255, 255, 0.55)' : css.muted),
+                              background: subActive ? (isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.02)') : 'transparent',
+                              transition: 'all 0.15s',
+                            }}
+                            onMouseEnter={e => {
+                              if (!subActive) {
+                                (e.currentTarget as HTMLElement).style.background = css.hoverBg;
+                                (e.currentTarget as HTMLElement).style.color = isDark ? '#ffffff' : css.text;
+                              }
+                            }}
+                            onMouseLeave={e => {
+                              if (!subActive) {
+                                (e.currentTarget as HTMLElement).style.background = 'transparent';
+                                (e.currentTarget as HTMLElement).style.color = isDark ? 'rgba(255, 255, 255, 0.55)' : css.muted;
+                              }
+                            }}
+                          >
+                            <span style={{ flex: 1 }}>{sub.name}</span>
+                            {sub.badge && (
+                              <span
+                                style={{
+                                  background: css.accent,
+                                  color: '#fff',
+                                  fontSize: 9,
+                                  fontWeight: 700,
+                                  padding: '1px 5px',
+                                  borderRadius: 999,
+                                }}
+                              >
+                                {sub.badge}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -991,18 +1254,18 @@ function SidebarContent({
               border: `1px solid ${css.border}`,
               borderRadius: 10,
               cursor: 'pointer',
-              color: css.muted,
+              color: isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted,
               fontSize: 12,
               fontWeight: 600,
               transition: 'all 0.15s',
             }}
             onMouseEnter={e => {
               (e.currentTarget as HTMLElement).style.background = css.hoverBg;
-              (e.currentTarget as HTMLElement).style.color = css.text;
+              (e.currentTarget as HTMLElement).style.color = isDark ? '#ffffff' : css.text;
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLElement).style.background = 'none';
-              (e.currentTarget as HTMLElement).style.color = css.muted;
+              (e.currentTarget as HTMLElement).style.color = isDark ? 'rgba(255, 255, 255, 0.7)' : css.muted;
             }}
           >
             {isCollapsed ? <ChevronRight size={15} /> : <><ChevronLeft size={15} /> <span>Collapse</span></>}

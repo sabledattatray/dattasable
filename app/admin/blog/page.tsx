@@ -183,10 +183,10 @@ export default function AdminBlog() {
   // Theme-aware CSS variables
   const css = isDark
     ? {
-        bg: '#0a0f1e',
-        surface: '#0f172a',
-        surface2: '#1e293b',
-        border: '#1e293b',
+        bg: '#000000',
+        surface: '#000000',
+        surface2: '#121212',
+        border: '#1a1a1a',
         text: '#f1f5f9',
         muted: '#64748b',
         accent: '#6366f1',
@@ -981,7 +981,7 @@ export default function AdminBlog() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
+          <span className="editor-header-draft-label" style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
           <ThemeToggle />
           <button
             onClick={handleSave}
@@ -1000,9 +1000,10 @@ export default function AdminBlog() {
       </header>
 
       {/* Editor Main */}
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      <div className="blog-editor-main" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         {/* Writing area */}
         <div
+          className="blog-editor-writing-area"
           style={{
             flex: 1, overflowY: 'auto',
             background: css.bg,
@@ -1049,6 +1050,7 @@ export default function AdminBlog() {
 
         {/* Settings sidebar */}
         <aside
+          className="blog-editor-sidebar"
           style={{
             width: 310, background: css.surface,
             borderLeft: `1px solid ${css.border}`,
@@ -1366,6 +1368,31 @@ export default function AdminBlog() {
           )}
         </aside>
       </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .blog-editor-main {
+            flex-direction: column !important;
+            overflow-y: auto !important;
+          }
+          .blog-editor-writing-area {
+            padding: 30px 20px !important;
+            flex: none !important;
+            overflow-y: visible !important;
+          }
+          .blog-editor-sidebar {
+            width: 100% !important;
+            border-left: none !important;
+            border-top: 1px solid ${css.border} !important;
+            flex: none !important;
+            overflow-y: visible !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .editor-header-draft-label {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

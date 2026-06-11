@@ -296,18 +296,18 @@ export default function AdminDashboardPage() {
 
   const css = isDark
     ? {
-        bg: '#0a0f1e',
-        surface: '#0f172a',
-        surface2: '#1e293b',
-        border: '#1e293b',
+        bg: '#000000',
+        surface: '#000000',
+        surface2: '#121212',
+        border: '#1a1a1a',
         text: '#f1f5f9',
         muted: '#64748b',
         accent: currentAccent,
         accentGlow: getGlow(currentAccent, 0.12),
-        card: '#0f172a',
+        card: '#000000',
         shadow: '0 4px 24px rgba(0,0,0,0.35)',
         shadowHover: '0 8px 32px rgba(0,0,0,0.5)',
-        headerGrad: `linear-gradient(135deg, ${getGlow(currentAccent, 0.15)} 0%, #1e293b 50%, #0f172a 100%)`,
+        headerGrad: `linear-gradient(135deg, ${getGlow(currentAccent, 0.15)} 0%, #121212 50%, #000000 100%)`,
       }
     : {
         bg: '#f0f4ff',
@@ -635,7 +635,7 @@ export default function AdminDashboardPage() {
               </p>
               <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: 0 }}>Quick Actions</h3>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+            <div className="admin-dash-quick-actions" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
               {quickActions.map((action, i) => {
                 const Icon = action.icon;
                 const isExternal = action.href.startsWith('http');
@@ -1011,6 +1011,7 @@ export default function AdminDashboardPage() {
         @media (max-width: 600px) {
           .admin-dash-main-grid { grid-template-columns: 1fr !important; }
           .admin-dash-bottom-grid { grid-template-columns: 1fr !important; }
+          .admin-dash-quick-actions { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
