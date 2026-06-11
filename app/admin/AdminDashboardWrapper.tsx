@@ -182,8 +182,58 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [typography, setTypography] = useState({
+    fontFamily: 'Inter',
+    fontSize: '14px',
+    color: '',
+    fontWeight: '500',
+  });
 
   const isDark = theme === 'dark';
+
+  // Load typography from localStorage
+  useEffect(() => {
+    const loadTypography = () => {
+      const saved = localStorage.getItem('admin_typography');
+      if (saved) {
+        try {
+          setTypography(JSON.parse(saved));
+        } catch (e) {
+          console.error('Failed to parse typography settings in wrapper', e);
+        }
+      }
+    };
+    loadTypography();
+    window.addEventListener('admin_typography_changed', loadTypography);
+    return () => {
+      window.removeEventListener('admin_typography_changed', loadTypography);
+    };
+  }, []);
+
+  // Sync typography on route changes
+  useEffect(() => {
+    const saved = localStorage.getItem('admin_typography');
+    if (saved) {
+      try {
+        setTypography(JSON.parse(saved));
+      } catch (e) {}
+    }
+  }, [pathname]);
+
+  // Inject selected Google Font dynamically
+  useEffect(() => {
+    if (typography.fontFamily && typography.fontFamily !== 'Inter' && typeof window !== 'undefined') {
+      const linkId = 'google-font-import';
+      let link = document.getElementById(linkId) as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.id = linkId;
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+      link.href = `https://fonts.googleapis.com/css2?family=${typography.fontFamily.replace(/\s+/g, '+')}:wght@300;400;500;600;700;800;900&display=swap`;
+    }
+  }, [typography.fontFamily]);
 
   useEffect(() => {
     setMounted(true);
@@ -232,6 +282,19 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
   const userInitial = userName.charAt(0).toUpperCase();
   const userEmail = session?.user?.email || 'admin@dattasable.com';
 
+  const getGlow = (hex: string, alpha: number) => {
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+    const r = parseInt(c.substring(0, 2), 16) || 99;
+    const g = parseInt(c.substring(2, 4), 16) || 102;
+    const b = parseInt(c.substring(4, 6), 16) || 241;
+    return `rgba(${r},${g},${b},${alpha})`;
+  };
+
+  const defaultAccent = isDark ? '#6366f1' : '#4f46e5';
+  const currentAccent = typography.color || defaultAccent;
+  const currentAccentGlow = typography.color ? getGlow(typography.color, isDark ? 0.15 : 0.08) : (isDark ? 'rgba(99,102,241,0.15)' : 'rgba(79,70,229,0.08)');
+
   // CSS variables for theming
   const css = isDark
     ? {
@@ -241,15 +304,15 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
         border: '#1a1a1a',
         text: '#f1f5f9',
         muted: '#64748b',
-        accent: '#6366f1',
-        accentGlow: 'rgba(99,102,241,0.15)',
+        accent: currentAccent,
+        accentGlow: currentAccentGlow,
         headerBg: 'rgba(0,0,0,0.9)',
         sidebarBg: 'linear-gradient(180deg, #000000 0%, #000000 100%)',
         cardBg: '#000000',
-        badgeBg: '#6366f1',
-        activeBg: 'rgba(99,102,241,0.12)',
-        activeBorder: '#6366f1',
-        hoverBg: 'rgba(99,102,241,0.06)',
+        badgeBg: currentAccent,
+        activeBg: currentAccentGlow,
+        activeBorder: currentAccent,
+        hoverBg: getGlow(currentAccent, 0.06),
         shadow: '0 4px 24px rgba(0,0,0,0.8)',
         glassBg: 'rgba(0,0,0,0.8)',
       }
@@ -260,15 +323,15 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
         border: '#e2e8f0',
         text: '#0f172a',
         muted: '#64748b',
-        accent: '#4f46e5',
-        accentGlow: 'rgba(79,70,229,0.08)',
+        accent: currentAccent,
+        accentGlow: currentAccentGlow,
         headerBg: 'rgba(255,255,255,0.92)',
         sidebarBg: 'linear-gradient(180deg, #ffffff 0%, #f8faff 100%)',
         cardBg: '#ffffff',
-        badgeBg: '#4f46e5',
-        activeBg: 'rgba(79,70,229,0.08)',
-        activeBorder: '#4f46e5',
-        hoverBg: 'rgba(79,70,229,0.04)',
+        badgeBg: currentAccent,
+        activeBg: currentAccentGlow,
+        activeBorder: currentAccent,
+        hoverBg: getGlow(currentAccent, 0.04),
         shadow: '0 4px 24px rgba(0,0,0,0.08)',
         glassBg: 'rgba(255,255,255,0.9)',
       };
@@ -282,7 +345,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
         minHeight: '100vh',
         background: css.bg,
         color: css.text,
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: typography.fontFamily !== 'Inter' ? `'${typography.fontFamily}', sans-serif` : "'Inter', sans-serif",
+        fontSize: typography.fontSize || '14px',
+        fontWeight: parseInt(typography.fontWeight) || 400,
         transition: 'background 0.3s, color 0.3s',
       }}
     >
@@ -832,6 +897,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
       </div>
 
       <style>{`
+        body, input, select, textarea, button, p, span, h1, h2, h3, h4, h5, h6, th, td, a, aside, nav, header, main {
+          font-family: ${typography.fontFamily !== 'Inter' ? `'${typography.fontFamily}', sans-serif !important` : 'inherit'};
+        }
         @keyframes ping {
           75%, 100% { transform: scale(2); opacity: 0; }
         }

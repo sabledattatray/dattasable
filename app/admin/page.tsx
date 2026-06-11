@@ -833,6 +833,7 @@ export default function AdminDashboardPage() {
                       const newTypo = { ...typography, fontFamily: e.target.value };
                       setTypography(newTypo);
                       localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                      window.dispatchEvent(new Event('admin_typography_changed'));
                     }}
                     style={{
                       width: '100%',
@@ -863,6 +864,7 @@ export default function AdminDashboardPage() {
                       const newTypo = { ...typography, fontSize: e.target.value };
                       setTypography(newTypo);
                       localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                      window.dispatchEvent(new Event('admin_typography_changed'));
                     }}
                     style={{
                       width: '100%',
@@ -898,6 +900,7 @@ export default function AdminDashboardPage() {
                       const newTypo = { ...typography, fontWeight: e.target.value };
                       setTypography(newTypo);
                       localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                      window.dispatchEvent(new Event('admin_typography_changed'));
                     }}
                     style={{
                       width: '100%',
@@ -945,6 +948,7 @@ export default function AdminDashboardPage() {
                           const newTypo = { ...typography, color: c.hex };
                           setTypography(newTypo);
                           localStorage.setItem('admin_typography', JSON.stringify(newTypo));
+                          window.dispatchEvent(new Event('admin_typography_changed'));
                         }}
                         title={c.name}
                         style={{
