@@ -1,30 +1,31 @@
 'use client';
-import { useEditorStore } from '@/store/editorStore';
-import EditorCanvas from '@/components/editor/EditorCanvas';
 import EditorSidebar from '@/components/editor/EditorSidebar';
-import MainToolbar from '@/components/editor/MainToolbar';
+import FullEditor from '@/components/editor/FullEditor';
 import { ArrowLeft, Save, Eye, Send } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, Suspense, useState } from 'react';
+import { useEffect, Suspense, useState, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useEditorStore } from '@/store/editorStore';
 
 function EditorContent() {
-  const { postMetadata, updatePostMetadata, blocks, setBlocks } = useEditorStore();
+  const { postMetadata, updatePostMetadata } = useEditorStore();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get('id');
   const [previewMode, setPreviewMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [editorHtml, setEditorHtml] = useState('');
+  const [autoSaveLabel, setAutoSaveLabel] = useState('');
 
   const css = isDark
     ? { bg: '#0a0f1e', surface: '#0f172a', surface2: '#1e293b', border: '#1e293b', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
     : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
 
-  const [loading, setLoading] = useState(false);
-
+  // Load existing post for editing
   useEffect(() => {
     if (editId) {
       const loadPost = async () => {
@@ -43,11 +44,7 @@ function EditorContent() {
               date: post.date,
               featuredImage: post.image || '',
             });
-            if (post.blocks && Array.isArray(post.blocks)) {
-              setBlocks(post.blocks);
-            } else if (post.content) {
-              setBlocks([{ id: `block-${Date.now()}`, type: 'paragraph', content: post.content, metadata: {} }]);
-            }
+            setEditorHtml(post.content || '');
           }
         } catch (err: any) {
           alert('Error loading post: ' + err.message);
@@ -59,15 +56,21 @@ function EditorContent() {
     }
   }, [editId]);
 
+  // Auto-save indicator
+  const handleEditorChange = useCallback((html: string) => {
+    setEditorHtml(html);
+    setAutoSaveLabel('Draft saved');
+    const timer = setTimeout(() => setAutoSaveLabel(''), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handlePublish = async (status: 'Draft' | 'Published') => {
-    const compiledContent = blocks.map(b => b.content).join('');
     const payload = {
       title: postMetadata.title || 'Untitled Post',
       slug: postMetadata.slug || (postMetadata.title || 'untitled-post').toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
       category: postMetadata.categories[0] || 'Tech Trends',
       excerpt: postMetadata.excerpt || '',
-      content: compiledContent,
-      blocks: blocks,
+      content: editorHtml,
       image: postMetadata.featuredImage || '/images/blog/bi-career.png',
       date: postMetadata.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       published: status === 'Published',
@@ -116,7 +119,14 @@ function EditorContent() {
               <ArrowLeft size={20} />
             </Link>
             <div style={{ width: 1, height: 24, background: css.border }} />
-            <MainToolbar />
+            <span style={{ fontSize: 14, fontWeight: 600, color: css.text }}>
+              {editId ? 'Edit Post' : 'New Post'}
+            </span>
+            {autoSaveLabel && (
+              <span style={{ fontSize: 12, color: css.muted, fontStyle: 'italic' }}>
+                {autoSaveLabel}
+              </span>
+            )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <ThemeToggle />
@@ -126,14 +136,14 @@ function EditorContent() {
             >
               <Eye size={15} /> Preview
             </button>
-            <button onClick={() => handlePublish('Draft')} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: 'none', border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s' }}
+            <button onClick={() => handlePublish('Draft')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: 'none', border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s', opacity: loading ? 0.5 : 1 }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.background = css.surface2; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.background = 'none'; }}
             >
               <Save size={15} /> Save Draft
             </button>
-            <button onClick={() => handlePublish('Published')} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', boxShadow: `0 4px 12px ${css.accent}40` }}>
-              <Send size={15} /> Publish
+            <button onClick={() => handlePublish('Published')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', boxShadow: `0 4px 12px ${css.accent}40`, opacity: loading ? 0.5 : 1 }}>
+              <Send size={15} /> {loading ? 'Saving...' : 'Publish'}
             </button>
           </div>
         </header>
@@ -148,22 +158,42 @@ function EditorContent() {
 
       {/* Main workspace */}
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <main style={{ flex: 1, overflowY: 'auto', background: css.bg, padding: previewMode ? '60px 40px' : '40px 40px' }}>
-          <div style={{ maxWidth: previewMode ? 860 : 800, margin: '0 auto' }}>
+        <main style={{ flex: 1, overflowY: 'auto', background: css.bg, padding: previewMode ? '60px 40px' : '24px 32px' }}>
+          <div style={{ maxWidth: previewMode ? 860 : 1200, margin: '0 auto' }}>
+            {/* Title Input */}
             {!previewMode && (
-              <div style={{ marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${css.border}` }}>
+              <div style={{ marginBottom: 20, paddingBottom: 16, borderBottom: `1px solid ${css.border}` }}>
                 <input
                   type="text"
                   placeholder="Post Title..."
                   value={postMetadata.title}
                   onChange={e => updatePostMetadata({ title: e.target.value })}
-                  style={{ width: '100%', fontSize: '2.4rem', fontWeight: 900, background: 'none', border: 'none', outline: 'none', color: css.text, letterSpacing: '-0.03em', lineHeight: 1.2, fontFamily: "'Inter', sans-serif" }}
+                  style={{ width: '100%', fontSize: '2rem', fontWeight: 800, background: 'none', border: 'none', outline: 'none', color: css.text, letterSpacing: '-0.02em', lineHeight: 1.3, fontFamily: "'Inter', sans-serif" }}
                 />
               </div>
             )}
-            <div style={{ background: css.surface, borderRadius: 16, border: `1px solid ${css.border}`, padding: '32px 40px', minHeight: 'calc(100vh - 300px)', boxShadow: isDark ? '0 4px 24px rgba(0,0,0,0.35)' : '0 4px 24px rgba(0,0,0,0.06)' }}>
-              <EditorCanvas />
-            </div>
+
+            {/* Preview Mode - show title + rendered HTML */}
+            {previewMode && (
+              <div>
+                <h1 style={{ fontSize: '2.4rem', fontWeight: 900, marginBottom: 24, letterSpacing: '-0.03em' }}>
+                  {postMetadata.title || 'Untitled Post'}
+                </h1>
+                <div
+                  dangerouslySetInnerHTML={{ __html: editorHtml }}
+                  style={{ fontSize: 16, lineHeight: 1.8 }}
+                />
+              </div>
+            )}
+
+            {/* Editor */}
+            {!previewMode && (
+              <FullEditor
+                content={editorHtml}
+                onChange={handleEditorChange}
+                isDark={isDark}
+              />
+            )}
           </div>
         </main>
         {!previewMode && <EditorSidebar />}

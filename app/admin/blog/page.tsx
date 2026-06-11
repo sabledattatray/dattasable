@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
+import FullEditor from '@/components/editor/FullEditor';
 
 const initialPosts = mainPosts.map((p, idx) => ({
   id: idx + 1,
@@ -197,8 +198,12 @@ export default function AdminBlog() {
     }
   };
 
-  const handleEditorChange = () => {
-    if (editorRef.current) setFormData(f => ({ ...f, content: editorRef.current!.innerHTML }));
+  const handleEditorChange = (html?: string) => {
+    if (typeof html === 'string') {
+      setFormData(f => ({ ...f, content: html }));
+    } else if (editorRef.current) {
+      setFormData(f => ({ ...f, content: editorRef.current!.innerHTML }));
+    }
   };
 
   const execCommand = (cmd: string, val = '') => {
@@ -634,7 +639,7 @@ export default function AdminBlog() {
             padding: '60px 40px',
           }}
         >
-          <div style={{ width: '100%', maxWidth: 780 }}>
+          <div style={{ width: '100%', maxWidth: 1100 }}>
             {/* Title */}
             <textarea
               placeholder="Article title..."
@@ -642,7 +647,7 @@ export default function AdminBlog() {
               onChange={e => setFormData(f => ({ ...f, title: e.target.value }))}
               rows={2}
               style={{
-                width: '100%', fontSize: '2.6rem', fontWeight: 800,
+                width: '100%', fontSize: '2.2rem', fontWeight: 800,
                 background: 'none', border: 'none',
                 color: css.text, outline: 'none', resize: 'none',
                 lineHeight: 1.2, letterSpacing: '-0.03em', marginBottom: '1.5rem',
@@ -650,86 +655,11 @@ export default function AdminBlog() {
               }}
             />
 
-            {/* Toolbar */}
-            <div
-              style={{
-                position: 'sticky', top: 0, zIndex: 10,
-                background: isDark ? 'rgba(10,15,30,0.92)' : 'rgba(240,244,255,0.92)',
-                backdropFilter: 'blur(12px)',
-                padding: '10px 0', borderBottom: `1px solid ${css.border}`,
-                display: 'flex', flexWrap: 'wrap', gap: 8,
-                marginBottom: '1.5rem',
-              }}
-            >
-              {/* Headings */}
-              {['H1', 'H2', 'H3'].map((h, i) => (
-                <button
-                  key={h}
-                  onClick={() => execCommand('formatBlock', `<h${i + 1}>`)}
-                  style={{
-                    background: css.surface, border: `1px solid ${css.border}`,
-                    color: css.text, cursor: 'pointer',
-                    padding: '4px 10px', fontSize: 13, fontWeight: 700, borderRadius: 7,
-                  }}
-                >
-                  {h}
-                </button>
-              ))}
-              <div style={{ width: 1, background: css.border, margin: '0 4px' }} />
-              {[
-                { cmd: 'bold', Icon: Bold },
-                { cmd: 'italic', Icon: Italic },
-                { cmd: 'underline', Icon: Underline },
-              ].map(({ cmd, Icon }) => (
-                <button
-                  key={cmd}
-                  onClick={() => execCommand(cmd)}
-                  style={{
-                    background: 'none', border: 'none', color: css.muted,
-                    cursor: 'pointer', padding: '6px', borderRadius: 7,
-                    display: 'flex', alignItems: 'center', transition: 'all 0.15s',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = css.surface2; (e.currentTarget as HTMLElement).style.color = css.text; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = css.muted; }}
-                >
-                  <Icon size={17} />
-                </button>
-              ))}
-              <div style={{ width: 1, background: css.border, margin: '0 4px' }} />
-              {[
-                { cmd: 'justifyLeft', Icon: AlignLeft },
-                { cmd: 'justifyCenter', Icon: AlignCenter },
-                { cmd: 'justifyRight', Icon: AlignRight },
-              ].map(({ cmd, Icon }) => (
-                <button
-                  key={cmd}
-                  onClick={() => execCommand(cmd)}
-                  style={{
-                    background: 'none', border: 'none', color: css.muted,
-                    cursor: 'pointer', padding: '6px', borderRadius: 7,
-                    display: 'flex', alignItems: 'center', transition: 'all 0.15s',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = css.surface2; (e.currentTarget as HTMLElement).style.color = css.text; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = css.muted; }}
-                >
-                  <Icon size={17} />
-                </button>
-              ))}
-            </div>
-
-            {/* Content editable */}
-            <div
-              ref={editorRef}
-              contentEditable
-              suppressContentEditableWarning
-              onInput={handleEditorChange}
-              className="prose prose-slate dark:prose-invert max-w-none focus:outline-none"
-              style={{
-                width: '100%', fontSize: '1.15rem', lineHeight: 1.85,
-                background: 'none', border: 'none',
-                color: css.text, outline: 'none', minHeight: 600,
-                fontFamily: "'Inter', sans-serif",
-              }}
+            {/* TipTap Full Editor */}
+            <FullEditor
+              content={formData.content}
+              onChange={(html: string) => handleEditorChange(html)}
+              isDark={isDark}
             />
           </div>
         </div>

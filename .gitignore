@@ -47,3 +47,6 @@ surgical-forge-lab/public/staging/*.csv
 
 # Scratch directory
 /scratch/
+
+# User uploads
+/public/uploads/
