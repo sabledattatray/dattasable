@@ -140,6 +140,19 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
   return { score, checks };
 }
 
+function calculateReadTime(content: string): number {
+  let textContent = '';
+  if (typeof document !== 'undefined') {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    textContent = tempDiv.textContent || tempDiv.innerText || '';
+  } else {
+    textContent = content.replace(/<[^>]*>/g, '');
+  }
+  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+}
+
 export default function AdminBlog() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -163,6 +176,7 @@ export default function AdminBlog() {
   const [showCategoryManager, setShowCategoryManager] = useState(false);
   const [editingCategory, setEditingCategory] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState('');
+  const [isReadTimeManual, setIsReadTimeManual] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
 
 
@@ -315,6 +329,9 @@ export default function AdminBlog() {
       if (post.blocks && typeof post.blocks === 'object') {
         keyword = (post.blocks as any).focusedKeyword || '';
       }
+      const calculated = calculateReadTime(post.content || '');
+      const isManual = post.readTime && post.readTime !== calculated;
+      setIsReadTimeManual(!!isManual);
       setEditingPost(post);
       setFormData({
         title: post.title,
@@ -329,12 +346,13 @@ export default function AdminBlog() {
         focusedKeyword: keyword,
       });
     } else {
+      setIsReadTimeManual(false);
       setEditingPost(null);
       setFormData({
         title: '', slug: '', category: 'Tech Trends', status: 'Draft',
         excerpt: '', content: '', image: '',
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        readTime: 5,
+        readTime: 1,
         focusedKeyword: '',
       });
     }
@@ -405,11 +423,17 @@ export default function AdminBlog() {
   };
 
   const handleEditorChange = (html?: string) => {
-    if (typeof html === 'string') {
-      setFormData(f => ({ ...f, content: html }));
-    } else if (editorRef.current) {
-      setFormData(f => ({ ...f, content: editorRef.current!.innerHTML }));
-    }
+    const newContent = typeof html === 'string'
+      ? html
+      : (editorRef.current ? editorRef.current.innerHTML : '');
+
+    setFormData(f => {
+      let updatedReadTime = f.readTime;
+      if (!isReadTimeManual) {
+        updatedReadTime = calculateReadTime(newContent);
+      }
+      return { ...f, content: newContent, readTime: updatedReadTime };
+    });
   };
 
   const execCommand = (cmd: string, val = '') => {
@@ -1125,14 +1149,33 @@ export default function AdminBlog() {
 
                 {/* Read Time */}
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                    Read Time (minutes)
-                  </label>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', margin: 0 }}>
+                      Read Time (minutes)
+                    </label>
+                    {isReadTimeManual && (
+                      <button
+                        onClick={() => {
+                          setIsReadTimeManual(false);
+                          setFormData(f => ({ ...f, readTime: calculateReadTime(f.content) }));
+                        }}
+                        style={{
+                          background: 'none', border: 'none', color: css.accent, fontSize: 10, fontWeight: 700,
+                          cursor: 'pointer', padding: 0, textTransform: 'uppercase', letterSpacing: '0.05em'
+                        }}
+                      >
+                        Auto-detect 🔄
+                      </button>
+                    )}
+                  </div>
                   <input
                     type="number"
                     min={1}
                     value={formData.readTime}
-                    onChange={e => setFormData(f => ({ ...f, readTime: parseInt(e.target.value) || 1 }))}
+                    onChange={e => {
+                      setIsReadTimeManual(true);
+                      setFormData(f => ({ ...f, readTime: parseInt(e.target.value) || 1 }));
+                    }}
                     style={{
                       width: '100%', background: css.inputBg,
                       border: `1px solid ${css.border}`, color: css.text,

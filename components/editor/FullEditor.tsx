@@ -11,6 +11,7 @@ import { Link } from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import { FontSize } from './FontSizeExtension';
+import { FontFamily } from './FontFamilyExtension';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough,
@@ -19,6 +20,7 @@ import {
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
   Link as LinkIcon, Image as ImageIcon, Minus,
   Undo, Redo, Type, Palette, Highlighter, Unlink,
+  FileCode, Eye,
 } from 'lucide-react';
 
 interface FullEditorProps {
@@ -64,6 +66,8 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
   const [linkUrl, setLinkUrl] = useState('');
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [fontColor, setFontColor] = useState('#ffffff');
+  const [isSourceMode, setIsSourceMode] = useState(false);
+  const [sourceHtml, setSourceHtml] = useState(content);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const colorInputRef = useRef<HTMLInputElement>(null);
 
@@ -92,6 +96,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         placeholder: 'Start writing your post...',
       }),
       FontSize,
+      FontFamily,
     ],
     content,
     immediatelyRender: false,
@@ -121,7 +126,9 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
       },
     },
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      const html = editor.getHTML();
+      onChange(html);
+      setSourceHtml(html);
     },
   });
 
@@ -129,8 +136,18 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
   useEffect(() => {
     if (editor && content && editor.getHTML() !== content) {
       editor.commands.setContent(content, { emitUpdate: false });
+      setSourceHtml(content);
     }
   }, [content, editor]);
+
+  const toggleSourceMode = () => {
+    if (isSourceMode) {
+      editor?.commands.setContent(sourceHtml);
+    } else {
+      setSourceHtml(editor?.getHTML() || '');
+    }
+    setIsSourceMode(!isSourceMode);
+  };
 
   const handleImageUpload = useCallback(async (file: File) => {
     if (!editor) return;
@@ -182,51 +199,51 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         color: css.muted,
       }}>
         {/* Undo/Redo */}
-        <ToolbarButton onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title="Undo">
+        <ToolbarButton onClick={() => editor.chain().focus().undo().run()} disabled={isSourceMode || !editor.can().undo()} title="Undo">
           <Undo size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title="Redo">
+        <ToolbarButton onClick={() => editor.chain().focus().redo().run()} disabled={isSourceMode || !editor.can().redo()} title="Redo">
           <Redo size={16} />
         </ToolbarButton>
 
         <ToolbarSep />
 
         {/* Text Type */}
-        <ToolbarButton onClick={() => editor.chain().focus().setParagraph().run()} active={editor.isActive('paragraph')} title="Paragraph">
+        <ToolbarButton onClick={() => editor.chain().focus().setParagraph().run()} active={editor.isActive('paragraph')} disabled={isSourceMode} title="Paragraph">
           <Type size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })} title="Heading 1">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })} disabled={isSourceMode} title="Heading 1">
           <Heading1 size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })} title="Heading 2">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })} disabled={isSourceMode} title="Heading 2">
           <Heading2 size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })} title="Heading 3">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })} disabled={isSourceMode} title="Heading 3">
           <Heading3 size={16} />
         </ToolbarButton>
 
         <ToolbarSep />
 
         {/* Inline Formatting */}
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} disabled={isSourceMode} title="Bold">
           <Bold size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive('italic')} title="Italic">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive('italic')} disabled={isSourceMode} title="Italic">
           <Italic size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive('underline')} title="Underline">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive('underline')} disabled={isSourceMode} title="Underline">
           <UnderlineIcon size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive('strike')} title="Strikethrough">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive('strike')} disabled={isSourceMode} title="Strikethrough">
           <Strikethrough size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()} active={editor.isActive('highlight')} title="Highlight">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()} active={editor.isActive('highlight')} disabled={isSourceMode} title="Highlight">
           <Highlighter size={16} />
         </ToolbarButton>
 
         {/* Font Color */}
         <div style={{ position: 'relative' }}>
-          <ToolbarButton onClick={() => colorInputRef.current?.click()} title="Font Color">
+          <ToolbarButton onClick={() => colorInputRef.current?.click()} disabled={isSourceMode} title="Font Color">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
               <Palette size={14} />
               <div style={{ width: 14, height: 3, borderRadius: 1, background: fontColor }} />
@@ -240,12 +257,40 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
               setFontColor(e.target.value);
               editor.chain().focus().setColor(e.target.value).run();
             }}
+            disabled={isSourceMode}
             style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0, opacity: 0, pointerEvents: 'none' }}
           />
         </div>
 
+        {/* Font Style */}
+        <select
+          value={editor.getAttributes('textStyle').fontFamily || 'default'}
+          onChange={e => {
+            const family = e.target.value;
+            if (family === 'default') {
+              editor.chain().focus().unsetFontFamily().run();
+            } else {
+              editor.chain().focus().setFontFamily(family).run();
+            }
+          }}
+          disabled={isSourceMode}
+          title="Font Style"
+          style={{
+            height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
+            background: 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
+            color: 'inherit', cursor: 'pointer', outline: 'none',
+          }}
+        >
+          <option value="default">Font Style</option>
+          <option value="Inter">Default (Inter)</option>
+          <option value="Syne">Creative (Syne)</option>
+          <option value="JetBrains Mono">Monospace</option>
+          <option value="Georgia">Serif (Georgia)</option>
+        </select>
+
         {/* Font Size */}
         <select
+          value={editor.getAttributes('textStyle').fontSize || 'default'}
           onChange={e => {
             const size = e.target.value;
             if (size === 'default') {
@@ -254,6 +299,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
               editor.chain().focus().setFontSize(size).run();
             }
           }}
+          disabled={isSourceMode}
           title="Font Size"
           style={{
             height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
@@ -277,35 +323,35 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         <ToolbarSep />
 
         {/* Lists */}
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} title="Bullet List">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} disabled={isSourceMode} title="Bullet List">
           <List size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive('orderedList')} title="Numbered List">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive('orderedList')} disabled={isSourceMode} title="Numbered List">
           <ListOrdered size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive('blockquote')} title="Quote">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive('blockquote')} disabled={isSourceMode} title="Quote">
           <Quote size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive('codeBlock')} title="Code Block">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive('codeBlock')} disabled={isSourceMode} title="Code Block">
           <Code2 size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleCode().run()} active={editor.isActive('code')} title="Inline Code">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleCode().run()} active={editor.isActive('code')} disabled={isSourceMode} title="Inline Code">
           <Code size={16} />
         </ToolbarButton>
 
         <ToolbarSep />
 
         {/* Alignment */}
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('left').run()} active={editor.isActive({ textAlign: 'left' })} title="Align Left">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('left').run()} active={editor.isActive({ textAlign: 'left' })} disabled={isSourceMode} title="Align Left">
           <AlignLeft size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('center').run()} active={editor.isActive({ textAlign: 'center' })} title="Align Center">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('center').run()} active={editor.isActive({ textAlign: 'center' })} disabled={isSourceMode} title="Align Center">
           <AlignCenter size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('right').run()} active={editor.isActive({ textAlign: 'right' })} title="Align Right">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('right').run()} active={editor.isActive({ textAlign: 'right' })} disabled={isSourceMode} title="Align Right">
           <AlignRight size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('justify').run()} active={editor.isActive({ textAlign: 'justify' })} title="Justify">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('justify').run()} active={editor.isActive({ textAlign: 'justify' })} disabled={isSourceMode} title="Justify">
           <AlignJustify size={16} />
         </ToolbarButton>
 
@@ -332,11 +378,11 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           </div>
         ) : (
           <>
-            <ToolbarButton onClick={() => { setLinkUrl(editor.getAttributes('link').href || ''); setShowLinkInput(true); }} active={editor.isActive('link')} title="Insert Link">
+            <ToolbarButton onClick={() => { setLinkUrl(editor.getAttributes('link').href || ''); setShowLinkInput(true); }} active={editor.isActive('link')} disabled={isSourceMode} title="Insert Link">
               <LinkIcon size={16} />
             </ToolbarButton>
             {editor.isActive('link') && (
-              <ToolbarButton onClick={() => editor.chain().focus().unsetLink().run()} title="Remove Link">
+              <ToolbarButton onClick={() => editor.chain().focus().unsetLink().run()} disabled={isSourceMode} title="Remove Link">
                 <Unlink size={16} />
               </ToolbarButton>
             )}
@@ -344,59 +390,95 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         )}
 
         {/* Image */}
-        <ToolbarButton onClick={handleImageClick} title="Insert Image">
+        <ToolbarButton onClick={handleImageClick} disabled={isSourceMode} title="Insert Image">
           <ImageIcon size={16} />
         </ToolbarButton>
         <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
 
         {/* Divider */}
-        <ToolbarButton onClick={() => editor.chain().focus().setHorizontalRule().run()} title="Horizontal Rule">
+        <ToolbarButton onClick={() => editor.chain().focus().setHorizontalRule().run()} disabled={isSourceMode} title="Horizontal Rule">
           <Minus size={16} />
+        </ToolbarButton>
+
+        <ToolbarSep />
+
+        {/* HTML Source View Toggle */}
+        <ToolbarButton onClick={toggleSourceMode} active={isSourceMode} title={isSourceMode ? "Visual Editor" : "HTML Source Code"}>
+          {isSourceMode ? <Eye size={16} /> : <FileCode size={16} />}
         </ToolbarButton>
       </div>
 
       {/* Bubble Menu (appears on text selection) */}
-      <Menu editor={editor} tippyOptions={{ duration: 150 }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 2, padding: '4px 8px',
-          background: isDark ? '#1e293b' : '#0f172a', borderRadius: 8,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-        }}>
-          {[
-            { icon: <Bold size={14} />, action: () => editor.chain().focus().toggleBold().run(), active: editor.isActive('bold'), title: 'Bold' },
-            { icon: <Italic size={14} />, action: () => editor.chain().focus().toggleItalic().run(), active: editor.isActive('italic'), title: 'Italic' },
-            { icon: <UnderlineIcon size={14} />, action: () => editor.chain().focus().toggleUnderline().run(), active: editor.isActive('underline'), title: 'Underline' },
-            { icon: <Code size={14} />, action: () => editor.chain().focus().toggleCode().run(), active: editor.isActive('code'), title: 'Code' },
-            { icon: <LinkIcon size={14} />, action: () => { setLinkUrl(editor.getAttributes('link').href || ''); setShowLinkInput(true); }, active: editor.isActive('link'), title: 'Link' },
-          ].map((btn, i) => (
-            <button
-              key={i}
-              onClick={btn.action}
-              title={btn.title}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                width: 28, height: 28, borderRadius: 4, border: 'none',
-                background: btn.active ? 'rgba(99,102,241,0.3)' : 'transparent',
-                color: btn.active ? '#a5b4fc' : '#e2e8f0',
-                cursor: 'pointer',
-              }}
-            >
-              {btn.icon}
-            </button>
-          ))}
-        </div>
-      </Menu>
+      {!isSourceMode && (
+        <Menu editor={editor} tippyOptions={{ duration: 150 }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 2, padding: '4px 8px',
+            background: isDark ? '#1e293b' : '#0f172a', borderRadius: 8,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+          }}>
+            {[
+              { icon: <Bold size={14} />, action: () => editor.chain().focus().toggleBold().run(), active: editor.isActive('bold'), title: 'Bold' },
+              { icon: <Italic size={14} />, action: () => editor.chain().focus().toggleItalic().run(), active: editor.isActive('italic'), title: 'Italic' },
+              { icon: <UnderlineIcon size={14} />, action: () => editor.chain().focus().toggleUnderline().run(), active: editor.isActive('underline'), title: 'Underline' },
+              { icon: <Code size={14} />, action: () => editor.chain().focus().toggleCode().run(), active: editor.isActive('code'), title: 'Code' },
+              { icon: <LinkIcon size={14} />, action: () => { setLinkUrl(editor.getAttributes('link').href || ''); setShowLinkInput(true); }, active: editor.isActive('link'), title: 'Link' },
+            ].map((btn, i) => (
+              <button
+                key={i}
+                onClick={btn.action}
+                title={btn.title}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  width: 28, height: 28, borderRadius: 4, border: 'none',
+                  background: btn.active ? 'rgba(99,102,241,0.3)' : 'transparent',
+                  color: btn.active ? '#a5b4fc' : '#e2e8f0',
+                  cursor: 'pointer',
+                }}
+              >
+                {btn.icon}
+              </button>
+            ))}
+          </div>
+        </Menu>
+      )}
 
       {/* Editor Content */}
       <div style={{
         border: `1px solid ${css.border}`,
         borderRadius: 12,
-        padding: '24px 32px',
+        padding: isSourceMode ? '16px' : '24px 32px',
         minHeight: 500,
-        background: css.bg,
+        background: isSourceMode ? (isDark ? '#020617' : '#fafafa') : css.bg,
         marginTop: 4,
+        display: 'flex',
+        flexDirection: 'column',
       }}>
-        <EditorContent editor={editor} />
+        {isSourceMode ? (
+          <textarea
+            value={sourceHtml}
+            onChange={e => {
+              const val = e.target.value;
+              setSourceHtml(val);
+              onChange(val);
+            }}
+            placeholder="Paste or write raw HTML code here..."
+            style={{
+              flex: 1,
+              width: '100%',
+              minHeight: 480,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: isDark ? '#38bdf8' : '#0f172a',
+              fontFamily: "'JetBrains Mono', 'Fira Code', Consolas, monospace",
+              fontSize: 14,
+              lineHeight: 1.6,
+              resize: 'vertical',
+            }}
+          />
+        ) : (
+          <EditorContent editor={editor} />
+        )}
       </div>
 
       {/* Editor Styles */}
