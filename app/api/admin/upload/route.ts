@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import { put } from '@vercel/blob';
 
 export async function POST(req: Request) {
   try {
@@ -18,15 +19,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
     // Sanitize and generate unique filename
     const fileExt = path.extname(file.name) || '.png';
     const originalName = path.basename(file.name, fileExt)
       .toLowerCase()
       .replace(/[^a-z0-9_-]/g, '');
     const filename = `${originalName}-${Date.now()}${fileExt}`;
+
+    // If Vercel Blob Storage token is provided (typically in production/live server)
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      const blob = await put(filename, file, {
+        access: 'public',
+      });
+      return NextResponse.json({ url: blob.url });
+    }
+
+    // Fallback: Local filesystem upload (typically for local development)
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
     const uploadDir = path.join(process.cwd(), 'public', 'uploads');
     
