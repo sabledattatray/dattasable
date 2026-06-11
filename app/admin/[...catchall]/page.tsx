@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ export default function AdminCatchAllPage() {
   const router = useRouter();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const mediaFileInputRef = useRef<HTMLInputElement>(null);
   
   const catchall = params?.catchall;
   const path = Array.isArray(catchall) ? catchall.join('/') : '';
@@ -85,20 +86,45 @@ export default function AdminCatchAllPage() {
     { id: 'ORD-8818', client: 'Fintech', service: 'Financial KPI Automation', price: '₹35,000', status: 'Pending', date: '3 days ago' },
   ]);
 
-  // Handle media file upload simulation
-  const handleSimulateUpload = () => {
-    const mockFileNames = ['project-chart.png', 'marketing-email-template.html', 'background-pattern.svg', 'blog-thumbnail-12.jpg'];
-    const randomName = mockFileNames[Math.floor(Math.random() * mockFileNames.length)];
-    const randomSize = `${Math.floor(Math.random() * 800) + 20} KB`;
-    const newMedia = {
-      id: Date.now(),
-      name: randomName,
-      size: randomSize,
-      type: randomName.endsWith('.html') ? 'file' : randomName.endsWith('.pdf') ? 'pdf' : 'image',
-      date: 'Just now',
-      url: '#'
-    };
-    setMediaList([newMedia, ...mediaList]);
+  // Trigger file selection for CMS Media Library
+  const handleMediaUploadClick = () => {
+    mediaFileInputRef.current?.click();
+  };
+
+  // Perform real file upload to /api/admin/upload
+  const handleMediaFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Upload failed');
+      }
+
+      const data = await res.json();
+      const newMedia = {
+        id: Date.now(),
+        name: file.name,
+        size: `${(file.size / 1024).toFixed(1)} KB`,
+        type: file.type.startsWith('image/') ? 'image' : file.type.includes('pdf') ? 'pdf' : 'file',
+        url: data.url,
+        date: 'Just now',
+      };
+      setMediaList(prev => [newMedia, ...prev]);
+    } catch (err: any) {
+      alert('Failed to upload file: ' + err.message);
+    } finally {
+      e.target.value = '';
+    }
   };
 
   // Render Subpage content based on the catchall path
@@ -618,20 +644,29 @@ export default function AdminCatchAllPage() {
       case 'cms/media':
         return (
           <div>
+            {/* Hidden Input for Real Upload */}
+            <input
+              type="file"
+              ref={mediaFileInputRef}
+              onChange={handleMediaFileUpload}
+              style={{ display: 'none' }}
+              accept="image/*,application/pdf,.html,.svg"
+            />
+
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>CMS</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Media Library</h1>
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Upload and organize assets, images, and files for layouts and posts.</p>
               </div>
-              <button onClick={handleSimulateUpload}
+              <button onClick={handleMediaUploadClick}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
                 <Upload size={15} /> Upload File
               </button>
             </div>
 
             {/* Drag & Drop Simulation area */}
-            <div onClick={handleSimulateUpload}
+            <div onClick={handleMediaUploadClick}
               style={{ width: '100%', border: `2px dashed ${css.border}`, borderRadius: 20, background: css.surface, padding: '36px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', marginBottom: 24, transition: 'border-color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = css.accent}
               onMouseLeave={e => e.currentTarget.style.borderColor = css.border}
@@ -659,13 +694,24 @@ export default function AdminCatchAllPage() {
                     <div style={{ fontSize: 12.5, fontWeight: 700, color: css.text, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }} title={m.name}>{m.name}</div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6 }}>
                       <span style={{ fontSize: 10.5, color: css.muted, fontWeight: 600 }}>{m.size} &bull; {m.date}</span>
-                      <button onClick={(e) => { e.stopPropagation(); setMediaList(mediaList.filter(x => x.id !== m.id)); }}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, padding: 2 }}
-                        onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
-                        onMouseLeave={e => e.currentTarget.style.color = css.muted}
-                      >
-                        <Trash2 size={13} />
-                      </button>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                        {m.url !== '#' && (
+                          <button onClick={(e) => { e.stopPropagation(); handleCopy(m.url); }}
+                            title="Copy link to clipboard"
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', color: copiedText === m.url ? '#10b981' : css.muted, padding: 2, display: 'flex', alignItems: 'center' }}
+                          >
+                            {copiedText === m.url ? <Check size={13} /> : <Copy size={13} />}
+                          </button>
+                        )}
+                        <button onClick={(e) => { e.stopPropagation(); setMediaList(mediaList.filter(x => x.id !== m.id)); }}
+                          title="Delete asset"
+                          style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, padding: 2, display: 'flex', alignItems: 'center' }}
+                          onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
+                          onMouseLeave={e => e.currentTarget.style.color = css.muted}
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
