@@ -849,7 +849,7 @@ export default function AdminBlog() {
       const url = editingPost ? `/api/admin/blog/${editingPost.id}` : '/api/admin/blog';
       const method = editingPost ? 'PUT' : 'POST';
       
-      const statusToSave = overrideStatus || formData.status;
+      const statusToSave = overrideStatus ?? 'Published';
       const payload = {
         title: formData.title,
         slug: formData.slug || formData.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
@@ -1628,7 +1628,7 @@ export default function AdminBlog() {
           </div>
           <ThemeToggle />
           <button
-            onClick={() => handleSave()}
+            onClick={() => handleSave('Published')}
             style={{
               background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
               border: 'none', color: '#fff',
