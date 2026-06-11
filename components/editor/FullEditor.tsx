@@ -191,7 +191,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
   const { words, chars, minutes } = getStats();
 
   return (
-    <div>
+    <div style={{ paddingBottom: '100px' }}>
       {/* Toolbar */}
       <div className="editor-toolbar">
         {/* Undo/Redo */}
