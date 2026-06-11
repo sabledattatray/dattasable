@@ -165,6 +165,10 @@ export default function AdminBlog() {
   const [isEditing, setIsEditing] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
+  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'dirty' | ''>('saved');
+  const [originalData, setOriginalData] = useState<any>(null);
+  const [showUnsavedModal, setShowUnsavedModal] = useState(false);
+  const [hasAutosaveToRestore, setHasAutosaveToRestore] = useState<any>(null);
   const [sidebarTab, setSidebarTab] = useState<'settings' | 'seo'>('settings');
   const [formData, setFormData] = useState({
     title: '', slug: '', category: 'Tech Trends', status: 'Draft',
@@ -303,6 +307,80 @@ export default function AdminBlog() {
     return () => clearTimeout(timer);
   }, [previewMode, formData.content]);
 
+  // 1. Browser reload/external exit warning (beforeunload)
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!isEditing || !originalData) return;
+      const dirty = JSON.stringify(formData) !== JSON.stringify(originalData);
+      if (dirty) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isEditing, formData, originalData]);
+
+  // 2. Local autosave debounced writing loop
+  useEffect(() => {
+    if (!isEditing || !originalData) return;
+    
+    const dirty = JSON.stringify(formData) !== JSON.stringify(originalData);
+    if (dirty) {
+      setSaveStatus('dirty');
+      
+      const timer = setTimeout(() => {
+        setSaveStatus('saving');
+        try {
+          localStorage.setItem(
+            'admin_blog_autosave',
+            JSON.stringify({
+              editingId: editingPost ? editingPost.id : 'new',
+              formData,
+              timestamp: Date.now()
+            })
+          );
+          setSaveStatus('saved');
+        } catch (e) {
+          console.error('Failed to auto-save draft to localStorage', e);
+        }
+      }, 2000); // 2 seconds debounce after editing stops
+      
+      return () => clearTimeout(timer);
+    } else {
+      setSaveStatus('saved');
+    }
+  }, [formData, isEditing, originalData, editingPost]);
+
+  // 3. Auto-recovery check when entering editing mode
+  useEffect(() => {
+    if (!isEditing) {
+      setHasAutosaveToRestore(null);
+      return;
+    }
+    
+    try {
+      const saved = localStorage.getItem('admin_blog_autosave');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const currentId = editingPost ? editingPost.id : 'new';
+        
+        if (parsed.editingId === currentId) {
+          // Check if there are meaningful differences
+          const isDifferent = parsed.formData.title !== formData.title || 
+                              parsed.formData.content !== formData.content ||
+                              parsed.formData.excerpt !== formData.excerpt;
+          
+          if (isDifferent) {
+            setHasAutosaveToRestore(parsed);
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Failed to retrieve autosave', e);
+    }
+  }, [isEditing]);
+
   const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
 
   const handleAddCategory = () => {
@@ -379,6 +457,7 @@ export default function AdminBlog() {
   const handleOpenEditor = (post: any = null) => {
     setPreviewMode(false);
     setSidebarTab('settings');
+    setSaveStatus('saved');
     if (post) {
       let keyword = '';
       if (post.blocks && typeof post.blocks === 'object') {
@@ -388,7 +467,7 @@ export default function AdminBlog() {
       const isManual = post.readTime && post.readTime !== calculated;
       setIsReadTimeManual(!!isManual);
       setEditingPost(post);
-      setFormData({
+      const initEdit = {
         title: post.title,
         slug: post.slug || post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
         category: post.category,
@@ -399,27 +478,32 @@ export default function AdminBlog() {
         date: post.date,
         readTime: post.readTime || 5,
         focusedKeyword: keyword,
-      });
+      };
+      setFormData(initEdit);
+      setOriginalData(initEdit);
     } else {
       setIsReadTimeManual(false);
       setEditingPost(null);
-      setFormData({
+      const initNew = {
         title: '', slug: '', category: 'Tech Trends', status: 'Draft',
         excerpt: '', content: '', image: '',
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
         readTime: 1,
         focusedKeyword: '',
-      });
+      };
+      setFormData(initNew);
+      setOriginalData(initNew);
     }
     setIsEditing(true);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (overrideStatus?: 'Draft' | 'Published') => {
     try {
       setLoading(true);
       const url = editingPost ? `/api/admin/blog/${editingPost.id}` : '/api/admin/blog';
       const method = editingPost ? 'PUT' : 'POST';
       
+      const statusToSave = overrideStatus || formData.status;
       const payload = {
         title: formData.title,
         slug: formData.slug || formData.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
@@ -428,7 +512,7 @@ export default function AdminBlog() {
         content: formData.content,
         image: formData.image || null,
         date: formData.date,
-        published: formData.status === 'Published',
+        published: statusToSave === 'Published',
         readTime: Number(formData.readTime) || 5,
         blocks: {
           focusedKeyword: formData.focusedKeyword || '',
@@ -446,6 +530,11 @@ export default function AdminBlog() {
         throw new Error(errData.error || 'Failed to save post');
       }
 
+      try {
+        localStorage.removeItem('admin_blog_autosave');
+      } catch (e) {}
+      
+      setOriginalData(null);
       setIsEditing(false);
       await fetchPosts();
     } catch (err: any) {
@@ -851,6 +940,95 @@ export default function AdminBlog() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
+      {/* Unsaved Changes Confirmation Modal */}
+      {showUnsavedModal && (
+        <div
+          style={{
+            position: 'fixed', inset: 0,
+            background: isDark ? 'rgba(0,0,0,0.7)' : 'rgba(15,23,42,0.3)',
+            backdropFilter: 'blur(8px)',
+            zIndex: 3000,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+          }}
+        >
+          <div
+            style={{
+              background: css.surface,
+              border: `1px solid ${css.border}`,
+              borderRadius: 24,
+              padding: '2.5rem',
+              maxWidth: 440,
+              width: '100%',
+              boxShadow: css.shadow,
+              textAlign: 'center',
+            }}
+          >
+            <div
+              style={{
+                width: 64, height: 64, borderRadius: '50%',
+                background: 'rgba(245,158,11,0.1)',
+                color: '#f59e0b',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: 28,
+              }}
+            >
+              ⚠️
+            </div>
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: css.text, margin: '0 0 10px' }}>
+              You have unsaved changes
+            </h3>
+            <p style={{ color: css.muted, fontSize: 13, lineHeight: 1.6, margin: '0 0 28px' }}>
+              Would you like to save this article as a draft before leaving, or discard your modifications?
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <button
+                onClick={async () => {
+                  setShowUnsavedModal(false);
+                  await handleSave('Draft');
+                }}
+                style={{
+                  width: '100%', padding: '12px', borderRadius: 12,
+                  background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none',
+                  color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13,
+                  boxShadow: `0 4px 12px ${css.accent}30`,
+                }}
+              >
+                Save as Draft & Exit
+              </button>
+              <button
+                onClick={() => {
+                  setShowUnsavedModal(false);
+                  try {
+                    localStorage.removeItem('admin_blog_autosave');
+                  } catch (e) {}
+                  setOriginalData(null);
+                  setIsEditing(false);
+                }}
+                style={{
+                  width: '100%', padding: '12px', borderRadius: 12,
+                  background: css.surface2, border: `1px solid ${css.border}`,
+                  color: '#ef4444', fontWeight: 700, cursor: 'pointer', fontSize: 13,
+                  transition: 'background 0.15s',
+                }}
+              >
+                Discard Changes & Exit
+              </button>
+              <button
+                onClick={() => setShowUnsavedModal(false)}
+                style={{
+                  width: '100%', padding: '12px', borderRadius: 12,
+                  background: 'none', border: `1px solid ${css.border}`,
+                  color: css.text, fontWeight: 600, cursor: 'pointer', fontSize: 13,
+                }}
+              >
+                Keep Editing
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Category Manager Modal */}
       {showCategoryManager && (
         <div
@@ -1005,7 +1183,14 @@ export default function AdminBlog() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <button
-            onClick={() => setIsEditing(false)}
+            onClick={() => {
+              const isDirty = originalData && JSON.stringify(formData) !== JSON.stringify(originalData);
+              if (isDirty) {
+                setShowUnsavedModal(true);
+              } else {
+                setIsEditing(false);
+              }
+            }}
             style={{
               background: 'none', border: `1px solid ${css.border}`,
               borderRadius: 9, padding: '7px 12px',
@@ -1036,7 +1221,24 @@ export default function AdminBlog() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span className="editor-header-draft-label" style={{ fontSize: 13, color: css.muted }}>Draft saved</span>
+          {saveStatus && (
+            <span
+              className="editor-header-draft-label"
+              style={{
+                fontSize: 12,
+                color: saveStatus === 'dirty' ? '#f59e0b' : saveStatus === 'saving' ? css.accent : '#10b981',
+                fontWeight: 600,
+                fontStyle: 'italic',
+                marginRight: 6,
+              }}
+            >
+              {saveStatus === 'dirty'
+                ? 'Unsaved changes'
+                : saveStatus === 'saving'
+                ? 'Saving local backup...'
+                : 'Draft saved locally'}
+            </span>
+          )}
           <button
             type="button"
             onClick={() => setPreviewMode(!previewMode)}
@@ -1068,7 +1270,7 @@ export default function AdminBlog() {
           </button>
           <ThemeToggle />
           <button
-            onClick={handleSave}
+            onClick={() => handleSave()}
             style={{
               background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
               border: 'none', color: '#fff',
@@ -1297,6 +1499,70 @@ export default function AdminBlog() {
           }}
         >
           <div style={{ width: '100%', maxWidth: 1100 }}>
+            {/* Recovery Banner */}
+            {hasAutosaveToRestore && (
+              <div style={{
+                background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(79,70,229,0.05)',
+                border: `1px solid ${css.accent}44`,
+                borderRadius: 12,
+                padding: '12px 18px',
+                marginBottom: 20,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: 12,
+              }}>
+                <div>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: css.text }}>Unsaved local backup found</span>
+                  <p style={{ fontSize: 11, color: css.muted, margin: '2px 0 0' }}>
+                    An auto-saved draft from {new Date(hasAutosaveToRestore.timestamp).toLocaleString()} was found.
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button
+                    onClick={() => {
+                      setFormData(hasAutosaveToRestore.formData);
+                      setOriginalData(hasAutosaveToRestore.formData);
+                      setHasAutosaveToRestore(null);
+                    }}
+                    style={{
+                      background: css.accent,
+                      border: 'none',
+                      color: '#fff',
+                      padding: '6px 14px',
+                      borderRadius: 8,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Restore Draft
+                  </button>
+                  <button
+                    onClick={() => {
+                      try {
+                        localStorage.removeItem('admin_blog_autosave');
+                      } catch (e) {}
+                      setHasAutosaveToRestore(null);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: `1px solid ${css.border}`,
+                      color: css.text,
+                      padding: '6px 14px',
+                      borderRadius: 8,
+                      fontSize: 12,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Discard
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Title */}
             <textarea
               placeholder="Article title..."
