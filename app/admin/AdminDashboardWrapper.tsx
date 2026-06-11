@@ -42,7 +42,6 @@ const navItems = [
     links: [
       { name: 'Projects', href: '/admin/projects', icon: Briefcase, exact: false, badge: null },
       { name: 'All Posts', href: '/admin/blog', icon: FileText, exact: false, badge: null },
-      { name: 'Write Post', href: '/admin/editor', icon: Edit, exact: false, badge: null },
       { name: 'All Pages', href: '/admin/pages', icon: Layers, exact: false, badge: null },
       { name: 'Add Page', href: '/admin/pages/editor', icon: Sparkles, exact: false, badge: null },
     ],

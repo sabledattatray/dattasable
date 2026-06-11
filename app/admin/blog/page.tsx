@@ -25,6 +25,121 @@ const initialPosts = mainPosts.map((p, idx) => ({
   image: p.image,
 }));
 
+function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string) {
+  if (!keyword) return { score: 0, checks: [] };
+
+  const checks = [];
+  let score = 0;
+  const kw = keyword.toLowerCase().trim();
+  const cleanTitle = title.toLowerCase();
+  const cleanSlug = slug.toLowerCase();
+  
+  // Extract text content from TipTap HTML
+  let textContent = '';
+  if (typeof document !== 'undefined') {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    textContent = tempDiv.textContent || tempDiv.innerText || '';
+  } else {
+    // Basic fallback for server rendering
+    textContent = content.replace(/<[^>]*>/g, '');
+  }
+  const cleanContent = textContent.toLowerCase();
+  const cleanExcerpt = excerpt.toLowerCase();
+
+  // 1. Keyword in Title (20 pts)
+  const kwInTitle = cleanTitle.includes(kw);
+  checks.push({
+    id: 'title',
+    label: 'Focus keyword in title',
+    passed: kwInTitle,
+    pts: 20
+  });
+  if (kwInTitle) score += 20;
+
+  // 2. Keyword in Slug (15 pts)
+  const kwInSlug = cleanSlug.includes(kw.replace(/\s+/g, '-'));
+  checks.push({
+    id: 'slug',
+    label: 'Focus keyword in URL slug',
+    passed: kwInSlug,
+    pts: 15
+  });
+  if (kwInSlug) score += 15;
+
+  // 3. Keyword in Content (20 pts)
+  const kwInContent = cleanContent.includes(kw);
+  checks.push({
+    id: 'content',
+    label: 'Focus keyword in content',
+    passed: kwInContent,
+    pts: 20
+  });
+  if (kwInContent) score += 20;
+
+  // 4. Keyword in Excerpt (15 pts)
+  const kwInExcerpt = cleanExcerpt.includes(kw);
+  checks.push({
+    id: 'excerpt',
+    label: 'Focus keyword in excerpt',
+    passed: kwInExcerpt,
+    pts: 15
+  });
+  if (kwInExcerpt) score += 15;
+
+  // 5. Title Length (10 pts)
+  const titleLen = title.length;
+  const titleLenOk = titleLen >= 40 && titleLen <= 70;
+  checks.push({
+    id: 'title_length',
+    label: `Title length (${titleLen} chars, ideal 40-70)`,
+    passed: titleLenOk,
+    pts: 10
+  });
+  if (titleLenOk) score += 10;
+
+  // 6. Content Length (10 pts)
+  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
+  const wordCountOk = wordCount >= 300;
+  checks.push({
+    id: 'word_count',
+    label: `Content length (${wordCount} words, min 300)`,
+    passed: wordCountOk,
+    pts: 10
+  });
+  if (wordCountOk) score += 10;
+
+  // 7. Keyword Density (5 pts)
+  let densityOk = false;
+  let densityMsg = 'Keyword density (ideal 0.5% - 2.5%)';
+  if (wordCount > 0 && kwInContent) {
+    const matches = cleanContent.split(kw).length - 1;
+    const density = (matches / wordCount) * 100;
+    densityOk = density >= 0.5 && density <= 2.5;
+    densityMsg = `Keyword density: ${density.toFixed(1)}% (ideal 0.5%-2.5%)`;
+  }
+  checks.push({
+    id: 'density',
+    label: densityMsg,
+    passed: densityOk,
+    pts: 5
+  });
+  if (densityOk) score += 5;
+
+  // 8. Images and Links (5 pts)
+  const hasImages = content.includes('<img');
+  const hasLinks = content.includes('<a') || content.includes('href=');
+  checks.push({
+    id: 'media',
+    label: 'Contains images & links',
+    passed: hasImages && hasLinks,
+    pts: 5
+  });
+  if (hasImages && hasLinks) score += 5;
+
+  return { score, checks };
+}
+
 export default function AdminBlog() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -35,15 +150,21 @@ export default function AdminBlog() {
   const [search, setSearch] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
+  const [sidebarTab, setSidebarTab] = useState<'settings' | 'seo'>('settings');
   const [formData, setFormData] = useState({
     title: '', slug: '', category: 'Tech Trends', status: 'Draft',
     excerpt: '', content: '', image: '', date: '',
+    readTime: 5, focusedKeyword: '',
   });
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
   const [showHighlightPicker, setShowHighlightPicker] = useState(false);
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState('');
   const editorRef = useRef<HTMLDivElement>(null);
+
 
   // Theme-aware CSS variables
   const css = isDark
@@ -101,6 +222,14 @@ export default function AdminBlog() {
   }, []);
 
   useEffect(() => {
+    if (posts.length > 0) {
+      const uniqueCats = Array.from(new Set(posts.map(p => p.category).filter(Boolean)));
+      const merged = Array.from(new Set([...['Tech Trends', 'Tutorials', 'Technical', 'BI Tools', 'SQL'], ...uniqueCats]));
+      setCategories(merged as string[]);
+    }
+  }, [posts]);
+
+  useEffect(() => {
     if (isEditing && editorRef.current && editorRef.current.innerHTML !== formData.content) {
       editorRef.current.innerHTML = formData.content;
     }
@@ -115,8 +244,77 @@ export default function AdminBlog() {
     }
   };
 
+  const handleRenameCategory = async (oldName: string, newName: string) => {
+    if (!newName.trim() || oldName === newName) {
+      setEditingCategory(null);
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await fetch('/api/admin/category', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'rename', oldName, newName }),
+      });
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Failed to rename category');
+      }
+      setCategories(prev => prev.map(cat => cat === oldName ? newName : cat));
+      if (formData.category === oldName) {
+        setFormData(f => ({ ...f, category: newName }));
+      }
+      setEditingCategory(null);
+      await fetchPosts();
+    } catch (err: any) {
+      alert(err.message || 'Error renaming category');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteCategory = async (name: string) => {
+    if (confirm(`Are you sure you want to delete category "${name}"? Existing posts using this category will be reassigned to "Tech Trends".`)) {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/admin/category', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'delete', name }),
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to delete category');
+        }
+        setCategories(prev => prev.filter(cat => cat !== name));
+        if (formData.category === name) {
+          setFormData(f => ({ ...f, category: 'Tech Trends' }));
+        }
+        await fetchPosts();
+      } catch (err: any) {
+        alert(err.message || 'Error deleting category');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleAddNewCategory = (name: string) => {
+    const trimmed = name.trim();
+    if (trimmed && !categories.includes(trimmed)) {
+      setCategories([...categories, trimmed]);
+      setFormData(f => ({ ...f, category: trimmed }));
+      setNewCat('');
+    }
+  };
+
   const handleOpenEditor = (post: any = null) => {
+    setSidebarTab('settings');
     if (post) {
+      let keyword = '';
+      if (post.blocks && typeof post.blocks === 'object') {
+        keyword = (post.blocks as any).focusedKeyword || '';
+      }
       setEditingPost(post);
       setFormData({
         title: post.title,
@@ -127,6 +325,8 @@ export default function AdminBlog() {
         content: post.content || '',
         image: post.image || '',
         date: post.date,
+        readTime: post.readTime || 5,
+        focusedKeyword: keyword,
       });
     } else {
       setEditingPost(null);
@@ -134,6 +334,8 @@ export default function AdminBlog() {
         title: '', slug: '', category: 'Tech Trends', status: 'Draft',
         excerpt: '', content: '', image: '',
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        readTime: 5,
+        focusedKeyword: '',
       });
     }
     setIsEditing(true);
@@ -154,6 +356,10 @@ export default function AdminBlog() {
         image: formData.image || null,
         date: formData.date,
         published: formData.status === 'Published',
+        readTime: Number(formData.readTime) || 5,
+        blocks: {
+          focusedKeyword: formData.focusedKeyword || '',
+        },
       };
 
       const res = await fetch(url, {
@@ -566,6 +772,147 @@ export default function AdminBlog() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
+      {/* Category Manager Modal */}
+      {showCategoryManager && (
+        <div
+          style={{
+            position: 'fixed', inset: 0,
+            background: isDark ? 'rgba(0,0,0,0.7)' : 'rgba(15,23,42,0.3)',
+            backdropFilter: 'blur(8px)',
+            zIndex: 3000,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+          }}
+        >
+          <div
+            style={{
+              background: css.surface,
+              border: `1px solid ${css.border}`,
+              borderRadius: 24,
+              padding: '2.2rem',
+              maxWidth: 480,
+              width: '100%',
+              boxShadow: css.shadow,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 20,
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: 0 }}>
+                Manage Categories
+              </h3>
+              <button
+                onClick={() => { setShowCategoryManager(false); setEditingCategory(null); }}
+                style={{ background: 'none', border: 'none', color: css.muted, cursor: 'pointer', fontSize: 18, fontWeight: 700 }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Add New Category */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              <input
+                type="text"
+                placeholder="New category name..."
+                value={newCat}
+                onChange={e => setNewCat(e.target.value)}
+                style={{
+                  flex: 1, background: css.inputBg,
+                  border: `1px solid ${css.border}`, color: css.text,
+                  padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 13,
+                }}
+                onKeyDown={e => { if (e.key === 'Enter') handleAddNewCategory(newCat); }}
+              />
+              <button
+                onClick={() => handleAddNewCategory(newCat)}
+                style={{
+                  background: css.accent, border: 'none',
+                  borderRadius: 10, padding: '10px 16px',
+                  fontSize: 12, fontWeight: 700, cursor: 'pointer', color: '#fff',
+                }}
+              >
+                Add
+              </button>
+            </div>
+
+            {/* Categories List */}
+            <div style={{ maxHeight: 280, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {categories.map((cat) => (
+                <div
+                  key={cat}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '10px 14px', background: css.surface2, borderRadius: 12,
+                    border: `1px solid ${css.border}`, gap: 10,
+                  }}
+                >
+                  {editingCategory === cat ? (
+                    <div style={{ display: 'flex', gap: 6, flex: 1 }}>
+                      <input
+                        type="text"
+                        value={renameValue}
+                        onChange={e => setRenameValue(e.target.value)}
+                        style={{
+                          flex: 1, background: css.inputBg,
+                          border: `1px solid ${css.border}`, color: css.text,
+                          padding: '6px 10px', borderRadius: 8, outline: 'none', fontSize: 12,
+                        }}
+                        autoFocus
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') handleRenameCategory(cat, renameValue);
+                          if (e.key === 'Escape') setEditingCategory(null);
+                        }}
+                      />
+                      <button
+                        onClick={() => handleRenameCategory(cat, renameValue)}
+                        style={{ background: '#10b981', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 12px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditingCategory(null)}
+                        style={{ background: 'none', border: `1px solid ${css.border}`, color: css.text, borderRadius: 8, padding: '6px 10px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: css.text }}>{cat}</span>
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        <button
+                          onClick={() => { setEditingCategory(cat); setRenameValue(cat); }}
+                          style={{
+                            background: 'none', border: `1px solid ${css.border}`,
+                            borderRadius: 8, padding: '5px 8px', fontSize: 11, fontWeight: 600,
+                            color: css.muted, cursor: 'pointer', transition: 'all 0.15s',
+                          }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = css.accent; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCategory(cat)}
+                          style={{
+                            background: 'none', border: `1px solid ${css.border}`,
+                            borderRadius: 8, padding: '5px 8px', fontSize: 11, fontWeight: 600,
+                            color: '#ef4444', cursor: 'pointer', transition: 'all 0.15s',
+                          }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)'; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       {/* Editor Top Bar */}
       <header
         style={{
@@ -644,14 +991,26 @@ export default function AdminBlog() {
             <textarea
               placeholder="Article title..."
               value={formData.title}
-              onChange={e => setFormData(f => ({ ...f, title: e.target.value }))}
-              rows={2}
+              onChange={e => {
+                setFormData(f => ({ ...f, title: e.target.value }));
+                e.target.style.height = 'auto';
+                e.target.style.height = `${e.target.scrollHeight}px`;
+              }}
+              ref={el => {
+                if (el) {
+                  el.style.height = 'auto';
+                  el.style.height = `${el.scrollHeight}px`;
+                }
+              }}
               style={{
                 width: '100%', fontSize: '2.2rem', fontWeight: 800,
                 background: 'none', border: 'none',
                 color: css.text, outline: 'none', resize: 'none',
                 lineHeight: 1.2, letterSpacing: '-0.03em', marginBottom: '1.5rem',
                 fontFamily: "'Inter', sans-serif",
+                height: 'auto',
+                minHeight: '2.8rem',
+                overflow: 'hidden',
               }}
             />
 
@@ -673,130 +1032,295 @@ export default function AdminBlog() {
             overflowY: 'auto',
           }}
         >
-          <div style={{ padding: '20px 20px', borderBottom: `1px solid ${css.border}` }}>
-            <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
-              Post Settings
-            </p>
+          {/* Tab Switcher */}
+          <div style={{ display: 'flex', borderBottom: `1px solid ${css.border}`, flexShrink: 0 }}>
+            <button
+              onClick={() => setSidebarTab('settings')}
+              style={{
+                flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                background: sidebarTab === 'settings' ? css.surface2 : 'transparent',
+                color: sidebarTab === 'settings' ? css.accent : css.muted,
+                border: 'none', borderBottom: sidebarTab === 'settings' ? `2px solid ${css.accent}` : 'none',
+                cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em',
+                transition: 'all 0.15s',
+              }}
+            >
+              ⚙️ Settings
+            </button>
+            <button
+              onClick={() => setSidebarTab('seo')}
+              style={{
+                flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                background: sidebarTab === 'seo' ? css.surface2 : 'transparent',
+                color: sidebarTab === 'seo' ? css.accent : css.muted,
+                border: 'none', borderBottom: sidebarTab === 'seo' ? `2px solid ${css.accent}` : 'none',
+                cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em',
+                transition: 'all 0.15s',
+              }}
+            >
+              📈 SEO Score
+            </button>
+          </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-              {/* Category */}
-              <div>
-                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Category
-                </label>
-                <select
-                  value={formData.category}
-                  onChange={e => setFormData(f => ({ ...f, category: e.target.value }))}
-                  style={{
-                    width: '100%', background: css.inputBg,
-                    border: `1px solid ${css.border}`, color: css.text,
-                    padding: '10px 12px', borderRadius: 10, outline: 'none',
-                    cursor: 'pointer', fontSize: 13, fontWeight: 600,
-                  }}
-                >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
-                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+          {sidebarTab === 'settings' ? (
+            <div style={{ padding: '20px 20px' }}>
+              <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
+                Post Settings
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                {/* Category */}
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    Category
+                  </label>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <select
+                      value={formData.category}
+                      onChange={e => setFormData(f => ({ ...f, category: e.target.value }))}
+                      style={{
+                        flex: 1, background: css.inputBg,
+                        border: `1px solid ${css.border}`, color: css.text,
+                        padding: '10px 12px', borderRadius: 10, outline: 'none',
+                        cursor: 'pointer', fontSize: 13, fontWeight: 600,
+                      }}
+                    >
+                      {categories.map(cat => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => setShowCategoryManager(true)}
+                      style={{
+                        background: css.surface2, border: `1px solid ${css.border}`,
+                        borderRadius: 10, padding: '10px', cursor: 'pointer', color: css.text,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        height: 40, width: 40,
+                        transition: 'all 0.15s',
+                      }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = css.hoverBg; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = css.surface2; }}
+                      title="Manage Categories"
+                    >
+                      ⚙️
+                    </button>
+                  </div>
+                </div>
+
+                {/* Slug */}
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    URL Slug
+                  </label>
                   <input
-                    type="text" value={newCat}
-                    onChange={e => setNewCat(e.target.value)}
-                    placeholder="New category..."
+                    type="text" value={formData.slug}
+                    onChange={e => setFormData(f => ({ ...f, slug: e.target.value }))}
                     style={{
-                      flex: 1, background: css.inputBg,
+                      width: '100%', background: css.inputBg,
                       border: `1px solid ${css.border}`, color: css.text,
-                      padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12,
+                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
                     }}
                   />
-                  <button
-                    onClick={handleAddCategory}
+                </div>
+
+                {/* Read Time */}
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    Read Time (minutes)
+                  </label>
+                  <input
+                    type="number"
+                    min={1}
+                    value={formData.readTime}
+                    onChange={e => setFormData(f => ({ ...f, readTime: parseInt(e.target.value) || 1 }))}
                     style={{
-                      background: css.accent, border: 'none',
-                      borderRadius: 8, padding: '8px 12px',
-                      fontSize: 11, fontWeight: 700, cursor: 'pointer', color: '#fff',
+                      width: '100%', background: css.inputBg,
+                      border: `1px solid ${css.border}`, color: css.text,
+                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                      fontWeight: 600,
+                    }}
+                  />
+                </div>
+
+                {/* Featured image */}
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    Featured Image
+                  </label>
+                  <div
+                    onClick={() => document.getElementById('featured-image-input')?.click()}
+                    style={{
+                      width: '100%', height: 130,
+                      background: css.inputBg,
+                      border: `2px dashed ${css.border}`,
+                      borderRadius: 12,
+                      display: 'flex', flexDirection: 'column',
+                      alignItems: 'center', justifyContent: 'center',
+                      cursor: 'pointer', overflow: 'hidden', position: 'relative',
                     }}
                   >
-                    ADD
-                  </button>
+                    {formData.image ? (
+                      <Image src={formData.image} fill style={{ objectFit: 'cover' }} alt="Featured" />
+                    ) : (
+                      <>
+                        <ImageIcon size={22} color={css.muted} style={{ pointerEvents: 'none' }} />
+                        <span style={{ fontSize: 12, color: css.muted, marginTop: 6, fontWeight: 500, pointerEvents: 'none' }}>
+                          Set featured image
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
+                  {formData.image && (
+                    <button
+                      onClick={() => setFormData(f => ({ ...f, image: '' }))}
+                      style={{ marginTop: 6, background: 'none', border: 'none', color: '#ef4444', fontSize: 12, fontWeight: 600, cursor: 'pointer', padding: 0 }}
+                    >
+                      Remove image
+                    </button>
+                  )}
+                </div>
+
+                {/* Excerpt */}
+                <div>
+                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    Excerpt
+                  </label>
+                  <textarea
+                    value={formData.excerpt}
+                    onChange={e => setFormData(f => ({ ...f, excerpt: e.target.value }))}
+                    rows={4}
+                    style={{
+                      width: '100%', background: css.inputBg,
+                      border: `1px solid ${css.border}`, color: css.text,
+                      padding: '10px 12px', borderRadius: 10, outline: 'none',
+                      fontSize: 12, resize: 'none', lineHeight: 1.6,
+                      fontFamily: "'Inter', sans-serif",
+                    }}
+                  />
                 </div>
               </div>
+            </div>
+          ) : (
+            <div style={{ padding: '20px 20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
+                SEO Analyzer
+              </p>
 
-              {/* Slug */}
+              {/* Focus Keyword */}
               <div>
                 <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  URL Slug
+                  Focus Keyword
                 </label>
                 <input
-                  type="text" value={formData.slug}
-                  onChange={e => setFormData(f => ({ ...f, slug: e.target.value }))}
+                  type="text"
+                  placeholder="Enter focus keyword..."
+                  value={formData.focusedKeyword}
+                  onChange={e => setFormData(f => ({ ...f, focusedKeyword: e.target.value }))}
                   style={{
                     width: '100%', background: css.inputBg,
                     border: `1px solid ${css.border}`, color: css.text,
                     padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                    fontWeight: 600,
                   }}
                 />
               </div>
 
-              {/* Featured image */}
-              <div>
-                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Featured Image
-                </label>
-                <div
-                  onClick={() => document.getElementById('featured-image-input')?.click()}
-                  style={{
-                    width: '100%', height: 130,
-                    background: css.inputBg,
-                    border: `2px dashed ${css.border}`,
-                    borderRadius: 12,
-                    display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center',
-                    cursor: 'pointer', overflow: 'hidden', position: 'relative',
-                  }}
-                >
-                  {formData.image ? (
-                    <Image src={formData.image} fill style={{ objectFit: 'cover' }} alt="Featured" />
-                  ) : (
-                    <>
-                      <ImageIcon size={22} color={css.muted} />
-                      <span style={{ fontSize: 12, color: css.muted, marginTop: 6, fontWeight: 500 }}>
-                        Set featured image
+              {formData.focusedKeyword ? (() => {
+                const seo = calculateSeoScore(
+                  formData.title,
+                  formData.slug,
+                  formData.content,
+                  formData.excerpt,
+                  formData.focusedKeyword
+                );
+                
+                const radius = 26;
+                const circumference = 2 * Math.PI * radius;
+                const strokeDashoffset = circumference - (seo.score / 100) * circumference;
+                const scoreColor = seo.score >= 80 ? '#10b981' : seo.score >= 50 ? '#f59e0b' : '#ef4444';
+
+                return (
+                  <>
+                    {/* Visual Score Meter */}
+                    <div style={{
+                      display: 'flex', alignItems: 'center', gap: 16,
+                      background: css.surface2, padding: '16px 20px', borderRadius: 16,
+                      border: `1px solid ${css.border}`
+                    }}>
+                      <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <svg width="64" height="64" viewBox="0 0 64 64" style={{ transform: 'rotate(-90deg)', position: 'absolute', top: 0, left: 0 }}>
+                          <circle cx="32" cy="32" r={radius} fill="transparent" stroke={isDark ? '#334155' : '#e2e8f0'} strokeWidth="6" />
+                          <circle
+                            cx="32" cy="32" r={radius} fill="transparent"
+                            stroke={scoreColor}
+                            strokeWidth="6"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={strokeDashoffset}
+                            strokeLinecap="round"
+                            style={{ transition: 'stroke-dashoffset 0.35s' }}
+                          />
+                        </svg>
+                        <span style={{ fontSize: 14, fontWeight: 900, color: scoreColor }}>
+                          {seo.score}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontSize: 16, fontWeight: 800, color: scoreColor }}>
+                          Score
+                        </span>
+                        <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: css.muted }}>
+                          {seo.score >= 80 ? 'Good' : seo.score >= 50 ? 'Needs Work' : 'Poor'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* SEO Checklist */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        Analysis Checklist
                       </span>
-                    </>
-                  )}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {seo.checks.map((check: any) => (
+                          <div
+                            key={check.id}
+                            style={{
+                              display: 'flex', alignItems: 'flex-start', gap: 10,
+                              fontSize: 12, fontWeight: 500, color: check.passed ? css.text : css.muted
+                            }}
+                          >
+                            <span style={{
+                              color: check.passed ? '#10b981' : '#ef4444',
+                              fontWeight: 900,
+                              fontSize: check.passed ? 15 : 13,
+                              marginTop: check.passed ? -2 : -1,
+                              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                              width: 14, height: 14, flexShrink: 0
+                            }}>
+                              {check.passed ? '✓' : '✗'}
+                            </span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                              <span style={{ lineHeight: 1.2 }}>{check.label}</span>
+                              <span style={{ fontSize: 9.5, color: css.muted, fontWeight: 600 }}>
+                                {check.passed ? `Passed (+${check.pts} pts)` : `Missing (-${check.pts} pts)`}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                );
+              })() : (
+                <div style={{
+                  padding: '30px 20px', textAlign: 'center', border: `1px dashed ${css.border}`,
+                  borderRadius: 16, color: css.muted, fontSize: 12, lineHeight: 1.6
+                }}>
+                  Enter a focus keyword to see your SEO score and analyze content in real-time.
                 </div>
-                <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
-                {formData.image && (
-                  <button
-                    onClick={() => setFormData(f => ({ ...f, image: '' }))}
-                    style={{ marginTop: 6, background: 'none', border: 'none', color: '#ef4444', fontSize: 12, fontWeight: 600, cursor: 'pointer', padding: 0 }}
-                  >
-                    Remove image
-                  </button>
-                )}
-              </div>
-
-              {/* Excerpt */}
-              <div>
-                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Excerpt
-                </label>
-                <textarea
-                  value={formData.excerpt}
-                  onChange={e => setFormData(f => ({ ...f, excerpt: e.target.value }))}
-                  rows={4}
-                  style={{
-                    width: '100%', background: css.inputBg,
-                    border: `1px solid ${css.border}`, color: css.text,
-                    padding: '10px 12px', borderRadius: 10, outline: 'none',
-                    fontSize: 12, resize: 'none', lineHeight: 1.6,
-                    fontFamily: "'Inter', sans-serif",
-                  }}
-                />
-              </div>
+              )}
             </div>
-          </div>
+          )}
         </aside>
       </div>
     </div>
