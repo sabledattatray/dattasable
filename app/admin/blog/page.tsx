@@ -1744,7 +1744,14 @@ export default function AdminBlog() {
                   placeholder="Article title..."
                   value={formData.title}
                   onChange={e => {
-                    setFormData(f => ({ ...f, title: e.target.value }));
+                    const newTitle = e.target.value;
+                    setFormData(f => {
+                      const updated = { ...f, title: newTitle };
+                      if (!isSlugManual) {
+                        updated.slug = generateSlug(newTitle);
+                      }
+                      return updated;
+                    });
                     e.target.style.height = 'auto';
                     e.target.style.height = `${e.target.scrollHeight}px`;
                   }}
@@ -1867,13 +1874,35 @@ export default function AdminBlog() {
                   </label>
                   <input
                     type="text" value={formData.slug}
-                    onChange={e => setFormData(f => ({ ...f, slug: e.target.value }))}
+                    onChange={e => {
+                      setIsSlugManual(true);
+                      setFormData(f => ({ ...f, slug: e.target.value }));
+                    }}
                     style={{
                       width: '100%', background: css.inputBg,
-                      border: `1px solid ${css.border}`, color: css.text,
+                      border: `1px solid ${slugError ? '#ef4444' : css.border}`, color: css.text,
                       padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
                     }}
                   />
+                  {slugError && (
+                    <p style={{ fontSize: 11, color: '#ef4444', fontWeight: 600, margin: '6px 0 0' }}>
+                      ⚠️ {slugError}
+                    </p>
+                  )}
+                  {isSlugManual && (
+                    <button
+                      onClick={() => {
+                        setIsSlugManual(false);
+                        setFormData(f => ({ ...f, slug: generateSlug(f.title) }));
+                      }}
+                      style={{
+                        background: 'none', border: 'none', color: css.accent, fontSize: 10, fontWeight: 700,
+                        cursor: 'pointer', padding: 0, marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.05em'
+                      }}
+                    >
+                      Auto-generate from title 🔄
+                    </button>
+                  )}
                 </div>
 
                 {/* Read Time */}
