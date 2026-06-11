@@ -4,7 +4,7 @@ import {
   FileText, Plus, Search, Trash2, Edit2,
   ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
   Type, Highlighter, Save, Settings, Image as ImageIcon,
-  Eye, EyeOff
+  Eye, EyeOff, Columns
 } from 'lucide-react';
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
@@ -163,7 +163,7 @@ export default function AdminBlog() {
   const [newCat, setNewCat] = useState('');
   const [search, setSearch] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [previewMode, setPreviewMode] = useState(false);
+  const [editorMode, setEditorMode] = useState<'edit' | 'split' | 'preview'>('edit');
   const [editingPost, setEditingPost] = useState<any>(null);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'dirty' | ''>('saved');
   const [originalData, setOriginalData] = useState<any>(null);
@@ -213,6 +213,197 @@ export default function AdminBlog() {
         hoverBg: 'rgba(0,0,0,0.02)',
       };
 
+  // Renders the clean live preview markup (used in Split & Preview modes)
+  const renderPreviewContent = () => {
+    return (
+      <div style={{ width: '100%', maxWidth: 760, paddingBottom: 80 }}>
+        {/* Nav / Category Info */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              color: css.accent,
+              borderColor: `${css.accent}44`,
+              borderWidth: 1,
+              borderStyle: 'solid',
+              padding: '3px 10px',
+              borderRadius: 999,
+              textTransform: 'uppercase',
+              letterSpacing: '0.07em',
+            }}
+          >
+            {formData.category}
+          </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: css.muted, fontSize: '0.8rem' }}>
+            ⏱️ {formData.readTime || '5'} min read
+          </span>
+          <span style={{ color: css.muted, fontSize: '0.8rem' }}>
+            {formData.date}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h1
+          style={{
+            fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+            lineHeight: 1.2,
+            fontWeight: 900,
+            color: css.text,
+            marginBottom: '2rem',
+          }}
+        >
+          {formData.title || 'Untitled Story'}
+        </h1>
+
+        {/* Featured Image */}
+        {formData.image && (
+          <div
+            style={{
+              width: '100%',
+              marginBottom: '2.5rem',
+              position: 'relative',
+              overflow: 'hidden',
+              border: `1px solid ${css.border}`,
+              borderRadius: '12px',
+              background: css.surface2,
+              aspectRatio: '16/9',
+            }}
+          >
+            <Image
+              src={formData.image}
+              alt={formData.title}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        )}
+
+        {/* Author Box */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            marginBottom: '2rem',
+            paddingBottom: '1.5rem',
+            borderBottom: `1px solid ${css.border}`,
+          }}
+        >
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: `2px solid ${css.accent}`,
+              flexShrink: 0,
+              position: 'relative',
+            }}
+          >
+            <Image
+              src="/images/datta.webp"
+              alt="Datta Sable"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: '0.9rem', color: css.text }}>
+              Datta Sable
+            </div>
+            <div style={{ color: css.muted, fontSize: '0.8rem' }}>
+              BI & Analytics Expert
+            </div>
+          </div>
+        </div>
+
+        {/* Content Renderer */}
+        <div
+          className="blog-content"
+          style={{ color: css.muted, lineHeight: 1.9, fontSize: '1.05rem', fontFamily: 'inherit' }}
+          dangerouslySetInnerHTML={{
+            __html: (formData.content || '<p style="color:var(--muted)">Write some content to preview it.</p>')
+              .replace(/<h3>/g, `<h3 style="color:${css.text};font-size:1.4rem;margin:2rem 0 1rem;font-weight:700;font-family:inherit;">`)
+              .replace(/<h2>/g, `<h2 style="color:${css.text};font-size:1.75rem;margin:2.25rem 0 1.25rem;font-weight:800;font-family:inherit;">`)
+              .replace(/<h1>/g, `<h1 style="color:${css.text};font-size:2.1rem;margin:2.5rem 0 1.5rem;font-weight:900;font-family:inherit;">`)
+              .replace(/<p>/g, `<p style="margin-bottom:1.2rem;font-family:inherit;">`)
+              .replace(/<pre><code([^>]*)>/g, `<pre style="background:${css.surface2};border:1px solid ${css.border};border-radius:12px;padding:1.2rem;overflow-x:auto;margin:1.5rem 0;"><code$1 style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:${css.accent};">`)
+              .replace(/<\/code><\/pre>/g, `</code></pre>`)
+              .replace(/<ul>/g, `<ul style="list-style-type:disc;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
+              .replace(/<ol>/g, `<ol style="list-style-type:decimal;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
+              .replace(/<li>/g, `<li style="line-height:1.7;font-family:inherit;">`)
+              .replace(/<blockquote>/g, `<blockquote style="border-left:4px solid ${css.accent};padding-left:1rem;color:${css.text};font-style:italic;margin:1.5rem 0;font-family:inherit;">`)
+          }}
+        />
+
+        {/* Author Bio Box */}
+        <div
+          style={{
+            marginTop: '5rem',
+            padding: '2.5rem',
+            background: css.surface2,
+            border: `1px solid ${css.border}`,
+            borderRadius: '16px',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '4px',
+              height: '100%',
+              background: css.accent,
+            }}
+          />
+          <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div
+              style={{
+                width: 72,
+                height: 72,
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: `3px solid ${css.accent}`,
+                flexShrink: 0,
+                position: 'relative',
+              }}
+            >
+              <Image
+                src="/images/datta.webp"
+                alt="Datta Sable"
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
+              />
+            </div>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <div
+                style={{
+                  fontSize: 9,
+                  fontWeight: 800,
+                  color: css.accent,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  marginBottom: 8,
+                }}
+              >
+                Verified Author
+              </div>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: css.text, margin: '0 0 10px' }}>
+                Datta Sable
+              </h3>
+              <p style={{ color: css.muted, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
+                Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -256,10 +447,10 @@ export default function AdminBlog() {
   }, [isEditing]);
 
   useEffect(() => {
-    if (!previewMode) return;
+    if (editorMode === 'edit') return;
 
     const renderMermaidDiagrams = async () => {
-      const mermaidElements = document.querySelectorAll('.blog-editor-preview-area .mermaid');
+      const mermaidElements = document.querySelectorAll('.blog-editor-preview-area .mermaid, .blog-editor-preview-area .language-mermaid');
       if (mermaidElements.length === 0) return;
 
       try {
@@ -291,6 +482,14 @@ export default function AdminBlog() {
             const { svg } = await mermaid.render(id, text);
             element.innerHTML = svg;
             element.style.background = 'transparent';
+            
+            // If it is a <code> tag inside a <pre> block, style the parent <pre> block
+            if (element.tagName.toLowerCase() === 'code' && element.parentElement?.tagName.toLowerCase() === 'pre') {
+              const pre = element.parentElement;
+              pre.style.background = 'transparent';
+              pre.style.border = 'none';
+              pre.style.padding = '0';
+            }
           } catch (renderError) {
             console.error('Error rendering diagram in preview:', renderError);
           }
@@ -305,7 +504,18 @@ export default function AdminBlog() {
     }, 150);
 
     return () => clearTimeout(timer);
-  }, [previewMode, formData.content]);
+  }, [editorMode, formData.content]);
+
+  // Window resize listener to automatically exit Split View on smaller screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 900 && editorMode === 'split') {
+        setEditorMode('edit');
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [editorMode]);
 
   // 1. Browser reload/external exit warning (beforeunload)
   useEffect(() => {
@@ -455,7 +665,7 @@ export default function AdminBlog() {
   };
 
   const handleOpenEditor = (post: any = null) => {
-    setPreviewMode(false);
+    setEditorMode('edit');
     setSidebarTab('settings');
     setSaveStatus('saved');
     if (post) {
@@ -1239,35 +1449,47 @@ export default function AdminBlog() {
                 : 'Draft saved locally'}
             </span>
           )}
-          <button
-            type="button"
-            onClick={() => setPreviewMode(!previewMode)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 7,
-              padding: '8px 16px',
-              background: css.surface2,
-              border: `1px solid ${css.border}`,
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: 600,
-              color: css.muted,
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.color = css.text;
-              (e.currentTarget as HTMLElement).style.borderColor = css.accent;
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.color = css.muted;
-              (e.currentTarget as HTMLElement).style.borderColor = css.border;
-            }}
-          >
-            {previewMode ? <EyeOff size={14} /> : <Eye size={14} />}
-            {previewMode ? 'Edit Mode' : 'Live Preview'}
-          </button>
+          <div style={{
+            display: 'flex',
+            background: css.surface2,
+            border: `1px solid ${css.border}`,
+            borderRadius: 10,
+            padding: 2,
+            gap: 2,
+          }}>
+            {[
+              { id: 'edit', label: 'Edit', icon: <FileText size={13} /> },
+              { id: 'split', label: 'Split', icon: <Columns size={13} />, desktopOnly: true },
+              { id: 'preview', label: 'Preview', icon: <Eye size={13} /> }
+            ].map(tab => {
+              const active = editorMode === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setEditorMode(tab.id as any)}
+                  className={tab.desktopOnly ? 'desktop-only-btn' : ''}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    padding: '6px 12px',
+                    borderRadius: 8,
+                    fontSize: 12,
+                    fontWeight: active ? 700 : 500,
+                    background: active ? css.surface : 'transparent',
+                    border: 'none',
+                    color: active ? css.accent : css.muted,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s',
+                  }}
+                >
+                  {tab.icon}
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
           <ThemeToggle />
           <button
             onClick={() => handleSave()}
@@ -1287,7 +1509,7 @@ export default function AdminBlog() {
 
       {/* Editor Main */}
       <div className="blog-editor-main" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {previewMode ? (
+        {editorMode === 'preview' && (
           /* Live Preview Container */
           <div
             className="blog-editor-preview-area"
@@ -1300,304 +1522,122 @@ export default function AdminBlog() {
               padding: '60px 20px',
             }}
           >
-            <div style={{ width: '100%', maxWidth: 760, paddingBottom: 80 }}>
-              {/* Nav / Category Info */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    color: css.accent,
-                    borderColor: `${css.accent}44`,
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    padding: '3px 10px',
-                    borderRadius: 999,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.07em',
-                  }}
-                >
-                  {formData.category}
-                </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: css.muted, fontSize: '0.8rem' }}>
-                  ⏱️ {formData.readTime || '5'} min read
-                </span>
-                <span style={{ color: css.muted, fontSize: '0.8rem' }}>
-                  {formData.date}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1
-                style={{
-                  fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
-                  lineHeight: 1.2,
-                  fontWeight: 900,
-                  color: css.text,
-                  marginBottom: '2rem',
-                }}
-              >
-                {formData.title || 'Untitled Story'}
-              </h1>
-
-              {/* Featured Image */}
-              {formData.image && (
-                <div
-                  style={{
-                    width: '100%',
-                    marginBottom: '2.5rem',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: `1px solid ${css.border}`,
-                    borderRadius: '12px',
-                    background: css.surface2,
-                    aspectRatio: '16/9',
-                  }}
-                >
-                  <Image
-                    src={formData.image}
-                    alt={formData.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-              )}
-
-              {/* Author Box */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  marginBottom: '2rem',
-                  paddingBottom: '1.5rem',
-                  borderBottom: `1px solid ${css.border}`,
-                }}
-              >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: `2px solid ${css.accent}`,
-                    flexShrink: 0,
-                    position: 'relative',
-                  }}
-                >
-                  <Image
-                    src="/images/datta.webp"
-                    alt="Datta Sable"
-                    fill
-                    style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
-                  />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: '0.9rem', color: css.text }}>
-                    Datta Sable
-                  </div>
-                  <div style={{ color: css.muted, fontSize: '0.8rem' }}>
-                    BI & Analytics Expert
-                  </div>
-                </div>
-              </div>
-
-              {/* Content Renderer */}
-              <div
-                className="blog-content"
-                style={{ color: css.muted, lineHeight: 1.9, fontSize: '1.05rem', fontFamily: 'inherit' }}
-                dangerouslySetInnerHTML={{
-                  __html: (formData.content || '<p style="color:var(--muted)">Write some content to preview it.</p>')
-                    .replace(/<h3>/g, `<h3 style="color:${css.text};font-size:1.4rem;margin:2rem 0 1rem;font-weight:700;font-family:inherit;">`)
-                    .replace(/<h2>/g, `<h2 style="color:${css.text};font-size:1.75rem;margin:2.25rem 0 1.25rem;font-weight:800;font-family:inherit;">`)
-                    .replace(/<h1>/g, `<h1 style="color:${css.text};font-size:2.1rem;margin:2.5rem 0 1.5rem;font-weight:900;font-family:inherit;">`)
-                    .replace(/<p>/g, `<p style="margin-bottom:1.2rem;font-family:inherit;">`)
-                    .replace(/<pre><code>/g, `<pre style="background:${css.surface2};border:1px solid ${css.border};border-radius:12px;padding:1.2rem;overflow-x:auto;margin:1.5rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:${css.accent};">`)
-                    .replace(/<\/code><\/pre>/g, `</code></pre>`)
-                    .replace(/<ul>/g, `<ul style="list-style-type:disc;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
-                    .replace(/<ol>/g, `<ol style="list-style-type:decimal;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
-                    .replace(/<li>/g, `<li style="line-height:1.7;font-family:inherit;">`)
-                    .replace(/<blockquote>/g, `<blockquote style="border-left:4px solid ${css.accent};padding-left:1rem;color:${css.text};font-style:italic;margin:1.5rem 0;font-family:inherit;">`)
-                }}
-              />
-
-              {/* Author Bio Box */}
-              <div
-                style={{
-                  marginTop: '5rem',
-                  padding: '2.5rem',
-                  background: css.surface2,
-                  border: `1px solid ${css.border}`,
-                  borderRadius: '16px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '4px',
-                    height: '100%',
-                    background: css.accent,
-                  }}
-                />
-                <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                  <div
-                    style={{
-                      width: 72,
-                      height: 72,
-                      borderRadius: '50%',
-                      overflow: 'hidden',
-                      border: `3px solid ${css.accent}`,
-                      flexShrink: 0,
-                      position: 'relative',
-                    }}
-                  >
-                    <Image
-                      src="/images/datta.webp"
-                      alt="Datta Sable"
-                      fill
-                      style={{ objectFit: 'cover', objectPosition: 'center 5%' }}
-                    />
-                  </div>
-                  <div style={{ flex: 1, minWidth: 260 }}>
-                    <div
-                      style={{
-                        fontSize: 9,
-                        fontWeight: 800,
-                        color: css.accent,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                        marginBottom: 8,
-                      }}
-                    >
-                      Verified Author
-                    </div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: css.text, margin: '0 0 10px' }}>
-                      Datta Sable
-                    </h3>
-                    <p style={{ color: css.muted, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
-                      Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {renderPreviewContent()}
           </div>
-        ) : (
+        )}
+
+        {editorMode === 'edit' && (
           <>
             {/* Writing area */}
             <div
-          className="blog-editor-writing-area"
-          style={{
-            flex: 1, overflowY: 'auto',
-            background: css.bg,
-            display: 'flex', justifyContent: 'center',
-            padding: '60px 40px',
-          }}
-        >
-          <div style={{ width: '100%', maxWidth: 1100 }}>
-            {/* Recovery Banner */}
-            {hasAutosaveToRestore && (
-              <div style={{
-                background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(79,70,229,0.05)',
-                border: `1px solid ${css.accent}44`,
-                borderRadius: 12,
-                padding: '12px 18px',
-                marginBottom: 20,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: 12,
-              }}>
-                <div>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: css.text }}>Unsaved local backup found</span>
-                  <p style={{ fontSize: 11, color: css.muted, margin: '2px 0 0' }}>
-                    An auto-saved draft from {new Date(hasAutosaveToRestore.timestamp).toLocaleString()} was found.
-                  </p>
-                </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button
-                    onClick={() => {
-                      setFormData(hasAutosaveToRestore.formData);
-                      setOriginalData(hasAutosaveToRestore.formData);
-                      setHasAutosaveToRestore(null);
-                    }}
-                    style={{
-                      background: css.accent,
-                      border: 'none',
-                      color: '#fff',
-                      padding: '6px 14px',
-                      borderRadius: 8,
-                      fontSize: 12,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Restore Draft
-                  </button>
-                  <button
-                    onClick={() => {
-                      try {
-                        localStorage.removeItem('admin_blog_autosave');
-                      } catch (e) {}
-                      setHasAutosaveToRestore(null);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: `1px solid ${css.border}`,
-                      color: css.text,
-                      padding: '6px 14px',
-                      borderRadius: 8,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Discard
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Title */}
-            <textarea
-              placeholder="Article title..."
-              value={formData.title}
-              onChange={e => {
-                setFormData(f => ({ ...f, title: e.target.value }));
-                e.target.style.height = 'auto';
-                e.target.style.height = `${e.target.scrollHeight}px`;
-              }}
-              ref={el => {
-                if (el) {
-                  el.style.height = 'auto';
-                  el.style.height = `${el.scrollHeight}px`;
-                }
-              }}
+              className="blog-editor-writing-area"
               style={{
-                width: '100%', fontSize: '2.2rem', fontWeight: 800,
-                background: 'none', border: 'none',
-                color: css.text, outline: 'none', resize: 'none',
-                lineHeight: 1.2, letterSpacing: '-0.03em', marginBottom: '1.5rem',
-                fontFamily: "'Inter', sans-serif",
-                height: 'auto',
-                minHeight: '2.8rem',
-                overflow: 'hidden',
+                flex: 1, overflowY: 'auto',
+                background: css.bg,
+                display: 'flex', justifyContent: 'center',
+                padding: '60px 40px',
               }}
-            />
+            >
+              <div style={{ width: '100%', maxWidth: 1100 }}>
+                {/* Recovery Banner */}
+                {hasAutosaveToRestore && (
+                  <div style={{
+                    background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(79,70,229,0.05)',
+                    border: `1px solid ${css.accent}44`,
+                    borderRadius: 12,
+                    padding: '12px 18px',
+                    marginBottom: 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: 12,
+                  }}>
+                    <div>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: css.text }}>Unsaved local backup found</span>
+                      <p style={{ fontSize: 11, color: css.muted, margin: '2px 0 0' }}>
+                        An auto-saved draft from {new Date(hasAutosaveToRestore.timestamp).toLocaleString()} was found.
+                      </p>
+                    </div>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button
+                        onClick={() => {
+                          setFormData(hasAutosaveToRestore.formData);
+                          setOriginalData(hasAutosaveToRestore.formData);
+                          setHasAutosaveToRestore(null);
+                        }}
+                        style={{
+                          background: css.accent,
+                          border: 'none',
+                          color: '#fff',
+                          padding: '6px 14px',
+                          borderRadius: 8,
+                          fontSize: 12,
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Restore Draft
+                      </button>
+                      <button
+                        onClick={() => {
+                          try {
+                            localStorage.removeItem('admin_blog_autosave');
+                          } catch (e) {}
+                          setHasAutosaveToRestore(null);
+                        }}
+                        style={{
+                          background: 'none',
+                          border: `1px solid ${css.border}`,
+                          color: css.text,
+                          padding: '6px 14px',
+                          borderRadius: 8,
+                          fontSize: 12,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Discard
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-            {/* TipTap Full Editor */}
-            <FullEditor
-              content={formData.content}
-              onChange={(html: string) => handleEditorChange(html)}
-              isDark={isDark}
-            />
-          </div>
-        </div>
+                {/* Title */}
+                <textarea
+                  placeholder="Article title..."
+                  value={formData.title}
+                  onChange={e => {
+                    setFormData(f => ({ ...f, title: e.target.value }));
+                    e.target.style.height = 'auto';
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                  }}
+                  ref={el => {
+                    if (el) {
+                      el.style.height = 'auto';
+                      el.style.height = `${el.scrollHeight}px`;
+                    }
+                  }}
+                  style={{
+                    width: '100%', fontSize: '2.2rem', fontWeight: 800,
+                    background: 'none', border: 'none',
+                    color: css.text, outline: 'none', resize: 'none',
+                    lineHeight: 1.2, letterSpacing: '-0.03em', marginBottom: '1.5rem',
+                    fontFamily: "'Inter', sans-serif",
+                    height: 'auto',
+                    minHeight: '2.8rem',
+                    overflow: 'hidden',
+                  }}
+                />
+
+                {/* TipTap Full Editor */}
+                <FullEditor
+                  content={formData.content}
+                  onChange={(html: string) => handleEditorChange(html)}
+                  isDark={isDark}
+                />
+              </div>
+            </div>
 
         {/* Settings sidebar */}
         <aside
@@ -1938,6 +1978,9 @@ export default function AdminBlog() {
             border-top: 1px solid ${css.border} !important;
             flex: none !important;
             overflow-y: visible !important;
+          }
+          .desktop-only-btn {
+            display: none !important;
           }
         }
         @media (max-width: 500px) {

@@ -188,6 +188,22 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
   const Menu = BubbleMenu as any;
 
+  // Compute live statistics for words, characters, and read time
+  const getStats = () => {
+    let text = '';
+    if (isSourceMode) {
+      text = sourceHtml.replace(/<[^>]*>/g, ' ');
+    } else {
+      text = editor.getText();
+    }
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    const chars = text.length;
+    const minutes = Math.max(1, Math.ceil(words / 200));
+    return { words, chars, minutes };
+  };
+
+  const { words, chars, minutes } = getStats();
+
   return (
     <div>
       {/* Toolbar */}
@@ -277,15 +293,15 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           title="Font Style"
           style={{
             height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
-            background: 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
-            color: 'inherit', cursor: 'pointer', outline: 'none',
+            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
+            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none',
           }}
         >
-          <option value="default">Font Style</option>
-          <option value="Inter">Default (Inter)</option>
-          <option value="Syne">Creative (Syne)</option>
-          <option value="JetBrains Mono">Monospace</option>
-          <option value="Georgia">Serif (Georgia)</option>
+          <option value="default" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Font Style</option>
+          <option value="Inter" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Default (Inter)</option>
+          <option value="Syne" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Creative (Syne)</option>
+          <option value="JetBrains Mono" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Monospace</option>
+          <option value="Georgia" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Serif (Georgia)</option>
         </select>
 
         {/* Font Size */}
@@ -303,21 +319,21 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           title="Font Size"
           style={{
             height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
-            background: 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
-            color: 'inherit', cursor: 'pointer', outline: 'none',
+            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
+            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none',
           }}
         >
-          <option value="default">Size</option>
-          <option value="12px">12</option>
-          <option value="14px">14</option>
-          <option value="16px">16</option>
-          <option value="18px">18</option>
-          <option value="20px">20</option>
-          <option value="24px">24</option>
-          <option value="28px">28</option>
-          <option value="32px">32</option>
-          <option value="36px">36</option>
-          <option value="48px">48</option>
+          <option value="default" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>Size</option>
+          <option value="12px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>12</option>
+          <option value="14px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>14</option>
+          <option value="16px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>16</option>
+          <option value="18px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>18</option>
+          <option value="20px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>20</option>
+          <option value="24px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>24</option>
+          <option value="28px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>28</option>
+          <option value="32px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>32</option>
+          <option value="36px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>36</option>
+          <option value="48px" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>48</option>
         </select>
 
         <ToolbarSep />
@@ -338,6 +354,42 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         <ToolbarButton onClick={() => editor.chain().focus().toggleCode().run()} active={editor.isActive('code')} disabled={isSourceMode} title="Inline Code">
           <Code size={16} />
         </ToolbarButton>
+
+        <select
+          value="default"
+          onChange={e => {
+            const val = e.target.value;
+            if (val === 'mermaid') {
+              editor.chain().focus().insertContent('<pre class="mermaid">flowchart TD\n  Start --> Process\n  Process --> End</pre><p></p>').run();
+            } else if (val === 'javascript') {
+              editor.chain().focus().insertContent('<pre><code class="language-javascript">// JavaScript Code\nfunction greet() {\n  console.log("Hello, World!");\n}</code></pre><p></p>').run();
+            } else if (val === 'table') {
+              editor.chain().focus().insertContent('<table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;"><thead style="background: var(--surface2);"><tr style="border-bottom: 2px solid var(--border);"><th style="padding: 10px; text-align: left; border: 1px solid var(--border);">Column 1</th><th style="padding: 10px; text-align: left; border: 1px solid var(--border);">Column 2</th></tr></thead><tbody><tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px; border: 1px solid var(--border);">Data A</td><td style="padding: 10px; border: 1px solid var(--border);">Data B</td></tr><tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px; border: 1px solid var(--border);">Data C</td><td style="padding: 10px; border: 1px solid var(--border);">Data D</td></tr></tbody></table><p></p>').run();
+            } else if (val === 'callout') {
+              editor.chain().focus().insertContent('<div class="callout-box" style="background: rgba(99, 102, 241, 0.06); border-left: 4px solid #6366f1; padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; color: var(--text);"><strong>Note:</strong> Enter callout or highlight details here.</div><p></p>').run();
+            } else if (val === 'accordion') {
+              editor.chain().focus().insertContent('<details style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; margin: 1.5rem 0; cursor: pointer;"><summary style="font-weight: 700; outline: none; margin-bottom: 4px;">Click to expand title</summary><p style="margin: 0; color: var(--muted); cursor: default;">This is the hidden details content that is displayed upon expansion.</p></details><p></p>').run();
+            } else if (val === 'html') {
+              editor.chain().focus().insertContent('<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 1.5rem 0;"><strong>HTML Block:</strong> Place your custom HTML layout here.</div><p></p>').run();
+            }
+            e.target.value = 'default';
+          }}
+          disabled={isSourceMode}
+          title="Insert custom blocks and templates"
+          style={{
+            height: 32, padding: '0 6px', fontSize: 12, fontWeight: 600,
+            background: isDark ? '#000000' : 'transparent', border: `1px solid ${css.border}`, borderRadius: 6,
+            color: isDark ? '#ffffff' : 'inherit', cursor: 'pointer', outline: 'none', marginLeft: 4, marginRight: 4,
+          }}
+        >
+          <option value="default" disabled style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>+ Insert Block</option>
+          <option value="mermaid" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>📊 Mermaid Diagram</option>
+          <option value="javascript" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>⚡ JavaScript Code</option>
+          <option value="table" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>📅 Data Table</option>
+          <option value="callout" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>💡 Callout Box</option>
+          <option value="accordion" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>🔽 Accordion (Details)</option>
+          <option value="html" style={{ background: isDark ? '#000000' : '#ffffff', color: isDark ? '#ffffff' : '#000000' }}>🌐 HTML Block</option>
+        </select>
 
         <ToolbarSep />
 
@@ -445,7 +497,8 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
       {/* Editor Content */}
       <div style={{
         border: `1px solid ${css.border}`,
-        borderRadius: 12,
+        borderBottom: 'none',
+        borderRadius: '12px 12px 0 0',
         padding: isSourceMode ? '16px' : '24px 32px',
         minHeight: 500,
         background: isSourceMode ? (isDark ? '#020617' : '#fafafa') : css.bg,
@@ -479,6 +532,22 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         ) : (
           <EditorContent editor={editor} />
         )}
+      </div>
+
+      {/* Editor Status Bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '10px 18px', border: `1px solid ${css.border}`,
+        borderRadius: '0 0 12px 12px', background: css.surface, color: css.muted,
+        fontSize: 12, fontWeight: 600,
+      }}>
+        <div style={{ display: 'flex', gap: 16 }}>
+          <span><strong>{words}</strong> words</span>
+          <span><strong>{chars}</strong> characters</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span>⏱️ {minutes} min read</span>
+        </div>
       </div>
 
       {/* Editor Styles */}
@@ -559,6 +628,41 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
           background: #fef08a;
           padding: 1px 4px;
           border-radius: 3px;
+        }
+        .full-editor-content .tiptap table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.5rem 0;
+          font-size: 0.9rem;
+        }
+        .full-editor-content .tiptap th,
+        .full-editor-content .tiptap td {
+          border: 1px solid ${css.border};
+          padding: 8px 12px;
+          text-align: left;
+        }
+        .full-editor-content .tiptap th {
+          background: ${isDark ? '#1e293b' : '#f8fafc'};
+          font-weight: 700;
+        }
+        .full-editor-content .tiptap details {
+          background: ${isDark ? '#0f172a' : '#f8fafc'};
+          border: 1px solid ${css.border};
+          border-radius: 8px;
+          padding: 12px 18px;
+          margin: 1.5rem 0;
+        }
+        .full-editor-content .tiptap summary {
+          font-weight: 700;
+          cursor: pointer;
+          outline: none;
+        }
+        .full-editor-content .tiptap .callout-box {
+          background: rgba(99, 102, 241, 0.06);
+          border-left: 4px solid ${css.accent};
+          padding: 1rem 1.25rem;
+          border-radius: 0 8px 8px 0;
+          margin: 1.5rem 0;
         }
         .full-editor-content .tiptap p.is-editor-empty:first-child::before {
           content: attr(data-placeholder);

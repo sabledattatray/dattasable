@@ -66,7 +66,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
 
     // ── DYNAMIC MERMAID FLOWCHART RENDERING ──
     const renderMermaidDiagrams = async () => {
-      const mermaidElements = document.querySelectorAll('.mermaid');
+      const mermaidElements = document.querySelectorAll('.mermaid, .language-mermaid');
       if (mermaidElements.length === 0) return;
 
       try {
@@ -98,6 +98,14 @@ export default function BlogPostContent({ post }: { post: Post }) {
             const { svg } = await mermaid.render(id, text);
             element.innerHTML = svg;
             element.style.background = 'transparent';
+            
+            // If it is a <code> tag inside a <pre> block, style the parent <pre> block
+            if (element.tagName.toLowerCase() === 'code' && element.parentElement?.tagName.toLowerCase() === 'pre') {
+              const pre = element.parentElement;
+              pre.style.background = 'transparent';
+              pre.style.border = 'none';
+              pre.style.padding = '0';
+            }
           } catch (renderError) {
             console.error('Error rendering diagram:', renderError);
           }
@@ -236,7 +244,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
             dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content)
               .replace(/<h3>/g, `<h3 style="color:var(--text);font-size:1.15rem;margin:1.75rem 0 0.75rem;font-family:Inter,sans-serif;">`)
               .replace(/<p>/g, `<p style="margin-bottom:1rem;">`)
-              .replace(/<pre><code>/g, `<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;overflow-x:auto;margin:1rem 0;"><code style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);">`)
+              .replace(/<pre><code([^>]*)>/g, `<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;overflow-x:auto;margin:1rem 0;"><code$1 style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);">`)
               .replace(/<\/code><\/pre>/g, `</code></pre>`)
             }}
           />
