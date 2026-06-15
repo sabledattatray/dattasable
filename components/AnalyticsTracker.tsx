@@ -8,6 +8,11 @@ export default function AnalyticsTracker() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // Don't track local dev visits in the database to keep logs clean
+    if (process.env.NODE_ENV === 'development') {
+      return;
+    }
+
     const trackView = async () => {
       try {
         const url = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
