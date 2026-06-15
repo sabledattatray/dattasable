@@ -67,7 +67,7 @@ export default function PerformanceOptimizer({
       window.addEventListener(event, handleInteraction, { once: true, passive: true });
     });
 
-    // Fallback timer for idle loading (only for real users)
+    // Fallback timer for idle loading (only for real users - reduced to 2s to capture scroll-only/engaged users)
     let idleId: number;
     const timer = setTimeout(() => {
       if ('requestIdleCallback' in window) {
@@ -75,7 +75,7 @@ export default function PerformanceOptimizer({
       } else {
         triggerLoad();
       }
-    }, 4500);
+    }, 2000);
 
     return () => {
       cleanup();
